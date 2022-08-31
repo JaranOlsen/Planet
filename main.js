@@ -53,7 +53,7 @@ let selectedPin = null;
 const starGeometry = new THREE.BufferGeometry()
 const starMaterial = new THREE.PointsMaterial({
   size: 5,
-  map: new THREE.TextureLoader().load("/assets/img/star.png"),
+  map: new THREE.TextureLoader().load("public/assets/img/star.png"),
   transparent: true
 })
 
@@ -93,9 +93,9 @@ scene.add(center);
 const jaranius = new THREE.Mesh(
   new THREE.SphereGeometry(5, 250, 250),
   new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('/assets/img/diffuse.png'),
-    normalMap: new THREE.TextureLoader().load('/assets/img/normal.png'),
-    roughnessMap: new THREE.TextureLoader().load('/assets/img/roughness.png'),
+    map: new THREE.TextureLoader().load('public/assets/img/diffuse.png'),
+    normalMap: new THREE.TextureLoader().load('public/assets/img/normal.png'),
+    roughnessMap: new THREE.TextureLoader().load('public/assets/img/roughness.png'),
     metalness: 0,
     flatShading: false,
     side: FrontSide,
@@ -107,8 +107,8 @@ scene.add(jaranius)
 const clouds = new THREE.Mesh(
   new THREE.SphereGeometry(5.05, 50, 50),
   new THREE.MeshLambertMaterial({
-    alphaMap: new THREE.TextureLoader().load('/assets/img/clouds2.png'),
-    map: new THREE.TextureLoader().load('/assets/img/clouds2.png'),
+    alphaMap: new THREE.TextureLoader().load('public/assets/img/clouds2.png'),
+    map: new THREE.TextureLoader().load('public/assets/img/clouds2.png'),
     transparent: true
   })
   )
@@ -138,9 +138,9 @@ class Moon {
   }
 }
 
-let moon1 = new Moon(1.5, '/assets/img/moon.jpg', 110, -0.0005, pivot1, 0.4);
-let moon2 = new Moon(2.5, '/assets/img/moon2.png', 190, -0.0003, pivot2, 0.1);
-let moon3 = new Moon(1, '/assets/img/moon3.png', 250, -0.0001, pivot3, 0.005);
+let moon1 = new Moon(1.5, 'public/assets/img/moon.jpg', 110, -0.0005, pivot1, 0.4);
+let moon2 = new Moon(2.5, 'public/assets/img/moon2.png', 190, -0.0003, pivot2, 0.1);
+let moon3 = new Moon(1, 'public/assets/img/moon3.png', 250, -0.0001, pivot3, 0.005);
 let moons = [moon1, moon2, moon3];
 
 for (let i = 0; i < moons.length; i++) {
