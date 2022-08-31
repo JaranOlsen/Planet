@@ -1,182 +1,70 @@
-import * as THREE from 'three'
-import { OrbitControls } from './orbitcontrols'
-import vertexShader from './shaders/vertex.glsl'
-import fragmentShader from './shaders/fragment.glsl'
-import atmosphereVertexShader from './shaders/atmosphereVertex.glsl'
-import atmosphereFragmentShader from './shaders/atmosphereFragment.glsl'
-import { BackSide, Float32BufferAttribute, TextureLoader, Vector2 } from 'three'
+import * as THREE from 'three';
+import DragControls from '/node_modules/drag-controls/src/drag-controls.js';
+//import {OrbitControls} from 'https://threejs.org/examples/jsm/controls/OrbitControls.js';
+import {OrbitControls} from '/node_modules/three/examples/jsm/controls/OrbitControls.js';
+import {Float32BufferAttribute, FrontSide, AdditiveBlending, TextureLoader, Mesh} from 'three';
 
-const scene = new THREE.Scene()
-const camera = new THREE.PerspectiveCamera(
-  50,
-  innerWidth/innerHeight,
-  0.1,
-  1000
-)
+//DragControls.install({THREE: THREE});
 
-//Loading screen
-const loadingManager = new THREE.LoadingManager();
-
-// loadingManager.onStart = function(url, loaded, total) {
-//     console.log('Started loading: $(url)');
-// }
-
-const progressBar = document.getElementById('progress-bar');
-
-loadingManager.onProgress = function(url, loaded, total) {
-  progressBar.value = (loaded / total) * 100;
-}
-
-const progressBarContainer = document.querySelector('pogress-bar-container');
-
-loadingManager.onLoad = function() {
-  progressBarContainer.style.display = 'none';
-}
-
-loadingManager.onError = function(url) {
-  console.error('Problem loading: $(url)');
-}
-
-const textureLoader = new TextureLoader(loadingManager); 
-//remember to change code in sphere creation:
-// textureLoader.load('assets/img/diffuse.png', function(diffuse){});
-// scene.add(diffuse);
-
-//Renderer
+const canvas = document.querySelector('#c');
 const renderer = new THREE.WebGLRenderer(
   {
+    canvas,
     antialias: true
+  });
+
+  function resizeRendererToDisplaySize(renderer) {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+      renderer.setSize(width, height, false);
+    }
+    return needResize;
   }
-)
-renderer.setSize(innerWidth, innerHeight)
-renderer.setPixelRatio(window.devicePixelRatio)
-document.body.appendChild(renderer.domElement)
-const controls = new OrbitControls( camera, renderer.domElement );
 
-//Raycaster
-const addNewBoxMesh = (x, y, z) => {
-  const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-  const boxMaterial = new THREE.MeshPhongMaterial ({color: 0xaa4488});
-  const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-  boxMesh.position.set(x, y, z);
-  test.scene.add(boxMesh);
-};
+const fov = 50;
+const aspect = 2;  // the canvas default
+const near = 0.1;
+const far = 2000;
+const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+camera.position.z = 50
 
-addNewBoxMesh(0, 2, 0);
-addNewBoxMesh(2, 2, 0);
-addNewBoxMesh(-2, 2, 0);
-addNewBoxMesh(0, 2, -2);
-addNewBoxMesh(2, 2, -2);
-addNewBoxMesh(-2, 2, -2);
-addNewBoxMesh(0, 2, 2);
-addNewBoxMesh(2, 2, 2);
-addNewBoxMesh(-2, 2, 2);
+const controls = new OrbitControls(camera, canvas);
+controls.enablePan = false
+controls.maxDistance = 1000
+controls.minDistance = 6.0
+controls.zoomSpeed = 0.3
+controls.rotateSpeed = 0.2
+controls.target.set(0, 0, 0);
+controls.update();
 
-const pointer = new THREE.Vector2();
+
+const scene = new THREE.Scene();
+
+const middleOfPlanet = new THREE.Vector3(0, 0, 0);
+const pointer = new THREE.Vector2;
+const tempV = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
-
-const onMouseMove = (event) => {
-  //calculate pointer position in normalized device coordinates
-  //(-1 to +1) for both components
-  pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-  pointer.y = (event.clientY / window.innerHeight) * 2 + 1;
-
-  raycaster.setFromCamera(pointer, test.camera);
-  const intersects = raycaster.intersectObjects(test.scene.children);
-
-  // for (let i = 0; i < intersects.length; i++) {
-  //   console.log(intersects);
-  // }
-
-  //change color of objects intersecting the raycaster
-  // for (let i = 0; i < intersects.length; i++) {
-  //   intersects[i].object.material.color.set(0xff0000);
-  // }
-  if (intersects.length > 0) {
-    intersects[0].object.material.color.set(0xff0000);
-  }
-};
-
-window.addEventListener('mousemove', onMouseMove);
-
-//create shader sphere
-const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5, 50, 50), 
-    new THREE.ShaderMaterial({
-      vertexShader,
-      fragmentShader,
-      uniforms: {
-        globeTexture: {
-          value: new THREE.TextureLoader().load('assets/img/diffuse.png')
-        }
-      }
-})
-)
-//sphere.position.set(-7, 0, 0)
-scene.add(sphere)
-
-//create phong material sphere
-const sphere2 = new THREE.Mesh(
-  new THREE.SphereGeometry(5, 50, 50),
-  new THREE.MeshPhongMaterial({
-    map: new THREE.TextureLoader().load('assets/img/diffuse.png'),
-    normalMap: new THREE.TextureLoader().load('assets/img/normal.png'),
-    normalScale: Vector2(1,1),
-    specularMap: new THREE.TextureLoader().load('assets/img/roughness.png'),
-    flatShading: true,
-    side: BackSide
-  })
-  )
-
-sphere2.position.set(7, 0, 0)
-scene.add(sphere2)
-
-//create lights
-const sun = new THREE.DirectionalLight({color: 0xffffff, intensity: 1});
-sun.position.set(50, 40, 20)
-sun.target.set(0, 0, 0)
-scene.add(sun)
-
-
-//create atmosphere
-const atmosphere = new THREE.Mesh(
-  new THREE.SphereGeometry(5, 50, 50), 
-  new THREE.ShaderMaterial({
-    vertexShader: atmosphereVertexShader,
-    fragmentShader: atmosphereFragmentShader,
-    blending: THREE.AdditiveBlending, side: THREE.BackSide
-})
-)
-
-atmosphere.scale.set(1.1, 1.1, 1.1)
-
-scene.add(atmosphere)
-
-//create mindmap
-const mindmap = new THREE.Mesh(
-  new THREE.BoxGeometry(0.5, 0.1, 0.001, 5, 5, 1),
-  new THREE.MeshBasicMaterial({
-    color: 0xff00000,
-  })
-)
-
-mindmap.position.set(0, 0, 6)
-
-scene.add(mindmap)
+let selectedPin = null;
 
 //create starfield
 const starGeometry = new THREE.BufferGeometry()
 const starMaterial = new THREE.PointsMaterial({
-  color: 0xffffff,
-  size: 15
+  size: 5,
+  map: new THREE.TextureLoader().load("public/assets/img/star.png"),
+  transparent: true
 })
 
 const starVertices = []
 for (let i = 0; i < 10000; i++) {
-  const x = (Math.random() - 0.5) * 30000
-  const y = (Math.random() - 0.5) * 30000
-  const z = (Math.random() - 0.5) * 30000
+  const x = (Math.random() - 0.5) * 2000
+  const y = (Math.random() - 0.5) * 2000
+  const z = (Math.random() - 0.5) * 2000
+  if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
   starVertices.push(x, y, z)
+  }
 }
 
 starGeometry.setAttribute('position', new Float32BufferAttribute(starVertices, 3))
@@ -184,38 +72,323 @@ starGeometry.setAttribute('position', new Float32BufferAttribute(starVertices, 3
 const stars = new THREE.Points(starGeometry, starMaterial)
 scene.add(stars)
 
-//gutta
-for (let i = 0; i < 50; i++) {
-  const guttaMesh = new THREE.Mesh(guttaGeometry, guttaMaterial);
-  guttaMesh.matrixAutoUpdate = false;
-  scene.add(guttaMesh);
+//create solar system
+const center = new THREE.Object3D();
+scene.add(center);
 
-  const gutta = new YUKA.Gutta();
-  gutta.setRenderComponent(guttaMesh, sync);
+  // pivots
+  var pivot1 = new THREE.Object3D();
+  var pivot2 = new THREE.Object3D();
+  var pivot3 = new THREE.Object3D();
 
-  gutta.rotation.fromEuler(0, Math.PI)
+  pivot1.rotation.y = 0;
+  pivot2.rotation.y = 0; //2 * Math.PI / 3;
+  pivot3.rotation.y = 0; //4 * Math.PI / 3;
+
+  center.add( pivot1 );
+  center.add( pivot2 );
+  center.add( pivot3 );
+
+//create Jaranius
+const jaranius = new THREE.Mesh(
+  new THREE.SphereGeometry(5, 250, 250),
+  new THREE.MeshStandardMaterial({
+    map: new THREE.TextureLoader().load('public/assets/img/diffuse.png'),
+    normalMap: new THREE.TextureLoader().load('public/assets/img/normal.png'),
+    roughnessMap: new THREE.TextureLoader().load('public/assets/img/roughness.png'),
+    metalness: 0,
+    flatShading: false,
+    side: FrontSide,
+  })
+  )
+scene.add(jaranius)
+
+//create cloud layer
+const clouds = new THREE.Mesh(
+  new THREE.SphereGeometry(5.05, 50, 50),
+  new THREE.MeshLambertMaterial({
+    alphaMap: new THREE.TextureLoader().load('public/assets/img/clouds2.png'),
+    map: new THREE.TextureLoader().load('public/assets/img/clouds2.png'),
+    transparent: true
+  })
+  )
+jaranius.add(clouds)
+
+//create atmosphere
+const atmosphere = new THREE.Mesh(
+  new THREE.SphereGeometry(5.3, 50, 50),
+  new THREE.MeshLambertMaterial({
+    color: 0xaabbff,
+    transparent: true,
+    opacity: 0.3,
+    blending: AdditiveBlending
+  })
+)
+jaranius.add(atmosphere);
+
+//create moons
+class Moon {
+  constructor(radius, texture, z, rotation, pivot, intensity) {
+    this.radius = radius;
+    this.texture = texture; 
+    this.z = z;
+    this.rotation = rotation;
+    this.pivot = pivot;
+    this.intensity = intensity;
+  }
+}
+
+let moon1 = new Moon(1.5, 'public/assets/img/moon.jpg', 110, -0.0005, pivot1, 0.4);
+let moon2 = new Moon(2.5, 'public/assets/img/moon2.png', 190, -0.0003, pivot2, 0.1);
+let moon3 = new Moon(1, 'public/assets/img/moon3.png', 250, -0.0001, pivot3, 0.005);
+let moons = [moon1, moon2, moon3];
+
+for (let i = 0; i < moons.length; i++) {
+  const mesh = new THREE.Mesh(
+    new THREE.SphereGeometry(moons[i].radius, 50, 50),
+    new THREE.MeshStandardMaterial({
+      map: new THREE.TextureLoader().load(moons[i].texture),
+      metalness: 0,
+      flatShading: false,
+      side: FrontSide,
+    })
+  )
+
+  mesh.position.set(moons[i].z, 0, 0)
+  moons[i].pivot.add(mesh);
+
+  const moonlight = new THREE.PointLight(0xffffff, moons[i].intensity);
+  moonlight.position.set(moons[i].z, 0, 0);
+  mesh.add(moonlight);
 }
 
 //lights
-const color = 0xFFFFFF;
-const intensity = 1;
-const light = new THREE.DirectionalLight(color, intensity);
-light.position.set(-3, 12, 20);
-scene.add(light);
+const ambient = new THREE.AmbientLight(0xffffff, 0.01);
+scene.add(ambient);
 
-//camera and controls
-camera.position.z = 15
-controls.enablePan = false
-controls.maxDistance = 100
-controls.minDistance = 6
-controls.zoomSpeed = 0.2
-controls.rotateSpeed = 0.2
+const jaraniusLight = new THREE.PointLight(0xffffff, 0.01);
+jaraniusLight.position.set(0, 0, 0);
+scene.add(jaraniusLight);
 
-function animate() {
-  requestAnimationFrame(animate)
-  renderer.render(scene, camera)
-  sphere.rotation.y += 0.0003
-  //sphere.rotation.x += 0.001
-  controls.update
+//Math functions
+function getRandomNum(min, max) {
+  return Math.random() * (max - min) + min;
 }
-animate() 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function convertLatLngtoCartesian(lat, lng){
+  let latRad = lat * Math.PI / 180;
+  let lngRad = lng * Math.PI / 180;
+
+  let x = 5.01 * Math.sin(latRad) * Math.sin(lngRad)
+  let y = 5.01 * Math.cos(latRad)
+  let z = 5.01 * Math.sin(latRad) * Math.cos(lngRad)
+
+  return {
+    x, y, z
+  }
+}
+
+function convertCartesiantoLatLng(x, y, z){
+  let latRad = Math.acos(y / (Math.sqrt(Math.pow(z, 2) + Math.pow(x, 2) + Math.pow(y, 2))));
+  let lngRad = x / z;
+
+  let lat = latRad / Math.PI * 180;
+  let lng = lngRad / Math.PI * 180;
+
+  return {
+    lat, lng
+  }
+}
+
+
+//create pins
+let pinPositions = []
+const labelContainerElem = document.querySelector('#labels');
+
+function instantiatePin(txt, lat, lng, radius, color, originalColor) {
+  const pin = new THREE.Mesh(
+    new THREE.SphereGeometry (radius, 20, 20),
+    new THREE.MeshBasicMaterial({
+      color: color,
+    })
+  )
+
+  originalColor = originalColor;
+
+  const elem = document.createElement('div');
+  elem.textContent = txt;
+  labelContainerElem.appendChild(elem);
+
+  let pos = convertLatLngtoCartesian(lat, lng);
+  pin.position.set(pos.x, pos.y, pos.z);
+  scene.add(pin);
+  pinPositions.push(pin);
+
+  return {pin, elem, originalColor};
+}
+
+let things = ["Aberdeen", "Abilene", "Akron", "Albany", "Albuquerque", "Alexandria", "Allentown", "Amarillo", "Anaheim", "Anchorage", "Ann Arbor", "Antioch", "Apple Valley", "Appleton", "Arlington", "Arvada", "Asheville", "Athens", "Atlanta", "Atlantic City", "Augusta", "Aurora", "Austin", "Bakersfield", "Baltimore", "Barnstable", "Baton Rouge", "Beaumont", "Bel Air", "Bellevue", "Berkeley", "Bethlehem", "Billings", "Birmingham", "Bloomington", "Boise", "Boise City", "Bonita Springs", "Boston", "Boulder", "Bradenton", "Bremerton", "Bridgeport", "Brighton", "Brownsville", "Bryan", "Buffalo", "Burbank", "Burlington", "Cambridge", "Canton", "Cape Coral", "Carrollton", "Cary", "Cathedral City", "Cedar Rapids", "Champaign", "Chandler", "Charleston", "Charlotte", "Chattanooga", "Chesapeake", "Chicago", "Chula Vista", "Cincinnati", "Clarke County", "Clarksville", "Clearwater", "Cleveland", "College Station", "Colorado Springs", "Columbia", "Columbus", "Concord", "Coral Springs", "Corona", "Corpus Christi", "Costa Mesa", "Dallas", "Daly City", "Danbury", "Davenport", "Davidson County", "Dayton", "Daytona Beach", "Deltona", "Denton", "Denver", "Des Moines", "Detroit", "Downey", "Duluth", "Durham", "El Monte", "El Paso", "Elizabeth", "Elk Grove", "Elkhart", "Erie", "Escondido", "Eugene", "Evansville", "Fairfield", "Fargo", "Fayetteville", "Fitchburg", "Flint", "Fontana", "Fort Collins", "Fort Lauderdale", "Fort Smith", "Fort Walton Beach", "Fort Wayne", "Fort Worth", "Frederick", "Fremont", "Fresno", "Fullerton", "Gainesville", "Garden Grove", "Garland", "Gastonia", "Gilbert", "Glendale", "Grand Prairie", "Grand Rapids", "Grayslake", "Green Bay", "GreenBay", "Greensboro", "Greenville", "Gulfport-Biloxi", "Hagerstown", "Hampton", "Harlingen", "Harrisburg", "Hartford", "Havre de Grace", "Hayward", "Hemet", "Henderson", "Hesperia", "Hialeah", "Hickory", "High Point", "Hollywood", "Honolulu", "Houma", "Houston", "Howell", "Huntington", "Huntington Beach", "Huntsville", "Independence", "Indianapolis", "Inglewood", "Irvine", "Irving", "Jackson", "Jacksonville", "Jefferson", "Jersey City", "Johnson City", "Joliet", "Kailua", "Kalamazoo", "Kaneohe", "Kansas City", "Kennewick", "Kenosha", "Killeen", "Kissimmee", "Knoxville", "Lacey", "Lafayette", "Lake Charles", "Lakeland", "Lakewood", "Lancaster", "Lansing", "Laredo", "Las Cruces", "Las Vegas", "Layton", "Leominster", "Lewisville", "Lexington", "Lincoln", "Little Rock", "Long Beach", "Lorain", "Los Angeles", "Louisville", "Lowell", "Lubbock", "Macon", "Madison", "Manchester", "Marina", "Marysville", "McAllen", "McHenry", "Medford", "Melbourne", "Memphis", "Merced", "Mesa", "Mesquite", "Miami", "Milwaukee", "Minneapolis", "Miramar", "Mission Viejo", "Mobile", "Modesto", "Monroe", "Monterey", "Montgomery", "Moreno Valley", "Murfreesboro", "Murrieta", "Muskegon", "Myrtle Beach", "Naperville", "Naples", "Nashua", "Nashville", "New Bedford", "New Haven", "New London", "New Orleans", "New York", "New York City", "Newark", "Newburgh", "Newport News", "Norfolk", "Normal", "Norman", "North Charleston", "North Las Vegas", "North Port", "Norwalk", "Norwich", "Oakland", "Ocala", "Oceanside", "Odessa", "Ogden", "Oklahoma City", "Olathe", "Olympia", "Omaha", "Ontario", "Orange", "Orem", "Orlando", "Overland Park", "Oxnard", "Palm Bay", "Palm Springs", "Palmdale", "Panama City", "Pasadena", "Paterson", "Pembroke Pines", "Pensacola", "Peoria", "Philadelphia", "Phoenix", "Pittsburgh", "Plano", "Pomona", "Pompano Beach", "Port Arthur", "Port Orange", "Port Saint Lucie", "Port St. Lucie", "Portland", "Portsmouth", "Poughkeepsie", "Providence", "Provo", "Pueblo", "Punta Gorda", "Racine", "Raleigh", "Rancho Cucamonga", "Reading", "Redding", "Reno", "Richland", "Richmond", "Richmond County", "Riverside", "Roanoke", "Rochester", "Rockford", "Roseville", "Round Lake Beach", "Sacramento", "Saginaw", "Saint Louis", "Saint Paul", "Saint Petersburg", "Salem", "Salinas", "Salt Lake City", "San Antonio", "San Bernardino", "San Buenaventura", "San Diego", "San Francisco", "San Jose", "Santa Ana", "Santa Barbara", "Santa Clara", "Santa Clarita", "Santa Cruz", "Santa Maria", "Santa Rosa", "Sarasota", "Savannah", "Scottsdale", "Scranton", "Seaside", "Seattle", "Sebastian", "Shreveport", "Simi Valley", "Sioux City", "Sioux Falls", "South Bend", "South Lyon", "Spartanburg", "Spokane", "Springdale", "Springfield", "St. Louis", "St. Paul", "St. Petersburg", "Stamford", "Sterling Heights", "Stockton", "Sunnyvale", "Syracuse", "Tacoma", "Tallahassee", "Tampa", "Temecula", "Tempe", "Thornton", "Thousand Oaks", "Toledo", "Topeka", "Torrance", "Trenton", "Tucson", "Tulsa", "Tuscaloosa", "Tyler", "Utica", "Vallejo", "Vancouver", "Vero Beach", "Victorville", "Virginia Beach", "Visalia", "Waco", "Warren", "Washington", "Waterbury", "Waterloo", "West Covina", "West Valley City", "Westminster", "Wichita", "Wilmington", "Winston", "Winter Haven", "Worcester", "Yakima", "Yonkers", "York", "Youngstown"];
+let pins = []
+  for (let i = 0; i < 100; i++) {
+    const color1 = 0x88cc88
+    const color2 = 0xcc8888
+    const color3 = 0x8888cc
+    const name1 = things[Math.floor(Math.random()*things.length)];
+    const name2 = things[Math.floor(Math.random()*things.length)];
+    const name3 = things[Math.floor(Math.random()*things.length)];
+    let pin1 = instantiatePin(name1, getRandomInt(0, 180), getRandomInt(0, 120), Math.random()/10, color1, color1);
+    let pin2 = instantiatePin(name2, getRandomInt(0, 180), getRandomInt(120, 240), Math.random()/10, color2, color2);
+    let pin3 = instantiatePin(name3, getRandomInt(0, 180), getRandomInt(240, 360), Math.random()/10, color3, color3);
+    pins.push(pin1, pin2, pin3);
+  }
+
+
+/* const mouseControls = new THREE.DragControls( moons, camera, renderer.domElement);
+mouseControls.addEventListener( 'drag', render ); */
+
+
+function unhoverPin() {
+  for ( let i = 0; i < pins.length; i ++ ) {
+		pins[i].pin.material.color.set(pins[i].originalColor);
+	}
+}
+
+function hoverPin() {
+  raycaster.setFromCamera(pointer, camera); 
+  const intersects = raycaster.intersectObjects( pinPositions);
+  for ( let i = 0; i < intersects.length; i ++ ) {
+		intersects[ i ].object.material.color.set(0xff0000);
+	}
+}
+
+document.addEventListener("keyup", onDocumentKeyUp, false);
+function onDocumentKeyUp(event) {
+    var keyCode = event.which;
+    
+    if (selectedPin != null) {
+      //console.log(selectedPin.position);
+      let posLatLng = convertCartesiantoLatLng(selectedPin.position.x, selectedPin.position.y, selectedPin.position.z);
+      //console.log(posLatLng);
+      // up
+      if (keyCode == 38) {
+          posLatLng.lat -= 1;
+          // down
+      } else if (keyCode == 40) {
+          posLatLng.lat += 1;
+          // left
+      } else if (keyCode == 37) {
+          posLatLng.lng -= 1;
+          // right
+      } else if (keyCode == 39) {
+          posLatLng.lng += 1;
+      }
+      //console.log(posLatLng);
+      let posXYZ = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng);
+      //console.log(posXYZ);
+      selectedPin.position.set(posXYZ.x, posXYZ.y, posXYZ.z);
+    }
+    render();
+};
+
+//create fps counter
+const times = [];
+let fps;
+
+function refreshLoop() {
+  window.requestAnimationFrame(() => {
+    const now = performance.now();
+    while (times.length > 0 && times[0] <= now - 1000) {
+      times.shift();
+    }
+    times.push(now);
+    fps = times.length;
+    refreshLoop();
+  });
+}
+refreshLoop();
+
+function render(time) {
+  time *= 0.001;
+
+  if (resizeRendererToDisplaySize(renderer)) {
+    const canvas = renderer.domElement;
+    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.updateProjectionMatrix();
+  }
+
+  pins.forEach((pinInfo) => {
+  const {pin, elem} = pinInfo;
+  
+  // get the position of the center of the pin
+  pin.updateWorldMatrix(true, false);
+  pin.getWorldPosition(tempV);
+
+  // get the normalized screen coordinate of that position
+  // x and y will be in the -1 to +1 range with x = -1 being
+  // on the left and y = -1 being on the bottom
+  tempV.project(camera);
+
+  raycaster.setFromCamera(tempV, camera);
+  const intersectedObjects = raycaster.intersectObjects( pinPositions, false);
+  const show = intersectedObjects.length && pin === intersectedObjects[0].object;
+  //camera.position.distanceTo(tempV) > pin.geometry.boundingSphere.radius * 250 : added to hide small pins when far away
+  if (!show || Math.abs(tempV.z) > 1 || camera.position.distanceTo(pin.position) > pin.geometry.parameters.radius * 150 || camera.position.distanceTo(pin.position) > camera.position.distanceTo(middleOfPlanet)) {
+    // hide the label
+    elem.style.display = 'none';
+  } else {
+    // un-hide the label
+    elem.style.display = '';
+  
+
+  // convert the normalized position to CSS coordinates
+  const x = (tempV.x *  .5 + .5) * canvas.clientWidth;
+  const y = (tempV.y * -.5 + .5) * canvas.clientHeight;
+
+  // move the elem to that position
+  elem.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
+
+  // set the zIndex for sorting
+  elem.style.zIndex = (-tempV.z * .5 + .5) * 100000 | 0;
+  }
+  }); 
+
+  function onPointerMove( event ) {
+    // calculate pointer position in normalized device coordinates
+    // (-1 to +1) for both components
+    pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+  }
+
+ 
+  function onClick( event ) {
+    raycaster.setFromCamera(pointer, camera); 
+    const intersects = raycaster.intersectObjects( pinPositions);
+    if (intersects.length > 0) {
+      selectedPin = intersects[0].object;
+    } 
+  }
+  window.addEventListener('pointermove', onPointerMove);
+  window.addEventListener('click', onClick);
+  unhoverPin();
+  hoverPin();
+
+  renderer.render(scene, camera);
+
+  requestAnimationFrame(render);
+  renderer.render(scene, camera)
+  center.rotation.y += -0.00001;
+  pivot1.rotation.y += -0.0003;
+  pivot2.rotation.y += -0.00003;
+  pivot3.rotation.y += -0.000003;
+  //jaranius.rotation.y += 0.0003
+  clouds.rotation.y += 0.0003
+}
+
+requestAnimationFrame(render);
+
+
