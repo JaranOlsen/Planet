@@ -2,16 +2,21 @@
   "name": "my-portfolio",
   "private": true,
   "version": "0.0.0",
+  "main": "main.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^3.0.6",
+    "@types/dat.gui": "^0.7.7",
+    "dat.gui": "^0.7.9",
+    "vite": "^3.0.9",
     "vite-plugin-string": "^1.1.2"
   },
   "dependencies": {
-    "three": "^0.143.0"
+    "drag-controls": "^1.0.4",
+    "three": "^0.144.0"
   }
 }
