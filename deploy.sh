@@ -25,7 +25,10 @@
 
 #cd -
 
-git init
+
+
+
+#git init
 git add .
 git commit -m “deploy”
 git branch -M main
