@@ -98,7 +98,7 @@ scene.add(center);
 const jaranius = new THREE.Mesh(
   new THREE.SphereGeometry(5, 250, 250),
   new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('public/assets/img/diffuse.jpg'),
+    map: new THREE.TextureLoader().load('public/assets/img/diffuse.png'),
     normalMap: new THREE.TextureLoader().load('public/assets/img/normal.png'),
     roughnessMap: new THREE.TextureLoader().load('public/assets/img/roughness.png'),
     metalness: 0,
