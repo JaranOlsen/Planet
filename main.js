@@ -1,8 +1,11 @@
 import * as THREE from 'three';
 import DragControls from '/node_modules/drag-controls/src/drag-controls.js';
-//import {OrbitControls} from 'https://threejs.org/examples/jsm/controls/OrbitControls.js';
 import {OrbitControls} from '/node_modules/three/examples/jsm/controls/OrbitControls.js';
 import {Float32BufferAttribute, FrontSide, AdditiveBlending, TextureLoader, Mesh} from 'three';
+
+/* import imgUrl from '/public/assets/img/diffuse.png'
+document.getElementById('hero-img').src = imgUrl */
+
 
 //DragControls.install({THREE: THREE});
 
@@ -31,19 +34,21 @@ const far = 2000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 camera.position.z = 50
 
+const middleOfPlanet = new THREE.Vector3(0, 0, 0);
+
 const controls = new OrbitControls(camera, canvas);
 controls.enablePan = false
 controls.maxDistance = 1000
 controls.minDistance = 6.0
-controls.zoomSpeed = 0.3
-controls.rotateSpeed = 0.2
+controls.zoomSpeed = 0.9
+controls.rotateSpeed = 0.3
 controls.target.set(0, 0, 0);
 controls.update();
 
 
 const scene = new THREE.Scene();
 
-const middleOfPlanet = new THREE.Vector3(0, 0, 0);
+
 const pointer = new THREE.Vector2;
 const tempV = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
@@ -93,7 +98,7 @@ scene.add(center);
 const jaranius = new THREE.Mesh(
   new THREE.SphereGeometry(5, 250, 250),
   new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('public/assets/img/diffuse.png'),
+    map: new THREE.TextureLoader().load('Planet/public/assets/img/diffuse.jpg'),
     normalMap: new THREE.TextureLoader().load('public/assets/img/normal.png'),
     roughnessMap: new THREE.TextureLoader().load('public/assets/img/roughness.png'),
     metalness: 0,
@@ -163,7 +168,7 @@ for (let i = 0; i < moons.length; i++) {
 }
 
 //lights
-const ambient = new THREE.AmbientLight(0xffffff, 0.01);
+const ambient = new THREE.AmbientLight(0xffffff, 0.5);  //0.01
 scene.add(ambient);
 
 const jaraniusLight = new THREE.PointLight(0xffffff, 0.01);
@@ -173,6 +178,16 @@ scene.add(jaraniusLight);
 //Math functions
 function getRandomNum(min, max) {
   return Math.random() * (max - min) + min;
+}
+function getRandomBell(min, max) {
+  let u = 0, v = 0;
+  while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+  while(v === 0) v = Math.random();
+  let num = Math.sqrt( -7.0 * Math.log( u ) ) * Math.cos( 7.0 * Math.PI * v );
+  num = num / 10.0 + 0.5; // Translate to 0 -> 1
+  if (num > 1 || num < 0) return getRandomBell(min, max) // resample between 0 and 1
+  num = Math.floor(num * (max - min + 1) + min);
+  return num
 }
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -205,6 +220,52 @@ function convertCartesiantoLatLng(x, y, z){
   }
 }
 
+//create coordpoints
+const coordPoint = new THREE.BufferGeometry()
+const coordPointMaterial = new THREE.PointsMaterial({
+  size: 0.02,
+  color: 0xffffff,
+})
+
+const coordVertices = []
+for (let lt = 1; lt < 180; lt++) {
+  for (let lg = 0; lg < 360; lg++) {
+    let xyz = convertLatLngtoCartesian(lt, lg);
+    coordVertices.push(xyz.x, xyz.y, xyz.z)
+  }
+}
+
+coordPoint.setAttribute('position', new Float32BufferAttribute(coordVertices, 3))
+
+const coords = new THREE.Points(coordPoint, coordPointMaterial)
+scene.add(coords)
+
+//create red coordpoints
+const coordPointred = new THREE.BufferGeometry()
+const coordPointMaterialred = new THREE.PointsMaterial({
+  size: 0.03,
+  color: 0xff0000,
+})
+
+const coordVerticesred = []
+for (let lt = 5; lt < 180; lt+=5) {
+  for (let lg = 0; lg < 360; lg++) {
+    let xyz = convertLatLngtoCartesian(lt, lg);
+    coordVerticesred.push(xyz.x, xyz.y, xyz.z)
+  }
+}
+for (let lt = 5; lt < 180; lt++) {
+  for (let lg = 0; lg < 360; lg+=5) {
+    let xyz = convertLatLngtoCartesian(lt, lg);
+    coordVerticesred.push(xyz.x, xyz.y, xyz.z)
+  }
+}
+
+coordPointred.setAttribute('position', new Float32BufferAttribute(coordVerticesred, 3))
+
+const coordsred = new THREE.Points(coordPointred, coordPointMaterialred)
+scene.add(coordsred)
+
 
 //create pins
 let pinPositions = []
@@ -212,7 +273,7 @@ const labelContainerElem = document.querySelector('#labels');
 
 function instantiatePin(txt, lat, lng, radius, color, originalColor) {
   const pin = new THREE.Mesh(
-    new THREE.SphereGeometry (radius, 20, 20),
+    new THREE.SphereBufferGeometry (radius, 20, 20),
     new THREE.MeshBasicMaterial({
       color: color,
     })
@@ -221,7 +282,7 @@ function instantiatePin(txt, lat, lng, radius, color, originalColor) {
   originalColor = originalColor;
 
   const elem = document.createElement('div');
-  elem.textContent = txt;
+  elem.textContent = txt + " lat: " + lat + " lng: " + lng;
   labelContainerElem.appendChild(elem);
 
   let pos = convertLatLngtoCartesian(lat, lng);
@@ -234,18 +295,25 @@ function instantiatePin(txt, lat, lng, radius, color, originalColor) {
 
 let things = ["Aberdeen", "Abilene", "Akron", "Albany", "Albuquerque", "Alexandria", "Allentown", "Amarillo", "Anaheim", "Anchorage", "Ann Arbor", "Antioch", "Apple Valley", "Appleton", "Arlington", "Arvada", "Asheville", "Athens", "Atlanta", "Atlantic City", "Augusta", "Aurora", "Austin", "Bakersfield", "Baltimore", "Barnstable", "Baton Rouge", "Beaumont", "Bel Air", "Bellevue", "Berkeley", "Bethlehem", "Billings", "Birmingham", "Bloomington", "Boise", "Boise City", "Bonita Springs", "Boston", "Boulder", "Bradenton", "Bremerton", "Bridgeport", "Brighton", "Brownsville", "Bryan", "Buffalo", "Burbank", "Burlington", "Cambridge", "Canton", "Cape Coral", "Carrollton", "Cary", "Cathedral City", "Cedar Rapids", "Champaign", "Chandler", "Charleston", "Charlotte", "Chattanooga", "Chesapeake", "Chicago", "Chula Vista", "Cincinnati", "Clarke County", "Clarksville", "Clearwater", "Cleveland", "College Station", "Colorado Springs", "Columbia", "Columbus", "Concord", "Coral Springs", "Corona", "Corpus Christi", "Costa Mesa", "Dallas", "Daly City", "Danbury", "Davenport", "Davidson County", "Dayton", "Daytona Beach", "Deltona", "Denton", "Denver", "Des Moines", "Detroit", "Downey", "Duluth", "Durham", "El Monte", "El Paso", "Elizabeth", "Elk Grove", "Elkhart", "Erie", "Escondido", "Eugene", "Evansville", "Fairfield", "Fargo", "Fayetteville", "Fitchburg", "Flint", "Fontana", "Fort Collins", "Fort Lauderdale", "Fort Smith", "Fort Walton Beach", "Fort Wayne", "Fort Worth", "Frederick", "Fremont", "Fresno", "Fullerton", "Gainesville", "Garden Grove", "Garland", "Gastonia", "Gilbert", "Glendale", "Grand Prairie", "Grand Rapids", "Grayslake", "Green Bay", "GreenBay", "Greensboro", "Greenville", "Gulfport-Biloxi", "Hagerstown", "Hampton", "Harlingen", "Harrisburg", "Hartford", "Havre de Grace", "Hayward", "Hemet", "Henderson", "Hesperia", "Hialeah", "Hickory", "High Point", "Hollywood", "Honolulu", "Houma", "Houston", "Howell", "Huntington", "Huntington Beach", "Huntsville", "Independence", "Indianapolis", "Inglewood", "Irvine", "Irving", "Jackson", "Jacksonville", "Jefferson", "Jersey City", "Johnson City", "Joliet", "Kailua", "Kalamazoo", "Kaneohe", "Kansas City", "Kennewick", "Kenosha", "Killeen", "Kissimmee", "Knoxville", "Lacey", "Lafayette", "Lake Charles", "Lakeland", "Lakewood", "Lancaster", "Lansing", "Laredo", "Las Cruces", "Las Vegas", "Layton", "Leominster", "Lewisville", "Lexington", "Lincoln", "Little Rock", "Long Beach", "Lorain", "Los Angeles", "Louisville", "Lowell", "Lubbock", "Macon", "Madison", "Manchester", "Marina", "Marysville", "McAllen", "McHenry", "Medford", "Melbourne", "Memphis", "Merced", "Mesa", "Mesquite", "Miami", "Milwaukee", "Minneapolis", "Miramar", "Mission Viejo", "Mobile", "Modesto", "Monroe", "Monterey", "Montgomery", "Moreno Valley", "Murfreesboro", "Murrieta", "Muskegon", "Myrtle Beach", "Naperville", "Naples", "Nashua", "Nashville", "New Bedford", "New Haven", "New London", "New Orleans", "New York", "New York City", "Newark", "Newburgh", "Newport News", "Norfolk", "Normal", "Norman", "North Charleston", "North Las Vegas", "North Port", "Norwalk", "Norwich", "Oakland", "Ocala", "Oceanside", "Odessa", "Ogden", "Oklahoma City", "Olathe", "Olympia", "Omaha", "Ontario", "Orange", "Orem", "Orlando", "Overland Park", "Oxnard", "Palm Bay", "Palm Springs", "Palmdale", "Panama City", "Pasadena", "Paterson", "Pembroke Pines", "Pensacola", "Peoria", "Philadelphia", "Phoenix", "Pittsburgh", "Plano", "Pomona", "Pompano Beach", "Port Arthur", "Port Orange", "Port Saint Lucie", "Port St. Lucie", "Portland", "Portsmouth", "Poughkeepsie", "Providence", "Provo", "Pueblo", "Punta Gorda", "Racine", "Raleigh", "Rancho Cucamonga", "Reading", "Redding", "Reno", "Richland", "Richmond", "Richmond County", "Riverside", "Roanoke", "Rochester", "Rockford", "Roseville", "Round Lake Beach", "Sacramento", "Saginaw", "Saint Louis", "Saint Paul", "Saint Petersburg", "Salem", "Salinas", "Salt Lake City", "San Antonio", "San Bernardino", "San Buenaventura", "San Diego", "San Francisco", "San Jose", "Santa Ana", "Santa Barbara", "Santa Clara", "Santa Clarita", "Santa Cruz", "Santa Maria", "Santa Rosa", "Sarasota", "Savannah", "Scottsdale", "Scranton", "Seaside", "Seattle", "Sebastian", "Shreveport", "Simi Valley", "Sioux City", "Sioux Falls", "South Bend", "South Lyon", "Spartanburg", "Spokane", "Springdale", "Springfield", "St. Louis", "St. Paul", "St. Petersburg", "Stamford", "Sterling Heights", "Stockton", "Sunnyvale", "Syracuse", "Tacoma", "Tallahassee", "Tampa", "Temecula", "Tempe", "Thornton", "Thousand Oaks", "Toledo", "Topeka", "Torrance", "Trenton", "Tucson", "Tulsa", "Tuscaloosa", "Tyler", "Utica", "Vallejo", "Vancouver", "Vero Beach", "Victorville", "Virginia Beach", "Visalia", "Waco", "Warren", "Washington", "Waterbury", "Waterloo", "West Covina", "West Valley City", "Westminster", "Wichita", "Wilmington", "Winston", "Winter Haven", "Worcester", "Yakima", "Yonkers", "York", "Youngstown"];
 let pins = []
-  for (let i = 0; i < 100; i++) {
+for (let lt = 10; lt < 171; lt+=10) {
+  for (let lg = 0; lg < 360; lg+=10) {
+    const color1 = 0x88cc88
+    let pin = instantiatePin(" ", lt, lg, 0.05, color1, color1);
+    pins.push(pin);
+  }
+}
+  /* for (let i = 0; i < 200; i++) {
     const color1 = 0x88cc88
     const color2 = 0xcc8888
     const color3 = 0x8888cc
     const name1 = things[Math.floor(Math.random()*things.length)];
     const name2 = things[Math.floor(Math.random()*things.length)];
     const name3 = things[Math.floor(Math.random()*things.length)];
-    let pin1 = instantiatePin(name1, getRandomInt(0, 180), getRandomInt(0, 120), Math.random()/10, color1, color1);
-    let pin2 = instantiatePin(name2, getRandomInt(0, 180), getRandomInt(120, 240), Math.random()/10, color2, color2);
-    let pin3 = instantiatePin(name3, getRandomInt(0, 180), getRandomInt(240, 360), Math.random()/10, color3, color3);
+    let pin1 = instantiatePin(name1, getRandomBell(0, 180), getRandomInt(0, 120), Math.random()/10, color1, color1);
+    let pin2 = instantiatePin(name2, getRandomBell(0, 180), getRandomInt(120, 240), Math.random()/10, color2, color2);
+    let pin3 = instantiatePin(name3, getRandomBell(0, 180), getRandomInt(240, 360), Math.random()/10, color3, color3);
     pins.push(pin1, pin2, pin3);
-  }
+  } */
 
 
 /* const mouseControls = new THREE.DragControls( moons, camera, renderer.domElement);
@@ -271,9 +339,7 @@ function onDocumentKeyUp(event) {
     var keyCode = event.which;
     
     if (selectedPin != null) {
-      //console.log(selectedPin.position);
       let posLatLng = convertCartesiantoLatLng(selectedPin.position.x, selectedPin.position.y, selectedPin.position.z);
-      //console.log(posLatLng);
       // up
       if (keyCode == 38) {
           posLatLng.lat -= 1;
@@ -287,9 +353,7 @@ function onDocumentKeyUp(event) {
       } else if (keyCode == 39) {
           posLatLng.lng += 1;
       }
-      //console.log(posLatLng);
       let posXYZ = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng);
-      //console.log(posXYZ);
       selectedPin.position.set(posXYZ.x, posXYZ.y, posXYZ.z);
     }
     render();
@@ -321,6 +385,7 @@ function render(time) {
     camera.updateProjectionMatrix();
   }
 
+  //pinLabels
   pins.forEach((pinInfo) => {
   const {pin, elem} = pinInfo;
   
@@ -387,6 +452,9 @@ function render(time) {
   pivot3.rotation.y += -0.000003;
   //jaranius.rotation.y += 0.0003
   clouds.rotation.y += 0.0003
+
+  controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);
+  controls.update();
 }
 
 requestAnimationFrame(render);
