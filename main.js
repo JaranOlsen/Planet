@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {Float32BufferAttribute, FrontSide, AdditiveBlending} from 'three';
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 
-import diffuseTexture from "./img/diffuse.jpg"
+import diffuseTexture from "./img/diffuse8k.jpg"
 import normalTexture from "./img/normal.png"
 import starTexture from "./img/star.png"
 import roughnessTex from "./img/roughness.png"
@@ -310,7 +310,7 @@ let pins = []
 //         pins.push(pin);
 //     }
 // }
-/* for (let i = 0; i < 200; i++) {
+for (let i = 0; i < 200; i++) {
   const color1 = 0x88cc88
   const color2 = 0xcc8888
   const color3 = 0x8888cc
@@ -321,11 +321,7 @@ let pins = []
   let pin2 = instantiatePin(name2, getRandomBell(0, 180), getRandomInt(120, 240), Math.random()/10, color2, color2);
   let pin3 = instantiatePin(name3, getRandomBell(0, 180), getRandomInt(240, 360), Math.random()/10, color3, color3);
   pins.push(pin1, pin2, pin3);
-} */
-
-
-/* const mouseControls = new THREE.DragControls( moons, camera, renderer.domElement);
-mouseControls.addEventListener( 'drag', render ); */
+}
 
 
 function unhoverPin() {
