@@ -44,6 +44,9 @@ SHORT-TERM DEVELOPMENT
     find way of blending nodes and text with texture (css: blend-mix-mode?)
 
 
+    Instance geometry
+
+
 
 
 LONG-TERM DEVELOPMENT
