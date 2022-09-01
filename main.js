@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {Float32BufferAttribute, FrontSide, AdditiveBlending} from 'three';
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 
-import diffuseTexture from "./img/diffuse.png"
+import diffuseTexture from "./img/diffuse.jpg"
 import normalTexture from "./img/normal.png"
 import starTexture from "./img/star.png"
 import roughnessTex from "./img/roughness.png"
