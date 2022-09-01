@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {Float32BufferAttribute, FrontSide, AdditiveBlending, TextureLoader, Mesh} from 'three';
+import {Float32BufferAttribute, FrontSide, AdditiveBlending} from 'three';
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 
 const canvas = document.querySelector('#c');
