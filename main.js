@@ -2,6 +2,16 @@ import * as THREE from 'three';
 import {Float32BufferAttribute, FrontSide, AdditiveBlending} from 'three';
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 
+import diffuseTexture from "./img/diffuse.png"
+import normalTexture from "./img/normal.png"
+import starTexture from "./img/star.png"
+import roughnessTex from "./img/roughness.png"
+import moonTex from "./img/moon.jpg"
+import moon2Tex from "./img/moon2.png"
+import moon3Tex from "./img/moon3.png"
+import clouds2Tex from "./img/clouds2.png"
+import cloudsAlphaTex from "./img/cloudsalpha.jpg"
+
 const canvas = document.querySelector('#c');
 const renderer = new THREE.WebGLRenderer(
     {
@@ -51,7 +61,7 @@ let selectedPin = null;
 const starGeometry = new THREE.BufferGeometry()
 const starMaterial = new THREE.PointsMaterial({
     size: 5,
-    map: new THREE.TextureLoader().load("https://jaranolsen.github.io/Planet/assets/img/star.png"),
+    map: new THREE.TextureLoader().load(starTexture),
     transparent: true
 })
 
@@ -89,14 +99,14 @@ center.add(pivot3);
 
 const textureLoader = new THREE.TextureLoader()
 //create Jaranius
-let diffuse = textureLoader.load('https://jaranolsen.github.io/Planet/assets/img/diffuse.png');
+let diffuse = textureLoader.load(diffuseTexture);
 
 const jaranius = new THREE.Mesh(
     new THREE.SphereGeometry(5, 250, 250),
     new THREE.MeshStandardMaterial({
         map: diffuse,
-        normalMap: textureLoader.load('https://jaranolsen.github.io/Planet/assets/img/normal.png'),
-        roughnessMap: textureLoader.load('https://jaranolsen.github.io/Planet/assets/img/roughness.png'),
+        normalMap: textureLoader.load(normalTexture),
+        roughnessMap: textureLoader.load(roughnessTex),
         metalness: 0,
         flatShading: false,
         side: FrontSide,
@@ -108,8 +118,8 @@ scene.add(jaranius)
 const clouds = new THREE.Mesh(
     new THREE.SphereGeometry(5.05, 50, 50),
     new THREE.MeshLambertMaterial({
-        alphaMap: textureLoader.load('https://jaranolsen.github.io/Planet/assets/img/clouds2.png'),
-        map: textureLoader.load('https://jaranolsen.github.io/Planet/assets/img/clouds2.png'),
+        alphaMap: textureLoader.load(cloudsAlphaTex),
+        map: textureLoader.load(clouds2Tex),
         transparent: true
     })
 )
@@ -139,9 +149,9 @@ class Moon {
     }
 }
 
-let moon1 = new Moon(1.5, 'https://jaranolsen.github.io/Planet/assets/img/moon.jpg', 110, -0.0005, pivot1, 0.4);
-let moon2 = new Moon(2.5, 'https://jaranolsen.github.io/Planet/assets/img/moon2.png', 190, -0.0003, pivot2, 0.1);
-let moon3 = new Moon(1, 'https://jaranolsen.github.io/Planet/assets/img/moon3.png', 250, -0.0001, pivot3, 0.005);
+let moon1 = new Moon(1.5, moonTex, 110, -0.0005, pivot1, 0.4);
+let moon2 = new Moon(2.5, moon2Tex, 190, -0.0003, pivot2, 0.1);
+let moon3 = new Moon(1, moon3Tex, 250, -0.0001, pivot3, 0.005);
 let moons = [moon1,moon2,moon3];
 
 for (let i = 0; i < moons.length; i++) {
