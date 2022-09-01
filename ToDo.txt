@@ -1,0 +1,53 @@
+MAKE USABLE
+    Fix Vite
+        assets not working
+        update deploy.sh
+
+    Figure out dependency importing
+
+    Folder structure
+
+    add lines between nodes
+
+    add way of presenting info/data
+
+    fix or remove DragControls
+
+    fix Labels jagged movement
+
+    test higher res jpg diffuse texture
+
+    add real labels and locations
+        figure out how to store this in separate file, making it easy to edit
+
+    make different size text for different size nodes
+
+    optimize texture-dimensions
+        In general, textures take width * height * 4 * 1.33 bytes of memory.
+
+
+
+SHORT-TERM DEVELOPMENT
+    Fix move pin lat lng bug
+        less than 0 more than 180/360
+        convert cartesian to latlong
+        
+    find way of editing text, nodesize, nodecolor realtime
+    find way of saving lat, long, size, color and text
+    find a way of adding connections realtime
+    find a way of saving connections
+
+    Fix move pin fps drop bug
+
+    make better clouds
+    make better atmosphere
+    find way of blending nodes and text with texture (css: blend-mix-mode?)
+
+
+
+
+LONG-TERM DEVELOPMENT
+    make procedural geography
+    add gutta (requires lat/lng fix)
+
+
