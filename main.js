@@ -92,12 +92,12 @@ const loader = new FontLoader();
 					// make shape ( N.B. edge view not visible )
 
 					const text = new THREE.Mesh( geometry, matLite );
-					text.position.x = 10;
-                    text.position.y = 10;
-                    text.position.z = 10;
-                    text.rotation.x = 30;
-                    text.rotation.y = 10;
-                    text.rotation.z = 15;
+					text.position.x = 0;
+                    text.position.y = 0;
+                    text.position.z = 6;
+                    text.rotation.x = 0;
+                    text.rotation.y = 0;
+                    text.rotation.z = 0;
                     text.scale.x = 0.01;
                     text.scale.y = 0.01;
                     text.scale.z = 0.01;
