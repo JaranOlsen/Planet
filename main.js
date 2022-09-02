@@ -385,8 +385,10 @@ refreshLoop();
 
 //CSS dynamic change
 function changeElement(id, distance) {
-    var el = document.getElementById(id);
-    el.style.fontSize = distance;
+    px = distance;
+    id.style.setProperty('--px', distance)
+/*     let el = document.getElementById(id);
+    el.style.fontSize = distance; */
 }
 
 function render(time) {
@@ -421,7 +423,7 @@ function render(time) {
         } else {
             // un-hide the label
             elem.style.display = '';
-            changeElement(labels>div, camera.position.distanceTo(pin.position));
+            changeElement(labels, camera.position.distanceTo(pin.position));
 
             // convert the normalized position to CSS coordinates
             const x = (tempV.x * .5 + .5) * canvas.clientWidth;

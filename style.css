@@ -48,7 +48,7 @@ html, body {
   border-radius: 3px;
   padding: 10px;
   cursor: pointer;    /* change the cursor to a hand when over us */
-  font-size: 16 px;
+  font-size: var(--px); /*16 px; */
   user-select: none;   /* don't let the text get selected */
   opacity: 30%;
   text-shadow:         /* create a black outline */
