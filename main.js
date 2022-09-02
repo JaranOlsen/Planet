@@ -423,7 +423,9 @@ function render(time) {
         } else {
             // un-hide the label
             elem.style.display = '';
-            changeElement(labels, camera.position.distanceTo(pin.position));
+            //changeElement(labels, camera.position.distanceTo(pin.position));
+            let fSize = "\"" + camera.position.distanceTo(pin.position) + "px \"";
+            document.getElementById('labels').style.fontSize = fSize;
 
             // convert the normalized position to CSS coordinates
             const x = (tempV.x * .5 + .5) * canvas.clientWidth;
