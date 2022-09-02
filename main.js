@@ -98,7 +98,9 @@ const loader = new FontLoader();
                     text.rotation.x = 30;
                     text.rotation.y = 10;
                     text.rotation.z = 15;
-                    text.scale = 0.01;
+                    text.scale.x = 0.01;
+                    text.scale.y = 0.01;
+                    text.scale.z = 0.01;
 					scene.add( text );
 
 					// make line shape ( N.B. edge view remains visible )
