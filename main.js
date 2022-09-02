@@ -421,7 +421,7 @@ function render(time) {
         } else {
             // un-hide the label
             elem.style.display = '';
-            changeElement(elem, camera.position.distanceTo(pin.position));
+            changeElement(label, camera.position.distanceTo(pin.position));
 
             // convert the normalized position to CSS coordinates
             const x = (tempV.x * .5 + .5) * canvas.clientWidth;
