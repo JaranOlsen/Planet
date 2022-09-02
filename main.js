@@ -300,17 +300,17 @@ let pins = []
 for (let i = 0; i < coordsList.length; i+=3) {
     let color = 0xff0000;
     if (coordsList[i+2] < 60) { 
-        color = 0x845EC2;
+        color = 0xcc8888 //0x845EC2;
     } else if (coordsList[i+2] < 120) { 
-        color = 0xD65DB1;
+        color = 0xaaaa88 //0xD65DB1;
     } else if (coordsList[i+2] < 180) { 
-        color = 0xFF6F91;
+        color = 0x88cc88 //0xFF6F91;
     } else if (coordsList[i+2] < 240) { 
-        color = 0xFF9671;
+        color = 0x88aaaa //0xFF9671;
     } else if (coordsList[i+2] < 300) { 
-        color = 0xFFC75F;
+        color = 0x8888cc //0xFFC75F;
     } else { 
-        color = 0xF9F871;
+        color = 0xaa88aa //0xF9F871;
     }
     let pin = instantiatePin(coordsList[i], coordsList[i+1], coordsList[i+2], color, color);
     pins.push(pin);
