@@ -383,13 +383,13 @@ function refreshLoop() {
 
 refreshLoop();
 
-/* //CSS dynamic change
-function changeElement(id, distance) {
+//CSS dynamic change
+/* function changeElement(id, distance) {
     px = distance;
     id.style.setProperty('--px', distance)
-/*     let el = document.getElementById(id);
-    el.style.fontSize = distance; */
-} */
+    let el = document.getElementById(id);
+    el.style.fontSize = distance; 
+}*/
 
 function render(time) {
     time *= 0.001;
