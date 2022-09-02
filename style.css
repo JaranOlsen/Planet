@@ -42,6 +42,11 @@ html, body {
   left: 0;             /* make their default position the top left of the container */
   top: 0;
   text-align: center;
+  background-color: darkolivegreen;
+  background-blend-mode: overlay;
+  border-color: black;
+  border-radius: 3px;
+  padding: 10px;
   cursor: pointer;    /* change the cursor to a hand when over us */
   font-size: medium;
   user-select: none;   /* don't let the text get selected */
