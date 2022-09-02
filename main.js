@@ -61,50 +61,89 @@ let selectedPin = null;
 
 //create text
 const loader = new FontLoader();
-loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
+				loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
 
-    const color = 0x006699;
+					const color = 0x006699;
 
-    const matDark = new THREE.LineBasicMaterial( {
-        color: color,
-        side: THREE.DoubleSide
-    } );
+					const matDark = new THREE.LineBasicMaterial( {
+						color: color,
+						side: THREE.DoubleSide
+					} );
 
-    const message = '   Three.js\nSimple text.';
+					const matLite = new THREE.MeshBasicMaterial( {
+						color: color,
+						transparent: true,
+						opacity: 0.4,
+						side: THREE.DoubleSide
+					} );
 
-    const shapes = font.generateShapes( message, 100 );
+					const message = '   Three.js\nSimple text.';
 
-    const geometry = new THREE.ShapeGeometry( shapes );
+					const shapes = font.generateShapes( message, 10 );
 
-    geometry.computeBoundingBox();
+					const geometry = new THREE.ShapeGeometry( shapes );
 
-    const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+					geometry.computeBoundingBox();
 
-    geometry.translate( xMid, 0, 0 );
+					const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
 
-    shapes.push.apply( shapes );
+					geometry.translate( xMid, 0, 0 );
 
-    const lineText = new THREE.Object3D();
+					// make shape ( N.B. edge view not visible )
 
-    for ( let i = 0; i < shapes.length; i ++ ) {
+					const text = new THREE.Mesh( geometry, matLite );
+					text.position.x = 10;
+                    text.position.y = 10;
+                    text.position.z = 10;
+                    text.rotation.x = 30;
+                    text.rotation.y = 10;
+                    text.rotation.z = 15;
+					scene.add( text );
 
-        const shape = shapes[ i ];
+					// make line shape ( N.B. edge view remains visible )
 
-        const points = shape.getPoints();
-        const geometry = new THREE.BufferGeometry().setFromPoints( points );
+					const holeShapes = [];
 
-        geometry.translate( xMid, 0, 0 );
+					for ( let i = 0; i < shapes.length; i ++ ) {
 
-        const lineMesh = new THREE.Line( geometry, matDark );
-        lineText.add( lineMesh );
+						const shape = shapes[ i ];
 
-    }
+						if ( shape.holes && shape.holes.length > 0 ) {
 
-    scene.add( lineText );
+							for ( let j = 0; j < shape.holes.length; j ++ ) {
 
-    render();
+								const hole = shape.holes[ j ];
+								holeShapes.push( hole );
 
-} ); //end load function
+							}
+
+						}
+
+					}
+
+					shapes.push.apply( shapes, holeShapes );
+
+					const lineText = new THREE.Object3D();
+
+					for ( let i = 0; i < shapes.length; i ++ ) {
+
+						const shape = shapes[ i ];
+
+						const points = shape.getPoints();
+						const geometry = new THREE.BufferGeometry().setFromPoints( points );
+
+						geometry.translate( xMid, 0, 0 );
+
+						const lineMesh = new THREE.Line( geometry, matDark );
+						lineText.add( lineMesh );
+
+					}
+
+					scene.add( lineText );
+
+					render();
+
+				} ); //end load function
 
 //create starfield
 const starGeometry = new THREE.BufferGeometry()
