@@ -299,7 +299,8 @@ const coordsList = ["the essence of love / meaning", 13.5, 90, "the essence of w
 let pins = []
 for (let i = 0; i < coordsList.length; i+=3) {
     let hexString = Math.floor(coordsList[i+2] * 0.7).toString(16);
-    let pin = instantiatePin(coordsList[i], coordsList[i+1], coordsList[i+2], 0.08, "0xcc" + hexString + (-hexString), "0xcc" + hexString + (-hexString));
+    let hexStringInverse = Math.floor((360 - coordsList[i+2]) * 0.7).toString(16);
+    let pin = instantiatePin(coordsList[i], coordsList[i+1], coordsList[i+2], 0.08, "0xcc" + hexString + hexStringInverse, "0xcc" + hexString + hexStringInverse);
     pins.push(pin);
 }
 
