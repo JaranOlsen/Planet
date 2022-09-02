@@ -424,7 +424,7 @@ function render(time) {
             // un-hide the label
             elem.style.display = '';
             //changeElement(labels, camera.position.distanceTo(pin.position));
-            let fSize = "\"" + camera.position.distanceTo(pin.position) + "px \"";
+            let fSize = "\"" + (51- Math.floor(camera.position.distanceTo(pin.position))) + "px \"";
             document.getElementById('labels').style.fontSize = fSize;
 
             // convert the normalized position to CSS coordinates
