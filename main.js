@@ -312,7 +312,7 @@ for (let i = 0; i < coordsList.length; i+=3) {
     } else { 
         color = 0xaa88aa //0xF9F871;
     }
-    let pin = instantiatePin(coordsList[i], coordsList[i+1], coordsList[i+2], color, color);
+    let pin = instantiatePin(coordsList[i], coordsList[i+1], coordsList[i+2], 0.05, color, color);
     pins.push(pin);
 }
 
