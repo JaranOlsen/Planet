@@ -11,7 +11,7 @@ MAKE USABLE
 
     add way of presenting info/data
 
-    USE PLANEGEOMETRY INSTEAD OF HTML/CSS?
+    USE PLANEGEOMETRY OR TEXTSHAPES INSTEAD OF HTML/CSS?
     fix Labels jagged movement
 
     test higher res jpg diffuse texture
