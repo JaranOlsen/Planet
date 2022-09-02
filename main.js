@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import {Float32BufferAttribute, FrontSide, AdditiveBlending} from 'three';
 //import {OrbitControls} from "/node_modules/three/examples/jsm/controls/OrbitControls.js"; 
 import {OrbitControls} from "three/addons/controls/OrbitControls.js"; //use in production build
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 import diffuseTexture from "./img/diffuse8k.jpg"
 import normalTexture from "./img/normal.png"
@@ -57,6 +58,53 @@ const pointer = new THREE.Vector2;
 const tempV = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
 let selectedPin = null;
+
+//create text
+const loader = new FontLoader();
+loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+
+    const color = 0x006699;
+
+    const matDark = new THREE.LineBasicMaterial( {
+        color: color,
+        side: THREE.DoubleSide
+    } );
+
+    const message = '   Three.js\nSimple text.';
+
+    const shapes = font.generateShapes( message, 100 );
+
+    const geometry = new THREE.ShapeGeometry( shapes );
+
+    geometry.computeBoundingBox();
+
+    const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+
+    geometry.translate( xMid, 0, 0 );
+
+    shapes.push.apply( shapes );
+
+    const lineText = new THREE.Object3D();
+
+    for ( let i = 0; i < shapes.length; i ++ ) {
+
+        const shape = shapes[ i ];
+
+        const points = shape.getPoints();
+        const geometry = new THREE.BufferGeometry().setFromPoints( points );
+
+        geometry.translate( xMid, 0, 0 );
+
+        const lineMesh = new THREE.Line( geometry, matDark );
+        lineText.add( lineMesh );
+
+    }
+
+    scene.add( lineText );
+
+    render();
+
+} ); //end load function
 
 //create starfield
 const starGeometry = new THREE.BufferGeometry()
