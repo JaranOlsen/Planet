@@ -94,13 +94,13 @@ const loader = new FontLoader();
 					const text = new THREE.Mesh( geometry, matLite );
 					text.position.x = 0;
                     text.position.y = 0;
-                    text.position.z = 6;
+                    text.position.z = 5.5;
                     text.rotation.x = 0;
                     text.rotation.y = 0;
                     text.rotation.z = 0;
-                    text.scale.x = 0.01;
-                    text.scale.y = 0.01;
-                    text.scale.z = 0.01;
+                    text.scale.x = 0.001;
+                    text.scale.y = 0.001;
+                    text.scale.z = 0.001;
 					scene.add( text );
 
 					// make line shape ( N.B. edge view remains visible )
