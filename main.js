@@ -383,6 +383,12 @@ function refreshLoop() {
 
 refreshLoop();
 
+//CSS dynamic change
+function changeElement(id, distance) {
+    var el = document.getElementById(id);
+    el.style.fontSize = distance;
+}
+
 function render(time) {
     time *= 0.001;
 
@@ -415,7 +421,7 @@ function render(time) {
         } else {
             // un-hide the label
             elem.style.display = '';
-
+            changeElement(elem, camera.position.distanceTo(pin.position));
 
             // convert the normalized position to CSS coordinates
             const x = (tempV.x * .5 + .5) * canvas.clientWidth;
