@@ -37,13 +37,13 @@ html, body {
   z-index: 0;
 }
 #labels>div {
-  /* white-space: nowrap; */
+  white-space: nowrap;
   position: absolute;  /* let us position them inside the container */
   left: 0;             /* make their default position the top left of the container */
   top: 0;
   text-align: center;
   cursor: pointer;    /* change the cursor to a hand when over us */
-  font-size: small;
+  font-size: medium;
   user-select: none;   /* don't let the text get selected */
   opacity: 30%;
   text-shadow:         /* create a black outline */
@@ -57,6 +57,6 @@ html, body {
   -1px  0   0 #000;
 }
 #labels>div:hover {
-  font-size: medium;
+  font-size: large;
   opacity: 70%;
 }
