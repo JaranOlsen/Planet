@@ -175,7 +175,7 @@ for (let i = 0; i < moons.length; i++) {
 }
 
 //lights
-const ambient = new THREE.AmbientLight(0xffffff, 0.5);  //0.01
+const ambient = new THREE.AmbientLight(0xffffff, 0.01);
 scene.add(ambient);
 
 const jaraniusLight = new THREE.PointLight(0xffffff, 0.01);
@@ -383,13 +383,13 @@ function refreshLoop() {
 
 refreshLoop();
 
-//CSS dynamic change
+/* //CSS dynamic change
 function changeElement(id, distance) {
     px = distance;
     id.style.setProperty('--px', distance)
 /*     let el = document.getElementById(id);
     el.style.fontSize = distance; */
-}
+} */
 
 function render(time) {
     time *= 0.001;
@@ -424,8 +424,8 @@ function render(time) {
             // un-hide the label
             elem.style.display = '';
             //changeElement(labels, camera.position.distanceTo(pin.position));
-            let fSize = "\"" + (51- Math.floor(camera.position.distanceTo(pin.position))) + "px \"";
-            document.getElementById('labels').style.fontSize = fSize;
+            /* let fSize = "\"" + (51- Math.floor(camera.position.distanceTo(pin.position))) + "px \"";
+            document.getElementById('labels').style.fontSize = fSize; */
 
             // convert the normalized position to CSS coordinates
             const x = (tempV.x * .5 + .5) * canvas.clientWidth;

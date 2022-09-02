@@ -11,8 +11,7 @@ MAKE USABLE
 
     add way of presenting info/data
 
-    fix or remove DragControls
-
+    USE PLANEGEOMETRY INSTEAD OF HTML/CSS?
     fix Labels jagged movement
 
     test higher res jpg diffuse texture
