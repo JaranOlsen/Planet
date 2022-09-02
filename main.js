@@ -79,7 +79,7 @@ const loader = new FontLoader();
 
 					const message = '   Three.js\nSimple text.';
 
-					const shapes = font.generateShapes( message, 10 );
+					const shapes = font.generateShapes( message, 100 );
 
 					const geometry = new THREE.ShapeGeometry( shapes );
 
@@ -98,6 +98,7 @@ const loader = new FontLoader();
                     text.rotation.x = 30;
                     text.rotation.y = 10;
                     text.rotation.z = 15;
+                    text.scale = 0.01;
 					scene.add( text );
 
 					// make line shape ( N.B. edge view remains visible )
