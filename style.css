@@ -45,10 +45,10 @@ html, body {
   background-color: darkolivegreen;
   background-blend-mode: overlay;
   border-color: black;
-  border-radius: 3px;
-  padding: 10px;
+  border-radius: 1%;
+  padding: 5%;
   cursor: pointer;    /* change the cursor to a hand when over us */
-  font-size: medium;
+  font-size: 5%;
   user-select: none;   /* don't let the text get selected */
   opacity: 30%;
   text-shadow:         /* create a black outline */
