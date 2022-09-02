@@ -126,7 +126,7 @@ const loader = new FontLoader();
 
 					shapes.push.apply( shapes, holeShapes );
 
-					const lineText = new THREE.Object3D();
+					//const lineText = new THREE.Object3D();
 
 					/* for ( let i = 0; i < shapes.length; i ++ ) {
 
@@ -142,7 +142,7 @@ const loader = new FontLoader();
 
 					} */
 
-					scene.add( lineText );
+					//scene.add( lineText );
 
 					render();
 
