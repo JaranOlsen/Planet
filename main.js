@@ -77,7 +77,7 @@ const loader = new FontLoader();
 						side: THREE.DoubleSide
 					} );
 
-					const message = '   Three.js\nSimple text.';
+					const message = '   Path of\nthe Heart.';
 
 					const shapes = font.generateShapes( message, 100 );
 
@@ -128,7 +128,7 @@ const loader = new FontLoader();
 
 					const lineText = new THREE.Object3D();
 
-					for ( let i = 0; i < shapes.length; i ++ ) {
+					/* for ( let i = 0; i < shapes.length; i ++ ) {
 
 						const shape = shapes[ i ];
 
@@ -140,7 +140,7 @@ const loader = new FontLoader();
 						const lineMesh = new THREE.Line( geometry, matDark );
 						lineText.add( lineMesh );
 
-					}
+					} */
 
 					scene.add( lineText );
 
