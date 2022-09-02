@@ -61,7 +61,7 @@ let selectedPin = null;
 
 //create text
 const loader = new FontLoader();
-loader.load( './helvetiker_regular.typeface.json', function ( font ) {
+loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
 
     const color = 0x006699;
 
