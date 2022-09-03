@@ -81,7 +81,7 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
     for (let i = 0; i < 175; i+=5) {
     const text = new THREE.Mesh( geometry, matLite );
     const textRadius = 5.4;
-    let latLng = convertlatLngLngtoCartesian(i, i, textRadius);
+    let latLng = convertlatLngtoCartesian(i, i, textRadius);
     let tangentP = new THREE.Vector3(latLng.x, latLng.y, latLng.z);
     text.lookAt(tangentP);
     //let tangent = findTangent(tangentP);
