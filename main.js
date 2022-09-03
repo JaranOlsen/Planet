@@ -126,25 +126,7 @@ const loader = new FontLoader();
 
 					shapes.push.apply( shapes, holeShapes );
 
-					//const lineText = new THREE.Object3D();
-
-					/* for ( let i = 0; i < shapes.length; i ++ ) {
-
-						const shape = shapes[ i ];
-
-						const points = shape.getPoints();
-						const geometry = new THREE.BufferGeometry().setFromPoints( points );
-
-						geometry.translate( xMid, 0, 0 );
-
-						const lineMesh = new THREE.Line( geometry, matDark );
-						lineText.add( lineMesh );
-
-					} */
-
-					//scene.add( lineText );
-
-					render();
+					//render();
 
 				} ); //end load function
 
