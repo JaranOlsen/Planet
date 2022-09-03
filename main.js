@@ -64,29 +64,17 @@ const loader = new FontLoader();
 				loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
 
 					const color = 0x006699;
-
-					const matDark = new THREE.LineBasicMaterial( {
-						color: color,
-						side: THREE.DoubleSide
-					} );
-
 					const matLite = new THREE.MeshBasicMaterial( {
 						color: color,
 						transparent: true,
 						opacity: 0.4,
 						side: THREE.DoubleSide
 					} );
-
 					const message = '   Path of\nthe Heart.';
-
 					const shapes = font.generateShapes( message, 100 );
-
 					const geometry = new THREE.ShapeGeometry( shapes );
-
 					geometry.computeBoundingBox();
-
 					const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-
 					geometry.translate( xMid, 0, 0 );
 
 					// make shape ( N.B. edge view not visible )
@@ -105,7 +93,7 @@ const loader = new FontLoader();
 
 					// make line shape ( N.B. edge view remains visible )
 
-					const holeShapes = [];
+					/* const holeShapes = [];
 
 					for ( let i = 0; i < shapes.length; i ++ ) {
 
@@ -124,7 +112,7 @@ const loader = new FontLoader();
 
 					}
 
-					shapes.push.apply( shapes, holeShapes );
+					shapes.push.apply( shapes, holeShapes ); */
 
 					//render();
 
