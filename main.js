@@ -89,13 +89,13 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
     text.position.x = latLng.x;
     text.position.y = latLng.y;
     text.position.z = latLng.z;
-/*     text.rotation.x = -1 //tangent.rotation.x;
+    console.log(text.position.x, text.position.y, text.position.z);
+/*  text.rotation.x = -1 //tangent.rotation.x;
     text.rotation.y = 0 //tangent.rotation.y;
     text.rotation.z = 0 //tangent.rotation.z; */
-    console.log(tangentP, tangent);
-    text.scale.x = 0.001;
-    text.scale.y = 0.001;
-    text.scale.z = 0.001;
+    text.scale.x = 0.01;
+    text.scale.y = 0.01;
+    text.scale.z = 0.01;
     scene.add( text );
     }
 } );
