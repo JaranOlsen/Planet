@@ -97,7 +97,7 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
         tag.scale.y = size;
         tag.scale.z = size;
 
-        const boxGeo = new THREE.PlaneGeometry( Math.abs(txtGeo.boundingBox.min.x) + Math.abs(txtGeo.boundingBox.max.x), Math.abs(txtGeo.boundingBox.min.y) + Math.abs(txtGeo.boundingBox.max.y));
+        const boxGeo = new THREE.PlaneGeometry((Math.abs(txtGeo.boundingBox.min.x) + Math.abs(txtGeo.boundingBox.max.x)) * size, (Math.abs(txtGeo.boundingBox.min.y) + Math.abs(txtGeo.boundingBox.max.y)) * size);
         boxGeo.computeBoundingBox();
         const boxMid = - 0.5 * ( boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x );
         boxGeo.translate( boxMid, 0, 0 );
