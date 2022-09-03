@@ -1,8 +1,9 @@
 import * as THREE from 'three';
 import {Float32BufferAttribute, FrontSide, AdditiveBlending} from 'three';
-//import {OrbitControls} from "/node_modules/three/examples/jsm/controls/OrbitControls.js"; 
-import {OrbitControls} from "three/addons/controls/OrbitControls.js"; //use in production build
-import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import {OrbitControls} from "/node_modules/three/examples/jsm/controls/OrbitControls.js"; 
+//import {OrbitControls} from "three/addons/controls/OrbitControls.js"; //use in production build
+import { FontLoader } from '/node_modules/three/examples/jsm/loaders/FontLoader.js';
+//import { FontLoader } from 'three/addons/loaders/FontLoader.js'; //use in production build
 
 import diffuseTexture from "./img/diffuse8k.jpg"
 import normalTexture from "./img/normal.png"
@@ -81,7 +82,7 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
         const txtGeo = new THREE.ShapeGeometry( shapes );
         txtGeo.computeBoundingBox();
         const xMid = - 0.5 * ( txtGeo.boundingBox.max.x - txtGeo.boundingBox.min.x );
-        txtGeo.translate( xMid, 0, 0 );
+        txtGeo.translate( 0, 0, 0 );
         console.log(txtGeo.boundingBox);
         
         const tag = new THREE.Mesh( txtGeo, textMat );
@@ -100,8 +101,8 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
         const padding = 100;
         const boxGeo = new THREE.PlaneGeometry((Math.abs(txtGeo.boundingBox.min.x) + Math.abs(txtGeo.boundingBox.max.x) + padding) * size, (Math.abs(txtGeo.boundingBox.min.y) + Math.abs(txtGeo.boundingBox.max.y) + padding) * size);
         boxGeo.computeBoundingBox();
-        const boxMid = -0.5 * ( boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y );
-        boxGeo.translate( 0, boxMid/4, 0 );
+        const boxMid = 0.5 * ( boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y );
+        boxGeo.translate( 0, 0, 0 );
         let box = new THREE.Mesh(boxGeo, boxMat);
 
         box.lookAt( rotationVector )
