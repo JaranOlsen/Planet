@@ -59,6 +59,7 @@ const tempV = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
 let selectedPin = null;
 
+
 //create text
 const loader = new FontLoader();
 loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
@@ -80,6 +81,8 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
     for (let i = 0; i < 100; i++) {
     const text = new THREE.Mesh( geometry, matLite );
     let lat = convertLatLngtoCartesian(i,i);
+    let tangentP = new THREE.Vector3(lat.x, lat.y, lat.z);
+    findTangent(tangentP);
     text.position.x = lat.x;
     text.position.y = lat.y;
     text.position.z = lat.z;
@@ -262,6 +265,18 @@ function convertCartesiantoLatLng(x, y, z) {
     return {
         lat, lng
     }
+}
+
+function findTangent(tangentPoint) {
+    let normal = new THREE.Vector3().copy( tangentPoint )
+    //normal.sub( sphere.position ) // remove sphere translation
+
+    let plane = new THREE.Mesh(
+    new THREE.PlaneGeometry( 5.5, 5.5 ),
+    new THREE.MeshBasicMaterial( { color: 'red' } )
+    )
+    plane.lookAt( normal )
+    plane.position.copy( tangentPoint )
 }
 
 //create coordpoints
