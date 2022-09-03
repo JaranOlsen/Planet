@@ -61,62 +61,37 @@ let selectedPin = null;
 
 //create text
 const loader = new FontLoader();
-				loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
+loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
 
-					const color = 0x006699;
-					const matLite = new THREE.MeshBasicMaterial( {
-						color: color,
-						transparent: true,
-						opacity: 0.4,
-						side: THREE.DoubleSide
-					} );
-					const message = '   Path of\nthe Heart.';
-					const shapes = font.generateShapes( message, 100 );
-					const geometry = new THREE.ShapeGeometry( shapes );
-					geometry.computeBoundingBox();
-					const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-					geometry.translate( xMid, 0, 0 );
+    const color = 0x006699;
+    const matLite = new THREE.MeshBasicMaterial( {
+        color: color,
+        transparent: true,
+        opacity: 0.4,
+        side: THREE.DoubleSide
+    } );
+    const message = '   Path of\nthe Heart.';
+    const shapes = font.generateShapes( message, 100 );
+    const geometry = new THREE.ShapeGeometry( shapes );
+    geometry.computeBoundingBox();
+    const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+    geometry.translate( xMid, 0, 0 );
 
-					// make shape ( N.B. edge view not visible )
-
-					const text = new THREE.Mesh( geometry, matLite );
-					text.position.x = 0;
-                    text.position.y = 0;
-                    text.position.z = 5.5;
-                    text.rotation.x = 0;
-                    text.rotation.y = 0;
-                    text.rotation.z = 0;
-                    text.scale.x = 0.001;
-                    text.scale.y = 0.001;
-                    text.scale.z = 0.001;
-					scene.add( text );
-
-					// make line shape ( N.B. edge view remains visible )
-
-					/* const holeShapes = [];
-
-					for ( let i = 0; i < shapes.length; i ++ ) {
-
-						const shape = shapes[ i ];
-
-						if ( shape.holes && shape.holes.length > 0 ) {
-
-							for ( let j = 0; j < shape.holes.length; j ++ ) {
-
-								const hole = shape.holes[ j ];
-								holeShapes.push( hole );
-
-							}
-
-						}
-
-					}
-
-					shapes.push.apply( shapes, holeShapes ); */
-
-					//render();
-
-				} ); //end load function
+    for (let i = 0; i < 100; i++) {
+    const text = new THREE.Mesh( geometry, matLite );
+    let lat = convertLatLngtoCartesian(i,i);
+    text.position.x = lat.x;
+    text.position.y = lat.y;
+    text.position.z = lat.z;
+    text.rotation.x = 0;
+    text.rotation.y = 0;
+    text.rotation.z = 0;
+    text.scale.x = 0.001;
+    text.scale.y = 0.001;
+    text.scale.z = 0.001;
+    scene.add( text );
+    }
+} );
 
 //create starfield
 const starGeometry = new THREE.BufferGeometry()
@@ -196,7 +171,7 @@ const atmosphere = new THREE.Mesh(
         blending: AdditiveBlending
     })
 )
-jaranius.add(atmosphere);
+//jaranius.add(atmosphere);
 
 //create moons
 class Moon {
