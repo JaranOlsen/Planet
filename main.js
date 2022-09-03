@@ -277,6 +277,7 @@ function findTangent(tangentPoint) {
     )
     plane.lookAt( normal )
     plane.position.copy( tangentPoint )
+    scene.add(plane);
 }
 
 //create coordpoints
