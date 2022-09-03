@@ -78,7 +78,7 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
         } );
 
         let box = new THREE.Mesh(
-            new THREE.PlaneGeometry( size * 100, size * 10 ),
+            new THREE.PlaneGeometry( size * 1000, size * 100 ),
             new THREE.MeshBasicMaterial( boxMat )
         )
         
@@ -86,8 +86,9 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
         const shapes = font.generateShapes( txt, 100 );
         const geometry = new THREE.ShapeGeometry( shapes );
         geometry.computeBoundingBox();
-        /* const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-        geometry.translate( xMid, 0, 0 ); */
+        const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+        geometry.translate( xMid, 0, 0 );
+        console.log(geometry.boundingBox);
         
         const tag = new THREE.Mesh( geometry, textMat );
         const tagRadius = 5.4;
@@ -102,6 +103,9 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
         tag.scale.y = size;
         tag.scale.z = size;
 
+        box.computeBoundingBox();
+        const boxMid = - 0.5 * ( box.boundingBox.max.x - box.boundingBox.min.x );
+        box.translate( boxMid, 0, 0 );
         box.lookAt( rotationVector )
         box.position.copy( rotationVector )
 
