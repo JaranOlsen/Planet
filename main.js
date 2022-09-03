@@ -84,13 +84,14 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
     let lat = convertLatLngtoCartesian(i, i, textRadius);
     let tangentP = new THREE.Vector3(lat.x, lat.y, lat.z);
     let tangent = findTangent(tangentP);
+
     text.position.x = lat.x;
     text.position.y = lat.y;
     text.position.z = lat.z;
-    text.rotation.x = tangent.rotation.x;
-    text.rotation.y = tangent.rotation.y;
-    text.rotation.z = tangent.rotation.z;
-    console.log(tangentP, tangent.rotation);
+    text.rotation.x = -1 //tangent.rotation.x;
+    text.rotation.y = 0 //tangent.rotation.y;
+    text.rotation.z = 0 //tangent.rotation.z;
+    console.log(tangentP, tangent);
     text.scale.x = 0.001;
     text.scale.y = 0.001;
     text.scale.z = 0.001;
