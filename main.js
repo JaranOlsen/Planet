@@ -77,20 +77,14 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
             side: THREE.DoubleSide
         } );
 
-        let box = new THREE.Mesh(
-            new THREE.PlaneGeometry( size * 1000, size * 100 ),
-            new THREE.MeshBasicMaterial( boxMat )
-        )
-        
-
         const shapes = font.generateShapes( txt, 100 );
-        const geometry = new THREE.ShapeGeometry( shapes );
-        geometry.computeBoundingBox();
-        const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-        geometry.translate( xMid, 0, 0 );
-        console.log(geometry.boundingBox);
+        const txtGeo = new THREE.ShapeGeometry( shapes );
+        txtGeo.computeBoundingBox();
+        const xMid = - 0.5 * ( txtGeo.boundingBox.max.x - txtGeo.boundingBox.min.x );
+        txtGeo.translate( xMid, 0, 0 );
+        console.log(txtGeo.boundingBox);
         
-        const tag = new THREE.Mesh( geometry, textMat );
+        const tag = new THREE.Mesh( txtGeo, textMat );
         const tagRadius = 5.4;
         let latLng = convertLatLngtoCartesian(lat, lng, tagRadius);
         let boxlatLng = convertLatLngtoCartesian(lat, lng, tagRadius - 0.1);
@@ -103,9 +97,12 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
         tag.scale.y = size;
         tag.scale.z = size;
 
-        box.computeBoundingBox();
-        const boxMid = - 0.5 * ( box.boundingBox.max.x - box.boundingBox.min.x );
-        box.translate( boxMid, 0, 0 );
+        const boxGeo = new THREE.PlaneGeometry( Math.abs(txtGeo.boundingBox.min.x) + Math.abs(txtGeo.boundingBox.max.x), Math.abs(txtGeo.boundingBox.min.y) + Math.abs(txtGeo.boundingBox.max.y));
+        boxGeo.computeBoundingBox();
+        const boxMid = - 0.5 * ( boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x );
+        boxGeo.translate( boxMid, 0, 0 );
+        let box = new THREE.Mesh(boxGeo, boxMat);
+
         box.lookAt( rotationVector )
         box.position.copy( rotationVector )
 
