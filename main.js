@@ -78,7 +78,7 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
     const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
     geometry.translate( xMid, 0, 0 );
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 1; i++) {
     const text = new THREE.Mesh( geometry, matLite );
     let lat = convertLatLngtoCartesian(i,i);
     let tangentP = new THREE.Vector3(lat.x, lat.y, lat.z);
