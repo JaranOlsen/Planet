@@ -90,6 +90,7 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
     text.rotation.x = tangent.rotation.x;
     text.rotation.y = tangent.rotation.y;
     text.rotation.z = tangent.rotation.z;
+    console.log(tangentP, tangent.rotation);
     text.scale.x = 0.001;
     text.scale.y = 0.001;
     text.scale.z = 0.001;
@@ -214,7 +215,7 @@ for (let i = 0; i < moons.length; i++) {
 }
 
 //lights
-const ambient = new THREE.AmbientLight(0xffffff, 0.01);
+const ambient = new THREE.AmbientLight(0xffffff, 1); //0.01
 scene.add(ambient);
 
 const jaraniusLight = new THREE.PointLight(0xffffff, 0.01);
