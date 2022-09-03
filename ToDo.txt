@@ -11,13 +11,17 @@ MAKE USABLE
 
     add way of presenting info/data
 
-    USE PLANEGEOMETRY OR TEXTSHAPES INSTEAD OF HTML/CSS?
-    fix Labels jagged movement
+    USE PLANEGEOMETRY (with imagetextures) OR TEXTSHAPES INSTEAD OF HTML/CSS?
+    
+    Textshapes
+        use boundingbox to calculate padding and size of box
+
+    HTML/CSS
+        fix Labels jagged movement
 
     test higher res jpg diffuse texture
 
-    add real labels and locations
-        figure out how to store this in separate file, making it easy to edit
+    figure out how to store tagdata in separate file, making it easy to edit
 
     make different size text for different size nodes
 

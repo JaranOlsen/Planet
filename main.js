@@ -105,6 +105,7 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
         box.lookAt( rotationVector )
         box.position.copy( rotationVector )
 
+        scene.add( box );
         scene.add( tag );
     }
 
