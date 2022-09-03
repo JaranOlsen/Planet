@@ -78,19 +78,20 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
     const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
     geometry.translate( xMid, 0, 0 );
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 175; i+=5) {
     const text = new THREE.Mesh( geometry, matLite );
     const textRadius = 5.4;
-    let lat = convertLatLngtoCartesian(i, i, textRadius);
-    let tangentP = new THREE.Vector3(lat.x, lat.y, lat.z);
-    let tangent = findTangent(tangentP);
+    let latLng = convertlatLngLngtoCartesian(i, i, textRadius);
+    let tangentP = new THREE.Vector3(latLng.x, latLng.y, latLng.z);
+    text.lookAt(tangentP);
+    //let tangent = findTangent(tangentP);
 
-    text.position.x = lat.x;
-    text.position.y = lat.y;
-    text.position.z = lat.z;
-    text.rotation.x = -1 //tangent.rotation.x;
+    text.position.x = latLng.x;
+    text.position.y = latLng.y;
+    text.position.z = latLng.z;
+/*     text.rotation.x = -1 //tangent.rotation.x;
     text.rotation.y = 0 //tangent.rotation.y;
-    text.rotation.z = 0 //tangent.rotation.z;
+    text.rotation.z = 0 //tangent.rotation.z; */
     console.log(tangentP, tangent);
     text.scale.x = 0.001;
     text.scale.y = 0.001;
