@@ -101,7 +101,7 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
         const boxGeo = new THREE.PlaneGeometry((Math.abs(txtGeo.boundingBox.min.x) + Math.abs(txtGeo.boundingBox.max.x) + padding) * size, (Math.abs(txtGeo.boundingBox.min.y) + Math.abs(txtGeo.boundingBox.max.y) + padding) * size);
         boxGeo.computeBoundingBox();
         const boxMid = 0.5 * ( boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y );
-        boxGeo.translate( 0, boxMid * 2, 0 );
+        boxGeo.translate( 0, boxMid, 0 );
         let box = new THREE.Mesh(boxGeo, boxMat);
 
         box.lookAt( rotationVector )
