@@ -78,17 +78,17 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
     const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
     geometry.translate( xMid, 0, 0 );
 
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 100; i++) {
     const text = new THREE.Mesh( geometry, matLite );
     let lat = convertLatLngtoCartesian(i,i);
     let tangentP = new THREE.Vector3(lat.x, lat.y, lat.z);
-    findTangent(tangentP);
+    let tangent = findTangent(tangentP);
     text.position.x = lat.x;
     text.position.y = lat.y;
     text.position.z = lat.z;
-    text.rotation.x = 0;
-    text.rotation.y = 0;
-    text.rotation.z = 0;
+    text.rotation.x = tangent.rotation.x;
+    text.rotation.y = tangent.rotation.y;
+    text.rotation.z = tangent.rotation.z;
     text.scale.x = 0.001;
     text.scale.y = 0.001;
     text.scale.z = 0.001;
@@ -272,12 +272,12 @@ function findTangent(tangentPoint) {
     //normal.sub( sphere.position ) // remove sphere translation
 
     let plane = new THREE.Mesh(
-    new THREE.PlaneGeometry( 5.5, 5.5 ),
-    new THREE.MeshBasicMaterial( { color: 'red' } )
+        new THREE.PlaneGeometry( 5.5, 5.5 ),
+        new THREE.MeshBasicMaterial( { color: 'red' } )
     )
     plane.lookAt( normal )
     plane.position.copy( tangentPoint )
-    scene.add(plane);
+    return { plane }
 }
 
 //create coordpoints
