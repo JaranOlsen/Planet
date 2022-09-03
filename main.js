@@ -80,7 +80,8 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
 
     for (let i = 0; i < 100; i++) {
     const text = new THREE.Mesh( geometry, matLite );
-    let lat = convertLatLngtoCartesian(i,i);
+    const textRadius = 5.4;
+    let lat = convertLatLngtoCartesian(i, i, textRadius);
     let tangentP = new THREE.Vector3(lat.x, lat.y, lat.z);
     let tangent = findTangent(tangentP);
     text.position.x = lat.x;
@@ -242,13 +243,13 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function convertLatLngtoCartesian(lat, lng) {
+function convertLatLngtoCartesian(lat, lng, radius) {
     let latRad = lat * Math.PI / 180;
     let lngRad = lng * Math.PI / 180;
 
-    let x = 5.01 * Math.sin(latRad) * Math.sin(lngRad)
-    let y = 5.01 * Math.cos(latRad)
-    let z = 5.01 * Math.sin(latRad) * Math.cos(lngRad)
+    let x = radius * Math.sin(latRad) * Math.sin(lngRad)
+    let y = radius * Math.cos(latRad)
+    let z = radius * Math.sin(latRad) * Math.cos(lngRad)
 
     return {
         x, y, z
@@ -337,8 +338,9 @@ function instantiatePin(txt, lat, lng, radius, color, originalColor) {
     const elem = document.createElement('div');
     elem.textContent = txt;
     labelContainerElem.appendChild(elem);
-
-    let pos = convertLatLngtoCartesian(lat, lng);
+    
+    const pinSphereRadius = 5.01
+    let pos = convertLatLngtoCartesian(lat, lng, pinSphereRadius);
     pin.position.set(pos.x, pos.y, pos.z);
     scene.add(pin);
     pinPositions.push(pin);
@@ -410,7 +412,8 @@ function onDocumentKeyUp(event) {
         } else if (keyCode == 39) {
             posLatLng.lng += 1;
         }
-        let posXYZ = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng);
+        const pinSphereRadius = 5.01
+        let posXYZ = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, pinSphereRadius);
         selectedPin.position.set(posXYZ.x, posXYZ.y, posXYZ.z);
     }
     render();
