@@ -1,18 +1,19 @@
 import * as THREE from 'three';
 import {Float32BufferAttribute, FrontSide, AdditiveBlending} from 'three';
+import { tagList } from './tagData.js'
+import { tagConnections } from './tagConnectionData.js'
+import {getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, convertLatLngtoCartesianAndBack} from './mathScripts.js'
 
 //    USE ON PRODUCTION BUILD
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
-import { tagList } from './tagData.js'
 
 //    USE ON LOCAL SERVER
 /* import {OrbitControls} from "/node_modules/three/examples/jsm/controls/OrbitControls.js"; 
-import { FontLoader } from '/node_modules/three/examples/jsm/loaders/FontLoader.js';
-import { tagList } from './tagData.js' */
+import { FontLoader } from '/node_modules/three/examples/jsm/loaders/FontLoader.js'; */
 
 //    USE ON PRODUCTION BUILD
-import diffuseTexture from "./img/diffuse8k.jpg"
+import diffuseTexture from "./img/terrain8k.jpg"
 import normalTexture from "./img/normal.png"
 import starTexture from "./img/star.png"
 import roughnessTex from "./img/roughness.png"
@@ -23,7 +24,7 @@ import clouds2Tex from "./img/clouds2.png"
 import cloudsAlphaTex from "./img/cloudsalpha.jpg"
 
 //    USE ON LOCAL SERVER
-/* const diffuseTexture = "./img/diffuse8k.jpg"
+/* const diffuseTexture = "./img/terrain8k.jpg"
 const normalTexture = "./img/normal.png"
 const starTexture = "./img/star.png"
 const roughnessTex = "./img/roughness.png"
@@ -64,7 +65,7 @@ const controls = new OrbitControls(camera, canvas);
 controls.enablePan = false
 controls.maxDistance = 1000
 controls.minDistance = 6.0
-controls.zoomSpeed = 0.9
+controls.zoomSpeed = 0.3
 controls.rotateSpeed = 0.3
 controls.target.set(0, 0, 0);
 controls.update();
@@ -82,15 +83,15 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
 
     function instantiateTag(txt, lat, lng, size, color) {
         const textMat = new THREE.MeshBasicMaterial( {
-            color: color,
-            transparent: true,
-            opacity: 0.7,
+            color: 0x000000, //color,
+            transparent: false,
+            //opacity: 0.8,
             side: THREE.DoubleSide
         } );
         const boxMat = new THREE.MeshBasicMaterial( {
-            color: 0x668877,
+            color: 0x888888,
             transparent: true,
-            opacity: 0.3,
+            opacity: 0.5,
             side: THREE.DoubleSide
         } );
 
@@ -185,7 +186,7 @@ loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/
         } else { 
             color = 0xaa88aa //0xF9F871;
         }
-        let tag = instantiateTag(tagList[i][1], tagList[i][2], tagList[i][3], 0.0005, color);
+        let tag = instantiateTag(tagList[i][1], tagList[i][2], tagList[i][3] - 180, 0.0004, color);
         tags.push(tag);
     }
 } );
@@ -233,14 +234,27 @@ for (let i = 0; i < tagList.length; i++) {
     } else { 
         color = 0xaa88aa //0xF9F871;
     }
-    let pin = instantiatePin(tagList[i][1], tagList[i][2], tagList[i][3], 0.05, color, color);
+    let pin = instantiatePin(tagList[i][1], tagList[i][2], tagList[i][3] - 180, 0.05, color, color);
     pins.push(pin);
 }
-const p1 = convertLatLngtoCartesian(tagList[125][2], tagList[125][3], 5)
-const p2 = convertLatLngtoCartesian(tagList[131][2], tagList[131][3], 5)
-getCurve(p1,p2);
 
 //create connections
+for (let i = 0; i < tagList.length; i++) {
+    for (let j = 0; j < tagConnections.length; j++) {
+        if (tagList[i][0] == tagConnections[j][0]) {
+            for (let k = 1; k < tagConnections[j].length; k++) {
+                for (let l = 0; l < tagList.length; l++) {
+                    if (tagList[l][0] == tagConnections[j][k]) {
+                        let t1 = convertLatLngtoCartesian(tagList[i][2], tagList[i][3] - 180, 5);
+                        let t2 = convertLatLngtoCartesian(tagList[l][2], tagList[l][3] - 180, 5);
+                        getCurve(t1, t2);
+                    }
+                }
+            }
+        }
+    }
+}
+
 function getCurve(p1, p2){
     let v1 = new THREE.Vector3(p1.x, p1.y, p1.z);
     let v2 = new THREE.Vector3(p2.x, p2.y, p2.z);
@@ -302,8 +316,8 @@ center.add(pivot1);
 center.add(pivot2);
 center.add(pivot3);
 
-const textureLoader = new THREE.TextureLoader()
 //create Jaranius
+const textureLoader = new THREE.TextureLoader()
 let diffuse = textureLoader.load(diffuseTexture);
 
 const jaranius = new THREE.Mesh(
@@ -379,72 +393,12 @@ for (let i = 0; i < moons.length; i++) {
 }
 
 //lights
-const ambient = new THREE.AmbientLight(0xffffff, 0.1); //0.01
+const ambient = new THREE.AmbientLight(0xffffff, 0.5); //0.01
 scene.add(ambient);
 
 const jaraniusLight = new THREE.PointLight(0xffffff, 0.01);
 jaraniusLight.position.set(0, 0, 0);
 scene.add(jaraniusLight);
-
-//Math functions
-function getRandomNum(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-function getRandomBell(min, max) {
-    let u = 0, v = 0;
-    while (u === 0) u = Math.random(); //Converting [0,1) to (0,1)
-    while (v === 0) v = Math.random();
-    let num = Math.sqrt(-7.0 * Math.log(u)) * Math.cos(7.0 * Math.PI * v);
-    num = num / 10.0 + 0.5; // Translate to 0 -> 1
-    if (num > 1 || num < 0) return getRandomBell(min, max) // resample between 0 and 1
-    num = Math.floor(num * (max - min + 1) + min);
-    return num
-}
-
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function convertLatLngtoCartesian(lat, lng, radius) {
-    let latRad = lat * Math.PI / 180;
-    let lngRad = lng * Math.PI / 180;
-
-    let x = radius * Math.sin(latRad) * Math.sin(lngRad)
-    let y = radius * Math.cos(latRad)
-    let z = radius * Math.sin(latRad) * Math.cos(lngRad)
-
-    return {
-        x, y, z
-    }
-}
-
-function convertCartesiantoLatLng(x, y, z) {
-    let latRad = Math.acos(y / (Math.sqrt(Math.pow(z, 2) + Math.pow(x, 2) + Math.pow(y, 2))));
-    let lngRad = x / z;
-
-    let lat = latRad / Math.PI * 180;
-    let lng = lngRad / Math.PI * 180;
-
-    return {
-        lat, lng
-    }
-}
-
-/* function findTangent(tangentPoint) {
-    let normal = new THREE.Vector3().copy( tangentPoint )
-    //normal.sub( sphere.position ) // remove sphere translation
-
-    let plane = new THREE.Mesh(
-        new THREE.PlaneGeometry( 5.5, 5.5 ),
-        new THREE.MeshBasicMaterial( { color: 'red' } )
-    )
-    plane.lookAt( normal )
-    plane.position.copy( tangentPoint )
-    return { plane }
-} */
 
 //create coordpoints
 /* const coordPoint = new THREE.BufferGeometry()
@@ -465,7 +419,7 @@ scene.add(coords) */
 
 
 
-
+// Interaction functions
 function unhoverPin() {
     for (let i = 0; i < pins.length; i++) {
         pins[i].pin.material.color.set(pins[i].originalColor);
@@ -480,31 +434,30 @@ function hoverPin() {
     }
 }
 
-document.addEventListener("keyup", onDocumentKeyUp, false);
+document.addEventListener("keydown", onDocumentKeyDown, false);
 
-function onDocumentKeyUp(event) {
+function onDocumentKeyDown(event) {
     const keyCode = event.which;
 
     if (selectedPin != null) {
         let posLatLng = convertCartesiantoLatLng(selectedPin.position.x, selectedPin.position.y, selectedPin.position.z);
         // up
         if (keyCode == 38) {
-            posLatLng.lat -= 1;
+            posLatLng.lat -= .3;
             // down
         } else if (keyCode == 40) {
-            posLatLng.lat += 1;
+            posLatLng.lat += .3;
             // left
         } else if (keyCode == 37) {
-            posLatLng.lng -= 1;
+            posLatLng.lng -= .3;
             // right
         } else if (keyCode == 39) {
-            posLatLng.lng += 1;
+            posLatLng.lng += .3;
         }
         const pinSphereRadius = 5.01
         let posXYZ = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, pinSphereRadius);
         selectedPin.position.set(posXYZ.x, posXYZ.y, posXYZ.z);
     }
-    render();
 };
 
 //create fps counter
