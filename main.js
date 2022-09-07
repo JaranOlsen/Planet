@@ -23,7 +23,6 @@ import moonTex from "./img/moon.jpg"
 import moon2Tex from "./img/moon2.png"
 import moon3Tex from "./img/moon3.png"
 const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
-//import tagFont from "./public/fonts/SourceSans3_Regular.json"
 
 //    USE ON LOCAL SERVER
 /* const diffuseTexture = "./img/terrain8k.jpg"
@@ -35,7 +34,7 @@ const starTexture = "./img/star.png"
 const moonTex = "./img/moon.jpg"
 const moon2Tex = "./img/moon2.png"
 const moon3Tex = "./img/moon3.png"  
-const tagFont = './public/fonts/SourceSans3_Regular.json' */
+const tagFont = './fonts/SourceSans3_Regular.json' */
 
 
 const canvas = document.querySelector('#c');
@@ -61,7 +60,7 @@ const aspect = 2;  // the canvas default
 const near = 0.1;
 const far = 2000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.z = 10
+camera.position.z = 50
 
 const controls = new OrbitControls(camera, canvas);
 controls.enablePan = false
