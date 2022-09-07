@@ -1,54 +1,54 @@
 MAKE USABLE
-    Fix Vite
-        assets not working
-        update deploy.sh
-
-    Figure out dependency importing
-
-    Folder structure
-
-    add lines between nodes
 
     add way of presenting info/data
-
-    USE PLANEGEOMETRY (with imagetextures) OR TEXTSHAPES INSTEAD OF HTML/CSS?
-
-    HTML/CSS
-        fix Labels jagged movement
-
-    add size, color, connectionarray to tagData
-
-    optimize texture-dimensions
-        In general, textures take width * height * 4 * 1.33 bytes of memory.
-        make all textures in powers of 2
 
 
 
 SHORT-TERM DEVELOPMENT
-    Fix move pin lat lng bug
-        less than 0 more than 180/360
-        convert cartesian to latlong
+    add gutta (requires lat/lng fix)
         
     find way of editing text, nodesize, nodecolor realtime
     find way of saving lat, long, size, color and text
     find a way of adding connections realtime
     find a way of saving connections
 
-    Fix move pin fps drop bug
-
-    make better clouds
+    blending mode on curves, tags, pins?
+    make better clouds (multiple layers? needs specific blending mode?)
     make better atmosphere
     find way of blending nodes and text with texture (css: blend-mix-mode?)
 
-
-    Instance geometry
-
-
+    add nuances to tag colors
+    add type of curve (dashed, arrowed)
 
 
 LONG-TERM DEVELOPMENT
 
     make procedural geography
-    add gutta (requires lat/lng fix)
 
+    Fix Vite
+        assets not working
+
+    Folder structure
+    
+    Figure out dependency importing
+
+    HTML/CSS
+        fix Labels jagged movement
+
+    optimize texture-dimensions
+        In general, textures take width * height * 4 * 1.33 bytes of memory.
+        make all textures in powers of 2
+
+    three.js examples that have useful feature/codesnippets
+        Better CSS labels: https://github.com/mrdoob/three.js/blob/master/examples/css2d_label.html
+        Youtube integration: https://github.com/mrdoob/three.js/blob/master/examples/css3d_youtube.html
+        Fly controls: https://github.com/mrdoob/three.js/blob/master/examples/misc_controls_fly.html
+        Boids: https://github.com/mrdoob/three.js/blob/master/examples/webgl_gpgpu_birds.html
+        Rotation: https://github.com/mrdoob/three.js/blob/master/examples/webgl_math_orientation_transform.html
+            https://en.wikipedia.org/wiki/Rodrigues%27_rotation_formula ??
+        Instancing: https://github.com/mrdoob/three.js/blob/master/examples/webgl_instancing_performance.html
+
+
+USEFUL
+    link to json font converter: http://gero3.github.io/facetype.js/
 
