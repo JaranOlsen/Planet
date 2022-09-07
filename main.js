@@ -22,7 +22,7 @@ import starTexture from "./img/star.png"
 import moonTex from "./img/moon.jpg"
 import moon2Tex from "./img/moon2.png"
 import moon3Tex from "./img/moon3.png"
-import tagFont from "./public/fonts/SourceSans3_Regular.json"
+//import tagFont from "./public/fonts/SourceSans3_Regular.json"
 
 //    USE ON LOCAL SERVER
 /* const diffuseTexture = "./img/terrain8k.jpg"
@@ -82,7 +82,7 @@ const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 
 //create tags
 const loader = new FontLoader();
-loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json'
+loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {  //tagFont, function ( font ) { //
 
     function instantiateTag(txt, lat, lng, color, originalColor, size) {
         const textMat = new THREE.MeshBasicMaterial( {
