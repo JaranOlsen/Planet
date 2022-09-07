@@ -22,6 +22,7 @@ import starTexture from "./img/star.png"
 import moonTex from "./img/moon.jpg"
 import moon2Tex from "./img/moon2.png"
 import moon3Tex from "./img/moon3.png"
+import tagFont from "./fonts/SourceSans3_Regular.json"
 
 //    USE ON LOCAL SERVER
 /* const diffuseTexture = "./img/terrain8k.jpg"
@@ -32,10 +33,10 @@ const cloudsAlphaTex = "./img/cloudsalpha.jpg"
 const starTexture = "./img/star.png"
 const moonTex = "./img/moon.jpg"
 const moon2Tex = "./img/moon2.png"
-const moon3Tex = "./img/moon3.png" */
+const moon3Tex = "./img/moon3.png" 
+const tagFont = './fonts/SourceSans3_Regular.json' */
 
 
-const tagFont = './fonts/SourceSans3_Regular.json'
 const canvas = document.querySelector('#c');
 const renderer = new THREE.WebGLRenderer(
     {
