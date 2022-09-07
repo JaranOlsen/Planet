@@ -22,6 +22,7 @@ import starTexture from "./img/star.png"
 import moonTex from "./img/moon.jpg"
 import moon2Tex from "./img/moon2.png"
 import moon3Tex from "./img/moon3.png"
+const tagFont = "https://www.dropbox.com/s/qi7c47mfa68oscc/SourceSans3_Regular.json?dl=0"
 //import tagFont from "./public/fonts/SourceSans3_Regular.json"
 
 //    USE ON LOCAL SERVER
@@ -33,8 +34,8 @@ const cloudsAlphaTex = "./img/cloudsalpha.jpg"
 const starTexture = "./img/star.png"
 const moonTex = "./img/moon.jpg"
 const moon2Tex = "./img/moon2.png"
-const moon3Tex = "./img/moon3.png"  */
-const tagFont = './public/fonts/SourceSans3_Regular.json'
+const moon3Tex = "./img/moon3.png"  
+const tagFont = './public/fonts/SourceSans3_Regular.json' */
 
 
 const canvas = document.querySelector('#c');
