@@ -33,8 +33,8 @@ const cloudsAlphaTex = "./img/cloudsalpha.jpg"
 const starTexture = "./img/star.png"
 const moonTex = "./img/moon.jpg"
 const moon2Tex = "./img/moon2.png"
-const moon3Tex = "./img/moon3.png" 
-const tagFont = './fonts/SourceSans3_Regular.json' */
+const moon3Tex = "./img/moon3.png"  */
+const tagFont = './public/fonts/SourceSans3_Regular.json'
 
 
 const canvas = document.querySelector('#c');
@@ -82,7 +82,7 @@ const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 
 //create tags
 const loader = new FontLoader();
-loader.load( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {  //tagFont, function ( font ) { //
+loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {  //
 
     function instantiateTag(txt, lat, lng, color, originalColor, size) {
         const textMat = new THREE.MeshBasicMaterial( {
