@@ -22,7 +22,7 @@ import starTexture from "./img/star.png"
 import moonTex from "./img/moon.jpg"
 import moon2Tex from "./img/moon2.png"
 import moon3Tex from "./img/moon3.png"
-const tagFont = "https://www.dropbox.com/s/qi7c47mfa68oscc/SourceSans3_Regular.json?dl=0"
+const tagFont = "https://jaranolsen.github.io/Planet//SourceSans3_Regular.json"
 //import tagFont from "./public/fonts/SourceSans3_Regular.json"
 
 //    USE ON LOCAL SERVER
