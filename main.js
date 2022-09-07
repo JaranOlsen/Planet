@@ -22,7 +22,7 @@ import starTexture from "./img/star.png"
 import moonTex from "./img/moon.jpg"
 import moon2Tex from "./img/moon2.png"
 import moon3Tex from "./img/moon3.png"
-import tagFont from "./fonts/SourceSans3_Regular.json"
+import tagFont from "./public/fonts/SourceSans3_Regular.json"
 
 //    USE ON LOCAL SERVER
 /* const diffuseTexture = "./img/terrain8k.jpg"
