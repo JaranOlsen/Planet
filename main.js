@@ -1,8 +1,14 @@
 import * as THREE from 'three';
+//import * as THREE from '/node_modules/three/build/three.module.js';
+import * as YUKA from './node_modules/yuka/build/yuka.module.js';
 import {Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3} from 'three';
 import { tagList } from './tagData.js'
 import { tagConnections } from './tagConnectionData.js'
 import {getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, convertLatLngtoCartesianAndBack} from './mathScripts.js'
+import vertexShader from './shaders/vertex.glsl';
+import fragmentShader from './shaders/fragment.glsl';
+import atmosphereVertexShader from './shaders/atmosphereVertex.glsl';
+import atmosphereFragmentShader from './shaders/atmosphereFragment.glsl';
 
 //    USE ON PRODUCTION BUILD
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
@@ -203,6 +209,7 @@ function instantiatePin(txt, lat, lng, color, originalColor, radius) {
     const pinSphereRadius = 5.01
     let pos = convertLatLngtoCartesian(lat, lng, pinSphereRadius);
     pin.position.set(pos.x, pos.y, pos.z);
+
     scene.add(pin);
     pinPositions.push(pin);
 
@@ -299,9 +306,10 @@ scene.add(center);
 //create Jaranius
 const textureLoader = new THREE.TextureLoader()
 let diffuse = textureLoader.load(diffuseTexture);
-
+const jaraniusGeometry = new THREE.SphereGeometry(5, 250, 250);
+jaraniusGeometry.computeBoundingSphere();
 const jaranius = new THREE.Mesh(
-    new THREE.SphereGeometry(5, 250, 250),
+    jaraniusGeometry,
     new THREE.MeshStandardMaterial({
         map: diffuse,
         normalMap: textureLoader.load(normalTexture),
@@ -324,17 +332,39 @@ const clouds = new THREE.Mesh(
 )
 jaranius.add(clouds)
 
-// create atmosphere
-/* const atmosphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5.3, 50, 50),
-    new THREE.MeshLambertMaterial({
-        color: 0xaabbff,
-        transparent: true,
-        opacity: 0.3,
-        blending: AdditiveBlending
+// create sphere
+const sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(5.01, 250, 250),
+    new THREE.ShaderMaterial({
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader,
+        blending: THREE.AdditiveBlending,
+        /* uniforms: {
+            diffuseTexture: {
+                value: new THREE.TextureLoader().load('/img/terrain8k.jpg')
+            },
+            normalTexture: {
+                value: new THREE.TextureLoader().load('/img/normal8k.jpg')
+            }
+        } */
     })
 )
-jaranius.add(atmosphere); */
+sphere.position.set(0, 0, 0)
+jaranius.add(sphere);
+
+// create atmosphere
+const atmosphere = new THREE.Mesh(
+    new THREE.SphereGeometry(5, 50, 50),
+    new THREE.ShaderMaterial({
+        vertexShader: atmosphereVertexShader,
+        fragmentShader: atmosphereFragmentShader,
+        blending: THREE.AdditiveBlending,
+        side: THREE.BackSide
+    })
+)
+atmosphere.position.set(0, 0, 0)
+atmosphere.scale.set(1.2, 1.2, 1.2)
+scene.add(atmosphere);
 
 //create moons
 class Moon {
@@ -369,85 +399,179 @@ for (let i = 0; i < moons.length; i++) {
 
     const moonlight = new THREE.PointLight(0xffffff, moons[i].intensity);
     moonlight.position.set(moons[i].z, 0, 0);
+    moonlight.castShadow = true;
     mesh.add(moonlight);
 }
 
+//YUKA
+const entityManager = new YUKA.EntityManager()
+const clock = new YUKA.Time()
+
+function sync(entity, RenderComponent) {
+    RenderComponent.matrix.copy(entity.worldMatrix)
+}
+
+const target = []
+
+const targetGeo = new THREE.SphereGeometry(0.001, 5, 5);
+const targetMat = new THREE.MeshBasicMaterial ({color: 0xff0000, transparent: true, opacity: 0});
+for (let lt = 20; lt <= 160; lt += 10) {
+    for (let lg = 0; lg < 360; lg += 15) {
+        let pos = convertLatLngtoCartesian(lt, lg, 10);
+        let vec = new YUKA.Vector3(pos.x, pos.y, pos.z)
+        const targetMesh = new THREE.Mesh(targetGeo, targetMat);
+        targetMesh.position.set(pos.x, pos.y, pos.z);
+        scene.add(targetMesh);
+        target.push(vec)
+    }
+}
+
+const jaraniusObstacle = new YUKA.GameEntity()
+jaraniusObstacle.position.copy (jaranius.position)
+entityManager.add(jaraniusObstacle)
+jaraniusObstacle.boundingRadius = jaraniusGeometry.boundingSphere.radius;
+
+const obstacles = []
+obstacles.push(jaraniusObstacle)
+const obstacleAvoidanceBehavior = new YUKA.ObstacleAvoidanceBehavior (obstacles)
+obstacleAvoidanceBehavior.weight = 1
+
+const alignmentBehavior = new YUKA.AlignmentBehavior()
+alignmentBehavior.weight = 0.1
+
+const cohesionBehavior = new YUKA.CohesionBehavior()
+cohesionBehavior.weight = 0.3
+
+const separationBehavior = new YUKA.SeparationBehavior()
+separationBehavior.weight = 0.1
+
+const wanderBehavior = new YUKA.WanderBehavior(1, 0.5, 2)
+wanderBehavior.weight = 0.2
+
+let feedingGround = new YUKA.Vector3 
+feedingGround = convertLatLngtoCartesian (90, 1, 5.1)
+const arriveBehavior = new YUKA.ArriveBehavior(feedingGround)
+arriveBehavior.weight = 0
+
+//end YUKA
+
 //create Gutta
 class Gutt {
-    constructor(lat, lng, rot) {
+    constructor(lat, lng, heading) {
         this.lat = lat;
         this.lng = lng;
-        this.rot = rot;
+        this.heading = heading;
         
-        let x = 0;
-        let y = 0;
-        let scale = 0.01;
+        let scale = 0.0005;
         this.shape = new THREE.Shape();
 
-        this.shape.moveTo( x + scale * 5, y + scale * 5 );
-        this.shape.bezierCurveTo( x + scale * 5, y + scale * 5, x + scale * 4, y, x, y );
-        this.shape.bezierCurveTo( x - scale * 6, y, x - scale * 6, y + scale * 7,x - scale * 6, y + scale * 7 );
-        this.shape.bezierCurveTo( x - scale * 6, y + scale * 11, x - scale * 3, y + scale * 15.4, x + scale * 5, y + scale * 19 );
-        this.shape.bezierCurveTo( x + scale * 12, y + scale * 15.4, x + scale * 16, y + scale * 11, x + scale * 16, y + scale * 7 );
-        this.shape.bezierCurveTo( x + scale * 16, y + scale * 7, x + scale * 16, y, x + scale * 10, y );
-        this.shape.bezierCurveTo( x + scale * 7, y, x + scale * 5, y + scale * 5, x + scale * 5, y + scale * 5 );
+        this.shape.moveTo(scale * 5,scale * 5 );
+        this.shape.bezierCurveTo(scale * 5,scale * 5,scale * 4, 0, 0, 0 );
+        this.shape.bezierCurveTo(- scale * 6, 0,- scale * 6,scale * 7, - scale * 6,scale * 7 );
+        this.shape.bezierCurveTo(- scale * 6,scale * 11,- scale * 3,scale * 15.4,scale * 5,scale * 19 );
+        this.shape.bezierCurveTo(scale * 12,scale * 15.4,scale * 16,scale * 11,scale * 16,scale * 7 );
+        this.shape.bezierCurveTo(scale * 16,scale * 7,scale * 16, 0,scale * 10, 0 );
+        this.shape.bezierCurveTo(scale * 7, 0,scale * 5,scale * 5,scale * 5,scale * 5 );
 
         this.geometry = new THREE.ShapeGeometry(this.shape)
-        this.material = new THREE.MeshBasicMaterial({color: 0xffffff, side: DoubleSide})
+            this.geometry.computeBoundingSphere();
+            this.center = this.geometry.boundingSphere.center
+            this.geometry.rotateX(Math.PI/2)
+            this.geometry.rotateZ(Math.PI/2)
+        this.material = new THREE.MeshBasicMaterial({
+            color: 0xffffff, 
+            side: DoubleSide,
+            transparent: true,
+            opacity: 0.5
+        })
         this.mesh = new THREE.Mesh(this.geometry, this.material)
+        this.mesh.geometry.center();
+        this.mesh.position.copy(this.center);
         
-        this.pos = convertLatLngtoCartesian(this.lat, this.lng, 5.2)
+        /* this.pos = convertLatLngtoCartesian(this.lat, this.lng, 5.01)
+        this.heading = getRandomNum(0, 2 * Math.PI)
 
         this.mesh.position.set(this.pos.x, this.pos.y, this.pos.z)
-        this.mesh.lookAt(middleOfPlanet)
+        this.mesh.lookAt(middleOfPlanet) */
         
+        //YUKA
+        this.mesh.matrixAutoUpdate = false
+        //end YUKA
+
         scene.add(this.mesh)
+
+        //YUKA
+        this.vehicle = new YUKA.Vehicle()
+        this.vehicle.boundingRadius = this.geometry.boundingSphere.radius
+        this.vehicle.setRenderComponent(this.mesh, sync)
+        this.pos = convertLatLngtoCartesian(this.lat, this.lng, 5.5)
+        this.vehicle.position.set(this.pos.x, this.pos.y, this.pos.z)
+        this.vehicle.rotation.fromEuler(getRandomNum(0, Math.PI * 2), getRandomNum(0, Math.PI * 2), getRandomNum(0, Math.PI * 2))
+
+        this.vehicle.maxSpeed = 0.1
+       
+        this.vehicle.updateNeighborhood = true
+        this.vehicle.neighborhoodRadius = 0.1
+        this.vehicle.steering.add(wanderBehavior)
+        this.vehicle.steering.add(alignmentBehavior)
+        this.vehicle.steering.add(cohesionBehavior)
+        this.vehicle.steering.add(separationBehavior)
+        this.vehicle.steering.add(arriveBehavior)
+        this.vehicle.steering.add(obstacleAvoidanceBehavior)
+        
+        for (let i = 0; i < target.length; i++) {
+            this.fleeBehavior = new YUKA.FleeBehavior(target[i], 4)
+            this.fleeBehavior.weight = 0.1
+            this.vehicle.steering.add(this.fleeBehavior)
+        }
+        
+        entityManager.add(this.vehicle)
+        //END YUKA
     }
 
-    move() {
-        this.newlat = this.lat + getRandomNum(-0.01, 0.01);
-        this.newlng = this.lng + 1;
-        this.pos = convertLatLngtoCartesian(newlat, newlng, 5.2);
-        this.mesh.position.set(pos.x, pos.y, pos.z);
+/*     move() {
+        this.lat -= Math.cos(this.heading) / 20
+        this.lng += Math.sin(this.heading) / 20
+        if (this.lat < 0) {this.lat = Math.abs(this.lat)}
+        if (this.lat > 180) {this.lat = 180 - (this.lat - 180)}
+        if (this.lng < 0) {this.lng = 360 + this.lng}
+        if (this.lng > 360) {this.lng = this.lng - 360}
+        this.pos = convertLatLngtoCartesian(this.lat, this.lng, 5.2);
+        this.mesh.position.set(this.pos.x, this.pos.y, this.pos.z);
     }
 
-    rot() {
-        this.mesh.lookAt(middleOfPlanet)
-    }
-
+    steer() {
+        if (getRandomNum(0, 1) > 0.9) {
+            this.heading += (Math.PI / 80)
+        }
+        if (getRandomNum(0, 1) > 0.9) {
+            this.heading -= (Math.PI / 80)
+        }
+        if (this.lat < 10) {
+            this.heading = getRandomNum(4 * Math.PI / 3, 5 * Math.PI / 3)
+        }
+        if (this.lat > 170) {
+            this.heading = getRandomNum(Math.PI / 3, 2 * Math.PI / 3)
+        }
+        this.mesh.lookAt(0, 0, 0)
+        this.mesh.rotateZ(this.heading)
+    } */
 }
 
 let gutta = [];
-for (let i = 0; i < 2000; i++) {
+for (let i = 0; i < 1000; i++) {
     let lat = getRandomBell(10, 170, 5)
     let lng = getRandomInt(0, 359)
-    //gutta.push(new Gutt(lat, lng))
+    gutta.push(new Gutt(lat, lng))
 }
 
 //lights
-const ambient = new THREE.AmbientLight(0xffffff, 0.2); //0.01
+const ambient = new THREE.AmbientLight(0xffffff, 0.01); //0.01
 scene.add(ambient);
 
 const jaraniusLight = new THREE.PointLight(0xffffff, 0.01);
 jaraniusLight.position.set(0, 0, 0);
 scene.add(jaraniusLight);
-
-//create coordpoints
-/* const coordPoint = new THREE.BufferGeometry()
-const coordPointMaterial = new THREE.PointsMaterial({
-    size: 0.02,
-    color: 0xffffff,
-})
-const coordVertices = []
-for (let lt = 1; lt < 180; lt++) {
-    for (let lg = 0; lg < 360; lg++) {
-        let xyz = convertLatLngtoCartesian(lt, lg);
-        coordVertices.push(xyz.x, xyz.y, xyz.z)
-    }
-}
-coordPoint.setAttribute('position', new Float32BufferAttribute(coordVertices, 3))
-const coords = new THREE.Points(coordPoint, coordPointMaterial)
-scene.add(coords) */
 
 // Interaction functions
 function unhoverPin() {
@@ -517,10 +641,15 @@ function render(time) {
         camera.updateProjectionMatrix();
     }
 
-    for (let i = 0; i < gutta.length; i++) {
+    //YUKA
+    const delta = clock.update().getDelta()
+    entityManager.update(delta)
+    //END YUKA
+
+/*     for (let i = 0; i < gutta.length; i++) {
         gutta[i].move();
-        //gutta[i].rot();
-    }
+        gutta[i].steer();
+    } */
 
     //pinLabels
     /* pins.forEach((pinInfo) => {
