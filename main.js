@@ -18,8 +18,10 @@ import atmosphereFragmentShader from './shaders/atmosphereFragment.glsl';
 import diffuseTexture from "./img/terrain8k.jpg"
 import normalTexture from "./img/normal8k.jpg"
 import roughnessTex from "./img/roughness2k.jpg"
+import clouds1Tex from "./img/clouds1.png"
+import clouds1AlphaTex from "./img/clouds1alpha.jpg"
 import clouds2Tex from "./img/clouds2.png"
-import cloudsAlphaTex from "./img/cloudsalpha.jpg"
+import clouds2AlphaTex from "./img/clouds2alpha.jpg"
 import starTexture from "./img/star.png"
 import moonTex from "./img/moon.jpg"
 import moon2Tex from "./img/moon2.png"
@@ -54,7 +56,7 @@ const aspect = 2;  // the canvas default
 const near = 0.1;
 const far = 2000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.z = 50
+camera.position.z = 500
 
 const controls = new OrbitControls(camera, canvas);
 controls.enablePan = false
@@ -73,8 +75,13 @@ const raycaster = new THREE.Raycaster();
 let selectedPin = null;
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
-let activeCarousel
 
+
+
+const introTune = document.getElementById("introTune");
+    introTune.preload = "auto";
+
+let activeCarousel
 //create Slide carousel
 const buttons = document.querySelectorAll("[data-carousel-button]")
 
@@ -171,19 +178,41 @@ const jaranius = new THREE.Mesh(
 scene.add(jaranius)
 
 // create cloud layer
-const clouds = new THREE.Mesh(
-    new THREE.SphereGeometry(5.05, 50, 50),
+const clouds1 = new THREE.Mesh(
+    new THREE.SphereGeometry(5.03, 50, 50),
     new THREE.MeshLambertMaterial({
-        alphaMap: textureLoader.load(cloudsAlphaTex),
-        map: textureLoader.load(clouds2Tex),
-        transparent: true
+        alphaMap: textureLoader.load(clouds1AlphaTex),
+        map: textureLoader.load(clouds1Tex),
+        transparent: true,
+        side: DoubleSide
     })
 )
-jaranius.add(clouds)
+jaranius.add(clouds1)
+const clouds2 = new THREE.Mesh(
+    new THREE.SphereGeometry(5.04, 50, 50),
+    new THREE.MeshLambertMaterial({
+        //alphaMap: textureLoader.load(clouds2AlphaTex),
+        map: textureLoader.load(clouds2Tex),
+        transparent: true,
+        side: DoubleSide
+    })
+)
+jaranius.add(clouds2)
+const clouds3 = new THREE.Mesh(
+    new THREE.SphereGeometry(5.05, 50, 50),
+    new THREE.MeshLambertMaterial({
+        //alphaMap: textureLoader.load(clouds2AlphaTex),
+        map: textureLoader.load(clouds2Tex),
+        transparent: true,
+        side: DoubleSide
+    })
+)
+jaranius.add(clouds3)
+clouds3.rotateY(Math.PI/2)
 
 // create atmosphericLight
 const atmosphericLight = new THREE.Mesh(
-    new THREE.SphereGeometry(5.01, 250, 250),
+    new THREE.SphereGeometry(5.0, 250, 250),
     new THREE.ShaderMaterial({
         vertexShader: vertexShader,
         fragmentShader: fragmentShader,
@@ -195,12 +224,13 @@ jaranius.add(atmosphericLight);
 
 // create atmosphere
 const atmosphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5, 50, 50),
+    new THREE.SphereGeometry(5.3, 50, 50),
     new THREE.ShaderMaterial({
         vertexShader: atmosphereVertexShader,
         fragmentShader: atmosphereFragmentShader,
         blending: THREE.AdditiveBlending,
-        side: THREE.BackSide
+        side: THREE.BackSide,
+        transparent: true,
     })
 )
 atmosphere.position.set(0, 0, 0)
@@ -558,11 +588,9 @@ class Gutt {
             this.shapePosition = this.geometry.position
             //this.geometry.rotateX(Math.PI/2)
             this.geometry.rotateZ(Math.PI/2)
-        this.material = new THREE.MeshBasicMaterial({
-            color: 0xffffff, 
+        this.material = new THREE.MeshLambertMaterial({
+            color: 0xdddddd, 
             side: DoubleSide,
-            transparent: true,
-            opacity: 0.5
         })
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.geometry.center();
@@ -803,8 +831,14 @@ function render(time) {
     pivot1.rotation.y += -0.0003;
     pivot2.rotation.y += -0.00003;
     pivot3.rotation.y += -0.000003;
-    jaranius.rotation.y += 0.000003;
-    clouds.rotation.y += 0.0003;
+    clouds1.rotation.y += 0.00001;
+    clouds2.rotation.y += 0.00005;
+    clouds3.rotation.y += 0.0001;
+    if (camera.position.z > 15) {
+        camera.position.z -= 0.0001 * Math.pow(camera.position.z - 8, 1.35)
+        jaranius.rotation.y += 0.0003;
+    }
+  
     controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);
 
     controls.update();
@@ -813,5 +847,5 @@ function render(time) {
 }
 
 requestAnimationFrame(render);
-
+introTune.play();
 

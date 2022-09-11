@@ -1,5 +1,6 @@
 MAKE USABLE
-    add way of presenting info/data
+    make improvements to slidecarousel
+        interactivity
 
 
 
