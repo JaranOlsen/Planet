@@ -1,0 +1,3 @@
+export const imgList = [ //ID, SRC, LATITUDE, LONGITUDE, SIZE
+["CD8700A2-C44A-4F60-8929-49109F06A53D", "idealism", 23, 184, 40]
+]

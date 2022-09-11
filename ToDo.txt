@@ -1,36 +1,28 @@
 MAKE USABLE
-
     add way of presenting info/data
 
 
 
 SHORT-TERM DEVELOPMENT
-    add gutta (requires lat/lng fix)
+    add nuances to tag colors
+    add type of curve (dashed, arrowed)
+
+    add sun in orbit around earth
+    make better clouds (multiple layers? needs specific blending mode?)
+    fix atmosphere (moons and stars being occluded)
+
+    fix gutta
         
     find way of editing text, nodesize, nodecolor realtime
     find way of saving lat, long, size, color and text
     find a way of adding connections realtime
     find a way of saving connections
 
-    blending mode on curves, tags, pins?
-    make better clouds (multiple layers? needs specific blending mode?)
-    make better atmosphere
-    find way of blending nodes and text with texture (css: blend-mix-mode?)
-
-    add nuances to tag colors
-    add type of curve (dashed, arrowed)
 
 
 LONG-TERM DEVELOPMENT
 
     make procedural geography
-
-    Fix Vite
-        assets not working
-
-    Folder structure
-    
-    Figure out dependency importing
 
     HTML/CSS
         fix Labels jagged movement
@@ -41,7 +33,6 @@ LONG-TERM DEVELOPMENT
 
     three.js examples that have useful feature/codesnippets
         Better CSS labels: https://github.com/mrdoob/three.js/blob/master/examples/css2d_label.html
-        Youtube integration: https://github.com/mrdoob/three.js/blob/master/examples/css3d_youtube.html
         Fly controls: https://github.com/mrdoob/three.js/blob/master/examples/misc_controls_fly.html
         Boids: https://github.com/mrdoob/three.js/blob/master/examples/webgl_gpgpu_birds.html
         Rotation: https://github.com/mrdoob/three.js/blob/master/examples/webgl_math_orientation_transform.html

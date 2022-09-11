@@ -1,24 +1,20 @@
 import * as THREE from 'three';
-//import * as THREE from '/node_modules/three/build/three.module.js';
-import * as YUKA from './node_modules/yuka/build/yuka.module.js';
-import {Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3} from 'three';
+import * as YUKA from 'yuka';
+import {Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, DiscreteInterpolant} from 'three';
 import { tagList } from './tagData.js'
+import { imgList } from './imgData.js'
 import { tagConnections } from './tagConnectionData.js'
 import {getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, convertLatLngtoCartesianAndBack} from './mathScripts.js'
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import { FontLoader } from 'three/addons/loaders/FontLoader.js'; 
+
+//    IMPORT SHADERS
 import vertexShader from './shaders/vertex.glsl';
 import fragmentShader from './shaders/fragment.glsl';
 import atmosphereVertexShader from './shaders/atmosphereVertex.glsl';
 import atmosphereFragmentShader from './shaders/atmosphereFragment.glsl';
 
-//    USE ON PRODUCTION BUILD
-import {OrbitControls} from "three/addons/controls/OrbitControls.js";
-import { FontLoader } from 'three/addons/loaders/FontLoader.js';
-
-//    USE ON LOCAL SERVER
-/* import {OrbitControls} from "/node_modules/three/examples/jsm/controls/OrbitControls.js"; 
-import { FontLoader } from '/node_modules/three/examples/jsm/loaders/FontLoader.js'; */
-
-//    USE ON PRODUCTION BUILD
+//    IMPORT TEXTURES
 import diffuseTexture from "./img/terrain8k.jpg"
 import normalTexture from "./img/normal8k.jpg"
 import roughnessTex from "./img/roughness2k.jpg"
@@ -28,19 +24,11 @@ import starTexture from "./img/star.png"
 import moonTex from "./img/moon.jpg"
 import moon2Tex from "./img/moon2.png"
 import moon3Tex from "./img/moon3.png"
+
+//    IMPORT IMAGES
+import idealism from "./img/idealism.png"
 const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
 
-//    USE ON LOCAL SERVER
-/* const diffuseTexture = "./img/terrain8k.jpg"
-const normalTexture = "./img/normal8k.jpg"
-const roughnessTex = "./img/roughness2k.jpg"
-const clouds2Tex = "./img/clouds2.png"
-const cloudsAlphaTex = "./img/cloudsalpha.jpg"
-const starTexture = "./img/star.png"
-const moonTex = "./img/moon.jpg"
-const moon2Tex = "./img/moon2.png"
-const moon3Tex = "./img/moon3.png"  
-const tagFont = './fonts/SourceSans3_Regular.json' */
 
 
 const canvas = document.querySelector('#c');
@@ -85,183 +73,44 @@ const raycaster = new THREE.Raycaster();
 let selectedPin = null;
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
+let activeCarousel
 
-//create tags
-const loader = new FontLoader();
-loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {  //
+//create Slide carousel
+const buttons = document.querySelectorAll("[data-carousel-button]")
 
-    function instantiateTag(txt, lat, lng, color, originalColor, size) {
-        const textMat = new THREE.MeshBasicMaterial( {
-            color: 0x000000, //color,
-            transparent: false,
-            //opacity: 0.8,
-            side: THREE.DoubleSide
-        } );
-        const boxMat = new THREE.MeshBasicMaterial( {
-            color: color, //0x888888,
-            transparent: true,
-            opacity: 0.5,
-            side: THREE.DoubleSide
-        } );
-
-        const shapes = font.generateShapes( txt, 100 );
-        const txtGeo = new THREE.ShapeGeometry( shapes );
-        txtGeo.computeBoundingBox();
-        const xMid = - 0.5 * ( txtGeo.boundingBox.max.x - txtGeo.boundingBox.min.x );
-        const yMid = 0.5 * ( txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y );
-        txtGeo.translate( xMid, yMid * 2, 0 );
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        const carousel = document.querySelector('.carousel')
+        if (button.dataset.carouselButton === "exit") {
+            console.log("trying to close", activeCarousel);
+            activeCarousel.style.display = "none"
+        } else {
+            const offset = button.dataset.carouselButton === "next" ? 1 : -1
+            const slides = button
+                .closest("[data-carousel]")
+                .querySelector("[data-slides]")
         
-        const tag = new THREE.Mesh( txtGeo, textMat );
-        const tagDistanceFromMiddleofPlanet = 5.06;
-        let latLng = convertLatLngtoCartesian(lat, lng, tagDistanceFromMiddleofPlanet);
-        let rotationVector = new THREE.Vector3(latLng.x, latLng.y, latLng.z);
-        tag.lookAt(rotationVector);
-        tag.position.x = latLng.x;
-        tag.position.y = latLng.y;
-        tag.position.z = latLng.z;
-        tag.scale.x = size;
-        tag.scale.y = size;
-        tag.scale.z = size;
+            const activeSlide = slides.querySelector("[data-active]")
+            let newIndex = [...slides.children].indexOf(activeSlide) + offset
 
-        //create boxes
-        const xPadding = 200;
-        const yPadding = 0;
-        let roundingFactor = size * 125;
-        let x = 0; let y = 0; 
-        let width = (Math.abs(txtGeo.boundingBox.min.x) + Math.abs(txtGeo.boundingBox.max.x) + xPadding) * size; 
-        let height = (Math.abs(txtGeo.boundingBox.min.y) + Math.abs(txtGeo.boundingBox.max.y) + yPadding) * size; 
-        let shape = new THREE.Shape();
-        shape.moveTo( x, y + roundingFactor );
-        shape.lineTo( x, y + height - roundingFactor );
-        shape.quadraticCurveTo( x, y + height, x + roundingFactor, y + height );
-        shape.lineTo( x + width - roundingFactor, y + height );
-        shape.quadraticCurveTo( x + width, y + height, x + width, y + height - roundingFactor );
-        shape.lineTo( x + width, y + roundingFactor );
-        shape.quadraticCurveTo( x + width, y, x + width - roundingFactor, y );
-        shape.lineTo( x + roundingFactor, y );
-        shape.quadraticCurveTo( x, y, x, y + roundingFactor );
-        const boxGeo = new THREE.ShapeBufferGeometry( shape );
-
-        var uvAttribute = boxGeo.attributes.uv;
-		let min = Infinity, max = 0
-		//find min max
-		for (var i = 0; i < uvAttribute.count; i++) {
-			let u = uvAttribute.getX(i);
-			let v = uvAttribute.getY(i);
-			min = Math.min(min, u, v)
-			max = Math.max(max, u, v)
-		}
-
-		//map min map to 1 to 1 range
-		for (var i = 0; i < uvAttribute.count; i++) {
-			let u = uvAttribute.getX(i);
-			let v = uvAttribute.getY(i);
-
-			// do something with uv
-			u = THREE.MathUtils.mapLinear(u, min, max, 0, 1)
-			v = THREE.MathUtils.mapLinear(v, min, max, 0, 1)
-
-			// write values back to attribute
-			uvAttribute.setXY(i, u, v);
-
-		}
-
-        boxGeo.computeBoundingBox();
-        const boxMidx = -0.5 * ( boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x );
-        const boxMidy = -0.5 * ( boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y );
-        boxGeo.translate( boxMidx, boxMidy * 0, 0 );
-        let box = new THREE.Mesh(boxGeo, boxMat);
-
-        let boxLatLng = convertLatLngtoCartesian(lat, lng, tagDistanceFromMiddleofPlanet - 0.01);
-        let boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
-        box.lookAt( boxRotationVector )
-        box.position.copy( boxRotationVector )
-
-        scene.add( box );
-        scene.add( tag );
-    }
-
-    let tags = []
-    for (let i = 0; i < tagList.length; i++) {
-        let tag = instantiateTag(tagList[i][1], tagList[i][2], tagList[i][3] - 180, tagList[i][4], tagList[i][4], tagList[i][5] / 100000); //(tagList[i][1], tagList[i][2], tagList[i][3] - 180, 0.0004, color); //
-        tags.push(tag);
-    }
-} );
-
-//create pins
-let pinPositions = []
-const labelContainerElem = document.querySelector('#labels');
-
-function instantiatePin(txt, lat, lng, color, originalColor, radius) {
-    const pin = new THREE.Mesh(
-        new THREE.SphereGeometry(radius, 20, 20),
-        new THREE.MeshBasicMaterial({
-            color: color,
-        })
-    )
-
-    originalColor = originalColor;
-
-/*     const elem = document.createElement('div');
-    elem.textContent = txt;
-    labelContainerElem.appendChild(elem); */
-    
-    const pinSphereRadius = 5.01
-    let pos = convertLatLngtoCartesian(lat, lng, pinSphereRadius);
-    pin.position.set(pos.x, pos.y, pos.z);
-
-    scene.add(pin);
-    pinPositions.push(pin);
-
-    return {pin, originalColor}; //elem
-}
-
-let pins = []
-for (let i = 0; i < tagList.length; i++) {
-    let pin = instantiatePin(tagList[i][1], tagList[i][2], tagList[i][3] - 180, tagList[i][4], tagList[i][4], tagList[i][5] / 1500);
-    pins.push(pin);
-}
-
-//create connections
-for (let i = 0; i < tagList.length; i++) {
-    for (let j = 0; j < tagConnections.length; j++) {
-        if (tagList[i][0] == tagConnections[j][0]) {
-            for (let k = 1; k < tagConnections[j].length; k++) {
-                for (let l = 0; l < tagList.length; l++) {
-                    if (tagList[l][0] == tagConnections[j][k]) {
-                        let t1 = convertLatLngtoCartesian(tagList[i][2], tagList[i][3] - 180, 5);
-                        let t2 = convertLatLngtoCartesian(tagList[l][2], tagList[l][3] - 180, 5);
-                        getCurve(t1, t2);
-                    }
-                }
-            }
+            slides.children[newIndex].dataset.active = true
+            delete activeSlide.dataset.active
         }
-    }
-}
+    })
+})
 
-function getCurve(p1, p2){
-    let thickness = 0.01
-    let radiusSegments = 3
-    let curveAltitude = 0.05
-    let v1 = new THREE.Vector3(p1.x, p1.y, p1.z);
-    let v2 = new THREE.Vector3(p2.x, p2.y, p2.z);
-    let points = []
-    for (let i = 0; i <= 20; i++) {
-      let p = new THREE.Vector3().lerpVectors(v1, v2, i/20)
-      p.normalize()
-      p.multiplyScalar(5 + curveAltitude * Math.sin(Math.PI*i/20));
-      points.push(p)
-    }
-    let path = new THREE.CatmullRomCurve3(points);
-    const geometry = new THREE.TubeGeometry(path, 20, thickness, radiusSegments, false);
-    const material = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: 0.15
-    });
-    const curve = new THREE.Mesh(geometry, material);
-    scene.add(curve);
-  }
+//create CSS elements
+/*     const slideContainer = document.querySelector('.slides');
+    slideContainer.style.display = 'none'
+    const slide = document.createElement('div');
+    slide.style.display = 'none';
+    slide.textContent = "Idealism";
+    slide.style.color = 0xffffff;
+    slideContainer.appendChild(slide);
+    const img = document.createElement("img");
+    img.src = "./img/idealism.png";
+    slideContainer.appendChild(img); */
+
 
 //create starfield
 const starGeometry = new THREE.BufferGeometry()
@@ -332,25 +181,17 @@ const clouds = new THREE.Mesh(
 )
 jaranius.add(clouds)
 
-// create sphere
-const sphere = new THREE.Mesh(
+// create atmosphericLight
+const atmosphericLight = new THREE.Mesh(
     new THREE.SphereGeometry(5.01, 250, 250),
     new THREE.ShaderMaterial({
         vertexShader: vertexShader,
         fragmentShader: fragmentShader,
         blending: THREE.AdditiveBlending,
-        /* uniforms: {
-            diffuseTexture: {
-                value: new THREE.TextureLoader().load('/img/terrain8k.jpg')
-            },
-            normalTexture: {
-                value: new THREE.TextureLoader().load('/img/normal8k.jpg')
-            }
-        } */
     })
 )
-sphere.position.set(0, 0, 0)
-jaranius.add(sphere);
+atmosphericLight.position.set(0, 0, 0)
+jaranius.add(atmosphericLight);
 
 // create atmosphere
 const atmosphere = new THREE.Mesh(
@@ -364,7 +205,245 @@ const atmosphere = new THREE.Mesh(
 )
 atmosphere.position.set(0, 0, 0)
 atmosphere.scale.set(1.2, 1.2, 1.2)
-scene.add(atmosphere);
+jaranius.add(atmosphere);
+
+//create pictureBoxes
+function instantiateImg(textureSrc, lat, lng, size) {
+    const textureLoader = new THREE.TextureLoader()
+    let img = textureLoader.load(textureSrc);
+    const boxMat = new THREE.MeshBasicMaterial( {
+        map: img,
+        transparent: true,
+        side: DoubleSide
+    } );
+
+    let roundingFactor = 0.01;
+    let x = 0; let y = 0; 
+    let width = size; 
+    let height = size; 
+    let shape = new THREE.Shape();
+    shape.moveTo( x, y + roundingFactor );
+    shape.lineTo( x, y + height - roundingFactor );
+    shape.quadraticCurveTo( x, y + height, x + roundingFactor, y + height );
+    shape.lineTo( x + width - roundingFactor, y + height );
+    shape.quadraticCurveTo( x + width, y + height, x + width, y + height - roundingFactor );
+    shape.lineTo( x + width, y + roundingFactor );
+    shape.quadraticCurveTo( x + width, y, x + width - roundingFactor, y );
+    shape.lineTo( x + roundingFactor, y );
+    shape.quadraticCurveTo( x, y, x, y + roundingFactor );
+    const boxGeo = new THREE.ShapeGeometry( shape );
+
+    var uvAttribute = boxGeo.attributes.uv;
+    let min = Infinity, max = 0
+    for (var i = 0; i < uvAttribute.count; i++) {
+        let u = uvAttribute.getX(i);
+        let v = uvAttribute.getY(i);
+        min = Math.min(min, u, v)
+        max = Math.max(max, u, v)
+    }
+    for (var i = 0; i < uvAttribute.count; i++) {
+        let u = uvAttribute.getX(i);
+        let v = uvAttribute.getY(i);
+        u = THREE.MathUtils.mapLinear(u, min, max, 0, 1)
+        v = THREE.MathUtils.mapLinear(v, min, max, 0, 1)
+        uvAttribute.setXY(i, u, v);
+    }
+
+    boxGeo.computeBoundingBox();
+    const boxMidx = -0.5 * ( boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x );
+    const boxMidy = -0.5 * ( boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y );
+    boxGeo.translate( boxMidx, boxMidy * 0, 0 );
+    let box = new THREE.Mesh(boxGeo, boxMat);
+
+    let boxLatLng = convertLatLngtoCartesian(lat, lng, 5.1);
+    let boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
+    box.lookAt( boxRotationVector )
+    box.position.copy( boxRotationVector )
+
+    jaranius.add( box );
+}
+
+for (let i = 0; i < imgList.length; i++) {
+    instantiateImg(idealism, imgList[i][2], imgList[i][3] - 180, imgList[i][4] / 500);
+}
+
+//create tags
+const loader = new FontLoader();
+loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {  //
+
+    function instantiateTag(txt, lat, lng, color, originalColor, size) {
+        const textMat = new THREE.MeshBasicMaterial( {
+            color: 0x000000, //color,
+            transparent: false,
+            //opacity: 0.8,
+            side: THREE.DoubleSide
+        } );
+        const boxMat = new THREE.MeshBasicMaterial( {
+            color: color, //0x888888,
+            transparent: true,
+            opacity: 0.5,
+            side: THREE.DoubleSide
+        } );
+
+        const shapes = font.generateShapes( txt, 100 );
+        const txtGeo = new THREE.ShapeGeometry( shapes );
+        txtGeo.computeBoundingBox();
+        const xMid = - 0.5 * ( txtGeo.boundingBox.max.x - txtGeo.boundingBox.min.x );
+        const yMid = 0.5 * ( txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y );
+        txtGeo.translate( xMid, yMid * 2, 0 );
+        
+        const tag = new THREE.Mesh( txtGeo, textMat );
+        const tagDistanceFromMiddleofPlanet = 5.06;
+        let latLng = convertLatLngtoCartesian(lat, lng, tagDistanceFromMiddleofPlanet);
+        let rotationVector = new THREE.Vector3(latLng.x, latLng.y, latLng.z);
+        tag.lookAt(rotationVector);
+        tag.position.x = latLng.x;
+        tag.position.y = latLng.y;
+        tag.position.z = latLng.z;
+        tag.scale.x = size;
+        tag.scale.y = size;
+        tag.scale.z = size;
+
+        //create boxes
+        const xPadding = 200;
+        const yPadding = 0;
+        let roundingFactor = size * 125;
+        let x = 0; let y = 0; 
+        let width = (Math.abs(txtGeo.boundingBox.min.x) + Math.abs(txtGeo.boundingBox.max.x) + xPadding) * size; 
+        let height = (Math.abs(txtGeo.boundingBox.min.y) + Math.abs(txtGeo.boundingBox.max.y) + yPadding) * size; 
+        let shape = new THREE.Shape();
+        shape.moveTo( x, y + roundingFactor );
+        shape.lineTo( x, y + height - roundingFactor );
+        shape.quadraticCurveTo( x, y + height, x + roundingFactor, y + height );
+        shape.lineTo( x + width - roundingFactor, y + height );
+        shape.quadraticCurveTo( x + width, y + height, x + width, y + height - roundingFactor );
+        shape.lineTo( x + width, y + roundingFactor );
+        shape.quadraticCurveTo( x + width, y, x + width - roundingFactor, y );
+        shape.lineTo( x + roundingFactor, y );
+        shape.quadraticCurveTo( x, y, x, y + roundingFactor );
+        const boxGeo = new THREE.ShapeGeometry( shape );
+
+        var uvAttribute = boxGeo.attributes.uv;
+		let min = Infinity, max = 0
+		//find min max
+		for (var i = 0; i < uvAttribute.count; i++) {
+			let u = uvAttribute.getX(i);
+			let v = uvAttribute.getY(i);
+			min = Math.min(min, u, v)
+			max = Math.max(max, u, v)
+		}
+
+		//map min map to 1 to 1 range
+		for (var i = 0; i < uvAttribute.count; i++) {
+			let u = uvAttribute.getX(i);
+			let v = uvAttribute.getY(i);
+
+			// do something with uv
+			u = THREE.MathUtils.mapLinear(u, min, max, 0, 1)
+			v = THREE.MathUtils.mapLinear(v, min, max, 0, 1)
+
+			// write values back to attribute
+			uvAttribute.setXY(i, u, v);
+
+		}
+
+        boxGeo.computeBoundingBox();
+        const boxMidx = -0.5 * ( boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x );
+        const boxMidy = -0.5 * ( boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y );
+        boxGeo.translate( boxMidx, boxMidy * 0, 0 );
+        let box = new THREE.Mesh(boxGeo, boxMat);
+
+        let boxLatLng = convertLatLngtoCartesian(lat, lng, tagDistanceFromMiddleofPlanet - 0.01);
+        let boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
+        box.lookAt( boxRotationVector )
+        box.position.copy( boxRotationVector )
+
+        jaranius.add( box );
+        jaranius.add( tag );
+    }
+
+    for (let i = 0; i < tagList.length; i++) {
+        let tag = instantiateTag(tagList[i][1], tagList[i][2], tagList[i][3] - 180, tagList[i][4], tagList[i][4], tagList[i][5] / 100000);
+    }
+} );
+
+//create pins
+let pinPositions = []
+//const labelContainerElem = document.querySelector('#labels');
+
+function instantiatePin(txt, lat, lng, color, originalColor, radius) {
+    const pin = new THREE.Mesh(
+        new THREE.SphereGeometry(radius, 20, 20),
+        new THREE.MeshBasicMaterial({
+            color: color,
+        })
+    )
+
+    originalColor = originalColor;
+
+/*     const elem = document.createElement('div');
+    elem.textContent = txt;
+    labelContainerElem.appendChild(elem); */
+    
+    const pinSphereRadius = 5.01
+    let pos = convertLatLngtoCartesian(lat, lng, pinSphereRadius);
+    pin.position.set(pos.x, pos.y, pos.z);
+
+    jaranius.add(pin);
+    pinPositions.push(pin);
+
+    return {pin, originalColor}; //elem
+}
+
+let pins = []
+for (let i = 0; i < tagList.length; i++) {
+    let pin = instantiatePin(tagList[i][1], tagList[i][2], tagList[i][3] - 180, tagList[i][4], tagList[i][4], tagList[i][5] / 1500);
+    pins.push(pin);
+}
+
+//create connections
+let curveThickness = 0.01
+let curveRadiusSegments = 3
+let curveMaxAltitude = 0.05
+let curveMinAltitude = 5.01
+
+for (let i = 0; i < tagList.length; i++) {
+    for (let j = 0; j < tagConnections.length; j++) {
+        if (tagList[i][0] == tagConnections[j][0]) {
+            for (let k = 1; k < tagConnections[j].length; k++) {
+                for (let l = 0; l < tagList.length; l++) {
+                    if (tagList[l][0] == tagConnections[j][k]) {
+                        let t1 = convertLatLngtoCartesian(tagList[i][2], tagList[i][3] - 180, curveMinAltitude);
+                        let t2 = convertLatLngtoCartesian(tagList[l][2], tagList[l][3] - 180, curveMinAltitude);
+                        getCurve(t1, t2);
+                    }
+                }
+            }
+        }
+    }
+}
+
+function getCurve(p1, p2){
+    let v1 = new THREE.Vector3(p1.x, p1.y, p1.z);
+    let v2 = new THREE.Vector3(p2.x, p2.y, p2.z);
+    let points = []
+    for (let i = 0; i <= 20; i++) {
+      let p = new THREE.Vector3().lerpVectors(v1, v2, i/20)
+      p.normalize()
+      p.multiplyScalar(curveMinAltitude + curveMaxAltitude * Math.sin(Math.PI*i/20));
+      points.push(p)
+    }
+    let path = new THREE.CatmullRomCurve3(points);
+    const geometry = new THREE.TubeGeometry(path, 20, curveThickness, curveRadiusSegments, false);
+    const material = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.15
+    });
+    const curve = new THREE.Mesh(geometry, material);
+    curve.renderOrder = -10
+    jaranius.add(curve);
+  }
 
 //create moons
 class Moon {
@@ -404,7 +483,7 @@ for (let i = 0; i < moons.length; i++) {
 }
 
 //YUKA
-const entityManager = new YUKA.EntityManager()
+/* const entityManager = new YUKA.EntityManager()
 const clock = new YUKA.Time()
 
 function sync(entity, RenderComponent) {
@@ -452,7 +531,7 @@ let feedingGround = new YUKA.Vector3
 feedingGround = convertLatLngtoCartesian (90, 1, 5.1)
 const arriveBehavior = new YUKA.ArriveBehavior(feedingGround)
 arriveBehavior.weight = 0
-
+ */
 //end YUKA
 
 //create Gutta
@@ -476,7 +555,8 @@ class Gutt {
         this.geometry = new THREE.ShapeGeometry(this.shape)
             this.geometry.computeBoundingSphere();
             this.center = this.geometry.boundingSphere.center
-            this.geometry.rotateX(Math.PI/2)
+            this.shapePosition = this.geometry.position
+            //this.geometry.rotateX(Math.PI/2)
             this.geometry.rotateZ(Math.PI/2)
         this.material = new THREE.MeshBasicMaterial({
             color: 0xffffff, 
@@ -488,20 +568,20 @@ class Gutt {
         this.mesh.geometry.center();
         this.mesh.position.copy(this.center);
         
-        /* this.pos = convertLatLngtoCartesian(this.lat, this.lng, 5.01)
+        this.pos = convertLatLngtoCartesian(this.lat, this.lng, 5.01)
         this.heading = getRandomNum(0, 2 * Math.PI)
 
         this.mesh.position.set(this.pos.x, this.pos.y, this.pos.z)
-        this.mesh.lookAt(middleOfPlanet) */
+        this.mesh.lookAt(middleOfPlanet)
         
         //YUKA
-        this.mesh.matrixAutoUpdate = false
+        // this.mesh.matrixAutoUpdate = false
         //end YUKA
 
         scene.add(this.mesh)
 
         //YUKA
-        this.vehicle = new YUKA.Vehicle()
+        /* this.vehicle = new YUKA.Vehicle()
         this.vehicle.boundingRadius = this.geometry.boundingSphere.radius
         this.vehicle.setRenderComponent(this.mesh, sync)
         this.pos = convertLatLngtoCartesian(this.lat, this.lng, 5.5)
@@ -525,11 +605,11 @@ class Gutt {
             this.vehicle.steering.add(this.fleeBehavior)
         }
         
-        entityManager.add(this.vehicle)
+        entityManager.add(this.vehicle) */
         //END YUKA
     }
 
-/*     move() {
+    move() {
         this.lat -= Math.cos(this.heading) / 20
         this.lng += Math.sin(this.heading) / 20
         if (this.lat < 0) {this.lat = Math.abs(this.lat)}
@@ -542,10 +622,10 @@ class Gutt {
 
     steer() {
         if (getRandomNum(0, 1) > 0.9) {
-            this.heading += (Math.PI / 80)
+            this.heading += (Math.PI / 20)
         }
         if (getRandomNum(0, 1) > 0.9) {
-            this.heading -= (Math.PI / 80)
+            this.heading -= (Math.PI / 20)
         }
         if (this.lat < 10) {
             this.heading = getRandomNum(4 * Math.PI / 3, 5 * Math.PI / 3)
@@ -554,8 +634,8 @@ class Gutt {
             this.heading = getRandomNum(Math.PI / 3, 2 * Math.PI / 3)
         }
         this.mesh.lookAt(0, 0, 0)
-        this.mesh.rotateZ(this.heading)
-    } */
+        this.mesh.rotateZ(this.heading - Math.PI / 2)
+    }
 }
 
 let gutta = [];
@@ -569,9 +649,9 @@ for (let i = 0; i < 1000; i++) {
 const ambient = new THREE.AmbientLight(0xffffff, 0.01); //0.01
 scene.add(ambient);
 
-const jaraniusLight = new THREE.PointLight(0xffffff, 0.01);
+const jaraniusLight = new THREE.PointLight(0xffffff, 0.5);
 jaraniusLight.position.set(0, 0, 0);
-scene.add(jaraniusLight);
+jaranius.add(jaraniusLight);
 
 // Interaction functions
 function unhoverPin() {
@@ -618,6 +698,9 @@ function onDocumentKeyDown(event) {
 const times = [];
 let fps;
 
+const fpsContainer = document.querySelector('#fpsCounter');
+const fpsDisplay = document.createElement('div');
+
 function refreshLoop() {
     window.requestAnimationFrame(() => {
         const now = performance.now();
@@ -626,9 +709,11 @@ function refreshLoop() {
         }
         times.push(now);
         fps = times.length;
+        fpsDisplay.textContent = fps;
         refreshLoop();
     });
 }
+fpsContainer.appendChild(fpsDisplay);
 
 refreshLoop();
 
@@ -642,14 +727,14 @@ function render(time) {
     }
 
     //YUKA
-    const delta = clock.update().getDelta()
-    entityManager.update(delta)
+/*     const delta = clock.update().getDelta()
+    entityManager.update(delta) */
     //END YUKA
 
-/*     for (let i = 0; i < gutta.length; i++) {
+    for (let i = 0; i < gutta.length; i++) {
         gutta[i].move();
         gutta[i].steer();
-    } */
+    }
 
     //pinLabels
     /* pins.forEach((pinInfo) => {
@@ -689,18 +774,21 @@ function render(time) {
     }); */
 
     function onPointerMove(event) {
-        // calculate pointer position in normalized device coordinates
-        // (-1 to +1) for both components
         pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
         pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
     }
-
 
     function onClick(event) {
         raycaster.setFromCamera(pointer, camera);
         const intersects = raycaster.intersectObjects(pinPositions);
         if (intersects.length > 0) {
             selectedPin = intersects[0].object;
+            if (camera.position.distanceTo(selectedPin.position) < 2) {
+                const selectedPinIndex = pinPositions.findIndex((object) => object==intersects[0].object)
+                const selectedCarousel = tagList[selectedPinIndex][6]
+                activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
+                activeCarousel.style.display = "block"
+            }
         }
     }
 
@@ -715,8 +803,8 @@ function render(time) {
     pivot1.rotation.y += -0.0003;
     pivot2.rotation.y += -0.00003;
     pivot3.rotation.y += -0.000003;
-    //jaranius.rotation.y += 0.0003
-    clouds.rotation.y += 0.0003
+    jaranius.rotation.y += 0.000003;
+    clouds.rotation.y += 0.0003;
     controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);
 
     controls.update();

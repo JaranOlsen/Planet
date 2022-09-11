@@ -1,4 +1,4 @@
-export const tagList = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR, SIZE (10-99)
+export const tagList = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR, SIZE (10-99), SLIDE-ID
     ["8BD3708E-8E3D-44B8-9E92-1050FA7987E5", " the essence of \n love / meaning", 14.5, 90, 0xA27E8E, 40],
     ["D4724AD1-EECD-4975-920C-CDAD71AA53C3", "the essence of \n wisdom / will", 14.5, 210, 0x88CCF1, 40],
     ["0027E01B-C40A-49F0-9833-30244700C39E", "   the essence of \n salvation / peace", 14.5, 330, 0xF2DD6E, 40],
@@ -16,9 +16,9 @@ export const tagList = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR, SIZE (10-99)
     ["2A36743D-9E95-4B9D-A8EB-6B4B11F20AB5", "salvation", 27, 227, 0x88ccf1, 20],
     ["963CA1BA-9539-4089-96AB-EB0E78602390", "true wisdom", 32, 235, 0x88ccf1, 20],
     ["EEA100C2-4D71-40C8-B70B-FE6A6D01D33B", "why important?", 22.5, 224,  0x88ccf1, 30],
-    ["982A6AFF-D536-4504-B63A-EC42A2712432", "Unconditional \n        Truth", 22.5, 211, 0x88ccf1, 50],
+    ["982A6AFF-D536-4504-B63A-EC42A2712432", "Unconditional \n        Truth", 22.5, 211, 0x88ccf1, 50, 2],
     ["F1EB56D4-15AE-4837-A070-40550E1262C7", "must be reduced to", 29, 205,  0x88ccf1, 40],
-    ["506E723E-071E-4694-80AD-06BBD0681E26", "Conventional \n        truth", 35, 211,  0x88ccf1, 50],
+    ["506E723E-071E-4694-80AD-06BBD0681E26", "Conventional \n        truth", 35, 211,  0x88ccf1, 50, 2],
     ["0DA43E60-8DB6-4401-A1B1-F3BC1B5EA856", "must transcend", 40, 217, 0x88ccf1, 40],
     ["6BDD61FD-3F46-453B-8714-64AF81BCE3F9", "limitations of", 35, 223,  0x88ccf1, 30],
     ["A81C54C1-D640-4297-AFA9-346A25B8132E", "contextual", 44, 232,  0x88ccf1, 25],
@@ -263,7 +263,7 @@ export const tagList = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR, SIZE (10-99)
     ["B6246F44-0855-4817-9D0D-D397E9DB7442", "Space?", 52, 173,  0x88ccf1, 40],
     ["050CF590-16D7-48A8-9656-E58FD0B6E8BF", "Time?", 54, 170, 0x88ccf1, 40],
     ["1EE48F2F-650A-413A-8F77-720A641BA416", "Matter?", 57, 170, 0x88ccf1, 40],
-    ["C2DF7137-7E37-4EAD-8AF9-BDCF24C7A5BA", "Ontologies", 29, 184,  0x88ccf1, 40],
+    ["C2DF7137-7E37-4EAD-8AF9-BDCF24C7A5BA", "Ontologies", 29, 184,  0x88ccf1, 40, 1],
     ["20790E3B-9D36-40B2-82CB-56322AA09DE7", "Epistemology - how can \nwe get true knowledge?", 62, 204, 0x88ccf1, 40],
     ["28763A09-FA38-43D2-A7C3-52E15D20F5B9", "What can’t we know?", 57, 195, 0x88ccf1, 40],
     ["B20BB587-FDB1-45B4-9F6B-04D75DB45484", "Pañña", 67.5, 102, 0xa27e8e, 50],

@@ -1,3 +1,6 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 html, body {
   height: 100%;
   margin: 0;
@@ -13,55 +16,109 @@ html, body {
   height: 100%;
   overflow: hidden;
 }
+
+
+
+
+.carousel {
+  position: absolute;
+  top: 5vh;
+  left: 5vw;
+  z-index: 1;
+  /* position: relative;  */
+  width: 90vw;
+  height: 90vh;
+  display: none;
+}
+.carousel > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none ;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: 200ms opacity ease-in-out;
+  transition-delay: 200ms;
+}
+.slide > img {
+  display: block;
+  border-color: blue; 
+  border-width: 10px;
+  border-radius: 10px;
+  width: 90vw;
+  height: 90vh;
+  object-fit: fill;
+}
+.slide[data-active] {
+  opacity: 1;
+  z-index: 2;
+  transition-delay: 0ms;
+}
+.carousel-button {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4)
+}
+.carousel-button:hover,
+.carousel-button:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.carousel-button:focus{
+  outline: 1px solid black;
+}
+.carousel-button.prev {
+  left: -2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+}
+.carousel-button.next {
+  top: 50%;
+  transform: translateY(-50%);
+  right: -2.5rem; 
+  font-size: 2rem;
+}
+.carousel-button.exit {
+  right: 0.1rem;
+  top: 0.1rem;
+  font-size: 1rem;
+}
+
+.carousel.s1 {
+  display: none;
+}
+.carousel.s2 {
+  display: none;
+}
+
+
+
+
+
+
 #fpsCounter {
   position: absolute;
   left: 0;
   top: 0;
-  color: white;
+  background-color: black;
   z-index: 0;
 }
 #fpsCounter>div {
   position: absolute;  /* let us position them inside the container */
   left: 0;             /* make their default position the top left of the container */
   top: 0;
-  text-align: left;
+  padding: 5px;
+  color: white;
+  text-align: center;
   cursor: pointer;     /* change the cursor to a hand when over us */
   font-size: x-small;
   user-select: none; 
-}
-#labels {
-  position: absolute;  /* let us position ourself inside the container */
-  left: 0;             /* make our position the top left of the container */
-  top: 0;
-  color: white;
-  z-index: 0;
-}
-#labels>div {
-  white-space: nowrap;
-  position: absolute;  /* let us position them inside the container */
-  left: 0;             /* make their default position the top left of the container */
-  top: 0;
-  text-align: center;
-  background-color: darkolivegreen;
-  background-blend-mode: overlay;
-  border-color: black;
-  border-radius: 3px;
-  padding: 10px;
-  cursor: pointer;    /* change the cursor to a hand when over us */
-  font-size:  16 px; /* var(--px); */
-  user-select: none;   /* don't let the text get selected */
-  opacity: 30%;
-  text-shadow:         /* create a black outline */
-  -1px -1px 0 #000,
-  0   -1px 0 #000,
-  1px -1px 0 #000,
-  1px  0   0 #000,
-  1px  1px 0 #000,
-  0    1px 0 #000,
-  -1px  1px 0 #000,
-  -1px  0   0 #000;
-}
-#labels>div:hover {
-  font-size: 24px;
-  opacity: 70%;
 }
