@@ -19,6 +19,51 @@ html, body {
 
 
 
+#playbutton {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 10rem;
+}
+#playbutton:hover,
+#playbutton:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#playbutton:focus{
+  outline: 1px solid black;
+}
+
+#skipbutton {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 50%;
+  top: 95%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 1rem;
+}
+#skipbutton:hover,
+#skipbutton:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#skipbutton:focus{
+  outline: 1px solid black;
+}
 
 .carousel {
   position: absolute;
@@ -51,6 +96,16 @@ html, body {
   height: 90vh;
   object-fit: fill;
 }
+.slide > iframe {
+  display: block;
+  border-color: rgba(0, 0, 255, 0.3);
+  border-width: 10px;
+  border-radius: 10px;
+  width: 90vw;
+  height: 90vh;
+  object-fit: contain;
+}
+
 .slide[data-active] {
   opacity: 1;
   z-index: 2;
@@ -91,14 +146,6 @@ html, body {
   top: 0.1rem;
   font-size: 1rem;
 }
-
-.carousel.s1 {
-  display: none;
-}
-.carousel.s2 {
-  display: none;
-}
-
 
 
 

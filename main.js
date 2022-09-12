@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import * as YUKA from 'yuka';
-import {Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, DiscreteInterpolant} from 'three';
+import {Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, DiscreteInterpolant, SubtractiveBlending, NormalBlending} from 'three';
 import { tagList } from './tagData.js'
 import { imgList } from './imgData.js'
 import { tagConnections } from './tagConnectionData.js'
@@ -27,8 +27,6 @@ import moonTex from "./img/moon.jpg"
 import moon2Tex from "./img/moon2.png"
 import moon3Tex from "./img/moon3.png"
 
-//    IMPORT IMAGES
-import idealism from "./img/idealism.png"
 const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
 
 
@@ -77,12 +75,31 @@ let selectedPin = null;
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 
 
-
+//start intro
+let start = false
 const introTune = document.getElementById("introTune");
     introTune.preload = "auto";
+    introTune.currentTime= 1.4;
 
-let activeCarousel
+const playButton = document.getElementById("playbutton")
+playButton.addEventListener("click", () => {
+        introTune.play();
+        start = true;
+        playButton.style.display = "none";
+        skipButton.style.display = "none";
+    })
+
+//skip intro
+const skipButton = document.getElementById("skipbutton")
+skipButton.addEventListener("click", () => {
+        playButton.style.display = "none";
+        skipButton.style.display = "none";
+        camera.position.z = 15;
+    })
+
+
 //create Slide carousel
+let activeCarousel
 const buttons = document.querySelectorAll("[data-carousel-button]")
 
 buttons.forEach(button => {
@@ -285,7 +302,7 @@ function instantiateImg(textureSrc, lat, lng, size) {
     boxGeo.translate( boxMidx, boxMidy * 0, 0 );
     let box = new THREE.Mesh(boxGeo, boxMat);
 
-    let boxLatLng = convertLatLngtoCartesian(lat, lng, 5.1);
+    let boxLatLng = convertLatLngtoCartesian(lat, lng, 5.06);
     let boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
     box.lookAt( boxRotationVector )
     box.position.copy( boxRotationVector )
@@ -294,7 +311,7 @@ function instantiateImg(textureSrc, lat, lng, size) {
 }
 
 for (let i = 0; i < imgList.length; i++) {
-    instantiateImg(idealism, imgList[i][2], imgList[i][3] - 180, imgList[i][4] / 500);
+    instantiateImg(imgList[i][1], imgList[i][2], imgList[i][3] - 180, imgList[i][4] / 500);
 }
 
 //create tags
@@ -445,7 +462,8 @@ for (let i = 0; i < tagList.length; i++) {
                     if (tagList[l][0] == tagConnections[j][k]) {
                         let t1 = convertLatLngtoCartesian(tagList[i][2], tagList[i][3] - 180, curveMinAltitude);
                         let t2 = convertLatLngtoCartesian(tagList[l][2], tagList[l][3] - 180, curveMinAltitude);
-                        getCurve(t1, t2);
+                        const weight = (tagList[i][5] + tagList[l][5]) / 2 / 50;
+                        getCurve(t1, t2, weight);
                     }
                 }
             }
@@ -453,7 +471,7 @@ for (let i = 0; i < tagList.length; i++) {
     }
 }
 
-function getCurve(p1, p2){
+function getCurve(p1, p2, weight){
     let v1 = new THREE.Vector3(p1.x, p1.y, p1.z);
     let v2 = new THREE.Vector3(p2.x, p2.y, p2.z);
     let points = []
@@ -464,7 +482,7 @@ function getCurve(p1, p2){
       points.push(p)
     }
     let path = new THREE.CatmullRomCurve3(points);
-    const geometry = new THREE.TubeGeometry(path, 20, curveThickness, curveRadiusSegments, false);
+    const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments, false);
     const material = new THREE.MeshBasicMaterial({
         color: 0xffffff,
         transparent: true,
@@ -674,7 +692,7 @@ for (let i = 0; i < 1000; i++) {
 }
 
 //lights
-const ambient = new THREE.AmbientLight(0xffffff, 0.01); //0.01
+const ambient = new THREE.AmbientLight(0xffffff, 0.1); //0.01
 scene.add(ambient);
 
 const jaraniusLight = new THREE.PointLight(0xffffff, 0.5);
@@ -811,7 +829,7 @@ function render(time) {
         const intersects = raycaster.intersectObjects(pinPositions);
         if (intersects.length > 0) {
             selectedPin = intersects[0].object;
-            if (camera.position.distanceTo(selectedPin.position) < 2) {
+            if (camera.position.distanceTo(selectedPin.position) < 3) {
                 const selectedPinIndex = pinPositions.findIndex((object) => object==intersects[0].object)
                 const selectedCarousel = tagList[selectedPinIndex][6]
                 activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
@@ -834,7 +852,7 @@ function render(time) {
     clouds1.rotation.y += 0.00001;
     clouds2.rotation.y += 0.00005;
     clouds3.rotation.y += 0.0001;
-    if (camera.position.z > 15) {
+    if (camera.position.z > 15 && start == true) {
         camera.position.z -= 0.0001 * Math.pow(camera.position.z - 8, 1.35)
         jaranius.rotation.y += 0.0003;
     }
@@ -847,5 +865,4 @@ function render(time) {
 }
 
 requestAnimationFrame(render);
-introTune.play();
 
