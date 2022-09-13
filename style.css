@@ -18,7 +18,18 @@ html, body {
 }
 
 
+#credits {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0 .5rem;
+  left: 50%;
+  top: 5%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: .75rem;
 
+}
 #playbutton {
   position: absolute;
   z-index: 3;
@@ -101,9 +112,11 @@ html, body {
   border-color: rgba(0, 0, 255, 0.3);
   border-width: 10px;
   border-radius: 10px;
+  top: 0;
+  left: 0;
   width: 90vw;
   height: 90vh;
-  object-fit: contain;
+  object-fit: fill;
 }
 
 .slide[data-active] {

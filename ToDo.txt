@@ -1,8 +1,6 @@
 MAKE USABLE
     make improvements to slidecarousel
         interactivity
-    
-    fix youtube margin
 
 
 SHORT-TERM DEVELOPMENT
@@ -11,7 +9,7 @@ SHORT-TERM DEVELOPMENT
 
     add sun in orbit around earth
     make better clouds (multiple layers? needs specific blending mode?)
-    fix atmosphere (moons and stars being occluded)
+    tweak atmosphere (moons and stars being occluded - fixed by transparency)
 
     fix gutta
         
@@ -41,7 +39,43 @@ LONG-TERM DEVELOPMENT
             https://en.wikipedia.org/wiki/Rodrigues%27_rotation_formula ??
         Instancing: https://github.com/mrdoob/three.js/blob/master/examples/webgl_instancing_performance.html
 
+    add flyControls (see section under)
 
 USEFUL
     link to json font converter: http://gero3.github.io/facetype.js/
+
+    flyControls - swap between control modes
+        function onClick() {
+
+            var prevCamera = camera;
+
+            camera = new THREE.PerspectiveCamera(...);
+            camera.position.copy( prevCamera.position );
+            camera.rotation.copy( prevCamera.rotation );
+
+            var MODE = { TRACKBALL: 0, FLY: 1 };
+
+            switch( mode ) {
+
+                case MODE.FLY:
+
+                    controls = new THREE.TrackballControls( camera );
+
+                    mode = MODE.TRACKBALL;
+
+                    break;
+
+                case MODE.TRACKBALL:
+
+                    controls = new THREE.FlyControls( camera );
+
+                    mode = MODE.FLY;
+
+                    break;
+
+            }
+
+        }
+        Also this (for fixing possible problem with orbitcontrols)
+        https://stackoverflow.com/questions/32412507/switch-between-flycontrols-and-orbitcontrols-threejs-mouse-clicked?noredirect=1#comment52768065_32412507
 

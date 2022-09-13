@@ -1,10 +1,10 @@
 import * as THREE from 'three';
-import * as YUKA from 'yuka';
-import {Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, DiscreteInterpolant, SubtractiveBlending, NormalBlending} from 'three';
+//import * as YUKA from 'yuka';
+import {Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3} from 'three';
 import { tagList } from './tagData.js'
 import { imgList } from './imgData.js'
 import { tagConnections } from './tagConnectionData.js'
-import {getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, convertLatLngtoCartesianAndBack} from './mathScripts.js'
+import {getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng} from './mathScripts.js'
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import { FontLoader } from 'three/addons/loaders/FontLoader.js'; 
 
@@ -21,14 +21,12 @@ import roughnessTex from "./img/roughness2k.jpg"
 import clouds1Tex from "./img/clouds1.png"
 import clouds1AlphaTex from "./img/clouds1alpha.jpg"
 import clouds2Tex from "./img/clouds2.png"
-import clouds2AlphaTex from "./img/clouds2alpha.jpg"
 import starTexture from "./img/star.png"
 import moonTex from "./img/moon.jpg"
 import moon2Tex from "./img/moon2.png"
 import moon3Tex from "./img/moon3.png"
 
 const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
-
 
 
 const canvas = document.querySelector('#c');
@@ -79,14 +77,24 @@ const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 let start = false
 const introTune = document.getElementById("introTune");
     introTune.preload = "auto";
-    introTune.currentTime= 1.4;
+    introTune.currentTime = 1.4;
+    introTune.volume = 0.25;
+const introSpeech = document.getElementById("introSpeech")
+    introSpeech.preload = "auto";
+    introSpeech.currentTime= 1.4;
 
 const playButton = document.getElementById("playbutton")
+const credits = document.getElementById("credits")
 playButton.addEventListener("click", () => {
         introTune.play();
+        setTimeout(function(){ 
+            introSpeech.play(); 
+            }, 40000)
         start = true;
         playButton.style.display = "none";
         skipButton.style.display = "none";
+        credits.style.display = "none";
+        
     })
 
 //skip intro
@@ -94,6 +102,7 @@ const skipButton = document.getElementById("skipbutton")
 skipButton.addEventListener("click", () => {
         playButton.style.display = "none";
         skipButton.style.display = "none";
+        credits.style.display = "none";
         camera.position.z = 15;
     })
 
@@ -211,7 +220,8 @@ const clouds2 = new THREE.Mesh(
         //alphaMap: textureLoader.load(clouds2AlphaTex),
         map: textureLoader.load(clouds2Tex),
         transparent: true,
-        side: DoubleSide
+        side: DoubleSide,
+        opacity: 0.5,
     })
 )
 jaranius.add(clouds2)
@@ -221,7 +231,8 @@ const clouds3 = new THREE.Mesh(
         //alphaMap: textureLoader.load(clouds2AlphaTex),
         map: textureLoader.load(clouds2Tex),
         transparent: true,
-        side: DoubleSide
+        side: DoubleSide,
+        opacity: 0.5,
     })
 )
 jaranius.add(clouds3)
@@ -320,13 +331,13 @@ loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/m
 
     function instantiateTag(txt, lat, lng, color, originalColor, size) {
         const textMat = new THREE.MeshBasicMaterial( {
-            color: 0x000000, //color,
+            color: 0x000000,
             transparent: false,
             //opacity: 0.8,
             side: THREE.DoubleSide
         } );
         const boxMat = new THREE.MeshBasicMaterial( {
-            color: color, //0x888888,
+            color: color,
             transparent: true,
             opacity: 0.5,
             side: THREE.DoubleSide
@@ -405,8 +416,31 @@ loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/m
         box.lookAt( boxRotationVector )
         box.position.copy( boxRotationVector )
 
+        //create border
+        /* let path = new THREE.Path();
+        path.moveTo( x, y + roundingFactor );
+        path.lineTo( x, y + height - roundingFactor );
+        path.quadraticCurveTo( x, y + height, x + roundingFactor, y + height );
+        path.lineTo( x + width - roundingFactor, y + height );
+        path.quadraticCurveTo( x + width, y + height, x + width, y + height - roundingFactor );
+        path.lineTo( x + width, y + roundingFactor );
+        path.quadraticCurveTo( x + width, y, x + width - roundingFactor, y );
+        path.lineTo( x + roundingFactor, y );
+        path.quadraticCurveTo( x, y, x, y + roundingFactor );
+        let pathPoints = path.getPoints();
+
+        let borderGeometry = new THREE.BufferGeometry().setFromPoints(pathPoints);
+        let borderMaterial = new THREE.LineBasicMaterial({color:0x000000, linewidth:5});
+        borderGeometry.translate( boxMidx, boxMidy * 0, 0 );
+
+        let border = new THREE.Line(borderGeometry, borderMaterial);
+        border.lookAt( boxRotationVector )
+        border.position.copy( boxRotationVector )
+
+        jaranius.add( border ); */
         jaranius.add( box );
         jaranius.add( tag );
+        
     }
 
     for (let i = 0; i < tagList.length; i++) {
@@ -418,11 +452,16 @@ loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/m
 let pinPositions = []
 //const labelContainerElem = document.querySelector('#labels');
 
-function instantiatePin(txt, lat, lng, color, originalColor, radius) {
+function instantiatePin(txt, lat, lng, color, originalColor, radius, wireframe) {
+    let segments = Math.floor(radius * 750)
+    if (wireframe == true) {
+        segments = Math.floor(radius * 750 / 3)
+    }
     const pin = new THREE.Mesh(
-        new THREE.SphereGeometry(radius, 20, 20),
+        new THREE.SphereGeometry(radius, segments, segments),
         new THREE.MeshBasicMaterial({
             color: color,
+            wireframe: wireframe,
         })
     )
 
@@ -444,12 +483,17 @@ function instantiatePin(txt, lat, lng, color, originalColor, radius) {
 
 let pins = []
 for (let i = 0; i < tagList.length; i++) {
-    let pin = instantiatePin(tagList[i][1], tagList[i][2], tagList[i][3] - 180, tagList[i][4], tagList[i][4], tagList[i][5] / 1500);
+    let hasSlides;
+    console.log(tagList[i][6])
+    if (tagList[i][6] == undefined) {
+        hasSlides = false
+    } else hasSlides = true
+    let pin = instantiatePin(tagList[i][1], tagList[i][2], tagList[i][3] - 180, tagList[i][4], tagList[i][4], tagList[i][5] / 1500, hasSlides);
     pins.push(pin);
 }
 
 //create connections
-let curveThickness = 0.01
+let curveThickness = 0.0001
 let curveRadiusSegments = 3
 let curveMaxAltitude = 0.05
 let curveMinAltitude = 5.01
@@ -462,7 +506,7 @@ for (let i = 0; i < tagList.length; i++) {
                     if (tagList[l][0] == tagConnections[j][k]) {
                         let t1 = convertLatLngtoCartesian(tagList[i][2], tagList[i][3] - 180, curveMinAltitude);
                         let t2 = convertLatLngtoCartesian(tagList[l][2], tagList[l][3] - 180, curveMinAltitude);
-                        const weight = (tagList[i][5] + tagList[l][5]) / 2 / 50;
+                        const weight = (tagList[i][5] + tagList[l][5]) / 2;
                         getCurve(t1, t2, weight);
                     }
                 }
@@ -486,7 +530,7 @@ function getCurve(p1, p2, weight){
     const material = new THREE.MeshBasicMaterial({
         color: 0xffffff,
         transparent: true,
-        opacity: 0.15
+        opacity: 0.25
     });
     const curve = new THREE.Mesh(geometry, material);
     curve.renderOrder = -10
@@ -588,6 +632,16 @@ class Gutt {
         this.lat = lat;
         this.lng = lng;
         this.heading = heading;
+
+        /* this is the stuff that should be used
+        this.position = vector;    use x,y as lng, lat?
+        this.velocity = vector;
+        this.acceleration = vector
+        move() (no need for separate steer)
+        this.position = this.position + this.velocity
+        this.velocity = this.velocity + this.acceleration
+        end of stuff */
+
         
         let scale = 0.0005;
         this.shape = new THREE.Shape();
@@ -604,7 +658,6 @@ class Gutt {
             this.geometry.computeBoundingSphere();
             this.center = this.geometry.boundingSphere.center
             this.shapePosition = this.geometry.position
-            //this.geometry.rotateX(Math.PI/2)
             this.geometry.rotateZ(Math.PI/2)
         this.material = new THREE.MeshLambertMaterial({
             color: 0xdddddd, 
@@ -692,8 +745,12 @@ for (let i = 0; i < 1000; i++) {
 }
 
 //lights
-const ambient = new THREE.AmbientLight(0xffffff, 0.1); //0.01
+const ambient = new THREE.AmbientLight(0xffffff, 0.02); //0.01
 scene.add(ambient);
+
+const spotlight = new THREE.DirectionalLight(0xffffff, 0);
+scene.add(spotlight);
+let spotlightIntensity = 0.3
 
 const jaraniusLight = new THREE.PointLight(0xffffff, 0.5);
 jaraniusLight.position.set(0, 0, 0);
@@ -714,8 +771,19 @@ function hoverPin() {
     }
 }
 
-document.addEventListener("keydown", onDocumentKeyDown, false);
 
+document.addEventListener("keyup", onDocumentKeyUp, false);
+function onDocumentKeyUp(event) {
+    const keyCode = event.which;
+
+    if (keyCode == 76) {
+        if (spotlight.intensity == 0) {
+            spotlight.intensity = spotlightIntensity
+        } else spotlight.intensity = 0
+    }
+}
+
+document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     const keyCode = event.which;
 
@@ -845,6 +913,10 @@ function render(time) {
 
     renderer.render(scene, camera);
 
+    const camPos = camera.position
+    const camRot = camera.rotation
+    spotlight.position.set(camPos.x, camPos.y, camPos.z);
+    spotlight.rotation.set(camRot.x, camRot.y, camRot.z);
     center.rotation.y += -0.00001;
     pivot1.rotation.y += -0.0003;
     pivot2.rotation.y += -0.00003;
@@ -853,11 +925,15 @@ function render(time) {
     clouds2.rotation.y += 0.00005;
     clouds3.rotation.y += 0.0001;
     if (camera.position.z > 15 && start == true) {
-        camera.position.z -= 0.0001 * Math.pow(camera.position.z - 8, 1.35)
-        jaranius.rotation.y += 0.0003;
+        camera.position.z -= 0.0001 * Math.pow(camera.position.z - 10, 1.35)
+        jaranius.rotation.y += 0.0005;
+    }
+    for (let i = 0; i < pins.length; i++) {
+        if (pins[i].pin.material.wireframe == true) {pins[i].pin.rotation.y += 0.002}
     }
   
     controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);
+    controls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;
 
     controls.update();
     
