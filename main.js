@@ -585,8 +585,8 @@ const sunLight = new THREE.PointLight(0xffffff, 1.2, 2000)
 sunLight.position.copy(sunRadiance.position)
 pivot4.add(sunLight)
 
-const textureFlare0 = textureLoader.load( '/img/lensflare0.png' );
-const textureFlare3 = textureLoader.load( '/img/lensflare3.png' );
+const textureFlare0 = textureLoader.load( './img/lensflare0.png' );
+const textureFlare3 = textureLoader.load( './img/lensflare3.png' );
 const lensflare = new Lensflare();
 
 lensflare.addElement( new LensflareElement( textureFlare0, 2560, 0 ) );
