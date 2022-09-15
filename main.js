@@ -28,6 +28,8 @@ import starTexture from "./img/star.png"
 import moonTex from "./img/moon.jpg"
 import moon2Tex from "./img/moon2.png"
 import moon3Tex from "./img/moon3.png"
+import flare0 from "./img/lensflare0.png"
+import flare3 from "./img/lensflare3.png"
 
 const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
 
