@@ -11,8 +11,6 @@ SHORT-TERM DEVELOPMENT
     
     add type of curve (dashed, arrowed)
 
-    add sun in orbit around earth
-        tweak light intensity
     make better clouds (multiple layers? needs specific blending mode?)
     tweak atmosphere (moons and stars being occluded - fixed by transparency)
 

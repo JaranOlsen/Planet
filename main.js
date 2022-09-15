@@ -1,18 +1,21 @@
 import * as THREE from 'three';
 //import * as YUKA from 'yuka';
-import {Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, RGBADepthPacking} from 'three';
+import {Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, RGBADepthPacking, SubtractiveBlending} from 'three';
 import { tagList } from './tagData.js'
 import { imgList } from './imgData.js'
 import { tagConnections } from './tagConnectionData.js'
 import {getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng} from './mathScripts.js'
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
-import { FontLoader } from 'three/addons/loaders/FontLoader.js'; 
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'; 
 
 //    IMPORT SHADERS
 import vertexShader from './shaders/vertex.glsl';
 import fragmentShader from './shaders/fragment.glsl';
 import atmosphereVertexShader from './shaders/atmosphereVertex.glsl';
 import atmosphereFragmentShader from './shaders/atmosphereFragment.glsl';
+import sunVertexShader from './shaders/sunVertex.glsl';
+import sunFragmentShader from './shaders/sunFragment.glsl';
 
 //    IMPORT TEXTURES
 import diffuseTexture from "./img/terrain8k.jpg"
@@ -33,7 +36,7 @@ const canvas = document.querySelector('#c');
 const renderer = new THREE.WebGLRenderer(
     {
         canvas,
-        antialias: true
+        antialias: true,
     });
 
 function resizeRendererToDisplaySize(renderer) {
@@ -175,14 +178,18 @@ scene.add(center);
     const pivot1 = new THREE.Object3D();
     const pivot2 = new THREE.Object3D();
     const pivot3 = new THREE.Object3D();
+    const pivot4 = new THREE.Object3D();
 
     pivot1.rotation.y = - Math.PI / 2.5;
     pivot2.rotation.y = 2 * Math.PI / 16;
     pivot3.rotation.y = 2 * Math.PI / 2;
+    pivot4.rotation.y = 5 * Math.PI / 3;
+    pivot4.rotation.x = -0.9;
 
     center.add(pivot1);
     center.add(pivot2);
     center.add(pivot3);
+    center.add(pivot4);
 
 //create Jaranius
 const textureLoader = new THREE.TextureLoader()
@@ -258,6 +265,7 @@ const atmosphere = new THREE.Mesh(
         blending: THREE.AdditiveBlending,
         side: THREE.BackSide,
         transparent: true,
+        depthWrite: false,
     })
 )
 atmosphere.position.set(0, 0, 0)
@@ -449,8 +457,9 @@ loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/m
 
 //create pins
 let pinPositions = []
-let pinLPositions = []
-let pinRPositions = []
+/* let pinLPositions = []
+let pinRPositions = [] */
+
 //const labelContainerElem = document.querySelector('#labels');
 
 function instantiatePin(txt, lat, lng, color, originalColor, radius, wireframe) {
@@ -559,17 +568,34 @@ function getCurve(p1, p2, weight){
   }
 
 //create sun
-const sunGeo = new THREE.SphereGeometry(15, 50, 50)
-const sunMat = new THREE.MeshBasicMaterial({
-    color: 0xffffff,
+const sunRadianceGeo = new THREE.SphereGeometry(25, 50, 50)
+const sunRadianceMat = new THREE.ShaderMaterial({
+    vertexShader: sunVertexShader,
+    fragmentShader: sunFragmentShader,
+    blending: AdditiveBlending,
+    transparent: true,
+    side: BackSide,
+    lights: false,
 })
-const sun = new THREE.Mesh(sunGeo, sunMat)
-sun.position.set(-400, 200, 200)
-scene.add(sun)
+const sunRadiance = new THREE.Mesh(sunRadianceGeo, sunRadianceMat)
+sunRadiance.position.set(0, 0, 490)//(-400, 200, 200)
+pivot4.add(sunRadiance)
 
-const sunLight = new THREE.PointLight(0xffffff, 1.5)
-sunLight.position.copy(sun.position)
-sun.add(sunLight)
+const sunLight = new THREE.PointLight(0xffffff, 1.2, 2000)
+sunLight.position.copy(sunRadiance.position)
+pivot4.add(sunLight)
+
+const textureFlare0 = textureLoader.load( '/img/lensflare0.png' );
+const textureFlare3 = textureLoader.load( '/img/lensflare3.png' );
+const lensflare = new Lensflare();
+
+lensflare.addElement( new LensflareElement( textureFlare0, 2560, 0 ) );
+lensflare.addElement( new LensflareElement( textureFlare3, 60, 0.6 ) );
+lensflare.addElement( new LensflareElement( textureFlare3, 70, 0.7 ) );
+lensflare.addElement( new LensflareElement( textureFlare3, 120, 0.9 ) );
+lensflare.addElement( new LensflareElement( textureFlare3, 70, 1 ) );
+
+sunLight.add( lensflare );
 
 //create moons
 class Moon {
@@ -604,7 +630,6 @@ for (let i = 0; i < moons.length; i++) {
 
     const moonlight = new THREE.PointLight(0xffffff, moons[i].intensity);
     moonlight.position.set(moons[i].z, 0, 0);
-    moonlight.castShadow = true;
     mesh.add(moonlight);
 }
 
@@ -955,6 +980,7 @@ function render(time) {
     pivot1.rotation.y += -0.0003;
     pivot2.rotation.y += -0.00003;
     pivot3.rotation.y += -0.000003;
+    pivot4.rotation.y += 0.0001;
     clouds1.rotation.y += 0.00001;
     clouds2.rotation.y += 0.00005;
     clouds3.rotation.y += 0.0001;
