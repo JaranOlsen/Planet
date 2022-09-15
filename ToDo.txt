@@ -2,12 +2,17 @@ MAKE USABLE
     make improvements to slidecarousel
         interactivity
 
-
 SHORT-TERM DEVELOPMENT
-    add nuances to tag colors
+    add LP static to intro 
+    
+    make color palette
+        make colorblind-friendly palette option
+        add nuances to tag colors
+    
     add type of curve (dashed, arrowed)
 
     add sun in orbit around earth
+        tweak light intensity
     make better clouds (multiple layers? needs specific blending mode?)
     tweak atmosphere (moons and stars being occluded - fixed by transparency)
 

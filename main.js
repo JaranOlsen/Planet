@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 //import * as YUKA from 'yuka';
-import {Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3} from 'three';
+import {Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, RGBADepthPacking} from 'three';
 import { tagList } from './tagData.js'
 import { imgList } from './imgData.js'
 import { tagConnections } from './tagConnectionData.js'
@@ -57,7 +57,7 @@ camera.position.z = 500
 const controls = new OrbitControls(camera, canvas);
 controls.enablePan = false
 controls.maxDistance = 1000
-controls.minDistance = 5.5
+controls.minDistance = 5.2
 controls.zoomSpeed = 0.3
 controls.rotateSpeed = 0.3
 controls.target.set(0, 0, 0);
@@ -115,7 +115,6 @@ buttons.forEach(button => {
     button.addEventListener("click", () => {
         const carousel = document.querySelector('.carousel')
         if (button.dataset.carouselButton === "exit") {
-            console.log("trying to close", activeCarousel);
             activeCarousel.style.display = "none"
         } else {
             const offset = button.dataset.carouselButton === "next" ? 1 : -1
@@ -177,9 +176,9 @@ scene.add(center);
     const pivot2 = new THREE.Object3D();
     const pivot3 = new THREE.Object3D();
 
-    pivot1.rotation.y = 0;
-    pivot2.rotation.y = 0; //2 * Math.PI / 3;
-    pivot3.rotation.y = 0; //4 * Math.PI / 3;
+    pivot1.rotation.y = - Math.PI / 2.5;
+    pivot2.rotation.y = 2 * Math.PI / 16;
+    pivot3.rotation.y = 2 * Math.PI / 2;
 
     center.add(pivot1);
     center.add(pivot2);
@@ -339,7 +338,7 @@ loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/m
         const boxMat = new THREE.MeshBasicMaterial( {
             color: color,
             transparent: true,
-            opacity: 0.5,
+            opacity: 0.65, //0.5
             side: THREE.DoubleSide
         } );
 
@@ -450,6 +449,8 @@ loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/m
 
 //create pins
 let pinPositions = []
+let pinLPositions = []
+let pinRPositions = []
 //const labelContainerElem = document.querySelector('#labels');
 
 function instantiatePin(txt, lat, lng, color, originalColor, radius, wireframe) {
@@ -464,6 +465,18 @@ function instantiatePin(txt, lat, lng, color, originalColor, radius, wireframe) 
             wireframe: wireframe,
         })
     )
+    const pinL = new THREE.Mesh(
+        new THREE.SphereGeometry(radius / 2, segments, segments),
+        new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+        })
+    )
+    const pinR = new THREE.Mesh(
+        new THREE.SphereGeometry(radius / 2, segments, segments),
+        new THREE.MeshBasicMaterial({
+            color: 0x000000,
+        })
+    )
 
     originalColor = originalColor;
 
@@ -474,6 +487,15 @@ function instantiatePin(txt, lat, lng, color, originalColor, radius, wireframe) 
     const pinSphereRadius = 5.01
     let pos = convertLatLngtoCartesian(lat, lng, pinSphereRadius);
     pin.position.set(pos.x, pos.y, pos.z);
+    
+    /* let posL = convertLatLngtoCartesian(lat, lng - ((radius * 20) * (1 + Math.pow(Math.abs(lat - 90) / 58, 4))) , pinSphereRadius);
+    pinL.position.set(posL.x, posL.y, posL.z);
+    jaranius.add(pinL)
+    pinLPositions.push(pinL);
+    let posR = convertLatLngtoCartesian(lat, lng + ((radius * 20) * (1 + Math.pow(Math.abs(lat - 90) / 58, 4))) , pinSphereRadius);
+    pinR.position.set(posR.x, posR.y, posR.z);
+    jaranius.add(pinR)
+    pinRPositions.push(pinR); */
 
     jaranius.add(pin);
     pinPositions.push(pin);
@@ -484,7 +506,6 @@ function instantiatePin(txt, lat, lng, color, originalColor, radius, wireframe) 
 let pins = []
 for (let i = 0; i < tagList.length; i++) {
     let hasSlides;
-    console.log(tagList[i][6])
     if (tagList[i][6] == undefined) {
         hasSlides = false
     } else hasSlides = true
@@ -495,7 +516,7 @@ for (let i = 0; i < tagList.length; i++) {
 //create connections
 let curveThickness = 0.0001
 let curveRadiusSegments = 3
-let curveMaxAltitude = 0.05
+let curveMaxAltitude = 0.03
 let curveMinAltitude = 5.01
 
 for (let i = 0; i < tagList.length; i++) {
@@ -537,6 +558,19 @@ function getCurve(p1, p2, weight){
     jaranius.add(curve);
   }
 
+//create sun
+const sunGeo = new THREE.SphereGeometry(15, 50, 50)
+const sunMat = new THREE.MeshBasicMaterial({
+    color: 0xffffff,
+})
+const sun = new THREE.Mesh(sunGeo, sunMat)
+sun.position.set(-400, 200, 200)
+scene.add(sun)
+
+const sunLight = new THREE.PointLight(0xffffff, 1.5)
+sunLight.position.copy(sun.position)
+sun.add(sunLight)
+
 //create moons
 class Moon {
     constructor(radius, texture, z, rotation, pivot, intensity) {
@@ -549,8 +583,8 @@ class Moon {
     }
 }
 
-let moon1 = new Moon(1.5, moonTex, 110, -0.0005, pivot1, 0.4);
-let moon2 = new Moon(2.5, moon2Tex, 190, -0.0003, pivot2, 0.1);
+let moon1 = new Moon(1.5, moonTex, 110, -0.0005, pivot1, 0.1);
+let moon2 = new Moon(2.5, moon2Tex, 190, -0.0003, pivot2, 0.05);
 let moon3 = new Moon(1, moon3Tex, 250, -0.0001, pivot3, 0.005);
 let moons = [moon1,moon2,moon3];
 
@@ -750,7 +784,7 @@ scene.add(ambient);
 
 const spotlight = new THREE.DirectionalLight(0xffffff, 0);
 scene.add(spotlight);
-let spotlightIntensity = 0.3
+let spotlightIntensity = 0.5
 
 const jaraniusLight = new THREE.PointLight(0xffffff, 0.5);
 jaraniusLight.position.set(0, 0, 0);
@@ -929,7 +963,10 @@ function render(time) {
         jaranius.rotation.y += 0.0005;
     }
     for (let i = 0; i < pins.length; i++) {
-        if (pins[i].pin.material.wireframe == true) {pins[i].pin.rotation.y += 0.002}
+        if (pins[i].pin.material.wireframe == true) {
+            pins[i].pin.rotation.y += 0.002
+            pins[i].pin.rotation.x += 0.001
+        }
     }
   
     controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);

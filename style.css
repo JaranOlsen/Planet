@@ -107,6 +107,9 @@ html, body {
   height: 90vh;
   object-fit: fill;
 }
+.verticalImg {
+  object-fit: contain !important;
+}
 .slide > iframe {
   display: block;
   border-color: rgba(0, 0, 255, 0.3);
