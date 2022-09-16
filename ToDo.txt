@@ -2,6 +2,8 @@ MAKE USABLE
     make improvements to slidecarousel
         interactivity
 
+    fix sun flare vite ()
+
 SHORT-TERM DEVELOPMENT
     add LP static to intro 
     
