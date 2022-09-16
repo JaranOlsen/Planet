@@ -28,8 +28,8 @@ import starTexture from "./img/star.png"
 import moonTex from "./img/moon.jpg"
 import moon2Tex from "./img/moon2.png"
 import moon3Tex from "./img/moon3.png"
-import flare0 from "./img/lensflare0.png"
-import flare3 from "./img/lensflare3.png"
+/* import flare0 from "./img/lensflare0.png"
+import flare3 from "./img/lensflare3.png" */
 
 const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
 
@@ -587,8 +587,8 @@ const sunLight = new THREE.PointLight(0xffffff, 1.2, 2000)
 sunLight.position.copy(sunRadiance.position)
 pivot4.add(sunLight)
 
-const textureFlare0 = textureLoader.load( './img/lensflare0.png' );
-const textureFlare3 = textureLoader.load( './img/lensflare3.png' );
+const textureFlare0 = textureLoader.load(require( './img/lensflare0.png' ));
+const textureFlare3 = textureLoader.load(require( './img/lensflare3.png' ));
 const lensflare = new Lensflare();
 
 lensflare.addElement( new LensflareElement( textureFlare0, 2560, 0 ) );
