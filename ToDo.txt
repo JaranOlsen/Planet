@@ -1,4 +1,8 @@
 MAKE USABLE
+    make smaller textures
+        webP?
+        options at start?
+
     make improvements to slidecarousel
         interactivity
 
@@ -7,6 +11,8 @@ MAKE USABLE
 
 SHORT-TERM DEVELOPMENT
     add VR support
+
+    fix assets so i won't have to upload (fonts and flares)
 
     add LP static to intro 
     

@@ -9,6 +9,7 @@ import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'; 
 import { VRButton } from 'three/addons/webxr/VRButton.js';
+import { GUI } from 'dat.gui'
 
 //    IMPORT SHADERS
 import vertexShader from './shaders/vertex.glsl';
@@ -19,8 +20,8 @@ import sunVertexShader from './shaders/sunVertex.glsl';
 import sunFragmentShader from './shaders/sunFragment.glsl';
 
 //    IMPORT TEXTURES
-import diffuseTexture from "./img/terrain8k.jpg"
-import normalTexture from "./img/normal8k.jpg"
+import diffuseTexture from "./img/terrain4k.jpg"
+import normalTexture from "./img/normal2k.jpg"
 import roughnessTex from "./img/roughness2k.jpg"
 import clouds1Tex from "./img/clouds1.png"
 import clouds1AlphaTex from "./img/clouds1alpha.jpg"
@@ -41,8 +42,6 @@ const renderer = new THREE.WebGLRenderer(
         canvas,
         antialias: true,
     });
-
-    renderer.xr.enabled = true;
 
 function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
@@ -81,6 +80,7 @@ let selectedPin = null;
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 
 //enable VR
+renderer.xr.enabled = true;
 document.body.appendChild( VRButton.createButton( renderer ) );
 
 //start intro
@@ -692,6 +692,18 @@ arriveBehavior.weight = 0
  */
 //end YUKA
 
+
+
+
+
+
+
+
+
+
+
+
+
 //create Gutta
 class Gutt {
     constructor(lat, lng, heading) {
@@ -699,7 +711,7 @@ class Gutt {
         this.lng = lng;
         this.heading = heading;
     
-        let scale = 0.005;
+        let scale = 0.0005;
         this.shape = new THREE.Shape();
 
         this.shape.moveTo(scale * 5,scale * 5 );
@@ -728,7 +740,6 @@ class Gutt {
 
         this.mesh.position.set(this.pos.x, this.pos.y, this.pos.z)
         this.mesh.lookAt(middleOfPlanet) */
-
         //-----------------------------------
         this.position = new THREE.Vector2(lat, lng)
         this.velocity = new THREE.Vector2(getRandomNum(-1, 1), getRandomNum(-1, 1)).setLength(0.01)
@@ -738,64 +749,38 @@ class Gutt {
   
         this.mesh.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
 
-        this.mat = new THREE.LineBasicMaterial({color: 0xff0000})
+        //Velocity vector helper
+        /* this.mat = new THREE.LineBasicMaterial({color: 0xff0000})
         this.points = []
             this.points.push( this.cartesianPosition.x );
             this.points.push( this.cartesianHeading );
         this.geo = new THREE.BufferGeometry().setFromPoints( this.points );
         this.velocityVector = new THREE.Line(this.geo, this.mat);
         this.velocityVector.geometry.attributes.position.needsUpdate = true;
-        scene.add(this.velocityVector)
+        scene.add(this.velocityVector) */
 
         this.wander = new THREE.Vector2(0, 0)
         this.alignment = new THREE.Vector2(0, 0)
-        this.alignmentPerception = 0.1
+        // this.alignmentPerception = 0.1
         this.cohesion = new THREE.Vector2(0, 0)
-        this.cohesionPerception = 0.1
+        // this.cohesionPerception = 0.1
         this.separation = new THREE.Vector2(0, 0)
-        this.separationPerception = 0.2
+        // this.separationPerception = 0.2
         this.maxForce = 0.1
         this.maxSpeed = 0.1
         this.velocity.setLength(this.maxSpeed) 
-        
-        //YUKA
-        // this.mesh.matrixAutoUpdate = false
-        //end YUKA
 
         scene.add(this.mesh)
-
-        //YUKA
-        /* this.vehicle = new YUKA.Vehicle()
-        this.vehicle.boundingRadius = this.geometry.boundingSphere.radius
-        this.vehicle.setRenderComponent(this.mesh, sync)
-        this.pos = convertLatLngtoCartesian(this.lat, this.lng, 5.5)
-        this.vehicle.position.set(this.pos.x, this.pos.y, this.pos.z)
-        this.vehicle.rotation.fromEuler(getRandomNum(0, Math.PI * 2), getRandomNum(0, Math.PI * 2), getRandomNum(0, Math.PI * 2))
-
-        this.vehicle.maxSpeed = 0.1
-       
-        this.vehicle.updateNeighborhood = true
-        this.vehicle.neighborhoodRadius = 0.1
-        this.vehicle.steering.add(wanderBehavior)
-        this.vehicle.steering.add(alignmentBehavior)
-        this.vehicle.steering.add(cohesionBehavior)
-        this.vehicle.steering.add(separationBehavior)
-        this.vehicle.steering.add(arriveBehavior)
-        this.vehicle.steering.add(obstacleAvoidanceBehavior)
-        
-        for (let i = 0; i < target.length; i++) {
-            this.fleeBehavior = new YUKA.FleeBehavior(target[i], 4)
-            this.fleeBehavior.weight = 0.1
-            this.vehicle.steering.add(this.fleeBehavior)
-        }
-        
-        entityManager.add(this.vehicle) */
-        //END YUKA
     }
 
     move() {
         this.acceleration.set(0, 0)
-        this.acceleration.add( this.wander )
+        this.alignment.multiplyScalar(parameters.alignment)
+        this.cohesion.multiplyScalar(parameters.cohesion)
+        this.separation.multiplyScalar(parameters.separation)
+
+        
+        //this.acceleration.add( this.wander )
         this.acceleration.add( this.alignment )
         this.acceleration.add( this.cohesion )
         this.acceleration.add( this.separation )
@@ -827,10 +812,11 @@ class Gutt {
         this.mesh.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
         this.mesh.lookAt(middleOfPlanet)
 
-        this.points.length = 0
+        //velocity vector
+        /* this.points.length = 0
         this.points.push( this.cartesianPosition );
         this.points.push( this.cartesianHeading );
-        this.velocityVector.geometry.setFromPoints(this.points)
+        this.velocityVector.geometry.setFromPoints(this.points) */
     }
 
     calculateWander() {
@@ -840,7 +826,7 @@ class Gutt {
     calculateAlignment() {
         let counter = 0
         for (let i = 0; i < gutta.length; i++) {
-            if (gutta[i] != this && this.mesh.position.distanceTo(gutta[i].mesh.position) < this.alignmentPerception) {
+            if (gutta[i] != this && this.mesh.position.distanceTo(gutta[i].mesh.position) < parameters.alignment_perception_distance) {
                 this.alignment.add(gutta[i].velocity)
                 counter += 1
             }
@@ -855,7 +841,7 @@ class Gutt {
     calculateCohesion() {
         let counter = 0
         for (let i = 0; i < gutta.length; i++) {
-            if (gutta[i] != this && this.mesh.position.distanceTo(gutta[i].mesh.position) < this.cohesionPerception) {
+            if (gutta[i] != this && this.mesh.position.distanceTo(gutta[i].mesh.position) < parameters.cohesion_perception_distance) {
                 this.cohesion.add(gutta[i].position)
                 counter += 1
             }
@@ -870,10 +856,9 @@ class Gutt {
     calculateSeparation() {
         let counter = 0
         for (let i = 0; i < gutta.length; i++) {
-            if (gutta[i] != this && this.mesh.position.distanceTo(gutta[i].mesh.position) < this.separationPerception) {
+            if (gutta[i] != this && this.mesh.position.distanceTo(gutta[i].mesh.position) < parameters.separation_perception_distance) {
                 let difference = new THREE.Vector2(this.position.x - gutta[i].position.x, this.position.y - gutta[i].position.y)
-                //difference.divide(this.mesh.position.distanceTo(gutta[i].mesh.position))
-                //difference.set(difference.x * -1, difference.y * -1)
+                difference.divideScalar(this.mesh.position.distanceTo(gutta[i].mesh.position))
                 this.separation.add(difference)
                 counter += 1
             }
@@ -883,44 +868,52 @@ class Gutt {
         }
         this.separation.clampLength(-this.maxForce, this.maxForce)
     }
-
-
-
-    /* move() {
-        this.lat -= Math.cos(this.heading) / 20
-        this.lng += Math.sin(this.heading) / 20
-        if (this.lat < 0) {this.lat = Math.abs(this.lat)}
-        if (this.lat > 180) {this.lat = 180 - (this.lat - 180)}
-        if (this.lng < 0) {this.lng = 360 + this.lng}
-        if (this.lng > 360) {this.lng = this.lng - 360}
-        this.pos = convertLatLngtoCartesian(this.lat, this.lng, 5.2);
-        this.mesh.position.set(this.pos.x, this.pos.y, this.pos.z);
-    } */
-
-    /* steer() {
-        if (getRandomNum(0, 1) > 0.9) {
-            this.heading += (Math.PI / 20)
-        }
-        if (getRandomNum(0, 1) > 0.9) {
-            this.heading -= (Math.PI / 20)
-        }
-        if (this.lat < 10) {
-            this.heading = getRandomNum(4 * Math.PI / 3, 5 * Math.PI / 3)
-        }
-        if (this.lat > 170) {
-            this.heading = getRandomNum(Math.PI / 3, 2 * Math.PI / 3)
-        }
-        this.mesh.lookAt(0, 0, 0)
-        this.mesh.rotateZ(this.heading - Math.PI / 2)
-    } */
 }
 
 let gutta = [];
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 300; i++) {
     let lat = getRandomBell(10, 170, 5)
     let lng = getRandomInt(0, 359)
     gutta.push(new Gutt(lat, lng))
 }
+
+//Dat.GUI
+const gui = new GUI()
+let parameters = {
+    alignment: 0,
+    alignment_perception_distance: 0,
+    cohesion: 0,
+    cohesion_perception_distance: 0,
+    separation: 0,
+    separation_perception_distance: 0
+}
+
+const parameterFolder = gui.addFolder('parameters')
+parameterFolder.add(parameters, 'alignment', 0, 100)
+parameterFolder.add(parameters, 'alignment_perception_distance', 0, 5, 0.01)
+parameterFolder.add(parameters, 'cohesion', 0, 100)
+parameterFolder.add(parameters, 'cohesion_perception_distance', 0, 5, 0.01)
+parameterFolder.add(parameters, 'separation', 0, 100)
+parameterFolder.add(parameters, 'separation_perception_distance', 0, 5, 0.01)
+parameterFolder.open()
+/* const guttaFolder = gui.addFolder('Gutta')
+guttaFolder.add(numberOfGutta, 'Number of gutta', 1, 500)
+guttaFolder.open() */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //lights
 const ambient = new THREE.AmbientLight(0xffffff, 0.02); //0.01
