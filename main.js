@@ -127,7 +127,7 @@ scene.add( controllerGrip );
 
 
 let dolly = new THREE.Object3D();
-dolly.position.z = 0;
+dolly.position.z = 15;
 dolly.add(camera);
 scene.add(dolly)
 
@@ -904,13 +904,17 @@ class Gutt {
     
         if (this.position.x < 0) {
             this.position.x = Math.abs(this.position.x)
+            if (this.position.y < 180) {
             this.position.y += 180
+            } else this.position.y -= 180
             this.velocity.x *= -1
             this.velocity.y *= -1
         }
         if (this.position.x > 180) {
             this.position.x = 180 - (this.position.x - 180)
-            this.position.y -= 180
+            if (this.position.y < 180) {
+                this.position.y += 180
+            } else this.position.y -= 180
             this.velocity.x *= -1
             this.velocity.y *= -1
         }
@@ -1127,6 +1131,7 @@ function render(time) {
 
     //VR
     const dt = clock.getDelta();
+    if (controller ) handleController( controller, dt );
 
     if (resizeRendererToDisplaySize(renderer)) {
         const canvas = renderer.domElement;
