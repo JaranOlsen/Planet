@@ -55,6 +55,8 @@ function resizeRendererToDisplaySize(renderer) {
     return needResize;
 }
 
+let clock = new THREE.Clock();
+
 const fov = 50;
 const aspect = 2;  // the canvas default
 const near = 0.1;
