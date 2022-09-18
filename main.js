@@ -125,7 +125,7 @@ scene.add( controllerGrip );
 
 
 let dolly = new THREE.Object3D();
-dolly.position.z = 15;
+dolly.position.z = 0;
 dolly.add(camera);
 scene.add(dolly)
 
@@ -1122,6 +1122,9 @@ function animate() {
 
 function render(time) {
     time *= 0.001;
+
+    //VR
+    const dt = clock.getDelta();
 
     if (resizeRendererToDisplaySize(renderer)) {
         const canvas = renderer.domElement;
