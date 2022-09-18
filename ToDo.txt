@@ -3,8 +3,11 @@ MAKE USABLE
         interactivity
 
     fix sun flare vite ()
+        require()?
 
 SHORT-TERM DEVELOPMENT
+    add VR support
+
     add LP static to intro 
     
     make color palette

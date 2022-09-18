@@ -1009,14 +1009,6 @@ fpsContainer.appendChild(fpsDisplay);
 
 refreshLoop();
 
-
-function animate() {
-
-    renderer.setAnimationLoop( render );
-
-}
-
-
 function render(time) {
     time *= 0.001;
 
@@ -1132,7 +1124,9 @@ function render(time) {
     controls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;
 
     controls.update();
+    
+    requestAnimationFrame(render);
 }
 
-animate()
+requestAnimationFrame(render);
 
