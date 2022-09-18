@@ -9,6 +9,7 @@ import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'; 
 import { VRButton } from 'three/addons/webxr/VRButton.js';
+import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
 import { GUI } from 'dat.gui'
 
 //    IMPORT SHADERS
@@ -82,6 +83,56 @@ const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 //enable VR
 renderer.xr.enabled = true;
 document.body.appendChild( VRButton.createButton( renderer ) );
+
+
+
+function onSelectStart() {
+            
+    userData.selectPressed = true;
+}
+
+function onSelectEnd() {
+
+    userData.selectPressed = false;
+    
+}
+
+let controller = renderer.xr.getController( 0 );
+controller.addEventListener( 'selectstart', onSelectStart );
+controller.addEventListener( 'selectend', onSelectEnd );
+controller.addEventListener( 'connected', function ( event ) {
+
+    const mesh = self.buildController.call(self, event.data );
+    mesh.scale.z = 0;
+    add( mesh );
+
+} );
+controller.addEventListener( 'disconnected', function () {
+
+    remove( children[ 0 ] );
+    self.controller = null;
+    self.controllerGrip = null;
+
+} );
+scene.add( controller );
+
+const controllerModelFactory = new XRControllerModelFactory();
+
+let controllerGrip = renderer.xr.getControllerGrip( 0 );
+controllerGrip.add( controllerModelFactory.createControllerModel( controllerGrip ) );
+scene.add( controllerGrip );
+
+
+
+let dolly = new THREE.Object3D();
+dolly.position.z = 20;
+dolly.add(camera);
+scene.add(dolly)
+
+let dummyCam = new THREE.Object3D();
+camera.add(dummyCam)
+
+
 
 //start intro
 let start = false
