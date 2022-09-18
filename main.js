@@ -127,7 +127,7 @@ scene.add( controllerGrip );
 
 
 let dolly = new THREE.Object3D();
-dolly.position.z = 15;
+dolly.position.z = 0;
 dolly.add(camera);
 scene.add(dolly)
 
@@ -252,19 +252,6 @@ buttons.forEach(button => {
         }
     })
 })
-
-//create CSS elements
-/*     const slideContainer = document.querySelector('.slides');
-    slideContainer.style.display = 'none'
-    const slide = document.createElement('div');
-    slide.style.display = 'none';
-    slide.textContent = "Idealism";
-    slide.style.color = 0xffffff;
-    slideContainer.appendChild(slide);
-    const img = document.createElement("img");
-    img.src = "./img/idealism.png";
-    slideContainer.appendChild(img); */
-
 
 //create starfield
 const starGeometry = new THREE.BufferGeometry()
@@ -542,31 +529,8 @@ loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/m
         box.lookAt( boxRotationVector )
         box.position.copy( boxRotationVector )
 
-        //create border
-        /* let path = new THREE.Path();
-        path.moveTo( x, y + roundingFactor );
-        path.lineTo( x, y + height - roundingFactor );
-        path.quadraticCurveTo( x, y + height, x + roundingFactor, y + height );
-        path.lineTo( x + width - roundingFactor, y + height );
-        path.quadraticCurveTo( x + width, y + height, x + width, y + height - roundingFactor );
-        path.lineTo( x + width, y + roundingFactor );
-        path.quadraticCurveTo( x + width, y, x + width - roundingFactor, y );
-        path.lineTo( x + roundingFactor, y );
-        path.quadraticCurveTo( x, y, x, y + roundingFactor );
-        let pathPoints = path.getPoints();
-
-        let borderGeometry = new THREE.BufferGeometry().setFromPoints(pathPoints);
-        let borderMaterial = new THREE.LineBasicMaterial({color:0x000000, linewidth:5});
-        borderGeometry.translate( boxMidx, boxMidy * 0, 0 );
-
-        let border = new THREE.Line(borderGeometry, borderMaterial);
-        border.lookAt( boxRotationVector )
-        border.position.copy( boxRotationVector )
-
-        jaranius.add( border ); */
         jaranius.add( box );
         jaranius.add( tag );
-        
     }
 
     for (let i = 0; i < tagList.length; i++) {
@@ -576,10 +540,6 @@ loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/m
 
 //create pins
 let pinPositions = []
-/* let pinLPositions = []
-let pinRPositions = [] */
-
-//const labelContainerElem = document.querySelector('#labels');
 
 function instantiatePin(txt, lat, lng, color, originalColor, radius, wireframe) {
     let segments = Math.floor(radius * 750)
@@ -593,37 +553,12 @@ function instantiatePin(txt, lat, lng, color, originalColor, radius, wireframe) 
             wireframe: wireframe,
         })
     )
-    const pinL = new THREE.Mesh(
-        new THREE.SphereGeometry(radius / 2, segments, segments),
-        new THREE.MeshBasicMaterial({
-            color: 0xffffff,
-        })
-    )
-    const pinR = new THREE.Mesh(
-        new THREE.SphereGeometry(radius / 2, segments, segments),
-        new THREE.MeshBasicMaterial({
-            color: 0x000000,
-        })
-    )
 
     originalColor = originalColor;
-
-/*     const elem = document.createElement('div');
-    elem.textContent = txt;
-    labelContainerElem.appendChild(elem); */
     
     const pinSphereRadius = 5.01
     let pos = convertLatLngtoCartesian(lat, lng, pinSphereRadius);
     pin.position.set(pos.x, pos.y, pos.z);
-    
-    /* let posL = convertLatLngtoCartesian(lat, lng - ((radius * 20) * (1 + Math.pow(Math.abs(lat - 90) / 58, 4))) , pinSphereRadius);
-    pinL.position.set(posL.x, posL.y, posL.z);
-    jaranius.add(pinL)
-    pinLPositions.push(pinL);
-    let posR = convertLatLngtoCartesian(lat, lng + ((radius * 20) * (1 + Math.pow(Math.abs(lat - 90) / 58, 4))) , pinSphereRadius);
-    pinR.position.set(posR.x, posR.y, posR.z);
-    jaranius.add(pinR)
-    pinRPositions.push(pinR); */
 
     jaranius.add(pin);
     pinPositions.push(pin);
@@ -752,70 +687,6 @@ for (let i = 0; i < moons.length; i++) {
     mesh.add(moonlight);
 }
 
-//YUKA
-/* const entityManager = new YUKA.EntityManager()
-const clock = new YUKA.Time()
-
-function sync(entity, RenderComponent) {
-    RenderComponent.matrix.copy(entity.worldMatrix)
-}
-
-const target = []
-
-const targetGeo = new THREE.SphereGeometry(0.001, 5, 5);
-const targetMat = new THREE.MeshBasicMaterial ({color: 0xff0000, transparent: true, opacity: 0});
-for (let lt = 20; lt <= 160; lt += 10) {
-    for (let lg = 0; lg < 360; lg += 15) {
-        let pos = convertLatLngtoCartesian(lt, lg, 10);
-        let vec = new YUKA.Vector3(pos.x, pos.y, pos.z)
-        const targetMesh = new THREE.Mesh(targetGeo, targetMat);
-        targetMesh.position.set(pos.x, pos.y, pos.z);
-        scene.add(targetMesh);
-        target.push(vec)
-    }
-}
-
-const jaraniusObstacle = new YUKA.GameEntity()
-jaraniusObstacle.position.copy (jaranius.position)
-entityManager.add(jaraniusObstacle)
-jaraniusObstacle.boundingRadius = jaraniusGeometry.boundingSphere.radius;
-
-const obstacles = []
-obstacles.push(jaraniusObstacle)
-const obstacleAvoidanceBehavior = new YUKA.ObstacleAvoidanceBehavior (obstacles)
-obstacleAvoidanceBehavior.weight = 1
-
-const alignmentBehavior = new YUKA.AlignmentBehavior()
-alignmentBehavior.weight = 0.1
-
-const cohesionBehavior = new YUKA.CohesionBehavior()
-cohesionBehavior.weight = 0.3
-
-const separationBehavior = new YUKA.SeparationBehavior()
-separationBehavior.weight = 0.1
-
-const wanderBehavior = new YUKA.WanderBehavior(1, 0.5, 2)
-wanderBehavior.weight = 0.2
-
-let feedingGround = new YUKA.Vector3 
-feedingGround = convertLatLngtoCartesian (90, 1, 5.1)
-const arriveBehavior = new YUKA.ArriveBehavior(feedingGround)
-arriveBehavior.weight = 0
- */
-//end YUKA
-
-
-
-
-
-
-
-
-
-
-
-
-
 //create Gutta
 class Gutt {
     constructor(lat, lng, heading) {
@@ -823,7 +694,7 @@ class Gutt {
         this.lng = lng;
         this.heading = heading;
     
-        let scale = 0.0005;
+        let scale = 0.0003;
         this.shape = new THREE.Shape();
 
         this.shape.moveTo(scale * 5,scale * 5 );
@@ -840,7 +711,7 @@ class Gutt {
             this.shapePosition = this.geometry.position
             this.geometry.rotateZ(Math.PI/2)
         this.material = new THREE.MeshBasicMaterial({
-            color: 0xdddddd, 
+            color: 0xbbddcc, 
             side: DoubleSide,
         })
         this.mesh = new THREE.Mesh(this.geometry, this.material)
@@ -878,7 +749,8 @@ class Gutt {
         // this.cohesionPerception = 0.1
         this.separation = new THREE.Vector2(0, 0)
         // this.separationPerception = 0.2
-        this.maxForce = 0.1
+        this.avoidance = new THREE.Vector2(0, 0)
+        //this.maxForce = 0.1
         this.maxSpeed = 0.1
         this.velocity.setLength(this.maxSpeed) 
 
@@ -890,12 +762,17 @@ class Gutt {
         this.alignment.multiplyScalar(parameters.alignment)
         this.cohesion.multiplyScalar(parameters.cohesion)
         this.separation.multiplyScalar(parameters.separation)
-
+        //this.avoidance.multiplyScalar(parameters.avoidance)
         
-        //this.acceleration.add( this.wander )
+
+        /* if (this == gutta[0]) {
+            console.log(this.wander, this.alignment, this.cohesion, this.separation, this.avoidance, this.position.x)
+        } */
+        this.acceleration.add( this.wander )
         this.acceleration.add( this.alignment )
         this.acceleration.add( this.cohesion )
         this.acceleration.add( this.separation )
+        this.acceleration.add( this.avoidance )
 
         this.position.add(this.velocity)
         this.velocity.add(this.acceleration)
@@ -928,7 +805,7 @@ class Gutt {
         this.mesh.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
         this.mesh.lookAt(middleOfPlanet)
 
-        //velocity vector
+        //velocity vector helper
         /* this.points.length = 0
         this.points.push( this.cartesianPosition );
         this.points.push( this.cartesianHeading );
@@ -941,6 +818,7 @@ class Gutt {
 
     calculateAlignment() {
         let counter = 0
+        this.alignment.set(0, 0)
         for (let i = 0; i < gutta.length; i++) {
             if (gutta[i] != this && this.mesh.position.distanceTo(gutta[i].mesh.position) < parameters.alignment_perception_distance) {
                 this.alignment.add(gutta[i].velocity)
@@ -949,13 +827,14 @@ class Gutt {
         }
         if (counter > 0 ) {
             this.alignment.set(this.alignment.x / counter, this.alignment.y / counter)
+            this.alignment.sub(this.velocity)
+            this.alignment.clampLength(-parameters.max_force, parameters.max_force)
         }
-        this.alignment.sub(this.velocity)
-        this.alignment.clampLength(-this.maxForce, this.maxForce)
     }
 
     calculateCohesion() {
         let counter = 0
+        this.cohesion.set(0, 0)
         for (let i = 0; i < gutta.length; i++) {
             if (gutta[i] != this && this.mesh.position.distanceTo(gutta[i].mesh.position) < parameters.cohesion_perception_distance) {
                 this.cohesion.add(gutta[i].position)
@@ -964,13 +843,14 @@ class Gutt {
         }
         if (counter > 0 ) {
             this.cohesion.set(this.cohesion.x / counter, this.cohesion.y / counter)
+            this.cohesion.sub(this.position)
+            this.cohesion.clampLength(-parameters.max_force, parameters.max_force)
         }
-        this.cohesion.sub(this.position)
-        this.cohesion.clampLength(-this.maxForce, this.maxForce)
     }
 
     calculateSeparation() {
         let counter = 0
+        this.separation.set(0, 0)
         for (let i = 0; i < gutta.length; i++) {
             if (gutta[i] != this && this.mesh.position.distanceTo(gutta[i].mesh.position) < parameters.separation_perception_distance) {
                 let difference = new THREE.Vector2(this.position.x - gutta[i].position.x, this.position.y - gutta[i].position.y)
@@ -981,13 +861,25 @@ class Gutt {
         }
         if (counter > 0 ) {
             this.separation.set(this.separation.x / counter, this.separation.y / counter)
+            this.separation.clampLength(-parameters.max_force, parameters.max_force)
         }
-        this.separation.clampLength(-this.maxForce, this.maxForce)
+    }
+
+    calculateTemperature() {
+        this.avoidance.set(0, 0)
+        if (this.position.x < 40) {
+            this.avoidance.set((Math.pow(40 - this.position.x, 2)) / 100000, 0)
+            this.avoidance.clampLength(-parameters.max_force, parameters.max_force)
+        }
+        if (this.position.x > 140) {
+            this.avoidance.set(-(Math.pow(140 - this.position.x, 2)) / 100000, 0)
+            this.avoidance.clampLength(-parameters.max_force, parameters.max_force)
+        }
     }
 }
 
 let gutta = [];
-for (let i = 0; i < 300; i++) {
+for (let i = 0; i < 200; i++) {
     let lat = getRandomBell(10, 170, 5)
     let lng = getRandomInt(0, 359)
     gutta.push(new Gutt(lat, lng))
@@ -996,37 +888,27 @@ for (let i = 0; i < 300; i++) {
 //Dat.GUI
 const gui = new GUI()
 let parameters = {
-    alignment: 0,
-    alignment_perception_distance: 0,
-    cohesion: 0,
-    cohesion_perception_distance: 0,
-    separation: 0,
-    separation_perception_distance: 0
+    alignment: 1.1,
+    alignment_perception_distance: 0.6,
+    cohesion: 1.2,
+    cohesion_perception_distance: 0.6,
+    separation: 0.8,
+    separation_perception_distance: 0.55,
+    max_force: 0.003,
 }
 
 const parameterFolder = gui.addFolder('parameters')
-parameterFolder.add(parameters, 'alignment', 0, 100)
-parameterFolder.add(parameters, 'alignment_perception_distance', 0, 5, 0.01)
-parameterFolder.add(parameters, 'cohesion', 0, 100)
-parameterFolder.add(parameters, 'cohesion_perception_distance', 0, 5, 0.01)
-parameterFolder.add(parameters, 'separation', 0, 100)
-parameterFolder.add(parameters, 'separation_perception_distance', 0, 5, 0.01)
-parameterFolder.open()
+parameterFolder.add(parameters, 'alignment', 0, 5, 0.1)
+parameterFolder.add(parameters, 'alignment_perception_distance', 0, 1, 0.01)
+parameterFolder.add(parameters, 'cohesion', 0, 5, 0.1)
+parameterFolder.add(parameters, 'cohesion_perception_distance', 0, 1, 0.01)
+parameterFolder.add(parameters, 'separation', 0, 5, 0.1)
+parameterFolder.add(parameters, 'separation_perception_distance', 0, 1, 0.01)
+parameterFolder.add(parameters, 'max_force', 0, 0.01, 0.0001)
+parameterFolder.close()
 /* const guttaFolder = gui.addFolder('Gutta')
 guttaFolder.add(numberOfGutta, 'Number of gutta', 1, 500)
 guttaFolder.open() */
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1131,7 +1013,7 @@ function render(time) {
 
     //VR
     const dt = clock.getDelta();
-    if (controller ) handleController( controller, dt );
+    if ( controller ) handleController( controller, dt );
 
     if (resizeRendererToDisplaySize(renderer)) {
         const canvas = renderer.domElement;
@@ -1139,58 +1021,14 @@ function render(time) {
         camera.updateProjectionMatrix();
     }
 
-    //YUKA
-/*     const delta = clock.update().getDelta()
-    entityManager.update(delta) */
-    //END YUKA
-
     for (let i = 0; i < gutta.length; i++) {
         gutta[i].calculateWander();
         gutta[i].calculateAlignment();
         gutta[i].calculateCohesion();
         gutta[i].calculateSeparation();
+        gutta[i].calculateTemperature();
         gutta[i].move();
-
-
-        //gutta[i].steer();
     }
-
-    //pinLabels
-    /* pins.forEach((pinInfo) => {
-        const {pin, elem} = pinInfo;
-
-        // get the position of the center of the pin
-        pin.updateWorldMatrix(true, false);
-        pin.getWorldPosition(tempV);
-
-        // get the normalized screen coordinate of that position
-        // x and y will be in the -1 to +1 range with x = -1 being
-        // on the left and y = -1 being on the bottom
-        tempV.project(camera);
-
-        raycaster.setFromCamera(tempV, camera);
-        const intersectedObjects = raycaster.intersectObjects(pinPositions, false);
-        const show = intersectedObjects.length && pin === intersectedObjects[0].object;
-        //camera.position.distanceTo(tempV) > pin.geometry.boundingSphere.radius * 250 : added to hide small pins when far away
-        if (!show || Math.abs(tempV.z) > 1 || camera.position.distanceTo(pin.position) > pin.geometry.parameters.radius * 150 || camera.position.distanceTo(pin.position) > camera.position.distanceTo(middleOfPlanet)) {
-            // hide the label
-            elem.style.display = 'none';
-        } else {
-            // un-hide the label
-            elem.style.display = '';
-            //changeElement(labels, camera.position.distanceTo(pin.position));
-
-            // convert the normalized position to CSS coordinates
-            const x = (tempV.x * .5 + .5) * canvas.clientWidth;
-            const y = (tempV.y * -.5 + .5) * canvas.clientHeight;
-
-            // move the elem to that position
-            elem.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
-
-            // set the zIndex for sorting
-            elem.style.zIndex = (-tempV.z * .5 + .5) * 100000 | 0;
-        }
-    }); */
 
     function onPointerMove(event) {
         pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
