@@ -125,12 +125,71 @@ scene.add( controllerGrip );
 
 
 let dolly = new THREE.Object3D();
-dolly.position.z = 20;
+dolly.position.z = 15;
 dolly.add(camera);
 scene.add(dolly)
 
 let dummyCam = new THREE.Object3D();
 camera.add(dummyCam)
+
+function handleController( controller, dt ) {
+    if (controller.userData.selectPressed ){
+        
+        const wallLimit = 1.3;
+        const speed = 2;
+        let pos = dolly.position.clone();
+        pos.y += 1;
+
+        let dir = new THREE.Vector3();
+        //Store original dolly rotation
+        const quaternion = dolly.quaternion.clone();
+        //Get rotation for movement from the headset pose
+        dolly.quaternion.copy( dummyCam.getWorldQuaternion() );
+        dolly.getWorldDirection(dir);
+        dir.negate();
+        raycaster.set(pos, dir);
+
+        let blocked = false;
+
+        let intersect = raycaster.intersectObjects(colliders);
+        if (intersect.length>0){
+            if (intersect[0].distance < wallLimit) blocked = true;
+        }
+
+        if (!blocked){
+            dolly.translateZ(-dt*speed);
+            pos = dolly.getWorldPosition( origin );
+        }
+
+        //cast left
+        dir.set(-1,0,0);
+        dir.applyMatrix4(dolly.matrix);
+        dir.normalize();
+        raycaster.set(pos, dir);
+
+        intersect = raycaster.intersectObjects(colliders);
+        if (intersect.length>0){
+            if (intersect[0].distance<wallLimit) dolly.translateX(wallLimit-intersect[0].distance);
+        }
+
+        //cast right
+        dir.set(1,0,0);
+        dir.applyMatrix4(dolly.matrix);
+        dir.normalize();
+        raycaster.set(pos, dir);
+
+        intersect = raycaster.intersectObjects(colliders);
+        if (intersect.length>0){
+            if (intersect[0].distance<wallLimit) dolly.translateX(intersect[0].distance-wallLimit);
+        }
+
+        dolly.position.y = 0;
+
+        //Restore the original rotation
+        dolly.quaternion.copy( quaternion );
+
+    }
+}
 
 
 
