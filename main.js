@@ -4,6 +4,7 @@ import {Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSid
 import { tagList } from './tagData.js'
 import { imgList } from './imgData.js'
 import { tagConnections } from './tagConnectionData.js'
+import { palette } from './palette.js'
 import {getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng} from './mathScripts.js'
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
@@ -43,6 +44,7 @@ const renderer = new THREE.WebGLRenderer(
         canvas,
         antialias: true,
     });
+renderer.setPixelRatio(window.devicePixelRatio)
 
 function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
@@ -82,10 +84,17 @@ let selectedPin = null;
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 
+
+
+
+console.log(palette[1][2])
+
+
+
+
 //enable VR
 renderer.xr.enabled = true;
-document.body.appendChild( VRButton.createButton( renderer ) );
-
+//document.body.appendChild( VRButton.createButton( renderer ) );
 
 
 function onSelectStart() {
@@ -137,10 +146,10 @@ camera.add(dummyCam)
 function handleController( controller, dt ) {
     if (controller.userData.selectPressed ){
         
-        const wallLimit = 1.3;
-        const speed = 2;
+        const wallLimit = 0.5;
+        const speed = 0.002;
         let pos = dolly.position.clone();
-        pos.y += 1;
+        //pos.y += 1;
 
         let dir = new THREE.Vector3();
         //Store original dolly rotation
@@ -290,7 +299,7 @@ scene.add(center);
     pivot2.rotation.y = 2 * Math.PI / 16;
     pivot3.rotation.y = 2 * Math.PI / 2;
     pivot4.rotation.y = 5 * Math.PI / 3;
-    pivot4.rotation.x = -0.9;
+    pivot4.rotation.x = -0.41;
 
     center.add(pivot1);
     center.add(pivot2);
@@ -534,7 +543,7 @@ loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/m
     }
 
     for (let i = 0; i < tagList.length; i++) {
-        let tag = instantiateTag(tagList[i][1], tagList[i][2], tagList[i][3] - 180, tagList[i][4], tagList[i][4], tagList[i][5] / 100000);
+        let tag = instantiateTag(tagList[i][1], tagList[i][2], tagList[i][3] - 180, palette[tagList[i][4]], palette[tagList[i][4]], tagList[i][5] / 100000);
     }
 } );
 
@@ -572,7 +581,7 @@ for (let i = 0; i < tagList.length; i++) {
     if (tagList[i][6] == undefined) {
         hasSlides = false
     } else hasSlides = true
-    let pin = instantiatePin(tagList[i][1], tagList[i][2], tagList[i][3] - 180, tagList[i][4], tagList[i][4], tagList[i][5] / 1500, hasSlides);
+    let pin = instantiatePin(tagList[i][1], tagList[i][2], tagList[i][3] - 180, palette[tagList[i][4]], palette[tagList[i][4]], tagList[i][5] / 1500, hasSlides);
     pins.push(pin);
 }
 
@@ -689,10 +698,9 @@ for (let i = 0; i < moons.length; i++) {
 
 //create Gutta
 class Gutt {
-    constructor(lat, lng, heading) {
+    constructor(lat, lng) {
         this.lat = lat;
         this.lng = lng;
-        this.heading = heading;
     
         let scale = 0.0003;
         this.shape = new THREE.Shape();
@@ -706,41 +714,25 @@ class Gutt {
         this.shape.bezierCurveTo(scale * 7, 0,scale * 5,scale * 5,scale * 5,scale * 5 );
 
         this.geometry = new THREE.ShapeGeometry(this.shape)
-            this.geometry.computeBoundingSphere();
-            this.center = this.geometry.boundingSphere.center
+            this.center = (5 * scale, 9.5 * scale, 0)
             this.shapePosition = this.geometry.position
             this.geometry.rotateZ(Math.PI/2)
-        this.material = new THREE.MeshBasicMaterial({
+        this.material = new THREE.MeshLambertMaterial({
             color: 0xbbddcc, 
             side: DoubleSide,
         })
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.geometry.center();
         this.mesh.position.copy(this.center);
-        //-----------------------------------
-        /* this.pos = convertLatLngtoCartesian(this.lat, this.lng, 5.01)
-        this.heading = getRandomNum(0, 2 * Math.PI) - Math.PI;
-
-        this.mesh.position.set(this.pos.x, this.pos.y, this.pos.z)
-        this.mesh.lookAt(middleOfPlanet) */
-        //-----------------------------------
+ 
         this.position = new THREE.Vector2(lat, lng)
-        this.velocity = new THREE.Vector2(getRandomNum(-1, 1), getRandomNum(-1, 1)).setLength(0.01)
+        this.velocity = new THREE.Vector2(getRandomNum(0, 0), getRandomNum(0, 1)).setLength(0.001)
         this.acceleration = new THREE.Vector2
         this.cartesianPosition = convertLatLngtoCartesian(this.position.x, this.position.y, 5.1)
-        this.cartesianHeading = convertLatLngtoCartesian(this.position.x + this.velocity.x, this.position.y + this.velocity.y, 5.1)
+        this.presentHeading
+        this.originalHeading
   
         this.mesh.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
-
-        //Velocity vector helper
-        /* this.mat = new THREE.LineBasicMaterial({color: 0xff0000})
-        this.points = []
-            this.points.push( this.cartesianPosition.x );
-            this.points.push( this.cartesianHeading );
-        this.geo = new THREE.BufferGeometry().setFromPoints( this.points );
-        this.velocityVector = new THREE.Line(this.geo, this.mat);
-        this.velocityVector.geometry.attributes.position.needsUpdate = true;
-        scene.add(this.velocityVector) */
 
         this.wander = new THREE.Vector2(0, 0)
         this.alignment = new THREE.Vector2(0, 0)
@@ -751,33 +743,30 @@ class Gutt {
         // this.separationPerception = 0.2
         this.avoidance = new THREE.Vector2(0, 0)
         //this.maxForce = 0.1
-        this.maxSpeed = 0.1
-        this.velocity.setLength(this.maxSpeed) 
+        //this.maxSpeed = 0.1 
 
         scene.add(this.mesh)
     }
 
     move() {
+        this.originalHeading = Math.atan2(this.velocity.x, this.velocity.y)
+
         this.acceleration.set(0, 0)
         this.alignment.multiplyScalar(parameters.alignment)
         this.cohesion.multiplyScalar(parameters.cohesion)
         this.separation.multiplyScalar(parameters.separation)
         //this.avoidance.multiplyScalar(parameters.avoidance)
         
-
-        /* if (this == gutta[0]) {
-            console.log(this.wander, this.alignment, this.cohesion, this.separation, this.avoidance, this.position.x)
-        } */
         this.acceleration.add( this.wander )
         this.acceleration.add( this.alignment )
         this.acceleration.add( this.cohesion )
         this.acceleration.add( this.separation )
         this.acceleration.add( this.avoidance )
 
-        this.position.add(this.velocity)
         this.velocity.add(this.acceleration)
-        this.velocity.clampLength(-this.maxSpeed, this.maxSpeed)
-        this.velocity.setLength(this.maxSpeed)  // remove this at some point
+        this.velocity.clampLength(-parameters.max_speed, parameters.max_speed)
+        this.velocity.setLength(parameters.max_speed)  // remove this at some point
+        this.position.add(this.velocity)
     
         if (this.position.x < 0) {
             this.position.x = Math.abs(this.position.x)
@@ -800,20 +789,17 @@ class Gutt {
         
         this.cartesianPosition = convertLatLngtoCartesian(this.position.x, this.position.y, 5.1)
         this.cartesianVelocity = convertLatLngtoCartesian(this.velocity.x, this.velocity.y, 5.1)
-        this.cartesianHeading = convertLatLngtoCartesian(this.position.x + this.velocity.x * 200, this.position.y + this.velocity.y * 200, 5.1)
+        
+        this.presentHeading = Math.atan2(this.velocity.x, this.velocity.y)
   
         this.mesh.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
+        this.mesh.geometry.rotateZ((this.presentHeading - this.originalHeading))
         this.mesh.lookAt(middleOfPlanet)
-
-        //velocity vector helper
-        /* this.points.length = 0
-        this.points.push( this.cartesianPosition );
-        this.points.push( this.cartesianHeading );
-        this.velocityVector.geometry.setFromPoints(this.points) */
     }
 
     calculateWander() {
-        this.wander.set(getRandomNum(-0.01, 0.01), getRandomNum(-0.01, 0.01))
+        this.wander.set(getRandomNum(-0.0001, 0.0001), getRandomNum(-0.0001, 0.0001))
+        this.wander.clampLength(-parameters.max_force, parameters.max_force)
     }
 
     calculateAlignment() {
@@ -879,7 +865,7 @@ class Gutt {
 }
 
 let gutta = [];
-for (let i = 0; i < 200; i++) {
+for (let i = 0; i < 300; i++) {
     let lat = getRandomBell(10, 170, 5)
     let lng = getRandomInt(0, 359)
     gutta.push(new Gutt(lat, lng))
@@ -888,29 +874,27 @@ for (let i = 0; i < 200; i++) {
 //Dat.GUI
 const gui = new GUI()
 let parameters = {
-    alignment: 1.1,
+    alignment: 0.2,
     alignment_perception_distance: 0.6,
-    cohesion: 1.2,
+    cohesion: 0.21,
     cohesion_perception_distance: 0.6,
-    separation: 0.8,
-    separation_perception_distance: 0.55,
-    max_force: 0.003,
+    separation: 0.12,
+    separation_perception_distance: 0.15,
+    max_force: 0.0008,
+    max_speed: 0.01,
 }
 
 const parameterFolder = gui.addFolder('parameters')
-parameterFolder.add(parameters, 'alignment', 0, 5, 0.1)
-parameterFolder.add(parameters, 'alignment_perception_distance', 0, 1, 0.01)
-parameterFolder.add(parameters, 'cohesion', 0, 5, 0.1)
-parameterFolder.add(parameters, 'cohesion_perception_distance', 0, 1, 0.01)
-parameterFolder.add(parameters, 'separation', 0, 5, 0.1)
-parameterFolder.add(parameters, 'separation_perception_distance', 0, 1, 0.01)
+parameterFolder.add(parameters, 'alignment', 0, 1, 0.001)
+parameterFolder.add(parameters, 'alignment_perception_distance', 0, 1, 0.001)
+parameterFolder.add(parameters, 'cohesion', 0, 1, 0.001)
+parameterFolder.add(parameters, 'cohesion_perception_distance', 0, 1, 0.001)
+parameterFolder.add(parameters, 'separation', 0, 1, 0.001)
+parameterFolder.add(parameters, 'separation_perception_distance', 0, 1, 0.001)
 parameterFolder.add(parameters, 'max_force', 0, 0.01, 0.0001)
+parameterFolder.add(parameters, 'max_speed', 0, 0.1, 0.001)
 parameterFolder.close()
-/* const guttaFolder = gui.addFolder('Gutta')
-guttaFolder.add(numberOfGutta, 'Number of gutta', 1, 500)
-guttaFolder.open() */
-
-
+gui.hide()
 
 
 //lights
