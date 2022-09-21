@@ -79,6 +79,7 @@ const scene = new THREE.Scene();
 
 const pointer = new THREE.Vector2;
 const tempV = new THREE.Vector3();
+const workingMatrix = new THREE.Matrix4();
 const raycaster = new THREE.Raycaster();
 let selectedPin = null;
 
@@ -86,7 +87,7 @@ const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 
 //enable VR
 renderer.xr.enabled = true;
-//document.body.appendChild( VRButton.createButton( renderer ) );
+document.body.appendChild( VRButton.createButton( renderer ) );
 
 
 function onSelectStart() {
@@ -128,12 +129,37 @@ scene.add( controllerGrip );
 
 
 let dolly = new THREE.Object3D();
-dolly.position.z = 0;
+dolly.position.z = 10;
 dolly.add(camera);
 scene.add(dolly)
 
 let dummyCam = new THREE.Object3D();
 camera.add(dummyCam)
+
+function buildControllers(){
+    const controllerModelFactory = new XRControllerModelFactory();
+
+    const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -1 ) ] );
+
+    const line = new THREE.Line( geometry );
+    line.scale.z = 0;
+    
+    const controllers = [];
+    
+    for(let i=0; i<=1; i++){
+        const controller = renderer.xr.getController( i );
+        controller.add( line.clone() );
+        controller.userData.selectPressed = false;
+        parent.add( controller );
+        controllers.push( controller );
+        
+        const grip = this.renderer.xr.getControllerGrip( i );
+        grip.add( controllerModelFactory.createControllerModel( grip ) );
+        parent.add( grip );
+    }
+    
+    return controllers;
+}
 
 function handleController( controller, dt ) {
     if (controller.userData.selectPressed ){
@@ -998,7 +1024,14 @@ function render(time) {
 
     //VR
     const dt = clock.getDelta();
-    if ( controller ) handleController( controller, dt );
+    //if ( controller ) handleController( controller, dt );
+    if (controllers ){
+        controllers.forEach( ( controller) => { 
+            handleController( controller ) 
+        });
+    }
+
+
 
     if (resizeRendererToDisplaySize(renderer)) {
         const canvas = renderer.domElement;
