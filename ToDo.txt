@@ -1,24 +1,15 @@
 MAKE USABLE
     add guided meditations
-    
-    make smaller textures
-        webP?
-        options at start?
 
     make improvements to slidecarousel
         interactivity
 
-    fix sun flare vite ()
-        require()?
 
 SHORT-TERM DEVELOPMENT
-    make color palette
-        make colorblind-friendly palette option
-        add nuances to tag colors
 
     fix VR controllers (udemy course)
 
-    light up area around when select pin (create or move spotlight?)
+    light up area around when hover pin (create or move spotlight?)
 
     fix assets so i won't have to upload (fonts and flares)
 
@@ -26,8 +17,17 @@ SHORT-TERM DEVELOPMENT
     
     add type of curve (dashed, arrowed)
 
+    make starfield more colorful
+        red and blueshift stars?
+        fog?
+        nebula
     make better clouds (multiple layers? needs specific blending mode?)
     tweak atmosphere (moons and stars being occluded - fixed by transparency)
+
+    make smaller textures
+        webP?
+        options at start? 2k 4k 8k
+        make all textures pow2 (clouds2)
         
     find way of editing text, nodesize, nodecolor realtime
     find way of saving lat, long, size, color and text

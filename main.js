@@ -84,14 +84,6 @@ let selectedPin = null;
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 
-
-
-
-console.log(palette[1][2])
-
-
-
-
 //enable VR
 renderer.xr.enabled = true;
 //document.body.appendChild( VRButton.createButton( renderer ) );
@@ -697,42 +689,48 @@ for (let i = 0; i < moons.length; i++) {
 }
 
 //create Gutta
+const guttaScale = 0.0003;
+
+/* const guttaGeometry = new THREE.ConeGeometry(10 * guttaScale, 30 * guttaScale, 6, 4)
+    guttaGeometry.rotateZ(Math.PI/2)
+    guttaGeometry.rotateY(Math.PI/2) */
+const guttaMaterial = new THREE.MeshLambertMaterial({
+    color: 0xbbddcc, 
+    side: DoubleSide,
+}) 
+
+const guttaShape = new THREE.Shape();
+
+guttaShape.moveTo(guttaScale * 5,guttaScale * 5 );
+guttaShape.bezierCurveTo(guttaScale * 5,guttaScale * 5,guttaScale * 4, 0, 0, 0 );
+guttaShape.bezierCurveTo(- guttaScale * 6, 0,- guttaScale * 6,guttaScale * 7, - guttaScale * 6,guttaScale * 7 );
+guttaShape.bezierCurveTo(- guttaScale * 6,guttaScale * 11,- guttaScale * 3,guttaScale * 15.4,guttaScale * 5,guttaScale * 19 );
+guttaShape.bezierCurveTo(guttaScale * 12,guttaScale * 15.4,guttaScale * 16,guttaScale * 11,guttaScale * 16,guttaScale * 7 );
+guttaShape.bezierCurveTo(guttaScale * 16,guttaScale * 7,guttaScale * 16, 0,guttaScale * 10, 0 );
+guttaShape.bezierCurveTo(guttaScale * 7, 0,guttaScale * 5,guttaScale * 5,guttaScale * 5,guttaScale * 5 );
+
+const guttaGeometry = new THREE.ShapeGeometry(guttaShape)
+guttaGeometry.center = (5 * guttaScale, 9.5 * guttaScale, 0)
+guttaGeometry.rotateZ(Math.PI/2)
+guttaGeometry.rotateY(Math.PI/2)
+
 class Gutt {
     constructor(lat, lng) {
         this.lat = lat;
         this.lng = lng;
-    
-        let scale = 0.0003;
-        this.shape = new THREE.Shape();
 
-        this.shape.moveTo(scale * 5,scale * 5 );
-        this.shape.bezierCurveTo(scale * 5,scale * 5,scale * 4, 0, 0, 0 );
-        this.shape.bezierCurveTo(- scale * 6, 0,- scale * 6,scale * 7, - scale * 6,scale * 7 );
-        this.shape.bezierCurveTo(- scale * 6,scale * 11,- scale * 3,scale * 15.4,scale * 5,scale * 19 );
-        this.shape.bezierCurveTo(scale * 12,scale * 15.4,scale * 16,scale * 11,scale * 16,scale * 7 );
-        this.shape.bezierCurveTo(scale * 16,scale * 7,scale * 16, 0,scale * 10, 0 );
-        this.shape.bezierCurveTo(scale * 7, 0,scale * 5,scale * 5,scale * 5,scale * 5 );
-
-        this.geometry = new THREE.ShapeGeometry(this.shape)
-            this.center = (5 * scale, 9.5 * scale, 0)
-            this.shapePosition = this.geometry.position
-            this.geometry.rotateZ(Math.PI/2)
-        this.material = new THREE.MeshLambertMaterial({
-            color: 0xbbddcc, 
-            side: DoubleSide,
-        })
-        this.mesh = new THREE.Mesh(this.geometry, this.material)
-        this.mesh.geometry.center();
-        this.mesh.position.copy(this.center);
+        this.gutt = new THREE.Mesh(guttaGeometry, guttaMaterial)
+        // this.mesh.geometry.center();
+        // this.mesh.position.copy(this.center);
  
-        this.position = new THREE.Vector2(lat, lng)
+        this.pos = new THREE.Vector2(lat, lng)
         this.velocity = new THREE.Vector2(getRandomNum(0, 0), getRandomNum(0, 1)).setLength(0.001)
         this.acceleration = new THREE.Vector2
-        this.cartesianPosition = convertLatLngtoCartesian(this.position.x, this.position.y, 5.1)
+        this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5.1)
         this.presentHeading
         this.originalHeading
   
-        this.mesh.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
+        this.gutt.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
 
         this.wander = new THREE.Vector2(0, 0)
         this.alignment = new THREE.Vector2(0, 0)
@@ -745,7 +743,7 @@ class Gutt {
         //this.maxForce = 0.1
         //this.maxSpeed = 0.1 
 
-        scene.add(this.mesh)
+        scene.add(this.gutt)
     }
 
     move() {
@@ -766,35 +764,38 @@ class Gutt {
         this.velocity.add(this.acceleration)
         this.velocity.clampLength(-parameters.max_speed, parameters.max_speed)
         this.velocity.setLength(parameters.max_speed)  // remove this at some point
-        this.position.add(this.velocity)
+        this.pos.add(this.velocity)
     
-        if (this.position.x < 0) {
-            this.position.x = Math.abs(this.position.x)
-            if (this.position.y < 180) {
-            this.position.y += 180
-            } else this.position.y -= 180
+        if (this.pos.x < 0) {
+            this.pos.x = Math.abs(this.pos.x)
+            if (this.pos.y < 180) {
+            this.pos.y += 180
+            } else this.pos.y -= 180
             this.velocity.x *= -1
             this.velocity.y *= -1
         }
-        if (this.position.x > 180) {
-            this.position.x = 180 - (this.position.x - 180)
-            if (this.position.y < 180) {
-                this.position.y += 180
-            } else this.position.y -= 180
+        if (this.pos.x > 180) {
+            this.pos.x = 180 - (this.pos.x - 180)
+            if (this.pos.y < 180) {
+                this.pos.y += 180
+            } else this.pos.y -= 180
             this.velocity.x *= -1
             this.velocity.y *= -1
         }
-        if (this.position.y < 0) {this.position.y = 360 + this.position.y}
-        if (this.position.y > 360) {this.position.y = this.position.y - 360}
+        if (this.pos.y < 0) {this.pos.y = 360 + this.pos.y}
+        if (this.pos.y > 360) {this.pos.y = this.pos.y - 360}
         
-        this.cartesianPosition = convertLatLngtoCartesian(this.position.x, this.position.y, 5.1)
+        this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5.1)
         this.cartesianVelocity = convertLatLngtoCartesian(this.velocity.x, this.velocity.y, 5.1)
         
         this.presentHeading = Math.atan2(this.velocity.x, this.velocity.y)
-  
-        this.mesh.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
-        this.mesh.geometry.rotateZ((this.presentHeading - this.originalHeading))
-        this.mesh.lookAt(middleOfPlanet)
+        
+        this.cp = new THREE.Vector3
+        this.cp.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
+        this.gutt.lookAt(this.cp)
+        this.gutt.rotateZ(this.presentHeading - this.originalHeading)
+        
+        this.gutt.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
     }
 
     calculateWander() {
@@ -806,7 +807,7 @@ class Gutt {
         let counter = 0
         this.alignment.set(0, 0)
         for (let i = 0; i < gutta.length; i++) {
-            if (gutta[i] != this && this.mesh.position.distanceTo(gutta[i].mesh.position) < parameters.alignment_perception_distance) {
+            if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.alignment_perception_distance) {
                 this.alignment.add(gutta[i].velocity)
                 counter += 1
             }
@@ -822,14 +823,14 @@ class Gutt {
         let counter = 0
         this.cohesion.set(0, 0)
         for (let i = 0; i < gutta.length; i++) {
-            if (gutta[i] != this && this.mesh.position.distanceTo(gutta[i].mesh.position) < parameters.cohesion_perception_distance) {
-                this.cohesion.add(gutta[i].position)
+            if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.cohesion_perception_distance) {
+                this.cohesion.add(gutta[i].pos)
                 counter += 1
             }
         }
         if (counter > 0 ) {
             this.cohesion.set(this.cohesion.x / counter, this.cohesion.y / counter)
-            this.cohesion.sub(this.position)
+            this.cohesion.sub(this.pos)
             this.cohesion.clampLength(-parameters.max_force, parameters.max_force)
         }
     }
@@ -838,9 +839,9 @@ class Gutt {
         let counter = 0
         this.separation.set(0, 0)
         for (let i = 0; i < gutta.length; i++) {
-            if (gutta[i] != this && this.mesh.position.distanceTo(gutta[i].mesh.position) < parameters.separation_perception_distance) {
-                let difference = new THREE.Vector2(this.position.x - gutta[i].position.x, this.position.y - gutta[i].position.y)
-                difference.divideScalar(this.mesh.position.distanceTo(gutta[i].mesh.position))
+            if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.separation_perception_distance) {
+                let difference = new THREE.Vector2(this.pos.x - gutta[i].pos.x, this.pos.y - gutta[i].pos.y)
+                difference.divideScalar(this.gutt.position.distanceTo(gutta[i].gutt.position))
                 this.separation.add(difference)
                 counter += 1
             }
@@ -853,12 +854,12 @@ class Gutt {
 
     calculateTemperature() {
         this.avoidance.set(0, 0)
-        if (this.position.x < 40) {
-            this.avoidance.set((Math.pow(40 - this.position.x, 2)) / 100000, 0)
+        if (this.pos.x < 40) {
+            this.avoidance.set((Math.pow(40 - this.pos.x, 2)) / 100000, 0)
             this.avoidance.clampLength(-parameters.max_force, parameters.max_force)
         }
-        if (this.position.x > 140) {
-            this.avoidance.set(-(Math.pow(140 - this.position.x, 2)) / 100000, 0)
+        if (this.pos.x > 140) {
+            this.avoidance.set(-(Math.pow(140 - this.pos.x, 2)) / 100000, 0)
             this.avoidance.clampLength(-parameters.max_force, parameters.max_force)
         }
     }
@@ -866,7 +867,7 @@ class Gutt {
 
 let gutta = [];
 for (let i = 0; i < 300; i++) {
-    let lat = getRandomBell(10, 170, 5)
+    let lat = getRandomBell(40, 140, 5)
     let lng = getRandomInt(0, 359)
     gutta.push(new Gutt(lat, lng))
 }
@@ -874,18 +875,18 @@ for (let i = 0; i < 300; i++) {
 //Dat.GUI
 const gui = new GUI()
 let parameters = {
-    alignment: 0.2,
-    alignment_perception_distance: 0.6,
-    cohesion: 0.21,
-    cohesion_perception_distance: 0.6,
-    separation: 0.12,
-    separation_perception_distance: 0.15,
-    max_force: 0.0008,
+    alignment: 0.016,
+    alignment_perception_distance: 0.435,
+    cohesion: 0.754,
+    cohesion_perception_distance: 0.887,
+    separation: 0.765,
+    separation_perception_distance: 0.225,
+    max_force: 0.0029,
     max_speed: 0.01,
 }
 
 const parameterFolder = gui.addFolder('parameters')
-parameterFolder.add(parameters, 'alignment', 0, 1, 0.001)
+parameterFolder.add(parameters, 'alignment', 0, 0.1, 0.0001)
 parameterFolder.add(parameters, 'alignment_perception_distance', 0, 1, 0.001)
 parameterFolder.add(parameters, 'cohesion', 0, 1, 0.001)
 parameterFolder.add(parameters, 'cohesion_perception_distance', 0, 1, 0.001)
