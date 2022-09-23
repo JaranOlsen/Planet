@@ -134,6 +134,8 @@ line.scale.z = 5;
 controller1.add( line.clone() );
 controller2.add( line.clone() );
 
+let VRraycaster = new THREE.Raycaster();
+
 //
 
 function onSelectStart( event ) {
@@ -177,10 +179,10 @@ function getIntersections( controller ) {
 
     tempMatrix.identity().extractRotation( controller.matrixWorld );
 
-    raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
-    raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
+    VRraycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
+    VRraycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
 
-    return raycaster.intersectObjects( group.children, false );
+    return VRraycaster.intersectObjects( group.children, false );
 
 }
 
