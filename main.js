@@ -125,7 +125,7 @@ scene.add( controllerGrip2 );
 
 //
 
-const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, - 1 ) ] );
+const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 8 ), new THREE.Vector3( 0, 0, - 1 ) ] );
 
 const line = new THREE.Line( geometry );
 line.name = 'line';
