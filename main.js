@@ -1292,6 +1292,9 @@ function render(time) {
     clouds1.rotation.y += 0.00001;
     clouds2.rotation.y += 0.00005;
     clouds3.rotation.y += 0.0001;
+    //VR TEST
+    jaranius.rotation.y += 0.0005;
+    //VR TEST
     if (camera.position.z > 15 && start == true) {
         camera.position.z -= 0.0001 * Math.pow(camera.position.z - 10, 1.35)
         jaranius.rotation.y += 0.0005;
