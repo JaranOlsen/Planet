@@ -93,13 +93,13 @@ group = new THREE.Group();
 scene.add( group );
 document.body.appendChild( VRButton.createButton( renderer ) );
 
-this.dolly = new THREE.Object3D();
-this.dolly.position.z = 8;
-this.dolly.add( this.camera );
-this.scene.add( this.dolly );
+let dolly = new THREE.Object3D();
+dolly.position.z = 8;
+dolly.add( camera );
+scene.add( dolly );
 
-this.dummyCam = new THREE.Object3D();
-this.camera.add( this.dummyCam );
+let dummyCam = new THREE.Object3D();
+camera.add( dummyCam );
 
 // controllers
 
