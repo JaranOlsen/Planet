@@ -136,6 +136,8 @@ controller2.add( line.clone() );
 
 let VRraycaster = new THREE.Raycaster();
 
+let start_x, start_y, rotate_canopy
+
 //
 
 function onSelectStart( event ) {
@@ -149,10 +151,14 @@ function onSelectStart( event ) {
         const intersection = intersections[ 0 ];
 
         const object = intersection.object;
-        object.material.emissive.b = 1;
+        object.material.emissive.b = 0.1;
         controller.attach( object );
 
         controller.userData.selected = object;
+
+        start_x = controller.rotation.x;
+        start_y = controller.rotation.y;
+        rotate_canopy = 1;
 
     }
 
@@ -200,7 +206,7 @@ function intersectObjects( controller ) {
         const intersection = intersections[ 0 ];
 
         const object = intersection.object;
-        object.material.emissive.r = 1;
+        object.material.emissive.r = 0.1;
         intersected.push( object );
 
         line.scale.z = intersection.distance;
@@ -1086,6 +1092,18 @@ function render(time) {
     clouds1.rotation.y += 0.00001;
     clouds2.rotation.y += 0.00005;
     clouds3.rotation.y += 0.0001;
+
+    //VR test
+    if(rotate_canopy > 0){
+        start_x_r = start_x - controller1.rotation.x
+        start_y_r = start_y - controller1.rotation.y
+        jaranius.rotation.x += start_x_r * .4;   //the object I'm rotating
+        jaranius.rotation.y += start_y_r * .4;
+        start_x = controller1.rotation.x
+        start_y = controller1.rotation.y
+    }
+    //
+
 
     if (camera.position.z > 15 && start == true) {
         camera.position.z -= 0.0001 * Math.pow(camera.position.z - 10, 1.35)
