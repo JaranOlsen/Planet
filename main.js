@@ -17,7 +17,8 @@ import {
 	fetchProfile,
 	MotionController
 } from 'three/examples/jsm/libs/motion-controllers.module.js';
-//import { Stats } from 'three/examples/jsm/libs/stats.module.js';
+//import { CanvasUI } from './CanvasUI.js';
+import Stats from 'three/examples/jsm/libs/stats.module'; //FIX?
 
 //    IMPORT SHADERS
 import vertexShader from './shaders/vertex.glsl';
@@ -91,17 +92,31 @@ const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 
 //enable VR
 
-//const stats = new Stats();
-//document.body.appendChild( this.stats.dom );
+const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
+const DEFAULT_PROFILE = 'generic-trigger';
+const stats = new Stats();
+document.body.appendChild( stats.dom );
 let workingMatrix = new THREE.Matrix4();
 let origin = new THREE.Vector3();
+//let ui = createUI();
+let controllers = {};
 
 
 setupXR();
-
+/* function createUI(){
+    const config = {
+        panelSize: { height: 0.5 },
+        height: 256,
+        body: { type: "text" }
+    }
+    const ui = new CanvasUI( { body: "" }, config );
+    ui.mesh.position.set(0, 1.5, -1);
+    scene.add( ui.mesh );
+    return ui;
+} */
 function createButtonStates(components){
 
-    const buttonStates = {};
+    let buttonStates = {};
     let gamepadIndices = components;
     
     Object.keys( components ).forEach( (key) => {
@@ -112,19 +127,19 @@ function createButtonStates(components){
         }
     })
     
-    buttonStates = buttonStates;
+    //buttonStates = buttonStates;
 }
 
-function updateUI(){
+/* function updateUI(){
     const str = JSON.stringify( buttonStates );
     if (strStates === undefined || ( str != strStates )){
         ui.updateElement( 'body', str );
         ui.update(); 
         strStates = str;
     }
-}
+} */
 
-function updateGamepadState(){
+/* function updateGamepadState(){
     const session = renderer.xr.getSession();
     
     const inputSource = session.inputSources[0];
@@ -150,12 +165,14 @@ function updateGamepadState(){
             console.warn("An error occurred setting the ui");
         }
     }
-}
+} */
 
 function setupXR(){
     renderer.xr.enabled = true;
     
     const button = new VRButton( renderer );
+
+    document.body.appendChild( VRButton.createButton( renderer ) );
 
     const self = this;
     
@@ -176,11 +193,11 @@ function setupXR(){
                 info[key] = components;
             });
 
-            self.createButtonStates( info.right );
+            createButtonStates( info.right );
             
             console.log( JSON.stringify(info) );
 
-            self.updateControllers( info );
+            updateControllers( info );
 
         } );
     }
@@ -196,7 +213,7 @@ function setupXR(){
     const line = new THREE.Line( geometry );
     line.scale.z = 0;
     
-    let controllers = {};
+    //let controllers = {};
     controllers.right = buildController( 0, line, modelFactory );
     controllers.left = buildController( 1, line, modelFactory );
 
@@ -1141,21 +1158,20 @@ function render(time) {
 
     //VR
     if (renderer.xr.isPresenting){
-        const self = this; 
         if (controllers ){
             Object.values( controllers).forEach( ( value ) => {
-                self.handleController( value.controller );
+                handleController( value.controller );
             });
         } 
-        if (elapsedTime===undefined) elapsedTime = 0;
+        /* if (elapsedTime===undefined) elapsedTime = 0;
         elapsedTime += dt;
         if (elapsedTime > 0.3){
             updateGamepadState();
-            elapsedTime = 0;
+            elapsedTime = 0; */
         }
-    }else{
+    //}else{
         //stats.update();
-    }
+    //}
 
 
     if (resizeRendererToDisplaySize(renderer)) {
