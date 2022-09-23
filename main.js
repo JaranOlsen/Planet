@@ -341,7 +341,7 @@ function handleController( controller ){
         raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
         raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( workingMatrix );
 
-        const intersects = raycaster.intersectObjects( room.children );
+        const intersects = raycaster.intersectObjects( pinPositions );
 
         if (intersects.length>0){
             intersects[0].object.add(highlight);
