@@ -98,6 +98,7 @@ async function checkForXRSupport() {
         const button = VRButton.createButton( renderer )
         document.body.appendChild( button );
         button.addEventListener("click", setupXR);
+        button.addEventListener("selectstart", setupXR)
       } else {
         console.log("Session not supported: " + reason);
       }
