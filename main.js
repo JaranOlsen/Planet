@@ -329,15 +329,19 @@ function handleController( controller ){
         raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
         raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( workingMatrix );
 
-        const intersects = raycaster.intersectObjects( scene );
+        const intersects = raycaster.intersectObjects( pinPositions );
 
         if (intersects.length>0){
-            console.log(intersects)
+            selectedPin = intersects[0].object;
+            const selectedPinIndex = pinPositions.findIndex((object) => object==intersects[0].object)
+            const selectedCarousel = tagList[selectedPinIndex][6]
+            activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
+            activeCarousel.style.display = "block"
             /* intersects[0].object.scale.set(2, 2, 2)
             controller.children[0].scale.z = intersects[0].distance;
             controller.userData.selected = intersects[0].object; */
         }else{
-            console.log("no hit")
+            jaranius.rotation.y += 0.005;
         }
     }
 }
