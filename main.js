@@ -1094,6 +1094,7 @@ function render(time) {
     clouds3.rotation.y += 0.0001;
 
     //VR test
+    let start_x_r, start_y_r
     if(rotate_canopy > 0){
         start_x_r = start_x - controller1.rotation.x
         start_y_r = start_y - controller1.rotation.y
