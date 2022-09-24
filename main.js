@@ -110,7 +110,6 @@ function declareGlobalVariables() {
     window.dolly = new THREE.Object3D();
     window.dummyCam = new THREE.Object3D();
     window.workingMatrix = new THREE.Matrix4();
-    //window.VRraycaster = new THREE.Raycaster();
     window.buttonStates = {};
     window.gamepadIndices = "";
     window.info = {};
@@ -281,7 +280,9 @@ function updateControllers(info){
         let trigger = false, squeeze = false;
         
         Object.keys( info.right ).forEach( (key) => {
-            if (key.indexOf('trigger')!=-1) trigger = true;                   if (key.indexOf('squeeze')!=-1) squeeze = true;      
+            if (key.indexOf('trigger')!=-1) trigger = true;                   
+            if (key.indexOf('squeeze')!=-1) squeeze = true;
+            
         });
         
         if (trigger){
@@ -335,8 +336,9 @@ function handleController( controller ){
             selectedPin = intersects[0].object;
             const selectedPinIndex = pinPositions.findIndex((object) => object==intersects[0].object)
             const selectedCarousel = tagList[selectedPinIndex][6]
-            activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
-            activeCarousel.style.display = "block"
+            // activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
+            // activeCarousel.style.display = "block"
+
             /* intersects[0].object.scale.set(2, 2, 2)
             controller.children[0].scale.z = intersects[0].distance;
             controller.userData.selected = intersects[0].object; */
