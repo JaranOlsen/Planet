@@ -336,8 +336,11 @@ function handleController( controller ){
             selectedPin = intersects[0].object;
             const selectedPinIndex = pinPositions.findIndex((object) => object==intersects[0].object)
             const selectedCarousel = tagList[selectedPinIndex][6]
-            // activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
-            // activeCarousel.style.display = "block"
+            if (selectedCarousel > 0) {
+                activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
+                activeCarousel.style.display = "block"
+            }
+            
 
             /* intersects[0].object.scale.set(2, 2, 2)
             controller.children[0].scale.z = intersects[0].distance;
