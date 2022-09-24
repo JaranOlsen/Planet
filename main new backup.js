@@ -85,64 +85,60 @@ const scene = new THREE.Scene();
 
 const pointer = new THREE.Vector2;
 const raycaster = new THREE.Raycaster();
-const clock = new THREE.Clock();
 let selectedPin = null;
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 
 
-//WEB XR
+//CHECK FOR VR SUPPORT
 async function checkForXRSupport() {
     navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
       if (supported) {
-        const button = VRButton.createButton( renderer )
-        document.body.appendChild( button );
-        button.addEventListener("click", setupXR);
+/*         var enterXrBtn = document.createElement("button");
+        enterXrBtn.innerHTML = "Enter VR";
+        enterXrBtn.addEventListener("click", beginXRSession);
+        document.body.appendChild(enterXrBtn); */
+        setupXR();
       } else {
         console.log("Session not supported: " + reason);
       }
     });
   }
+
+
+  let clock = new THREE.Clock();
+//VR
 checkForXRSupport();
-
-
-function declareGlobalVariables() {
-    window.dolly = new THREE.Object3D();
-    window.dummyCam = new THREE.Object3D();
-    window.workingMatrix = new THREE.Matrix4();
-    //window.VRraycaster = new THREE.Raycaster();
-    window.buttonStates = {};
-    window.gamepadIndices = "";
-    window.info = {};
-    window.controllers = {};
-    window.elapsedTime = 0;
-}
-
 function setupXR() {
-    renderer.xr.enabled = true;
+renderer.shadowMap.enabled = true; //ANY SHADOWS? WORTH PROCESSING COST?
+renderer.xr.enabled = true;
+let controller, controller2;
+let controllerGrip1, controllerGrip2;
+const intersected = [];
+const tempMatrix = new THREE.Matrix4();
+let group;
+group = new THREE.Group();
+scene.add( group );
+document.body.appendChild( VRButton.createButton( renderer ) );
 
-    declareGlobalVariables();
-    
-    dolly.position.z = 7;
-    dolly.add( camera );
-    scene.add( dolly );
-    camera.add( dummyCam );
 
-    const controller = renderer.xr.getController( 0 );
-    controller.addEventListener( 'connected', onConnected );
-    const modelFactory = new XRControllerModelFactory();
-    const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0,0,0 ), new THREE.Vector3( 0,0,-1 ) ] );
-    const line = new THREE.Line( geometry );
-    line.scale.z = 0;
-    
-    controllers = {};
-    controllers.right = buildController( 0, line, modelFactory );
-    controllers.left = buildController( 1, line, modelFactory );
-}
 
+let dolly = new THREE.Object3D();
+dolly.position.z = 8;
+dolly.add( camera );
+scene.add( dolly );
+
+let dummyCam = new THREE.Object3D();
+camera.add( dummyCam );
+
+
+
+
+let buttonStates
+let gamepadIndices
 function createButtonStates(components){
-    buttonStates = {};
-    gamepadIndices = components
+buttonStates = {}; //inside or outside function??
+gamepadIndices = components; //
     Object.keys( components ).forEach( (key) => {
         if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
             buttonStates[key] = { button: 0, xAxis: 0, yAxis: 0 };
@@ -150,7 +146,9 @@ function createButtonStates(components){
             buttonStates[key] = 0; 
         }
     })
+    //this.buttonStates = buttonStates;
 }
+
 
 function updateGamepadState(){
     const session = renderer.xr.getSession();
@@ -171,6 +169,8 @@ function updateGamepadState(){
                 }else{
                     buttonStates[key] = gamepad.buttons[buttonIndex].value;
                 }
+                
+                //this.updateUI();
             });
         }catch(e){
             console.warn("An error occurred setting the ui");
@@ -179,7 +179,7 @@ function updateGamepadState(){
 }
 
 function onConnected( event ){
-    info = {};
+    const info = {};
     
     fetchProfile( event.data, DEFAULT_PROFILES_PATH, DEFAULT_PROFILE ).then( ( { profile, assetPath } ) => {
         console.log( JSON.stringify(profile));
@@ -204,6 +204,52 @@ function onConnected( event ){
     } );
 }
 
+
+
+// controllers
+/* controller = renderer.xr.getController( 0 );
+controller.addEventListener( 'selectstart', onSelectStart );
+controller.addEventListener( 'selectend', onSelectEnd );
+dolly.add( controller ); */
+
+/* controller2 = renderer.xr.getController( 1 );
+controller2.addEventListener( 'selectstart', onSelectStart );
+controller2.addEventListener( 'selectend', onSelectEnd );
+dolly.add( controller2 ); */
+
+const controllerModelFactory = new XRControllerModelFactory();
+//controller.addEventListener( 'connected', onConnected );
+
+/* controllerGrip1 = renderer.xr.getControllerGrip( 0 );
+controllerGrip1.add( controllerModelFactory.createControllerModel( controllerGrip1 ) );
+dolly.add( controllerGrip1 );
+
+controllerGrip2 = renderer.xr.getControllerGrip( 1 );
+controllerGrip2.add( controllerModelFactory.createControllerModel( controllerGrip2 ) );
+dolly.add( controllerGrip2 ); */
+//
+
+const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0, 0, 8 ), new THREE.Vector3( 0, 0, 8 - 1 ) ] );
+
+const line = new THREE.Line( geometry );
+line.name = 'line';
+line.scale.z = 5;
+
+//controller.add( line.clone() );
+//controller2.add( line.clone() );
+
+let controllers = {};
+controllers.right = buildController( 0, line, controllerModelFactory );
+controllers.left = buildController( 1, line, controllerModelFactory );
+
+
+
+
+let VRraycaster = new THREE.Raycaster();
+
+//let start_x, start_y, rotate_canopy
+
+
 function buildController( index, line, modelFactory ){
     const controller = renderer.xr.getController( index );
     
@@ -212,7 +258,7 @@ function buildController( index, line, modelFactory ){
     
     if (line) controller.add( line.clone() );
     
-    dolly.add( controller );
+    scene.add( controller );
     
     let grip;
     
@@ -224,102 +270,6 @@ function buildController( index, line, modelFactory ){
     
     return { controller, grip };
 }
-
-function onSelectStart( ){
-    console.log("select")
-    this.userData.selectPressed = true;
-    
-}
-
-function onSelectEnd( ){
-    this.children[0].scale.z = 0;
-    this.userData.selectPressed = false;
-    this.userData.selected = undefined;
-    console.log("selectend")
-}
-
-function onSqueezeStart( ){
-    this.userData.squeezePressed = true;
-    if (this.userData.selected !== undefined ){
-        this.attach( this.userData.selected );
-        this.userData.attachedObject = userData.selected;
-    }
-    console.log("squeeze")
-}
-
-function onSqueezeEnd( ){
-    this.userData.squeezePressed = false;
-    if (this.userData.attachedObject !== undefined){
-            room.attach( this.userData.attachedObject );
-        this.userData.attachedObject = undefined;
-    }
-    console.log("squeezeend")
-}
-
-function onDisconnected(){
-    const index = userData.index;
-    console.log(`Disconnected controller ${index}`);
-    
-    if ( controllers ){
-        const obj = (index==0) ? controllers.right : controllers.left;
-        
-        if (obj){
-            if (obj.controller){
-                const controller = obj.controller;
-                while( controller.children.length > 0 ) controller.remove( controller.children[0] );
-                dolly.remove( controller );
-            }
-            if (obj.grip) dolly.remove( obj.grip );
-        }
-    }
-}
-
-function updateControllers(info){
-    if (info.right !== undefined){
-        const right = renderer.xr.getController(0);
-        
-        let trigger = false, squeeze = false;
-        
-        Object.keys( info.right ).forEach( (key) => {
-            if (key.indexOf('trigger')!=-1) trigger = true;                   if (key.indexOf('squeeze')!=-1) squeeze = true;      
-        });
-        
-        if (trigger){
-            right.addEventListener( 'selectstart', onSelectStart );
-            right.addEventListener( 'selectend', onSelectEnd );
-        }
-
-        if (squeeze){
-            right.addEventListener( 'squeezestart', onSqueezeStart );
-            right.addEventListener( 'squeezeend', onSqueezeEnd );
-        }
-        
-        right.addEventListener( 'disconnected', onDisconnected );
-    }
-    
-    if (info.left !== undefined){
-        const left = renderer.xr.getController(1);
-        
-        let trigger = false, squeeze = false;
-        
-        Object.keys( info.left ).forEach( (key) => {
-            if (key.indexOf('trigger')!=-1) trigger = true;                   if (key.indexOf('squeeze')!=-1) squeeze = true;      
-        });
-        
-        if (trigger){
-            left.addEventListener( 'selectstart', onSelectStart );
-            left.addEventListener( 'selectend', onSelectEnd );
-        }
-
-        if (squeeze){
-            left.addEventListener( 'squeezestart', onSqueezeStart );
-            left.addEventListener( 'squeezeend', onSqueezeEnd );
-        }
-        
-        left.addEventListener( 'disconnected', onDisconnected );
-    }
-}
-
 function handleController( controller ){
     if (controller.userData.selectPressed ){
         controller.children[0].scale.z = 10;
@@ -329,19 +279,192 @@ function handleController( controller ){
         raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
         raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( workingMatrix );
 
-        const intersects = raycaster.intersectObjects( scene );
+        const intersects = raycaster.intersectObjects( room.children );
 
         if (intersects.length>0){
-            console.log(intersects)
-            /* intersects[0].object.scale.set(2, 2, 2)
+            intersects[0].object.add(highlight);
+            highlight.visible = true;
             controller.children[0].scale.z = intersects[0].distance;
-            controller.userData.selected = intersects[0].object; */
+            controller.userData.selected = intersects[0].object;
         }else{
-            console.log("no hit")
+            highlight.visible = false;
         }
     }
 }
 
+
+
+
+//
+
+function updateControllers(info){
+    function onSqueezeStart( event ) {
+        console.log(event)
+        const controller = event.target;
+        console.log(controller)
+    }
+    function onSqueezeEnd( event ) {
+
+    }
+
+    function onSelectStart( event ) {
+        
+        console.log(event)
+        const controller = event.target;
+        console.log(controller)
+
+        //VR Rotation
+        // start_x = controller.rotation.x;
+        // start_y = controller.rotation.y;
+        // rotate_canopy = 1;
+
+
+
+
+        /* const intersections = getIntersections( controller );
+
+        if ( intersections.length > 0 ) {
+
+            const intersection = intersections[ 0 ];
+
+            const object = intersection.object;
+            object.material.emissive.b = 0.1;
+            controller.attach( object );
+
+            controller.userData.selected = object;
+        } */
+
+    }
+
+    function onSelectEnd( event ) {
+
+        /* const controller = event.target;
+
+        if ( controller.userData.selected !== undefined ) {
+
+            const object = controller.userData.selected;
+            object.material.emissive.b = 0;
+            group.attach( object );
+
+            controller.userData.selected = undefined;
+
+        } */
+
+
+    }
+
+    function onDisconnected(){
+        const index = this.userData.index;
+        console.log(`Disconnected controller ${index}`);
+        
+        if ( controllers ){
+            const obj = (index==0) ? controllers.right : controllers.left;
+            
+            if (obj){
+                if (obj.controller){
+                    const controller = obj.controller;
+                    while( controller.children.length > 0 ) controller.remove( controller.children[0] );
+                    scene.remove( controller );
+                }
+                if (obj.grip) scene.remove( obj.grip );
+            }
+        }
+    }
+    
+    if (info.right !== undefined){
+        const right = this.renderer.xr.getController(0);
+        
+        let trigger = false, squeeze = false;
+        
+        Object.keys( info.right ).forEach( (key) => {
+            if (key.indexOf('trigger')!=-1) trigger = true;                   if (key.indexOf('squeeze')!=-1) squeeze = true;      
+        });
+        
+        if (trigger){
+            right.addEventListener( 'selectstart', updateControllers.onSelectStart );
+            right.addEventListener( 'selectend', updateControllers.onSelectEnd );
+        }
+
+        if (squeeze){
+            right.addEventListener( 'squeezestart', updateControllers.onSqueezeStart );
+            right.addEventListener( 'squeezeend', updateControllers.onSqueezeEnd );
+        }
+        
+        right.addEventListener( 'disconnected', onDisconnected );
+    }
+    
+    if (info.left !== undefined){
+        const left = this.renderer.xr.getController(1);
+        
+        let trigger = false, squeeze = false;
+        
+        Object.keys( info.left ).forEach( (key) => {
+            if (key.indexOf('trigger')!=-1) trigger = true;                   if (key.indexOf('squeeze')!=-1) squeeze = true;      
+        });
+        
+        if (trigger){
+            left.addEventListener( 'selectstart', updateControllers.onSelectStart );
+            left.addEventListener( 'selectend', updateControllers.onSelectEnd );
+        }
+
+        if (squeeze){
+            left.addEventListener( 'squeezestart', updateControllers.onSqueezeStart );
+            left.addEventListener( 'squeezeend', updateControllers.onSqueezeEnd );
+        }
+        
+        left.addEventListener( 'disconnected', onDisconnected );
+    }
+}
+
+function getIntersections( controller ) {
+
+    /* tempMatrix.identity().extractRotation( controller.matrixWorld );
+
+    VRraycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
+    VRraycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
+
+    return VRraycaster.intersectObjects( group.children, false ); */
+
+}
+
+function intersectObjects( controller ) {
+
+    // Do not highlight when already selected
+
+    /* if ( controller.userData.selected !== undefined ) return;
+
+    const line = controller.getObjectByName( 'line' );
+    const intersections = getIntersections( controller );
+
+    if ( intersections.length > 0 ) {
+
+        const intersection = intersections[ 0 ];
+
+        const object = intersection.object;
+        object.material.emissive.r = 0.1;
+        intersected.push( object );
+
+        line.scale.z = intersection.distance;
+
+    } else {
+
+        line.scale.z = 5;
+
+    } */
+
+}
+
+function cleanIntersected() {
+
+    /* while ( intersected.length ) {
+
+        const object = intersected.pop();
+        object.material.emissive.r = 0;
+
+    } */
+
+}
+}
 
 //start intro
 let start = false
@@ -1139,11 +1262,22 @@ function animate() {
 
 }
 
+let elapsedTime
 function render(time) {
-    //WebXR
-    const dt = clock.getDelta();
-        
+    time *= 0.001;
+
+    //VR Dragging
+    /* cleanIntersected();
+
+				intersectObjects( controller1 );
+				intersectObjects( controller2 );
+ */
+    //
+
+    //VR controls
+    /* const dt = clock.getDelta();
     if (renderer.xr.isPresenting){
+         
         if (controllers ){
             Object.values( controllers).forEach( ( value ) => {
                 handleController( value.controller );
@@ -1155,11 +1289,9 @@ function render(time) {
             updateGamepadState();
             elapsedTime = 0;
         }
-    }
-    //
+    } */
 
 
-    time *= 0.001;
 
     if (resizeRendererToDisplaySize(renderer)) {
         const canvas = renderer.domElement;
@@ -1215,6 +1347,19 @@ function render(time) {
     clouds2.rotation.y += 0.00005;
     clouds3.rotation.y += 0.0001;
 
+    //VR rotation
+   /*  let start_x_r, start_y_r
+    if(rotate_canopy > 0){
+        start_x_r = start_x - controller1.rotation.x
+        start_y_r = start_y - controller1.rotation.y
+        jaranius.rotation.x += start_x_r * .4;   //the object I'm rotating
+        jaranius.rotation.y += start_y_r * .4;
+        start_x = controller1.rotation.x
+        start_y = controller1.rotation.y
+    } */
+    //
+
+
     if (camera.position.z > 15 && start == true) {
         camera.position.z -= 0.0001 * Math.pow(camera.position.z - 10, 1.35)
         jaranius.rotation.y += 0.0005;
@@ -1230,7 +1375,6 @@ function render(time) {
     controls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;
 
     controls.update();
-
 }
 
 animate()
