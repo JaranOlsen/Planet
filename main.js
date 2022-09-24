@@ -141,13 +141,15 @@ let start_x, start_y, rotate_canopy
 //
 
 function onSelectStart( event ) {
+    
+
+    const controller = event.target;
+
     start_x = controller.rotation.x;
     start_y = controller.rotation.y;
     rotate_canopy = 1;
 
-    /* const controller = event.target;
-
-    const intersections = getIntersections( controller );
+    /* const intersections = getIntersections( controller );
 
     if ( intersections.length > 0 ) {
 
