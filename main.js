@@ -141,8 +141,11 @@ let start_x, start_y, rotate_canopy
 //
 
 function onSelectStart( event ) {
+    start_x = controller.rotation.x;
+    start_y = controller.rotation.y;
+    rotate_canopy = 1;
 
-    const controller = event.target;
+    /* const controller = event.target;
 
     const intersections = getIntersections( controller );
 
@@ -155,18 +158,13 @@ function onSelectStart( event ) {
         controller.attach( object );
 
         controller.userData.selected = object;
-
-        start_x = controller.rotation.x;
-        start_y = controller.rotation.y;
-        rotate_canopy = 1;
-
-    }
+    } */
 
 }
 
 function onSelectEnd( event ) {
 
-    const controller = event.target;
+    /* const controller = event.target;
 
     if ( controller.userData.selected !== undefined ) {
 
@@ -176,19 +174,19 @@ function onSelectEnd( event ) {
 
         controller.userData.selected = undefined;
 
-    }
+    } */
 
 
 }
 
 function getIntersections( controller ) {
 
-    tempMatrix.identity().extractRotation( controller.matrixWorld );
+    /* tempMatrix.identity().extractRotation( controller.matrixWorld );
 
     VRraycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
     VRraycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
 
-    return VRraycaster.intersectObjects( group.children, false );
+    return VRraycaster.intersectObjects( group.children, false ); */
 
 }
 
@@ -196,7 +194,7 @@ function intersectObjects( controller ) {
 
     // Do not highlight when already selected
 
-    if ( controller.userData.selected !== undefined ) return;
+    /* if ( controller.userData.selected !== undefined ) return;
 
     const line = controller.getObjectByName( 'line' );
     const intersections = getIntersections( controller );
@@ -215,18 +213,18 @@ function intersectObjects( controller ) {
 
         line.scale.z = 5;
 
-    }
+    } */
 
 }
 
 function cleanIntersected() {
 
-    while ( intersected.length ) {
+    /* while ( intersected.length ) {
 
         const object = intersected.pop();
         object.material.emissive.r = 0;
 
-    }
+    } */
 
 }
 
