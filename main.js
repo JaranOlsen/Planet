@@ -1165,9 +1165,12 @@ function render(time) {
             updateGamepadState();
             elapsedTime = 0;
         }
-        if (buttonStates.a_button !== 0) {
-            jaranius.rotation.y += 0.05
+        if (buttonStates.xr_standard_thumbstick.yAxis !== 0 || buttonStates.xr_standard_thumbstick.xAxis !== 0 || buttonStates.a_button !== 0 || buttonStates.b_button !== 0) {
+            const dollyPos = convertLatLngtoCartesian(dollyLat + buttonStates.a_button * 0.1 + buttonStates.b_button * 0.1, dollyLng + buttonStates.xr_standard_thumbstick.xAxis, dollyRadius + buttonStates.xr_standard_thumbstick.yAxis)
+            dolly.position.set(dollyPos.x, dollyPos.y, dollyPos.z)
+            camera.lookAt.middleOfPlanet
         }
+        console.log(buttonStates)
     }
     //
 
