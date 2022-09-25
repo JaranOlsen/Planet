@@ -1165,6 +1165,9 @@ function render(time) {
             updateGamepadState();
             elapsedTime = 0;
         }
+        if (buttonStates.a_button !== 0) {
+            jaranius.rotation.y += 0.05
+        }
     }
     //
 
