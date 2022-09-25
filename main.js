@@ -89,6 +89,7 @@ const clock = new THREE.Clock();
 let selectedPin = null;
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
+let xrInitialized = false
 
 
 //WEB XR
@@ -97,8 +98,7 @@ async function checkForXRSupport() {
       if (supported) {
         const button = VRButton.createButton( renderer )
         document.body.appendChild( button );
-        button.addEventListener("click", setupXR);
-        button.addEventListener("selectstart", setupXR)
+        setupXR();
       } else {
         console.log("Session not supported: " + reason);
       }
@@ -123,7 +123,7 @@ function setupXR() {
 
     declareGlobalVariables();
     
-    dolly.position.z = 7;
+    dolly.position.z = 8;
     dolly.add( camera );
     scene.add( dolly );
     camera.add( dummyCam );
