@@ -106,7 +106,6 @@ async function checkForXRSupport() {
   }
 checkForXRSupport();
 
-
 function declareGlobalVariables() {
     window.dolly = new THREE.Object3D();
     window.dummyCam = new THREE.Object3D();
@@ -116,6 +115,9 @@ function declareGlobalVariables() {
     window.info = {};
     window.controllers = {};
     window.elapsedTime = 0;
+    window.dollyLat = 90;
+    window.dollyLng = 180;
+    window.dollyRadius = 8;
 }
 
 function setupXR() {
@@ -123,10 +125,22 @@ function setupXR() {
 
     declareGlobalVariables();
     
-    dolly.position.z = 8;
+    camera.position.set( 0, 1.6, 0 );
+    const dollyPos = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
+    dolly.position.set(dollyPos.x, dollyPos.y - 1.6, dollyPos.z)
     dolly.add( camera );
     scene.add( dolly );
     camera.add( dummyCam );
+
+ /*    let test = new THREE.Vector3();
+    test.set(-dollyPos.x, -(dollyPos.y - 1.6), -dollyPos.z)
+    console.log(test, dolly.position, camera.position, dummyCam.position)
+    test.normalize()
+    console.log(test)
+    console.log(dolly.rotation)
+    dolly.rotateY = test.y
+    console.log(dolly.rotation) */
+    
 
     const controller = renderer.xr.getController( 0 );
     controller.addEventListener( 'connected', onConnected );
@@ -228,6 +242,7 @@ function buildController( index, line, modelFactory ){
 function onSelectStart( ){
     console.log("select")
     this.userData.selectPressed = true;
+    jaranius.rotateY += 0.05
     
 }
 
@@ -350,6 +365,42 @@ function handleController( controller ){
             jaranius.rotation.y += 0.005;
         }
     }
+}
+
+function moveDolly(dt){
+    
+    const speed = 0.2;
+    let pos = dolly.position.clone();
+    pos.y += 1;
+    
+    let dir = new THREE.Vector3();
+    const q = new THREE.Quaternion();
+    //Store original dolly rotation
+    const quaternion = dolly.quaternion.clone();
+    //Get rotation for movement from the headset pose
+    dolly.quaternion.copy( dummyCam.getWorldQuaternion(q) );
+    dolly.getWorldDirection(dir);
+    dir.negate();
+    
+        dolly.translateZ(-dt*speed);
+        pos = dolly.getWorldPosition( origin );
+
+    //cast left
+    dir.set(-1,0,0);
+    dir.applyMatrix4(dolly.matrix);
+    dir.normalize();
+
+    //cast right
+    dir.set(1,0,0);
+    dir.applyMatrix4(dolly.matrix);
+    dir.normalize();
+
+    //cast down
+    dir.set(0,-1,0);
+    pos.y += 1.5;
+
+    //Restore the original rotation
+    dolly.quaternion.copy( quaternion );
 }
 
 
@@ -1165,12 +1216,12 @@ function render(time) {
             updateGamepadState();
             elapsedTime = 0;
         }
-        if (buttonStates.xr_standard_thumbstick.yAxis !== 0 || buttonStates.xr_standard_thumbstick.xAxis !== 0 || buttonStates.a_button !== 0 || buttonStates.b_button !== 0) {
-            const dollyPos = convertLatLngtoCartesian(dollyLat + buttonStates.a_button * 0.1 + buttonStates.b_button * 0.1, dollyLng + buttonStates.xr_standard_thumbstick.xAxis, dollyRadius + buttonStates.xr_standard_thumbstick.yAxis)
+        /* if (buttonStates.xr_standard_thumbstick !== 0 || buttonStates.a_button !== 0 || buttonStates.b_button !== 0) {
+            const dollyPos = convertLatLngtoCartesian(dollyLat + buttonStates.a_button * 0.1 + buttonStates.b_button * 0.1, dollyLng + buttonStates.xr_standard_thumbstick, dollyRadius + buttonStates.xr_standard_thumbstick)
             dolly.position.set(dollyPos.x, dollyPos.y, dollyPos.z)
             camera.lookAt.middleOfPlanet
-        }
-        console.log(buttonStates)
+        } */
+        //console.log(buttonStates)
     }
     //
 
