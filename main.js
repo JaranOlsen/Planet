@@ -242,7 +242,7 @@ function buildController( index, line, modelFactory ){
 function onSelectStart( ){
     console.log("select")
     this.userData.selectPressed = true;
-    jaranius.rotateY += 0.05
+    //jaranius.rotateY += 0.05
     
 }
 
