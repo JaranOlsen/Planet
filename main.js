@@ -26,16 +26,24 @@ import sunVertexShader from './shaders/sunVertex.glsl';
 import sunFragmentShader from './shaders/sunFragment.glsl';
 
 //    IMPORT TEXTURES
-import diffuseTexture from "./img/terrain4k.jpg"
-import normalTexture from "./img/normal2k.jpg"
-import roughnessTex from "./img/roughness2k.jpg"
-import clouds1Tex from "./img/clouds1.png"
-import clouds1AlphaTex from "./img/clouds1alpha.jpg"
-import clouds2Tex from "./img/clouds2.png"
-import starTexture from "./img/star.png"
-import moonTex from "./img/moon.jpg"
-import moon2Tex from "./img/moon2.png"
-import moon3Tex from "./img/moon3.png"
+//import diffuseTexture from "./img/textures/terrain8k.jpg"
+import diffuseTexture from "./img/textures/diffuse4k.webp"
+import normalTexture from "./img/textures/normal1k.webp"
+import roughnessTex from "./img/textures/roughness1k.webp"
+import cloudsTexture from "./img/textures/clouds.webp"
+import starW from "./img/textures/starW.webp"
+import starR5 from "./img/textures/starR5.webp"
+import starR10 from "./img/textures/starR10.webp"
+import starR15 from "./img/textures/starR15.webp"
+import starR20 from "./img/textures/starR20.webp"
+import starB5 from "./img/textures/starB5.webp"
+import starB10 from "./img/textures/starB10.webp"
+import starB15 from "./img/textures/starB15.webp"
+import starB20 from "./img/textures/starB20.webp"
+import sunTexture from "./img/textures/sun1k.webp"
+import moonTexture from "./img/textures/moon1k.webp"
+import redmoonTexture from "./img/textures/moonRed1k.webp"
+import icemoonTexture from "./img/textures/moonIce1k.webp"
 /* import flare0 from "./img/lensflare0.png"
 import flare3 from "./img/lensflare3.png" */
 
@@ -91,6 +99,7 @@ let selectedPin = null;
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 let xrInitialized = false
 
+//scene.fog = new THREE.FogExp2(0x5599ff, 0.0001);
 
 //WEB XR
 async function checkForXRSupport() {
@@ -99,8 +108,6 @@ async function checkForXRSupport() {
         const button = VRButton.createButton( renderer )
         document.body.appendChild( button );
         setupXR();
-      } else {
-        console.log("Session not supported: " + reason);
       }
     });
   }
@@ -464,14 +471,72 @@ buttons.forEach(button => {
 
 //create starfield
 const starGeometry = new THREE.BufferGeometry()
+const starGeoR5 = new THREE.BufferGeometry()
+const starGeoR10 = new THREE.BufferGeometry()
+const starGeoR15 = new THREE.BufferGeometry()
+const starGeoR20 = new THREE.BufferGeometry()
+const starGeoB5 = new THREE.BufferGeometry()
+const starGeoB10 = new THREE.BufferGeometry()
+const starGeoB15 = new THREE.BufferGeometry()
+const starGeoB20 = new THREE.BufferGeometry()
+
 const starMaterial = new THREE.PointsMaterial({
     size: 5,
-    map: new THREE.TextureLoader().load(starTexture),
-    transparent: true
+    map: new THREE.TextureLoader().load(starW),
+    transparent: true,
+    fog: false
+})
+const starMatR5 = new THREE.PointsMaterial({
+    size: 5,
+    map: new THREE.TextureLoader().load(starR5),
+    transparent: true,
+    fog: false
+})
+const starMatR10 = new THREE.PointsMaterial({
+    size: 5,
+    map: new THREE.TextureLoader().load(starR10),
+    transparent: true,
+    fog: false
+})
+const starMatR15 = new THREE.PointsMaterial({
+    size: 5,
+    map: new THREE.TextureLoader().load(starR15),
+    transparent: true,
+    fog: false
+})
+const starMatR20 = new THREE.PointsMaterial({
+    size: 5,
+    map: new THREE.TextureLoader().load(starR20),
+    transparent: true,
+    fog: false
+})
+const starMatB5 = new THREE.PointsMaterial({
+    size: 5,
+    map: new THREE.TextureLoader().load(starB5),
+    transparent: true,
+    fog: false
+})
+const starMatB10 = new THREE.PointsMaterial({
+    size: 5,
+    map: new THREE.TextureLoader().load(starB10),
+    transparent: true,
+    fog: false
+})
+const starMatB15 = new THREE.PointsMaterial({
+    size: 5,
+    map: new THREE.TextureLoader().load(starB15),
+    transparent: true,
+    fog: false
+})
+const starMatB20 = new THREE.PointsMaterial({
+    size: 5,
+    map: new THREE.TextureLoader().load(starB20),
+    transparent: true,
+    fog: false
 })
 
 const starVertices = []
-for (let i = 0; i < 10000; i++) {
+for (let i = 0; i < 5000; i++) {
     const x = (Math.random() - 0.5) * 2000
     const y = (Math.random() - 0.5) * 2000
     const z = (Math.random() - 0.5) * 2000
@@ -479,11 +544,99 @@ for (let i = 0; i < 10000; i++) {
         starVertices.push(x, y, z)
     }
 }
+const starVertR5 = []
+for (let i = 0; i < 1000; i++) {
+    const x = (Math.random() - 0.5) * 2000
+    const y = (Math.random() - 0.5) * 2000
+    const z = (Math.random() - 0.5) * 2000
+    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
+        starVertR5.push(x, y, z)
+    }
+}
+const starVertR10 = []
+for (let i = 0; i < 500; i++) {
+    const x = (Math.random() - 0.5) * 2000
+    const y = (Math.random() - 0.5) * 2000
+    const z = (Math.random() - 0.5) * 2000
+    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
+        starVertR10.push(x, y, z)
+    }
+}
+const starVertR15 = []
+for (let i = 0; i < 100; i++) {
+    const x = (Math.random() - 0.5) * 2000
+    const y = (Math.random() - 0.5) * 2000
+    const z = (Math.random() - 0.5) * 2000
+    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
+        starVertR15.push(x, y, z)
+    }
+}
+const starVertR20 = []
+for (let i = 0; i < 25; i++) {
+    const x = (Math.random() - 0.5) * 2000
+    const y = (Math.random() - 0.5) * 2000
+    const z = (Math.random() - 0.5) * 2000
+    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
+        starVertR20.push(x, y, z)
+    }
+}
+const starVertB5 = []
+for (let i = 0; i < 1000; i++) {
+    const x = (Math.random() - 0.5) * 2000
+    const y = (Math.random() - 0.5) * 2000
+    const z = (Math.random() - 0.5) * 2000
+    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
+        starVertB5.push(x, y, z)
+    }
+}
+const starVertB10 = []
+for (let i = 0; i < 500; i++) {
+    const x = (Math.random() - 0.5) * 2000
+    const y = (Math.random() - 0.5) * 2000
+    const z = (Math.random() - 0.5) * 2000
+    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
+        starVertB10.push(x, y, z)
+    }
+}
+const starVertB15 = []
+for (let i = 0; i < 100; i++) {
+    const x = (Math.random() - 0.5) * 2000
+    const y = (Math.random() - 0.5) * 2000
+    const z = (Math.random() - 0.5) * 2000
+    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
+        starVertB15.push(x, y, z)
+    }
+}
+const starVertB20 = []
+for (let i = 0; i < 25; i++) {
+    const x = (Math.random() - 0.5) * 2000
+    const y = (Math.random() - 0.5) * 2000
+    const z = (Math.random() - 0.5) * 2000
+    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
+        starVertB20.push(x, y, z)
+    }
+}
 
 starGeometry.setAttribute('position', new Float32BufferAttribute(starVertices, 3))
+starGeoR5.setAttribute('position', new Float32BufferAttribute(starVertR5, 3))
+starGeoR10.setAttribute('position', new Float32BufferAttribute(starVertR10, 3))
+starGeoR15.setAttribute('position', new Float32BufferAttribute(starVertR15, 3))
+starGeoR20.setAttribute('position', new Float32BufferAttribute(starVertR20, 3))
+starGeoB5.setAttribute('position', new Float32BufferAttribute(starVertB5, 3))
+starGeoB10.setAttribute('position', new Float32BufferAttribute(starVertB10, 3))
+starGeoB15.setAttribute('position', new Float32BufferAttribute(starVertB15, 3))
+starGeoB20.setAttribute('position', new Float32BufferAttribute(starVertB20, 3))
 
 const stars = new THREE.Points(starGeometry, starMaterial)
-scene.add(stars)
+const starsR5 = new THREE.Points(starGeoR5, starMatR5)
+const starsR10 = new THREE.Points(starGeoR10, starMatR10)
+const starsR15 = new THREE.Points(starGeoR15, starMatR15)
+const starsR20 = new THREE.Points(starGeoR20, starMatR20)
+const starsB5 = new THREE.Points(starGeoB5, starMatB5)
+const starsB10 = new THREE.Points(starGeoB10, starMatB10)
+const starsB15 = new THREE.Points(starGeoB15, starMatB15)
+const starsB20 = new THREE.Points(starGeoB20, starMatB20)
+scene.add(stars, starsR5, starsR10, starsR15, starsR20, starsB5, starsB10, starsB15, starsB20)
 
 //create solar system
 const center = new THREE.Object3D();
@@ -525,39 +678,24 @@ const jaranius = new THREE.Mesh(
 scene.add(jaranius)
 
 // create cloud layer
-const clouds1 = new THREE.Mesh(
-    new THREE.SphereGeometry(5.03, 50, 50),
-    new THREE.MeshLambertMaterial({
-        alphaMap: textureLoader.load(clouds1AlphaTex),
-        map: textureLoader.load(clouds1Tex),
-        transparent: true,
-        side: DoubleSide
-    })
-)
-jaranius.add(clouds1)
-const clouds2 = new THREE.Mesh(
+const cloudsMaterial = new THREE.MeshLambertMaterial({
+    map: textureLoader.load(cloudsTexture),
+    transparent: true,
+    side: DoubleSide,
+    opacity: 0.5,
+})
+const lowerClouds = new THREE.Mesh(
     new THREE.SphereGeometry(5.04, 50, 50),
-    new THREE.MeshLambertMaterial({
-        //alphaMap: textureLoader.load(clouds2AlphaTex),
-        map: textureLoader.load(clouds2Tex),
-        transparent: true,
-        side: DoubleSide,
-        opacity: 0.5,
-    })
+    cloudsMaterial
 )
-jaranius.add(clouds2)
-const clouds3 = new THREE.Mesh(
+jaranius.add(lowerClouds)
+
+const upperClouds = new THREE.Mesh(
     new THREE.SphereGeometry(5.05, 50, 50),
-    new THREE.MeshLambertMaterial({
-        //alphaMap: textureLoader.load(clouds2AlphaTex),
-        map: textureLoader.load(clouds2Tex),
-        transparent: true,
-        side: DoubleSide,
-        opacity: 0.5,
-    })
+    cloudsMaterial
 )
-jaranius.add(clouds3)
-clouds3.rotateY(Math.PI/2)
+jaranius.add(upperClouds)
+upperClouds.rotateY(Math.PI/2)
 
 // create atmosphericLight
 const atmosphericLight = new THREE.Mesh(
@@ -831,7 +969,9 @@ function getCurve(p1, p2, weight){
   }
 
 //create sun
-const sunRadianceGeo = new THREE.SphereGeometry(25, 50, 50)
+const sunRadius = 5
+const sunRadianceGeo = new THREE.SphereGeometry(sunRadius, 50, 50)
+/* const sunRadianceGeo2 = new THREE.SphereGeometry(20, 50, 50)
 const sunRadianceMat = new THREE.ShaderMaterial({
     vertexShader: sunVertexShader,
     fragmentShader: sunFragmentShader,
@@ -839,19 +979,25 @@ const sunRadianceMat = new THREE.ShaderMaterial({
     transparent: true,
     side: BackSide,
     lights: false,
+}) */
+const sunMat = new THREE.MeshBasicMaterial({
+    map: new THREE.TextureLoader().load(sunTexture)
 })
-const sunRadiance = new THREE.Mesh(sunRadianceGeo, sunRadianceMat)
-sunRadiance.position.set(0, 0, 490)//(-400, 200, 200)
+const sunRadiance = new THREE.Mesh(sunRadianceGeo, sunMat)
+sunRadiance.position.set(0, 0, 490)
 pivot4.add(sunRadiance)
+/* const sunRadiance2 = new THREE.Mesh(sunRadianceGeo2, sunRadianceMat)
+sunRadiance2.position.set(0, 0, 490)
+pivot4.add(sunRadiance2) */
 
 const sunLight = new THREE.PointLight(0xffffff, 1.2, 2000)
-sunLight.position.copy(sunRadiance.position)
+sunLight.position.set(sunRadiance.position.x, sunRadiance.position.y, sunRadiance.position.z - sunRadius * 1.5)
 pivot4.add(sunLight)
 
-const textureFlare0 = textureLoader.load("https://jaranolsen.github.io/Planet/lensflare0.png");
-const textureFlare3 = textureLoader.load("https://jaranolsen.github.io/Planet/lensflare3.png");
+const textureFlare0 = textureLoader.load("https://jaranolsen.github.io/Planet/sunflare.webp");
+const textureFlare3 = textureLoader.load("https://jaranolsen.github.io/Planet/lensflare.webp");
 const lensflare = new Lensflare();
-
+lensflare.position.set( 0, 0, 0 );
 lensflare.addElement( new LensflareElement( textureFlare0, 2560, 0 ) );
 lensflare.addElement( new LensflareElement( textureFlare3, 60, 0.6 ) );
 lensflare.addElement( new LensflareElement( textureFlare3, 70, 0.7 ) );
@@ -872,9 +1018,9 @@ class Moon {
     }
 }
 
-let moon1 = new Moon(1.5, moonTex, 110, -0.0005, pivot1, 0.1);
-let moon2 = new Moon(2.5, moon2Tex, 190, -0.0003, pivot2, 0.05);
-let moon3 = new Moon(1, moon3Tex, 250, -0.0001, pivot3, 0.005);
+let moon1 = new Moon(1.5, moonTexture, 110, -0.0005, pivot1, 0.1);
+let moon2 = new Moon(2.5, redmoonTexture, 190, -0.0003, pivot2, 0.05);
+let moon3 = new Moon(1, icemoonTexture, 250, -0.0001, pivot3, 0.005);
 let moons = [moon1,moon2,moon3];
 
 for (let i = 0; i < moons.length; i++) {
@@ -1278,9 +1424,8 @@ function render(time) {
     pivot2.rotation.y += -0.00003;
     pivot3.rotation.y += -0.000003;
     pivot4.rotation.y += 0.0001;
-    clouds1.rotation.y += 0.00001;
-    clouds2.rotation.y += 0.00005;
-    clouds3.rotation.y += 0.0001;
+    lowerClouds.rotation.y += 0.00005;
+    upperClouds.rotation.y += 0.0001;
 
     if (camera.position.z > 15 && start == true) {
         camera.position.z -= 0.0001 * Math.pow(camera.position.z - 10, 1.35)
@@ -1297,7 +1442,6 @@ function render(time) {
     controls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;
 
     controls.update();
-
 }
 
 animate()

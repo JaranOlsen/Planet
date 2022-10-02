@@ -1,11 +1,13 @@
 MAKE USABLE
-    add guided meditations
+    add guided meditations, beth upton, rupert spira clips 
 
     make improvements to slidecarousel
         interactivity
 
 
 SHORT-TERM DEVELOPMENT
+
+    convert starfield generation to a function
 
     fix VR controllers (udemy course)
 
@@ -17,17 +19,9 @@ SHORT-TERM DEVELOPMENT
     
     add type of curve (dashed, arrowed)
 
-    make starfield more colorful
-        red and blueshift stars?
+    make background more colorful
         fog?
         nebula
-    make better clouds (multiple layers? needs specific blending mode?)
-    tweak atmosphere (moons and stars being occluded - fixed by transparency)
-
-    make smaller textures
-        webP?
-        options at start? 2k 4k 8k
-        make all textures pow2 (clouds2)
         
     find way of editing text, nodesize, nodecolor realtime
     find way of saving lat, long, size, color and text
@@ -42,10 +36,6 @@ LONG-TERM DEVELOPMENT
 
     HTML/CSS
         fix Labels jagged movement
-
-    optimize texture-dimensions
-        In general, textures take width * height * 4 * 1.33 bytes of memory.
-        make all textures in powers of 2
 
     three.js examples that have useful feature/codesnippets
         Better CSS labels: https://github.com/mrdoob/three.js/blob/master/examples/css2d_label.html
