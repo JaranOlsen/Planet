@@ -270,7 +270,6 @@ function buildController( index, line, modelFactory ){
 function onSelectStart( ){
     console.log("select")
     this.userData.selectPressed = true;
-    //jaranius.rotateY += 0.05
     //console.log(buttonStates.a_button, buttonStates.b_button, buttonStates.xr_standard_thumbstick.button, buttonStates.xr_standard_thumbstick.xAxis, buttonStates.xr_standard_thumbstick.yAxis)
     /* console.log(buttonStates,
     gamepadIndices,
@@ -345,13 +344,6 @@ function handleController( controller ){
             /* intersects[0].object.scale.set(2, 2, 2)
             controller.children[0].scale.z = intersects[0].distance;
             controller.userData.selected = intersects[0].object; */
-        }else{
-            if (controller == controller.right) {
-                jaranius.rotation.y += 0.01;
-            }
-            if (controller == controller.left) {
-                jaranius.rotation.y -= 0.01;
-            }
         }
     }
 }
@@ -1489,10 +1481,9 @@ function render(time) {
             const xInput = Number(buttonStates.xr_standard_thumbstick.xAxis)
             const yInput = Number(buttonStates.xr_standard_thumbstick.yAxis)
             if (xInput != 0 || yInput != 0 || buttonStates.a_button != 0 || buttonStates.b_button != 0) {
-                jaranius.rotation.y += xInput;
-                dollyLng += xInput / 100
-                dollyLat += yInput / 100
-                dollyRadius += (0.01 * buttonStates.b_button) - (0.01 * buttonStates.a_button)
+                dollyLng += xInput
+                dollyLat += yInput
+                dollyRadius += (0.01 * buttonStates.a_button) - (0.01 * buttonStates.b_button)
                 const dollyPosit = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
                 dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z)
             }
