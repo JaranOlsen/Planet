@@ -123,6 +123,7 @@ function declareGlobalVariables() {
     window.dollyLat = 90;
     window.dollyLng = 180;
     window.dollyRadius = 8;
+    window.XRinSession = false;
 }
 
 function setupXR() {
@@ -362,6 +363,7 @@ function updateGamepadState(){
     
     if (inputSource && inputSource.gamepad && gamepadIndices && buttonStates){
         const gamepad = inputSource.gamepad;
+        XRinSession = true
         try{
             Object.entries( buttonStates ).forEach( ( [ key, value ] ) => {
                 const buttonIndex = gamepadIndices[key].button;
@@ -1483,7 +1485,7 @@ function render(time) {
             updateGamepadState();
             elapsedTime = 0;
         }
-        if (buttonStates.xr_standard_thumbstick.xAxis != 0) {
+        if (XRinSession == true && buttonStates.xr_standard_thumbstick.xAxis != 0) {
             const dollyPos = convertLatLngtoCartesian(dollyLat, dollyLng + buttonStates.xr_standard_thumbstick.xAxis, dollyRadius)
             dolly.position.set(dollyPos.x, dollyPos.y - 1.6, dollyPos.z)
         }
