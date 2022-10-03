@@ -343,8 +343,10 @@ function handleController( controller ){
                 activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
                 activeCarousel.style.display = "block"
             }
-            renderer.xr.getSession().end();
-            checkForXRSupport();
+            
+            xrSession.end().then(() => xrSession = null);
+            /* renderer.xr.getSession().end();
+            renderer.xr.getSession(); */
             /* window.XRinSession = false;
             renderer.xr.enabled = true; */
             
