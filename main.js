@@ -339,6 +339,7 @@ function handleController( controller ){
                 activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
                 activeCarousel.style.display = "block"
             }
+            renderer.xr.getSession().end();
             
 
             /* intersects[0].object.scale.set(2, 2, 2)
@@ -1483,23 +1484,11 @@ function render(time) {
             if (xInput != 0 || yInput != 0 || buttonStates.a_button != 0 || buttonStates.b_button != 0) {
                 dollyLng += xInput * 2
                 dollyLat += yInput
-                dollyRadius += (0.5 * buttonStates.a_button) - (0.5 * buttonStates.b_button)
+                dollyRadius += ((0.1 * buttonStates.a_button) - (0.1 * buttonStates.b_button)) * (dollyRadius - 5)
                 const dollyPosit = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
                 dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z)
             }
         }
-            /*
-            buttonStates.a_button, 
-            buttonStates.b_button, 
-            buttonStates.xr_standard_thumbstick.button, 
-            buttonStates.xr_standard_thumbstick.xAxis, 
-            buttonStates.xr_standard_thumbstick.yAxis)
-            */
-        /* if (buttonStates.xr_standard_thumbstick !== 0 || buttonStates.a_button !== 0 || buttonStates.b_button !== 0) {
-            const dollyPos = convertLatLngtoCartesian(dollyLat + buttonStates.a_button * 0.1 + buttonStates.b_button * 0.1, dollyLng + buttonStates.xr_standard_thumbstick, dollyRadius + buttonStates.xr_standard_thumbstick)
-            dolly.position.set(dollyPos.x, dollyPos.y, dollyPos.z)
-            camera.lookAt.middleOfPlanet
-        } */
     }
     //
 
