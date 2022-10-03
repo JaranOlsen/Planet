@@ -161,6 +161,10 @@ function setupXR() {
 }
 
 function onConnected( event ){
+    playButton.style.display = "none";
+    skipButton.style.display = "none";
+    credits.style.display = "none";
+
     info = {};
     
     fetchProfile( event.data, DEFAULT_PROFILES_PATH, DEFAULT_PROFILE ).then( ( { profile, assetPath } ) => {
