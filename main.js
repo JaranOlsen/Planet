@@ -1481,9 +1481,9 @@ function render(time) {
             const xInput = Number(buttonStates.xr_standard_thumbstick.xAxis)
             const yInput = Number(buttonStates.xr_standard_thumbstick.yAxis)
             if (xInput != 0 || yInput != 0 || buttonStates.a_button != 0 || buttonStates.b_button != 0) {
-                dollyLng += xInput
+                dollyLng += xInput * 2
                 dollyLat += yInput
-                dollyRadius += (0.01 * buttonStates.a_button) - (0.01 * buttonStates.b_button)
+                dollyRadius += (0.5 * buttonStates.a_button) - (0.5 * buttonStates.b_button)
                 const dollyPosit = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
                 dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z)
             }
