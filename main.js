@@ -340,8 +340,9 @@ function handleController( controller ){
                 activeCarousel.style.display = "block"
             }
             renderer.xr.getSession().end();
+            window.XRinSession = false;
+            renderer.xr.enabled = true;
             
-
             /* intersects[0].object.scale.set(2, 2, 2)
             controller.children[0].scale.z = intersects[0].distance;
             controller.userData.selected = intersects[0].object; */
