@@ -1486,8 +1486,9 @@ function render(time) {
             elapsedTime = 0;
         }
         if (XRinSession == true && buttonStates.xr_standard_thumbstick.xAxis != 0) {
-            const dollyPos = convertLatLngtoCartesian(dollyLat, dollyLng + buttonStates.xr_standard_thumbstick.xAxis, dollyRadius)
-            dolly.position.set(dollyPos.x, dollyPos.y - 1.6, dollyPos.z)
+            dollyLng += buttonStates.xr_standard_thumbstick.xAxis
+            const dollyPosit = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
+            dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z)
         }
             /*
             buttonStates.a_button, 
