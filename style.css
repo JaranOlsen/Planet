@@ -17,7 +17,15 @@ html, body {
   overflow: hidden;
 }
 
+/*  || COMMON ELEMENTS
+p
+h1, h2, h3, h4, h5
+ul and ol
+The table properties
+Links
+*/
 
+/*  || INTRO SCREEN */
 #credits {
   position: absolute;
   z-index: 3;
@@ -28,7 +36,6 @@ html, body {
   top: 5%;
   transform: translateX(-50%) translateY(-50%);
   font-size: .75rem;
-
 }
 #playbutton {
   position: absolute;
@@ -52,7 +59,6 @@ html, body {
 #playbutton:focus{
   outline: 1px solid black;
 }
-
 #skipbutton {
   position: absolute;
   z-index: 3;
@@ -76,6 +82,7 @@ html, body {
   outline: 1px solid black;
 }
 
+/*  || SLIDE SCREENS */
 .carousel {
   position: absolute;
   top: 5vh;
@@ -121,7 +128,6 @@ html, body {
   height: 90vh;
   object-fit: fill;
 }
-
 .slide[data-active] {
   opacity: 1;
   z-index: 2;
@@ -162,11 +168,84 @@ html, body {
   top: 0.1rem;
   font-size: 1rem;
 }
+.menu-button {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4)
+}
+.menu-button:hover,
+.menu-button:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.menu-button:focus{
+  outline: 1px solid black;
+}
+.menu-button.menu {
+  left: 0.5%;
+  top: 1%;
+  font-size: 1rem;
+}
+.menu-button.definition {
+  left: 33%;
+  top: 33%;
+  font-size: 5rem;
+}
+.menu-button.exercise {
+  left: 66%;
+  top: 33%;
+  font-size: 5rem;
+}
+.menu-button.theory {
+  left: 33%;
+  top: 66%;
+  font-size: 5rem;
+}
+.menu-button.media {
+  left: 66%;
+  top: 66%;
+  font-size: 5rem;
+}
+.nav-button {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4)
+}
+.nav-button:hover,
+.nav-button:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.nav-button:focus{
+  outline: 1px solid black;
+}
+.nav-button.one {
+  font-size: 1rem;
+}
+.nav-button.two {
+  font-size: 1rem;
+}
+.nav-button.three {
+  font-size: 1rem;
+}
+.nav-button.four {
+  font-size: 1rem;
+}
+.nav-button.five {
+  font-size: 1rem;
+}
 
-
-
-
-
+/*  || FPS COUNTER */
 #fpsCounter {
   position: absolute;
   left: 0;
@@ -186,6 +265,7 @@ html, body {
   user-select: none; 
 }
 
+/*  || WEBXR (from where?) */
 :xr-overlay {
   /* force a transparent background */
   background: rgba(0,0,0,0) !important;

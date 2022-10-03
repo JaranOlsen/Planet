@@ -2,12 +2,17 @@ MAKE USABLE
     add guided meditations, beth upton, rupert spira clips 
 
     make improvements to slidecarousel
+        return to menu button
+        small section buttons? animating out/up? css text morph animation into icon?
+            one of them bigger/brighter to indicate active section?
         interactivity
 
 
 SHORT-TERM DEVELOPMENT
 
-    convert starfield generation to a function
+    convert to functions:
+        starfield generation
+        slidecarousel buttons
 
     fix VR controllers (udemy course)
 
@@ -31,6 +36,8 @@ SHORT-TERM DEVELOPMENT
 
 
 LONG-TERM DEVELOPMENT
+
+    post-processing?
 
     make procedural geography
 

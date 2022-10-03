@@ -1,6 +1,6 @@
-export const tagList = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see bottom of file for palette), SIZE (10-99), SLIDE-CAROUSEL-ID
-    ["8BD3708E-8E3D-44B8-9E92-1050FA7987E5", " the essence of \n love / meaning", 14.5, 90, 20, 40],
-    ["D4724AD1-EECD-4975-920C-CDAD71AA53C3", "the essence of \n wisdom / will", 14.5, 210, 30, 40],
+export const tagList = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see palette.js), SIZE (10-99), SLIDE-CAROUSEL-ID
+    ["8BD3708E-8E3D-44B8-9E92-1050FA7987E5", " the essence of \n love / meaning", 14.5, 90, 20, 40, 34],
+    ["D4724AD1-EECD-4975-920C-CDAD71AA53C3", "the essence of \n wisdom / will", 14.5, 210, 30, 40, 35],
     ["0027E01B-C40A-49F0-9833-30244700C39E", "   the essence of \n salvation / peace", 14.5, 330, 10, 40],
     ["66F19982-732D-4744-AF06-F1F8A68D898B", "Rewiring the gut", 18, 330,  10, 40],
     ["287B1377-9E86-42B2-99F1-EBBEA971AB08", "Rewiring the heart", 18, 90, 20, 40],
@@ -301,9 +301,9 @@ export const tagList = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see bottom of f
     ["64768881-AED3-403E-92A8-E4A3CBB39100", "Anicca", 76, 122,  20, 40],
     ["EE895C76-B04A-4587-9970-5A6CBA56069C", "Six sense-spheres", 86.5, 108, 20, 40, 17],
     ["DE7F9890-14E7-433A-AD84-B0E18BE5BD79", "Insights", 64, 115,  20, 40],
-    ["95BBCB02-420D-4FD9-A9BA-A404D72B41D3", "Nature of fundamental reality", 21, 174, 30, 25],
-    ["6A893E71-2F6B-4958-B917-5F145FA37CF5", "Matter", 22, 164,  30, 20],
-    ["3041389D-AD21-46F6-9721-2DD4E9FC1F65", "Consciousness", 22, 184, 30, 20],
+    ["95BBCB02-420D-4FD9-A9BA-A404D72B41D3", "Nature of fundamental reality", 21, 174, 33, 25],
+    ["6A893E71-2F6B-4958-B917-5F145FA37CF5", "Matter", 22, 164,  33, 20],
+    ["3041389D-AD21-46F6-9721-2DD4E9FC1F65", "Consciousness", 22, 184, 33, 20],
     ["CC97CAEF-3828-466E-B55A-BA85783CE034", "Acceptance and agency", 80, 3, 12, 40],
     ["0F8B3461-7B9D-4E1D-A392-A6DE782AE537", "Motivation split", 82, 289,  12, 40],
     ["DEADD385-73FB-4EA3-AACC-13C6B453E9E6", "Transcendence needs", 83, 307, 10, 40],

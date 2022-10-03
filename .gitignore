@@ -9,8 +9,8 @@ lerna-debug.log*
 
 node_modules
 dist
-upload
-backup
+upload/
+backup/
 dist-ssr
 *.local
 

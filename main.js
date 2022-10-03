@@ -99,8 +99,6 @@ let selectedPin = null;
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 let xrInitialized = false
 
-//scene.fog = new THREE.FogExp2(0x5599ff, 0.0001);
-
 //WEB XR
 async function checkForXRSupport() {
     navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
@@ -445,7 +443,7 @@ skipButton.addEventListener("click", () => {
     })
 
 
-//create Slide carousel
+//Slide carousel
 let activeCarousel
 const buttons = document.querySelectorAll("[data-carousel-button]")
 
@@ -463,6 +461,120 @@ buttons.forEach(button => {
             const activeSlide = slides.querySelector("[data-active]")
             let newIndex = [...slides.children].indexOf(activeSlide) + offset
 
+            slides.children[newIndex].dataset.active = true
+            delete activeSlide.dataset.active
+        }
+    })
+})
+
+const menuButtons = document.querySelectorAll("[data-menu-button]")
+menuButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const carousel = document.querySelector('.carousel')
+        if (button.dataset.menuButton === "menu") {
+            const slides = button
+                .closest("[data-carousel]")
+                .querySelector("[data-slides]")
+            const activeSlide = slides.querySelector("[data-active]")
+            const targetSlide = slides.querySelector("[menu]")
+            let newIndex = [...slides.children].indexOf(targetSlide)
+            slides.children[newIndex].dataset.active = true
+            delete activeSlide.dataset.active
+        }
+        if (button.dataset.menuButton === "definition") {
+            const slides = button
+                .closest("[data-carousel]")
+                .querySelector("[data-slides]")
+            const activeSlide = slides.querySelector("[data-active]")
+            const targetSlide = slides.querySelector("[definition]")
+            let newIndex = [...slides.children].indexOf(targetSlide)
+            slides.children[newIndex].dataset.active = true
+            delete activeSlide.dataset.active
+        }
+        if (button.dataset.menuButton === "exercise") {
+            const slides = button
+                .closest("[data-carousel]")
+                .querySelector("[data-slides]")
+            const activeSlide = slides.querySelector("[data-active]")
+            const targetSlide = slides.querySelector("[exercise]")
+            let newIndex = [...slides.children].indexOf(targetSlide)
+            slides.children[newIndex].dataset.active = true
+            delete activeSlide.dataset.active
+        }
+        if (button.dataset.menuButton === "theory") {
+            const slides = button
+                .closest("[data-carousel]")
+                .querySelector("[data-slides]")
+            const activeSlide = slides.querySelector("[data-active]")
+            const targetSlide = slides.querySelector("[theory]")
+            let newIndex = [...slides.children].indexOf(targetSlide)
+            slides.children[newIndex].dataset.active = true
+            delete activeSlide.dataset.active
+        }
+        if (button.dataset.menuButton === "media") {
+            const slides = button
+                .closest("[data-carousel]")
+                .querySelector("[data-slides]")
+            const activeSlide = slides.querySelector("[data-active]")
+            const targetSlide = slides.querySelector("[media]")
+            let newIndex = [...slides.children].indexOf(targetSlide)
+            slides.children[newIndex].dataset.active = true
+            delete activeSlide.dataset.active
+        }
+    })
+})
+
+const navButtons = document.querySelectorAll("[data-nav-button]")
+navButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const carousel = document.querySelector('.carousel')
+        if (button.dataset.navButton === "one") {
+            const slides = button
+                .closest("[data-carousel]")
+                .querySelector("[data-slides]")
+            const activeSlide = slides.querySelector("[data-active]")
+            const targetSlide = slides.querySelector("[one]")
+            let newIndex = [...slides.children].indexOf(targetSlide)
+            slides.children[newIndex].dataset.active = true
+            delete activeSlide.dataset.active
+        }
+        if (button.dataset.navButton === "two") {
+            const slides = button
+                .closest("[data-carousel]")
+                .querySelector("[data-slides]")
+            const activeSlide = slides.querySelector("[data-active]")
+            const targetSlide = slides.querySelector("[two]")
+            let newIndex = [...slides.children].indexOf(targetSlide)
+            slides.children[newIndex].dataset.active = true
+            delete activeSlide.dataset.active
+        }
+        if (button.dataset.navButton === "three") {
+            const slides = button
+                .closest("[data-carousel]")
+                .querySelector("[data-slides]")
+            const activeSlide = slides.querySelector("[data-active]")
+            const targetSlide = slides.querySelector("[three]")
+            let newIndex = [...slides.children].indexOf(targetSlide)
+            slides.children[newIndex].dataset.active = true
+            delete activeSlide.dataset.active
+        }
+        if (button.dataset.navButton === "four") {
+            const slides = button
+                .closest("[data-carousel]")
+                .querySelector("[data-slides]")
+            const activeSlide = slides.querySelector("[data-active]")
+            const targetSlide = slides.querySelector("[four]")
+            let newIndex = [...slides.children].indexOf(targetSlide)
+            slides.children[newIndex].dataset.active = true
+            delete activeSlide.dataset.active
+        }
+        if (button.dataset.navButton === "five") {
+            const slides = button
+                .closest("[data-carousel]")
+                .querySelector("[data-slides]")
+            const activeSlide = slides.querySelector("[data-active]")
+            const targetSlide = slides.querySelector("[five]")
+            let newIndex = [...slides.children].indexOf(targetSlide)
             slides.children[newIndex].dataset.active = true
             delete activeSlide.dataset.active
         }
@@ -1429,6 +1541,10 @@ function render(time) {
 
     if (camera.position.z > 15 && start == true) {
         camera.position.z -= 0.0001 * Math.pow(camera.position.z - 10, 1.35)
+        jaranius.rotation.y += 0.0005;
+    }
+    if (camera.position.z < -15 && start == true) {
+        camera.position.z += 0.0001 * Math.pow(Math.abs(camera.position.z) - 10, 1.35)
         jaranius.rotation.y += 0.0005;
     }
     for (let i = 0; i < pins.length; i++) {
