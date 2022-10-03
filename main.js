@@ -1486,8 +1486,10 @@ function render(time) {
             elapsedTime = 0;
         }
         if (XRinSession == true) {
-            if (buttonStates.xr_standard_thumbstick.xAxis != 0 || buttonStates.xr_standard_thumbstick.yAxis != 0 || buttonStates.a_button != 0 || buttonStates.b_button != 0) {
-                jaranius.rotation.y += buttonStates.xr_standard_thumbstick.xAxis;
+            const xInput = Number(buttonStates.xr_standard_thumbstick.xAxis)
+            const yInput = Number(buttonStates.xr_standard_thumbstick.yAxis)
+            if (xInput != 0 || yInput != 0 || buttonStates.a_button != 0 || buttonStates.b_button != 0) {
+                jaranius.rotation.y += xInput;
                 /* dollyLng += buttonStates.xr_standard_thumbstick.xAxis
                 const dollyPosit = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
                 dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z) */
