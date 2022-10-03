@@ -159,44 +159,6 @@ function setupXR() {
     controllers.left = buildController( 1, line, modelFactory );
 }
 
-function createButtonStates(components){
-    buttonStates = {};
-    gamepadIndices = components
-    Object.keys( components ).forEach( (key) => {
-        if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
-            buttonStates[key] = { button: 0, xAxis: 0, yAxis: 0 };
-        }else{
-            buttonStates[key] = 0; 
-        }
-    })
-}
-
-function updateGamepadState(){
-    const session = renderer.xr.getSession();
-    
-    const inputSource = session.inputSources[0];
-    
-    if (inputSource && inputSource.gamepad && gamepadIndices && buttonStates){
-        const gamepad = inputSource.gamepad;
-        try{
-            Object.entries( buttonStates ).forEach( ( [ key, value ] ) => {
-                const buttonIndex = gamepadIndices[key].button;
-                if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
-                    const xAxisIndex = gamepadIndices[key].xAxis;
-                    const yAxisIndex = gamepadIndices[key].yAxis;
-                    buttonStates[key].button = gamepad.buttons[buttonIndex].value; 
-                    buttonStates[key].xAxis = gamepad.axes[xAxisIndex].toFixed(2); 
-                    buttonStates[key].yAxis = gamepad.axes[yAxisIndex].toFixed(2); 
-                }else{
-                    buttonStates[key] = gamepad.buttons[buttonIndex].value;
-                }
-            });
-        }catch(e){
-            console.warn("An error occurred setting the ui");
-        }
-    }
-}
-
 function onConnected( event ){
     info = {};
     
@@ -223,75 +185,16 @@ function onConnected( event ){
     } );
 }
 
-function buildController( index, line, modelFactory ){
-    const controller = renderer.xr.getController( index );
-    
-    controller.userData.selectPressed = false;
-    controller.userData.index = index;
-    
-    if (line) controller.add( line.clone() );
-    
-    dolly.add( controller );
-    
-    let grip;
-    
-    if ( modelFactory ){
-        grip = renderer.xr.getControllerGrip( index );
-        grip.add( modelFactory.createControllerModel( grip ));
-        dolly.add( grip );
-    }
-    
-    return { controller, grip };
-}
-
-function onSelectStart( ){
-    console.log("select")
-    this.userData.selectPressed = true;
-    //jaranius.rotateY += 0.05
-    
-}
-
-function onSelectEnd( ){
-    this.children[0].scale.z = 0;
-    this.userData.selectPressed = false;
-    this.userData.selected = undefined;
-    console.log("selectend")
-}
-
-function onSqueezeStart( ){
-    this.userData.squeezePressed = true;
-    if (this.userData.selected !== undefined ){
-        this.attach( this.userData.selected );
-        this.userData.attachedObject = userData.selected;
-    }
-    console.log("squeeze")
-}
-
-function onSqueezeEnd( ){
-    this.userData.squeezePressed = false;
-    if (this.userData.attachedObject !== undefined){
-            room.attach( this.userData.attachedObject );
-        this.userData.attachedObject = undefined;
-    }
-    console.log("squeezeend")
-}
-
-function onDisconnected(){
-    const index = userData.index;
-    console.log(`Disconnected controller ${index}`);
-    
-    if ( controllers ){
-        const obj = (index==0) ? controllers.right : controllers.left;
-        
-        if (obj){
-            if (obj.controller){
-                const controller = obj.controller;
-                while( controller.children.length > 0 ) controller.remove( controller.children[0] );
-                dolly.remove( controller );
-            }
-            if (obj.grip) dolly.remove( obj.grip );
+function createButtonStates(components){
+    buttonStates = {};
+    gamepadIndices = components
+    Object.keys( components ).forEach( (key) => {
+        if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
+            buttonStates[key] = { button: 0, xAxis: 0, yAxis: 0 };
+        }else{
+            buttonStates[key] = 0; 
         }
-    }
+    })
 }
 
 function updateControllers(info){
@@ -342,6 +245,81 @@ function updateControllers(info){
     }
 }
 
+function buildController( index, line, modelFactory ){
+    const controller = renderer.xr.getController( index );
+    
+    controller.userData.selectPressed = false;
+    controller.userData.index = index;
+    
+    if (line) controller.add( line.clone() );
+    
+    dolly.add( controller );
+    
+    let grip;
+    
+    if ( modelFactory ){
+        grip = renderer.xr.getControllerGrip( index );
+        grip.add( modelFactory.createControllerModel( grip ));
+        dolly.add( grip );
+    }
+    
+    return { controller, grip };
+}
+
+function onSelectStart( ){
+    console.log("select")
+    this.userData.selectPressed = true;
+    //jaranius.rotateY += 0.05
+    //console.log(buttonStates.a_button, buttonStates.b_button, buttonStates.xr_standard_thumbstick.button, buttonStates.xr_standard_thumbstick.xAxis, buttonStates.xr_standard_thumbstick.yAxis)
+    /* console.log(buttonStates,
+    gamepadIndices,
+    info,
+    controllers) */
+}
+
+function onSelectEnd( ){
+    this.children[0].scale.z = 0;
+    this.userData.selectPressed = false;
+    this.userData.selected = undefined;
+    console.log("selectend")
+}
+
+function onSqueezeStart( ){
+    this.userData.squeezePressed = true;
+    if (this.userData.selected !== undefined ){
+        this.attach( this.userData.selected );
+        this.userData.attachedObject = userData.selected;
+    }
+    console.log("squeeze")
+}
+
+function onSqueezeEnd( ){
+    this.userData.squeezePressed = false;
+    if (this.userData.attachedObject !== undefined){
+            room.attach( this.userData.attachedObject );
+        this.userData.attachedObject = undefined;
+    }
+    console.log("squeezeend")
+}
+
+function onDisconnected(){
+    const index = userData.index;
+    console.log(`Disconnected controller ${index}`);
+    
+    if ( controllers ){
+        const obj = (index==0) ? controllers.right : controllers.left;
+        
+        if (obj){
+            if (obj.controller){
+                const controller = obj.controller;
+                while( controller.children.length > 0 ) controller.remove( controller.children[0] );
+                dolly.remove( controller );
+            }
+            if (obj.grip) dolly.remove( obj.grip );
+        }
+    }
+}
+
 function handleController( controller ){
     if (controller.userData.selectPressed ){
         controller.children[0].scale.z = 10;
@@ -367,7 +345,38 @@ function handleController( controller ){
             controller.children[0].scale.z = intersects[0].distance;
             controller.userData.selected = intersects[0].object; */
         }else{
-            jaranius.rotation.y += 0.005;
+            if (controller == controller.right) {
+                jaranius.rotation.y += 0.01;
+            }
+            if (controller == controller.left) {
+                jaranius.rotation.y -= 0.01;
+            }
+        }
+    }
+}
+
+function updateGamepadState(){
+    const session = renderer.xr.getSession();
+    
+    const inputSource = session.inputSources[0];
+    
+    if (inputSource && inputSource.gamepad && gamepadIndices && buttonStates){
+        const gamepad = inputSource.gamepad;
+        try{
+            Object.entries( buttonStates ).forEach( ( [ key, value ] ) => {
+                const buttonIndex = gamepadIndices[key].button;
+                if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
+                    const xAxisIndex = gamepadIndices[key].xAxis;
+                    const yAxisIndex = gamepadIndices[key].yAxis;
+                    buttonStates[key].button = gamepad.buttons[buttonIndex].value; 
+                    buttonStates[key].xAxis = gamepad.axes[xAxisIndex].toFixed(2); 
+                    buttonStates[key].yAxis = gamepad.axes[yAxisIndex].toFixed(2); 
+                }else{
+                    buttonStates[key] = gamepad.buttons[buttonIndex].value;
+                }
+            });
+        }catch(e){
+            console.warn("An error occurred setting the ui");
         }
     }
 }
@@ -1474,12 +1483,22 @@ function render(time) {
             updateGamepadState();
             elapsedTime = 0;
         }
+        if (buttonStates.xr_standard_thumbstick.xAxis != 0) {
+            const dollyPos = convertLatLngtoCartesian(dollyLat, dollyLng + buttonStates.xr_standard_thumbstick.xAxis, dollyRadius)
+            dolly.position.set(dollyPos.x, dollyPos.y - 1.6, dollyPos.z)
+        }
+            /*
+            buttonStates.a_button, 
+            buttonStates.b_button, 
+            buttonStates.xr_standard_thumbstick.button, 
+            buttonStates.xr_standard_thumbstick.xAxis, 
+            buttonStates.xr_standard_thumbstick.yAxis)
+            */
         /* if (buttonStates.xr_standard_thumbstick !== 0 || buttonStates.a_button !== 0 || buttonStates.b_button !== 0) {
             const dollyPos = convertLatLngtoCartesian(dollyLat + buttonStates.a_button * 0.1 + buttonStates.b_button * 0.1, dollyLng + buttonStates.xr_standard_thumbstick, dollyRadius + buttonStates.xr_standard_thumbstick)
             dolly.position.set(dollyPos.x, dollyPos.y, dollyPos.z)
             camera.lookAt.middleOfPlanet
         } */
-        //console.log(buttonStates)
     }
     //
 
