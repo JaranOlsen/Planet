@@ -1,48 +1,44 @@
 MAKE USABLE
     add guided meditations, beth upton, rupert spira clips 
 
-    make improvements to slidecarousel
-        return to menu button
-        small section buttons? animating out/up? css text morph animation into icon?
-            one of them bigger/brighter to indicate active section?
-        interactivity
-
+    re-enter VR / access to html elements in VR
 
 SHORT-TERM DEVELOPMENT
+
+    add type of curve (dashed, arrowed)
+
+    add LP static to intro 
+
+    make design improvements to slidecarousel
 
     convert to functions:
         starfield generation
         slidecarousel buttons
 
-    fix VR controllers (udemy course)
+    improve VR controllers
 
     light up area around when hover pin (create or move spotlight?)
 
     fix assets so i won't have to upload (fonts and flares)
 
-    add LP static to intro 
-    
-    add type of curve (dashed, arrowed)
-
     make background more colorful
         fog?
         nebula
-        
-    find way of editing text, nodesize, nodecolor realtime
-    find way of saving lat, long, size, color and text
-    find a way of adding connections realtime
-    find a way of saving connections
-
-
+    
 
 LONG-TERM DEVELOPMENT
 
-    post-processing?
+    post-processing? bloom?
 
     make procedural geography
 
     HTML/CSS
         fix Labels jagged movement
+
+    find way of editing text, nodesize, nodecolor realtime
+    find way of saving lat, long, size, color and text
+    find a way of adding connections realtime
+    find a way of saving connections
 
     three.js examples that have useful feature/codesnippets
         Better CSS labels: https://github.com/mrdoob/three.js/blob/master/examples/css2d_label.html
