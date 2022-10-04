@@ -18,12 +18,15 @@ import {
 } from 'three/examples/jsm/libs/motion-controllers.module.js';
 
 //    IMPORT SHADERS
-import vertexShader from './shaders/vertex.glsl';
-import fragmentShader from './shaders/fragment.glsl';
+import atmosphericLightVertexShader from './shaders/atmosphericLightVertex.glsl';
+import atmosphericLightFragmentShader from './shaders/atmosphericLightFragment.glsl';
 import atmosphereVertexShader from './shaders/atmosphereVertex.glsl';
 import atmosphereFragmentShader from './shaders/atmosphereFragment.glsl';
 import sunVertexShader from './shaders/sunVertex.glsl';
 import sunFragmentShader from './shaders/sunFragment.glsl';
+import spiralVertexShader from './shaders/spiralVertex.glsl';
+import spriralFragmentShader from './shaders/spiralFragment.glsl';
+
 
 //    IMPORT TEXTURES
 //import diffuseTexture from "./img/textures/terrain8k.jpg"
@@ -97,6 +100,7 @@ const clock = new THREE.Clock();
 let selectedPin = null;
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
+const spiral = new THREE.Object3D()
 let xrInitialized = false
 
 //WEB XR
@@ -343,7 +347,7 @@ function handleController( controller ){
                 activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
                 activeCarousel.style.display = "block"
             }
-            
+
             xrSession.end().then(() => xrSession = null);
             /* renderer.xr.getSession().end();
             renderer.xr.getSession(); */
@@ -825,8 +829,8 @@ upperClouds.rotateY(Math.PI/2)
 const atmosphericLight = new THREE.Mesh(
     new THREE.SphereGeometry(5.0, 250, 250),
     new THREE.ShaderMaterial({
-        vertexShader: vertexShader,
-        fragmentShader: fragmentShader,
+        vertexShader: atmosphericLightVertexShader,
+        fragmentShader: atmosphericLightFragmentShader,
         blending: THREE.AdditiveBlending,
     })
 )
@@ -850,7 +854,7 @@ atmosphere.scale.set(1.2, 1.2, 1.2)
 jaranius.add(atmosphere);
 
 //create pictureBoxes
-function instantiateImg(textureSrc, lat, lng, size) {
+function instantiateImg(textureSrc, lat, lng, size, radius, context) {
     const textureLoader = new THREE.TextureLoader()
     let img = textureLoader.load(textureSrc);
     const boxMat = new THREE.MeshBasicMaterial( {
@@ -897,15 +901,20 @@ function instantiateImg(textureSrc, lat, lng, size) {
     boxGeo.translate( boxMidx, boxMidy * 0, 0 );
     let box = new THREE.Mesh(boxGeo, boxMat);
 
-    let boxLatLng = convertLatLngtoCartesian(lat, lng, 5.06);
+    let boxLatLng = convertLatLngtoCartesian(lat, lng, radius);
     let boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
     box.lookAt( boxRotationVector )
     box.position.copy( boxRotationVector )
-    jaranius.add( box );
+    if (context == "jaranius") {
+        jaranius.add( box );
+    } else if (context == "spiral") {
+        spiral.add( box );
+    }
+    
 }
 
 for (let i = 0; i < imgList.length; i++) {
-    instantiateImg(imgList[i][1], imgList[i][2], imgList[i][3] - 180, imgList[i][4] / 500);
+    instantiateImg(imgList[i][1], imgList[i][2], imgList[i][3] - 180, imgList[i][4] / 500, imgList[i][5], imgList[i][6]);
 }
 
 //create tags
@@ -1166,6 +1175,65 @@ for (let i = 0; i < moons.length; i++) {
     mesh.add(moonlight);
 }
 
+//create Spiral
+let spiralActivated = false
+function createSpiral() {
+    spiralActivated = true
+    scene.add(spiral)
+    let helixMaxRadius = 7;
+    let helixRevolutions = 9;
+    let helixPoints = []
+    let colors = ["burlywood", "purple", "red", "blue", "orange", "green", "yellow", "turquoise", "coral"]
+
+    for (let i = 0; i < helixRevolutions; i++) {
+        helixPoints[i] = []
+        for (let t = (2 * Math.PI) * i; t <= (2 * Math.PI) * (i + 1.03); t += Math.PI / 128) {
+            let radiusModifier = Math.sin(t / (helixRevolutions * 2))
+            let helixX = radiusModifier * helixMaxRadius * Math.cos(t);
+            let helixZ = radiusModifier * helixMaxRadius * Math.sin(t)
+            let helixY = (helixMaxRadius / (helixRevolutions * Math.PI)) * t
+
+            helixPoints[i].push(new THREE.Vector3(helixX, helixY - helixMaxRadius, helixZ));
+        }
+
+        let helixCurve = new THREE.CatmullRomCurve3(helixPoints[i]);
+
+        const geometry = new THREE.TubeGeometry(helixCurve, 64, 0.01, 10, false);
+        geometry.computeBoundingBox();
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                color1: {
+                value: new THREE.Color(colors[i])
+                },
+                color2: {
+                value: new THREE.Color(colors[i+1])
+                },
+                bboxMin: {
+                value: geometry.boundingBox.min
+                },
+                bboxMax: {
+                value: geometry.boundingBox.max
+                }
+            },
+            vertexShader: spiralVertexShader,
+            fragmentShader: spriralFragmentShader,
+        })
+        const spiralSection = new THREE.Mesh(geometry, material);
+        spiral.add(spiralSection)
+
+        const geometry2 = new THREE.TubeGeometry(helixCurve, 64, 0.10 - i / 70, 10, false);
+        const material2 = new THREE.MeshBasicMaterial({
+            color: colors[i],
+            transparent: true,
+            opacity: 0.6
+        })
+        const spiralSection2 = new THREE.Mesh(geometry2, material2);
+        spiral.add(spiralSection2)
+        spiral.rotation.set(0, Math.PI, 0)
+    }
+}
+
+
 //create Gutta
 const guttaScale = 0.0003;
 
@@ -1413,6 +1481,16 @@ function onDocumentKeyUp(event) {
             spotlight.intensity = spotlightIntensity
         } else spotlight.intensity = 0
     }
+    if (keyCode == 83) {
+        if (spiralActivated == false) {
+            createSpiral()
+        } else {
+            spiralActivated = false
+            scene.remove(spiral)
+        }
+    }
+
+    
 }
 
 document.addEventListener("keydown", onDocumentKeyDown, false);
