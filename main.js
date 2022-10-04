@@ -142,16 +142,6 @@ function setupXR() {
     scene.add( dolly );
     camera.add( dummyCam );
 
- /*    let test = new THREE.Vector3();
-    test.set(-dollyPos.x, -(dollyPos.y - 1.6), -dollyPos.z)
-    console.log(test, dolly.position, camera.position, dummyCam.position)
-    test.normalize()
-    console.log(test)
-    console.log(dolly.rotation)
-    dolly.rotateY = test.y
-    console.log(dolly.rotation) */
-    
-
     const controller = renderer.xr.getController( 0 );
     controller.addEventListener( 'connected', onConnected );
     const modelFactory = new XRControllerModelFactory();
@@ -914,7 +904,8 @@ function instantiateImg(textureSrc, lat, lng, size, radius, context) {
 }
 
 for (let i = 0; i < imgList.length; i++) {
-    instantiateImg(imgList[i][1], imgList[i][2], imgList[i][3] - 180, imgList[i][4] / 500, imgList[i][5], imgList[i][6]);
+    //instantiateImg(imgList[i][1], imgList[i][2], imgList[i][3] - 180, imgList[i][4] / 500, imgList[i][5], imgList[i][6]);
+    instantiateImg(imgList[i].src, imgList[i].lat, imgList[i].lng - 180, imgList[i].size / 500, imgList[i].radius, imgList[i].context);
 }
 
 //create tags
@@ -1014,7 +1005,7 @@ loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/m
     
     for (let i = 0; i < tagList.length; i++) {
         
-        let tag = instantiateTag(tagList[i][1], tagList[i][2], tagList[i][3] - 180, palette[tagList[i][4]], palette[tagList[i][4]], tagList[i][5] / 100000);
+        let tag = instantiateTag(tagList[i].text, tagList[i].lat, tagList[i].lng - 180, palette[tagList[i].color], palette[tagList[i].color], tagList[i].size / 100000);
     }
 } );
 
@@ -1049,28 +1040,28 @@ function instantiatePin(txt, lat, lng, color, originalColor, radius, wireframe) 
 let pins = []
 for (let i = 0; i < tagList.length; i++) {
     let hasSlides;
-    if (tagList[i][6] == undefined) {
+    if (tagList[i].slides == undefined) {
         hasSlides = false
     } else hasSlides = true
-    let pin = instantiatePin(tagList[i][1], tagList[i][2], tagList[i][3] - 180, palette[tagList[i][4]], palette[tagList[i][4]], tagList[i][5] / 1500, hasSlides);
+    let pin = instantiatePin(tagList[i].text, tagList[i].lat, tagList[i].lng - 180, palette[tagList[i].color], palette[tagList[i].color], tagList[i].size / 1500, hasSlides);
     pins.push(pin);
 }
 
 //create connections
-let curveThickness = 0.0001
+let curveThickness = 0.0002
 let curveRadiusSegments = 3
 let curveMaxAltitude = 0.03
 let curveMinAltitude = 5.01
 
 for (let i = 0; i < tagList.length; i++) {
     for (let j = 0; j < tagConnections.length; j++) {
-        if (tagList[i][0] == tagConnections[j][0]) {
+        if (tagList[i].id == tagConnections[j][0]) {
             for (let k = 1; k < tagConnections[j].length; k++) {
                 for (let l = 0; l < tagList.length; l++) {
-                    if (tagList[l][0] == tagConnections[j][k]) {
-                        let t1 = convertLatLngtoCartesian(tagList[i][2], tagList[i][3] - 180, curveMinAltitude);
-                        let t2 = convertLatLngtoCartesian(tagList[l][2], tagList[l][3] - 180, curveMinAltitude);
-                        const weight = (tagList[i][5] + tagList[l][5]) / 2;
+                    if (tagList[l].id == tagConnections[j][k]) {
+                        let t1 = convertLatLngtoCartesian(tagList[i].lat, tagList[i].lng - 180, curveMinAltitude);
+                        let t2 = convertLatLngtoCartesian(tagList[l].lat, tagList[l].lng - 180, curveMinAltitude);
+                        const weight = (tagList[i].size + tagList[l].size) / 2;
                         getCurve(t1, t2, weight);
                     }
                 }
@@ -1608,7 +1599,7 @@ function render(time) {
             selectedPin = intersects[0].object;
             if (camera.position.distanceTo(selectedPin.position) < 3) {
                 const selectedPinIndex = pinPositions.findIndex((object) => object==intersects[0].object)
-                const selectedCarousel = tagList[selectedPinIndex][6]
+                const selectedCarousel = tagList[selectedPinIndex].slides
                 activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
                 activeCarousel.style.display = "block"
             }
