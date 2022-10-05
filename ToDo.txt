@@ -1,9 +1,20 @@
 MAKE USABLE
     add guided meditations, beth upton, rupert spira clips 
+        ken wilber clips?
 
     re-enter VR / access to html elements in VR
 
+
+
 SHORT-TERM DEVELOPMENT
+
+    tweak terrain colors - deeper blue oceans? higher contrast? see real photo
+
+    make functions of init processes - add key for showing/hiding mindmap
+        different files for different contexts - initialized by function
+        improve folder structure? build folder? data folder?
+    
+    planet icon
 
     add type of curve (dashed, arrowed)
 

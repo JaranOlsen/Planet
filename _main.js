@@ -1,23 +1,22 @@
+//  IMPORT DEPENDENCIES
 import * as THREE from 'three';
 import { Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, RGBADepthPacking, SubtractiveBlending } from 'three';
-import { tagList } from './tagData.js'
-import { imgList } from './imgData.js'
-import { tagConnections } from './tagConnectionData.js'
-import { palette } from './palette.js'
-import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng } from './mathScripts.js'
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'; 
 import { VRButton } from 'three/addons/webxr/VRButton.js';
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
+import { Constants as MotionControllerConstants, fetchProfile, MotionController } from 'three/examples/jsm/libs/motion-controllers.module.js';
 import { GUI } from 'dat.gui'
-import {
-	Constants as MotionControllerConstants,
-	fetchProfile,
-	MotionController
-} from 'three/examples/jsm/libs/motion-controllers.module.js';
 
-//    IMPORT SHADERS
+//  IMPORT SCRIPTS
+import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng } from './mathScripts.js'
+import { tagList } from './tagData.js'
+import { imgList } from './imgData.js'
+import { tagConnections } from './tagConnectionData.js'
+import { palette } from './palette.js'
+
+//  IMPORT SHADERS
 import atmosphericLightVertexShader from './shaders/atmosphericLightVertex.glsl';
 import atmosphericLightFragmentShader from './shaders/atmosphericLightFragment.glsl';
 import atmosphereVertexShader from './shaders/atmosphereVertex.glsl';
@@ -27,8 +26,7 @@ import sunFragmentShader from './shaders/sunFragment.glsl';
 import spiralVertexShader from './shaders/spiralVertex.glsl';
 import spriralFragmentShader from './shaders/spiralFragment.glsl';
 
-
-//    IMPORT TEXTURES
+//  IMPORT TEXTURES
 //import diffuseTexture from "./img/textures/terrain8k.jpg"
 import diffuseTexture from "./img/textures/diffuse4k.webp"
 import normalTexture from "./img/textures/normal1k.webp"
