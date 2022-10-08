@@ -54,3 +54,24 @@ export function convertCartesiantoLatLng(x, y, z) {
         lat, lng
     }
 }
+
+export function constrainLatLng(lat, lng) {
+    if (lat < 0) {
+        lat = Math.abs(lat)
+        if (lng < 180) {
+        lng += 180
+        } else lng -= 180
+
+    }
+    if (lat > 180) {
+        lat = 180 - (lat - 180)
+        if (lng < 180) {
+            lng += 180
+        } else lng -= 180
+
+    }
+    if (lng < 0) {lng = 360 + lng}
+    if (lng > 360) {lng = lng - 360}
+
+    return {lat, lng}
+}

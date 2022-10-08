@@ -2,7 +2,6 @@
 import * as THREE from 'three';
 import { Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, RGBADepthPacking, SubtractiveBlending } from 'three';
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'; 
 import { VRButton } from 'three/addons/webxr/VRButton.js';
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
@@ -10,10 +9,14 @@ import { Constants as MotionControllerConstants, fetchProfile, MotionController 
 import { GUI } from 'dat.gui'
 
 //  IMPORT SCRIPTS
-import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng } from './mathScripts.js'
-import { tagList } from './data/tagData.js'
-import { imgList } from './data/imgData.js'
-import { tagConnections } from './data/tagConnectionData.js'
+import { createImages, createTags, pins, tags, pinPositions, createConnections } from './mindmap.js';
+import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
+import { tagPlanetData } from './data/tagPlanetData.js'
+import { tagPlanetConnections } from './data/tagPlanetConnectionData.js'
+import { imgPlanetData } from './data/imgPlanetData.js'
+import { tagSpiralData } from './data/tagSpiralData.js';
+import { tagSpiralConnections } from './data/tagSpiralConnectionData.js';
+import { imgSpiralData } from './data/imgSpiralData.js'
 import { palette } from './data/palette.js'
 
 //  IMPORT SHADERS
@@ -27,11 +30,23 @@ import spiralVertexShader from '../shaders/spiralVertex.glsl';
 import spriralFragmentShader from '../shaders/spiralFragment.glsl';
 
 //  IMPORT TEXTURES
+
+    // ||Diffuse - 
 //import diffuseTexture from "../img/textures/terrain8k.jpg"
-import diffuseTexture from "../img/textures/diffuse4k.webp"
-import normalTexture from "../img/textures/normal1k.webp"
-import roughnessTex from "../img/textures/roughness1k.webp"
-import cloudsTexture from "../img/textures/clouds.webp"
+//import diffuseTexture from "../img/textures/diffuse4k.webp"
+//import diffuseTexture from "../img/textures/earth8k.jpeg"
+import diffuseTexture from "../img/textures/diffuse8kvibrance.webp"
+//import diffuseTexture from "../img/textures/diffuse4kNASA.webp"
+
+    // ||Normals - White = high altitude - see https://www.youtube.com/watch?v=YJqWHsllczY&t=1s on how to best generate
+//import normalTexture from "../img/textures/normal1k.webp"
+//import normalTexture from "../img/textures/normal1kNASA.webp"
+import normalTexture from "../img/textures/normals2k.webp"
+
+    // ||Roughness - White = high roughness
+import roughnessTexture from "../img/textures/roughness2k.webp"
+
+import cloudsTexture from "../img/textures/clouds4k.webp"
 import starW from "../img/textures/starW.webp"
 import starR5 from "../img/textures/starR5.webp"
 import starR10 from "../img/textures/starR10.webp"
@@ -47,8 +62,6 @@ import redmoonTexture from "../img/textures/moonRed1k.webp"
 import icemoonTexture from "../img/textures/moonIce1k.webp"
 /* import flare0 from "../img/lensflare0.png"
 import flare3 from "../img/lensflare3.png" */
-
-const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
 
 const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
 const DEFAULT_PROFILE = 'generic-trigger';
@@ -96,6 +109,11 @@ const pointer = new THREE.Vector2;
 const raycaster = new THREE.Raycaster();
 const clock = new THREE.Clock();
 let selectedPin = null;
+let selectedBox = null;
+let selectedTag = null;
+let selectedNode = null;
+let selectedNodes = []
+let showContent = true;
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 const spiral = new THREE.Object3D()
@@ -330,7 +348,7 @@ function handleController( controller ){
         if (intersects.length>0){
             selectedPin = intersects[0].object;
             const selectedPinIndex = pinPositions.findIndex((object) => object==intersects[0].object)
-            const selectedCarousel = tagList[selectedPinIndex][6]
+            const selectedCarousel = tagPlanetData[selectedPinIndex][6]
             if (selectedCarousel > 0) {
                 activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
                 activeCarousel.style.display = "block"
@@ -449,6 +467,7 @@ skipButton.addEventListener("click", () => {
 
 //Slide carousel
 let activeCarousel
+
 const buttons = document.querySelectorAll("[data-carousel-button]")
 
 buttons.forEach(button => {
@@ -776,16 +795,28 @@ scene.add(center);
     center.add(pivot4);
 
 //create Jaranius
+
+        //cubemap test
+        /* const cubeMapLoader = new THREE.CubeTextureLoader();
+        cubeMapLoader.setPath( '../img/textures/cubemap/' );
+        const textureCube = cubeMapLoader.load( [
+            'px.png', 'nx.png',
+            'py.png', 'ny.png',
+            'pz.png', 'nz.png'
+        ] );
+        const cubeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: textureCube } ); */
+
 const textureLoader = new THREE.TextureLoader()
 let diffuse = textureLoader.load(diffuseTexture);
 const jaraniusGeometry = new THREE.SphereGeometry(5, 250, 250);
 jaraniusGeometry.computeBoundingSphere();
 const jaranius = new THREE.Mesh(
     jaraniusGeometry,
+    //cubeMaterial
     new THREE.MeshStandardMaterial({
         map: diffuse,
         normalMap: textureLoader.load(normalTexture),
-        roughnessMap: textureLoader.load(roughnessTex),
+        roughnessMap: textureLoader.load(roughnessTexture),
         metalness: 0,
         flatShading: false,
         side: FrontSide,
@@ -798,20 +829,13 @@ const cloudsMaterial = new THREE.MeshLambertMaterial({
     map: textureLoader.load(cloudsTexture),
     transparent: true,
     side: DoubleSide,
-    opacity: 0.5,
+    opacity: 0.8,
 })
-const lowerClouds = new THREE.Mesh(
+const clouds = new THREE.Mesh(
     new THREE.SphereGeometry(5.04, 50, 50),
     cloudsMaterial
 )
-jaranius.add(lowerClouds)
-
-const upperClouds = new THREE.Mesh(
-    new THREE.SphereGeometry(5.05, 50, 50),
-    cloudsMaterial
-)
-jaranius.add(upperClouds)
-upperClouds.rotateY(Math.PI/2)
+jaranius.add(clouds)
 
 // create atmosphericLight
 const atmosphericLight = new THREE.Mesh(
@@ -842,253 +866,34 @@ atmosphere.scale.set(1.2, 1.2, 1.2)
 jaranius.add(atmosphere);
 
 //create pictureBoxes
-function instantiateImg(textureSrc, lat, lng, size, radius, context) {
-    const textureLoader = new THREE.TextureLoader()
-    let img = textureLoader.load(textureSrc);
-    const boxMat = new THREE.MeshBasicMaterial( {
-        map: img,
-        transparent: true,
-        side: DoubleSide
-    } );
+const planetContent = new THREE.Object3D
+jaranius.add(planetContent)
 
-    let roundingFactor = 0.01;
-    let x = 0; let y = 0; 
-    let width = size; 
-    let height = size; 
-    let shape = new THREE.Shape();
-    shape.moveTo( x, y + roundingFactor );
-    shape.lineTo( x, y + height - roundingFactor );
-    shape.quadraticCurveTo( x, y + height, x + roundingFactor, y + height );
-    shape.lineTo( x + width - roundingFactor, y + height );
-    shape.quadraticCurveTo( x + width, y + height, x + width, y + height - roundingFactor );
-    shape.lineTo( x + width, y + roundingFactor );
-    shape.quadraticCurveTo( x + width, y, x + width - roundingFactor, y );
-    shape.lineTo( x + roundingFactor, y );
-    shape.quadraticCurveTo( x, y, x, y + roundingFactor );
-    const boxGeo = new THREE.ShapeGeometry( shape );
-
-    var uvAttribute = boxGeo.attributes.uv;
-    let min = Infinity, max = 0
-    for (var i = 0; i < uvAttribute.count; i++) {
-        let u = uvAttribute.getX(i);
-        let v = uvAttribute.getY(i);
-        min = Math.min(min, u, v)
-        max = Math.max(max, u, v)
-    }
-    for (var i = 0; i < uvAttribute.count; i++) {
-        let u = uvAttribute.getX(i);
-        let v = uvAttribute.getY(i);
-        u = THREE.MathUtils.mapLinear(u, min, max, 0, 1)
-        v = THREE.MathUtils.mapLinear(v, min, max, 0, 1)
-        uvAttribute.setXY(i, u, v);
-    }
-
-    boxGeo.computeBoundingBox();
-    const boxMidx = -0.5 * ( boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x );
-    const boxMidy = -0.5 * ( boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y );
-    boxGeo.translate( boxMidx, boxMidy * 0, 0 );
-    let box = new THREE.Mesh(boxGeo, boxMat);
-
-    let boxLatLng = convertLatLngtoCartesian(lat, lng, radius);
-    let boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
-    box.lookAt( boxRotationVector )
-    box.position.copy( boxRotationVector )
-    if (context == "jaranius") {
-        jaranius.add( box );
-    } else if (context == "spiral") {
-        spiral.add( box );
-    }
-    
+for (let i = 0; i < imgPlanetData.length; i++) {
+    createImages(imgPlanetData[i].src, imgPlanetData[i].lat, imgPlanetData[i].lng - 180, imgPlanetData[i].size / 500, imgPlanetData[i].radius, planetContent);
 }
-
-for (let i = 0; i < imgList.length; i++) {
-    //instantiateImg(imgList[i][1], imgList[i][2], imgList[i][3] - 180, imgList[i][4] / 500, imgList[i][5], imgList[i][6]);
-    instantiateImg(imgList[i].src, imgList[i].lat, imgList[i].lng - 180, imgList[i].size / 500, imgList[i].radius, imgList[i].context);
+for (let i = 0; i < imgSpiralData.length; i++) {
+    createImages(imgSpiralData[i].src, imgSpiralData[i].lat, imgSpiralData[i].lng - 180, imgSpiralData[i].size / 500, imgSpiralData[i].radius, spiral);
 }
 
 //create tags
-const loader = new FontLoader();
-loader.load( tagFont, function ( font ) { //'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {  //
-
-    function instantiateTag(txt, lat, lng, color, originalColor, size) {
-        const textMat = new THREE.MeshBasicMaterial( {
-            color: 0x000000,
-            transparent: false,
-            //opacity: 0.8,
-            side: THREE.DoubleSide
-        } );
-        const boxMat = new THREE.MeshBasicMaterial( {
-            color: color,
-            transparent: true,
-            opacity: 0.65, //0.5
-            side: THREE.DoubleSide
-        } );
-
-        const shapes = font.generateShapes( txt, 100 );
-        const txtGeo = new THREE.ShapeGeometry( shapes );
-        txtGeo.computeBoundingBox();
-        const xMid = - 0.5 * ( txtGeo.boundingBox.max.x - txtGeo.boundingBox.min.x );
-        const yMid = 0.5 * ( txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y );
-        txtGeo.translate( xMid, yMid * 2, 0 );
-        
-        const tag = new THREE.Mesh( txtGeo, textMat );
-        const tagDistanceFromMiddleofPlanet = 5.06;
-        let latLng = convertLatLngtoCartesian(lat, lng, tagDistanceFromMiddleofPlanet);
-        let rotationVector = new THREE.Vector3(latLng.x, latLng.y, latLng.z);
-        tag.lookAt(rotationVector);
-        tag.position.x = latLng.x;
-        tag.position.y = latLng.y;
-        tag.position.z = latLng.z;
-        tag.scale.x = size;
-        tag.scale.y = size;
-        tag.scale.z = size;
-
-        //create boxes
-        const xPadding = 200;
-        const yPadding = 0;
-        let roundingFactor = size * 125;
-        let x = 0; let y = 0; 
-        let width = (Math.abs(txtGeo.boundingBox.min.x) + Math.abs(txtGeo.boundingBox.max.x) + xPadding) * size; 
-        let height = (Math.abs(txtGeo.boundingBox.min.y) + Math.abs(txtGeo.boundingBox.max.y) + yPadding) * size; 
-        let shape = new THREE.Shape();
-        shape.moveTo( x, y + roundingFactor );
-        shape.lineTo( x, y + height - roundingFactor );
-        shape.quadraticCurveTo( x, y + height, x + roundingFactor, y + height );
-        shape.lineTo( x + width - roundingFactor, y + height );
-        shape.quadraticCurveTo( x + width, y + height, x + width, y + height - roundingFactor );
-        shape.lineTo( x + width, y + roundingFactor );
-        shape.quadraticCurveTo( x + width, y, x + width - roundingFactor, y );
-        shape.lineTo( x + roundingFactor, y );
-        shape.quadraticCurveTo( x, y, x, y + roundingFactor );
-        const boxGeo = new THREE.ShapeGeometry( shape );
-
-        var uvAttribute = boxGeo.attributes.uv;
-		let min = Infinity, max = 0
-		//find min max
-		for (var i = 0; i < uvAttribute.count; i++) {
-			let u = uvAttribute.getX(i);
-			let v = uvAttribute.getY(i);
-			min = Math.min(min, u, v)
-			max = Math.max(max, u, v)
-		}
-
-		//map min map to 1 to 1 range
-		for (var i = 0; i < uvAttribute.count; i++) {
-			let u = uvAttribute.getX(i);
-			let v = uvAttribute.getY(i);
-
-			// do something with uv
-			u = THREE.MathUtils.mapLinear(u, min, max, 0, 1)
-			v = THREE.MathUtils.mapLinear(v, min, max, 0, 1)
-
-			// write values back to attribute
-			uvAttribute.setXY(i, u, v);
-
-		}
-
-        boxGeo.computeBoundingBox();
-        const boxMidx = -0.5 * ( boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x );
-        const boxMidy = -0.5 * ( boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y );
-        boxGeo.translate( boxMidx, boxMidy * 0, 0 );
-        let box = new THREE.Mesh(boxGeo, boxMat);
-
-        let boxLatLng = convertLatLngtoCartesian(lat, lng, tagDistanceFromMiddleofPlanet - 0.01);
-        let boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
-        box.lookAt( boxRotationVector )
-        box.position.copy( boxRotationVector )
-        
-        jaranius.add( box );
-        jaranius.add( tag );
-    }
-    
-    for (let i = 0; i < tagList.length; i++) {
-        
-        let tag = instantiateTag(tagList[i].text, tagList[i].lat, tagList[i].lng - 180, palette[tagList[i].color], palette[tagList[i].color], tagList[i].size / 100000);
-    }
-} );
-
-//create pins
-let pinPositions = []
-
-function instantiatePin(txt, lat, lng, color, originalColor, radius, wireframe) {
-    let segments = Math.floor(radius * 750)
-    if (wireframe == true) {
-        segments = Math.floor(radius * 750 / 3)
-    }
-    const pin = new THREE.Mesh(
-        new THREE.SphereGeometry(radius, segments, segments),
-        new THREE.MeshBasicMaterial({
-            color: color,
-            wireframe: wireframe,
-        })
-    )
-
-    originalColor = originalColor;
-    
-    const pinSphereRadius = 5.01
-    let pos = convertLatLngtoCartesian(lat, lng, pinSphereRadius);
-    pin.position.set(pos.x, pos.y, pos.z);
-
-    jaranius.add(pin);
-    pinPositions.push(pin);
-
-    return {pin, originalColor}; //elem
-}
-
-let pins = []
-for (let i = 0; i < tagList.length; i++) {
-    let hasSlides;
-    if (tagList[i].slides == undefined) {
-        hasSlides = false
-    } else hasSlides = true
-    let pin = instantiatePin(tagList[i].text, tagList[i].lat, tagList[i].lng - 180, palette[tagList[i].color], palette[tagList[i].color], tagList[i].size / 1500, hasSlides);
-    pins.push(pin);
-}
+createTags(tagPlanetData, planetContent, 5)
+createTags(tagSpiralData, spiral, 7)
 
 //create connections
-let curveThickness = 0.0002
-let curveRadiusSegments = 3
-let curveMaxAltitude = 0.03
-let curveMinAltitude = 5.01
+const curveThickness = 0.0002
+const curveRadiusSegments = 3
+const curveMaxAltitude = 0.03
+const curveMinAltitude = 5.01
+const jaraniusConnections = new THREE.Object3D()
+jaranius.add(jaraniusConnections)
+let context = jaraniusConnections
+createConnections(tagPlanetData, tagPlanetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context)
 
-for (let i = 0; i < tagList.length; i++) {
-    for (let j = 0; j < tagConnections.length; j++) {
-        if (tagList[i].id == tagConnections[j][0]) {
-            for (let k = 1; k < tagConnections[j].length; k++) {
-                for (let l = 0; l < tagList.length; l++) {
-                    if (tagList[l].id == tagConnections[j][k]) {
-                        let t1 = convertLatLngtoCartesian(tagList[i].lat, tagList[i].lng - 180, curveMinAltitude);
-                        let t2 = convertLatLngtoCartesian(tagList[l].lat, tagList[l].lng - 180, curveMinAltitude);
-                        const weight = (tagList[i].size + tagList[l].size) / 2;
-                        getCurve(t1, t2, weight);
-                    }
-                }
-            }
-        }
-    }
-}
-
-function getCurve(p1, p2, weight){
-    let v1 = new THREE.Vector3(p1.x, p1.y, p1.z);
-    let v2 = new THREE.Vector3(p2.x, p2.y, p2.z);
-    let points = []
-    for (let i = 0; i <= 20; i++) {
-      let p = new THREE.Vector3().lerpVectors(v1, v2, i/20)
-      p.normalize()
-      p.multiplyScalar(curveMinAltitude + curveMaxAltitude * Math.sin(Math.PI*i/20));
-      points.push(p)
-    }
-    let path = new THREE.CatmullRomCurve3(points);
-    const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments, false);
-    const material = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: 0.25
-    });
-    const curve = new THREE.Mesh(geometry, material);
-    curve.renderOrder = -10
-    jaranius.add(curve);
-  }
+const spiralConnections = new THREE.Object3D()
+spiral.add(spiralConnections)
+let context2 = spiralConnections
+createConnections(tagSpiralData, tagSpiralConnections, 0.0005, curveRadiusSegments, 0.3, 7.01, context2)
 
 //create sun
 const sunRadius = 5
@@ -1172,7 +977,6 @@ function createSpiral() {
     let helixMaxRadius = 7;
     let helixRevolutions = 9;
     let helixPoints = []
-    let colors = ["burlywood", "purple", "red", "blue", "orange", "green", "yellow", "turquoise", "coral"]
 
     for (let i = 0; i < helixRevolutions; i++) {
         helixPoints[i] = []
@@ -1192,10 +996,10 @@ function createSpiral() {
         const material = new THREE.ShaderMaterial({
             uniforms: {
                 color1: {
-                value: new THREE.Color(colors[i])
+                value: new THREE.Color(palette[40 + i])
                 },
                 color2: {
-                value: new THREE.Color(colors[i+1])
+                value: new THREE.Color(palette[40 + i + 1])
                 },
                 bboxMin: {
                 value: geometry.boundingBox.min
@@ -1210,15 +1014,15 @@ function createSpiral() {
         const spiralSection = new THREE.Mesh(geometry, material);
         spiral.add(spiralSection)
 
-        const geometry2 = new THREE.TubeGeometry(helixCurve, 64, 0.10 - i / 70, 10, false);
+        const geometry2 = new THREE.TubeGeometry(helixCurve, 64, 0.12 - i / 70, 10, false);
         const material2 = new THREE.MeshBasicMaterial({
-            color: colors[i],
+            color: palette[40 + i],
             transparent: true,
             opacity: 0.6
         })
         const spiralSection2 = new THREE.Mesh(geometry2, material2);
         spiral.add(spiralSection2)
-        spiral.rotation.set(0, Math.PI, 0)
+        spiral.rotation.set(0, 0, 0)
     }
 }
 
@@ -1465,10 +1269,43 @@ document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
 
+    if (keyCode == 65) {
+        selectedNodes.length = 0
+        console.log(selectedNodes, selectedPin)
+
+    }
+    if (keyCode == 90) {
+        console.log(selectedNode)
+        if (selectedNode) {
+            console.log(selectedNodes.indexOf(selectedNode))
+            if (selectedNodes.indexOf(selectedNode) == -1) {
+                selectedNodes.push(selectedNode)
+            }
+            console.log(selectedNodes)
+        }
+    }
+    if (keyCode == 67) {
+        if (showContent == true) {
+            jaranius.remove(planetContent)
+            jaranius.remove(jaraniusConnections)
+            showContent = false
+        } else {
+            jaranius.add(planetContent)
+            jaranius.add(jaraniusConnections)
+            showContent = true
+        }
+    }
     if (keyCode == 76) {
         if (spotlight.intensity == 0) {
             spotlight.intensity = spotlightIntensity
         } else spotlight.intensity = 0
+    }
+    if (keyCode == 81) {
+        let output = ""
+        for (let i = 0; i < tagPlanetData.length; i++) {
+            output = output + "    {id: \"" + tagPlanetData[i].id + "\", text: " + JSON.stringify(tagPlanetData[i].text) + ", lat: " + tagPlanetData[i].lat + ", lng: " + tagPlanetData[i].lng + ", color: " + tagPlanetData[i].color + ", size: " + tagPlanetData[i].size + ", slides: " + tagPlanetData[i].slides + "},\n"
+        }
+        console.log(output)
     }
     if (keyCode == 83) {
         if (spiralActivated == false) {
@@ -1478,33 +1315,108 @@ function onDocumentKeyUp(event) {
             scene.remove(spiral)
         }
     }
-
-    
+    if (keyCode == 87) {
+        jaraniusConnections.clear()
+        const curveThickness = 0.0002
+        const curveRadiusSegments = 3
+        const curveMaxAltitude = 0.03
+        const curveMinAltitude = 5.01
+        const context = jaraniusConnections
+        createConnections(tagPlanetData, tagPlanetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context)
+        
+    } 
+    if (keyCode == 187) {
+        let originalSize = 0
+        let size = 0
+        if (selectedNode)
+            originalSize = pins[selectedNode].originalSize
+            tagPlanetData[selectedNode].size += 5
+            size = tagPlanetData[selectedNode].size
+            selectedPin.scale.set(size / originalSize, size / originalSize, size / originalSize)
+            selectedBox.scale.set(size / originalSize, size / originalSize, size / originalSize)
+    }
+    if (keyCode == 189) {
+        let originalSize = 0
+        let size = 0
+        if (selectedNode)
+            originalSize = pins[selectedNode].originalSize
+            tagPlanetData[selectedNode].size -= 5
+            size = tagPlanetData[selectedNode].size
+            selectedPin.scale.set(size / originalSize, size / originalSize, size / originalSize)
+            selectedBox.scale.set(size / originalSize, size / originalSize, size / originalSize)
+    } 
 }
 
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     const keyCode = event.which;
+    if (selectedNodes.length > 0) {
+        for (let node = 0; node < selectedNodes.length; node++) {
+            if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
+                let posLatLng = convertCartesiantoLatLng(pins[selectedNodes[node]].pin.position.x, pins[selectedNodes[node]].pin.position.y, pins[selectedNodes[node]].pin.position.z);
+                // up
+                if (keyCode == 38) {
+                    posLatLng.lat -= .1;
+                    // down
+                } else if (keyCode == 40) {
+                    posLatLng.lat += .1;
+                    // left
+                } else if (keyCode == 37) {
+                    posLatLng.lng -= .1;
+                    // right
+                } else if (keyCode == 39) {
+                    posLatLng.lng += .1;
+                }
 
-    if (selectedPin != null) {
-        let posLatLng = convertCartesiantoLatLng(selectedPin.position.x, selectedPin.position.y, selectedPin.position.z);
-        // up
-        if (keyCode == 38) {
-            posLatLng.lat -= .3;
-            // down
-        } else if (keyCode == 40) {
-            posLatLng.lat += .3;
-            // left
-        } else if (keyCode == 37) {
-            posLatLng.lng -= .3;
-            // right
-        } else if (keyCode == 39) {
-            posLatLng.lng += .3;
+                const pinSphereRadius = 5.01
+                const boxSphereRadius = 5.05
+                const tagSphereRadius = 5.06
+                
+                const pinPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, pinSphereRadius);
+                const boxPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, boxSphereRadius);
+                const tagPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, tagSphereRadius);
+                pins[selectedNodes[node]].pin.position.set(pinPos.x, pinPos.y, pinPos.z);
+                tags[selectedNodes[node]].box.position.set(boxPos.x, boxPos.y, boxPos.z);
+                tags[selectedNodes[node]].tag.position.set(tagPos.x, tagPos.y, tagPos.z);
+                posLatLng = constrainLatLng(posLatLng.lat, posLatLng.lng - 180)
+                tagPlanetData[selectedNodes[node]].lat = posLatLng.lat.toFixed(1)
+                tagPlanetData[selectedNodes[node]].lng = posLatLng.lng.toFixed(1)
+            }
         }
-        const pinSphereRadius = 5.01
-        let posXYZ = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, pinSphereRadius);
-        selectedPin.position.set(posXYZ.x, posXYZ.y, posXYZ.z);
+    } else if (selectedPin != null) {
+        if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
+            let posLatLng = convertCartesiantoLatLng(selectedPin.position.x, selectedPin.position.y, selectedPin.position.z);
+            // up
+            if (keyCode == 38) {
+                posLatLng.lat -= .1;
+                // down
+            } else if (keyCode == 40) {
+                posLatLng.lat += .1;
+                // left
+            } else if (keyCode == 37) {
+                posLatLng.lng -= .1;
+                // right
+            } else if (keyCode == 39) {
+                posLatLng.lng += .1;
+            }
+
+            const pinSphereRadius = 5.01
+            const boxSphereRadius = 5.05
+            const tagSphereRadius = 5.06
+            
+            const pinPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, pinSphereRadius);
+            const boxPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, boxSphereRadius);
+            const tagPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, tagSphereRadius);
+            selectedPin.position.set(pinPos.x, pinPos.y, pinPos.z);
+            selectedBox.position.set(boxPos.x, boxPos.y, boxPos.z);
+            selectedTag.position.set(tagPos.x, tagPos.y, tagPos.z);
+            posLatLng = constrainLatLng(posLatLng.lat, posLatLng.lng - 180)
+            tagPlanetData[selectedNode].lat = posLatLng.lat.toFixed(1)
+            tagPlanetData[selectedNode].lng = posLatLng.lng.toFixed(1)
+        }
     }
+
+        
 };
 
 //create fps counter
@@ -1538,6 +1450,8 @@ function animate() {
 }
 
 function render(time) {
+    time *= 0.001;
+
     //WebXR
     const dt = clock.getDelta();
         
@@ -1566,10 +1480,7 @@ function render(time) {
         }
     }
     //
-
-
-    time *= 0.001;
-
+            
     if (resizeRendererToDisplaySize(renderer)) {
         const canvas = renderer.domElement;
         camera.aspect = canvas.clientWidth / canvas.clientHeight;
@@ -1595,9 +1506,12 @@ function render(time) {
         const intersects = raycaster.intersectObjects(pinPositions);
         if (intersects.length > 0) {
             selectedPin = intersects[0].object;
-            if (camera.position.distanceTo(selectedPin.position) < 3) {
-                const selectedPinIndex = pinPositions.findIndex((object) => object==intersects[0].object)
-                const selectedCarousel = tagList[selectedPinIndex].slides
+            selectedNode = pinPositions.findIndex((object) => object==intersects[0].object)
+            selectedBox = tags[selectedNode].box;
+            selectedTag = tags[selectedNode].tag;
+            
+            if (camera.position.distanceTo(selectedPin.position) < 4) {
+                const selectedCarousel = tagPlanetData[selectedNode].slides
                 activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
                 activeCarousel.style.display = "block"
             }
@@ -1620,8 +1534,7 @@ function render(time) {
     pivot2.rotation.y += -0.00003;
     pivot3.rotation.y += -0.000003;
     pivot4.rotation.y += 0.0001;
-    lowerClouds.rotation.y += 0.00005;
-    upperClouds.rotation.y += 0.0001;
+    clouds.rotation.y += 0.00001;
 
     if (camera.position.z > 15 && start == true) {
         camera.position.z -= 0.0001 * Math.pow(camera.position.z - 10, 1.35)
@@ -1630,12 +1543,6 @@ function render(time) {
     if (camera.position.z < -15 && start == true) {
         camera.position.z += 0.0001 * Math.pow(Math.abs(camera.position.z) - 10, 1.35)
         jaranius.rotation.y += 0.0005;
-    }
-    for (let i = 0; i < pins.length; i++) {
-        if (pins[i].pin.material.wireframe == true) {
-            pins[i].pin.rotation.y += 0.002
-            pins[i].pin.rotation.x += 0.001
-        }
     }
   
     controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);
