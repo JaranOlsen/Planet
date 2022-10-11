@@ -41,10 +41,20 @@ import diffuseTexture from "../img/textures/diffuse8kvibrance.webp"
     // ||Normals - White = high altitude - see https://www.youtube.com/watch?v=YJqWHsllczY&t=1s on how to best generate
 //import normalTexture from "../img/textures/normal1k.webp"
 //import normalTexture from "../img/textures/normal1kNASA.webp"
-import normalTexture from "../img/textures/normals2k.webp"
+import normalTexture from "../img/textures/normals8ktest.webp"
+//import normalTexture from "../img/textures/normals2k.webp"
 
-    // ||Roughness - White = high roughness
+    // ||Roughness - Green (white) = high roughness (green channel - see documentation)
 import roughnessTexture from "../img/textures/roughness2k.webp"
+
+    // ||Ambient Occlusion - Red (white) = high occlusion (red channel - see documentation)
+//import ambientOcclusionTexture from "../img/textures/ambientOcclusion8k.webp"
+import ambientOcclusionTexture from "../img/textures/ambientOcclusionTest8k.webp"
+
+    // ||Environment
+import environmentTexture from "../img/textures/environment5k.webp"
+
+
 
 import cloudsTexture from "../img/textures/clouds4k.webp"
 import starW from "../img/textures/starW.webp"
@@ -795,36 +805,30 @@ scene.add(center);
     center.add(pivot4);
 
 //create Jaranius
-
-        //cubemap test
-        /* const cubeMapLoader = new THREE.CubeTextureLoader();
-        cubeMapLoader.setPath( '../img/textures/cubemap/' );
-        const textureCube = cubeMapLoader.load( [
-            'px.png', 'nx.png',
-            'py.png', 'ny.png',
-            'pz.png', 'nz.png'
-        ] );
-        const cubeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: textureCube } ); */
-
 const textureLoader = new THREE.TextureLoader()
 let diffuse = textureLoader.load(diffuseTexture);
 const jaraniusGeometry = new THREE.SphereGeometry(5, 250, 250);
 jaraniusGeometry.computeBoundingSphere();
 const jaranius = new THREE.Mesh(
     jaraniusGeometry,
-    //cubeMaterial
-    new THREE.MeshStandardMaterial({
+    new THREE.MeshStandardMaterial({ //Note that for best results you should always specify an environment map when using this material.
         map: diffuse,
-        normalMap: textureLoader.load(normalTexture),
-        roughnessMap: textureLoader.load(roughnessTexture),
-        metalness: 0,
+        normalMap: textureLoader.load(normalTexture),  //make extreme variant to test properly
+        roughnessMap: textureLoader.load(roughnessTexture),  //works well
+        aoMap: textureLoader.load(ambientOcclusionTexture),  //doesn't seem to work. Docs says need second UV map
+        envMap: textureLoader.load(environmentTexture),  //doesn't seem to have any effect
+        aoMapIntensity: 1,
+        normalScale: new THREE.Vector2(1, 1),  //needs testing
+        envMapIntensity: 100,  //doesn't seem to do much
+        metalness: 0,  //works well
+        roughness: 0.85,  //works well
         flatShading: false,
         side: FrontSide,
     })
 )
 scene.add(jaranius)
 
-// create cloud layer
+//create cloud layer
 const cloudsMaterial = new THREE.MeshLambertMaterial({
     map: textureLoader.load(cloudsTexture),
     transparent: true,
@@ -837,7 +841,7 @@ const clouds = new THREE.Mesh(
 )
 jaranius.add(clouds)
 
-// create atmosphericLight
+//create atmosphericLight
 const atmosphericLight = new THREE.Mesh(
     new THREE.SphereGeometry(5.0, 250, 250),
     new THREE.ShaderMaterial({
@@ -849,7 +853,7 @@ const atmosphericLight = new THREE.Mesh(
 atmosphericLight.position.set(0, 0, 0)
 jaranius.add(atmosphericLight);
 
-// create atmosphere
+//create atmosphere
 const atmosphere = new THREE.Mesh(
     new THREE.SphereGeometry(5.3, 50, 50),
     new THREE.ShaderMaterial({
@@ -1519,7 +1523,8 @@ function render(time) {
     }
 
     window.addEventListener('pointermove', onPointerMove);
-    window.addEventListener('click', onClick);
+    window.addEventListener('mouseup', onClick);
+    window.addEventListener('touchend', onClick);
     unhoverPin();
     hoverPin();
 

@@ -1,22 +1,29 @@
 MAKE USABLE
-    add guided meditations, beth upton, rupert spira clips 
-        ken wilber clips?
+    debug for iphone
+        add touch click controls
 
     re-enter VR / access to html elements in VR
 
 
-
 SHORT-TERM DEVELOPMENT
+    Limit double-side rendering (especially on high tris geometry)
+
+    Ambient occlusion mindmap
+
+    add color-realtime-editing
+
+    add type of curve (dashed, arrowed)
+
+    add guided meditations, beth upton, rupert spira clips 
+        ken wilber clips?
 
     tweak terrain colors - deeper blue oceans? higher contrast? see real photo
 
-    make functions of init processes - add key for showing/hiding mindmap
-        different files for different contexts - initialized by function
-        improve folder structure? build folder? data folder?
-    
-    planet icon
+    make loading screen
 
-    add type of curve (dashed, arrowed)
+    make functions of init processes
+    
+    improve planet icon
 
     add LP static to intro 
 
@@ -35,7 +42,20 @@ SHORT-TERM DEVELOPMENT
     make background more colorful
         fog?
         nebula
+
     
+GEOGRAPHICAL FEATURES
+    Labyrinth
+    Cities
+    Rivers
+    Lakes
+    Riverdeltas
+    Floodplanes/lush terrain next to Rivers
+
+    Geographical names
+        Desert of the real
+        Sea of Empathy
+
 
 LONG-TERM DEVELOPMENT
 
@@ -46,11 +66,9 @@ LONG-TERM DEVELOPMENT
     HTML/CSS
         fix Labels jagged movement
 
-    find way of editing text, nodesize, nodecolor realtime
-    find way of saving lat, long, size, color and text
-    find a way of adding connections realtime
-    find a way of saving connections
+    add flyControls (see section under)
 
+USEFUL
     three.js examples that have useful feature/codesnippets
         Better CSS labels: https://github.com/mrdoob/three.js/blob/master/examples/css2d_label.html
         Fly controls: https://github.com/mrdoob/three.js/blob/master/examples/misc_controls_fly.html
@@ -59,9 +77,6 @@ LONG-TERM DEVELOPMENT
             https://en.wikipedia.org/wiki/Rodrigues%27_rotation_formula ??
         Instancing: https://github.com/mrdoob/three.js/blob/master/examples/webgl_instancing_performance.html
 
-    add flyControls (see section under)
-
-USEFUL
     link to json font converter: http://gero3.github.io/facetype.js/
 
     flyControls - swap between control modes
