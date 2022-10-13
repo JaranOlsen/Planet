@@ -49,10 +49,10 @@ import roughnessTexture from "../img/textures/roughness2k.webp"
 
     // ||Ambient Occlusion - Red (white) = high occlusion (red channel - see documentation)
 //import ambientOcclusionTexture from "../img/textures/ambientOcclusion8k.webp"
-import ambientOcclusionTexture from "../img/textures/ambientOcclusionTest8k.webp"
+//import ambientOcclusionTexture from "../img/textures/ambientOcclusionTest8k.webp"
 
     // ||Environment
-import environmentTexture from "../img/textures/environment5k.webp"
+//simport environmentTexture from "../img/textures/sun1k.webp"
 
 
 
@@ -127,9 +127,16 @@ let showContent = true;
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 const spiral = new THREE.Object3D()
-let xrInitialized = false
+let VRenabled = false
 
 //WEB XR
+const enableVRbutton = document.getElementById("enableVRbutton")
+enableVRbutton.addEventListener("click", () => {
+        enableVRbutton.style.display = "none";
+        VRenabled = true
+    })
+
+
 async function checkForXRSupport() {
     navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
       if (supported) {
@@ -139,7 +146,7 @@ async function checkForXRSupport() {
       }
     });
   }
-checkForXRSupport();
+if (VRenabled == true) checkForXRSupport();
 
 function declareGlobalVariables() {
     window.dolly = new THREE.Object3D();
@@ -461,6 +468,7 @@ playButton.addEventListener("click", () => {
         start = true;
         playButton.style.display = "none";
         skipButton.style.display = "none";
+        enableVRbutton.style.display = "none";
         credits.style.display = "none";
         
     })
@@ -470,6 +478,7 @@ const skipButton = document.getElementById("skipbutton")
 skipButton.addEventListener("click", () => {
         playButton.style.display = "none";
         skipButton.style.display = "none";
+        enableVRbutton.style.display = "none";
         credits.style.display = "none";
         camera.position.z = 15;
     })
@@ -813,13 +822,14 @@ const jaranius = new THREE.Mesh(
     jaraniusGeometry,
     new THREE.MeshStandardMaterial({ //Note that for best results you should always specify an environment map when using this material.
         map: diffuse,
+        //color: 0xffffff,
         normalMap: textureLoader.load(normalTexture),  //make extreme variant to test properly
         roughnessMap: textureLoader.load(roughnessTexture),  //works well
-        aoMap: textureLoader.load(ambientOcclusionTexture),  //doesn't seem to work. Docs says need second UV map
-        envMap: textureLoader.load(environmentTexture),  //doesn't seem to have any effect
-        aoMapIntensity: 1,
+        //aoMap: textureLoader.load(ambientOcclusionTexture),  //doesn't seem to work. Docs says need second UV map
+        //envMap: textureLoader.load(environmentTexture),  //doesn't seem to have any effect
+        //aoMapIntensity: 1,
         normalScale: new THREE.Vector2(1, 1),  //needs testing
-        envMapIntensity: 100,  //doesn't seem to do much
+        //envMapIntensity: 100,  //doesn't seem to do much
         metalness: 0,  //works well
         roughness: 0.85,  //works well
         flatShading: false,
@@ -843,7 +853,7 @@ jaranius.add(clouds)
 
 //create atmosphericLight
 const atmosphericLight = new THREE.Mesh(
-    new THREE.SphereGeometry(5.0, 250, 250),
+    new THREE.SphereGeometry(5.0, 500, 500),
     new THREE.ShaderMaterial({
         vertexShader: atmosphericLightVertexShader,
         fragmentShader: atmosphericLightFragmentShader,

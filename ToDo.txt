@@ -4,11 +4,15 @@ MAKE USABLE
 
     re-enter VR / access to html elements in VR
 
+    add aversive habits - link to primary/secondary emotions? - link to five hindrances?
+
+    add stuff from notes in here?
+
 
 SHORT-TERM DEVELOPMENT
     Limit double-side rendering (especially on high tris geometry)
 
-    Ambient occlusion mindmap
+    Ambient occlusion map
 
     add color-realtime-editing
 

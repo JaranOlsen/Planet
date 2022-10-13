@@ -81,6 +81,28 @@ Links
 #skipbutton:focus{
   outline: 1px solid black;
 }
+#enableVRbutton {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 50%;
+  top: 95%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 1rem;
+}
+#enableVRbutton:hover,
+#enableVRbutton:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#enableVRbutton:focus{
+  outline: 1px solid black;
+}
 
 /*  || SLIDE SCREENS */
 .carousel {
