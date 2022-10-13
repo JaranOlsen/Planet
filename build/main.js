@@ -1545,9 +1545,10 @@ function render(time) {
 
     window.addEventListener('pointermove', onPointerMove);
     window.addEventListener('mouseup', onClick);
-    document.addEventListener("touchstart", touch2Mouse, true);
+    document.addEventListener("touchstart", onClick);
+    /* document.addEventListener("touchstart", touch2Mouse, true);
     document.addEventListener("touchmove", touch2Mouse, true);
-    document.addEventListener("touchend", touch2Mouse, true);
+    document.addEventListener("touchend", touch2Mouse, true); */
     unhoverPin();
     hoverPin();
 
