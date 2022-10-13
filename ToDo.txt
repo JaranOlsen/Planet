@@ -1,6 +1,6 @@
 MAKE USABLE
     debug for iphone
-        add touch click controls
+        fix touch click controls - fixed?
 
     re-enter VR / access to html elements in VR
 
@@ -11,8 +11,6 @@ MAKE USABLE
 
 SHORT-TERM DEVELOPMENT
     Limit double-side rendering (especially on high tris geometry)
-
-    Ambient occlusion map
 
     add color-realtime-editing
 

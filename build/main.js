@@ -32,24 +32,15 @@ import spriralFragmentShader from '../shaders/spiralFragment.glsl';
 //  IMPORT TEXTURES
 
     // ||Diffuse - 
-//import diffuseTexture from "../img/textures/terrain8k.jpg"
 //import diffuseTexture from "../img/textures/diffuse4k.webp"
-//import diffuseTexture from "../img/textures/earth8k.jpeg"
 import diffuseTexture from "../img/textures/diffuse8kvibrance.webp"
-//import diffuseTexture from "../img/textures/diffuse4kNASA.webp"
 
     // ||Normals - White = high altitude - see https://www.youtube.com/watch?v=YJqWHsllczY&t=1s on how to best generate
-//import normalTexture from "../img/textures/normal1k.webp"
-//import normalTexture from "../img/textures/normal1kNASA.webp"
-import normalTexture from "../img/textures/normals8ktest.webp"
-//import normalTexture from "../img/textures/normals2k.webp"
+//import normalTexture from "../img/textures/normals8ktest.webp"
+import normalTexture from "../img/textures/normal2k.webp"
 
     // ||Roughness - Green (white) = high roughness (green channel - see documentation)
 import roughnessTexture from "../img/textures/roughness2k.webp"
-
-    // ||Ambient Occlusion - Red (white) = high occlusion (red channel - see documentation)
-//import ambientOcclusionTexture from "../img/textures/ambientOcclusion8k.webp"
-//import ambientOcclusionTexture from "../img/textures/ambientOcclusionTest8k.webp"
 
     // ||Environment
 //simport environmentTexture from "../img/textures/sun1k.webp"
@@ -1534,7 +1525,7 @@ function render(time) {
 
     window.addEventListener('pointermove', onPointerMove);
     window.addEventListener('mouseup', onClick);
-    window.addEventListener('touchend', onClick);
+    window.addEventListener('touchstart', onClick);
     unhoverPin();
     hoverPin();
 
