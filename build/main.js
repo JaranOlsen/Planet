@@ -2,6 +2,7 @@
 import * as THREE from 'three';
 import { Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, RGBADepthPacking, SubtractiveBlending } from 'three';
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'; 
 import { VRButton } from 'three/addons/webxr/VRButton.js';
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
@@ -119,6 +120,27 @@ let showContent = true;
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 const spiral = new THREE.Object3D()
 let VRenabled = false
+
+//Loading Manager
+const manager = new THREE.LoadingManager();
+manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+	//console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+};
+
+const progressBar = document.getElementById('progress-bar');
+manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+    progressBar.value = (itemsLoaded / itemsTotal ) * 100
+	//console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+};
+
+const progressBarContainer = document.querySelector('.progress-bar-container')
+manager.onLoad = function ( ) {
+    progressBarContainer.style.display = 'none';
+	//console.log( 'Loading complete!');
+};
+manager.onError = function ( url ) {
+	console.log( 'There was an error loading ' + url );
+};
 
 //WEB XR
 const enableVRbutton = document.getElementById("enableVRbutton")
@@ -627,55 +649,55 @@ const starGeoB20 = new THREE.BufferGeometry()
 
 const starMaterial = new THREE.PointsMaterial({
     size: 5,
-    map: new THREE.TextureLoader().load(starW),
+    map: new THREE.TextureLoader(manager).load(starW),
     transparent: true,
     fog: false
 })
 const starMatR5 = new THREE.PointsMaterial({
     size: 5,
-    map: new THREE.TextureLoader().load(starR5),
+    map: new THREE.TextureLoader(manager).load(starR5),
     transparent: true,
     fog: false
 })
 const starMatR10 = new THREE.PointsMaterial({
     size: 5,
-    map: new THREE.TextureLoader().load(starR10),
+    map: new THREE.TextureLoader(manager).load(starR10),
     transparent: true,
     fog: false
 })
 const starMatR15 = new THREE.PointsMaterial({
     size: 5,
-    map: new THREE.TextureLoader().load(starR15),
+    map: new THREE.TextureLoader(manager).load(starR15),
     transparent: true,
     fog: false
 })
 const starMatR20 = new THREE.PointsMaterial({
     size: 5,
-    map: new THREE.TextureLoader().load(starR20),
+    map: new THREE.TextureLoader(manager).load(starR20),
     transparent: true,
     fog: false
 })
 const starMatB5 = new THREE.PointsMaterial({
     size: 5,
-    map: new THREE.TextureLoader().load(starB5),
+    map: new THREE.TextureLoader(manager).load(starB5),
     transparent: true,
     fog: false
 })
 const starMatB10 = new THREE.PointsMaterial({
     size: 5,
-    map: new THREE.TextureLoader().load(starB10),
+    map: new THREE.TextureLoader(manager).load(starB10),
     transparent: true,
     fog: false
 })
 const starMatB15 = new THREE.PointsMaterial({
     size: 5,
-    map: new THREE.TextureLoader().load(starB15),
+    map: new THREE.TextureLoader(manager).load(starB15),
     transparent: true,
     fog: false
 })
 const starMatB20 = new THREE.PointsMaterial({
     size: 5,
-    map: new THREE.TextureLoader().load(starB20),
+    map: new THREE.TextureLoader(manager).load(starB20),
     transparent: true,
     fog: false
 })
@@ -805,7 +827,7 @@ scene.add(center);
     center.add(pivot4);
 
 //create Jaranius
-const textureLoader = new THREE.TextureLoader()
+const textureLoader = new THREE.TextureLoader(manager)
 let diffuse = textureLoader.load(diffuseTexture);
 const jaraniusGeometry = new THREE.SphereGeometry(5, 250, 250);
 jaraniusGeometry.computeBoundingSphere();
@@ -886,7 +908,7 @@ createTags(tagPlanetData, planetContent, 5)
 createTags(tagSpiralData, spiral, 7)
 
 //create connections
-const curveThickness = 0.0002
+const curveThickness = 0.0001
 const curveRadiusSegments = 3
 const curveMaxAltitude = 0.03
 const curveMinAltitude = 5.01
@@ -899,6 +921,29 @@ const spiralConnections = new THREE.Object3D()
 spiral.add(spiralConnections)
 let context2 = spiralConnections
 createConnections(tagSpiralData, tagSpiralConnections, 0.0005, curveRadiusSegments, 0.3, 7.01, context2)
+
+//create sign
+
+let sign = new THREE.Object3D()
+planetContent.add(sign)
+sign.position.set(0, -5.05, 0)
+const loader = new GLTFLoader(manager);
+loader.load('../models/sign.glb',
+	function ( glb ) {
+        const model = glb.scene
+		sign.add( model );
+        model.scale.set(5, 5, 5)
+        model.rotation.y += Math.PI / 2;
+        model.rotation.x += Math.PI / 3;
+	},
+	function ( xhr ) {
+		//console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+	},
+	function ( error ) {
+		console.log( 'An error happened' );
+	}
+);
+
 
 //create sun
 const sunRadius = 5
@@ -913,11 +958,12 @@ const sunRadianceMat = new THREE.ShaderMaterial({
     lights: false,
 }) */
 const sunMat = new THREE.MeshBasicMaterial({
-    map: new THREE.TextureLoader().load(sunTexture)
+    map: new THREE.TextureLoader(manager).load(sunTexture)
 })
 const sunRadiance = new THREE.Mesh(sunRadianceGeo, sunMat)
 sunRadiance.position.set(0, 0, 490)
 pivot4.add(sunRadiance)
+
 /* const sunRadiance2 = new THREE.Mesh(sunRadianceGeo2, sunRadianceMat)
 sunRadiance2.position.set(0, 0, 490)
 pivot4.add(sunRadiance2) */
@@ -925,6 +971,8 @@ pivot4.add(sunRadiance2) */
 const sunLight = new THREE.PointLight(0xffffff, 1.2, 2000)
 sunLight.position.set(sunRadiance.position.x, sunRadiance.position.y, sunRadiance.position.z - sunRadius * 1.5)
 pivot4.add(sunLight)
+
+
 
 const textureFlare0 = textureLoader.load("https://jaranolsen.github.io/Planet/sunflare.webp");
 const textureFlare3 = textureLoader.load("https://jaranolsen.github.io/Planet/lensflare.webp");
@@ -959,7 +1007,7 @@ for (let i = 0; i < moons.length; i++) {
     const mesh = new THREE.Mesh(
         new THREE.SphereGeometry(moons[i].radius, 50, 50),
         new THREE.MeshStandardMaterial({
-            map: new THREE.TextureLoader().load(moons[i].texture),
+            map: new THREE.TextureLoader(manager).load(moons[i].texture),
             metalness: 0,
             flatShading: false,
             side: FrontSide,
@@ -1248,6 +1296,7 @@ scene.add(ambient);
 
 const spotlight = new THREE.DirectionalLight(0xffffff, 0);
 scene.add(spotlight);
+
 let spotlightIntensity = 0.5
 
 const jaraniusLight = new THREE.PointLight(0xffffff, 0.5);
@@ -1323,7 +1372,14 @@ function onDocumentKeyUp(event) {
     if (keyCode == 76) {
         if (spotlight.intensity == 0) {
             spotlight.intensity = spotlightIntensity
-        } else spotlight.intensity = 0
+        } else if (spotlight.intensity == spotlightIntensity) {
+            spotlight.intensity = spotlightIntensity * 2
+        } else if (spotlight.intensity == spotlightIntensity * 2) {
+            spotlight.intensity = spotlightIntensity * 3
+        } else if (spotlight.intensity == spotlightIntensity * 3) {
+            spotlight.intensity = 0
+        }
+        
     }
     if (keyCode == 81) {
         let output = ""
@@ -1534,7 +1590,7 @@ function render(time) {
             selectedNode = pinPositions.findIndex((object) => object==intersects[0].object)
             selectedBox = tags[selectedNode].box;
             selectedTag = tags[selectedNode].tag;
-            
+            ht
             if (camera.position.distanceTo(selectedPin.position) < 4) {
                 const selectedCarousel = tagPlanetData[selectedNode].slides
                 activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
@@ -1576,6 +1632,12 @@ function render(time) {
   
     controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);
     controls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;
+
+    if (sign) {
+        const signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z)
+        signRotationVector.normalize()
+        sign.lookAt(signRotationVector.x, signRotationVector.y, signRotationVector.z ) 
+    }
 
     controls.update();
 }

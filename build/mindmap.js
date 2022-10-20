@@ -236,7 +236,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         const material = new THREE.MeshBasicMaterial({
             color: 0xffffff,
             transparent: true,
-            opacity: 0.45
+            opacity: 1 //0.45
         });
         const curve = new THREE.Mesh(geometry, material);
         curve.renderOrder = -10

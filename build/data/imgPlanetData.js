@@ -14,5 +14,5 @@ export const imgPlanetData = [ //ID, SRC, LATITUDE, LONGITUDE, SIZE, RADIUS, CON
 {id: "E0BA43A5-DD1E-499B-B987-89ABC147185F", src: gutLogo, lat: 110, lng: 312, size: 550, radius: 5.06, context: "jaranius"},
 {id: "6E82624B-7964-4EE1-9FB2-678E2F4B6B4B", src: heartLogo, lat: 85, lng: 86, size: 600, radius: 5.06, context: "jaranius"},
 {id: "42AE95EF-168F-4C9A-BD26-4C2E5B4A615C", src: headLogo, lat: 50, lng: 192, size: 400, radius: 5.06, context: "jaranius"},
-{id: "6E82624B-7964-4EE1-9FB2-678E2F4B6B4B", src: heartLogo, lat: 180, lng: 90, size: 50, radius: 5.06, context: "jaranius"},
+//{id: "6E82624B-7964-4EE1-9FB2-678E2F4B6B4B", src: heartLogo, lat: 180, lng: 90, size: 50, radius: 5.06, context: "jaranius"},
 ]
