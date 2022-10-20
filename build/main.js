@@ -46,8 +46,6 @@ import roughnessTexture from "../img/textures/roughness2k.webp"
     // ||Environment
 //simport environmentTexture from "../img/textures/sun1k.webp"
 
-
-
 import cloudsTexture from "../img/textures/clouds4k.webp"
 import starW from "../img/textures/starW.webp"
 import starR5 from "../img/textures/starR5.webp"
@@ -64,6 +62,9 @@ import redmoonTexture from "../img/textures/moonRed1k.webp"
 import icemoonTexture from "../img/textures/moonIce1k.webp"
 /* import flare0 from "../img/lensflare0.png"
 import flare3 from "../img/lensflare3.png" */
+
+// IMPORT MODELS
+import signModel from "../models/sign.glb"
 
 const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
 const DEFAULT_PROFILE = 'generic-trigger';
@@ -928,7 +929,7 @@ let sign = new THREE.Object3D()
 planetContent.add(sign)
 sign.position.set(0, -5.05, 0)
 const loader = new GLTFLoader(manager);
-loader.load('../models/sign.glb',
+loader.load(signModel,
 	function ( glb ) {
         const model = glb.scene
 		sign.add( model );
