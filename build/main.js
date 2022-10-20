@@ -817,8 +817,11 @@ scene.add(center);
     const pivot4 = new THREE.Object3D();
 
     pivot1.rotation.y = - Math.PI / 2.5;
+    pivot1.rotation.x = 0.15
     pivot2.rotation.y = 2 * Math.PI / 16;
+    pivot2.rotation.x = 0.22
     pivot3.rotation.y = 2 * Math.PI / 2;
+    pivot3.rotation.x = 0.31
     pivot4.rotation.y = 5 * Math.PI / 3;
     pivot4.rotation.x = -0.41;
 
@@ -1618,7 +1621,7 @@ function render(time) {
     center.rotation.y += -0.00001;
     pivot1.rotation.y += -0.0003;
     pivot2.rotation.y += -0.00003;
-    pivot3.rotation.y += -0.000003;
+    pivot3.rotation.y += -0.000009;
     pivot4.rotation.y += 0.0001;
     clouds.rotation.y += 0.00001;
 
