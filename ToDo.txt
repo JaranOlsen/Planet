@@ -19,8 +19,6 @@ SHORT-TERM DEVELOPMENT
 
     tweak terrain colors - deeper blue oceans? higher contrast? see real photo
 
-    make loading screen
-
     make functions of init processes
     
     improve planet icon
@@ -36,8 +34,6 @@ SHORT-TERM DEVELOPMENT
     improve VR controllers
 
     light up area around when hover pin (create or move spotlight?)
-
-    fix assets so i won't have to upload (fonts and flares)
 
     make background more colorful
         fog?

@@ -1591,7 +1591,7 @@ function render(time) {
             selectedNode = pinPositions.findIndex((object) => object==intersects[0].object)
             selectedBox = tags[selectedNode].box;
             selectedTag = tags[selectedNode].tag;
-            ht
+
             if (camera.position.distanceTo(selectedPin.position) < 4) {
                 const selectedCarousel = tagPlanetData[selectedNode].slides
                 activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
