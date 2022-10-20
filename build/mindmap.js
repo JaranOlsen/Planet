@@ -59,7 +59,7 @@ export function createImages(textureSrc, lat, lng, size, radius, context) {
     boxGeo.computeBoundingBox();
     const boxMidx = -0.5 * ( boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x );
     const boxMidy = -0.5 * ( boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y );
-    boxGeo.translate( boxMidx, boxMidy * 0, 0 );
+    boxGeo.translate( boxMidx, boxMidy, 0 );
     let box = new THREE.Mesh(boxGeo, boxMat);
 
     let boxLatLng = convertLatLngtoCartesian(lat, lng, radius);

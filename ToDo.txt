@@ -8,6 +8,7 @@ MAKE USABLE
 
 
 SHORT-TERM DEVELOPMENT
+
     Limit double-side rendering (especially on high tris geometry)
 
     add color-realtime-editing
