@@ -7,7 +7,8 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { convertLatLngtoCartesian } from './mathScripts.js'
 import { palette } from './data/palette.js'
 
-const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
+//const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
+const tagFont = "fonts/SourceSans3_Regular.json"
 
 export const pins = []
 export const pinPositions = []
