@@ -1,6 +1,7 @@
 MAKE USABLE
     debug for iphone
         fix touch click controls - fixed?
+        test disabling youtube embeds
 
     re-enter VR / access to html elements in VR
 
