@@ -60,8 +60,6 @@ import sunTexture from "../img/textures/sun1k.webp"
 import moonTexture from "../img/textures/moon1k.webp"
 import redmoonTexture from "../img/textures/moonRed1k.webp"
 import icemoonTexture from "../img/textures/moonIce1k.webp"
-/* import flare0 from "../img/lensflare0.png"
-import flare3 from "../img/lensflare3.png" */
 
 // IMPORT MODELS
 import signModel from "../models/sign.glb"
@@ -111,12 +109,16 @@ const scene = new THREE.Scene();
 const pointer = new THREE.Vector2;
 const raycaster = new THREE.Raycaster();
 const clock = new THREE.Clock();
+
+let contexts = []
+let selectedContext = null;
 let selectedPin = null;
 let selectedBox = null;
 let selectedTag = null;
 let selectedNode = null;
 let selectedNodes = []
 let showContent = true;
+let fastMove = false;
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 const spiral = new THREE.Object3D()
@@ -909,6 +911,7 @@ for (let i = 0; i < imgSpiralData.length; i++) {
 
 //create tags
 createTags(tagPlanetData, planetContent, 5)
+
 createTags(tagSpiralData, spiral, 7)
 
 //create connections
@@ -1034,18 +1037,40 @@ function createSpiral() {
     let helixMaxRadius = 7;
     let helixRevolutions = 9;
     let helixPoints = []
+    let jointPoints = []
 
     for (let i = 0; i < helixRevolutions; i++) {
         helixPoints[i] = []
-        for (let t = (2 * Math.PI) * i; t <= (2 * Math.PI) * (i + 1.03); t += Math.PI / 128) {
+        jointPoints[i] = []
+        for (let t = (2 * Math.PI) * i; t <= (2 * Math.PI) * (i + 1.0000001); t += Math.PI / 128) {
             let radiusModifier = Math.sin(t / (helixRevolutions * 2))
             let helixX = radiusModifier * helixMaxRadius * Math.cos(t);
             let helixZ = radiusModifier * helixMaxRadius * Math.sin(t)
             let helixY = (helixMaxRadius / (helixRevolutions * Math.PI)) * t
 
             helixPoints[i].push(new THREE.Vector3(helixX, helixY - helixMaxRadius, helixZ));
+
+            if (i == 0) {
+                if (t > (2 * Math.PI) * i + (((2 * Math.PI) * (i + 1.0000001) - (2 * Math.PI) * i) * 0.98)) {
+                    jointPoints[i].push(new THREE.Vector3(helixX, helixY - helixMaxRadius, helixZ));
+                }
+            }
+            else if (i < helixRevolutions) {
+                if (t < (2 * Math.PI) * i + (((2 * Math.PI) * (i + 1.0000001) - (2 * Math.PI) * i) * 0.02)) {
+                    jointPoints[i - 1].push(new THREE.Vector3(helixX, helixY - helixMaxRadius, helixZ));
+                }
+                if (t > (2 * Math.PI) * i + (((2 * Math.PI) * (i + 1.0000001) - (2 * Math.PI) * i) * 0.98)) {
+                    jointPoints[i].push(new THREE.Vector3(helixX, helixY - helixMaxRadius, helixZ));
+                }
+            }
+            else {
+                if (t < (2 * Math.PI) * i + (((2 * Math.PI) * (i + 1.0000001) - (2 * Math.PI) * i) * 0.02)) {
+                    jointPoints[i - 1].push(new THREE.Vector3(helixX, helixY - helixMaxRadius, helixZ));
+                }
+            }
         }
 
+        //core
         let helixCurve = new THREE.CatmullRomCurve3(helixPoints[i]);
 
         const geometry = new THREE.TubeGeometry(helixCurve, 64, 0.01, 10, false);
@@ -1071,6 +1096,7 @@ function createSpiral() {
         const spiralSection = new THREE.Mesh(geometry, material);
         spiral.add(spiralSection)
 
+        //skin
         const geometry2 = new THREE.TubeGeometry(helixCurve, 64, 0.12 - i / 70, 10, false);
         const material2 = new THREE.MeshBasicMaterial({
             color: palette[40 + i],
@@ -1080,6 +1106,34 @@ function createSpiral() {
         const spiralSection2 = new THREE.Mesh(geometry2, material2);
         spiral.add(spiralSection2)
         spiral.rotation.set(0, 0, 0)
+        
+        //joint
+        if (i !== 0){    
+            let jointCurve = new THREE.CatmullRomCurve3(jointPoints[i - 1]);
+
+            const jointGeometry = new THREE.TubeGeometry(jointCurve, 64, 0.15 - i / 70, 10, false);
+            jointGeometry.computeBoundingBox();
+            const jointMaterial = new THREE.ShaderMaterial({
+                uniforms: {
+                    color1: {
+                    value: new THREE.Color(palette[40 + i - 1])
+                    },
+                    color2: {
+                    value: new THREE.Color(palette[40 + i])
+                    },
+                    bboxMin: {
+                    value: jointGeometry.boundingBox.min
+                    },
+                    bboxMax: {
+                    value: jointGeometry.boundingBox.max
+                    }
+                },
+                vertexShader: spiralVertexShader,
+                fragmentShader: spriralFragmentShader,
+            })
+            const jointSection = new THREE.Mesh(jointGeometry, jointMaterial);
+            spiral.add(jointSection)
+        }
     }
 }
 
@@ -1307,6 +1361,12 @@ const jaraniusLight = new THREE.PointLight(0xffffff, 0.5);
 jaraniusLight.position.set(0, 0, 0);
 jaranius.add(jaraniusLight);
 
+//create Contexts
+contexts.push([tagPlanetData, tagPlanetData.length, tagPlanetConnections, jaraniusConnections, 5.01])
+
+contexts.push([tagSpiralData, contexts[contexts.length - 1][1] + tagSpiralData.length, tagSpiralConnections, spiralConnections, 7.01])
+
+
 // Interaction functions
 function unhoverPin() {
     for (let i = 0; i < pins.length; i++) {
@@ -1331,7 +1391,7 @@ function touch2Mouse(e)
   {
     case "touchstart": mouseEv="mousedown"; break;  
     case "touchend":   mouseEv="mouseup"; break;
-    case "touchmove":  mouseEv="mousemove"; break;
+    case "touchmove":  mouseEv="mousemove"; break;selectedNodes
     default: return;
   }
 
@@ -1347,22 +1407,18 @@ document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
 
-    if (keyCode == 65) {
+    if (keyCode == 65) { //A
         selectedNodes.length = 0
-        console.log(selectedNodes, selectedPin)
-
     }
-    if (keyCode == 90) {
-        console.log(selectedNode)
-        if (selectedNode) {
-            console.log(selectedNodes.indexOf(selectedNode))
+    if (keyCode == 90) { //Z
+        if (selectedNode !== null) {
             if (selectedNodes.indexOf(selectedNode) == -1) {
                 selectedNodes.push(selectedNode)
             }
             console.log(selectedNodes)
         }
     }
-    if (keyCode == 67) {
+    if (keyCode == 67) { //C
         if (showContent == true) {
             jaranius.remove(planetContent)
             jaranius.remove(jaraniusConnections)
@@ -1373,7 +1429,14 @@ function onDocumentKeyUp(event) {
             showContent = true
         }
     }
-    if (keyCode == 76) {
+    if (keyCode == 70) { //F
+        if (fastMove == true) {
+            fastMove = false
+        } else {
+            fastMove = true
+        }
+    }
+    if (keyCode == 76) { //L
         if (spotlight.intensity == 0) {
             spotlight.intensity = spotlightIntensity
         } else if (spotlight.intensity == spotlightIntensity) {
@@ -1385,14 +1448,15 @@ function onDocumentKeyUp(event) {
         }
         
     }
-    if (keyCode == 81) {
+    if (keyCode == 81) { //Q
         let output = ""
-        for (let i = 0; i < tagPlanetData.length; i++) {
-            output = output + "    {id: \"" + tagPlanetData[i].id + "\", text: " + JSON.stringify(tagPlanetData[i].text) + ", lat: " + tagPlanetData[i].lat + ", lng: " + tagPlanetData[i].lng + ", color: " + tagPlanetData[i].color + ", size: " + tagPlanetData[i].size + ", slides: " + tagPlanetData[i].slides + "},\n"
+        const context = contexts[selectedContext][0]
+        for (let i = 0; i < context.length; i++) {
+            output = output + "    {id: \"" + context[i].id + "\", text: " + JSON.stringify(context[i].text) + ", lat: " + context[i].lat + ", lng: " + context[i].lng + ", color: " + context[i].color + ", size: " + context[i].size + ", slides: " + context[i].slides + "},\n"
         }
         console.log(output)
     }
-    if (keyCode == 83) {
+    if (keyCode == 83) { //S
         if (spiralActivated == false) {
             createSpiral()
         } else {
@@ -1400,33 +1464,43 @@ function onDocumentKeyUp(event) {
             scene.remove(spiral)
         }
     }
-    if (keyCode == 87) {
-        jaraniusConnections.clear()
+    if (keyCode == 87) { //W
+        const context = [contexts[selectedContext][0], contexts[selectedContext][2], contexts[selectedContext][3], contexts[selectedContext][4]]
+        context[2].clear()
         const curveThickness = 0.0002
         const curveRadiusSegments = 3
         const curveMaxAltitude = 0.03
         const curveMinAltitude = 5.01
-        const context = jaraniusConnections
-        createConnections(tagPlanetData, tagPlanetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context)
+        createConnections(context[0], context[1], curveThickness, curveRadiusSegments, curveMaxAltitude, context[3], context[2])
         
     } 
-    if (keyCode == 187) {
+    if (keyCode == 187) { //+
         let originalSize = 0
         let size = 0
+        let context = {context: contexts[selectedContext][0]}
+        let indexModifier
+                if (selectedContext > 0) {
+                    indexModifier = contexts[selectedContext - 1][1]
+                } else indexModifier = 0
         if (selectedNode)
             originalSize = pins[selectedNode].originalSize
-            tagPlanetData[selectedNode].size += 5
-            size = tagPlanetData[selectedNode].size
+            context.context[selectedNode - indexModifier].size += 5
+            size = context.context[selectedNode - indexModifier].size
             selectedPin.scale.set(size / originalSize, size / originalSize, size / originalSize)
             selectedBox.scale.set(size / originalSize, size / originalSize, size / originalSize)
     }
-    if (keyCode == 189) {
+    if (keyCode == 189) { //-
         let originalSize = 0
         let size = 0
+        let context = {context: contexts[selectedContext][0]}
+        let indexModifier
+                if (selectedContext > 0) {
+                    indexModifier = contexts[selectedContext - 1][1]
+                } else indexModifier = 0
         if (selectedNode)
             originalSize = pins[selectedNode].originalSize
-            tagPlanetData[selectedNode].size -= 5
-            size = tagPlanetData[selectedNode].size
+            context.context[selectedNode - indexModifier].size -= 5
+            size = context.context[selectedNode - indexModifier].size
             selectedPin.scale.set(size / originalSize, size / originalSize, size / originalSize)
             selectedBox.scale.set(size / originalSize, size / originalSize, size / originalSize)
     } 
@@ -1435,27 +1509,34 @@ function onDocumentKeyUp(event) {
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     const keyCode = event.which;
+
     if (selectedNodes.length > 0) {
+        const context = {context: contexts[selectedContext][0], length: contexts[selectedContext][1], radius: contexts[selectedContext][4]}
+
         for (let node = 0; node < selectedNodes.length; node++) {
             if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
                 let posLatLng = convertCartesiantoLatLng(pins[selectedNodes[node]].pin.position.x, pins[selectedNodes[node]].pin.position.y, pins[selectedNodes[node]].pin.position.z);
                 // up
                 if (keyCode == 38) {
+                    if (fastMove) posLatLng.lat -= .4;
                     posLatLng.lat -= .1;
                     // down
                 } else if (keyCode == 40) {
+                    if (fastMove)posLatLng.lat += .4;
                     posLatLng.lat += .1;
                     // left
                 } else if (keyCode == 37) {
+                    if (fastMove)posLatLng.lng -= .4;
                     posLatLng.lng -= .1;
                     // right
                 } else if (keyCode == 39) {
+                    if (fastMove)posLatLng.lng += .4;
                     posLatLng.lng += .1;
                 }
 
-                const pinSphereRadius = 5.01
-                const boxSphereRadius = 5.05
-                const tagSphereRadius = 5.06
+                const pinSphereRadius = context.radius
+                const boxSphereRadius = context.radius + 0.04
+                const tagSphereRadius = context.radius + 0.05
                 
                 const pinPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, pinSphereRadius);
                 const boxPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, boxSphereRadius);
@@ -1464,30 +1545,41 @@ function onDocumentKeyDown(event) {
                 tags[selectedNodes[node]].box.position.set(boxPos.x, boxPos.y, boxPos.z);
                 tags[selectedNodes[node]].tag.position.set(tagPos.x, tagPos.y, tagPos.z);
                 posLatLng = constrainLatLng(posLatLng.lat, posLatLng.lng - 180)
-                tagPlanetData[selectedNodes[node]].lat = posLatLng.lat.toFixed(1)
-                tagPlanetData[selectedNodes[node]].lng = posLatLng.lng.toFixed(1)
+
+                let indexModifier
+                if (selectedContext > 0) {
+                    indexModifier = contexts[selectedContext - 1][1]
+                } else indexModifier = 0
+                context.context[selectedNodes[node] - indexModifier].lat = posLatLng.lat.toFixed(1)
+                context.context[selectedNodes[node] - indexModifier].lng = posLatLng.lng.toFixed(1)
             }
         }
     } else if (selectedPin != null) {
+        const context = {context: contexts[selectedContext][0], length: contexts[selectedContext][1], radius: contexts[selectedContext][4]}
+
         if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
             let posLatLng = convertCartesiantoLatLng(selectedPin.position.x, selectedPin.position.y, selectedPin.position.z);
             // up
             if (keyCode == 38) {
+                if (fastMove) posLatLng.lat -= .4;
                 posLatLng.lat -= .1;
                 // down
             } else if (keyCode == 40) {
+                if (fastMove) posLatLng.lat += .4;
                 posLatLng.lat += .1;
                 // left
             } else if (keyCode == 37) {
+                if (fastMove) posLatLng.lng -= .4;
                 posLatLng.lng -= .1;
                 // right
             } else if (keyCode == 39) {
+                if (fastMove) posLatLng.lng += .4;
                 posLatLng.lng += .1;
             }
 
-            const pinSphereRadius = 5.01
-            const boxSphereRadius = 5.05
-            const tagSphereRadius = 5.06
+            const pinSphereRadius = context.radius
+            const boxSphereRadius = context.radius + 0.04
+            const tagSphereRadius = context.radius + 0.05
             
             const pinPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, pinSphereRadius);
             const boxPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, boxSphereRadius);
@@ -1496,8 +1588,13 @@ function onDocumentKeyDown(event) {
             selectedBox.position.set(boxPos.x, boxPos.y, boxPos.z);
             selectedTag.position.set(tagPos.x, tagPos.y, tagPos.z);
             posLatLng = constrainLatLng(posLatLng.lat, posLatLng.lng - 180)
-            tagPlanetData[selectedNode].lat = posLatLng.lat.toFixed(1)
-            tagPlanetData[selectedNode].lng = posLatLng.lng.toFixed(1)
+
+            let indexModifier
+                if (selectedContext > 0) {
+                    indexModifier = contexts[selectedContext - 1][1]
+                } else indexModifier = 0
+                context.context[selectedNode - indexModifier].lat = posLatLng.lat.toFixed(1)
+                context.context[selectedNode - indexModifier].lng = posLatLng.lng.toFixed(1)
         }
     }
 
@@ -1594,8 +1691,26 @@ function render(time) {
             selectedNode = pinPositions.findIndex((object) => object==intersects[0].object)
             selectedBox = tags[selectedNode].box;
             selectedTag = tags[selectedNode].tag;
+            
+            const currentContext = selectedContext
+            for (let i = 0; i < 100; i++){
+                if (selectedNode < contexts[i][1]) {
+                    selectedContext = i
+                    if (selectedContext !== currentContext) {
+                        selectedNodes.length = 0
+                    }
+                    break
+                }
+            }
 
-            if (camera.position.distanceTo(selectedPin.position) < 4) {
+            let indexModifier
+                if (selectedContext > 0) {
+                    indexModifier = contexts[selectedContext - 1][1]
+                } else indexModifier = 0
+
+            let context = contexts[selectedContext][0]
+
+            if (camera.position.distanceTo(selectedPin.position) < 4 && context[selectedNode - indexModifier].slides !== undefined) {
                 const selectedCarousel = tagPlanetData[selectedNode].slides
                 activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
                 activeCarousel.style.display = "block"

@@ -227,10 +227,10 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         let v2 = new THREE.Vector3(p2.x, p2.y, p2.z);
         let points = []
         for (let i = 0; i <= 20; i++) {
-        let p = new THREE.Vector3().lerpVectors(v1, v2, i/20)
-        p.normalize()
-        p.multiplyScalar(curveMinAltitude + curveMaxAltitude * Math.sin(Math.PI*i/20));
-        points.push(p)
+            let p = new THREE.Vector3().lerpVectors(v1, v2, i/20)
+            p.normalize()
+            p.multiplyScalar(curveMinAltitude + curveMaxAltitude * Math.sin(Math.PI*i/20));
+            points.push(p)
         }
         let path = new THREE.CatmullRomCurve3(points);
         const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments, false);
