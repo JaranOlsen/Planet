@@ -14,8 +14,6 @@ SHORT-TERM DEVELOPMENT
 
     add color-realtime-editing
 
-    add type of curve (dashed, arrowed)
-
     add guided meditations, beth upton, rupert spira clips 
         ken wilber clips?
 

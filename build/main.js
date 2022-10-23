@@ -14,6 +14,7 @@ import { createImages, createTags, pins, tags, pinPositions, createConnections }
 import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
 import { tagPlanetData } from './data/tagPlanetData.js'
 import { tagPlanetConnections } from './data/tagPlanetConnectionData.js'
+import { tagPlanetSpecialConnections } from './data/tagPlanetSpecialConnectionData.js'
 import { imgPlanetData } from './data/imgPlanetData.js'
 import { tagSpiralData } from './data/tagSpiralData.js';
 import { tagSpiralConnections } from './data/tagSpiralConnectionData.js';
@@ -922,12 +923,14 @@ const curveMinAltitude = 5.01
 const jaraniusConnections = new THREE.Object3D()
 jaranius.add(jaraniusConnections)
 let context = jaraniusConnections
-createConnections(tagPlanetData, tagPlanetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context)
+createConnections(tagPlanetData, tagPlanetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false)
+createConnections(tagPlanetData, tagPlanetSpecialConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, true)
+
 
 const spiralConnections = new THREE.Object3D()
 spiral.add(spiralConnections)
 let context2 = spiralConnections
-createConnections(tagSpiralData, tagSpiralConnections, 0.0005, curveRadiusSegments, 0.3, 7.01, context2)
+createConnections(tagSpiralData, tagSpiralConnections, 0.0005, curveRadiusSegments, 0.3, 7.01, context2, false)
 
 //create sign
 
@@ -1448,6 +1451,21 @@ function onDocumentKeyUp(event) {
         }
         
     }
+   /*  if (keyCode == 78) { //N
+        const tempStore = []
+        const context = contexts[selectedContext][0]
+            context.push(context[selectedNode])
+            tempStore.push(context[selectedNode])
+            context[selectedNode].id = "set new"
+            context[selectedNode].text = "new text"
+            tempStore[0].text = "new text"
+            context[selectedNode].lat -=1
+            tempStore[0].lat -=1
+            context[selectedNode].slides = undefined
+
+            createTags(tempStore, planetContent, 5) 
+    } */
+
     if (keyCode == 81) { //Q
         let output = ""
         const context = contexts[selectedContext][0]

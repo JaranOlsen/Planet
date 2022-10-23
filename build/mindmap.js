@@ -7,8 +7,12 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { convertLatLngtoCartesian } from './mathScripts.js'
 import { palette } from './data/palette.js'
 
+import dash from '../img/textures/dash.webp'
+
 const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
 //const tagFont = "fonts/SourceSans3_Regular.json"
+
+const textureLoader = new THREE.TextureLoader()
 
 export const pins = []
 export const pinPositions = []
@@ -16,7 +20,6 @@ export const boxes = []
 export const tags = []
 
 export function createImages(textureSrc, lat, lng, size, radius, context) {
-    const textureLoader = new THREE.TextureLoader()
     let img = textureLoader.load(textureSrc);
     const boxMat = new THREE.MeshBasicMaterial( {
         map: img,
@@ -204,7 +207,7 @@ export function createTags(dataSource, context, radius) {
     }
 }
 
-export function createConnections(tagSource, connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context) {
+export function createConnections(tagSource, connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, dashed) {
     for (let i = 0; i < tagSource.length; i++) {
         for (let j = 0; j < connectionSource.length; j++) {
             if (tagSource[i].id == connectionSource[j][0]) {
@@ -233,12 +236,20 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
             points.push(p)
         }
         let path = new THREE.CatmullRomCurve3(points);
+        const dashTexture = textureLoader.load(dash)
+        const distance = Math.floor(v1.distanceTo(v2) * 25)
+        dashTexture.repeat.set(0, distance)
+        dashTexture.wrapS = THREE.RepeatWrapping;
+        dashTexture.wrapT = THREE.RepeatWrapping;
+        dashTexture.rotation = Math.PI / 2
         const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments, false);
         const material = new THREE.MeshBasicMaterial({
+            alphaMap: dashTexture,
             color: 0xffffff,
-            transparent: true,
-            opacity: 1 //0.45
+            transparent: dashed,
+            opacity: 0.5
         });
+
         const curve = new THREE.Mesh(geometry, material);
         curve.renderOrder = -10
         context.add(curve);
