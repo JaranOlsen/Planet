@@ -19,7 +19,6 @@ CONTENT
 
     wordclouds for difficult concepts
 
-    guided meditations (just audio instead of insight-timer)
     add beth upton, rupert spira clips 
         ken wilber clips?
 
@@ -49,6 +48,9 @@ MAKE USABLE
     debug for iphone
         fix touch click controls - fixed?
         test disabling youtube embeds
+        low resolution/resource version?
+            -eliminate gutta
+            -lower texture quality
 
     re-enter VR / access to html elements in VR
 

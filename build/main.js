@@ -1149,7 +1149,7 @@ function createSpiral() {
         spiral.add(spiralSection2)
         spiral.rotation.set(0, 0, 0)
         
-        //joint
+        //joints
         if (i !== 0){    
             let jointCurve = new THREE.CatmullRomCurve3(jointPoints[i - 1]);
 
@@ -1177,6 +1177,8 @@ function createSpiral() {
             spiral.add(jointSection)
         }
     }
+
+    //tier2ring
     const dashAlphaTexture = textureLoader.load(dash)
         dashAlphaTexture.repeat.set(0, 100)
         //dashAlphaTexture.wrapS = THREE.RepeatWrapping;
@@ -1718,6 +1720,12 @@ fpsContainer.appendChild(fpsDisplay);
 
 refreshLoop();
 
+//debug
+if (tagPlanetData.length !== tagPlanetConnections.length) {
+    console.log("ERROR: tagPlanetData.length !== tagPlanetConnections.length")
+}
+
+//ANIMATIONLOOP
 
 function animate() {
 
