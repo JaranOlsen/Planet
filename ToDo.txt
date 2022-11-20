@@ -1,3 +1,50 @@
+INITIATIVES
+    go through way of the gut with Thomas
+
+    ask for intro audio snippets tips on buddhist page
+
+    ask for anomalies on TOE discord
+
+    show planet to aksel and tommy
+
+    apply for a pimp
+
+    find venue for weekend retreat in oslo and bergen
+
+
+CONTENT
+    Anapana (etc) tips and tricks
+
+    convert exercises to one background image and html text (saves loading time)
+
+    wordclouds for difficult concepts
+
+    guided meditations (just audio instead of insight-timer)
+    add beth upton, rupert spira clips 
+        ken wilber clips?
+
+    menu-screen?
+
+    short, medium, long videos featuring key teachers/academics/subjects
+        -iain mcGilchrist
+            - 1hr: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/fciCsq0uBUI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        -bernardo kastrup
+        -don hoffman
+        -roger penrose / stuart hameroff
+        -michael levin
+        -john vervaeke
+        -ken wilber
+
+        -les greenberg
+        -carl rogers
+        -abraham maslow
+        -carl jung
+        
+        -rupert spira
+        -ajahn chah
+        -ajahn sumedho
+        -
+
 MAKE USABLE
     debug for iphone
         fix touch click controls - fixed?
@@ -10,12 +57,20 @@ MAKE USABLE
 
 SHORT-TERM DEVELOPMENT
 
+    click on textboxes rather than on nodes? (use nodes for selecting?)
+
+    clickable images?
+
+    alpha maps on colored sphere for podcast links
+        https://r105.threejsfundamentals.org/threejs/lessons/threejs-picking.html
+
+    investigate how to render multiple layers of transparent object
+
+    convert all images to webp
+
     Limit double-side rendering (especially on high tris geometry)
 
     add color-realtime-editing
-
-    add guided meditations, beth upton, rupert spira clips 
-        ken wilber clips?
 
     tweak terrain colors - deeper blue oceans? higher contrast? see real photo
 
@@ -54,6 +109,9 @@ GEOGRAPHICAL FEATURES
 
 
 LONG-TERM DEVELOPMENT
+
+    restructure / rewrite code
+        context independent functions (pass context parameters)
 
     post-processing? bloom?
 

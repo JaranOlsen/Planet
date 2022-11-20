@@ -45,7 +45,7 @@ import normalTexture from "../img/textures/normal2k.webp"
 import roughnessTexture from "../img/textures/roughness2k.webp"
 
     // ||Environment
-//simport environmentTexture from "../img/textures/sun1k.webp"
+//import environmentTexture from "../img/textures/sun1k.webp"
 
 import cloudsTexture from "../img/textures/clouds4k.webp"
 import starW from "../img/textures/starW.webp"
@@ -61,6 +61,10 @@ import sunTexture from "../img/textures/sun1k.webp"
 import moonTexture from "../img/textures/moon1k.webp"
 import redmoonTexture from "../img/textures/moonRed1k.webp"
 import icemoonTexture from "../img/textures/moonIce1k.webp"
+import dash from '../img/textures/dash.webp'
+import tier from '../img/textures/tier.webp'
+import podAlpha1 from '../img/textures/podAlpha1.webp'
+import podAlpha2 from '../img/textures/podAlpha2.webp'
 
 // IMPORT MODELS
 import signModel from "../models/sign.glb"
@@ -120,6 +124,8 @@ let selectedNode = null;
 let selectedNodes = []
 let showContent = true;
 let fastMove = false;
+
+let signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z)
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 const spiral = new THREE.Object3D()
@@ -930,7 +936,7 @@ createConnections(tagPlanetData, tagPlanetSpecialConnections, curveThickness, cu
 const spiralConnections = new THREE.Object3D()
 spiral.add(spiralConnections)
 let context2 = spiralConnections
-createConnections(tagSpiralData, tagSpiralConnections, 0.0005, curveRadiusSegments, 0.3, 7.01, context2, false)
+createConnections(tagSpiralData, tagSpiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false)
 
 //create sign
 
@@ -954,6 +960,39 @@ loader.load(signModel,
 	}
 );
 
+//create Podcast map
+/* let podcastFields = []
+
+const podCastLayer = new THREE.Object3D()
+jaranius.add(podCastLayer)
+
+const pod1Geo = new THREE.SphereGeometry(5.3, 50, 50)
+const pod1Mat = new THREE.MeshBasicMaterial({
+    alphaMap: textureLoader.load(podAlpha1),
+    alphaTest: 0.01,
+    color: 0xcc88cc,
+    transparent: true,
+    opacity: 0.2,
+    blending: AdditiveBlending,
+    depthWrite: false
+})
+const podField1 = new THREE.Mesh(pod1Geo, pod1Mat)
+podCastLayer.add(podField1)
+podcastFields.push(podField1)
+
+const pod2Geo = new THREE.SphereGeometry(5.4, 50, 50)
+const pod2Mat = new THREE.MeshBasicMaterial({
+    alphaMap: textureLoader.load(podAlpha2),
+    alphaTest: 0.01,
+    color: 0x88cccc,
+    transparent: true,
+    opacity: 0.2,
+    blending: AdditiveBlending,
+    depthWrite: false
+})
+const podField2 = new THREE.Mesh(pod2Geo, pod2Mat)
+podCastLayer.add(podField2)
+podcastFields.push(podField2) */
 
 //create sun
 const sunRadius = 5
@@ -1138,10 +1177,39 @@ function createSpiral() {
             spiral.add(jointSection)
         }
     }
+    const dashAlphaTexture = textureLoader.load(dash)
+        dashAlphaTexture.repeat.set(0, 100)
+        //dashAlphaTexture.wrapS = THREE.RepeatWrapping;
+        dashAlphaTexture.wrapT = THREE.RepeatWrapping;
+        dashAlphaTexture.rotation = Math.PI / 2
+    const dashTexture = textureLoader.load(tier)
+        dashTexture.repeat.set(1, 100)
+        dashTexture.wrapS = THREE.RepeatWrapping;
+        dashTexture.wrapT = THREE.RepeatWrapping;
+        dashTexture.rotation = Math.PI / 2
+        dashTexture.offset.set(0.5, 0)
+    const tierGeo = new THREE.TorusGeometry(6.05, 0.05, 50, 100)
+    const tierMat = new THREE.MeshStandardMaterial({
+        alphaMap: dashAlphaTexture,
+        transparent: true,
+        alphaTest: 0.5,
+        map: dashTexture,
+        emissive: 0xffffff,
+        emissiveMap: dashTexture,
+        emissiveIntensity: 0.05,
+        color: 0xffffff,
+        metalness: 1,
+        roughness: 0.7,
+    })
+    const tierRing = new THREE.Mesh(tierGeo, tierMat)
+    tierRing.rotation.x = Math.PI / 2
+    tierRing.position.y = 2.34
+    spiral.add(tierRing)
 }
 
 
 //create Gutta
+const numberOfGutta = 100;
 const guttaScale = 0.0003;
 
 /* const guttaGeometry = new THREE.ConeGeometry(10 * guttaScale, 30 * guttaScale, 6, 4)
@@ -1319,7 +1387,7 @@ class Gutt {
 }
 
 let gutta = [];
-for (let i = 0; i < 300; i++) {
+for (let i = 0; i < numberOfGutta; i++) {
     let lat = getRandomBell(40, 140, 5)
     let lng = getRandomInt(0, 359)
     gutta.push(new Gutt(lat, lng))
@@ -1375,6 +1443,9 @@ function unhoverPin() {
     for (let i = 0; i < pins.length; i++) {
         pins[i].pin.material.color.set(pins[i].originalColor);
     }
+    /* for (let i = 0; i < podcastFields.length; i++) {
+        podcastFields[i].material.opacity = 0.2;
+    } */
 }
 
 function hoverPin() {
@@ -1383,6 +1454,11 @@ function hoverPin() {
     for (let i = 0; i < intersects.length; i++) {
         intersects[i].object.material.color.set(0xff0000);
     }
+    /* const podIntersects = raycaster.intersectObjects(podCastLayer.children);
+    for (let i = 0; i < podIntersects.length; i++) {
+        podIntersects[i].object.material.opacity = 0.5;
+        console.log("x")
+    } */
 }
 
 function touch2Mouse(e)
@@ -1771,7 +1847,7 @@ function render(time) {
     controls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;
 
     if (sign) {
-        const signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z)
+        signRotationVector.set(camera.position.x, camera.position.y, camera.position.z)
         signRotationVector.normalize()
         sign.lookAt(signRotationVector.x, signRotationVector.y, signRotationVector.z ) 
     }

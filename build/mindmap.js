@@ -7,6 +7,7 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { convertLatLngtoCartesian } from './mathScripts.js'
 import { palette } from './data/palette.js'
 
+//  IMPORT TEXTURES
 import dash from '../img/textures/dash.webp'
 
 const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
