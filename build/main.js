@@ -1,6 +1,6 @@
 //  IMPORT DEPENDENCIES
 import * as THREE from 'three';
-import { Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, RGBADepthPacking, SubtractiveBlending } from 'three';
+import { Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, RGBADepthPacking, SubtractiveBlending, LoadingManager } from 'three';
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'; 
@@ -68,6 +68,7 @@ import podAlpha2 from '../img/textures/podAlpha2.webp'
 
 // IMPORT MODELS
 import signModel from "../models/sign.glb"
+import { lerp, smoothstep } from 'three/src/math/MathUtils.js';
 
 const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
 const DEFAULT_PROFILE = 'generic-trigger';
@@ -114,6 +115,7 @@ const scene = new THREE.Scene();
 const pointer = new THREE.Vector2;
 const raycaster = new THREE.Raycaster();
 const clock = new THREE.Clock();
+const timer = new THREE.Clock();
 
 let contexts = []
 let selectedContext = null;
@@ -1425,9 +1427,10 @@ gui.hide()
 const ambient = new THREE.AmbientLight(0xffffff, 0.02); //0.01
 scene.add(ambient);
 
-const spotlight = new THREE.DirectionalLight(0xffffff, 0);
+const spotlight = new THREE.SpotLight(0xefebd8, 0);
+spotlight.penumbra = 0.8
+spotlight.angle = Math.PI / 8
 scene.add(spotlight);
-
 let spotlightIntensity = 0.5
 
 const jaraniusLight = new THREE.PointLight(0xffffff, 0.5);
@@ -1441,18 +1444,18 @@ contexts.push([tagSpiralData, contexts[contexts.length - 1][1] + tagSpiralData.l
 
 
 // Interaction functions
-function unhoverPin() {
-    for (let i = 0; i < pins.length; i++) {
-        pins[i].pin.material.color.set(pins[i].originalColor);
-    }
-    /* for (let i = 0; i < podcastFields.length; i++) {
-        podcastFields[i].material.opacity = 0.2;
-    } */
-}
-
 function hoverPin() {
     raycaster.setFromCamera(pointer, camera);
     const intersects = raycaster.intersectObjects(pinPositions);
+
+    //unhovered
+    if (intersects.length == 0) {
+        for (let i = 0; i < pins.length; i++) {
+            pins[i].pin.material.color.set(pins[i].originalColor);
+        }
+    }
+
+    //hovered
     for (let i = 0; i < intersects.length; i++) {
         intersects[i].object.material.color.set(0xff0000);
     }
@@ -1737,9 +1740,9 @@ function render(time) {
     time *= 0.001;
 
     //WebXR
-    const dt = clock.getDelta();
-        
     if (renderer.xr.isPresenting){
+        const dt = clock.getDelta();
+
         if (controllers ){
             Object.values( controllers).forEach( ( value ) => {
                 handleController( value.controller );
@@ -1826,7 +1829,7 @@ function render(time) {
     /* document.addEventListener("touchstart", touch2Mouse, true);
     document.addEventListener("touchmove", touch2Mouse, true);
     document.addEventListener("touchend", touch2Mouse, true); */
-    unhoverPin();
+
     hoverPin();
 
     renderer.render(scene, camera);
@@ -1835,6 +1838,7 @@ function render(time) {
     const camRot = camera.rotation
     spotlight.position.set(camPos.x, camPos.y, camPos.z);
     spotlight.rotation.set(camRot.x, camRot.y, camRot.z);
+    
     center.rotation.y += -0.00001;
     pivot1.rotation.y += -0.0003;
     pivot2.rotation.y += -0.00003;

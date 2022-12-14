@@ -170,7 +170,7 @@ export function createTags(dataSource, context, radius) {
             return { box, tag }
         }
         
-        for (let i = 0; i < dataSource.length; i++) {
+        for (let i = 0; i < dataSource.length; i++) {  
             let tag = instantiateTag(dataSource[i].text, dataSource[i].lat, dataSource[i].lng - 180, palette[dataSource[i].color], dataSource[i].size / 100000);
             tags.push(tag)
         }
@@ -202,7 +202,7 @@ export function createTags(dataSource, context, radius) {
         return {pin, originalColor, originalSize};
     }
 
-    for (let i = 0; i < dataSource.length; i++) {
+    for (let i = 0; i < dataSource.length; i++) { 
         let pin = instantiatePin(dataSource[i].lat, dataSource[i].lng - 180, palette[dataSource[i].color], palette[dataSource[i].color], dataSource[i].size / 100000, dataSource[i].size, dataSource[i].slides, context);
         pins.push(pin)
     }

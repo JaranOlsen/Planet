@@ -13,6 +13,10 @@ INITIATIVES
 
 
 CONTENT
+    Menu-screen at index.html
+        index.html -> planet.html (one or more versions - high-performance, low-performance, ultra-low/bare-links-version, dev version)
+        start loading resources at index.html?
+
     Anapana (etc) tips and tricks
 
     convert exercises to one background image and html text (saves loading time)
@@ -21,8 +25,6 @@ CONTENT
 
     add beth upton, rupert spira clips 
         ken wilber clips?
-
-    menu-screen?
 
     short, medium, long videos featuring key teachers/academics/subjects
         -iain mcGilchrist
