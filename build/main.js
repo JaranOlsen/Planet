@@ -477,19 +477,24 @@ function moveDolly(dt){
 let start = false
 const introTune = document.getElementById("introTune");
     introTune.preload = "auto";
+    introTune.currentTime = 0;
+    introTune.volume = 1;
+const introTuneLength = introTune.duration
+/* const introTune = document.getElementById("introTune");
+    introTune.preload = "auto";
     introTune.currentTime = 1.4;
-    introTune.volume = 0.25;
-const introSpeech = document.getElementById("introSpeech")
+    introTune.volume = 0.25; */
+/* const introSpeech = document.getElementById("introSpeech")
     introSpeech.preload = "auto";
-    introSpeech.currentTime= 1.4;
+    introSpeech.currentTime= 1.4; */
 
 const playButton = document.getElementById("playbutton")
 const credits = document.getElementById("credits")
 playButton.addEventListener("click", () => {
         introTune.play();
-        setTimeout(function(){ 
+        /* setTimeout(function(){ 
             introSpeech.play(); 
-            }, 40000)
+            }, 40000) */
         start = true;
         playButton.style.display = "none";
         skipButton.style.display = "none";
@@ -1847,11 +1852,11 @@ function render(time) {
     clouds.rotation.y += 0.00001;
 
     if (camera.position.z > 15 && start == true) {
-        camera.position.z -= 0.0001 * Math.pow(camera.position.z - 10, 1.35)
+        camera.position.z -= 0.0213 * Math.pow(camera.position.z - 10, 1.35) / introTuneLength
         jaranius.rotation.y += 0.0005;
     }
     if (camera.position.z < -15 && start == true) {
-        camera.position.z += 0.0001 * Math.pow(Math.abs(camera.position.z) - 10, 1.35)
+        camera.position.z += 0.213 * Math.pow(Math.abs(camera.position.z) - 10, 1.35) / introTuneLength
         jaranius.rotation.y += 0.0005;
     }
   
