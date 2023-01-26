@@ -495,11 +495,11 @@ playButton.addEventListener("click", () => {
         /* setTimeout(function(){ 
             introSpeech.play(); 
             }, 40000) */
-        start = true;
-        /* playButton.style.display = "none";
+        //start = true;
+        playButton.style.display = "none";
         skipButton.style.display = "none";
         enableVRbutton.style.display = "none";
-        credits.style.display = "none"; */
+        credits.style.display = "none";
         
     })
 
