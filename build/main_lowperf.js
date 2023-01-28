@@ -141,9 +141,9 @@ const introTune = document.getElementById("introTune");
     introTune.preload = "auto";
     introTune.currentTime = 1.4;
     introTune.volume = 0.25;
-const introSpeech = document.getElementById("introSpeech")
+/* const introSpeech = document.getElementById("introSpeech")
     introSpeech.preload = "auto";
-    introSpeech.currentTime= 1.4;
+    introSpeech.currentTime= 1.4; */
 
 const playButton = document.getElementById("playbutton")
 const credits = document.getElementById("credits")
