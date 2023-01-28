@@ -149,9 +149,9 @@ const playButton = document.getElementById("playbutton")
 const credits = document.getElementById("credits")
 playButton.addEventListener("click", () => {
         introTune.play();
-        setTimeout(function(){ 
+        /* setTimeout(function(){ 
             introSpeech.play(); 
-            }, 40000)
+            }, 40000) */
         start = true;
         playButton.style.display = "none";
         skipButton.style.display = "none";
