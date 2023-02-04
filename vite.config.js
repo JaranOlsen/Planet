@@ -16,6 +16,7 @@ export default defineConfig({
         planet: resolve('planet.html'),
         planet_lowperf: resolve('planet_lowperf.html'),
         planet_ultralowperf: resolve('planet_ultralowperf.html'),
+        planet_dev: resolve('planet_dev.html'),
       },
     },
   },

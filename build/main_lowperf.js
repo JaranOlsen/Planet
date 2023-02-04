@@ -17,6 +17,7 @@ import { tagSpiralData } from './data/spiralTagData.js';
 import { tagSpiralConnections } from './data/spiralConnectionData.js';
 import { imgSpiralData } from './data/spiralImageData.js'
 import { palette } from './data/palette.js'
+import { pushContent } from './content.js';
 
 //  IMPORT SHADERS
 import spiralVertexShader from '../shaders/spiralVertex.glsl';
@@ -853,27 +854,6 @@ function hoverPin() {
     } */
 }
 
-function touch2Mouse(e)
-{
-  var theTouch = e.changedTouches[0];
-  var mouseEv;
-
-  switch(e.type)
-  {
-    case "touchstart": mouseEv="mousedown"; break;  
-    case "touchend":   mouseEv="mouseup"; break;
-    case "touchmove":  mouseEv="mousemove"; break;selectedNodes
-    default: return;
-  }
-
-  var mouseEvent = document.createEvent("MouseEvent");
-  mouseEvent.initMouseEvent(mouseEv, true, true, window, 1, theTouch.screenX, theTouch.screenY, theTouch.clientX, theTouch.clientY, false, false, false, false, 0, null);
-  theTouch.target.dispatchEvent(mouseEvent);
-
-  e.preventDefault();
-}
-
-
 document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
@@ -913,6 +893,74 @@ function onDocumentKeyUp(event) {
         }
     }
 }
+
+//EVENTS MOUSE
+function onPointerMove(event) {
+    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+
+function onClick(event) {
+    raycaster.setFromCamera(pointer, camera);
+    const intersects = raycaster.intersectObjects(pinPositions);
+    if (intersects.length > 0) {
+        selectedPin = intersects[0].object;
+        selectedNode = pinPositions.findIndex((object) => object==intersects[0].object)
+        
+        const currentContext = selectedContext
+        for (let i = 0; i < 100; i++){
+            if (selectedNode < contexts[i][1]) {
+                selectedContext = i
+                if (selectedContext !== currentContext) {
+                    selectedNodes.length = 0
+                }
+                break
+            }
+        }
+
+        let indexModifier
+            if (selectedContext > 0) {
+                indexModifier = contexts[selectedContext - 1][1]
+            } else indexModifier = 0
+
+        let context = contexts[selectedContext][0]
+
+        if (camera.position.distanceTo(selectedPin.position) < 4 && context[selectedNode - indexModifier].slides !== undefined) {
+            const selectedCarousel = tagPlanetData[selectedNode].slides
+            pushContent(selectedCarousel)
+            activeCarousel = document.querySelector(`.carousel.s1`)
+            //activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
+            activeCarousel.style.display = "block"
+        }
+    }
+}
+
+/* function touch2Mouse(e)
+{
+  var theTouch = e.changedTouches[0];
+  var mouseEv;
+
+  switch(e.type)
+  {
+    case "touchstart": mouseEv="mousedown"; break;  
+    case "touchend":   mouseEv="mouseup"; break;
+    case "touchmove":  mouseEv="mousemove"; break;selectedNodes
+    default: return;
+  }
+
+  var mouseEvent = document.createEvent("MouseEvent");
+  mouseEvent.initMouseEvent(mouseEv, true, true, window, 1, theTouch.screenX, theTouch.screenY, theTouch.clientX, theTouch.clientY, false, false, false, false, 0, null);
+  theTouch.target.dispatchEvent(mouseEvent);
+
+  e.preventDefault();
+} */
+
+window.addEventListener('pointermove', onPointerMove);
+window.addEventListener('click', onClick);
+document.addEventListener("touchstart", onClick);
+/* document.addEventListener("touchstart", touch2Mouse, true);
+document.addEventListener("touchmove", touch2Mouse, true);
+document.addEventListener("touchend", touch2Mouse, true); */
 
 
 //create fps counter
@@ -959,51 +1007,6 @@ function render(time) {
         camera.aspect = canvas.clientWidth / canvas.clientHeight;
         camera.updateProjectionMatrix();
     }
-
-    function onPointerMove(event) {
-        pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-        pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    }
-
-    function onClick(event) {
-        raycaster.setFromCamera(pointer, camera);
-        const intersects = raycaster.intersectObjects(pinPositions);
-        if (intersects.length > 0) {
-            selectedPin = intersects[0].object;
-            selectedNode = pinPositions.findIndex((object) => object==intersects[0].object)
-            
-            const currentContext = selectedContext
-            for (let i = 0; i < 100; i++){
-                if (selectedNode < contexts[i][1]) {
-                    selectedContext = i
-                    if (selectedContext !== currentContext) {
-                        selectedNodes.length = 0
-                    }
-                    break
-                }
-            }
-
-            let indexModifier
-                if (selectedContext > 0) {
-                    indexModifier = contexts[selectedContext - 1][1]
-                } else indexModifier = 0
-
-            let context = contexts[selectedContext][0]
-
-            if (camera.position.distanceTo(selectedPin.position) < 4 && context[selectedNode - indexModifier].slides !== undefined) {
-                const selectedCarousel = tagPlanetData[selectedNode].slides
-                activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
-                activeCarousel.style.display = "block"
-            }
-        }
-    }
-
-    window.addEventListener('pointermove', onPointerMove);
-    window.addEventListener('mouseup', onClick);
-    document.addEventListener("touchstart", onClick);
-    /* document.addEventListener("touchstart", touch2Mouse, true);
-    document.addEventListener("touchmove", touch2Mouse, true);
-    document.addEventListener("touchend", touch2Mouse, true); */
 
     hoverPin();
 

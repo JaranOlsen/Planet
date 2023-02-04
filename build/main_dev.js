@@ -20,6 +20,7 @@ import { tagSpiralData } from './data/spiralTagData.js';
 import { tagSpiralConnections } from './data/spiralConnectionData.js';
 import { imgSpiralData } from './data/spiralImageData.js'
 import { palette } from './data/palette.js'
+import { pushContent } from './content.js';
 
 //  IMPORT SHADERS
 import atmosphericLightVertexShader from '../shaders/atmosphericLightVertex.glsl';
@@ -69,8 +70,6 @@ import podAlpha2 from '../img/textures/podAlpha2.webp'
 // IMPORT MODELS
 import signModel from "../models/sign.glb"
 import { lerp, smoothstep } from 'three/src/math/MathUtils.js';
-import { pushContent } from './content.js';
-import { contentData } from './data/contentData.js';
 
 const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
 const DEFAULT_PROFILE = 'generic-trigger';
@@ -1504,9 +1503,6 @@ function onDocumentKeyUp(event) {
 
     if (keyCode == 65) { //A
         selectedNodes.length = 0
-    }
-    if (keyCode == 73) { //I
-        pushContent(0)
     }
 
     if (keyCode == 90) { //Z
