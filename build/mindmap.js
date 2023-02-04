@@ -22,7 +22,8 @@ export const tags = []
 
 export function createImages(textureSrc, lat, lng, size, radius, context) {
     let img = textureLoader.load(textureSrc);
-    const boxMat = new THREE.MeshBasicMaterial( {
+    //const boxMat = new THREE.MeshBasicMaterial( {
+    const boxMat = new THREE.MeshStandardMaterial( {
         map: img,
         transparent: true,
         side: DoubleSide
@@ -85,7 +86,8 @@ export function createTags(dataSource, context, radius) {
                 //opacity: 0.8,
                 side: THREE.DoubleSide
             } );
-            const boxMat = new THREE.MeshBasicMaterial( {
+            //const boxMat = new THREE.MeshBasicMaterial( {
+            const boxMat = new THREE.MeshStandardMaterial( {
                 color: color,
                 transparent: true,
                 opacity: 0.65, //0.5
@@ -187,7 +189,8 @@ export function createTags(dataSource, context, radius) {
 
         const pin = new THREE.Mesh(
             new THREE.SphereGeometry(size * 75, segments, segments),
-            new THREE.MeshBasicMaterial({
+            //new THREE.MeshBasicMaterial({
+            new THREE.MeshStandardMaterial({
                 color: color,
                 wireframe: wireframe,
             })
@@ -244,12 +247,15 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         dashTexture.wrapT = THREE.RepeatWrapping;
         dashTexture.rotation = Math.PI / 2
         const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments, false);
-        const material = new THREE.MeshBasicMaterial({
-            alphaMap: dashTexture,
+        //const material = new THREE.MeshBasicMaterial({
+        const material = new THREE.MeshStandardMaterial({
             color: 0xffffff,
-            transparent: dashed,
+            transparent: true,
             opacity: 0.5
         });
+        if (dashed == true) {
+            material.alphaMap = dashTexture
+        }
 
         const curve = new THREE.Mesh(geometry, material);
         curve.renderOrder = -10

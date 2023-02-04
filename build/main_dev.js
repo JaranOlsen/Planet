@@ -839,7 +839,7 @@ scene.add(center);
     pivot2.rotation.x = 0.22
     pivot3.rotation.y = 2 * Math.PI / 2;
     pivot3.rotation.x = 0.31
-    pivot4.rotation.y = 5 * Math.PI / 3;
+    pivot4.rotation.y = 9 * Math.PI / 6;
     pivot4.rotation.x = -0.41;
 
     center.add(pivot1);
@@ -1848,17 +1848,21 @@ function render(time) {
     pivot1.rotation.y += -0.0003;
     pivot2.rotation.y += -0.00003;
     pivot3.rotation.y += -0.000009;
-    pivot4.rotation.y += 0.0001;
+    pivot4.rotation.y += -0.0001;
     clouds.rotation.y += 0.00001;
 
     if (camera.position.z > 15 && start == true) {
         camera.position.z -= 0.0213 * Math.pow(camera.position.z - 10, 1.35) / introTuneLength
-        jaranius.rotation.y += 0.0005;
     }
     if (camera.position.z < -15 && start == true) {
         camera.position.z += 0.213 * Math.pow(Math.abs(camera.position.z) - 10, 1.35) / introTuneLength
-        jaranius.rotation.y += 0.0005;
     }
+    if (start == true) {
+        camera.position.x += 0.4 / introTuneLength
+        camera.position.y += 0.1 / introTuneLength
+    }
+    //console.log("x: ", camera.position.x, "y: ", camera.position.y, "z: ", camera.position.z)
+    if (camera.position.z > -15 && camera.position.z < 15) start = false
   
     controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);
     controls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;
