@@ -117,7 +117,6 @@ let signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y,
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 const spiral = new THREE.Object3D()
-let VRenabled = false
 
 //Loading Manager
 const manager = new THREE.LoadingManager();
@@ -155,7 +154,6 @@ playButton.addEventListener("click", () => {
         start = true;
         playButton.style.display = "none";
         skipButton.style.display = "none";
-        enableVRbutton.style.display = "none";
         credits.style.display = "none";
         
     })
