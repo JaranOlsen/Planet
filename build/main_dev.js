@@ -849,21 +849,15 @@ scene.add(center);
 
 //create Jaranius
 const textureLoader = new THREE.TextureLoader(manager)
-let diffuse = textureLoader.load(diffuseTexture);
 const jaraniusGeometry = new THREE.SphereGeometry(5, 250, 250);
 jaraniusGeometry.computeBoundingSphere();
 const jaranius = new THREE.Mesh(
     jaraniusGeometry,
-    new THREE.MeshStandardMaterial({ //Note that for best results you should always specify an environment map when using this material.
-        map: diffuse,
-        //color: 0xffffff,
-        normalMap: textureLoader.load(normalTexture),  //make extreme variant to test properly
+    new THREE.MeshStandardMaterial({ 
+        map: textureLoader.load(diffuseTexture),
+        normalMap: textureLoader.load(normalTexture),
         roughnessMap: textureLoader.load(roughnessTexture),  //works well
-        //aoMap: textureLoader.load(ambientOcclusionTexture),  //doesn't seem to work. Docs says need second UV map
-        //envMap: textureLoader.load(environmentTexture),  //doesn't seem to have any effect
-        //aoMapIntensity: 1,
-        normalScale: new THREE.Vector2(1, 1),  //needs testing
-        //envMapIntensity: 100,  //doesn't seem to do much
+        normalScale: new THREE.Vector2(3, 3),  //works well
         metalness: 0,  //works well
         roughness: 0.85,  //works well
         flatShading: false,
@@ -1435,7 +1429,7 @@ scene.add(ambient);
 
 const spotlight = new THREE.SpotLight(0xefebd8, 0);
 spotlight.penumbra = 0.8
-spotlight.angle = Math.PI / 8
+spotlight.angle = Math.PI / 4
 scene.add(spotlight);
 let spotlightIntensity = 0.5
 
