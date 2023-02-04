@@ -12,13 +12,13 @@ import { GUI } from 'dat.gui'
 //  IMPORT SCRIPTS
 import { createImages, createTags, pins, tags, pinPositions, createConnections } from './mindmap.js';
 import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
-import { tagPlanetData } from './data/tagPlanetData.js'
-import { tagPlanetConnections } from './data/tagPlanetConnectionData.js'
-import { tagPlanetSpecialConnections } from './data/tagPlanetSpecialConnectionData.js'
-import { imgPlanetData } from './data/imgPlanetData.js'
-import { tagSpiralData } from './data/tagSpiralData.js';
-import { tagSpiralConnections } from './data/tagSpiralConnectionData.js';
-import { imgSpiralData } from './data/imgSpiralData.js'
+import { tagPlanetData } from './data/planetTagData.js'
+import { tagPlanetConnections } from './data/planetConnectionData.js'
+import { tagPlanetSpecialConnections } from './data/planetSpecialConnectionData.js'
+import { imgPlanetData } from './data/planetImageData'
+import { tagSpiralData } from './data/spiralTagData.js';
+import { tagSpiralConnections } from './data/spiralConnectionData.js';
+import { imgSpiralData } from './data/spiralImageData.js'
 import { palette } from './data/palette.js'
 
 //  IMPORT SHADERS
