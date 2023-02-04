@@ -1755,7 +1755,7 @@ function onClick(event) {
     }
 }
 
-/* function touch2Mouse(e)
+function touch2Mouse(e)
 {
   var theTouch = e.changedTouches[0];
   var mouseEv;
@@ -1773,14 +1773,14 @@ function onClick(event) {
   theTouch.target.dispatchEvent(mouseEvent);
 
   e.preventDefault();
-} */
+}
 
 window.addEventListener('pointermove', onPointerMove);
 window.addEventListener('click', onClick);
 document.addEventListener("touchstart", onClick);
-/* document.addEventListener("touchstart", touch2Mouse, true);
+document.addEventListener("touchstart", touch2Mouse, true);
 document.addEventListener("touchmove", touch2Mouse, true);
-document.addEventListener("touchend", touch2Mouse, true); */
+document.addEventListener("touchend", touch2Mouse, true);
 
 //debug
 if (tagPlanetData.length !== tagPlanetConnections.length) {
