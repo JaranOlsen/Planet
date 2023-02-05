@@ -91,7 +91,9 @@ export function createTags(dataSource, context, radius) {
                 color: color,
                 transparent: true,
                 opacity: 0.65, //0.5
-                side: THREE.DoubleSide
+                side: THREE.DoubleSide,
+                emissive: color,
+                emissiveIntensity: 0.1,
             } );
 
             const shapes = font.generateShapes( txt, 100 );
@@ -193,6 +195,8 @@ export function createTags(dataSource, context, radius) {
             new THREE.MeshStandardMaterial({
                 color: color,
                 wireframe: wireframe,
+                emissive: color,
+                emissiveIntensity: 0.1,
             })
         )
         
@@ -251,7 +255,9 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         const material = new THREE.MeshStandardMaterial({
             color: 0xffffff,
             transparent: true,
-            opacity: 0.5
+            opacity: 0.5,
+            emissive: 0xffffff,
+            emissiveIntensity: 0.1,
         });
         if (dashed == true) {
             material.alphaMap = dashTexture
