@@ -196,7 +196,7 @@ export function createTags(dataSource, context, radius) {
                 color: color,
                 wireframe: wireframe,
                 emissive: color,
-                emissiveIntensity: 0.1,
+                emissiveIntensity: 0.2,
             })
         )
         
@@ -255,7 +255,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         const material = new THREE.MeshStandardMaterial({
             color: 0xffffff,
             transparent: true,
-            opacity: 0.5,
+            opacity: 0.6,
             emissive: 0xffffff,
             emissiveIntensity: 0.1,
         });

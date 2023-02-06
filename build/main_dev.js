@@ -1,36 +1,37 @@
 //  IMPORT DEPENDENCIES
-import * as THREE from 'three';
-import { Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, RGBADepthPacking, SubtractiveBlending, LoadingManager } from 'three';
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'; 
-import { VRButton } from 'three/addons/webxr/VRButton.js';
-import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js';
-import { Constants as MotionControllerConstants, fetchProfile, MotionController } from 'three/examples/jsm/libs/motion-controllers.module.js';
+import * as THREE from 'three'
+import { Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, RGBADepthPacking, SubtractiveBlending, LoadingManager } from 'three'
+import { OrbitControls } from "three/addons/controls/OrbitControls.js"
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'
+import { VRButton } from 'three/addons/webxr/VRButton.js'
+import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js'
+import { Constants as MotionControllerConstants, fetchProfile, MotionController } from 'three/examples/jsm/libs/motion-controllers.module.js'
 import { GUI } from 'dat.gui'
 
 //  IMPORT SCRIPTS
-import { createImages, createTags, pins, tags, pinPositions, createConnections } from './mindmap.js';
+import { createImages, createTags, pins, tags, pinPositions, createConnections } from './mindmap.js'
 import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
 import { tagPlanetData } from './data/planetTagData.js'
 import { tagPlanetConnections } from './data/planetConnectionData.js'
 import { tagPlanetSpecialConnections } from './data/planetSpecialConnectionData.js'
 import { imgPlanetData } from './data/planetImageData.js'
-import { tagSpiralData } from './data/spiralTagData.js';
-import { tagSpiralConnections } from './data/spiralConnectionData.js';
+import { tagSpiralData } from './data/spiralTagData.js'
+import { tagSpiralConnections } from './data/spiralConnectionData.js'
 import { imgSpiralData } from './data/spiralImageData.js'
 import { palette } from './data/palette.js'
-import { pushContent } from './content.js';
+import { pushContent } from './content.js'
+import { animationLoop } from './loop'
 
 //  IMPORT SHADERS
-import atmosphericLightVertexShader from '../shaders/atmosphericLightVertex.glsl';
-import atmosphericLightFragmentShader from '../shaders/atmosphericLightFragment.glsl';
-import atmosphereVertexShader from '../shaders/atmosphereVertex.glsl';
-import atmosphereFragmentShader from '../shaders/atmosphereFragment.glsl';
-import sunVertexShader from '../shaders/sunVertex.glsl';
-import sunFragmentShader from '../shaders/sunFragment.glsl';
-import spiralVertexShader from '../shaders/spiralVertex.glsl';
-import spriralFragmentShader from '../shaders/spiralFragment.glsl';
+import atmosphericLightVertexShader from '../shaders/atmosphericLightVertex.glsl'
+import atmosphericLightFragmentShader from '../shaders/atmosphericLightFragment.glsl'
+import atmosphereVertexShader from '../shaders/atmosphereVertex.glsl'
+import atmosphereFragmentShader from '../shaders/atmosphereFragment.glsl'
+import sunVertexShader from '../shaders/sunVertex.glsl'
+import sunFragmentShader from '../shaders/sunFragment.glsl'
+import spiralVertexShader from '../shaders/spiralVertex.glsl'
+import spriralFragmentShader from '../shaders/spiralFragment.glsl'
 
 //  IMPORT TEXTURES
 
@@ -39,8 +40,8 @@ import spriralFragmentShader from '../shaders/spiralFragment.glsl';
 import diffuseTexture from "../img/textures/diffuse8kvibrance.webp"
 
     // ||Normals - White = high altitude - see https://www.youtube.com/watch?v=YJqWHsllczY&t=1s on how to best generate
-//import normalTexture from "../img/textures/normals8ktest.webp"
-import normalTexture from "../img/textures/normal2k.webp"
+import normalTexture from "../img/textures/normals8ktest.webp"
+//import normalTexture from "../img/textures/normal2k.webp"
 
     // ||Roughness - Green (white) = high roughness (green channel - see documentation)
 import roughnessTexture from "../img/textures/roughness2k.webp"
@@ -1877,4 +1878,5 @@ function render(time) {
 }
 
 animate()
+
 
