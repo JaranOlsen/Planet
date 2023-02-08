@@ -93,8 +93,6 @@ SHORT-TERM DEVELOPMENT
     
     improve planet icon
 
-    add LP static to intro 
-
     make design improvements to slidecarousel
 
     convert to functions:
@@ -131,9 +129,6 @@ LONG-TERM DEVELOPMENT
     post-processing? bloom?
 
     make procedural geography
-
-    HTML/CSS
-        fix Labels jagged movement
 
     add flyControls (see section under)
 

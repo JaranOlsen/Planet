@@ -1,6 +1,6 @@
 export const palette = [
 0x74121D,   //Global colors
-0x000000,
+0xff0000,
 0x000000,
 0x000000,
 0x000000,

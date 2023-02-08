@@ -10,14 +10,16 @@ import { palette } from './data/palette.js'
 //  IMPORT TEXTURES
 import dash from '../img/textures/dash.webp'
 
+//  IMPORT MATERIALS
+import { boxMaterial0, boxMaterial10, boxMaterial11, boxMaterial12, boxMaterial20, boxMaterial21, boxMaterial22, boxMaterial30, boxMaterial31, boxMaterial32, boxMaterial33, boxMaterial40, boxMaterial41, boxMaterial42, boxMaterial43, boxMaterial44, boxMaterial45, boxMaterial46, boxMaterial47, boxMaterial48, boxMaterial49, pinMaterial0, pinMaterial1, pinMaterial10, pinMaterial11, pinMaterial12, pinMaterial20, pinMaterial21, pinMaterial22, pinMaterial30, pinMaterial31, pinMaterial32, pinMaterial33, pinMaterial40, pinMaterial41, pinMaterial42, pinMaterial43, pinMaterial44, pinMaterial45, pinMaterial46, pinMaterial47, pinMaterial48, pinMaterial49, pinWireframeMaterial0,pinWireframeMaterial1, pinWireframeMaterial10, pinWireframeMaterial11, pinWireframeMaterial12, pinWireframeMaterial20, pinWireframeMaterial21, pinWireframeMaterial22, pinWireframeMaterial30, pinWireframeMaterial31, pinWireframeMaterial32, pinWireframeMaterial33, pinWireframeMaterial40, pinWireframeMaterial41, pinWireframeMaterial42, pinWireframeMaterial43, pinWireframeMaterial44, pinWireframeMaterial45, pinWireframeMaterial46, pinWireframeMaterial47, pinWireframeMaterial48, pinWireframeMaterial49, textMaterial, connectionMaterial} from './materials.js'
+
 const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
 //const tagFont = "fonts/SourceSans3_Regular.json"
 
 const textureLoader = new THREE.TextureLoader()
 
-export const pins = []
 export const pinPositions = []
-export const boxes = []
+export const pins = []
 export const tags = []
 
 export function createImages(textureSrc, lat, lng, size, radius, context) {
@@ -79,23 +81,8 @@ export function createTags(dataSource, context, radius) {
     loader.load( tagFont, function ( font ) { 
 
         function instantiateTag(txt, lat, lng, color, size) {
-            //create text
-            const textMat = new THREE.MeshBasicMaterial( {
-                color: 0x000000,
-                transparent: false,
-                //opacity: 0.8,
-                side: THREE.DoubleSide
-            } );
-            //const boxMat = new THREE.MeshBasicMaterial( {
-            const boxMat = new THREE.MeshStandardMaterial( {
-                color: color,
-                transparent: true,
-                opacity: 0.65, //0.5
-                side: THREE.DoubleSide,
-                emissive: color,
-                emissiveIntensity: 0.1,
-            } );
 
+            //create text
             const shapes = font.generateShapes( txt, 100 );
             const txtGeo = new THREE.ShapeGeometry( shapes );
             txtGeo.computeBoundingBox();
@@ -103,7 +90,7 @@ export function createTags(dataSource, context, radius) {
             const yMid = 0.5 * ( txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y );
             txtGeo.translate( xMid, yMid * 2, 0 );
             
-            const tag = new THREE.Mesh( txtGeo, textMat );
+            const tag = new THREE.Mesh( txtGeo, textMaterial );
             let latLng = convertLatLngtoCartesian(lat, lng, radius + 0.06);
             let rotationVector = new THREE.Vector3(latLng.x, latLng.y, latLng.z);
             tag.lookAt(rotationVector);
@@ -161,7 +148,7 @@ export function createTags(dataSource, context, radius) {
             const boxMidx = -0.5 * ( boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x );
             const boxMidy = -0.5 * ( boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y );
             boxGeo.translate( boxMidx, boxMidy * 0, 0 );
-            let box = new THREE.Mesh(boxGeo, boxMat);
+            let box = new THREE.Mesh(boxGeo, eval(`boxMaterial${color}`));
 
             let boxLatLng = convertLatLngtoCartesian(lat, lng, radius + 0.05);
             let boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
@@ -175,42 +162,42 @@ export function createTags(dataSource, context, radius) {
         }
         
         for (let i = 0; i < dataSource.length; i++) {  
-            let tag = instantiateTag(dataSource[i].text, dataSource[i].lat, dataSource[i].lng - 180, palette[dataSource[i].color], dataSource[i].size / 100000);
+            let tag = instantiateTag(dataSource[i].text, dataSource[i].lat, dataSource[i].lng - 180, dataSource[i].color, dataSource[i].size / 100000);
             tags.push(tag)
         }
     } );
 
-    function instantiatePin(lat, lng, color, originalColor, size, originalSize, slides, context) {
+    function instantiatePin(index, lat, lng, color, size, originalSize, slides, context) {
         let segments
+        let material
         let wireframe = true
 
         if (slides !== undefined) {
             wireframe = false
+            material = eval(`pinMaterial${color}`)
             segments = 10 //Math.floor(size * 750)
-        } else segments = 6 //Math.floor(size * 750 / 3)
+        } else {
+            segments = 6 //Math.floor(size * 750 / 3)
+            material = eval(`pinWireframeMaterial${color}`)
+        }
 
         const pin = new THREE.Mesh(
             new THREE.SphereGeometry(size * 75, segments, segments),
-            //new THREE.MeshBasicMaterial({
-            new THREE.MeshStandardMaterial({
-                color: color,
-                wireframe: wireframe,
-                emissive: color,
-                emissiveIntensity: 0.2,
-            })
+            material,
         )
-        
+        pin.name = index
+
         let pos = convertLatLngtoCartesian(lat, lng, radius + 0.01);
         pin.position.set(pos.x, pos.y, pos.z);
     
         context.add(pin);
         pinPositions.push(pin);
     
-        return {pin, originalColor, originalSize};
+        return {pin, color, originalSize, slides};
     }
 
     for (let i = 0; i < dataSource.length; i++) { 
-        let pin = instantiatePin(dataSource[i].lat, dataSource[i].lng - 180, palette[dataSource[i].color], palette[dataSource[i].color], dataSource[i].size / 100000, dataSource[i].size, dataSource[i].slides, context);
+        let pin = instantiatePin(i, dataSource[i].lat, dataSource[i].lng - 180, dataSource[i].color, dataSource[i].size / 100000, dataSource[i].size, dataSource[i].slides, context);
         pins.push(pin)
     }
 }
@@ -244,27 +231,55 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
             points.push(p)
         }
         let path = new THREE.CatmullRomCurve3(points);
-        const dashTexture = textureLoader.load(dash)
-        const distance = Math.floor(v1.distanceTo(v2) * 25)
-        dashTexture.repeat.set(0, distance)
-        dashTexture.wrapS = THREE.RepeatWrapping;
-        dashTexture.wrapT = THREE.RepeatWrapping;
-        dashTexture.rotation = Math.PI / 2
+        
         const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments, false);
-        //const material = new THREE.MeshBasicMaterial({
-        const material = new THREE.MeshStandardMaterial({
-            color: 0xffffff,
-            transparent: true,
-            opacity: 0.6,
-            emissive: 0xffffff,
-            emissiveIntensity: 0.1,
-        });
+        //const material = new THREE.MeshLambertMaterial({
+        let material = connectionMaterial
+        
         if (dashed == true) {
-            material.alphaMap = dashTexture
+            const dashTexture = textureLoader.load(dash)
+            const distance = Math.floor(v1.distanceTo(v2) * 25)
+            dashTexture.repeat.set(0, distance)
+            dashTexture.wrapS = THREE.RepeatWrapping;
+            dashTexture.wrapT = THREE.RepeatWrapping;
+            dashTexture.rotation = Math.PI / 2
+            
+            material = new THREE.MeshStandardMaterial({
+                color: 0xffffaa,
+                transparent: true,
+                opacity: 0.6,
+                emissive: 0xffffff,
+                emissiveIntensity: 0.1,
+                alphaMap: dashTexture
+            });
         }
 
         const curve = new THREE.Mesh(geometry, material);
         curve.renderOrder = -10
         context.add(curve);
+    }
+}
+
+export function hoverPins(intersects) {
+    //unhovered
+    if (intersects.length == 0) {
+        for (let i = 0; i < pins.length; i++) {
+            if (pins[i].slides !== undefined) {
+                pins[i].pin.material = eval(`pinMaterial${(pins[i].color)}`);
+            } else pins[i].pin.material = eval(`pinWireframeMaterial${(pins[i].color)}`);
+            
+            pins[i].pin.scale.x = 1
+            pins[i].pin.scale.y = 1
+            pins[i].pin.scale.z = 1
+        }
+    }
+
+    //hovered
+    for (let i = 0; i < intersects.length; i++) {
+        if (intersects[i].object.material.wireframe == false) {
+            intersects[i].object.material = pinMaterial1
+        } else intersects[i].object.material = pinWireframeMaterial1
+        
+        if (intersects[i].object.scale.x == 1) intersects[i].object.scale.multiplyScalar(1.2)
     }
 }

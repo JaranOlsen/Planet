@@ -10,7 +10,7 @@ import { Constants as MotionControllerConstants, fetchProfile, MotionController 
 import { GUI } from 'dat.gui'
 
 //  IMPORT SCRIPTS
-import { createImages, createTags, pins, tags, pinPositions, createConnections } from './mindmap.js'
+import { createImages, createTags, pins, tags, pinPositions, createConnections, hoverPins } from './mindmap.js'
 import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
 import { tagPlanetData } from './data/planetTagData.js'
 import { tagPlanetConnections } from './data/planetConnectionData.js'
@@ -920,6 +920,7 @@ for (let i = 0; i < imgSpiralData.length; i++) {
 }
 
 //create tags
+
 createTags(tagPlanetData, planetContent, 5)
 
 createTags(tagSpiralData, spiral, 7)
@@ -1468,26 +1469,11 @@ refreshLoop();
 
 
 // Interaction functions
-function hoverPin() {
+function scanPins() {
     raycaster.setFromCamera(pointer, camera);
     const intersects = raycaster.intersectObjects(pinPositions);
 
-    //unhovered
-    if (intersects.length == 0) {
-        for (let i = 0; i < pins.length; i++) {
-            pins[i].pin.material.color.set(pins[i].originalColor);
-        }
-    }
-
-    //hovered
-    for (let i = 0; i < intersects.length; i++) {
-        intersects[i].object.material.color.set(0xff0000);
-    }
-    /* const podIntersects = raycaster.intersectObjects(podCastLayer.children);
-    for (let i = 0; i < podIntersects.length; i++) {
-        podIntersects[i].object.material.opacity = 0.5;
-        console.log("x")
-    } */
+    hoverPins(intersects)
 }
 
 
@@ -1496,6 +1482,40 @@ document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
 
+    //Light control
+    if (keyCode == 49) { 
+        spotlight.intensity = 0
+    }
+    if (keyCode == 50) { 
+        spotlight.intensity = 0.5
+    }
+    if (keyCode == 51) { 
+        spotlight.intensity = 1
+    }
+    if (keyCode == 52) { 
+        spotlight.intensity = 1.5
+    }
+    if (keyCode == 53) { 
+        spotlight.intensity = 2
+    }
+
+    if (keyCode == 54) { 
+        ambient.intensity = 0
+    }
+    if (keyCode == 55) { 
+        ambient.intensity = 0.02
+    }
+    if (keyCode == 56) { 
+        ambient.intensity = 0.1
+    }
+    if (keyCode == 57) { 
+        ambient.intensity = 0.5
+    }
+    if (keyCode == 48) { 
+        ambient.intensity = 1
+    }
+
+    //Node management
     if (keyCode == 65) { //A
         selectedNodes.length = 0
     }
@@ -1526,18 +1546,7 @@ function onDocumentKeyUp(event) {
             fastMove = true
         }
     }
-    if (keyCode == 76) { //L
-        if (spotlight.intensity == 0) {
-            spotlight.intensity = spotlightIntensity
-        } else if (spotlight.intensity == spotlightIntensity) {
-            spotlight.intensity = spotlightIntensity * 2
-        } else if (spotlight.intensity == spotlightIntensity * 2) {
-            spotlight.intensity = spotlightIntensity * 3
-        } else if (spotlight.intensity == spotlightIntensity * 3) {
-            spotlight.intensity = 0
-        }
-        
-    }
+    
    /*  if (keyCode == 78) { //N
         const tempStore = []
         const context = contexts[selectedContext][0]
@@ -1836,7 +1845,7 @@ function render(time) {
         gutta[i].move();
     }
 
-    hoverPin();
+    scanPins();
 
     renderer.render(scene, camera);
 
