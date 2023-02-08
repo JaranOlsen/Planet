@@ -11,7 +11,7 @@ import { palette } from './data/palette.js'
 import dash from '../img/textures/dash.webp'
 
 //  IMPORT MATERIALS
-import { boxMaterial0, boxMaterial10, boxMaterial11, boxMaterial12, boxMaterial20, boxMaterial21, boxMaterial22, boxMaterial30, boxMaterial31, boxMaterial32, boxMaterial33, boxMaterial40, boxMaterial41, boxMaterial42, boxMaterial43, boxMaterial44, boxMaterial45, boxMaterial46, boxMaterial47, boxMaterial48, boxMaterial49, pinMaterial0, pinMaterial1, pinMaterial10, pinMaterial11, pinMaterial12, pinMaterial20, pinMaterial21, pinMaterial22, pinMaterial30, pinMaterial31, pinMaterial32, pinMaterial33, pinMaterial40, pinMaterial41, pinMaterial42, pinMaterial43, pinMaterial44, pinMaterial45, pinMaterial46, pinMaterial47, pinMaterial48, pinMaterial49, pinWireframeMaterial0,pinWireframeMaterial1, pinWireframeMaterial10, pinWireframeMaterial11, pinWireframeMaterial12, pinWireframeMaterial20, pinWireframeMaterial21, pinWireframeMaterial22, pinWireframeMaterial30, pinWireframeMaterial31, pinWireframeMaterial32, pinWireframeMaterial33, pinWireframeMaterial40, pinWireframeMaterial41, pinWireframeMaterial42, pinWireframeMaterial43, pinWireframeMaterial44, pinWireframeMaterial45, pinWireframeMaterial46, pinWireframeMaterial47, pinWireframeMaterial48, pinWireframeMaterial49, textMaterial, connectionMaterial} from './materials.js'
+import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWireframeMaterials } from './materials.js';
 
 const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
 //const tagFont = "fonts/SourceSans3_Regular.json"
@@ -148,7 +148,8 @@ export function createTags(dataSource, context, radius) {
             const boxMidx = -0.5 * ( boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x );
             const boxMidy = -0.5 * ( boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y );
             boxGeo.translate( boxMidx, boxMidy * 0, 0 );
-            let box = new THREE.Mesh(boxGeo, eval(`boxMaterial${color}`));
+            
+            let box = new THREE.Mesh(boxGeo, boxMaterials[color]);
 
             let boxLatLng = convertLatLngtoCartesian(lat, lng, radius + 0.05);
             let boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
@@ -174,11 +175,11 @@ export function createTags(dataSource, context, radius) {
 
         if (slides !== undefined) {
             wireframe = false
-            material = eval(`pinMaterial${color}`)
+            material = pinMaterials[color]
             segments = 10 //Math.floor(size * 750)
         } else {
             segments = 6 //Math.floor(size * 750 / 3)
-            material = eval(`pinWireframeMaterial${color}`)
+            material = pinWireframeMaterials[color]
         }
 
         const pin = new THREE.Mesh(
@@ -233,7 +234,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         let path = new THREE.CatmullRomCurve3(points);
         
         const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments, false);
-        //const material = new THREE.MeshLambertMaterial({
+        
         let material = connectionMaterial
         
         if (dashed == true) {
@@ -265,8 +266,8 @@ export function hoverPins(intersects) {
     if (intersects.length == 0) {
         for (let i = 0; i < pins.length; i++) {
             if (pins[i].slides !== undefined) {
-                pins[i].pin.material = eval(`pinMaterial${(pins[i].color)}`);
-            } else pins[i].pin.material = eval(`pinWireframeMaterial${(pins[i].color)}`);
+                pins[i].pin.material = pinMaterials[pins[i].color]; 
+            } else pins[i].pin.material = pinWireframeMaterials[pins[i].color];
             
             pins[i].pin.scale.x = 1
             pins[i].pin.scale.y = 1
@@ -277,8 +278,8 @@ export function hoverPins(intersects) {
     //hovered
     for (let i = 0; i < intersects.length; i++) {
         if (intersects[i].object.material.wireframe == false) {
-            intersects[i].object.material = pinMaterial1
-        } else intersects[i].object.material = pinWireframeMaterial1
+            intersects[i].object.material = pinMaterials[1] //pinMaterial1
+        } else intersects[i].object.material = pinWireframeMaterials[1] //pinWireframeMaterial1
         
         if (intersects[i].object.scale.x == 1) intersects[i].object.scale.multiplyScalar(1.2)
     }
