@@ -22,6 +22,8 @@ export const pinPositions = []
 export const pins = []
 export const tags = []
 
+const hoveredPins = []
+
 export function createImages(textureSrc, lat, lng, size, radius, context) {
     let img = textureLoader.load(textureSrc);
     //const boxMat = new THREE.MeshBasicMaterial( {
@@ -264,7 +266,19 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
 export function hoverPins(intersects) {
     //unhovered
     if (intersects.length == 0) {
-        for (let i = 0; i < pins.length; i++) {
+        for (let i = 0; i < hoveredPins.length; i++) {
+            //console.log(hoveredPins[i].object.name)
+            if (pins[hoveredPins[i].object.name].slides !== undefined) {
+                pins[hoveredPins[i].object.name].pin.material = pinMaterials[pins[hoveredPins[i].object.name].color]; 
+            } else pins[hoveredPins[i].object.name].pin.material = pinWireframeMaterials[pins[hoveredPins[i].object.name].color];
+            
+            pins[hoveredPins[i].object.name].pin.scale.x = 1
+            pins[hoveredPins[i].object.name].pin.scale.y = 1
+            pins[hoveredPins[i].object.name].pin.scale.z = 1
+
+            hoveredPins.length = 0
+        }
+        /* for (let i = 0; i < pins.length; i++) {
             if (pins[i].slides !== undefined) {
                 pins[i].pin.material = pinMaterials[pins[i].color]; 
             } else pins[i].pin.material = pinWireframeMaterials[pins[i].color];
@@ -272,11 +286,12 @@ export function hoverPins(intersects) {
             pins[i].pin.scale.x = 1
             pins[i].pin.scale.y = 1
             pins[i].pin.scale.z = 1
-        }
+        } */
     }
 
     //hovered
     for (let i = 0; i < intersects.length; i++) {
+        hoveredPins.push(intersects[i])
         if (intersects[i].object.material.wireframe == false) {
             intersects[i].object.material = pinMaterials[1] //pinMaterial1
         } else intersects[i].object.material = pinWireframeMaterials[1] //pinWireframeMaterial1

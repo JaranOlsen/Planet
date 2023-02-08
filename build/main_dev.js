@@ -1845,8 +1845,6 @@ function render(time) {
         gutta[i].move();
     }
 
-    scanPins();
-
     renderer.render(scene, camera);
 
     const camPos = camera.position
@@ -1882,6 +1880,8 @@ function render(time) {
         signRotationVector.normalize()
         sign.lookAt(signRotationVector.x, signRotationVector.y, signRotationVector.z ) 
     }
+
+    scanPins();
 
     controls.update();
 }
