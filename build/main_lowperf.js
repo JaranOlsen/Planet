@@ -36,7 +36,7 @@ import spriralFragmentShader from '../shaders/spiralFragment.glsl'
 //  IMPORT TEXTURES
 
     // ||Diffuse - 
-import diffuseTexture from "../img/textures/diffuse4k.webp"
+import diffuseTexture from "../img/textures/diffuse2kvibrance.webp"
 //import diffuseTexture from "../img/textures/diffuse8kvibrance.webp"
 
     // ||Normals - White = high altitude - see https://www.youtube.com/watch?v=YJqWHsllczY&t=1s on how to best generate
