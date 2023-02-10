@@ -1,6 +1,6 @@
 //  IMPORT DEPENDENCIES
 import * as THREE from 'three';
-import { DoubleSide } from 'three';
+import { DoubleSide, Object3D } from 'three';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 //  IMPORT SCRIPTS
@@ -9,6 +9,7 @@ import { palette } from './data/palette.js'
 
 //  IMPORT TEXTURES
 import dash from '../img/textures/dash.webp'
+import arrow from '../img/textures/arrow.webp'
 
 //  IMPORT MATERIALS
 import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWireframeMaterials } from './materials.js';
@@ -26,11 +27,10 @@ const hoveredPins = []
 
 export function createImages(textureSrc, lat, lng, size, radius, context) {
     let img = textureLoader.load(textureSrc);
-    //const boxMat = new THREE.MeshBasicMaterial( {
     const boxMat = new THREE.MeshStandardMaterial( {
         map: img,
         transparent: true,
-        side: DoubleSide
+        side: DoubleSide,
     } );
 
     let roundingFactor = 0.01;
@@ -75,7 +75,9 @@ export function createImages(textureSrc, lat, lng, size, radius, context) {
     let boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
     box.lookAt( boxRotationVector )
     box.position.copy( boxRotationVector )
-    context.add( box );    
+    context.add( box );
+
+    return { box }
 }
 
 export function createTags(dataSource, context, radius) {
@@ -157,6 +159,9 @@ export function createTags(dataSource, context, radius) {
             let boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
             box.lookAt( boxRotationVector )
             box.position.copy( boxRotationVector )
+
+            box.renderOrder = -8
+            tag.renderOrder = -7
             
             context.add( box );
             context.add( tag );
@@ -205,17 +210,17 @@ export function createTags(dataSource, context, radius) {
     }
 }
 
-export function createConnections(tagSource, connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, dashed) {
+export function createConnections(tagSource, connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, dashed, arrowed) {
     for (let i = 0; i < tagSource.length; i++) {
         for (let j = 0; j < connectionSource.length; j++) {
             if (tagSource[i].id == connectionSource[j][0]) {
                 for (let k = 1; k < connectionSource[j].length; k++) {
                     for (let l = 0; l < tagSource.length; l++) {
                         if (tagSource[l].id == connectionSource[j][k]) {
-                            let t1 = convertLatLngtoCartesian(tagSource[i].lat, tagSource[i].lng - 180, curveMinAltitude);
-                            let t2 = convertLatLngtoCartesian(tagSource[l].lat, tagSource[l].lng - 180, curveMinAltitude);
+                            let p1 = convertLatLngtoCartesian(tagSource[i].lat, tagSource[i].lng - 180, curveMinAltitude);
+                            let p2 = convertLatLngtoCartesian(tagSource[l].lat, tagSource[l].lng - 180, curveMinAltitude);
                             const weight = (tagSource[i].size + tagSource[l].size) / 2;
-                            getCurve(t1, t2, weight);
+                            getCurve(p1, p2, weight, tagSource[l].lat, tagSource[l].lng - 180);
                         }
                     }
                 }
@@ -223,7 +228,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         }
     }
 
-    function getCurve(p1, p2, weight){
+    function getCurve(p1, p2, weight, lat, lng){
         let v1 = new THREE.Vector3(p1.x, p1.y, p1.z);
         let v2 = new THREE.Vector3(p2.x, p2.y, p2.z);
         let points = []
@@ -233,6 +238,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
             p.multiplyScalar(curveMinAltitude + curveMaxAltitude * Math.sin(Math.PI*i/20));
             points.push(p)
         }
+
         let path = new THREE.CatmullRomCurve3(points);
         
         const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments, false);
@@ -257,6 +263,14 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
             });
         }
 
+        if (arrowed == true) {
+            let img = createImages(arrow, lat, lng, 0.2, curveMinAltitude + 0.01, context)
+            let up = new THREE.Vector3(v2.x - v1.x, v2.y - v1.y, v2.z - v1.z)
+            img.box.up = up
+            img.box.lookAt(v2.x, v2.y, v2.z)
+            img.box.renderOrder = -9
+        }
+
         const curve = new THREE.Mesh(geometry, material);
         curve.renderOrder = -10
         context.add(curve);
@@ -267,7 +281,6 @@ export function hoverPins(intersects) {
     //unhovered
     if (intersects.length == 0) {
         for (let i = 0; i < hoveredPins.length; i++) {
-            //console.log(hoveredPins[i].object.name)
             if (pins[hoveredPins[i].object.name].slides !== undefined) {
                 pins[hoveredPins[i].object.name].pin.material = pinMaterials[pins[hoveredPins[i].object.name].color]; 
             } else pins[hoveredPins[i].object.name].pin.material = pinWireframeMaterials[pins[hoveredPins[i].object.name].color];
@@ -278,23 +291,14 @@ export function hoverPins(intersects) {
 
             hoveredPins.length = 0
         }
-        /* for (let i = 0; i < pins.length; i++) {
-            if (pins[i].slides !== undefined) {
-                pins[i].pin.material = pinMaterials[pins[i].color]; 
-            } else pins[i].pin.material = pinWireframeMaterials[pins[i].color];
-            
-            pins[i].pin.scale.x = 1
-            pins[i].pin.scale.y = 1
-            pins[i].pin.scale.z = 1
-        } */
     }
 
     //hovered
     for (let i = 0; i < intersects.length; i++) {
         hoveredPins.push(intersects[i])
         if (intersects[i].object.material.wireframe == false) {
-            intersects[i].object.material = pinMaterials[1] //pinMaterial1
-        } else intersects[i].object.material = pinWireframeMaterials[1] //pinWireframeMaterial1
+            intersects[i].object.material = pinMaterials[1]
+        } else intersects[i].object.material = pinWireframeMaterials[1]
         
         if (intersects[i].object.scale.x == 1) intersects[i].object.scale.multiplyScalar(1.2)
     }

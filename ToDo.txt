@@ -1,32 +1,13 @@
-ORANGE DAY
-  * e-post samsara
-
-  * årshjul og kalender
-
-  * søke etter hallik
-
-    resolutions
-
-    live podcast med aktivt publikum
-
 INITIATIVES
     go through way of the gut with Thomas
 
-   * ask for intro audio snippets tips on buddhist page
-
-   * ask for anomalies on TOE discord and reddit
-
-    show planet to aksel and tommy
-
-   * apply for a pimp
+    apply for a pimp
 
     find venue for weekend retreat in oslo and bergen
 
 
 CONTENT
-    Menu-screen at index.html
-        index.html -> planet.html (one or more versions - high-performance, low-performance, ultra-low/bare-links-version, dev version)
-        start loading resources at index.html?
+    Restructure versions
 
     Anapana (etc) tips and tricks
 
@@ -59,18 +40,15 @@ CONTENT
 
 MAKE USABLE
     debug for iphone
-        fix touch click controls - fixed?
-        test disabling youtube embeds
-        low resolution/resource version?
-            -eliminate gutta
-            -lower texture quality
+        fix touch click controls - fixed? not quite..
 
     re-enter VR / access to html elements in VR
 
-    add stuff from notes in here?
-
 
 SHORT-TERM DEVELOPMENT
+    make arrow special connections (remove lines at two levels of truth, add line between communicate at transcend)
+
+    add stuff from notes in here?
 
     click on textboxes rather than on nodes? (use nodes for selecting?)
 
@@ -84,8 +62,6 @@ SHORT-TERM DEVELOPMENT
     convert all images to webp
 
     Limit double-side rendering (especially on high tris geometry)
-
-    add color-realtime-editing
 
     tweak terrain colors - deeper blue oceans? higher contrast? see real photo
 

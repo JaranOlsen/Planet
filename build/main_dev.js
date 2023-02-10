@@ -14,14 +14,14 @@ import { createImages, createTags, pins, tags, pinPositions, createConnections, 
 import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
 import { tagPlanetData } from './data/planetTagData.js'
 import { tagPlanetConnections } from './data/planetConnectionData.js'
-import { tagPlanetSpecialConnections } from './data/planetSpecialConnectionData.js'
+import { tagPlanetDashedConnections } from './data/planetDashedConnectionData.js'
+import { tagPlanetArrowedConnections } from './data/planetArrowedConnectionData.js'
 import { imgPlanetData } from './data/planetImageData.js'
 import { tagSpiralData } from './data/spiralTagData.js'
 import { tagSpiralConnections } from './data/spiralConnectionData.js'
 import { imgSpiralData } from './data/spiralImageData.js'
 import { palette } from './data/palette.js'
 import { pushContent } from './content.js'
-import { animationLoop } from './loop'
 
 //  IMPORT SHADERS
 import atmosphericLightVertexShader from '../shaders/atmosphericLightVertex.glsl'
@@ -929,18 +929,19 @@ createTags(tagSpiralData, spiral, 7)
 const curveThickness = 0.0001
 const curveRadiusSegments = 3
 const curveMaxAltitude = 0.03
-const curveMinAltitude = 5.01
+const curveMinAltitude = 5.02
 const jaraniusConnections = new THREE.Object3D()
 jaranius.add(jaraniusConnections)
 let context = jaraniusConnections
-createConnections(tagPlanetData, tagPlanetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false)
-createConnections(tagPlanetData, tagPlanetSpecialConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, true)
+createConnections(tagPlanetData, tagPlanetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, false)
+createConnections(tagPlanetData, tagPlanetDashedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, true, false)
+createConnections(tagPlanetData, tagPlanetArrowedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, true)
 
 
 const spiralConnections = new THREE.Object3D()
 spiral.add(spiralConnections)
 let context2 = spiralConnections
-createConnections(tagSpiralData, tagSpiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false)
+createConnections(tagSpiralData, tagSpiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false, false)
 
 //create sign
 
@@ -1217,14 +1218,12 @@ function createSpiral() {
 //create Gutta
 const numberOfGutta = 300;
 const guttaScale = 0.0003;
+const guttaFlyAltitude = 0.01
 
-/* const guttaGeometry = new THREE.ConeGeometry(10 * guttaScale, 30 * guttaScale, 6, 4)
-    guttaGeometry.rotateZ(Math.PI/2)
-    guttaGeometry.rotateY(Math.PI/2) */
-const guttaMaterial = new THREE.MeshLambertMaterial({
-    color: 0xbbddcc, 
+/* const guttaMaterial = new THREE.MeshLambertMaterial({
+    //color: 0xcc7766, 
     side: DoubleSide,
-}) 
+}) */ 
 
 const guttaShape = new THREE.Shape();
 
@@ -1242,18 +1241,17 @@ guttaGeometry.rotateZ(Math.PI/2)
 guttaGeometry.rotateY(Math.PI/2)
 
 class Gutt {
-    constructor(lat, lng) {
+    constructor(lat, lng, material) {
         this.lat = lat;
         this.lng = lng;
+        this.material = material;
 
-        this.gutt = new THREE.Mesh(guttaGeometry, guttaMaterial)
-        // this.mesh.geometry.center();
-        // this.mesh.position.copy(this.center);
+        this.gutt = new THREE.Mesh(guttaGeometry, this.material)
  
         this.pos = new THREE.Vector2(lat, lng)
         this.velocity = new THREE.Vector2(getRandomNum(0, 0), getRandomNum(0, 1)).setLength(0.001)
         this.acceleration = new THREE.Vector2
-        this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5.1)
+        this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5 + guttaFlyAltitude)
         this.presentHeading
         this.originalHeading
   
@@ -1312,8 +1310,8 @@ class Gutt {
         if (this.pos.y < 0) {this.pos.y = 360 + this.pos.y}
         if (this.pos.y > 360) {this.pos.y = this.pos.y - 360}
         
-        this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5.1)
-        this.cartesianVelocity = convertLatLngtoCartesian(this.velocity.x, this.velocity.y, 5.1)
+        this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5 + guttaFlyAltitude)
+        this.cartesianVelocity = convertLatLngtoCartesian(this.velocity.x, this.velocity.y, 5 + guttaFlyAltitude)
         
         this.presentHeading = Math.atan2(this.velocity.x, this.velocity.y)
         
@@ -1396,7 +1394,28 @@ let gutta = [];
 for (let i = 0; i < numberOfGutta; i++) {
     let lat = getRandomBell(40, 140, 5)
     let lng = getRandomInt(0, 359)
-    gutta.push(new Gutt(lat, lng))
+
+    let material
+    let redBird = new THREE.MeshLambertMaterial({
+        color: 0xcc6655, 
+        side: DoubleSide,
+    })
+    let greyBird = new THREE.MeshLambertMaterial({
+        color: 0xcc7788, 
+        side: DoubleSide,
+    })
+    let darkBird = new THREE.MeshLambertMaterial({
+        color: 0xbb4455, 
+        side: DoubleSide,
+    })
+
+    if (i <= numberOfGutta / 3) {
+        material = redBird
+    } else if (i < numberOfGutta / 3 * 2) {
+        material = greyBird
+    } else material = darkBird
+
+    gutta.push(new Gutt(lat, lng, material))
 }
 
 //Dat.GUI
