@@ -1,32 +1,37 @@
 //  IMPORT DEPENDENCIES
-import * as THREE from 'three';
-import { Float32BufferAttribute, FrontSide, DoubleSide } from 'three';
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'; 
+import * as THREE from 'three'
+import { Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, RGBADepthPacking, SubtractiveBlending, LoadingManager } from 'three'
+import { OrbitControls } from "three/addons/controls/OrbitControls.js"
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'
+import { VRButton } from 'three/addons/webxr/VRButton.js'
+import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js'
+import { Constants as MotionControllerConstants, fetchProfile, MotionController } from 'three/examples/jsm/libs/motion-controllers.module.js'
 import { GUI } from 'dat.gui'
 
 //  IMPORT SCRIPTS
-import { createImages, createTags, pins, tags, pinPositions, createConnections } from './mindmap.js';
+import { createImages, createTags, pins, tags, pinPositions, createConnections, hoverPins } from './mindmap.js'
 import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
 import { tagPlanetData } from './data/planetTagData.js'
 import { tagPlanetConnections } from './data/planetConnectionData.js'
-import { tagPlanetSpecialConnections } from './data/planetSpecialConnectionData.js'
+import { tagPlanetDashedConnections } from './data/planetDashedConnectionData.js'
+import { tagPlanetArrowedConnections } from './data/planetArrowedConnectionData.js'
 import { imgPlanetData } from './data/planetImageData.js'
-import { tagSpiralData } from './data/spiralTagData.js';
-import { tagSpiralConnections } from './data/spiralConnectionData.js';
+import { tagSpiralData } from './data/spiralTagData.js'
+import { tagSpiralConnections } from './data/spiralConnectionData.js'
 import { imgSpiralData } from './data/spiralImageData.js'
 import { palette } from './data/palette.js'
-import { pushContent } from './content.js';
-
+import { pushContent } from './content.js'
 
 //  IMPORT SHADERS
-import atmosphericLightVertexShader from '../shaders/atmosphericLightVertex.glsl';
-import atmosphericLightFragmentShader from '../shaders/atmosphericLightFragment.glsl';
-import atmosphereVertexShader from '../shaders/atmosphereVertex.glsl';
-import atmosphereFragmentShader from '../shaders/atmosphereFragment.glsl';
-import spiralVertexShader from '../shaders/spiralVertex.glsl';
-import spriralFragmentShader from '../shaders/spiralFragment.glsl';
+import atmosphericLightVertexShader from '../shaders/atmosphericLightVertex.glsl'
+import atmosphericLightFragmentShader from '../shaders/atmosphericLightFragment.glsl'
+import atmosphereVertexShader from '../shaders/atmosphereVertex.glsl'
+import atmosphereFragmentShader from '../shaders/atmosphereFragment.glsl'
+import sunVertexShader from '../shaders/sunVertex.glsl'
+import sunFragmentShader from '../shaders/sunFragment.glsl'
+import spiralVertexShader from '../shaders/spiralVertex.glsl'
+import spriralFragmentShader from '../shaders/spiralFragment.glsl'
 
 //  IMPORT TEXTURES
 
@@ -35,11 +40,14 @@ import spriralFragmentShader from '../shaders/spiralFragment.glsl';
 import diffuseTexture from "../img/textures/diffuse8kvibrance.webp"
 
     // ||Normals - White = high altitude - see https://www.youtube.com/watch?v=YJqWHsllczY&t=1s on how to best generate
-//import normalTexture from "../img/textures/normals8ktest.webp"
-import normalTexture from "../img/textures/normal2k.webp"
+import normalTexture from "../img/textures/normals8ktest.webp"
+//import normalTexture from "../img/textures/normal2k.webp"
 
     // ||Roughness - Green (white) = high roughness (green channel - see documentation)
 import roughnessTexture from "../img/textures/roughness2k.webp"
+
+    // ||Environment
+//import environmentTexture from "../img/textures/sun1k.webp"
 
 import cloudsTexture from "../img/textures/clouds4k.webp"
 import starW from "../img/textures/starW.webp"
@@ -57,9 +65,16 @@ import redmoonTexture from "../img/textures/moonRed1k.webp"
 import icemoonTexture from "../img/textures/moonIce1k.webp"
 import dash from '../img/textures/dash.webp'
 import tier from '../img/textures/tier.webp'
+import podAlpha1 from '../img/textures/podAlpha1.webp'
+import podAlpha2 from '../img/textures/podAlpha2.webp'
 
 // IMPORT MODELS
 import signModel from "../models/sign.glb"
+import { lerp, smoothstep } from 'three/src/math/MathUtils.js';
+
+const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
+const DEFAULT_PROFILE = 'generic-trigger';
+
 
 const canvas = document.querySelector('#c');
 const renderer = new THREE.WebGLRenderer(
@@ -68,6 +83,7 @@ const renderer = new THREE.WebGLRenderer(
         antialias: true,
     });
 renderer.setPixelRatio(window.devicePixelRatio)
+//renderer.outputEncoding = THREE.sRGBEncoding;
 
 function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
@@ -117,6 +133,7 @@ let signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y,
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 const spiral = new THREE.Object3D()
+let VRenabled = false
 
 //Loading Manager
 const manager = new THREE.LoadingManager();
@@ -139,6 +156,325 @@ manager.onError = function ( url ) {
 	console.log( 'There was an error loading ' + url );
 };
 
+//WEB XR
+const enableVRbutton = document.getElementById("enableVRbutton")
+enableVRbutton.addEventListener("click", () => {
+        enableVRbutton.style.display = "none";
+        VRenabled = true
+    })
+
+
+async function checkForXRSupport() {
+    navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
+      if (supported) {
+        const button = VRButton.createButton( renderer )
+        document.body.appendChild( button );
+        setupXR();
+      }
+    });
+  }
+if (VRenabled == true) checkForXRSupport();
+
+function declareGlobalVariables() {
+    window.dolly = new THREE.Object3D();
+    window.dummyCam = new THREE.Object3D();
+    window.workingMatrix = new THREE.Matrix4();
+    window.buttonStates = {};
+    window.gamepadIndices = "";
+    window.info = {};
+    window.controllers = {};
+    window.elapsedTime = 0;
+    window.dollyLat = 90;
+    window.dollyLng = 180;
+    window.dollyRadius = 8;
+    window.XRinSession = false;
+}
+
+function setupXR() {
+    renderer.xr.enabled = true;
+
+    declareGlobalVariables();
+    
+    camera.position.set( 0, 1.6, 0 );
+    const dollyPos = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
+    dolly.position.set(dollyPos.x, dollyPos.y - 1.6, dollyPos.z)
+    dolly.add( camera );
+    scene.add( dolly );
+    camera.add( dummyCam );
+
+    const controller = renderer.xr.getController( 0 );
+    controller.addEventListener( 'connected', onConnected );
+    const modelFactory = new XRControllerModelFactory();
+    const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0,0,0 ), new THREE.Vector3( 0,0,-1 ) ] );
+    const line = new THREE.Line( geometry );
+    line.scale.z = 0;
+    
+    controllers = {};
+    controllers.right = buildController( 0, line, modelFactory );
+    controllers.left = buildController( 1, line, modelFactory );
+}
+
+function onConnected( event ){
+    playButton.style.display = "none";
+    skipButton.style.display = "none";
+    credits.style.display = "none";
+
+    info = {};
+    
+    fetchProfile( event.data, DEFAULT_PROFILES_PATH, DEFAULT_PROFILE ).then( ( { profile, assetPath } ) => {
+        console.log( JSON.stringify(profile));
+        
+        info.name = profile.profileId;
+        info.targetRayMode = event.data.targetRayMode;
+
+        Object.entries( profile.layouts ).forEach( ( [key, layout] ) => {
+            const components = {};
+            Object.values( layout.components ).forEach( ( component ) => {
+                components[component.rootNodeName] = component.gamepadIndices;
+            });
+            info[key] = components;
+        });
+
+        createButtonStates( info.right );
+        
+        console.log( JSON.stringify(info) );
+
+        updateControllers( info );
+
+    } );
+}
+
+function createButtonStates(components){
+    buttonStates = {};
+    gamepadIndices = components
+    Object.keys( components ).forEach( (key) => {
+        if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
+            buttonStates[key] = { button: 0, xAxis: 0, yAxis: 0 };
+        }else{
+            buttonStates[key] = 0; 
+        }
+    })
+}
+
+function updateControllers(info){
+    if (info.right !== undefined){
+        const right = renderer.xr.getController(0);
+        
+        let trigger = false, squeeze = false;
+        
+        Object.keys( info.right ).forEach( (key) => {
+            if (key.indexOf('trigger')!=-1) trigger = true;                   
+            if (key.indexOf('squeeze')!=-1) squeeze = true;
+            
+        });
+        
+        if (trigger){
+            right.addEventListener( 'selectstart', onSelectStart );
+            right.addEventListener( 'selectend', onSelectEnd );
+        }
+
+        if (squeeze){
+            right.addEventListener( 'squeezestart', onSqueezeStart );
+            right.addEventListener( 'squeezeend', onSqueezeEnd );
+        }
+        
+        right.addEventListener( 'disconnected', onDisconnected );
+    }
+    
+    if (info.left !== undefined){
+        const left = renderer.xr.getController(1);
+        
+        let trigger = false, squeeze = false;
+        
+        Object.keys( info.left ).forEach( (key) => {
+            if (key.indexOf('trigger')!=-1) trigger = true;                   if (key.indexOf('squeeze')!=-1) squeeze = true;      
+        });
+        
+        if (trigger){
+            left.addEventListener( 'selectstart', onSelectStart );
+            left.addEventListener( 'selectend', onSelectEnd );
+        }
+
+        if (squeeze){
+            left.addEventListener( 'squeezestart', onSqueezeStart );
+            left.addEventListener( 'squeezeend', onSqueezeEnd );
+        }
+        
+        left.addEventListener( 'disconnected', onDisconnected );
+    }
+}
+
+function buildController( index, line, modelFactory ){
+    const controller = renderer.xr.getController( index );
+    
+    controller.userData.selectPressed = false;
+    controller.userData.index = index;
+    
+    if (line) controller.add( line.clone() );
+    
+    dolly.add( controller );
+    
+    let grip;
+    
+    if ( modelFactory ){
+        grip = renderer.xr.getControllerGrip( index );
+        grip.add( modelFactory.createControllerModel( grip ));
+        dolly.add( grip );
+    }
+    
+    return { controller, grip };
+}
+
+function onSelectStart( ){
+    console.log("select")
+    this.userData.selectPressed = true;
+    //console.log(buttonStates.a_button, buttonStates.b_button, buttonStates.xr_standard_thumbstick.button, buttonStates.xr_standard_thumbstick.xAxis, buttonStates.xr_standard_thumbstick.yAxis)
+    /* console.log(buttonStates,
+    gamepadIndices,
+    info,
+    controllers) */
+}
+
+function onSelectEnd( ){
+    this.children[0].scale.z = 0;
+    this.userData.selectPressed = false;
+    this.userData.selected = undefined;
+    console.log("selectend")
+}
+
+function onSqueezeStart( ){
+    this.userData.squeezePressed = true;
+    if (this.userData.selected !== undefined ){
+        this.attach( this.userData.selected );
+        this.userData.attachedObject = userData.selected;
+    }
+    console.log("squeeze")
+}
+
+function onSqueezeEnd( ){
+    this.userData.squeezePressed = false;
+    if (this.userData.attachedObject !== undefined){
+            room.attach( this.userData.attachedObject );
+        this.userData.attachedObject = undefined;
+    }
+    console.log("squeezeend")
+}
+
+function onDisconnected(){
+    const index = userData.index;
+    console.log(`Disconnected controller ${index}`);
+    
+    if ( controllers ){
+        const obj = (index==0) ? controllers.right : controllers.left;
+        
+        if (obj){
+            if (obj.controller){
+                const controller = obj.controller;
+                while( controller.children.length > 0 ) controller.remove( controller.children[0] );
+                dolly.remove( controller );
+            }
+            if (obj.grip) dolly.remove( obj.grip );
+        }
+    }
+}
+
+function handleController( controller ){
+    if (controller.userData.selectPressed ){
+        controller.children[0].scale.z = 10;
+
+        workingMatrix.identity().extractRotation( controller.matrixWorld );
+
+        raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
+        raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( workingMatrix );
+
+        const intersects = raycaster.intersectObjects( pinPositions );
+
+        if (intersects.length>0){
+            selectedPin = intersects[0].object;
+            const selectedPinIndex = pinPositions.findIndex((object) => object==intersects[0].object)
+            const selectedCarousel = tagPlanetData[selectedPinIndex][6]
+            if (selectedCarousel > 0) {
+                activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
+                activeCarousel.style.display = "block"
+            }
+
+            xrSession.end().then(() => xrSession = null);
+            /* renderer.xr.getSession().end();
+            renderer.xr.getSession(); */
+            /* window.XRinSession = false;
+            renderer.xr.enabled = true; */
+            
+            /* intersects[0].object.scale.set(2, 2, 2)
+            controller.children[0].scale.z = intersects[0].distance;
+            controller.userData.selected = intersects[0].object; */
+        }
+    }
+}
+
+function updateGamepadState(){
+    const session = renderer.xr.getSession();
+    
+    const inputSource = session.inputSources[0];
+    
+    if (inputSource && inputSource.gamepad && gamepadIndices && buttonStates){
+        const gamepad = inputSource.gamepad;
+        XRinSession = true
+        try{
+            Object.entries( buttonStates ).forEach( ( [ key, value ] ) => {
+                const buttonIndex = gamepadIndices[key].button;
+                if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
+                    const xAxisIndex = gamepadIndices[key].xAxis;
+                    const yAxisIndex = gamepadIndices[key].yAxis;
+                    buttonStates[key].button = gamepad.buttons[buttonIndex].value; 
+                    buttonStates[key].xAxis = gamepad.axes[xAxisIndex].toFixed(2); 
+                    buttonStates[key].yAxis = gamepad.axes[yAxisIndex].toFixed(2); 
+                }else{
+                    buttonStates[key] = gamepad.buttons[buttonIndex].value;
+                }
+            });
+        }catch(e){
+            console.warn("An error occurred setting the ui");
+        }
+    }
+}
+
+function moveDolly(dt){
+    
+    const speed = 0.2;
+    let pos = dolly.position.clone();
+    pos.y += 1;
+    
+    let dir = new THREE.Vector3();
+    const q = new THREE.Quaternion();
+    //Store original dolly rotation
+    const quaternion = dolly.quaternion.clone();
+    //Get rotation for movement from the headset pose
+    dolly.quaternion.copy( dummyCam.getWorldQuaternion(q) );
+    dolly.getWorldDirection(dir);
+    dir.negate();
+    
+        dolly.translateZ(-dt*speed);
+        pos = dolly.getWorldPosition( origin );
+
+    //cast left
+    dir.set(-1,0,0);
+    dir.applyMatrix4(dolly.matrix);
+    dir.normalize();
+
+    //cast right
+    dir.set(1,0,0);
+    dir.applyMatrix4(dolly.matrix);
+    dir.normalize();
+
+    //cast down
+    dir.set(0,-1,0);
+    pos.y += 1.5;
+
+    //Restore the original rotation
+    dolly.quaternion.copy( quaternion );
+}
+
+
 //start intro
 let start = false
 const introTune = document.getElementById("introTune");
@@ -146,14 +482,25 @@ const introTune = document.getElementById("introTune");
     introTune.currentTime = 0;
     introTune.volume = 1;
 const introTuneLength = introTune.duration
+/* const introTune = document.getElementById("introTune");
+    introTune.preload = "auto";
+    introTune.currentTime = 1.4;
+    introTune.volume = 0.25; */
+/* const introSpeech = document.getElementById("introSpeech")
+    introSpeech.preload = "auto";
+    introSpeech.currentTime= 1.4; */
 
 const playButton = document.getElementById("playbutton")
 const credits = document.getElementById("credits")
 playButton.addEventListener("click", () => {
         introTune.play();
+        /* setTimeout(function(){ 
+            introSpeech.play(); 
+            }, 40000) */
         start = true;
         playButton.style.display = "none";
         skipButton.style.display = "none";
+        enableVRbutton.style.display = "none";
         credits.style.display = "none";
         
     })
@@ -163,6 +510,7 @@ const skipButton = document.getElementById("skipbutton")
 skipButton.addEventListener("click", () => {
         playButton.style.display = "none";
         skipButton.style.display = "none";
+        enableVRbutton.style.display = "none";
         credits.style.display = "none";
         camera.position.z = 15;
     })
@@ -492,7 +840,7 @@ scene.add(center);
     pivot2.rotation.x = 0.22
     pivot3.rotation.y = 2 * Math.PI / 2;
     pivot3.rotation.x = 0.31
-    pivot4.rotation.y = 5 * Math.PI / 3;
+    pivot4.rotation.y = 9 * Math.PI / 6;
     pivot4.rotation.x = -0.41;
 
     center.add(pivot1);
@@ -506,11 +854,11 @@ const jaraniusGeometry = new THREE.SphereGeometry(5, 250, 250);
 jaraniusGeometry.computeBoundingSphere();
 const jaranius = new THREE.Mesh(
     jaraniusGeometry,
-    new THREE.MeshStandardMaterial({ //Note that for best results you should always specify an environment map when using this material.
+    new THREE.MeshStandardMaterial({ 
         map: textureLoader.load(diffuseTexture),
-        normalMap: textureLoader.load(normalTexture),  //make extreme variant to test properly
+        normalMap: textureLoader.load(normalTexture),
         roughnessMap: textureLoader.load(roughnessTexture),  //works well
-        normalScale: new THREE.Vector2(3, 3),  //needs testing
+        normalScale: new THREE.Vector2(3, 3),  //works well
         metalness: 0,  //works well
         roughness: 0.85,  //works well
         flatShading: false,
@@ -572,6 +920,7 @@ for (let i = 0; i < imgSpiralData.length; i++) {
 }
 
 //create tags
+
 createTags(tagPlanetData, planetContent, 5)
 
 createTags(tagSpiralData, spiral, 7)
@@ -580,18 +929,19 @@ createTags(tagSpiralData, spiral, 7)
 const curveThickness = 0.0001
 const curveRadiusSegments = 3
 const curveMaxAltitude = 0.03
-const curveMinAltitude = 5.01
+const curveMinAltitude = 5.02
 const jaraniusConnections = new THREE.Object3D()
 jaranius.add(jaraniusConnections)
 let context = jaraniusConnections
-createConnections(tagPlanetData, tagPlanetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false)
-createConnections(tagPlanetData, tagPlanetSpecialConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, true)
+createConnections(tagPlanetData, tagPlanetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, false)
+createConnections(tagPlanetData, tagPlanetDashedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, true, false)
+createConnections(tagPlanetData, tagPlanetArrowedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, true)
 
 
 const spiralConnections = new THREE.Object3D()
 spiral.add(spiralConnections)
 let context2 = spiralConnections
-createConnections(tagSpiralData, tagSpiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false)
+createConnections(tagSpiralData, tagSpiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false, false)
 
 //create sign
 
@@ -615,9 +965,52 @@ loader.load(signModel,
 	}
 );
 
+//create Podcast map
+/* let podcastFields = []
+
+const podCastLayer = new THREE.Object3D()
+jaranius.add(podCastLayer)
+
+const pod1Geo = new THREE.SphereGeometry(5.3, 50, 50)
+const pod1Mat = new THREE.MeshBasicMaterial({
+    alphaMap: textureLoader.load(podAlpha1),
+    alphaTest: 0.01,
+    color: 0xcc88cc,
+    transparent: true,
+    opacity: 0.2,
+    blending: AdditiveBlending,
+    depthWrite: false
+})
+const podField1 = new THREE.Mesh(pod1Geo, pod1Mat)
+podCastLayer.add(podField1)
+podcastFields.push(podField1)
+
+const pod2Geo = new THREE.SphereGeometry(5.4, 50, 50)
+const pod2Mat = new THREE.MeshBasicMaterial({
+    alphaMap: textureLoader.load(podAlpha2),
+    alphaTest: 0.01,
+    color: 0x88cccc,
+    transparent: true,
+    opacity: 0.2,
+    blending: AdditiveBlending,
+    depthWrite: false
+})
+const podField2 = new THREE.Mesh(pod2Geo, pod2Mat)
+podCastLayer.add(podField2)
+podcastFields.push(podField2) */
+
 //create sun
 const sunRadius = 5
 const sunRadianceGeo = new THREE.SphereGeometry(sunRadius, 50, 50)
+/* const sunRadianceGeo2 = new THREE.SphereGeometry(20, 50, 50)
+const sunRadianceMat = new THREE.ShaderMaterial({
+    vertexShader: sunVertexShader,
+    fragmentShader: sunFragmentShader,
+    blending: AdditiveBlending,
+    transparent: true,
+    side: BackSide,
+    lights: false,
+}) */
 const sunMat = new THREE.MeshBasicMaterial({
     map: new THREE.TextureLoader(manager).load(sunTexture)
 })
@@ -625,9 +1018,15 @@ const sunRadiance = new THREE.Mesh(sunRadianceGeo, sunMat)
 sunRadiance.position.set(0, 0, 490)
 pivot4.add(sunRadiance)
 
+/* const sunRadiance2 = new THREE.Mesh(sunRadianceGeo2, sunRadianceMat)
+sunRadiance2.position.set(0, 0, 490)
+pivot4.add(sunRadiance2) */
+
 const sunLight = new THREE.PointLight(0xffffff, 1.2, 2000)
 sunLight.position.set(sunRadiance.position.x, sunRadiance.position.y, sunRadiance.position.z - sunRadius * 1.5)
 pivot4.add(sunLight)
+
+
 
 const textureFlare0 = textureLoader.load("https://jaranolsen.github.io/Planet/sunflare.webp");
 const textureFlare3 = textureLoader.load("https://jaranolsen.github.io/Planet/lensflare.webp");
@@ -787,6 +1186,7 @@ function createSpiral() {
     //tier2ring
     const dashAlphaTexture = textureLoader.load(dash)
         dashAlphaTexture.repeat.set(0, 100)
+        //dashAlphaTexture.wrapS = THREE.RepeatWrapping;
         dashAlphaTexture.wrapT = THREE.RepeatWrapping;
         dashAlphaTexture.rotation = Math.PI / 2
     const dashTexture = textureLoader.load(tier)
@@ -816,13 +1216,14 @@ function createSpiral() {
 
 
 //create Gutta
-const numberOfGutta = 100;
+const numberOfGutta = 300;
 const guttaScale = 0.0003;
+const guttaFlyAltitude = 0.01
 
-const guttaMaterial = new THREE.MeshLambertMaterial({
-    color: 0xbbddcc, 
+/* const guttaMaterial = new THREE.MeshLambertMaterial({
+    //color: 0xcc7766, 
     side: DoubleSide,
-}) 
+}) */ 
 
 const guttaShape = new THREE.Shape();
 
@@ -840,16 +1241,17 @@ guttaGeometry.rotateZ(Math.PI/2)
 guttaGeometry.rotateY(Math.PI/2)
 
 class Gutt {
-    constructor(lat, lng) {
+    constructor(lat, lng, material) {
         this.lat = lat;
         this.lng = lng;
+        this.material = material;
 
-        this.gutt = new THREE.Mesh(guttaGeometry, guttaMaterial)
+        this.gutt = new THREE.Mesh(guttaGeometry, this.material)
  
         this.pos = new THREE.Vector2(lat, lng)
         this.velocity = new THREE.Vector2(getRandomNum(0, 0), getRandomNum(0, 1)).setLength(0.001)
         this.acceleration = new THREE.Vector2
-        this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5.1)
+        this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5 + guttaFlyAltitude)
         this.presentHeading
         this.originalHeading
   
@@ -857,9 +1259,14 @@ class Gutt {
 
         this.wander = new THREE.Vector2(0, 0)
         this.alignment = new THREE.Vector2(0, 0)
+        // this.alignmentPerception = 0.1
         this.cohesion = new THREE.Vector2(0, 0)
+        // this.cohesionPerception = 0.1
         this.separation = new THREE.Vector2(0, 0)
+        // this.separationPerception = 0.2
         this.avoidance = new THREE.Vector2(0, 0)
+        //this.maxForce = 0.1
+        //this.maxSpeed = 0.1 
 
         jaranius.add(this.gutt)
     }
@@ -871,6 +1278,7 @@ class Gutt {
         this.alignment.multiplyScalar(parameters.alignment)
         this.cohesion.multiplyScalar(parameters.cohesion)
         this.separation.multiplyScalar(parameters.separation)
+        //this.avoidance.multiplyScalar(parameters.avoidance)
         
         this.acceleration.add( this.wander )
         this.acceleration.add( this.alignment )
@@ -902,8 +1310,8 @@ class Gutt {
         if (this.pos.y < 0) {this.pos.y = 360 + this.pos.y}
         if (this.pos.y > 360) {this.pos.y = this.pos.y - 360}
         
-        this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5.1)
-        this.cartesianVelocity = convertLatLngtoCartesian(this.velocity.x, this.velocity.y, 5.1)
+        this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5 + guttaFlyAltitude)
+        this.cartesianVelocity = convertLatLngtoCartesian(this.velocity.x, this.velocity.y, 5 + guttaFlyAltitude)
         
         this.presentHeading = Math.atan2(this.velocity.x, this.velocity.y)
         
@@ -986,7 +1394,28 @@ let gutta = [];
 for (let i = 0; i < numberOfGutta; i++) {
     let lat = getRandomBell(40, 140, 5)
     let lng = getRandomInt(0, 359)
-    gutta.push(new Gutt(lat, lng))
+
+    let material
+    let redBird = new THREE.MeshLambertMaterial({
+        color: 0xcc6655, 
+        side: DoubleSide,
+    })
+    let greyBird = new THREE.MeshLambertMaterial({
+        color: 0xcc7788, 
+        side: DoubleSide,
+    })
+    let darkBird = new THREE.MeshLambertMaterial({
+        color: 0xbb4455, 
+        side: DoubleSide,
+    })
+
+    if (i <= numberOfGutta / 3) {
+        material = redBird
+    } else if (i < numberOfGutta / 3 * 2) {
+        material = greyBird
+    } else material = darkBird
+
+    gutta.push(new Gutt(lat, lng, material))
 }
 
 //Dat.GUI
@@ -1059,33 +1488,55 @@ refreshLoop();
 
 
 // Interaction functions
-function hoverPin() {
+function scanPins() {
     raycaster.setFromCamera(pointer, camera);
     const intersects = raycaster.intersectObjects(pinPositions);
 
-    //unhovered
-    if (intersects.length == 0) {
-        for (let i = 0; i < pins.length; i++) {
-            pins[i].pin.material.color.set(pins[i].originalColor);
-        }
-    }
-
-    //hovered
-    for (let i = 0; i < intersects.length; i++) {
-        intersects[i].object.material.color.set(0xff0000);
-    }
+    hoverPins(intersects)
 }
+
 
 // EVENTS KEYBOARD
 document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
 
+    //Light control
+    if (keyCode == 49) { 
+        spotlight.intensity = 0
+    }
+    if (keyCode == 50) { 
+        spotlight.intensity = 0.5
+    }
+    if (keyCode == 51) { 
+        spotlight.intensity = 1
+    }
+    if (keyCode == 52) { 
+        spotlight.intensity = 1.5
+    }
+    if (keyCode == 53) { 
+        spotlight.intensity = 2
+    }
+
+    if (keyCode == 54) { 
+        ambient.intensity = 0
+    }
+    if (keyCode == 55) { 
+        ambient.intensity = 0.02
+    }
+    if (keyCode == 56) { 
+        ambient.intensity = 0.1
+    }
+    if (keyCode == 57) { 
+        ambient.intensity = 0.5
+    }
+    if (keyCode == 48) { 
+        ambient.intensity = 1
+    }
+
+    //Node management
     if (keyCode == 65) { //A
         selectedNodes.length = 0
-    }
-    if (keyCode == 73) { //I
-        pushContent(0)
     }
 
     if (keyCode == 90) { //Z
@@ -1114,18 +1565,21 @@ function onDocumentKeyUp(event) {
             fastMove = true
         }
     }
-    if (keyCode == 76) { //L
-        if (spotlight.intensity == 0) {
-            spotlight.intensity = spotlightIntensity
-        } else if (spotlight.intensity == spotlightIntensity) {
-            spotlight.intensity = spotlightIntensity * 2
-        } else if (spotlight.intensity == spotlightIntensity * 2) {
-            spotlight.intensity = spotlightIntensity * 3
-        } else if (spotlight.intensity == spotlightIntensity * 3) {
-            spotlight.intensity = 0
-        }
-        
-    }
+    
+   /*  if (keyCode == 78) { //N
+        const tempStore = []
+        const context = contexts[selectedContext][0]
+            context.push(context[selectedNode])
+            tempStore.push(context[selectedNode])
+            context[selectedNode].id = "set new"
+            context[selectedNode].text = "new text"
+            tempStore[0].text = "new text"
+            context[selectedNode].lat -=1
+            tempStore[0].lat -=1
+            context[selectedNode].slides = undefined
+
+            createTags(tempStore, planetContent, 5) 
+    } */
 
     if (keyCode == 81) { //Q
         let output = ""
@@ -1151,6 +1605,7 @@ function onDocumentKeyUp(event) {
         const curveMaxAltitude = 0.03
         const curveMinAltitude = 5.01
         createConnections(context[0], context[1], curveThickness, curveRadiusSegments, curveMaxAltitude, context[3], context[2])
+        
     } 
     if (keyCode == 187) { //+
         let originalSize = 0
@@ -1274,7 +1729,9 @@ function onDocumentKeyDown(event) {
                 context.context[selectedNode - indexModifier].lat = posLatLng.lat.toFixed(1)
                 context.context[selectedNode - indexModifier].lng = posLatLng.lng.toFixed(1)
         }
-    }    
+    }
+
+        
 };
 
 
@@ -1315,14 +1772,38 @@ function onClick(event) {
             const selectedCarousel = tagPlanetData[selectedNode].slides
             pushContent(selectedCarousel)
             activeCarousel = document.querySelector(`.carousel.s1`)
+            //activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
             activeCarousel.style.display = "block"
         }
     }
 }
 
+/* function touch2Mouse(e)
+{
+  var theTouch = e.changedTouches[0];
+  var mouseEv;
+
+  switch(e.type)
+  {
+    case "touchstart": mouseEv="mousedown"; break;  
+    case "touchend":   mouseEv="mouseup"; break;
+    case "touchmove":  mouseEv="mousemove"; break;selectedNodes
+    default: return;
+  }
+
+  var mouseEvent = document.createEvent("MouseEvent");
+  mouseEvent.initMouseEvent(mouseEv, true, true, window, 1, theTouch.screenX, theTouch.screenY, theTouch.clientX, theTouch.clientY, false, false, false, false, 0, null);
+  theTouch.target.dispatchEvent(mouseEvent);
+
+  e.preventDefault();
+} */
+
 window.addEventListener('pointermove', onPointerMove);
 window.addEventListener('click', onClick);
 window.addEventListener("touchstart", onClick);
+/* document.addEventListener("touchstart", touch2Mouse, true);
+document.addEventListener("touchmove", touch2Mouse, true);
+document.addEventListener("touchend", touch2Mouse, true); */
 
 //debug
 if (tagPlanetData.length !== tagPlanetConnections.length) {
@@ -1339,6 +1820,34 @@ function animate() {
 
 function render(time) {
     time *= 0.001;
+
+    //WebXR
+    if (renderer.xr.isPresenting){
+        const dt = clock.getDelta();
+
+        if (controllers ){
+            Object.values( controllers).forEach( ( value ) => {
+                handleController( value.controller );
+            });
+        } 
+        if (elapsedTime===undefined) elapsedTime = 0;
+        elapsedTime += dt;
+        if (elapsedTime > 0.3){
+            updateGamepadState();
+            elapsedTime = 0;
+        }
+        if (XRinSession == true) {
+            const xInput = Number(buttonStates.xr_standard_thumbstick.xAxis)
+            const yInput = Number(buttonStates.xr_standard_thumbstick.yAxis)
+            if (xInput != 0 || yInput != 0 || buttonStates.a_button != 0 || buttonStates.b_button != 0) {
+                dollyLng += xInput * 2
+                dollyLat += yInput
+                dollyRadius += ((0.1 * buttonStates.a_button) - (0.1 * buttonStates.b_button)) * (dollyRadius - 5)
+                const dollyPosit = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
+                dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z)
+            }
+        }
+    }
             
     if (resizeRendererToDisplaySize(renderer)) {
         const canvas = renderer.domElement;
@@ -1355,8 +1864,6 @@ function render(time) {
         gutta[i].move();
     }
 
-    hoverPin();
-
     renderer.render(scene, camera);
 
     const camPos = camera.position
@@ -1368,17 +1875,21 @@ function render(time) {
     pivot1.rotation.y += -0.0003;
     pivot2.rotation.y += -0.00003;
     pivot3.rotation.y += -0.000009;
-    pivot4.rotation.y += 0.0001;
+    pivot4.rotation.y += -0.0001;
     clouds.rotation.y += 0.00001;
 
     if (camera.position.z > 15 && start == true) {
         camera.position.z -= 0.0213 * Math.pow(camera.position.z - 10, 1.35) / introTuneLength
-        jaranius.rotation.y += 0.0005;
     }
     if (camera.position.z < -15 && start == true) {
         camera.position.z += 0.213 * Math.pow(Math.abs(camera.position.z) - 10, 1.35) / introTuneLength
-        jaranius.rotation.y += 0.0005;
     }
+    if (start == true) {
+        camera.position.x += 0.4 / introTuneLength
+        camera.position.y += 0.1 / introTuneLength
+    }
+    //console.log("x: ", camera.position.x, "y: ", camera.position.y, "z: ", camera.position.z)
+    if (camera.position.z > -15 && camera.position.z < 15) start = false
   
     controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);
     controls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;
@@ -1389,8 +1900,11 @@ function render(time) {
         sign.lookAt(signRotationVector.x, signRotationVector.y, signRotationVector.z ) 
     }
 
+    scanPins();
+
     controls.update();
 }
 
 animate()
+
 
