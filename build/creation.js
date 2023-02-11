@@ -1,6 +1,5 @@
-
 //  IMPORT SCRIPTS
-import { createJaranius, createGutta } from "./main.js"
+import { createJaranius, createGutta, initializeLoadingManager } from "./main.js"
 
 //  IMPORT TEXTURES
     // ||Diffuse - 
@@ -23,15 +22,18 @@ import cloudsTexture4k from "../img/textures/clouds4k.webp"
 import cloudsTexture1k from "../img/textures/clouds1k.webp"
 
 
-export function creation(version) {
+export function creation(version, postLoadingManager) {
     if (version == 1){
+        initializeLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture4k, normalTexture2k, roughnessTexture2k, cloudsTexture4k)
         createGutta(300)
     } 
     if (version == 2){
+        initializeLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture2k, normalTexture1k, roughnessTexture1k, cloudsTexture1k)
     } 
     if (version == 3){
+        initializeLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture8k, normalTexture8k, roughnessTexture8k, cloudsTexture4k)
         createGutta(500)
     } 

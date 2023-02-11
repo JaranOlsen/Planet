@@ -1,6 +1,6 @@
 //  IMPORT DEPENDENCIES
 import * as THREE from 'three'
-import { Float32BufferAttribute, FrontSide, AdditiveBlending, BackSide, DoubleSide, Vector3, RGBADepthPacking, SubtractiveBlending, LoadingManager } from 'three'
+import { Float32BufferAttribute, FrontSide, DoubleSide } from 'three'
 import { OrbitControls } from "three/addons/controls/OrbitControls.js"
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'
@@ -119,60 +119,68 @@ let signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y,
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 const spiral = new THREE.Object3D()
-let VRenabled = false
 
 
 //VERSION MANAGER
+
+const postLoadingManager = new THREE.LoadingManager();
+const textureLoader2 = new THREE.TextureLoader(postLoadingManager)
+
 const playButton = document.getElementById("playbutton")
 const credits = document.getElementById("credits")
-const skipButton = document.getElementById("skipbutton")
 const enableVRbutton = document.getElementById("enableVRbutton")
-const version = initializeVersion(creation)
+const skipButton = document.getElementById("skipbutton")
+initializeVersion(creation, postLoadingManager)
 
-let guttaInitialized = false
+let webXRInitialized = false
 let jaraniusInitialized = false
+let guttaInitialized = false
 
-//Loading Manager
-const manager = new THREE.LoadingManager();
-const textureLoader = new THREE.TextureLoader(manager)
-initializeLoadingManager()
-function initializeLoadingManager() {
-    manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
-        //console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+
+//LOADING MANAGER
+const initialLoadingManager = new THREE.LoadingManager();
+const textureLoader = new THREE.TextureLoader(initialLoadingManager)
+
+initializeLoadingManager(initialLoadingManager)
+
+export function initializeLoadingManager(loadingManager) {
+    loadingManager.onStart = function () {
+        if (loadingManager == postLoadingManager) progressBarContainer.style.display = 'flex';
     };
 
     const progressBar = document.getElementById('progress-bar');
-    manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+    loadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
         progressBar.value = (itemsLoaded / itemsTotal ) * 100
-        //console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+        console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
     };
 
     const progressBarContainer = document.querySelector('.progress-bar-container')
-    manager.onLoad = function ( ) {
+    loadingManager.onLoad = function ( ) {
         progressBarContainer.style.display = 'none';
-        //console.log( 'Loading complete!');
+        console.log( 'Loading complete!');
     };
-    manager.onError = function ( url ) {
+    loadingManager.onError = function ( url ) {
         console.log( 'There was an error loading ' + url );
     };
 }
+
+
 //WEB XR
 enableVRbutton.addEventListener("click", () => {
-        enableVRbutton.style.display = "none";
-        VRenabled = true
-    })
+    checkForXRSupport()
+    enableVRbutton.style.display = "none"; 
+})
 
-
-async function checkForXRSupport() {
+export async function checkForXRSupport() {
     navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
-      if (supported) {
+    if (supported) {
+        webXRInitialized = true
         const button = VRButton.createButton( renderer )
         document.body.appendChild( button );
         setupXR();
-      }
+    }
     });
-  }
-if (VRenabled == true) checkForXRSupport();
+}
 
 function declareGlobalVariables() {
     window.dolly = new THREE.Object3D();
@@ -505,7 +513,7 @@ function initializeIntro() {
         })
 }
 
-//Slide carousel
+//SLIDE CAROUSEL
 let activeCarousel
 
 const buttons = document.querySelectorAll("[data-carousel-button]")
@@ -644,7 +652,7 @@ navButtons.forEach(button => {
     })
 })
 
-//create starfield
+//CREATE STARS
 const starGeometry = new THREE.BufferGeometry()
 const starGeoR5 = new THREE.BufferGeometry()
 const starGeoR10 = new THREE.BufferGeometry()
@@ -655,142 +663,52 @@ const starGeoB10 = new THREE.BufferGeometry()
 const starGeoB15 = new THREE.BufferGeometry()
 const starGeoB20 = new THREE.BufferGeometry()
 
-const starMaterial = new THREE.PointsMaterial({
-    size: 5,
-    map: new THREE.TextureLoader(manager).load(starW),
-    transparent: true,
-    fog: false
-})
-const starMatR5 = new THREE.PointsMaterial({
-    size: 5,
-    map: new THREE.TextureLoader(manager).load(starR5),
-    transparent: true,
-    fog: false
-})
-const starMatR10 = new THREE.PointsMaterial({
-    size: 5,
-    map: new THREE.TextureLoader(manager).load(starR10),
-    transparent: true,
-    fog: false
-})
-const starMatR15 = new THREE.PointsMaterial({
-    size: 5,
-    map: new THREE.TextureLoader(manager).load(starR15),
-    transparent: true,
-    fog: false
-})
-const starMatR20 = new THREE.PointsMaterial({
-    size: 5,
-    map: new THREE.TextureLoader(manager).load(starR20),
-    transparent: true,
-    fog: false
-})
-const starMatB5 = new THREE.PointsMaterial({
-    size: 5,
-    map: new THREE.TextureLoader(manager).load(starB5),
-    transparent: true,
-    fog: false
-})
-const starMatB10 = new THREE.PointsMaterial({
-    size: 5,
-    map: new THREE.TextureLoader(manager).load(starB10),
-    transparent: true,
-    fog: false
-})
-const starMatB15 = new THREE.PointsMaterial({
-    size: 5,
-    map: new THREE.TextureLoader(manager).load(starB15),
-    transparent: true,
-    fog: false
-})
-const starMatB20 = new THREE.PointsMaterial({
-    size: 5,
-    map: new THREE.TextureLoader(manager).load(starB20),
-    transparent: true,
-    fog: false
-})
+function createStarMaterial(texture) {
+    new THREE.PointsMaterial({
+        size: 5,
+        map: textureLoader.load(starW),
+        transparent: true,
+        fog: false
+    })
+}
+const starMaterial = createStarMaterial(starW)
+const starMatR5 = createStarMaterial(starR5)
+const starMatR10 = createStarMaterial(starR10)
+const starMatR15 = createStarMaterial(starR15)
+const starMatR20 = createStarMaterial(starR20)
+const starMatB5 = createStarMaterial(starB5)
+const starMatB10 = createStarMaterial(starB10)
+const starMatB15 = createStarMaterial(starB15)
+const starMatB20 = createStarMaterial(starB20)
 
+function createStarVertices(source, number) {
+    for (let i = 0; i < number; i++) {
+        const x = (Math.random() - 0.5) * 2000
+        const y = (Math.random() - 0.5) * 2000
+        const z = (Math.random() - 0.5) * 2000
+        if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
+            source.push(x, y, z)
+        }
+    }
+}
 const starVertices = []
-for (let i = 0; i < 5000; i++) {
-    const x = (Math.random() - 0.5) * 2000
-    const y = (Math.random() - 0.5) * 2000
-    const z = (Math.random() - 0.5) * 2000
-    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
-        starVertices.push(x, y, z)
-    }
-}
+createStarVertices(starVertices, 5000)
 const starVertR5 = []
-for (let i = 0; i < 1000; i++) {
-    const x = (Math.random() - 0.5) * 2000
-    const y = (Math.random() - 0.5) * 2000
-    const z = (Math.random() - 0.5) * 2000
-    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
-        starVertR5.push(x, y, z)
-    }
-}
+createStarVertices(starVertR5, 1000)
 const starVertR10 = []
-for (let i = 0; i < 500; i++) {
-    const x = (Math.random() - 0.5) * 2000
-    const y = (Math.random() - 0.5) * 2000
-    const z = (Math.random() - 0.5) * 2000
-    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
-        starVertR10.push(x, y, z)
-    }
-}
+createStarVertices(starVertR10, 500)
 const starVertR15 = []
-for (let i = 0; i < 100; i++) {
-    const x = (Math.random() - 0.5) * 2000
-    const y = (Math.random() - 0.5) * 2000
-    const z = (Math.random() - 0.5) * 2000
-    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
-        starVertR15.push(x, y, z)
-    }
-}
+createStarVertices(starVertR15, 100)
 const starVertR20 = []
-for (let i = 0; i < 25; i++) {
-    const x = (Math.random() - 0.5) * 2000
-    const y = (Math.random() - 0.5) * 2000
-    const z = (Math.random() - 0.5) * 2000
-    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
-        starVertR20.push(x, y, z)
-    }
-}
+createStarVertices(starVertR20, 25)
 const starVertB5 = []
-for (let i = 0; i < 1000; i++) {
-    const x = (Math.random() - 0.5) * 2000
-    const y = (Math.random() - 0.5) * 2000
-    const z = (Math.random() - 0.5) * 2000
-    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
-        starVertB5.push(x, y, z)
-    }
-}
+createStarVertices(starVertB5, 1000)
 const starVertB10 = []
-for (let i = 0; i < 500; i++) {
-    const x = (Math.random() - 0.5) * 2000
-    const y = (Math.random() - 0.5) * 2000
-    const z = (Math.random() - 0.5) * 2000
-    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
-        starVertB10.push(x, y, z)
-    }
-}
+createStarVertices(starVertB10, 500)
 const starVertB15 = []
-for (let i = 0; i < 100; i++) {
-    const x = (Math.random() - 0.5) * 2000
-    const y = (Math.random() - 0.5) * 2000
-    const z = (Math.random() - 0.5) * 2000
-    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
-        starVertB15.push(x, y, z)
-    }
-}
+createStarVertices(starVertB15, 100)
 const starVertB20 = []
-for (let i = 0; i < 25; i++) {
-    const x = (Math.random() - 0.5) * 2000
-    const y = (Math.random() - 0.5) * 2000
-    const z = (Math.random() - 0.5) * 2000
-    if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
-        starVertB20.push(x, y, z)
-    }
-}
+createStarVertices(starVertB20, 25)
 
 starGeometry.setAttribute('position', new Float32BufferAttribute(starVertices, 3))
 starGeoR5.setAttribute('position', new Float32BufferAttribute(starVertR5, 3))
@@ -813,30 +731,28 @@ const starsB15 = new THREE.Points(starGeoB15, starMatB15)
 const starsB20 = new THREE.Points(starGeoB20, starMatB20)
 scene.add(stars, starsR5, starsR10, starsR15, starsR20, starsB5, starsB10, starsB15, starsB20)
 
-//create solar system
+//CREATE SOLAR SYSTEM
 const center = new THREE.Object3D();
 scene.add(center);
 
-    // pivots
-    const pivot1 = new THREE.Object3D();
-    const pivot2 = new THREE.Object3D();
-    const pivot3 = new THREE.Object3D();
-    const pivot4 = new THREE.Object3D();
+const pivot1 = new THREE.Object3D();
+const pivot2 = new THREE.Object3D();
+const pivot3 = new THREE.Object3D();
+const pivot4 = new THREE.Object3D();
 
-    pivot1.rotation.y = - Math.PI / 2.5;
-    pivot1.rotation.x = 0.15
-    pivot2.rotation.y = 2 * Math.PI / 16;
-    pivot2.rotation.x = 0.22
-    pivot3.rotation.y = 2 * Math.PI / 2;
-    pivot3.rotation.x = 0.31
-    pivot4.rotation.y = 9 * Math.PI / 6;
-    pivot4.rotation.x = -0.41;
+pivot1.rotation.y = - Math.PI / 2.5;
+pivot1.rotation.x = 0.15
+pivot2.rotation.y = 2 * Math.PI / 16;
+pivot2.rotation.x = 0.22
+pivot3.rotation.y = 2 * Math.PI / 2;
+pivot3.rotation.x = 0.31
+pivot4.rotation.y = 9 * Math.PI / 6;
+pivot4.rotation.x = -0.41;
 
-    center.add(pivot1);
-    center.add(pivot2);
-    center.add(pivot3);
-    center.add(pivot4);
-
+center.add(pivot1);
+center.add(pivot2);
+center.add(pivot3);
+center.add(pivot4);
 
 // CREATE JARANIUS
 let jaranius
@@ -844,7 +760,6 @@ let jaraniusConnections
 let spiralConnections
 let clouds
 let sign
-//createJaranius()
 export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture) {
     jaraniusInitialized = true
     
@@ -853,9 +768,9 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     jaranius = new THREE.Mesh(
         jaraniusGeometry,
         new THREE.MeshStandardMaterial({ 
-            map: textureLoader.load(diffuseTexture),
-            normalMap: textureLoader.load(normalTexture),
-            roughnessMap: textureLoader.load(roughnessTexture),  //works well
+            map: textureLoader2.load(diffuseTexture),
+            normalMap: textureLoader2.load(normalTexture),
+            roughnessMap: textureLoader2.load(roughnessTexture),  //works well
             normalScale: new THREE.Vector2(3, 3),  //works well
             metalness: 0,  //works well
             roughness: 0.85,  //works well
@@ -867,7 +782,7 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
 
     //create cloud layer
     const cloudsMaterial = new THREE.MeshLambertMaterial({
-        map: textureLoader.load(cloudsTexture),
+        map: textureLoader2.load(cloudsTexture),
         transparent: true,
         side: DoubleSide,
         opacity: 0.8,
@@ -907,70 +822,67 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     jaranius.add(atmosphere);
 
 
-//create pictureBoxes
-const planetContent = new THREE.Object3D
-jaranius.add(planetContent)
+    //create pictureBoxes
+    const planetContent = new THREE.Object3D
+    jaranius.add(planetContent)
 
-for (let i = 0; i < imgPlanetData.length; i++) {
-    createImages(imgPlanetData[i].src, imgPlanetData[i].lat, imgPlanetData[i].lng - 180, imgPlanetData[i].size / 500, imgPlanetData[i].radius, planetContent);
-}
-for (let i = 0; i < imgSpiralData.length; i++) {
-    createImages(imgSpiralData[i].src, imgSpiralData[i].lat, imgSpiralData[i].lng - 180, imgSpiralData[i].size / 500, imgSpiralData[i].radius, spiral);
-}
+    for (let i = 0; i < imgPlanetData.length; i++) {
+        createImages(imgPlanetData[i].src, imgPlanetData[i].lat, imgPlanetData[i].lng - 180, imgPlanetData[i].size / 500, imgPlanetData[i].radius, planetContent);
+    }
+    for (let i = 0; i < imgSpiralData.length; i++) {
+        createImages(imgSpiralData[i].src, imgSpiralData[i].lat, imgSpiralData[i].lng - 180, imgSpiralData[i].size / 500, imgSpiralData[i].radius, spiral);
+    }
 
-//create tags
+    //create tags
+    createTags(tagPlanetData, planetContent, 5)
 
-createTags(tagPlanetData, planetContent, 5)
+    createTags(tagSpiralData, spiral, 7)
 
-createTags(tagSpiralData, spiral, 7)
+    //create connections
+    const curveThickness = 0.0001
+    const curveRadiusSegments = 3
+    const curveMaxAltitude = 0.03
+    const curveMinAltitude = 5.02
+    jaraniusConnections = new THREE.Object3D()
+    jaranius.add(jaraniusConnections)
+    let context = jaraniusConnections
+    createConnections(tagPlanetData, tagPlanetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, false)
+    createConnections(tagPlanetData, tagPlanetDashedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, true, false)
+    createConnections(tagPlanetData, tagPlanetArrowedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, true)
 
-//create connections
-const curveThickness = 0.0001
-const curveRadiusSegments = 3
-const curveMaxAltitude = 0.03
-const curveMinAltitude = 5.02
-jaraniusConnections = new THREE.Object3D()
-jaranius.add(jaraniusConnections)
-let context = jaraniusConnections
-createConnections(tagPlanetData, tagPlanetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, false)
-createConnections(tagPlanetData, tagPlanetDashedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, true, false)
-createConnections(tagPlanetData, tagPlanetArrowedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, true)
+    spiralConnections = new THREE.Object3D()
+    spiral.add(spiralConnections)
+    let context2 = spiralConnections
+    createConnections(tagSpiralData, tagSpiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false, false)
 
-
-spiralConnections = new THREE.Object3D()
-spiral.add(spiralConnections)
-let context2 = spiralConnections
-createConnections(tagSpiralData, tagSpiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false, false)
-
-//create sign
-
-sign = new THREE.Object3D()
-planetContent.add(sign)
-sign.position.set(0, -5.05, 0)
-const loader = new GLTFLoader(manager);
-loader.load(signModel,
-	function ( glb ) {
-        const model = glb.scene
-		sign.add( model );
-        model.scale.set(5, 5, 5)
-        model.rotation.y += Math.PI / 2;
-        model.rotation.x += Math.PI / 3;
-	},
-	function ( xhr ) {
-		//console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-	},
-	function ( error ) {
-		console.log( 'An error happened' );
-	}
-);
+    //create sign
+    sign = new THREE.Object3D()
+    planetContent.add(sign)
+    sign.position.set(0, -5.05, 0)
+    const loader = new GLTFLoader(postLoadingManager);
+    loader.load(signModel,
+        function ( glb ) {
+            const model = glb.scene
+            sign.add( model );
+            model.scale.set(5, 5, 5)
+            model.rotation.y += Math.PI / 2;
+            model.rotation.x += Math.PI / 3;
+        },
+        function ( xhr ) {
+            //console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        function ( error ) {
+            console.log( 'An error happened' );
+        }
+    );
 }
 
-//create sun
+//CREATE SUN
 const sunRadius = 5
 const sunRadianceGeo = new THREE.SphereGeometry(sunRadius, 50, 50)
 
 const sunMat = new THREE.MeshBasicMaterial({
-    map: new THREE.TextureLoader(manager).load(sunTexture)
+    map: textureLoader.load(sunTexture)
 })
 const sunRadiance = new THREE.Mesh(sunRadianceGeo, sunMat)
 sunRadiance.position.set(0, 0, 490)
@@ -992,7 +904,7 @@ lensflare.addElement( new LensflareElement( textureFlare3, 70, 1 ) );
 
 sunLight.add( lensflare );
 
-//create moons
+//CREATE MOONS
 class Moon {
     constructor(radius, texture, z, rotation, pivot, intensity) {
         this.radius = radius;
@@ -1013,7 +925,7 @@ for (let i = 0; i < moons.length; i++) {
     const mesh = new THREE.Mesh(
         new THREE.SphereGeometry(moons[i].radius, 50, 50),
         new THREE.MeshStandardMaterial({
-            map: new THREE.TextureLoader(manager).load(moons[i].texture),
+            map: textureLoader.load(moons[i].texture),
             metalness: 0,
             flatShading: false,
             side: FrontSide,
@@ -1028,7 +940,7 @@ for (let i = 0; i < moons.length; i++) {
     mesh.add(moonlight);
 }
 
-//create Spiral
+//CREATE SPIRAL
 let spiralActivated = false
 function createSpiral() {
     spiralActivated = true
@@ -1166,8 +1078,7 @@ function createSpiral() {
     spiral.add(tierRing)
 }
 
-
-//create Gutta
+//CREATE GUTTA
 let gutta
 export function createGutta(numberOfGutta) {
     guttaInitialized = true
@@ -1394,7 +1305,7 @@ export function createGutta(numberOfGutta) {
     gui.hide()
 }
 
-//lights
+//CREATE LIGHTS
 const ambient = new THREE.AmbientLight(0xffffff, 0.02); //0.01
 scene.add(ambient);
 
@@ -1410,12 +1321,12 @@ if (jaraniusInitialized == true) {
     jaranius.add(jaraniusLight);
 }
 
-//create Contexts
+//CREATE CONTEXTS
 contexts.push([tagPlanetData, tagPlanetData.length, tagPlanetConnections, jaraniusConnections, 5.01])
 
 contexts.push([tagSpiralData, contexts[contexts.length - 1][1] + tagSpiralData.length, tagSpiralConnections, spiralConnections, 7.01])
 
-//create fps counter
+//CREATE FPS COUNTER
 const times = [];
 let fps;
 
@@ -1438,8 +1349,7 @@ fpsContainer.appendChild(fpsDisplay);
 
 refreshLoop();
 
-
-// Interaction functions
+//INTERACTION FUNCTIONS
 function scanPins() {
     raycaster.setFromCamera(pointer, camera);
     const intersects = raycaster.intersectObjects(pinPositions);
@@ -1447,8 +1357,7 @@ function scanPins() {
     hoverPins(intersects)
 }
 
-
-// EVENTS KEYBOARD
+//EVENTS KEYBOARD
 document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
@@ -1686,7 +1595,6 @@ function onDocumentKeyDown(event) {
         
 };
 
-
 //EVENTS MOUSE
 function onPointerMove(event) {
     pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -1724,7 +1632,6 @@ function onClick(event) {
             const selectedCarousel = tagPlanetData[selectedNode].slides
             pushContent(selectedCarousel)
             activeCarousel = document.querySelector(`.carousel.s1`)
-            //activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
             activeCarousel.style.display = "block"
         }
     }
@@ -1757,24 +1664,20 @@ window.addEventListener("touchstart", onClick);
 document.addEventListener("touchmove", touch2Mouse, true);
 document.addEventListener("touchend", touch2Mouse, true); */
 
-//debug
+//TESTS
 if (tagPlanetData.length !== tagPlanetConnections.length) {
     console.log("ERROR: tagPlanetData.length !== tagPlanetConnections.length")
 }
 
 //ANIMATIONLOOP
-
 function animate() {
-
     renderer.setAnimationLoop( render );
-
 }
 
-function render(time) {
-    time *= 0.001;
+function render() {  
 
     //WebXR
-    if (renderer.xr.isPresenting){
+    if (webXRInitialized == true && renderer.xr.isPresenting){
         const dt = clock.getDelta();
 
         if (controllers ){
@@ -1800,12 +1703,6 @@ function render(time) {
             }
         }
     }
-            
-    if (resizeRendererToDisplaySize(renderer)) {
-        const canvas = renderer.domElement;
-        camera.aspect = canvas.clientWidth / canvas.clientHeight;
-        camera.updateProjectionMatrix();
-    }
 
     if (guttaInitialized == true) {
         for (let i = 0; i < gutta.length; i++) {
@@ -1817,7 +1714,6 @@ function render(time) {
             gutta[i].move();
         }
     }
-    renderer.render(scene, camera);
 
     const camPos = camera.position
     const camRot = camera.rotation
@@ -1844,8 +1740,8 @@ function render(time) {
     //console.log("x: ", camera.position.x, "y: ", camera.position.y, "z: ", camera.position.z)
     if (camera.position.z > -15 && camera.position.z < 15) start = false
   
-    controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);
-    controls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;
+    controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);  //  /1
+    controls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;//  /3;
 
     if (sign) {
         signRotationVector.set(camera.position.x, camera.position.y, camera.position.z)
@@ -1856,6 +1752,13 @@ function render(time) {
     scanPins();
 
     controls.update();
+
+    if (resizeRendererToDisplaySize(renderer)) {
+        const canvas = renderer.domElement;
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        camera.updateProjectionMatrix();
+    }
+    renderer.render(scene, camera);
 }
 
 animate()
