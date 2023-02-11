@@ -25,6 +25,78 @@ The table properties
 Links
 */
 
+/*  ||  VERSION SCREEN */
+#versions {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 20;
+  padding: 20;
+  transform: translateY(-50%);
+
+}
+.version-option {
+  position: relative;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  transform: translateX(-50%);
+  font-size: 2rem;
+  line-height: 4rem;
+}
+.version-option:hover,
+.version-option:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.version-option:focus{
+  outline: 1px solid black;
+}
+
+.keys {
+  position: absolute;
+  left: 20%;
+  bottom: 0%;
+  width: 60%;
+  height: 10%;
+  margin: 20;
+  padding: 20;
+  font-size: x-small;
+  color: white;
+  line-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* unvisited link */
+a:link {
+  color: white;
+  text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+  color: lightblue;
+  text-decoration: none;
+  display: block;
+}
+
+/* selected link */
+a:active {
+  color: lightblue;
+  text-decoration: none;
+}
+
+
 /*  || INTRO SCREEN */
 #credits {
   position: absolute;
@@ -36,6 +108,7 @@ Links
   top: 5%;
   transform: translateX(-50%) translateY(-50%);
   font-size: .75rem;
+  display: none;
 }
 #playbutton {
   position: absolute;
@@ -50,6 +123,7 @@ Links
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
   font-size: 10rem;
+  display: none;
 }
 #playbutton:hover,
 #playbutton:focus{
@@ -72,6 +146,7 @@ Links
   top: 85%;
   transform: translateX(-50%) translateY(-50%);
   font-size: 1rem;
+  display: none;
 }
 #skipbutton:hover,
 #skipbutton:focus{
@@ -94,6 +169,7 @@ Links
   top: 95%;
   transform: translateX(-50%) translateY(-50%);
   font-size: 1rem;
+  display: none;
 }
 #enableVRbutton:hover,
 #enableVRbutton:focus{

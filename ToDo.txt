@@ -7,7 +7,12 @@ INITIATIVES
 
 
 CONTENT
+    Golden nuggets - poems
+
     Restructure versions
+        define parameters at top of file
+        norwegian version
+            use chatGPT to translate file, add norwegian in same file
 
     Anapana (etc) tips and tricks
 
@@ -43,6 +48,8 @@ MAKE USABLE
         fix touch click controls - fixed? not quite..
 
     re-enter VR / access to html elements in VR
+
+    fix hover stuck at spiral
 
 
 SHORT-TERM DEVELOPMENT

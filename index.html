@@ -6,30 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Planet</title>
 
-    <link rel="stylesheet" href="indexstyle.css">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-
-    <div id="c">
-      <div id="container">
-
-        <div id="options">
-          <div class="option">
-            <a href="planet.html" title="Full version - Resource demanding">High Performance version</a>
-          </div>
-          <div class="option">
-            <a href="planet_lowperf.html" title="Complete content - less resource demanding">Low Performance version</a>
-          </div>
-          <div class="option">
-            <a href="planet_dev.html" title="Full version including beta features - might not always work at all">Developer version</a>
-          </div>
-        </div>
-        <div class="keys">
-          Click nodes to see content. Wireframe nodes doesn't have content. Press 1 to 5 for spotlight intensity, 6 to 0 for ambient intensity.
-        </div>
-
-      </div>
-    </div>
  
+    <div id="container">
+      <canvas id="c"></canvas>
+      <!-- <div id="credits">DEVELOPER VERSION</div> -->
+      <!-- <div id="credits">Alan Watts on letting go. Music: Kevin MacLeod - Meditation Impromptu 1</div> -->
+      <!-- <div id="credits">An Honest Meditation</div> -->
+      <div id="credits">Jack Kornfield on Ajahn Chah. Music: Jaran Olsen - This is me</div>
+      <div class="progress-bar-container">
+        <label for="progress-bar">Loading...</label>
+        <progress id="progress-bar" value="0" max="100"></progress>
+      </div>
+      <div id="versions">
+        <button class="version-option" id="version1" alt="Requires powerful computer">Full version</button><br>
+        <button class="version-option" id="version2" alt="Suitable for light laptops and mobile devices">Light version</button><br>
+        <button class="version-option" id="version3" alt="Includes beta features - might not always work">Developer version</button>
+      </div>
+      <button id="playbutton">&#9654;</button>
+      <button id="skipbutton">skip intro</button>
+      <button id="enableVRbutton">enable VR</button>
+      <div id="fpsCounter"></div>
+
+      <section class="slides" aria-label="Slides">  
+        <div class="carousel s1" id="div_carousel" data-carousel>
+          <button class="carousel-button prev" data-carousel-button="prev">&#8666;</button>
+          <button class="carousel-button next" data-carousel-button="next">&#8667;</button>
+          <button class="carousel-button exit" data-carousel-button="exit">&#10005;</button>
+          <ul id="ul_carousel" data-slides>
+            <li class="slide" data-active>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <audio id="introTune">
+      <source src="/audio/ajahnchah2.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio> 
+    
+    <!-- Remove this when import maps will be widely supported  -->
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+    <script type="module" src="/build/main.js"></script>
+    <!-- <script type="module" src="/mathScripts.js"></script> -->
   </body>
 </html>

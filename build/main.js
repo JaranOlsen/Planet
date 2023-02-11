@@ -8,6 +8,8 @@ import { VRButton } from 'three/addons/webxr/VRButton.js'
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js'
 import { Constants as MotionControllerConstants, fetchProfile, MotionController } from 'three/examples/jsm/libs/motion-controllers.module.js'
 import { GUI } from 'dat.gui'
+import { lerp, smoothstep } from 'three/src/math/MathUtils.js';
+
 
 //  IMPORT SCRIPTS
 import { createImages, createTags, pins, tags, pinPositions, createConnections, hoverPins } from './mindmap.js'
@@ -22,6 +24,8 @@ import { tagSpiralConnections } from './data/spiralConnectionData.js'
 import { imgSpiralData } from './data/spiralImageData.js'
 import { palette } from './data/palette.js'
 import { pushContent } from './content.js'
+import { initializeVersion } from './versions.js'
+import { creation } from './creation.js'
 
 //  IMPORT SHADERS
 import atmosphericLightVertexShader from '../shaders/atmosphericLightVertex.glsl'
@@ -34,22 +38,6 @@ import spiralVertexShader from '../shaders/spiralVertex.glsl'
 import spriralFragmentShader from '../shaders/spiralFragment.glsl'
 
 //  IMPORT TEXTURES
-
-    // ||Diffuse - 
-//import diffuseTexture from "../img/textures/diffuse4k.webp"
-import diffuseTexture from "../img/textures/diffuse8kvibrance.webp"
-
-    // ||Normals - White = high altitude - see https://www.youtube.com/watch?v=YJqWHsllczY&t=1s on how to best generate
-import normalTexture from "../img/textures/normals8ktest.webp"
-//import normalTexture from "../img/textures/normal2k.webp"
-
-    // ||Roughness - Green (white) = high roughness (green channel - see documentation)
-import roughnessTexture from "../img/textures/roughness2k.webp"
-
-    // ||Environment
-//import environmentTexture from "../img/textures/sun1k.webp"
-
-import cloudsTexture from "../img/textures/clouds4k.webp"
 import starW from "../img/textures/starW.webp"
 import starR5 from "../img/textures/starR5.webp"
 import starR10 from "../img/textures/starR10.webp"
@@ -65,12 +53,10 @@ import redmoonTexture from "../img/textures/moonRed1k.webp"
 import icemoonTexture from "../img/textures/moonIce1k.webp"
 import dash from '../img/textures/dash.webp'
 import tier from '../img/textures/tier.webp'
-import podAlpha1 from '../img/textures/podAlpha1.webp'
-import podAlpha2 from '../img/textures/podAlpha2.webp'
 
 // IMPORT MODELS
 import signModel from "../models/sign.glb"
-import { lerp, smoothstep } from 'three/src/math/MathUtils.js';
+
 
 const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
 const DEFAULT_PROFILE = 'generic-trigger';
@@ -135,29 +121,42 @@ const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 const spiral = new THREE.Object3D()
 let VRenabled = false
 
+
+//VERSION MANAGER
+const playButton = document.getElementById("playbutton")
+const credits = document.getElementById("credits")
+const skipButton = document.getElementById("skipbutton")
+const enableVRbutton = document.getElementById("enableVRbutton")
+const version = initializeVersion(creation)
+
+let guttaInitialized = false
+let jaraniusInitialized = false
+
 //Loading Manager
 const manager = new THREE.LoadingManager();
-manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
-	//console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
-};
+const textureLoader = new THREE.TextureLoader(manager)
+initializeLoadingManager()
+function initializeLoadingManager() {
+    manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+        //console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+    };
 
-const progressBar = document.getElementById('progress-bar');
-manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
-    progressBar.value = (itemsLoaded / itemsTotal ) * 100
-	//console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
-};
+    const progressBar = document.getElementById('progress-bar');
+    manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+        progressBar.value = (itemsLoaded / itemsTotal ) * 100
+        //console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+    };
 
-const progressBarContainer = document.querySelector('.progress-bar-container')
-manager.onLoad = function ( ) {
-    progressBarContainer.style.display = 'none';
-	//console.log( 'Loading complete!');
-};
-manager.onError = function ( url ) {
-	console.log( 'There was an error loading ' + url );
-};
-
+    const progressBarContainer = document.querySelector('.progress-bar-container')
+    manager.onLoad = function ( ) {
+        progressBarContainer.style.display = 'none';
+        //console.log( 'Loading complete!');
+    };
+    manager.onError = function ( url ) {
+        console.log( 'There was an error loading ' + url );
+    };
+}
 //WEB XR
-const enableVRbutton = document.getElementById("enableVRbutton")
 enableVRbutton.addEventListener("click", () => {
         enableVRbutton.style.display = "none";
         VRenabled = true
@@ -475,46 +474,36 @@ function moveDolly(dt){
 }
 
 
-//start intro
+//INTRO
 let start = false
-const introTune = document.getElementById("introTune");
-    introTune.preload = "auto";
-    introTune.currentTime = 0;
-    introTune.volume = 1;
-const introTuneLength = introTune.duration
-/* const introTune = document.getElementById("introTune");
-    introTune.preload = "auto";
-    introTune.currentTime = 1.4;
-    introTune.volume = 0.25; */
-/* const introSpeech = document.getElementById("introSpeech")
-    introSpeech.preload = "auto";
-    introSpeech.currentTime= 1.4; */
+let introTuneLength
+initializeIntro()
+function initializeIntro() {
+    const introTune = document.getElementById("introTune");
+        introTune.preload = "auto";
+        introTune.currentTime = 0;
+        introTune.volume = 1;
+    introTuneLength = introTune.duration
 
-const playButton = document.getElementById("playbutton")
-const credits = document.getElementById("credits")
-playButton.addEventListener("click", () => {
-        introTune.play();
-        /* setTimeout(function(){ 
-            introSpeech.play(); 
-            }, 40000) */
-        start = true;
-        playButton.style.display = "none";
-        skipButton.style.display = "none";
-        enableVRbutton.style.display = "none";
-        credits.style.display = "none";
-        
-    })
+    playButton.addEventListener("click", () => {
+            introTune.play();
+            start = true;
+            playButton.style.display = "none";
+            skipButton.style.display = "none";
+            enableVRbutton.style.display = "none";
+            credits.style.display = "none";
+            
+        })
 
-//skip intro
-const skipButton = document.getElementById("skipbutton")
-skipButton.addEventListener("click", () => {
-        playButton.style.display = "none";
-        skipButton.style.display = "none";
-        enableVRbutton.style.display = "none";
-        credits.style.display = "none";
-        camera.position.z = 15;
-    })
-
+    //skip intro
+    skipButton.addEventListener("click", () => {
+            playButton.style.display = "none";
+            skipButton.style.display = "none";
+            enableVRbutton.style.display = "none";
+            credits.style.display = "none";
+            camera.position.z = 15;
+        })
+}
 
 //Slide carousel
 let activeCarousel
@@ -848,65 +837,75 @@ scene.add(center);
     center.add(pivot3);
     center.add(pivot4);
 
-//create Jaranius
-const textureLoader = new THREE.TextureLoader(manager)
-const jaraniusGeometry = new THREE.SphereGeometry(5, 250, 250);
-jaraniusGeometry.computeBoundingSphere();
-const jaranius = new THREE.Mesh(
-    jaraniusGeometry,
-    new THREE.MeshStandardMaterial({ 
-        map: textureLoader.load(diffuseTexture),
-        normalMap: textureLoader.load(normalTexture),
-        roughnessMap: textureLoader.load(roughnessTexture),  //works well
-        normalScale: new THREE.Vector2(3, 3),  //works well
-        metalness: 0,  //works well
-        roughness: 0.85,  //works well
-        flatShading: false,
-        side: FrontSide,
-    })
-)
-scene.add(jaranius)
 
-//create cloud layer
-const cloudsMaterial = new THREE.MeshLambertMaterial({
-    map: textureLoader.load(cloudsTexture),
-    transparent: true,
-    side: DoubleSide,
-    opacity: 0.8,
-})
-const clouds = new THREE.Mesh(
-    new THREE.SphereGeometry(5.04, 50, 50),
-    cloudsMaterial
-)
-jaranius.add(clouds)
+// CREATE JARANIUS
+let jaranius
+let jaraniusConnections
+let spiralConnections
+let clouds
+let sign
+//createJaranius()
+export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture) {
+    jaraniusInitialized = true
+    
+    const jaraniusGeometry = new THREE.SphereGeometry(5, 250, 250);
+    jaraniusGeometry.computeBoundingSphere();
+    jaranius = new THREE.Mesh(
+        jaraniusGeometry,
+        new THREE.MeshStandardMaterial({ 
+            map: textureLoader.load(diffuseTexture),
+            normalMap: textureLoader.load(normalTexture),
+            roughnessMap: textureLoader.load(roughnessTexture),  //works well
+            normalScale: new THREE.Vector2(3, 3),  //works well
+            metalness: 0,  //works well
+            roughness: 0.85,  //works well
+            flatShading: false,
+            side: FrontSide,
+        })
+    )
+    scene.add(jaranius)
 
-//create atmosphericLight
-const atmosphericLight = new THREE.Mesh(
-    new THREE.SphereGeometry(5.0, 500, 500),
-    new THREE.ShaderMaterial({
-        vertexShader: atmosphericLightVertexShader,
-        fragmentShader: atmosphericLightFragmentShader,
-        blending: THREE.AdditiveBlending,
-    })
-)
-atmosphericLight.position.set(0, 0, 0)
-jaranius.add(atmosphericLight);
-
-//create atmosphere
-const atmosphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5.3, 50, 50),
-    new THREE.ShaderMaterial({
-        vertexShader: atmosphereVertexShader,
-        fragmentShader: atmosphereFragmentShader,
-        blending: THREE.AdditiveBlending,
-        side: THREE.BackSide,
+    //create cloud layer
+    const cloudsMaterial = new THREE.MeshLambertMaterial({
+        map: textureLoader.load(cloudsTexture),
         transparent: true,
-        depthWrite: false,
+        side: DoubleSide,
+        opacity: 0.8,
     })
-)
-atmosphere.position.set(0, 0, 0)
-atmosphere.scale.set(1.2, 1.2, 1.2)
-jaranius.add(atmosphere);
+    clouds = new THREE.Mesh(
+        new THREE.SphereGeometry(5.04, 50, 50),
+        cloudsMaterial
+    )
+    jaranius.add(clouds)
+
+    //create atmosphericLight
+    const atmosphericLight = new THREE.Mesh(
+        new THREE.SphereGeometry(5.0, 500, 500),
+        new THREE.ShaderMaterial({
+            vertexShader: atmosphericLightVertexShader,
+            fragmentShader: atmosphericLightFragmentShader,
+            blending: THREE.AdditiveBlending,
+        })
+    )
+    atmosphericLight.position.set(0, 0, 0)
+    jaranius.add(atmosphericLight);
+
+    //create atmosphere
+    const atmosphere = new THREE.Mesh(
+        new THREE.SphereGeometry(5.3, 50, 50),
+        new THREE.ShaderMaterial({
+            vertexShader: atmosphereVertexShader,
+            fragmentShader: atmosphereFragmentShader,
+            blending: THREE.AdditiveBlending,
+            side: THREE.BackSide,
+            transparent: true,
+            depthWrite: false,
+        })
+    )
+    atmosphere.position.set(0, 0, 0)
+    atmosphere.scale.set(1.2, 1.2, 1.2)
+    jaranius.add(atmosphere);
+
 
 //create pictureBoxes
 const planetContent = new THREE.Object3D
@@ -930,7 +929,7 @@ const curveThickness = 0.0001
 const curveRadiusSegments = 3
 const curveMaxAltitude = 0.03
 const curveMinAltitude = 5.02
-const jaraniusConnections = new THREE.Object3D()
+jaraniusConnections = new THREE.Object3D()
 jaranius.add(jaraniusConnections)
 let context = jaraniusConnections
 createConnections(tagPlanetData, tagPlanetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, false)
@@ -938,14 +937,14 @@ createConnections(tagPlanetData, tagPlanetDashedConnections, curveThickness, cur
 createConnections(tagPlanetData, tagPlanetArrowedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, true)
 
 
-const spiralConnections = new THREE.Object3D()
+spiralConnections = new THREE.Object3D()
 spiral.add(spiralConnections)
 let context2 = spiralConnections
 createConnections(tagSpiralData, tagSpiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false, false)
 
 //create sign
 
-let sign = new THREE.Object3D()
+sign = new THREE.Object3D()
 planetContent.add(sign)
 sign.position.set(0, -5.05, 0)
 const loader = new GLTFLoader(manager);
@@ -964,53 +963,12 @@ loader.load(signModel,
 		console.log( 'An error happened' );
 	}
 );
-
-//create Podcast map
-/* let podcastFields = []
-
-const podCastLayer = new THREE.Object3D()
-jaranius.add(podCastLayer)
-
-const pod1Geo = new THREE.SphereGeometry(5.3, 50, 50)
-const pod1Mat = new THREE.MeshBasicMaterial({
-    alphaMap: textureLoader.load(podAlpha1),
-    alphaTest: 0.01,
-    color: 0xcc88cc,
-    transparent: true,
-    opacity: 0.2,
-    blending: AdditiveBlending,
-    depthWrite: false
-})
-const podField1 = new THREE.Mesh(pod1Geo, pod1Mat)
-podCastLayer.add(podField1)
-podcastFields.push(podField1)
-
-const pod2Geo = new THREE.SphereGeometry(5.4, 50, 50)
-const pod2Mat = new THREE.MeshBasicMaterial({
-    alphaMap: textureLoader.load(podAlpha2),
-    alphaTest: 0.01,
-    color: 0x88cccc,
-    transparent: true,
-    opacity: 0.2,
-    blending: AdditiveBlending,
-    depthWrite: false
-})
-const podField2 = new THREE.Mesh(pod2Geo, pod2Mat)
-podCastLayer.add(podField2)
-podcastFields.push(podField2) */
+}
 
 //create sun
 const sunRadius = 5
 const sunRadianceGeo = new THREE.SphereGeometry(sunRadius, 50, 50)
-/* const sunRadianceGeo2 = new THREE.SphereGeometry(20, 50, 50)
-const sunRadianceMat = new THREE.ShaderMaterial({
-    vertexShader: sunVertexShader,
-    fragmentShader: sunFragmentShader,
-    blending: AdditiveBlending,
-    transparent: true,
-    side: BackSide,
-    lights: false,
-}) */
+
 const sunMat = new THREE.MeshBasicMaterial({
     map: new THREE.TextureLoader(manager).load(sunTexture)
 })
@@ -1018,15 +976,9 @@ const sunRadiance = new THREE.Mesh(sunRadianceGeo, sunMat)
 sunRadiance.position.set(0, 0, 490)
 pivot4.add(sunRadiance)
 
-/* const sunRadiance2 = new THREE.Mesh(sunRadianceGeo2, sunRadianceMat)
-sunRadiance2.position.set(0, 0, 490)
-pivot4.add(sunRadiance2) */
-
 const sunLight = new THREE.PointLight(0xffffff, 1.2, 2000)
 sunLight.position.set(sunRadiance.position.x, sunRadiance.position.y, sunRadiance.position.z - sunRadius * 1.5)
 pivot4.add(sunLight)
-
-
 
 const textureFlare0 = textureLoader.load("https://jaranolsen.github.io/Planet/sunflare.webp");
 const textureFlare3 = textureLoader.load("https://jaranolsen.github.io/Planet/lensflare.webp");
@@ -1216,233 +1168,231 @@ function createSpiral() {
 
 
 //create Gutta
-const numberOfGutta = 300;
-const guttaScale = 0.0003;
-const guttaFlyAltitude = 0.01
+let gutta
+export function createGutta(numberOfGutta) {
+    guttaInitialized = true
+    //const numberOfGutta = 300;
+    const guttaScale = 0.0003;
+    const guttaFlyAltitude = 0.01
 
-/* const guttaMaterial = new THREE.MeshLambertMaterial({
-    //color: 0xcc7766, 
-    side: DoubleSide,
-}) */ 
+    const guttaShape = new THREE.Shape();
 
-const guttaShape = new THREE.Shape();
+    guttaShape.moveTo(guttaScale * 5,guttaScale * 5 );
+    guttaShape.bezierCurveTo(guttaScale * 5,guttaScale * 5,guttaScale * 4, 0, 0, 0 );
+    guttaShape.bezierCurveTo(- guttaScale * 6, 0,- guttaScale * 6,guttaScale * 7, - guttaScale * 6,guttaScale * 7 );
+    guttaShape.bezierCurveTo(- guttaScale * 6,guttaScale * 11,- guttaScale * 3,guttaScale * 15.4,guttaScale * 5,guttaScale * 19 );
+    guttaShape.bezierCurveTo(guttaScale * 12,guttaScale * 15.4,guttaScale * 16,guttaScale * 11,guttaScale * 16,guttaScale * 7 );
+    guttaShape.bezierCurveTo(guttaScale * 16,guttaScale * 7,guttaScale * 16, 0,guttaScale * 10, 0 );
+    guttaShape.bezierCurveTo(guttaScale * 7, 0,guttaScale * 5,guttaScale * 5,guttaScale * 5,guttaScale * 5 );
 
-guttaShape.moveTo(guttaScale * 5,guttaScale * 5 );
-guttaShape.bezierCurveTo(guttaScale * 5,guttaScale * 5,guttaScale * 4, 0, 0, 0 );
-guttaShape.bezierCurveTo(- guttaScale * 6, 0,- guttaScale * 6,guttaScale * 7, - guttaScale * 6,guttaScale * 7 );
-guttaShape.bezierCurveTo(- guttaScale * 6,guttaScale * 11,- guttaScale * 3,guttaScale * 15.4,guttaScale * 5,guttaScale * 19 );
-guttaShape.bezierCurveTo(guttaScale * 12,guttaScale * 15.4,guttaScale * 16,guttaScale * 11,guttaScale * 16,guttaScale * 7 );
-guttaShape.bezierCurveTo(guttaScale * 16,guttaScale * 7,guttaScale * 16, 0,guttaScale * 10, 0 );
-guttaShape.bezierCurveTo(guttaScale * 7, 0,guttaScale * 5,guttaScale * 5,guttaScale * 5,guttaScale * 5 );
+    const guttaGeometry = new THREE.ShapeGeometry(guttaShape)
+    guttaGeometry.center = (5 * guttaScale, 9.5 * guttaScale, 0)
+    guttaGeometry.rotateZ(Math.PI/2)
+    guttaGeometry.rotateY(Math.PI/2)
 
-const guttaGeometry = new THREE.ShapeGeometry(guttaShape)
-guttaGeometry.center = (5 * guttaScale, 9.5 * guttaScale, 0)
-guttaGeometry.rotateZ(Math.PI/2)
-guttaGeometry.rotateY(Math.PI/2)
+    class Gutt {
+        constructor(lat, lng, material) {
+            this.lat = lat;
+            this.lng = lng;
+            this.material = material;
 
-class Gutt {
-    constructor(lat, lng, material) {
-        this.lat = lat;
-        this.lng = lng;
-        this.material = material;
-
-        this.gutt = new THREE.Mesh(guttaGeometry, this.material)
- 
-        this.pos = new THREE.Vector2(lat, lng)
-        this.velocity = new THREE.Vector2(getRandomNum(0, 0), getRandomNum(0, 1)).setLength(0.001)
-        this.acceleration = new THREE.Vector2
-        this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5 + guttaFlyAltitude)
-        this.presentHeading
-        this.originalHeading
-  
-        this.gutt.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
-
-        this.wander = new THREE.Vector2(0, 0)
-        this.alignment = new THREE.Vector2(0, 0)
-        // this.alignmentPerception = 0.1
-        this.cohesion = new THREE.Vector2(0, 0)
-        // this.cohesionPerception = 0.1
-        this.separation = new THREE.Vector2(0, 0)
-        // this.separationPerception = 0.2
-        this.avoidance = new THREE.Vector2(0, 0)
-        //this.maxForce = 0.1
-        //this.maxSpeed = 0.1 
-
-        jaranius.add(this.gutt)
-    }
-
-    move() {
-        this.originalHeading = Math.atan2(this.velocity.x, this.velocity.y)
-
-        this.acceleration.set(0, 0)
-        this.alignment.multiplyScalar(parameters.alignment)
-        this.cohesion.multiplyScalar(parameters.cohesion)
-        this.separation.multiplyScalar(parameters.separation)
-        //this.avoidance.multiplyScalar(parameters.avoidance)
-        
-        this.acceleration.add( this.wander )
-        this.acceleration.add( this.alignment )
-        this.acceleration.add( this.cohesion )
-        this.acceleration.add( this.separation )
-        this.acceleration.add( this.avoidance )
-
-        this.velocity.add(this.acceleration)
-        this.velocity.clampLength(-parameters.max_speed, parameters.max_speed)
-        this.velocity.setLength(parameters.max_speed)  // remove this at some point
-        this.pos.add(this.velocity)
+            this.gutt = new THREE.Mesh(guttaGeometry, this.material)
     
-        if (this.pos.x < 0) {
-            this.pos.x = Math.abs(this.pos.x)
-            if (this.pos.y < 180) {
-            this.pos.y += 180
-            } else this.pos.y -= 180
-            this.velocity.x *= -1
-            this.velocity.y *= -1
+            this.pos = new THREE.Vector2(lat, lng)
+            this.velocity = new THREE.Vector2(getRandomNum(0, 0), getRandomNum(0, 1)).setLength(0.001)
+            this.acceleration = new THREE.Vector2
+            this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5 + guttaFlyAltitude)
+            this.presentHeading
+            this.originalHeading
+    
+            this.gutt.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
+
+            this.wander = new THREE.Vector2(0, 0)
+            this.alignment = new THREE.Vector2(0, 0)
+            // this.alignmentPerception = 0.1
+            this.cohesion = new THREE.Vector2(0, 0)
+            // this.cohesionPerception = 0.1
+            this.separation = new THREE.Vector2(0, 0)
+            // this.separationPerception = 0.2
+            this.avoidance = new THREE.Vector2(0, 0)
+            //this.maxForce = 0.1
+            //this.maxSpeed = 0.1 
+
+            jaranius.add(this.gutt)
         }
-        if (this.pos.x > 180) {
-            this.pos.x = 180 - (this.pos.x - 180)
-            if (this.pos.y < 180) {
+
+        move() {
+            this.originalHeading = Math.atan2(this.velocity.x, this.velocity.y)
+
+            this.acceleration.set(0, 0)
+            this.alignment.multiplyScalar(parameters.alignment)
+            this.cohesion.multiplyScalar(parameters.cohesion)
+            this.separation.multiplyScalar(parameters.separation)
+            //this.avoidance.multiplyScalar(parameters.avoidance)
+            
+            this.acceleration.add( this.wander )
+            this.acceleration.add( this.alignment )
+            this.acceleration.add( this.cohesion )
+            this.acceleration.add( this.separation )
+            this.acceleration.add( this.avoidance )
+
+            this.velocity.add(this.acceleration)
+            this.velocity.clampLength(-parameters.max_speed, parameters.max_speed)
+            this.velocity.setLength(parameters.max_speed)  // remove this at some point
+            this.pos.add(this.velocity)
+        
+            if (this.pos.x < 0) {
+                this.pos.x = Math.abs(this.pos.x)
+                if (this.pos.y < 180) {
                 this.pos.y += 180
-            } else this.pos.y -= 180
-            this.velocity.x *= -1
-            this.velocity.y *= -1
+                } else this.pos.y -= 180
+                this.velocity.x *= -1
+                this.velocity.y *= -1
+            }
+            if (this.pos.x > 180) {
+                this.pos.x = 180 - (this.pos.x - 180)
+                if (this.pos.y < 180) {
+                    this.pos.y += 180
+                } else this.pos.y -= 180
+                this.velocity.x *= -1
+                this.velocity.y *= -1
+            }
+            if (this.pos.y < 0) {this.pos.y = 360 + this.pos.y}
+            if (this.pos.y > 360) {this.pos.y = this.pos.y - 360}
+            
+            this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5 + guttaFlyAltitude)
+            this.cartesianVelocity = convertLatLngtoCartesian(this.velocity.x, this.velocity.y, 5 + guttaFlyAltitude)
+            
+            this.presentHeading = Math.atan2(this.velocity.x, this.velocity.y)
+            
+            this.cp = new THREE.Vector3
+            this.cp.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
+            this.gutt.lookAt(this.cp)
+            this.gutt.rotateZ(this.presentHeading - this.originalHeading)
+            
+            this.gutt.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
         }
-        if (this.pos.y < 0) {this.pos.y = 360 + this.pos.y}
-        if (this.pos.y > 360) {this.pos.y = this.pos.y - 360}
-        
-        this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5 + guttaFlyAltitude)
-        this.cartesianVelocity = convertLatLngtoCartesian(this.velocity.x, this.velocity.y, 5 + guttaFlyAltitude)
-        
-        this.presentHeading = Math.atan2(this.velocity.x, this.velocity.y)
-        
-        this.cp = new THREE.Vector3
-        this.cp.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
-        this.gutt.lookAt(this.cp)
-        this.gutt.rotateZ(this.presentHeading - this.originalHeading)
-        
-        this.gutt.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
-    }
 
-    calculateWander() {
-        this.wander.set(getRandomNum(-0.0001, 0.0001), getRandomNum(-0.0001, 0.0001))
-        this.wander.clampLength(-parameters.max_force, parameters.max_force)
-    }
+        calculateWander() {
+            this.wander.set(getRandomNum(-0.0001, 0.0001), getRandomNum(-0.0001, 0.0001))
+            this.wander.clampLength(-parameters.max_force, parameters.max_force)
+        }
 
-    calculateAlignment() {
-        let counter = 0
-        this.alignment.set(0, 0)
-        for (let i = 0; i < gutta.length; i++) {
-            if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.alignment_perception_distance) {
-                this.alignment.add(gutta[i].velocity)
-                counter += 1
+        calculateAlignment() {
+            let counter = 0
+            this.alignment.set(0, 0)
+            for (let i = 0; i < gutta.length; i++) {
+                if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.alignment_perception_distance) {
+                    this.alignment.add(gutta[i].velocity)
+                    counter += 1
+                }
+            }
+            if (counter > 0 ) {
+                this.alignment.set(this.alignment.x / counter, this.alignment.y / counter)
+                this.alignment.sub(this.velocity)
+                this.alignment.clampLength(-parameters.max_force, parameters.max_force)
             }
         }
-        if (counter > 0 ) {
-            this.alignment.set(this.alignment.x / counter, this.alignment.y / counter)
-            this.alignment.sub(this.velocity)
-            this.alignment.clampLength(-parameters.max_force, parameters.max_force)
-        }
-    }
 
-    calculateCohesion() {
-        let counter = 0
-        this.cohesion.set(0, 0)
-        for (let i = 0; i < gutta.length; i++) {
-            if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.cohesion_perception_distance) {
-                this.cohesion.add(gutta[i].pos)
-                counter += 1
+        calculateCohesion() {
+            let counter = 0
+            this.cohesion.set(0, 0)
+            for (let i = 0; i < gutta.length; i++) {
+                if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.cohesion_perception_distance) {
+                    this.cohesion.add(gutta[i].pos)
+                    counter += 1
+                }
+            }
+            if (counter > 0 ) {
+                this.cohesion.set(this.cohesion.x / counter, this.cohesion.y / counter)
+                this.cohesion.sub(this.pos)
+                this.cohesion.clampLength(-parameters.max_force, parameters.max_force)
             }
         }
-        if (counter > 0 ) {
-            this.cohesion.set(this.cohesion.x / counter, this.cohesion.y / counter)
-            this.cohesion.sub(this.pos)
-            this.cohesion.clampLength(-parameters.max_force, parameters.max_force)
-        }
-    }
 
-    calculateSeparation() {
-        let counter = 0
-        this.separation.set(0, 0)
-        for (let i = 0; i < gutta.length; i++) {
-            if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.separation_perception_distance) {
-                let difference = new THREE.Vector2(this.pos.x - gutta[i].pos.x, this.pos.y - gutta[i].pos.y)
-                difference.divideScalar(this.gutt.position.distanceTo(gutta[i].gutt.position))
-                this.separation.add(difference)
-                counter += 1
+        calculateSeparation() {
+            let counter = 0
+            this.separation.set(0, 0)
+            for (let i = 0; i < gutta.length; i++) {
+                if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.separation_perception_distance) {
+                    let difference = new THREE.Vector2(this.pos.x - gutta[i].pos.x, this.pos.y - gutta[i].pos.y)
+                    difference.divideScalar(this.gutt.position.distanceTo(gutta[i].gutt.position))
+                    this.separation.add(difference)
+                    counter += 1
+                }
+            }
+            if (counter > 0 ) {
+                this.separation.set(this.separation.x / counter, this.separation.y / counter)
+                this.separation.clampLength(-parameters.max_force, parameters.max_force)
             }
         }
-        if (counter > 0 ) {
-            this.separation.set(this.separation.x / counter, this.separation.y / counter)
-            this.separation.clampLength(-parameters.max_force, parameters.max_force)
+
+        calculateTemperature() {
+            this.avoidance.set(0, 0)
+            if (this.pos.x < 40) {
+                this.avoidance.set((Math.pow(40 - this.pos.x, 2)) / 100000, 0)
+                this.avoidance.clampLength(-parameters.max_force, parameters.max_force)
+            }
+            if (this.pos.x > 140) {
+                this.avoidance.set(-(Math.pow(140 - this.pos.x, 2)) / 100000, 0)
+                this.avoidance.clampLength(-parameters.max_force, parameters.max_force)
+            }
         }
     }
 
-    calculateTemperature() {
-        this.avoidance.set(0, 0)
-        if (this.pos.x < 40) {
-            this.avoidance.set((Math.pow(40 - this.pos.x, 2)) / 100000, 0)
-            this.avoidance.clampLength(-parameters.max_force, parameters.max_force)
-        }
-        if (this.pos.x > 140) {
-            this.avoidance.set(-(Math.pow(140 - this.pos.x, 2)) / 100000, 0)
-            this.avoidance.clampLength(-parameters.max_force, parameters.max_force)
-        }
+    gutta = [];
+    for (let i = 0; i < numberOfGutta; i++) {
+        let lat = getRandomBell(40, 140, 5)
+        let lng = getRandomInt(0, 359)
+
+        let material
+        let redBird = new THREE.MeshLambertMaterial({
+            color: 0xcc6655, 
+            side: DoubleSide,
+        })
+        let greyBird = new THREE.MeshLambertMaterial({
+            color: 0xcc7788, 
+            side: DoubleSide,
+        })
+        let darkBird = new THREE.MeshLambertMaterial({
+            color: 0xbb4455, 
+            side: DoubleSide,
+        })
+
+        if (i <= numberOfGutta / 3) {
+            material = redBird
+        } else if (i < numberOfGutta / 3 * 2) {
+            material = greyBird
+        } else material = darkBird
+
+        gutta.push(new Gutt(lat, lng, material))
     }
+
+    //Dat.GUI
+    const gui = new GUI()
+    let parameters = {
+        alignment: 0.016,
+        alignment_perception_distance: 0.435,
+        cohesion: 0.754,
+        cohesion_perception_distance: 0.887,
+        separation: 0.765,
+        separation_perception_distance: 0.225,
+        max_force: 0.0029,
+        max_speed: 0.01,
+    }
+
+    const parameterFolder = gui.addFolder('parameters')
+    parameterFolder.add(parameters, 'alignment', 0, 0.1, 0.0001)
+    parameterFolder.add(parameters, 'alignment_perception_distance', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'cohesion', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'cohesion_perception_distance', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'separation', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'separation_perception_distance', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'max_force', 0, 0.01, 0.0001)
+    parameterFolder.add(parameters, 'max_speed', 0, 0.1, 0.001)
+    parameterFolder.close()
+    gui.hide()
 }
-
-let gutta = [];
-for (let i = 0; i < numberOfGutta; i++) {
-    let lat = getRandomBell(40, 140, 5)
-    let lng = getRandomInt(0, 359)
-
-    let material
-    let redBird = new THREE.MeshLambertMaterial({
-        color: 0xcc6655, 
-        side: DoubleSide,
-    })
-    let greyBird = new THREE.MeshLambertMaterial({
-        color: 0xcc7788, 
-        side: DoubleSide,
-    })
-    let darkBird = new THREE.MeshLambertMaterial({
-        color: 0xbb4455, 
-        side: DoubleSide,
-    })
-
-    if (i <= numberOfGutta / 3) {
-        material = redBird
-    } else if (i < numberOfGutta / 3 * 2) {
-        material = greyBird
-    } else material = darkBird
-
-    gutta.push(new Gutt(lat, lng, material))
-}
-
-//Dat.GUI
-const gui = new GUI()
-let parameters = {
-    alignment: 0.016,
-    alignment_perception_distance: 0.435,
-    cohesion: 0.754,
-    cohesion_perception_distance: 0.887,
-    separation: 0.765,
-    separation_perception_distance: 0.225,
-    max_force: 0.0029,
-    max_speed: 0.01,
-}
-
-const parameterFolder = gui.addFolder('parameters')
-parameterFolder.add(parameters, 'alignment', 0, 0.1, 0.0001)
-parameterFolder.add(parameters, 'alignment_perception_distance', 0, 1, 0.001)
-parameterFolder.add(parameters, 'cohesion', 0, 1, 0.001)
-parameterFolder.add(parameters, 'cohesion_perception_distance', 0, 1, 0.001)
-parameterFolder.add(parameters, 'separation', 0, 1, 0.001)
-parameterFolder.add(parameters, 'separation_perception_distance', 0, 1, 0.001)
-parameterFolder.add(parameters, 'max_force', 0, 0.01, 0.0001)
-parameterFolder.add(parameters, 'max_speed', 0, 0.1, 0.001)
-parameterFolder.close()
-gui.hide()
-
 
 //lights
 const ambient = new THREE.AmbientLight(0xffffff, 0.02); //0.01
@@ -1454,9 +1404,11 @@ spotlight.angle = Math.PI / 4
 scene.add(spotlight);
 let spotlightIntensity = 0.5
 
-const jaraniusLight = new THREE.PointLight(0xffffff, 0.5);
-jaraniusLight.position.set(0, 0, 0);
-jaranius.add(jaraniusLight);
+if (jaraniusInitialized == true) {
+    const jaraniusLight = new THREE.PointLight(0xffffff, 0.5);
+    jaraniusLight.position.set(0, 0, 0);
+    jaranius.add(jaraniusLight);
+}
 
 //create Contexts
 contexts.push([tagPlanetData, tagPlanetData.length, tagPlanetConnections, jaraniusConnections, 5.01])
@@ -1855,15 +1807,16 @@ function render(time) {
         camera.updateProjectionMatrix();
     }
 
-    for (let i = 0; i < gutta.length; i++) {
-        gutta[i].calculateWander();
-        gutta[i].calculateAlignment();
-        gutta[i].calculateCohesion();
-        gutta[i].calculateSeparation();
-        gutta[i].calculateTemperature();
-        gutta[i].move();
+    if (guttaInitialized == true) {
+        for (let i = 0; i < gutta.length; i++) {
+            gutta[i].calculateWander();
+            gutta[i].calculateAlignment();
+            gutta[i].calculateCohesion();
+            gutta[i].calculateSeparation();
+            gutta[i].calculateTemperature();
+            gutta[i].move();
+        }
     }
-
     renderer.render(scene, camera);
 
     const camPos = camera.position
@@ -1876,7 +1829,7 @@ function render(time) {
     pivot2.rotation.y += -0.00003;
     pivot3.rotation.y += -0.000009;
     pivot4.rotation.y += -0.0001;
-    clouds.rotation.y += 0.00001;
+    if (jaraniusInitialized == true) clouds.rotation.y += 0.00001;
 
     if (camera.position.z > 15 && start == true) {
         camera.position.z -= 0.0213 * Math.pow(camera.position.z - 10, 1.35) / introTuneLength
