@@ -13,9 +13,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: resolve('index.html'),
-        planet: resolve('planet.html'),
-        planet_lowperf: resolve('planet_lowperf.html'),
-        planet_dev: resolve('planet_dev.html'),
       },
     },
   },
