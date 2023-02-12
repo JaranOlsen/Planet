@@ -664,12 +664,13 @@ const starGeoB15 = new THREE.BufferGeometry()
 const starGeoB20 = new THREE.BufferGeometry()
 
 function createStarMaterial(texture) {
-    new THREE.PointsMaterial({
+    const material = new THREE.PointsMaterial({
         size: 5,
-        map: textureLoader.load(starW),
+        map: textureLoader.load(texture),
         transparent: true,
         fog: false
     })
+    return material
 }
 const starMaterial = createStarMaterial(starW)
 const starMatR5 = createStarMaterial(starR5)
