@@ -1,5 +1,5 @@
 export const tagSpiralData = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see palette.js), SIZE (10-99), SLIDE-CAROUSEL-ID
-{id: "90A7B1ED-9A29-408C-97E2-D4E28C77A655", text: "Archaic", lat: 163, lng: 180, color: 40, size: 100, slides: undefined},
+{id: "90A7B1ED-9A29-408C-97E2-D4E28C77A655", text: "Archaic", lat: 163, lng: 180, color: 40, size: 100, slides: 1},
 {id: "321D4DE6-A276-4A2E-A7C1-34D1AF16D913", text: "Magic", lat: 138, lng: 180, color: 41, size: 100, slides: undefined},
 {id: "7D4EFB3B-AA80-4732-9EDF-471749F9156B", text: "Magic-Mythic", lat: 113, lng: 180, color: 42, size: 100, slides: undefined},
 {id: "47820194-7495-42A5-8034-1175B84FEDD7", text: "Mythic-Literal", lat: 96, lng: 180, color: 43, size: 100, slides: undefined},

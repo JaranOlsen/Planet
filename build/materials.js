@@ -1,5 +1,15 @@
-import { MeshBasicMaterial, MeshStandardMaterial, DoubleSide } from "three";
+import { MeshBasicMaterial, MeshStandardMaterial, DoubleSide, LoadingManager, TextureLoader, Vector2 } from "three";
 import { palette } from "./data/palette";
+
+//IMPORT TEXTURES
+import nugget_diffuse from "../img/textures/nugget_diffuse.jpg"
+import nugget_ao from "../img/textures/nugget_ao.jpg"
+import nugget_normal from "../img/textures/nugget_normal.jpg"
+import nugget_displacement from "../img/textures/nugget_displacement.png"
+import nugget_roughness from "../img/textures/nugget_roughness.jpg"
+
+const materialLoadingManager = new LoadingManager();
+const textureLoader3 = new TextureLoader(materialLoadingManager)
 
 //Box materials
 const boxMaterial0 = new MeshStandardMaterial({
@@ -185,6 +195,18 @@ const pinMaterial1 = new MeshStandardMaterial({
     color: palette[1],
     emissive: palette[1],
     emissiveIntensity: 0.2,
+})
+const pinMaterial2 = new MeshStandardMaterial({
+    map: textureLoader3.load(nugget_diffuse),
+    aoMap: textureLoader3.load(nugget_ao),
+    aoMapIntensity: 1,
+    normalMap: textureLoader3.load(nugget_normal),
+    normalScale: new Vector2(4, 4),
+    displacementMap: textureLoader3.load(nugget_displacement),
+    displacementScale: 0.005,
+    roughnessMap: textureLoader3.load(nugget_roughness),
+    roughness: 0.3,
+    metalness: 0.7,
 })
 
 const pinMaterial10 = new MeshStandardMaterial({
@@ -453,7 +475,7 @@ export const boxMaterials = [
     boxMaterial40, boxMaterial41, boxMaterial42, boxMaterial43, boxMaterial44, boxMaterial45, boxMaterial46, boxMaterial47, boxMaterial48, boxMaterial49, 
 ]
 export const pinMaterials = [
-    pinMaterial0, pinMaterial1, , , , , , , , , 
+    pinMaterial0, pinMaterial1, pinMaterial2, , , , , , , , 
     pinMaterial10, pinMaterial11, pinMaterial12, , , , , , , , 
     pinMaterial20, pinMaterial21, pinMaterial22, , , , , , , , 
     pinMaterial30, pinMaterial31, pinMaterial32, pinMaterial33, , , , , , , 

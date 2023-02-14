@@ -86,6 +86,7 @@ export const contentData = [ //slides ID = line number - 2
     ["https://insig.ht/qS8fCTMk7ub"],
     ["https://insig.ht/4pOmDkyM8wb"],
     ["https://insig.ht/nEom02rM8wb"],
+    ["./img/poems/nightsky.webp"],
 ];
 
 

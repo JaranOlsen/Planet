@@ -1,6 +1,6 @@
 //  IMPORT DEPENDENCIES
 import * as THREE from 'three'
-import { Float32BufferAttribute, FrontSide, DoubleSide } from 'three'
+import { Float32BufferAttribute, FrontSide, DoubleSide, Vector2 } from 'three'
 import { OrbitControls } from "three/addons/controls/OrbitControls.js"
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'
@@ -12,13 +12,14 @@ import { lerp, smoothstep } from 'three/src/math/MathUtils.js';
 
 
 //  IMPORT SCRIPTS
-import { createImages, createTags, pins, tags, pinPositions, createConnections, hoverPins } from './mindmap.js'
+import { createImages, createTags, pins, tags, pinPositions, createConnections, hoverPins, instantiateNugget } from './mindmap.js'
 import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
 import { tagPlanetData } from './data/planetTagData.js'
 import { tagPlanetConnections } from './data/planetConnectionData.js'
 import { tagPlanetDashedConnections } from './data/planetDashedConnectionData.js'
 import { tagPlanetArrowedConnections } from './data/planetArrowedConnectionData.js'
 import { imgPlanetData } from './data/planetImageData.js'
+import { planetNuggetData } from './data/planetNuggetData.js'
 import { tagSpiralData } from './data/spiralTagData.js'
 import { tagSpiralConnections } from './data/spiralConnectionData.js'
 import { imgSpiralData } from './data/spiralImageData.js'
@@ -112,6 +113,7 @@ let selectedBox = null;
 let selectedTag = null;
 let selectedNode = null;
 let selectedNodes = []
+let nuggets = []
 let showContent = true;
 let fastMove = false;
 
@@ -761,6 +763,7 @@ let jaraniusConnections
 let spiralConnections
 let clouds
 let sign
+const planetContent = new THREE.Object3D
 export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture) {
     jaraniusInitialized = true
     
@@ -824,7 +827,6 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
 
 
     //create pictureBoxes
-    const planetContent = new THREE.Object3D
     jaranius.add(planetContent)
 
     for (let i = 0; i < imgPlanetData.length; i++) {
@@ -838,6 +840,12 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     createTags(tagPlanetData, planetContent, 5)
 
     createTags(tagSpiralData, spiral, 7)
+
+    //create nuggets
+    for (let i = 0; i < planetNuggetData.length; i++) { 
+        let nugget = instantiateNugget(i, planetNuggetData[i].lat, planetNuggetData[i].lng - 180, planetNuggetData[i].color, planetNuggetData[i].size / 100000, planetNuggetData[i].slides, scene);
+        nuggets.push(nugget)
+    }
 
     //create connections
     const curveThickness = 0.0001
@@ -1081,34 +1089,28 @@ function createSpiral() {
 
 //CREATE GUTTA
 let gutta
-export function createGutta(numberOfGutta) {
+let mara
+let species
+
+/* let nuggets = []
+for (let i = 0; i < planetNuggetData.length; i++) { 
+    let nugget = instantiateNugget(i, planetNuggetData[i].lat, planetNuggetData[i].lng - 180, planetNuggetData[i].color, planetNuggetData[i].size / 100000, planetNuggetData[i].size, planetNuggetData[i].slides, scene);
+    nuggets.push(nugget)
+} */
+
+export function createGutta(numberOfGutta, numberOfMara) {
     guttaInitialized = true
-    //const numberOfGutta = 300;
-    const guttaScale = 0.0003;
     const guttaFlyAltitude = 0.01
 
-    const guttaShape = new THREE.Shape();
-
-    guttaShape.moveTo(guttaScale * 5,guttaScale * 5 );
-    guttaShape.bezierCurveTo(guttaScale * 5,guttaScale * 5,guttaScale * 4, 0, 0, 0 );
-    guttaShape.bezierCurveTo(- guttaScale * 6, 0,- guttaScale * 6,guttaScale * 7, - guttaScale * 6,guttaScale * 7 );
-    guttaShape.bezierCurveTo(- guttaScale * 6,guttaScale * 11,- guttaScale * 3,guttaScale * 15.4,guttaScale * 5,guttaScale * 19 );
-    guttaShape.bezierCurveTo(guttaScale * 12,guttaScale * 15.4,guttaScale * 16,guttaScale * 11,guttaScale * 16,guttaScale * 7 );
-    guttaShape.bezierCurveTo(guttaScale * 16,guttaScale * 7,guttaScale * 16, 0,guttaScale * 10, 0 );
-    guttaShape.bezierCurveTo(guttaScale * 7, 0,guttaScale * 5,guttaScale * 5,guttaScale * 5,guttaScale * 5 );
-
-    const guttaGeometry = new THREE.ShapeGeometry(guttaShape)
-    guttaGeometry.center = (5 * guttaScale, 9.5 * guttaScale, 0)
-    guttaGeometry.rotateZ(Math.PI/2)
-    guttaGeometry.rotateY(Math.PI/2)
-
     class Gutt {
-        constructor(lat, lng, material) {
+        constructor(lat, lng, geometry, material, array, line) {
             this.lat = lat;
             this.lng = lng;
             this.material = material;
+            this.geometry = geometry;
+            this.array = array;
 
-            this.gutt = new THREE.Mesh(guttaGeometry, this.material)
+            this.gutt = new THREE.Mesh(this.geometry, this.material)
     
             this.pos = new THREE.Vector2(lat, lng)
             this.velocity = new THREE.Vector2(getRandomNum(0, 0), getRandomNum(0, 1)).setLength(0.001)
@@ -1121,36 +1123,72 @@ export function createGutta(numberOfGutta) {
 
             this.wander = new THREE.Vector2(0, 0)
             this.alignment = new THREE.Vector2(0, 0)
-            // this.alignmentPerception = 0.1
             this.cohesion = new THREE.Vector2(0, 0)
-            // this.cohesionPerception = 0.1
             this.separation = new THREE.Vector2(0, 0)
-            // this.separationPerception = 0.2
+            this.hunt = new THREE.Vector2(0, 0)
+            this.flee = new THREE.Vector2(0, 0)
+            this.feed = new THREE.Vector2(0, 0)
             this.avoidance = new THREE.Vector2(0, 0)
-            //this.maxForce = 0.1
-            //this.maxSpeed = 0.1 
 
             jaranius.add(this.gutt)
         }
 
-        move() {
+        move(species, ID) {
             this.originalHeading = Math.atan2(this.velocity.x, this.velocity.y)
 
             this.acceleration.set(0, 0)
-            this.alignment.multiplyScalar(parameters.alignment)
-            this.cohesion.multiplyScalar(parameters.cohesion)
-            this.separation.multiplyScalar(parameters.separation)
+            if (species == "gutt") {
+                this.alignment.multiplyScalar(parameters.gutt_alignment)
+                this.cohesion.multiplyScalar(parameters.gutt_cohesion)
+                this.separation.multiplyScalar(parameters.gutt_separation)
+                this.flee.multiplyScalar(parameters.gutt_flee)
+                this.feed.multiplyScalar(parameters.gutt_feed)
+            }
+            if (species == "mara") {
+                this.alignment.multiplyScalar(parameters.mara_alignment)
+                this.cohesion.multiplyScalar(parameters.mara_cohesion)
+                this.separation.multiplyScalar(parameters.mara_separation)
+                this.hunt.multiplyScalar(parameters.mara_hunt)
+            }
             //this.avoidance.multiplyScalar(parameters.avoidance)
-            
+            /* if (species == "gutt" && ID == 0) {
+
+                console.log("lat: ", this.pos.x, "lng: ", this.pos.y)
+                console.log("alignment length: ", this.alignment.length())
+                console.log("cohesion length: ", this.cohesion.length())
+                console.log("separation length: ", this.separation.length())
+                console.log("flee length: ", this.flee.length())
+                console.log("feed length: ", this.feed.length())
+                console.log("wander length: ", this.wander.length())
+                console.log("lat: ", this.pos.x, "lng: ", this.pos.y)
+                console.log("alignment: ", this.alignment)
+                console.log("cohesion: ", this.cohesion)
+                console.log("separation: ", this.separation)
+                console.log("flee: ", this.flee)
+                console.log("feed: ", this.feed)
+                console.log("wander: ", this.wander)
+            } */
+
             this.acceleration.add( this.wander )
             this.acceleration.add( this.alignment )
             this.acceleration.add( this.cohesion )
             this.acceleration.add( this.separation )
+            if (species == "gutt") {
+                this.acceleration.add( this.flee )
+                this.acceleration.add( this.feed )
+            }
+            if (species == "mara") {
+                this.acceleration.add( this.hunt )
+            }
             this.acceleration.add( this.avoidance )
 
             this.velocity.add(this.acceleration)
-            this.velocity.clampLength(-parameters.max_speed, parameters.max_speed)
-            this.velocity.setLength(parameters.max_speed)  // remove this at some point
+            if (species == "gutt") {
+                this.velocity.clampLength(-parameters.gutt_max_speed, parameters.gutt_max_speed)
+            }
+            if (species == "mara") {
+                this.velocity.clampLength(-parameters.mara_max_speed, parameters.mara_max_speed)
+            }
             this.pos.add(this.velocity)
         
             if (this.pos.x < 0) {
@@ -1181,83 +1219,202 @@ export function createGutta(numberOfGutta) {
             this.cp.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
             this.gutt.lookAt(this.cp)
             this.gutt.rotateZ(this.presentHeading - this.originalHeading)
-            
             this.gutt.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
         }
 
-        calculateWander() {
-            this.wander.set(getRandomNum(-0.0001, 0.0001), getRandomNum(-0.0001, 0.0001))
-            this.wander.clampLength(-parameters.max_force, parameters.max_force)
+        calculateWander(species) {
+             this.wander.set(getRandomNum(-0.005, 0.005), getRandomNum(-0.005, 0.005))
+            if (species == "gutt") {
+                this.wander.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
+            }
+            if (species == "mara") {
+                this.wander.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
+            }
         }
 
-        calculateAlignment() {
+        calculateAlignment(species) {
+            let perception 
+            if (species == "gutt") {
+                perception = parameters.gutt_alignment_perception_distance
+            }
+            if (species == "mara") {
+                perception = parameters.mara_alignment_perception_distance
+            }
             let counter = 0
             this.alignment.set(0, 0)
-            for (let i = 0; i < gutta.length; i++) {
-                if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.alignment_perception_distance) {
-                    this.alignment.add(gutta[i].velocity)
+            for (let i = 0; i < this.array.length; i++) {
+                if (this.array[i] != this && this.gutt.position.distanceTo(this.array[i].gutt.position) < perception) {
+                    this.alignment.add(this.array[i].velocity)
                     counter += 1
                 }
             }
             if (counter > 0 ) {
                 this.alignment.set(this.alignment.x / counter, this.alignment.y / counter)
                 this.alignment.sub(this.velocity)
-                this.alignment.clampLength(-parameters.max_force, parameters.max_force)
+                if (species == "gutt") {
+                    this.alignment.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
+                }
+                if (species == "mara") {
+                    this.alignment.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
+                }
             }
         }
 
-        calculateCohesion() {
+        calculateCohesion(species) {
+            let perception 
+            if (species == "gutt") {
+                perception = parameters.gutt_cohesion_perception_distance
+            }
+            if (species == "mara") {
+                perception = parameters.mara_cohesion_perception_distance
+            }
             let counter = 0
             this.cohesion.set(0, 0)
-            for (let i = 0; i < gutta.length; i++) {
-                if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.cohesion_perception_distance) {
-                    this.cohesion.add(gutta[i].pos)
+            for (let i = 0; i < this.array.length; i++) {
+                if (this.array[i] != this && this.gutt.position.distanceTo(this.array[i].gutt.position) < perception) {
+                    this.cohesion.add(this.array[i].pos)
                     counter += 1
                 }
             }
             if (counter > 0 ) {
                 this.cohesion.set(this.cohesion.x / counter, this.cohesion.y / counter)
                 this.cohesion.sub(this.pos)
-                this.cohesion.clampLength(-parameters.max_force, parameters.max_force)
+                if (species == "gutt") {
+                    this.cohesion.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
+                }
+                if (species == "mara") {
+                    this.cohesion.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
+                }
             }
         }
 
-        calculateSeparation() {
+        calculateSeparation(species) {
+            let perception 
+            if (species == "gutt") {
+                perception = parameters.gutt_separation_perception_distance
+            }
+            if (species == "mara") {
+                perception = parameters.mara_separation_perception_distance
+            }
             let counter = 0
             this.separation.set(0, 0)
-            for (let i = 0; i < gutta.length; i++) {
-                if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.separation_perception_distance) {
-                    let difference = new THREE.Vector2(this.pos.x - gutta[i].pos.x, this.pos.y - gutta[i].pos.y)
-                    difference.divideScalar(this.gutt.position.distanceTo(gutta[i].gutt.position))
+            for (let i = 0; i < this.array.length; i++) {
+                if (this.array[i] != this && this.gutt.position.distanceTo(this.array[i].gutt.position) < perception) {
+                    let difference = new THREE.Vector2(this.pos.x - this.array[i].pos.x, this.pos.y - this.array[i].pos.y)
+                    difference.divideScalar(this.gutt.position.distanceTo(this.array[i].gutt.position))
                     this.separation.add(difference)
                     counter += 1
                 }
             }
             if (counter > 0 ) {
                 this.separation.set(this.separation.x / counter, this.separation.y / counter)
-                this.separation.clampLength(-parameters.max_force, parameters.max_force)
+                if (species == "gutt") {
+                    this.separation.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
+                }
+                if (species == "mara") {
+                    this.separation.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
+                }
             }
         }
 
-        calculateTemperature() {
+        calculateHunting() {
+            let counter = 0
+            this.hunt.set(0, 0)
+            for (let i = 0; i < gutta.length; i++) {
+                if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.mara_hunt_perception_distance) {
+                    this.hunt.add(gutta[i].pos)
+                    counter += 1
+                }
+            }
+            if (counter > 0 ) {
+                this.hunt.set(this.hunt.x / counter, this.hunt.y / counter)
+                this.hunt.sub(this.pos)
+                this.hunt.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
+            }
+        }
+
+        calculateFleeing() {
+            let counter = 0
+            this.flee.set(0, 0)
+            for (let i = 0; i < mara.length; i++) {
+                if (mara[i] != this && this.gutt.position.distanceTo(mara[i].gutt.position) < parameters.gutt_flee_perception_distance) {
+                    let difference = new THREE.Vector2(this.pos.x - mara[i].pos.x, this.pos.y - mara[i].pos.y)
+                    difference.divideScalar(this.gutt.position.distanceTo(mara[i].gutt.position))
+                    this.flee.add(difference)
+                    counter += 1
+                }
+            }
+            if (counter > 0 ) {
+                this.flee.set(this.flee.x / counter, this.flee.y / counter)
+                this.flee.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
+            }
+        }
+
+        calculateFeeding() {
+            let counter = 0
+            this.feed.set(0, 0)
+            for (let i = 0; i < nuggets.length; i++) {
+                if (this.gutt.position.distanceTo(nuggets[i].nugget.position) < parameters.gutt_feed_perception_distance) { 
+                    this.feed.add(nuggets[i].pos)
+                    counter += 1
+                }
+            }
+            if (counter > 0 ) {
+                this.feed.set(this.feed.x / counter, this.feed.y / counter)
+                this.feed.sub(this.pos)
+                this.feed.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
+            }
+        }
+
+        calculateTemperature(species) {
             this.avoidance.set(0, 0)
             if (this.pos.x < 40) {
                 this.avoidance.set((Math.pow(40 - this.pos.x, 2)) / 100000, 0)
-                this.avoidance.clampLength(-parameters.max_force, parameters.max_force)
+                if (species == "gutt") {
+                    this.avoidance.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
+                }
+                if (species == "mara") {
+                    this.avoidance.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
+                }
             }
             if (this.pos.x > 140) {
                 this.avoidance.set(-(Math.pow(140 - this.pos.x, 2)) / 100000, 0)
-                this.avoidance.clampLength(-parameters.max_force, parameters.max_force)
+                if (species == "gutt") {
+                    this.avoidance.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
+                }
+                if (species == "mara") {
+                    this.avoidance.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
+                }
             }
         }
     }
 
     gutta = [];
+    const guttaScale = 0.0003;
+
+    const guttaShape = new THREE.Shape();
+    guttaShape.moveTo(guttaScale * 5,guttaScale * 5 );
+    guttaShape.bezierCurveTo(guttaScale * 5,guttaScale * 5,guttaScale * 4, 0, 0, 0 );
+    guttaShape.bezierCurveTo(- guttaScale * 6, 0,- guttaScale * 6,guttaScale * 7, - guttaScale * 6,guttaScale * 7 );
+    guttaShape.bezierCurveTo(- guttaScale * 6,guttaScale * 11,- guttaScale * 3,guttaScale * 15.4,guttaScale * 5,guttaScale * 19 );
+    guttaShape.bezierCurveTo(guttaScale * 12,guttaScale * 15.4,guttaScale * 16,guttaScale * 11,guttaScale * 16,guttaScale * 7 );
+    guttaShape.bezierCurveTo(guttaScale * 16,guttaScale * 7,guttaScale * 16, 0,guttaScale * 10, 0 );
+    guttaShape.bezierCurveTo(guttaScale * 7, 0,guttaScale * 5,guttaScale * 5,guttaScale * 5,guttaScale * 5 );
+
+    const guttaGeometry = new THREE.ShapeGeometry(guttaShape)
+    guttaGeometry.center = (5 * guttaScale, 9.5 * guttaScale, 0)
+    guttaGeometry.rotateZ(Math.PI/2)
+    guttaGeometry.rotateY(Math.PI/2)
+
     for (let i = 0; i < numberOfGutta; i++) {
         let lat = getRandomBell(40, 140, 5)
         let lng = getRandomInt(0, 359)
 
-        let material
+        let guttaMaterial
+        let testBird = new THREE.MeshBasicMaterial({
+            color: 0xff0000, 
+            side: DoubleSide,
+        })
         let redBird = new THREE.MeshLambertMaterial({
             color: 0xcc6655, 
             side: DoubleSide,
@@ -1271,39 +1428,119 @@ export function createGutta(numberOfGutta) {
             side: DoubleSide,
         })
 
-        if (i <= numberOfGutta / 3) {
-            material = redBird
+        if (i == 0) {
+            guttaMaterial = testBird
+        } else if (i <= numberOfGutta / 3) {
+            guttaMaterial = redBird
         } else if (i < numberOfGutta / 3 * 2) {
-            material = greyBird
-        } else material = darkBird
+            guttaMaterial = greyBird
+        } else guttaMaterial = darkBird
 
-        gutta.push(new Gutt(lat, lng, material))
+        gutta.push(new Gutt(lat, lng, guttaGeometry, guttaMaterial, gutta))
+    }
+
+    mara = [];
+    const maraScale = 0.0003;
+
+    const beakLength = 40
+    const tipLength = 8
+
+    const maraShape = new THREE.Shape();
+    maraShape.moveTo(maraScale * 5,maraScale * 5 );
+    maraShape.bezierCurveTo(maraScale * 5,maraScale * 5,maraScale * 4, 0, 0, maraScale * -tipLength );
+    maraShape.bezierCurveTo(- maraScale * 6, 0,- maraScale * 6,maraScale * 7, - maraScale * 6,maraScale * 7 );
+    maraShape.bezierCurveTo(- maraScale * 6,maraScale * 11,- maraScale * 3,maraScale * 15.4,maraScale * 5,maraScale * beakLength );
+    maraShape.bezierCurveTo(maraScale * 12,maraScale * 15.4,maraScale * 16,maraScale * 11,maraScale * 16,maraScale * 7 );
+    maraShape.bezierCurveTo(maraScale * 16,maraScale * 7,maraScale * 16, 0,maraScale * 10, maraScale * -tipLength );
+    maraShape.bezierCurveTo(maraScale * 7, 0,maraScale * 5,maraScale * 5,maraScale * 5,maraScale * 5 );
+
+    const maraGeometry = new THREE.ShapeGeometry(maraShape)
+    maraGeometry.center = (5 * maraScale, 9.5 * maraScale, 0)
+    maraGeometry.rotateZ(Math.PI/2)
+    maraGeometry.rotateY(Math.PI/2)
+
+    for (let i = 0; i < numberOfMara; i++) {
+        let lat = getRandomBell(40, 140, 5)
+        let lng = getRandomInt(0, 359)
+
+        let maraMaterial
+        let darkMara = new THREE.MeshLambertMaterial({
+            color: 0x222222, 
+            side: DoubleSide,
+        })
+        let plainMara = new THREE.MeshLambertMaterial({
+            color: 0x333333, 
+            side: DoubleSide,
+        })
+        let lightMara = new THREE.MeshLambertMaterial({
+            color: 0x444444, 
+            side: DoubleSide,
+        })
+
+        if (i <= numberOfMara / 3) {
+            maraMaterial = darkMara
+        } else if (i < numberOfMara / 3 * 2) {
+            maraMaterial = plainMara
+        } else maraMaterial = lightMara
+
+        mara.push(new Gutt(lat, lng, maraGeometry, maraMaterial, mara))
     }
 
     //Dat.GUI
     const gui = new GUI()
     let parameters = {
-        alignment: 0.016,
-        alignment_perception_distance: 0.435,
-        cohesion: 0.754,
-        cohesion_perception_distance: 0.887,
-        separation: 0.765,
-        separation_perception_distance: 0.225,
-        max_force: 0.0029,
-        max_speed: 0.01,
+        gutt_alignment: 0.7,
+        gutt_alignment_perception_distance: 0.2,
+        gutt_cohesion: 0.6,
+        gutt_cohesion_perception_distance: 0.4,
+        gutt_separation: 0.6,
+        gutt_separation_perception_distance: 0.03,
+        gutt_flee: 10,
+        gutt_flee_perception_distance: 0.1,
+        gutt_feed: 0.3,
+        gutt_feed_perception_distance: 1,
+        gutt_max_force: 0.0005,
+        gutt_max_speed: 0.01,
+
+        mara_alignment: 0.1,
+        mara_alignment_perception_distance: 0.6,
+        mara_cohesion: 0.1,
+        mara_cohesion_perception_distance: 0.6,
+        mara_separation: 0.4,
+        mara_separation_perception_distance: 0.5,
+        mara_hunt: 0.75,
+        mara_hunt_perception_distance: 0.8,
+        mara_max_force: 0.001,
+        mara_max_speed: 0.04,
     }
 
-    const parameterFolder = gui.addFolder('parameters')
-    parameterFolder.add(parameters, 'alignment', 0, 0.1, 0.0001)
-    parameterFolder.add(parameters, 'alignment_perception_distance', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'cohesion', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'cohesion_perception_distance', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'separation', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'separation_perception_distance', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'max_force', 0, 0.01, 0.0001)
-    parameterFolder.add(parameters, 'max_speed', 0, 0.1, 0.001)
+    const parameterFolder = gui.addFolder('Gutta parameters')
+    parameterFolder.add(parameters, 'gutt_alignment', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'gutt_alignment_perception_distance', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'gutt_cohesion', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'gutt_cohesion_perception_distance', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'gutt_separation', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'gutt_separation_perception_distance', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'gutt_flee', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'gutt_flee_perception_distance', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'gutt_feed', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'gutt_feed_perception_distance', 0, 1, 0.001)
+    parameterFolder.add(parameters, 'gutt_max_force', 0, 0.001, 0.00001)
+    parameterFolder.add(parameters, 'gutt_max_speed', 0, 0.1, 0.001)
     parameterFolder.close()
-    gui.hide()
+    const parameterFolder2 = gui.addFolder('Mara parameters')
+    parameterFolder2.add(parameters, 'mara_alignment', 0, 1, 0.001)
+    parameterFolder2.add(parameters, 'mara_alignment_perception_distance', 0, 1, 0.001)
+    parameterFolder2.add(parameters, 'mara_cohesion', 0, 1, 0.001)
+    parameterFolder2.add(parameters, 'mara_cohesion_perception_distance', 0, 1, 0.001)
+    parameterFolder2.add(parameters, 'mara_separation', 0, 1, 0.001)
+    parameterFolder2.add(parameters, 'mara_separation_perception_distance', 0, 1, 0.001)
+    parameterFolder2.add(parameters, 'mara_hunt', 0, 1, 0.001)
+    parameterFolder2.add(parameters, 'mara_hunt_perception_distance', 0, 1, 0.001)
+    parameterFolder2.add(parameters, 'mara_max_force', 0, 0.01, 0.0001)
+    parameterFolder2.add(parameters, 'mara_max_speed', 0, 0.1, 0.001)
+    parameterFolder2.close()
+    //gui.hide()
 }
 
 //CREATE LIGHTS
@@ -1326,6 +1563,9 @@ if (jaraniusInitialized == true) {
 contexts.push([tagPlanetData, tagPlanetData.length, tagPlanetConnections, jaraniusConnections, 5.01])
 
 contexts.push([tagSpiralData, contexts[contexts.length - 1][1] + tagSpiralData.length, tagSpiralConnections, spiralConnections, 7.01])
+
+contexts.push([planetNuggetData, contexts[contexts.length - 1][1] + planetNuggetData.length, , , 5.01])
+
 
 //CREATE FPS COUNTER
 const times = [];
@@ -1608,9 +1848,12 @@ function onClick(event) {
     if (intersects.length > 0) {
         selectedPin = intersects[0].object;
         selectedNode = pinPositions.findIndex((object) => object==intersects[0].object)
-        selectedBox = tags[selectedNode].box;
-        selectedTag = tags[selectedNode].tag;
-        
+        console.log(tags.length, selectedNode)
+        if (tags.length > selectedNode){
+            selectedBox = tags[selectedNode].box;
+            selectedTag = tags[selectedNode].tag;
+        }
+
         const currentContext = selectedContext
         for (let i = 0; i < 100; i++){
             if (selectedNode < contexts[i][1]) {
@@ -1630,7 +1873,7 @@ function onClick(event) {
         let context = contexts[selectedContext][0]
 
         if (camera.position.distanceTo(selectedPin.position) < 4 && context[selectedNode - indexModifier].slides !== undefined) {
-            const selectedCarousel = tagPlanetData[selectedNode].slides
+            const selectedCarousel = context[selectedNode - indexModifier].slides
             pushContent(selectedCarousel)
             activeCarousel = document.querySelector(`.carousel.s1`)
             activeCarousel.style.display = "block"
@@ -1706,13 +1949,30 @@ function render() {
     }
 
     if (guttaInitialized == true) {
+        species = "gutt"
+        let wander
+        if ((getRandomNum(0, 1) > 0.95)) {
+            wander = true
+        } else wander = false
         for (let i = 0; i < gutta.length; i++) {
-            gutta[i].calculateWander();
-            gutta[i].calculateAlignment();
-            gutta[i].calculateCohesion();
-            gutta[i].calculateSeparation();
-            gutta[i].calculateTemperature();
-            gutta[i].move();
+            if (wander == true) gutta[i].calculateWander(species);
+            gutta[i].calculateAlignment(species);
+            gutta[i].calculateCohesion(species);
+            gutta[i].calculateSeparation(species);
+            gutta[i].calculateFleeing();
+            gutta[i].calculateFeeding();
+            gutta[i].calculateTemperature(species);
+            gutta[i].move(species, i); 
+        }
+        species = "mara"
+        for (let i = 0; i < mara.length; i++) {
+            if (wander == true) mara[i].calculateWander(species);
+            mara[i].calculateAlignment(species);
+            mara[i].calculateCohesion(species);
+            mara[i].calculateSeparation(species);
+            mara[i].calculateHunting();
+            mara[i].calculateTemperature(species);
+            mara[i].move(species);
         }
     }
 

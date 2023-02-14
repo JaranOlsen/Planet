@@ -277,6 +277,28 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
     }
 }
 
+export function instantiateNugget(index, lat, lng, color, size, slides, context) {
+    let material = pinMaterials[color]
+
+    const nugget = new THREE.Mesh(
+        new THREE.SphereGeometry(size * 5, 20, 20),
+        material,
+    )
+    nugget.name = "nugget " + index
+
+    let position = convertLatLngtoCartesian(lat, lng, 5 + 0.01);
+    nugget.position.set(position.x, position.y, position.z);
+
+    let adjusted_lng = lng + 360
+    if (adjusted_lng >= 360) adjusted_lng -= 360
+    let pos = new THREE.Vector2(lat, adjusted_lng)
+
+    context.add(nugget);
+    pinPositions.push(nugget);
+
+    return {nugget, slides, pos};
+}
+
 export function hoverPins(intersects) {
     //unhovered
     if (intersects.length == 0) {
@@ -295,11 +317,16 @@ export function hoverPins(intersects) {
 
     //hovered
     for (let i = 0; i < intersects.length; i++) {
-        hoveredPins.push(intersects[i])
-        if (intersects[i].object.material.wireframe == false) {
-            intersects[i].object.material = pinMaterials[1]
-        } else intersects[i].object.material = pinWireframeMaterials[1]
-        
-        if (intersects[i].object.scale.x == 1) intersects[i].object.scale.multiplyScalar(1.2)
+        const nameString = String(intersects[i].object.name)   
+
+        if (nameString.includes("nugget") !== true) {
+            if (hoveredPins[hoveredPins.length - 1] !== intersects[i]) hoveredPins.push(intersects[i])
+            console.log(hoveredPins[0].object.name)
+            if (intersects[i].object.material.wireframe == false) {
+                intersects[i].object.material = pinMaterials[1]
+            } else intersects[i].object.material = pinWireframeMaterials[1]
+            
+            if (intersects[i].object.scale.x == 1) intersects[i].object.scale.multiplyScalar(1.2)
+        }
     }
 }
