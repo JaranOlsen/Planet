@@ -13,6 +13,8 @@ import arrow from '../img/textures/arrow.webp'
 
 //  IMPORT MATERIALS
 import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWireframeMaterials } from './materials.js';
+import { planetNuggetData } from './data/planetNuggetData.js';
+import { tagPlanetData } from './data/planetTagData.js';
 
 const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
 //const tagFont = "fonts/SourceSans3_Regular.json"
@@ -193,7 +195,8 @@ export function createTags(dataSource, context, radius) {
             new THREE.SphereGeometry(size * 75, segments, segments),
             material,
         )
-        pin.name = index
+        pin.source = dataSource
+        pin.index = index
 
         let pos = convertLatLngtoCartesian(lat, lng, radius + 0.01);
         pin.position.set(pos.x, pos.y, pos.z);
@@ -284,7 +287,8 @@ export function instantiateNugget(index, lat, lng, color, size, slides, context)
         new THREE.SphereGeometry(size * 5, 20, 20),
         material,
     )
-    nugget.name = "nugget " + index
+    nugget.source = planetNuggetData
+    nugget.index = index
 
     let position = convertLatLngtoCartesian(lat, lng, 5 + 0.01);
     nugget.position.set(position.x, position.y, position.z);
@@ -300,28 +304,35 @@ export function instantiateNugget(index, lat, lng, color, size, slides, context)
 }
 
 export function hoverPins(intersects) {
-    //unhovered
+    //unhover
     if (intersects.length == 0) {
         for (let i = 0; i < hoveredPins.length; i++) {
-            if (pins[hoveredPins[i].object.name].slides !== undefined) {
-                pins[hoveredPins[i].object.name].pin.material = pinMaterials[pins[hoveredPins[i].object.name].color]; 
-            } else pins[hoveredPins[i].object.name].pin.material = pinWireframeMaterials[pins[hoveredPins[i].object.name].color];
-            
-            pins[hoveredPins[i].object.name].pin.scale.x = 1
-            pins[hoveredPins[i].object.name].pin.scale.y = 1
-            pins[hoveredPins[i].object.name].pin.scale.z = 1
+              
+            if (hoveredPins[i].source !== planetNuggetData) {
+                if (hoveredPins[i].material.wireframe == false) {
+                    hoveredPins[i].material = pinMaterials[1]
+                } else hoveredPins[i].material = pinWireframeMaterials[1]
+                
+                if (hoveredPins[i].scale.x == 1) hoveredPins[i].scale.multiplyScalar(1.2)
+            }
 
-            hoveredPins.length = 0
+            if (hoveredPins[i].source[hoveredPins[i].index].slides !== undefined) {
+                hoveredPins[i].material = pinMaterials[hoveredPins[i].source[hoveredPins[i].index].color]; 
+            } else hoveredPins[i].material = pinWireframeMaterials[hoveredPins[i].source[hoveredPins[i].index].color];
+            
+            hoveredPins[i].scale.x = 1
+            hoveredPins[i].scale.y = 1
+            hoveredPins[i].scale.z = 1
+
+            hoveredPins.length = 0  
         }
     }
 
-    //hovered
-    for (let i = 0; i < intersects.length; i++) {
-        const nameString = String(intersects[i].object.name)   
+    //hover
+    for (let i = 0; i < intersects.length; i++) {    
+        if (hoveredPins.includes(intersects[0].object) == false) hoveredPins.push(intersects[0].object)
 
-        if (nameString.includes("nugget") !== true) {
-            if (hoveredPins[hoveredPins.length - 1] !== intersects[i]) hoveredPins.push(intersects[i])
-            console.log(hoveredPins[0].object.name)
+        if (intersects[i].object.source !== planetNuggetData) {
             if (intersects[i].object.material.wireframe == false) {
                 intersects[i].object.material = pinMaterials[1]
             } else intersects[i].object.material = pinWireframeMaterials[1]

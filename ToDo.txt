@@ -7,7 +7,7 @@ INITIATIVES
 
     suggest fagdag to aksel fagdaggruppa - how do we find that transcendental part of me?
      - exercises: stirreøvelse, speaking straight from the heart
-     - challenge: some have found it, some have not, that's just the nature of this (compare to the insight puzzle) - it took me 18 years to find it reliably (but it need not take that long - and everybody has it). when we find it, it's real, but different for all of us (compare with håvard)
+     - challenge: some have found it, some have not, that's just the nature of this (compare to the insight puzzle), challenging to measure or graduate objectively - it took me 18 years to find it reliably (but it need not take that long - and everybody has it). qualities you have that was lacking in me. qualities i had that was instrumental in me getting there. if you try to get there - you won't, but if you don't try - you won't get there either... when we find it, it's real, but manifests differently through us (compare with håvard), it makes us blossom
      - what am i? what am I not? what is real? what is real? how can something about me be real in the strong sense? (ontological perspectives)
      - rogers: altered state of consciousness, that transcendental part of me
      - maslow: self-transcendence. ajahn chah - die before you die. (sounds dark) vigdis garbarek - den som har et ansikt å tape har en maske å miste. det er masken vår som ajahn chah oppfordrer oss til å la dø. det vi virkelig er kan ikke dø - hvis det kunne dødd så hadde det ikke virkelig vært oss.
@@ -24,6 +24,7 @@ CONTENT
         v fix nuggetmaterial - displacement/normal/roughness - might need to increase segments
         v move instantiateNugget call
         - remove testBird
+        v fix image path - poem not loading on ghpages
 
      Carl rogers - transcendental part of me on way of the gut - insight meditation: important questions - deep states = focusing+ (compare to REALLY going into feelings and the significance of that / watching a tiktok about a topic vs. delving deep into it, running 1km once a month vs. 10km every day)
 
@@ -75,9 +76,7 @@ MAKE USABLE
 SHORT-TERM DEVELOPMENT
     Debug black screen - console-log camera position
 
-    fix unhover pins for spiral
-    
-    add names to pins and nuggets and trigger slides from that?
+    rewrite entire click code, pinpositions, pins, tags. use source&index instead of all that jazzz...
 
     add stuff from notes in here?
 

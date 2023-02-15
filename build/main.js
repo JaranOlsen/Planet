@@ -1831,9 +1831,7 @@ function onDocumentKeyDown(event) {
                 context.context[selectedNode - indexModifier].lat = posLatLng.lat.toFixed(1)
                 context.context[selectedNode - indexModifier].lng = posLatLng.lng.toFixed(1)
         }
-    }
-
-        
+    }     
 };
 
 //EVENTS MOUSE
@@ -1848,7 +1846,6 @@ function onClick(event) {
     if (intersects.length > 0) {
         selectedPin = intersects[0].object;
         selectedNode = pinPositions.findIndex((object) => object==intersects[0].object)
-        console.log(tags.length, selectedNode)
         if (tags.length > selectedNode){
             selectedBox = tags[selectedNode].box;
             selectedTag = tags[selectedNode].tag;
