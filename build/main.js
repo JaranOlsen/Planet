@@ -1985,16 +1985,16 @@ function render() {
     pivot4.rotation.y += -0.0001;
     if (jaraniusInitialized == true) clouds.rotation.y += 0.00001;
 
-    /* if (camera.position.z > 15 && start == true) {
-        camera.position.z -= 0.0213 * Math.pow(camera.position.z - 10, 1.35) / introTuneLength
+    if (camera.position.z > 15 && start == true) {
+        camera.position.z -= 0.0213 * Math.pow(camera.position.z - 10, 1.35) // / introTuneLength
     }
     if (camera.position.z < -15 && start == true) {
-        camera.position.z += 0.213 * Math.pow(Math.abs(camera.position.z) - 10, 1.35) / introTuneLength
+        camera.position.z += 0.213 * Math.pow(Math.abs(camera.position.z) - 10, 1.35) // / introTuneLength
     }
     if (start == true) {
-        camera.position.x += 0.4 / introTuneLength
-        camera.position.y += 0.1 / introTuneLength
-    } */
+        camera.position.x += 0.4 // / introTuneLength
+        camera.position.y += 0.1 // / introTuneLength
+    }
     console.log("x: ", camera.position.x, "y: ", camera.position.y, "z: ", camera.position.z)
     if (camera.position.z > -15 && camera.position.z < 15) start = false
   
