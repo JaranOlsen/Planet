@@ -519,7 +519,6 @@ function initializeIntro() {
 let activeCarousel
 
 const buttons = document.querySelectorAll("[data-carousel-button]")
-
 buttons.forEach(button => {
     button.addEventListener("click", () => {
         const carousel = document.querySelector('.carousel')
@@ -824,9 +823,13 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     atmosphere.position.set(0, 0, 0)
     atmosphere.scale.set(1.2, 1.2, 1.2)
     jaranius.add(atmosphere);
+    
+    //create jaranius light
+    const jaraniusLight = new THREE.PointLight(0xffffff, 0.01);
+    jaraniusLight.position.set(0, 0, 0);
+    jaranius.add(jaraniusLight);
 
-
-    //create pictureBoxes
+    //create pictures
     jaranius.add(planetContent)
 
     for (let i = 0; i < imgPlanetData.length; i++) {
@@ -1059,7 +1062,6 @@ function createSpiral() {
     //tier2ring
     const dashAlphaTexture = textureLoader.load(dash)
         dashAlphaTexture.repeat.set(0, 100)
-        //dashAlphaTexture.wrapS = THREE.RepeatWrapping;
         dashAlphaTexture.wrapT = THREE.RepeatWrapping;
         dashAlphaTexture.rotation = Math.PI / 2
     const dashTexture = textureLoader.load(tier)
@@ -1092,13 +1094,7 @@ let gutta
 let mara
 let species
 
-/* let nuggets = []
-for (let i = 0; i < planetNuggetData.length; i++) { 
-    let nugget = instantiateNugget(i, planetNuggetData[i].lat, planetNuggetData[i].lng - 180, planetNuggetData[i].color, planetNuggetData[i].size / 100000, planetNuggetData[i].size, planetNuggetData[i].slides, scene);
-    nuggets.push(nugget)
-} */
-
-export function createGutta(numberOfGutta, numberOfMara) {
+export function createGutta(numberOfGutta, numberOfMara, version) {
     guttaInitialized = true
     const guttaFlyAltitude = 0.01
 
@@ -1151,8 +1147,8 @@ export function createGutta(numberOfGutta, numberOfMara) {
                 this.hunt.multiplyScalar(parameters.mara_hunt)
             }
             //this.avoidance.multiplyScalar(parameters.avoidance)
-            /* if (species == "gutt" && ID == 0) {
 
+            /* if (species == "gutt" && ID == 0) {
                 console.log("lat: ", this.pos.x, "lng: ", this.pos.y)
                 console.log("alignment length: ", this.alignment.length())
                 console.log("cohesion length: ", this.cohesion.length())
@@ -1515,32 +1511,33 @@ export function createGutta(numberOfGutta, numberOfMara) {
     }
 
     const parameterFolder = gui.addFolder('Gutta parameters')
-    parameterFolder.add(parameters, 'gutt_alignment', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'gutt_alignment_perception_distance', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'gutt_cohesion', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'gutt_cohesion_perception_distance', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'gutt_separation', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'gutt_separation_perception_distance', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'gutt_flee', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'gutt_flee_perception_distance', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'gutt_feed', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'gutt_feed_perception_distance', 0, 1, 0.001)
-    parameterFolder.add(parameters, 'gutt_max_force', 0, 0.001, 0.00001)
-    parameterFolder.add(parameters, 'gutt_max_speed', 0, 0.1, 0.001)
+        parameterFolder.add(parameters, 'gutt_alignment', 0, 1, 0.001)
+        parameterFolder.add(parameters, 'gutt_alignment_perception_distance', 0, 1, 0.001)
+        parameterFolder.add(parameters, 'gutt_cohesion', 0, 1, 0.001)
+        parameterFolder.add(parameters, 'gutt_cohesion_perception_distance', 0, 1, 0.001)
+        parameterFolder.add(parameters, 'gutt_separation', 0, 1, 0.001)
+        parameterFolder.add(parameters, 'gutt_separation_perception_distance', 0, 1, 0.001)
+        parameterFolder.add(parameters, 'gutt_flee', 0, 1, 0.001)
+        parameterFolder.add(parameters, 'gutt_flee_perception_distance', 0, 1, 0.001)
+        parameterFolder.add(parameters, 'gutt_feed', 0, 1, 0.001)
+        parameterFolder.add(parameters, 'gutt_feed_perception_distance', 0, 1, 0.001)
+        parameterFolder.add(parameters, 'gutt_max_force', 0, 0.001, 0.00001)
+        parameterFolder.add(parameters, 'gutt_max_speed', 0, 0.1, 0.001)
     parameterFolder.close()
+
     const parameterFolder2 = gui.addFolder('Mara parameters')
-    parameterFolder2.add(parameters, 'mara_alignment', 0, 1, 0.001)
-    parameterFolder2.add(parameters, 'mara_alignment_perception_distance', 0, 1, 0.001)
-    parameterFolder2.add(parameters, 'mara_cohesion', 0, 1, 0.001)
-    parameterFolder2.add(parameters, 'mara_cohesion_perception_distance', 0, 1, 0.001)
-    parameterFolder2.add(parameters, 'mara_separation', 0, 1, 0.001)
-    parameterFolder2.add(parameters, 'mara_separation_perception_distance', 0, 1, 0.001)
-    parameterFolder2.add(parameters, 'mara_hunt', 0, 1, 0.001)
-    parameterFolder2.add(parameters, 'mara_hunt_perception_distance', 0, 1, 0.001)
-    parameterFolder2.add(parameters, 'mara_max_force', 0, 0.01, 0.0001)
-    parameterFolder2.add(parameters, 'mara_max_speed', 0, 0.1, 0.001)
+        parameterFolder2.add(parameters, 'mara_alignment', 0, 1, 0.001)
+        parameterFolder2.add(parameters, 'mara_alignment_perception_distance', 0, 1, 0.001)
+        parameterFolder2.add(parameters, 'mara_cohesion', 0, 1, 0.001)
+        parameterFolder2.add(parameters, 'mara_cohesion_perception_distance', 0, 1, 0.001)
+        parameterFolder2.add(parameters, 'mara_separation', 0, 1, 0.001)
+        parameterFolder2.add(parameters, 'mara_separation_perception_distance', 0, 1, 0.001)
+        parameterFolder2.add(parameters, 'mara_hunt', 0, 1, 0.001)
+        parameterFolder2.add(parameters, 'mara_hunt_perception_distance', 0, 1, 0.001)
+        parameterFolder2.add(parameters, 'mara_max_force', 0, 0.01, 0.0001)
+        parameterFolder2.add(parameters, 'mara_max_speed', 0, 0.1, 0.001)
     parameterFolder2.close()
-    //gui.hide()
+    if (version !== 0) gui.hide()
 }
 
 //CREATE LIGHTS
@@ -1551,13 +1548,6 @@ const spotlight = new THREE.SpotLight(0xefebd8, 0);
 spotlight.penumbra = 0.8
 spotlight.angle = Math.PI / 4
 scene.add(spotlight);
-let spotlightIntensity = 0.5
-
-if (jaraniusInitialized == true) {
-    const jaraniusLight = new THREE.PointLight(0xffffff, 0.5);
-    jaraniusLight.position.set(0, 0, 0);
-    jaranius.add(jaraniusLight);
-}
 
 //CREATE CONTEXTS
 contexts.push([tagPlanetData, tagPlanetData.length, tagPlanetConnections, jaraniusConnections, 5.01])

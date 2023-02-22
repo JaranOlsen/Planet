@@ -12,10 +12,21 @@ export function pushContent(index) {
         let content
         if (contentData[index][i].includes("http")) {
             content = document.createElement("iframe");
+            content.src = contentData[index][i]
         } else if (contentData[index][i].includes("/img/")) {
             content = document.createElement("img");
+            content.src = contentData[index][i]
+        } else {
+            content = document.createElement("div")
+            content.className = "quote"
+            const p = document.createElement("p")
+            p.innerHTML = contentData[index][i]
+            let count = Math.round((3 - (p.innerHTML.match(/<br>/g) || []).length / 20) * 10) / 10
+            let size = String(count + "vh")
+            p.style.fontSize = size
+            content.appendChild(p)  
         }
-        content.src = contentData[index][i]
+
         slide.appendChild(content)
         slides.appendChild(slide)
     }

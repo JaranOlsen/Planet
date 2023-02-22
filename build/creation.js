@@ -26,7 +26,7 @@ export function creation(version, postLoadingManager) {
     if (version == 1){
         initializeLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture4k, normalTexture2k, roughnessTexture2k, cloudsTexture4k)
-        createGutta(300, 15)
+        createGutta(300, 15, version)
     } 
     if (version == 2){
         initializeLoadingManager(postLoadingManager)
@@ -35,6 +35,6 @@ export function creation(version, postLoadingManager) {
     if (version == 3){
         initializeLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture8k, normalTexture8k, roughnessTexture8k, cloudsTexture4k)
-        createGutta(500, 30)
+        createGutta(500, 30, version)
     } 
 }

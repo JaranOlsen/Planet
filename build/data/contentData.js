@@ -7,7 +7,7 @@ export const contentData = [ //slides ID = line number - 2
     ["https://www.youtube-nocookie.com/embed/L70T4pQv7P8"],
     ["https://www.youtube-nocookie.com/embed/3JywTh5O8ys"],
     ["https://www.youtube-nocookie.com/embed/1Evwgu369Jw?start=8", "https://www.youtube-nocookie.com/embed/l7AWnfFRc7g"],
-    ["./img/exercises/open1/Slide1.jpeg", "./img/exercises/open1/Slide2.jpeg", "./img/exercises/open1/Slide3.jpeg", "./img/exercises/open1/Slide4.jpeg", "./img/exercises/open1/Slide5.jpeg", "./img/exercises/open1/Slide6.jpeg"],
+    ["Close your eyes and relax.<br>Just listen.", "Opening awareness up to it all.<br>Letting everything be as it is.", "Being right here, right now.<br>No doing, just being.", "Allowing the mind to settle.<br>Welcoming stillness and calm.", "No need to strain or concentrate.<br>The mind is naturally awake and aware.", "Just being the knowing.<br>Being now, being here."],
     ["https://www.youtube-nocookie.com/embed/H-SEfK4uFa8"],
     ["https://www.youtube-nocookie.com/embed/H-SEfK4uFa8", "./img/exercises/experience1/Slide1.jpeg", "./img/exercises/experience1/Slide2.jpeg", "./img/exercises/experience1/Slide3.jpeg", "./img/exercises/experience1/Slide4.jpeg", "./img/exercises/experience1/Slide5.jpeg", "./img/exercises/experience1/Slide6.jpeg"],
     ["https://www.youtube-nocookie.com/embed/H-SEfK4uFa8", "./img/exercises/experience2/Slide1.jpeg", "./img/exercises/experience2/Slide2.jpeg", "./img/exercises/experience2/Slide3.jpeg", "./img/exercises/experience2/Slide4.jpeg", "./img/exercises/experience2/Slide5.jpeg", "./img/exercises/experience2/Slide6.jpeg", "./img/exercises/experience2/Slide7.jpeg", "./img/exercises/experience2/Slide8.jpeg", "./img/exercises/experience2/Slide9.jpeg", "./img/exercises/experience2/Slide10.jpeg", "./img/exercises/experience2/Slide11.jpeg", "./img/exercises/awareness1/Slide1.jpeg", "./img/exercises/awareness1/Slide2.jpeg", "./img/exercises/awareness1/Slide3.jpeg", "./img/exercises/awareness1/Slide4.jpeg", "./img/exercises/awareness1/Slide5.jpeg", "./img/exercises/awareness1/Slide6.jpeg", "./img/exercises/awareness1/Slide7.jpeg", "./img/exercises/awareness1/Slide8.jpeg", "./img/exercises/awareness1/Slide9.jpeg", "./img/exercises/awareness1/Slide10.jpeg", "./img/exercises/awareness1/Slide11.jpeg"],
@@ -87,7 +87,18 @@ export const contentData = [ //slides ID = line number - 2
     ["https://insig.ht/4pOmDkyM8wb"],
     ["https://insig.ht/nEom02rM8wb"],
     ["./img/poems/nightsky.webp"],
-];
+    ["https://www.youtube-nocookie.com/embed/_5iLt1p-W1U"],
+    ["https://www.youtube-nocookie.com/embed/0zfw76P_Cq4"],
+    ["https://www.youtube-nocookie.com/embed/z_Gy3mTztgg"],
+    ["https://www.youtube-nocookie.com/embed/w0d1TsOcbQs"],
+    ["https://www.youtube-nocookie.com/embed/BZFlE0eKTvw"],
+    ["https://www.youtube-nocookie.com/embed/XEHYK3TM2jc"],
+    ["<u>Dyad</u> <br><br>This time<br>it is all-or-nothing,<br>I thought,<br><br>as I once again<br>approached the lion’s cave.<br><br>Little did I know<br>it was never a matter of either-or,<br>because<br>in the deepest of depths -<br><br>where I found nothing<br><br>I found it all.<br><br>- Hege Fridtun"],
+    ["<u>Intertwined</u><br><br>Perhaps I had to<br>get tangled up,<br>before I detangled,<br><br>to be able to realize<br>that this entanglement<br>and disentanglement,<br><br>is tangled up with the mis-take<br>that the unraveling<br>involves<br>a tangler.<br><br>- Hege Fridtun"],
+    ["God, grant me the serenity to accept that which I cannot change,<br>courage to change what I can,<br>and wisdom to know the difference.<br><br>- Reinhold Niebuhr"],
+    ["<u>New beginnings</u><br><br>Nothing is wrong with you<br>you say,<br><br>with a trust so strong<br>it pierces through<br>even the thickest<br>divide of distrust.<br><br>Nothing is wrong with you,<br>you repeat,<br><br>and uproot all my old ideas<br>about everything I have to change<br>to deserve love.<br><br>Nothing is wrong with you,<br>your eyes shine,<br><br>and waves of tears and quivering tenderness<br>washes over me,<br>because I can feel that it is<br>true.<br><br>Nothing is wrong with me,<br>I say,<br><br>and feel with a shaky, unshakeable heart<br>the joy of being alive.<br><br>- Hege Fridtun"],
+    ["Test"],
+  ];
 // REMEMBER TO ADD PICTURES TO PUBLIC FOLDER
 
 
