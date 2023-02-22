@@ -28,8 +28,6 @@ CONTENT
 
      Carl rogers - transcendental part of me on way of the gut - insight meditation: important questions - deep states = focusing+ (compare to REALLY going into feelings and the significance of that / watching a tiktok about a topic vs. delving deep into it, running 1km once a month vs. 10km every day)
 
-    Leo Gura videos on spiral dynamics
-
     Restructure versions
         define parameters at top of file
         norwegian version
@@ -42,7 +40,6 @@ CONTENT
     wordclouds for difficult concepts
 
     add beth upton, rupert spira clips 
-        ken wilber clips?
 
     short, medium, long videos featuring key teachers/academics/subjects
         -iain mcGilchrist
@@ -70,17 +67,11 @@ MAKE USABLE
 
     re-enter VR / access to html elements in VR
 
-    fix hover stuck at spiral
-
 
 SHORT-TERM DEVELOPMENT
-    Debug black screen - console-log camera position
-
     rewrite entire click code, pinpositions, pins, tags. use source&index instead of all that jazzz...
 
     add stuff from notes in here?
-
-    click on textboxes rather than on nodes? (use nodes for selecting?)
 
     clickable images?
 
@@ -102,8 +93,7 @@ SHORT-TERM DEVELOPMENT
     make design improvements to slidecarousel
 
     convert to functions:
-        starfield generation
-        slidecarousel buttons
+    (slidecarousel buttons)
 
     improve VR controllers
 
