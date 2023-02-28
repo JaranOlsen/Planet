@@ -12,19 +12,20 @@ const materialLoadingManager = new LoadingManager();
 const textureLoader3 = new TextureLoader(materialLoadingManager)
 
 //Box materials
+//const boxMaterial0 = new MeshBasicMaterial({
 const boxMaterial0 = new MeshStandardMaterial({
         color: palette[0],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[0],
-        emissiveIntensity: 0.1,
+        emissiveIntensity: 0.5,
     })
     
 const boxMaterial10 = new MeshStandardMaterial({
         color: palette[10],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[10],
         emissiveIntensity: 0.1,
@@ -32,7 +33,7 @@ const boxMaterial10 = new MeshStandardMaterial({
 const boxMaterial11 = new MeshStandardMaterial({
         color: palette[11],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[11],
         emissiveIntensity: 0.1,
@@ -40,16 +41,24 @@ const boxMaterial11 = new MeshStandardMaterial({
 const boxMaterial12 = new MeshStandardMaterial({
         color: palette[12],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[12],
+        emissiveIntensity: 0.1,
+    })
+const boxMaterial13 = new MeshStandardMaterial({
+        color: palette[13],
+        transparent: true,
+        opacity: 0.65, 
+        side: DoubleSide,
+        emissive: palette[13],
         emissiveIntensity: 0.1,
     })
     
 const boxMaterial20 = new MeshStandardMaterial({
         color: palette[20],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[20],
         emissiveIntensity: 0.1,
@@ -57,7 +66,7 @@ const boxMaterial20 = new MeshStandardMaterial({
 const boxMaterial21 = new MeshStandardMaterial({
         color: palette[21],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[21],
         emissiveIntensity: 0.1,
@@ -65,7 +74,7 @@ const boxMaterial21 = new MeshStandardMaterial({
 const boxMaterial22 = new MeshStandardMaterial({
         color: palette[22],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[22],
         emissiveIntensity: 0.1,
@@ -74,7 +83,7 @@ const boxMaterial22 = new MeshStandardMaterial({
 const boxMaterial30 = new MeshStandardMaterial({
         color: palette[30],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[30],
         emissiveIntensity: 0.1,
@@ -82,7 +91,7 @@ const boxMaterial30 = new MeshStandardMaterial({
 const boxMaterial31 = new MeshStandardMaterial({
         color: palette[31],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[31],
         emissiveIntensity: 0.1,
@@ -90,7 +99,7 @@ const boxMaterial31 = new MeshStandardMaterial({
 const boxMaterial32 = new MeshStandardMaterial({
         color: palette[32],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[32],
         emissiveIntensity: 0.1,
@@ -98,7 +107,7 @@ const boxMaterial32 = new MeshStandardMaterial({
 const boxMaterial33 = new MeshStandardMaterial({
         color: palette[33],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[33],
         emissiveIntensity: 0.1,
@@ -107,7 +116,7 @@ const boxMaterial33 = new MeshStandardMaterial({
 const boxMaterial40 = new MeshStandardMaterial({
         color: palette[40],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[40],
         emissiveIntensity: 0.1,
@@ -115,7 +124,7 @@ const boxMaterial40 = new MeshStandardMaterial({
 const boxMaterial41 = new MeshStandardMaterial({
         color: palette[41],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[41],
         emissiveIntensity: 0.1,
@@ -123,7 +132,7 @@ const boxMaterial41 = new MeshStandardMaterial({
 const boxMaterial42 = new MeshStandardMaterial({
         color: palette[42],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[42],
         emissiveIntensity: 0.1,
@@ -131,7 +140,7 @@ const boxMaterial42 = new MeshStandardMaterial({
 const boxMaterial43 = new MeshStandardMaterial({
         color: palette[43],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[43],
         emissiveIntensity: 0.1,
@@ -139,7 +148,7 @@ const boxMaterial43 = new MeshStandardMaterial({
 const boxMaterial44 = new MeshStandardMaterial({
         color: palette[44],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[44],
         emissiveIntensity: 0.1,
@@ -147,7 +156,7 @@ const boxMaterial44 = new MeshStandardMaterial({
 const boxMaterial45 = new MeshStandardMaterial({
         color: palette[45],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[45],
         emissiveIntensity: 0.1,
@@ -155,7 +164,7 @@ const boxMaterial45 = new MeshStandardMaterial({
 const boxMaterial46 = new MeshStandardMaterial({
         color: palette[46],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[46],
         emissiveIntensity: 0.1,
@@ -163,7 +172,7 @@ const boxMaterial46 = new MeshStandardMaterial({
 const boxMaterial47 = new MeshStandardMaterial({
         color: palette[47],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[47],
         emissiveIntensity: 0.1,
@@ -171,7 +180,7 @@ const boxMaterial47 = new MeshStandardMaterial({
 const boxMaterial48 = new MeshStandardMaterial({
         color: palette[48],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[48],
         emissiveIntensity: 0.1,
@@ -179,14 +188,15 @@ const boxMaterial48 = new MeshStandardMaterial({
 const boxMaterial49 = new MeshStandardMaterial({
         color: palette[49],
         transparent: true,
-        opacity: 0.65, //0.5
+        opacity: 0.65, 
         side: DoubleSide,
         emissive: palette[49],
         emissiveIntensity: 0.1,
     })
 
 //Pin materials
-const pinMaterial0 = new MeshStandardMaterial({
+const pinMaterial0 = new MeshBasicMaterial({
+//const pinMaterial0 = new MeshStandardMaterial({
     color: palette[0],
     emissive: palette[0],
     emissiveIntensity: 0.2,
@@ -222,6 +232,11 @@ const pinMaterial11 = new MeshStandardMaterial({
 const pinMaterial12 = new MeshStandardMaterial({
     color: palette[12],
     emissive: palette[12],
+    emissiveIntensity: 0.2,
+})
+const pinMaterial13 = new MeshStandardMaterial({
+    color: palette[13],
+    emissive: palette[13],
     emissiveIntensity: 0.2,
 })
 
@@ -313,7 +328,8 @@ const pinMaterial49 = new MeshStandardMaterial({
     emissiveIntensity: 0.2,
 })
 //Pin Wireframe materials
-const pinWireframeMaterial0 = new MeshStandardMaterial({
+const pinWireframeMaterial0 = new MeshBasicMaterial({
+//const pinWireframeMaterial0 = new MeshStandardMaterial({
     color: palette[0],
     emissive: palette[0],
     emissiveIntensity: 0.2,
@@ -341,6 +357,12 @@ const pinWireframeMaterial11 = new MeshStandardMaterial({
 const pinWireframeMaterial12 = new MeshStandardMaterial({
     color: palette[12],
     emissive: palette[12],
+    emissiveIntensity: 0.2,
+    wireframe: true
+})
+const pinWireframeMaterial13 = new MeshStandardMaterial({
+    color: palette[13],
+    emissive: palette[13],
     emissiveIntensity: 0.2,
     wireframe: true
 })
@@ -469,21 +491,21 @@ export const connectionMaterial = new MeshStandardMaterial({
 
 export const boxMaterials = [
     boxMaterial0, , , , , , , , , , 
-    boxMaterial10, boxMaterial11, boxMaterial12, , , , , , , , 
+    boxMaterial10, boxMaterial11, boxMaterial12, boxMaterial13, , , , , , , 
     boxMaterial20, boxMaterial21, boxMaterial22, , , , , , , , 
     boxMaterial30, boxMaterial31, boxMaterial32, boxMaterial33, , , , , , , 
     boxMaterial40, boxMaterial41, boxMaterial42, boxMaterial43, boxMaterial44, boxMaterial45, boxMaterial46, boxMaterial47, boxMaterial48, boxMaterial49, 
 ]
 export const pinMaterials = [
     pinMaterial0, pinMaterial1, pinMaterial2, , , , , , , , 
-    pinMaterial10, pinMaterial11, pinMaterial12, , , , , , , , 
+    pinMaterial10, pinMaterial11, pinMaterial12, pinMaterial13, , , , , , , 
     pinMaterial20, pinMaterial21, pinMaterial22, , , , , , , , 
     pinMaterial30, pinMaterial31, pinMaterial32, pinMaterial33, , , , , , , 
     pinMaterial40, pinMaterial41, pinMaterial42, pinMaterial43, pinMaterial44, pinMaterial45, pinMaterial46, pinMaterial47, pinMaterial48, pinMaterial49, 
 ]
 export const pinWireframeMaterials = [
     pinWireframeMaterial0,pinWireframeMaterial1, , , , , , , , , 
-    pinWireframeMaterial10, pinWireframeMaterial11, pinWireframeMaterial12, , , , , , , ,
+    pinWireframeMaterial10, pinWireframeMaterial11, pinWireframeMaterial12, pinWireframeMaterial13, , , , , , ,
     pinWireframeMaterial20, pinWireframeMaterial21, pinWireframeMaterial22, , , , , , , ,
     pinWireframeMaterial30, pinWireframeMaterial31, pinWireframeMaterial32, pinWireframeMaterial33, , , , , , , 
     pinWireframeMaterial40, pinWireframeMaterial41, pinWireframeMaterial42, pinWireframeMaterial43, pinWireframeMaterial44, pinWireframeMaterial45, pinWireframeMaterial46, pinWireframeMaterial47, pinWireframeMaterial48, pinWireframeMaterial49, 

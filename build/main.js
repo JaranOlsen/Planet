@@ -63,7 +63,7 @@ const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profile
 const DEFAULT_PROFILE = 'generic-trigger';
 
 
-const canvas = document.querySelector('#c');
+const canvas = document.querySelector('#canvas');
 const renderer = new THREE.WebGLRenderer(
     {
         canvas,
@@ -116,6 +116,11 @@ let selectedNodes = []
 let nuggets = []
 let showContent = true;
 let fastMove = false;
+
+let kills = 0
+let totalHungerAtKill = 0
+let munch = 0
+let totalHungerAtMunch = 0
 
 let signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z)
 
@@ -518,7 +523,7 @@ function initializeIntro() {
 //SLIDE CAROUSEL
 let activeCarousel
 
-const buttons = document.querySelectorAll("[data-carousel-button]")
+/* const buttons = document.querySelectorAll("[data-carousel-button]")
 buttons.forEach(button => {
     button.addEventListener("click", () => {
         const carousel = document.querySelector('.carousel')
@@ -535,9 +540,42 @@ buttons.forEach(button => {
 
             slides.children[newIndex].dataset.active = true
             delete activeSlide.dataset.active
+
+            console.log(button)
         }
     })
-})
+}) */
+
+const buttons = document.querySelectorAll("[data-carousel-button]");
+
+function handleCarouselButton(button) {
+  const carousel = document.querySelector('.carousel');
+
+  if (button.dataset.carouselButton === "exit") {
+    carousel.style.display = "none";
+  } else {
+    const offset = button.dataset.carouselButton === "next" ? 1 : -1;
+    const slides = button.closest("[data-carousel]").querySelector("[data-slides]");
+    const activeSlide = slides.querySelector("[data-active]");
+    let newIndex = [...slides.children].indexOf(activeSlide) + offset;
+
+    if (newIndex < 0) {
+      newIndex = slides.children.length - 1;
+    } else if (newIndex >= slides.children.length) {
+      //newIndex = 0;
+      newIndex = slides.children.length;
+    }
+
+    slides.children[newIndex].dataset.active = true;
+    delete activeSlide.dataset.active;
+  }
+}
+
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    handleCarouselButton(button);
+  });
+});
 
 const menuButtons = document.querySelectorAll("[data-menu-button]")
 menuButtons.forEach(button => {
@@ -1126,10 +1164,14 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
             this.feed = new THREE.Vector2(0, 0)
             this.avoidance = new THREE.Vector2(0, 0)
 
+            this.hunger = 0
+
             jaranius.add(this.gutt)
         }
 
         move(species, ID) {
+            if (this.hunger < 1) this.hunger += 0.0001
+
             this.originalHeading = Math.atan2(this.velocity.x, this.velocity.y)
 
             this.acceleration.set(0, 0)
@@ -1221,7 +1263,7 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
         calculateWander(species) {
              this.wander.set(getRandomNum(-0.005, 0.005), getRandomNum(-0.005, 0.005))
             if (species == "gutt") {
-                this.wander.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
+                this.wander.clampLength(-parameters.gutt_max_force * (1 - this.hunger), parameters.gutt_max_force * (1 - this.hunger))
             }
             if (species == "mara") {
                 this.wander.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
@@ -1318,6 +1360,14 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
             this.hunt.set(0, 0)
             for (let i = 0; i < gutta.length; i++) {
                 if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.mara_hunt_perception_distance) {
+                    if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < 0.01) {
+                        if (this.hunger > 0.2) {
+                            kills += 1
+                            totalHungerAtKill += this.hunger
+                            //console.log("Mara Hunger: ", this.hunger)
+                            this.hunger = 0
+                        }
+                    }
                     this.hunt.add(gutta[i].pos)
                     counter += 1
                 }
@@ -1325,7 +1375,7 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
             if (counter > 0 ) {
                 this.hunt.set(this.hunt.x / counter, this.hunt.y / counter)
                 this.hunt.sub(this.pos)
-                this.hunt.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
+                this.hunt.clampLength(-parameters.mara_max_force * this.hunger, parameters.mara_max_force * this.hunger)
             }
         }
 
@@ -1351,6 +1401,14 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
             this.feed.set(0, 0)
             for (let i = 0; i < nuggets.length; i++) {
                 if (this.gutt.position.distanceTo(nuggets[i].nugget.position) < parameters.gutt_feed_perception_distance) { 
+                    if (this.gutt.position.distanceTo(nuggets[i].nugget.position) < 0.005) {
+                        if (this.hunger > 0.05) {
+                            munch += 1
+                            totalHungerAtMunch += this.hunger
+                            //console.log("Gutta Hunger: ", this.hunger)
+                            this.hunger -= 0.05
+                        }
+                    }
                     this.feed.add(nuggets[i].pos)
                     counter += 1
                 }
@@ -1358,7 +1416,7 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
             if (counter > 0 ) {
                 this.feed.set(this.feed.x / counter, this.feed.y / counter)
                 this.feed.sub(this.pos)
-                this.feed.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
+                this.feed.clampLength(-parameters.gutt_max_force * this.hunger, parameters.gutt_max_force * this.hunger)
             }
         }
 
@@ -1407,10 +1465,10 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
         let lng = getRandomInt(0, 359)
 
         let guttaMaterial
-        let testBird = new THREE.MeshBasicMaterial({
+        /* let testBird = new THREE.MeshBasicMaterial({
             color: 0xff0000, 
             side: DoubleSide,
-        })
+        }) */
         let redBird = new THREE.MeshLambertMaterial({
             color: 0xcc6655, 
             side: DoubleSide,
@@ -1424,9 +1482,10 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
             side: DoubleSide,
         })
 
-        if (i == 0) {
+        /* if (i == 0) {
             guttaMaterial = testBird
-        } else if (i <= numberOfGutta / 3) {
+        } else  */
+        if (i <= numberOfGutta / 3) {
             guttaMaterial = redBird
         } else if (i < numberOfGutta / 3 * 2) {
             guttaMaterial = greyBird
@@ -1556,6 +1615,14 @@ contexts.push([tagSpiralData, contexts[contexts.length - 1][1] + tagSpiralData.l
 
 contexts.push([planetNuggetData, contexts[contexts.length - 1][1] + planetNuggetData.length, , , 5.01])
 
+//CREATE GUTTA STATS
+const guttaStats = document.querySelector('#guttaStats');
+const statsDisplay = document.createElement('div');
+
+function refreshStats() {
+    statsDisplay.innerHTML = "Number of munches: " + munch + "<br>Average hunger: " + Math.round(totalHungerAtMunch/munch * 100) / 100 + "<br><br>Number of kills: " + kills + "<br>Average hunger: " + Math.round(totalHungerAtKill/kills * 100) / 100
+    guttaStats.appendChild(statsDisplay)
+}
 
 //CREATE FPS COUNTER
 const times = [];
@@ -1593,21 +1660,38 @@ document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
 
+    //Slide control
+    if (keyCode === 33 || keyCode === 37) { // left arrow
+        const prevButton = document.querySelector("[data-carousel-button='prev']");
+        handleCarouselButton(prevButton);
+    }
+    if (keyCode === 34 || keyCode === 39) { // right arrow
+        const nextButton = document.querySelector("[data-carousel-button='next']");
+        handleCarouselButton(nextButton);
+    }
+    if (keyCode == 116) { 
+        console.log("play")
+    }
+    if (keyCode == 190) { 
+        activeCarousel.style.display = "none"
+    }
+
+
     //Light control
     if (keyCode == 49) { 
         spotlight.intensity = 0
     }
     if (keyCode == 50) { 
-        spotlight.intensity = 0.5
+        spotlight.intensity = 0.1
     }
     if (keyCode == 51) { 
-        spotlight.intensity = 1
+        spotlight.intensity = 0.25
     }
     if (keyCode == 52) { 
-        spotlight.intensity = 1.5
+        spotlight.intensity = 0.5
     }
     if (keyCode == 53) { 
-        spotlight.intensity = 2
+        spotlight.intensity = 1
     }
 
     if (keyCode == 54) { 
@@ -1617,13 +1701,24 @@ function onDocumentKeyUp(event) {
         ambient.intensity = 0.02
     }
     if (keyCode == 56) { 
-        ambient.intensity = 0.1
+        ambient.intensity = 0.05
     }
     if (keyCode == 57) { 
-        ambient.intensity = 0.5
+        ambient.intensity = 0.1
     }
     if (keyCode == 48) { 
-        ambient.intensity = 1
+        ambient.intensity = 0.3
+    }
+
+    //Stats display
+    if (keyCode == 71) { //G
+        if (fpsContainer.style.display == "block") {
+            fpsContainer.style.display = "none"
+            guttaStats.style.display = "none"
+        } else {
+            fpsContainer.style.display = "block"
+            guttaStats.style.display = "block" 
+        }
     }
 
     //Node management
@@ -1984,7 +2079,7 @@ function render() {
         }
         if (start == true) {
             camera.position.x += 0.4 / introTuneLength
-            camera.position.y += 0.1 / introTuneLength
+            camera.position.y += 0.2 / introTuneLength
         }
     }
     //console.log("x: ", camera.position.x, "y: ", camera.position.y, "z: ", camera.position.z)
@@ -1998,6 +2093,8 @@ function render() {
         signRotationVector.normalize()
         sign.lookAt(signRotationVector.x, signRotationVector.y, signRotationVector.z ) 
     }
+
+    refreshStats();
 
     scanPins();
 

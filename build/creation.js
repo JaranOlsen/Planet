@@ -3,7 +3,7 @@ import { createJaranius, createGutta, initializeLoadingManager } from "./main.js
 
 //  IMPORT TEXTURES
     // ||Diffuse - 
-import diffuseTexture8k from "../img/textures/diffuse8k.webp"
+import diffuseTexture8k from "../img/textures/diffuse8kNew.webp"
 import diffuseTexture4k from "../img/textures/diffuse4k.webp"
 import diffuseTexture2k from "../img/textures/diffuse2k.webp"
 
@@ -26,7 +26,7 @@ export function creation(version, postLoadingManager) {
     if (version == 1){
         initializeLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture4k, normalTexture2k, roughnessTexture2k, cloudsTexture4k)
-        createGutta(300, 15, version)
+        createGutta(200, 10, version)
     } 
     if (version == 2){
         initializeLoadingManager(postLoadingManager)
@@ -35,6 +35,6 @@ export function creation(version, postLoadingManager) {
     if (version == 3){
         initializeLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture8k, normalTexture8k, roughnessTexture8k, cloudsTexture4k)
-        createGutta(500, 30, version)
+        createGutta(400, 25, version)
     } 
 }
