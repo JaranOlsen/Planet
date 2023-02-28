@@ -6,27 +6,27 @@ INITIATIVES
     find venue for weekend retreat in oslo and bergen
 
     suggest fagdag to aksel fagdaggruppa - how do we find that transcendental part of me?
-     - exercises: stirreøvelse, speaking straight from the heart
      - challenge: some have found it, some have not, that's just the nature of this (compare to the insight puzzle), challenging to measure or graduate objectively - it took me 18 years to find it reliably (but it need not take that long - and everybody has it). qualities you have that was lacking in me. qualities i had that was instrumental in me getting there. if you try to get there - you won't, but if you don't try - you won't get there either... when we find it, it's real, but manifests differently through us (compare with håvard), it makes us blossom
      - what am i? what am I not? what is real? what is real? how can something about me be real in the strong sense? (ontological perspectives)
      - rogers: altered state of consciousness, that transcendental part of me
      - maslow: self-transcendence. ajahn chah - die before you die. (sounds dark) vigdis garbarek - den som har et ansikt å tape har en maske å miste. det er masken vår som ajahn chah oppfordrer oss til å la dø. det vi virkelig er kan ikke dø - hvis det kunne dødd så hadde det ikke virkelig vært oss.
      - gendlin: that beyond words(?)
      - hvis du prøver å finne nirvana så finner du det ikke, men hvis du ikke prøver, få finner du det heller ikke..
+     - Carl rogers - transcendental part of me on way of the gut - insight meditation: important questions - deep states = focusing+ (compare to REALLY going into feelings and the significance of that / watching a tiktok about a topic vs. delving deep into it, running 1km once a month vs. 10km every day)
+
+“You can’t force your mind to be silent. That would be like trying to smooth ripples in water with a flatiron. Water becomes clear and calm only when left alone." 
 
 CONTENT
      Tiny golden nuggets - poems - gutta land and eat at them. black predator with pointy wings chase them.
         v tidy up nuggets
         v fix open slides to nuggets click
         - only looping through boids closeby would reduce load......
-        - add nuggets
+        v add nuggets
         v tidy up nuggetData
         v fix nuggetmaterial - displacement/normal/roughness - might need to increase segments
         v move instantiateNugget call
-        - remove testBird
+        v remove testBird
         v fix image path - poem not loading on ghpages
-
-     Carl rogers - transcendental part of me on way of the gut - insight meditation: important questions - deep states = focusing+ (compare to REALLY going into feelings and the significance of that / watching a tiktok about a topic vs. delving deep into it, running 1km once a month vs. 10km every day)
 
     Restructure versions
         define parameters at top of file
