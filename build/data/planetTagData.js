@@ -1,4 +1,4 @@
-export const tagPlanetData = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see palette.js), SIZE (10-99), SLIDE-CAROUSEL-ID
+export const planetTagData = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see palette.js), SIZE (10-99), SLIDE-CAROUSEL-ID
 {id: "8BD3708E-8E3D-44B8-9E92-1050FA7987E5", text: " the essence of \n love / meaning", lat: 14.5, lng: 90, color: 20, size: 40, slides: undefined},
 {id: "D4724AD1-EECD-4975-920C-CDAD71AA53C3", text: "the essence of \n wisdom / will", lat: 14.5, lng: 210, color: 30, size: 40, slides: undefined},
 {id: "0027E01B-C40A-49F0-9833-30244700C39E", text: "   the essence of \n salvation / peace", lat: 14.5, lng: 330, color: 10, size: 40, slides: undefined},
@@ -406,7 +406,6 @@ export const tagPlanetData = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see palet
 {id: "3B448BEF-259A-47A2-BCC7-9559D595BC29", text: "Authenticity", lat: 117.9, lng: 295, color: 11, size: 35, slides: undefined},
 {id: "D5338437-FF62-4249-BC13-2119C1A92031", text: "Self-disclosure", lat: 116.4, lng: 290.3, color: 10, size: 30, slides: undefined},
 {id: "1F3B0749-A55A-4AE8-905A-8103424BB959", text: "Foundations", lat: 127.7, lng: 319.3, color: 10, size: 40, slides: 110},
-
 ];
 
 //Remember to add connection

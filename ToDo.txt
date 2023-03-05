@@ -15,6 +15,10 @@ INITIATIVES
      - Carl rogers - transcendental part of me on way of the gut - insight meditation: important questions - deep states = focusing+ (compare to REALLY going into feelings and the significance of that / watching a tiktok about a topic vs. delving deep into it, running 1km once a month vs. 10km every day)
 
 CONTENT
+
+    - Sappaya
+    - sankhara vs asankhara
+
      Tiny golden nuggets - poems - gutta land and eat at them. black predator with pointy wings chase them.
         v tidy up nuggets
         v fix open slides to nuggets click
@@ -64,6 +68,12 @@ MAKE USABLE
         fix touch click controls - fixed? not quite..
 
     re-enter VR / access to html elements in VR
+
+    gutta and vr controller fix
+        - add gutta to something other that jaranius? to fix rotation bug. test by rotating jaranius
+        - rotate jaranius instead of rotating camera? or keep both? on on left controller, one on the right?
+        - lower resolution textures for vr mode?
+        - perhaps make a separate vr mode in version screen?
 
 
 SHORT-TERM DEVELOPMENT
@@ -125,6 +135,56 @@ LONG-TERM DEVELOPMENT
     make procedural geography
 
     add flyControls (see section under)
+
+SCENE STRUCTURE
+- scene
+    - center
+        - jaranius
+            - clouds
+            - atmosphericLight
+            - atmosphere
+            - jaraniusLight
+            - planetContent
+                - createImages(planetImageData)
+                - createTags(planetTagData)
+                - sign
+                    - model
+            - jaraniusConnections
+                - createConnections(planetConnections)
+                - createConnections(planetDashedConnections)
+                - createConnections(planetArrowedConnections)
+            - instantiateNugget(planetNuggetData)
+        - pivot1
+            - moon1
+        - pivot2
+            - moon2
+        - pivot3
+            - moon3
+        - pivot4
+            - sunRadiance
+            - sunLight
+                - lensflare
+    - this.gutt
+    - spiral 
+        - createImages(spiralImageData)
+        - createTags(spiralTagData)
+        - spiralSection
+        - spiralSection2
+        - jointSection
+        - tierRing
+        - spiralDynamicsConnections
+            - createConnections(spiralConnections)
+    - stars, starsR5, starsR10, starsR15, starsR20, starsB5, starsB10, starsB15, starsB20
+
+    - dolly
+        - camera
+            - dummyCam
+        - controller
+            - line.clone()
+        - grip
+            - modelFactory.createControllerModel( grip )
+    - ambient
+    - spotlight
 
 USEFUL
     three.js examples that have useful feature/codesnippets

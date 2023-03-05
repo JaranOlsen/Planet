@@ -1,4 +1,4 @@
-export const tagSpiralData = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see palette.js), SIZE (10-99), SLIDE-CAROUSEL-ID
+export const spiralTagData = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see palette.js), SIZE (10-99), SLIDE-CAROUSEL-ID
 {id: "90A7B1ED-9A29-408C-97E2-D4E28C77A655", text: "Archaic", lat: 163, lng: 180, color: 40, size: 100, slides: undefined},
 {id: "321D4DE6-A276-4A2E-A7C1-34D1AF16D913", text: "Magic", lat: 138, lng: 180, color: 41, size: 100, slides: 92},
 {id: "7D4EFB3B-AA80-4732-9EDF-471749F9156B", text: "Magic-Mythic", lat: 113, lng: 180, color: 42, size: 100, slides: 93},

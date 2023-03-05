@@ -12,7 +12,6 @@ const materialLoadingManager = new LoadingManager();
 const textureLoader3 = new TextureLoader(materialLoadingManager)
 
 //Box materials
-//const boxMaterial0 = new MeshBasicMaterial({
 const boxMaterial0 = new MeshStandardMaterial({
         color: palette[0],
         transparent: true,
@@ -195,11 +194,11 @@ const boxMaterial49 = new MeshStandardMaterial({
     })
 
 //Pin materials
-const pinMaterial0 = new MeshBasicMaterial({
-//const pinMaterial0 = new MeshStandardMaterial({
+//const pinMaterial0 = new MeshBasicMaterial({
+const pinMaterial0 = new MeshStandardMaterial({
     color: palette[0],
     emissive: palette[0],
-    emissiveIntensity: 0.2,
+    emissiveIntensity: 0.8,
 })
 const pinMaterial1 = new MeshStandardMaterial({
     color: palette[1],
@@ -328,11 +327,11 @@ const pinMaterial49 = new MeshStandardMaterial({
     emissiveIntensity: 0.2,
 })
 //Pin Wireframe materials
-const pinWireframeMaterial0 = new MeshBasicMaterial({
-//const pinWireframeMaterial0 = new MeshStandardMaterial({
+//const pinWireframeMaterial0 = new MeshBasicMaterial({
+const pinWireframeMaterial0 = new MeshStandardMaterial({
     color: palette[0],
     emissive: palette[0],
-    emissiveIntensity: 0.2,
+    emissiveIntensity: 0.8,
     wireframe: true
 })
 const pinWireframeMaterial1 = new MeshStandardMaterial({

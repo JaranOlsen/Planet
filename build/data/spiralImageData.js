@@ -8,7 +8,7 @@ import yellow from "../../img/features/yellow.webp"
 import turquoise from "../../img/features/turquoise.webp"
 import coral from "../../img/features/coral.webp"
 
-export const imgSpiralData = [ //ID, SRC, LATITUDE, LONGITUDE, SIZE, RADIUS, CONTEXT
+export const spiralImageData = [ //ID, SRC, LATITUDE, LONGITUDE, SIZE, RADIUS, CONTEXT
 {id: "B72D4692-F427-44A0-936B-32CE2AD4C732", src: beige, lat: 167, lng: 180, size: 500, radius: 7.1, context: "spiral"},
 {id: "09326608-1F6D-47A0-B03D-79B498D418C9", src: purple, lat: 142, lng: 180, size: 500, radius: 7.1, context: "spiral"},
 {id: "BDA40792-4AF9-44D1-8A77-5EA073DDE3AC", src: red, lat: 117, lng: 180, size: 500, radius: 7.1, context: "spiral"},

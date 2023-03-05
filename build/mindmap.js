@@ -14,7 +14,7 @@ import arrow from '../img/textures/arrow.webp'
 //  IMPORT MATERIALS
 import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWireframeMaterials } from './materials.js';
 import { planetNuggetData } from './data/planetNuggetData.js';
-import { tagPlanetData } from './data/planetTagData.js';
+import { planetTagData } from './data/planetTagData.js';
 
 const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
 //const tagFont = "fonts/SourceSans3_Regular.json"
@@ -269,8 +269,11 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         if (arrowed == true) {
             let img = createImages(arrow, lat, lng, 0.2, curveMinAltitude + 0.01, context)
             let up = new THREE.Vector3(v2.x - v1.x, v2.y - v1.y, v2.z - v1.z)
+            up.normalize()
             img.box.up = up
             img.box.lookAt(v2.x, v2.y, v2.z)
+            console.log(img.box)
+
             img.box.renderOrder = -9
         }
 

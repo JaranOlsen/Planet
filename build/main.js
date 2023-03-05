@@ -14,15 +14,15 @@ import { lerp, smoothstep } from 'three/src/math/MathUtils.js';
 //  IMPORT SCRIPTS
 import { createImages, createTags, pins, tags, pinPositions, createConnections, hoverPins, instantiateNugget } from './mindmap.js'
 import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
-import { tagPlanetData } from './data/planetTagData.js'
-import { tagPlanetConnections } from './data/planetConnectionData.js'
-import { tagPlanetDashedConnections } from './data/planetDashedConnectionData.js'
-import { tagPlanetArrowedConnections } from './data/planetArrowedConnectionData.js'
-import { imgPlanetData } from './data/planetImageData.js'
+import { planetTagData } from './data/planetTagData.js'
+import { planetConnections } from './data/planetConnectionData.js'
+import { planetDashedConnections } from './data/planetDashedConnectionData.js'
+import { planetArrowedConnections } from './data/planetArrowedConnectionData.js'
+import { planetImageData } from './data/planetImageData.js'
 import { planetNuggetData } from './data/planetNuggetData.js'
-import { tagSpiralData } from './data/spiralTagData.js'
-import { tagSpiralConnections } from './data/spiralConnectionData.js'
-import { imgSpiralData } from './data/spiralImageData.js'
+import { spiralTagData } from './data/spiralTagData.js'
+import { spiralConnections } from './data/spiralConnectionData.js'
+import { spiralImageData } from './data/spiralImageData.js'
 import { palette } from './data/palette.js'
 import { pushContent } from './content.js'
 import { initializeVersion } from './versions.js'
@@ -406,7 +406,7 @@ function handleController( controller ){
         if (intersects.length>0){
             selectedPin = intersects[0].object;
             const selectedPinIndex = pinPositions.findIndex((object) => object==intersects[0].object)
-            const selectedCarousel = tagPlanetData[selectedPinIndex][6]
+            const selectedCarousel = planetTagData[selectedPinIndex][6]
             if (selectedCarousel > 0) {
                 activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
                 activeCarousel.style.display = "block"
@@ -797,7 +797,7 @@ center.add(pivot4);
 // CREATE JARANIUS
 let jaranius
 let jaraniusConnections
-let spiralConnections
+let spiralDynamicsConnections
 let clouds
 let sign
 const planetContent = new THREE.Object3D
@@ -819,7 +819,8 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
             side: FrontSide,
         })
     )
-    scene.add(jaranius)
+    //scene.add(jaranius)
+    center.add(jaranius)
 
     //create cloud layer
     const cloudsMaterial = new THREE.MeshLambertMaterial({
@@ -870,21 +871,21 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     //create pictures
     jaranius.add(planetContent)
 
-    for (let i = 0; i < imgPlanetData.length; i++) {
-        createImages(imgPlanetData[i].src, imgPlanetData[i].lat, imgPlanetData[i].lng - 180, imgPlanetData[i].size / 500, imgPlanetData[i].radius, planetContent);
+    for (let i = 0; i < planetImageData.length; i++) {
+        createImages(planetImageData[i].src, planetImageData[i].lat, planetImageData[i].lng - 180, planetImageData[i].size / 500, planetImageData[i].radius, planetContent);
     }
-    for (let i = 0; i < imgSpiralData.length; i++) {
-        createImages(imgSpiralData[i].src, imgSpiralData[i].lat, imgSpiralData[i].lng - 180, imgSpiralData[i].size / 500, imgSpiralData[i].radius, spiral);
+    for (let i = 0; i < spiralImageData.length; i++) {
+        createImages(spiralImageData[i].src, spiralImageData[i].lat, spiralImageData[i].lng - 180, spiralImageData[i].size / 500, spiralImageData[i].radius, spiral);
     }
 
     //create tags
-    createTags(tagPlanetData, planetContent, 5)
+    createTags(planetTagData, planetContent, 5)
 
-    createTags(tagSpiralData, spiral, 7)
+    createTags(spiralTagData, spiral, 7)
 
     //create nuggets
     for (let i = 0; i < planetNuggetData.length; i++) { 
-        let nugget = instantiateNugget(i, planetNuggetData[i].lat, planetNuggetData[i].lng - 180, planetNuggetData[i].color, planetNuggetData[i].size / 100000, planetNuggetData[i].slides, scene);
+        let nugget = instantiateNugget(i, planetNuggetData[i].lat, planetNuggetData[i].lng - 180, planetNuggetData[i].color, planetNuggetData[i].size / 100000, planetNuggetData[i].slides, jaranius);
         nuggets.push(nugget)
     }
 
@@ -896,14 +897,14 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     jaraniusConnections = new THREE.Object3D()
     jaranius.add(jaraniusConnections)
     let context = jaraniusConnections
-    createConnections(tagPlanetData, tagPlanetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, false)
-    createConnections(tagPlanetData, tagPlanetDashedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, true, false)
-    createConnections(tagPlanetData, tagPlanetArrowedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, true)
+    createConnections(planetTagData, planetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, false)
+    createConnections(planetTagData, planetDashedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, true, false)
+    createConnections(planetTagData, planetArrowedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, true)
 
-    spiralConnections = new THREE.Object3D()
-    spiral.add(spiralConnections)
-    let context2 = spiralConnections
-    createConnections(tagSpiralData, tagSpiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false, false)
+    spiralDynamicsConnections = new THREE.Object3D()
+    spiral.add(spiralDynamicsConnections)
+    let context2 = spiralDynamicsConnections
+    createConnections(spiralTagData, spiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false, false)
 
     //create sign
     sign = new THREE.Object3D()
@@ -1166,7 +1167,8 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
 
             this.hunger = 0
 
-            jaranius.add(this.gutt)
+            //jaranius.add(this.gutt)
+            scene.add(this.gutt)
         }
 
         move(species, ID) {
@@ -1364,7 +1366,6 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
                         if (this.hunger > 0.2) {
                             kills += 1
                             totalHungerAtKill += this.hunger
-                            //console.log("Mara Hunger: ", this.hunger)
                             this.hunger = 0
                         }
                     }
@@ -1400,16 +1401,26 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
             let counter = 0
             this.feed.set(0, 0)
             for (let i = 0; i < nuggets.length; i++) {
-                if (this.gutt.position.distanceTo(nuggets[i].nugget.position) < parameters.gutt_feed_perception_distance) { 
-                    if (this.gutt.position.distanceTo(nuggets[i].nugget.position) < 0.005) {
+                let nuggetPosition = nuggets[i].nugget.position.clone()
+                nuggetPosition.applyMatrix4(jaranius.matrixWorld);
+
+                if (this.gutt.position.distanceTo(nuggetPosition) < parameters.gutt_feed_perception_distance) { 
+                    if (this.gutt.position.distanceTo(nuggetPosition) < 0.005) {
                         if (this.hunger > 0.05) {
                             munch += 1
                             totalHungerAtMunch += this.hunger
-                            //console.log("Gutta Hunger: ", this.hunger)
                             this.hunger -= 0.05
                         }
                     }
-                    this.feed.add(nuggets[i].pos)
+
+                    let nuggetLatLng = convertCartesiantoLatLng(nuggetPosition.x, nuggetPosition.y, nuggetPosition.z)
+
+                    let adjusted_lng = nuggetLatLng.lng + 360
+                    if (adjusted_lng >= 360) adjusted_lng -= 360
+                    let adjusted_nuggetLatLng = new THREE.Vector2 (nuggetLatLng.lat, adjusted_lng)
+            
+                    this.feed.add(adjusted_nuggetLatLng)
+
                     counter += 1
                 }
             }
@@ -1445,6 +1456,7 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
 
     gutta = [];
     const guttaScale = 0.0003;
+    //const guttaScale = 0.003;
 
     const guttaShape = new THREE.Shape();
     guttaShape.moveTo(guttaScale * 5,guttaScale * 5 );
@@ -1465,10 +1477,10 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
         let lng = getRandomInt(0, 359)
 
         let guttaMaterial
-        /* let testBird = new THREE.MeshBasicMaterial({
+        let testBird = new THREE.MeshBasicMaterial({
             color: 0xff0000, 
             side: DoubleSide,
-        }) */
+        })
         let redBird = new THREE.MeshLambertMaterial({
             color: 0xcc6655, 
             side: DoubleSide,
@@ -1482,10 +1494,9 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
             side: DoubleSide,
         })
 
-        /* if (i == 0) {
+        if (i == 0) {
             guttaMaterial = testBird
-        } else  */
-        if (i <= numberOfGutta / 3) {
+        } else if (i <= numberOfGutta / 3) {
             guttaMaterial = redBird
         } else if (i < numberOfGutta / 3 * 2) {
             guttaMaterial = greyBird
@@ -1596,7 +1607,7 @@ export function createGutta(numberOfGutta, numberOfMara, version) {
         parameterFolder2.add(parameters, 'mara_max_force', 0, 0.01, 0.0001)
         parameterFolder2.add(parameters, 'mara_max_speed', 0, 0.1, 0.001)
     parameterFolder2.close()
-    if (version !== 0) gui.hide()
+    if (version !== 0) gui.hide() //set to 3 to enable for developer mode
 }
 
 //CREATE LIGHTS
@@ -1609,9 +1620,9 @@ spotlight.angle = Math.PI / 4
 scene.add(spotlight);
 
 //CREATE CONTEXTS
-contexts.push([tagPlanetData, tagPlanetData.length, tagPlanetConnections, jaraniusConnections, 5.01])
+contexts.push([planetTagData, planetTagData.length, planetConnections, jaraniusConnections, 5.01])
 
-contexts.push([tagSpiralData, contexts[contexts.length - 1][1] + tagSpiralData.length, tagSpiralConnections, spiralConnections, 7.01])
+contexts.push([spiralTagData, contexts[contexts.length - 1][1] + spiralTagData.length, spiralConnections, spiralDynamicsConnections, 7.01])
 
 contexts.push([planetNuggetData, contexts[contexts.length - 1][1] + planetNuggetData.length, , , 5.01])
 
@@ -1991,8 +2002,8 @@ document.addEventListener("touchmove", touch2Mouse, true);
 document.addEventListener("touchend", touch2Mouse, true); */
 
 //TESTS
-if (tagPlanetData.length !== tagPlanetConnections.length) {
-    console.log("ERROR: tagPlanetData.length !== tagPlanetConnections.length")
+if (planetTagData.length !== planetConnections.length) {
+    console.log("ERROR: planetTagData.length !== planetConnections.length")
 }
 
 //ANIMATIONLOOP
@@ -2021,11 +2032,16 @@ function render() {
             const xInput = Number(buttonStates.xr_standard_thumbstick.xAxis)
             const yInput = Number(buttonStates.xr_standard_thumbstick.yAxis)
             if (xInput != 0 || yInput != 0 || buttonStates.a_button != 0 || buttonStates.b_button != 0) {
-                dollyLng += xInput * 2
+
+                //DOLLY ROTATE
+                /* dollyLng += xInput * 2
                 dollyLat += yInput
                 dollyRadius += ((0.1 * buttonStates.a_button) - (0.1 * buttonStates.b_button)) * (dollyRadius - 5)
                 const dollyPosit = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
-                dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z)
+                dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z) */
+
+                //JARANIUS ROTATE
+                jaranius.rotation.y += xInput
             }
         }
     }
@@ -2063,12 +2079,31 @@ function render() {
     spotlight.position.set(camPos.x, camPos.y, camPos.z);
     spotlight.rotation.set(camRot.x, camRot.y, camRot.z);
     
-    center.rotation.y += -0.00001;
-    pivot1.rotation.y += -0.0003;
-    pivot2.rotation.y += -0.00003;
-    pivot3.rotation.y += -0.000009;
-    pivot4.rotation.y += -0.0001;
-    if (jaraniusInitialized == true) clouds.rotation.y += 0.00001;
+    
+    if (jaraniusInitialized == true) {
+        center.rotation.y += -0.00001;
+        pivot1.rotation.y += -0.0003;
+        pivot2.rotation.y += -0.00003;
+        pivot3.rotation.y += -0.000009;
+        pivot4.rotation.y += -0.0001;
+        clouds.rotation.y += 0.00001;
+
+        //console.log("x: ", camera.position.x, "y: ", camera.position.y, "z: ", camera.position.z)
+        if (camera.position.z > -15 && camera.position.z < 15) start = false
+    
+        controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);  //  /1
+        controls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;//  /3;
+
+        if (sign) {
+            signRotationVector.set(camera.position.x, camera.position.y, camera.position.z)
+            signRotationVector.normalize()
+            sign.lookAt(signRotationVector.x, signRotationVector.y, signRotationVector.z ) 
+        }
+
+        refreshStats();
+
+        scanPins();
+    }
 
     if (introTuneLength) {
         if (camera.position.z > 15 && start == true) {
@@ -2082,21 +2117,6 @@ function render() {
             camera.position.y += 0.2 / introTuneLength
         }
     }
-    //console.log("x: ", camera.position.x, "y: ", camera.position.y, "z: ", camera.position.z)
-    if (camera.position.z > -15 && camera.position.z < 15) start = false
-  
-    controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);  //  /1
-    controls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;//  /3;
-
-    if (sign) {
-        signRotationVector.set(camera.position.x, camera.position.y, camera.position.z)
-        signRotationVector.normalize()
-        sign.lookAt(signRotationVector.x, signRotationVector.y, signRotationVector.z ) 
-    }
-
-    refreshStats();
-
-    scanPins();
 
     controls.update();
 

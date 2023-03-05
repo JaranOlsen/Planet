@@ -49,7 +49,7 @@ import roadToHere40 from "../../img/roadToHere/40.webp"
 import roadToHere41 from "../../img/roadToHere/41.webp"
 import roadToHere42 from "../../img/roadToHere/42.webp"
 
-export const imgPlanetData = [ //ID, SRC, LATITUDE, LONGITUDE, SIZE, RADIUS, CONTEXT
+export const planetImageData = [ //ID, SRC, LATITUDE, LONGITUDE, SIZE, RADIUS, CONTEXT
 {id: "CD8700A2-C44A-4F60-8929-49109F06A53D", src: idealism, lat: 22.6, lng: 184, size: 35, radius: 5.06, context: "jaranius"},
 {id: "5FA198AA-C7EF-489E-886D-62A95A32FD09", src: panpsychism, lat: 22.5, lng: 176, size: 35, radius: 5.06, context: "jaranius"},
 {id: "F50C2354-B76D-461E-93C1-EEAEED59607B", src: physicalism, lat: 22.5, lng: 167.8, size: 35, radius: 5.06, context: "jaranius"},
