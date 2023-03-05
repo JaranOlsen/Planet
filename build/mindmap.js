@@ -272,8 +272,6 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
             up.normalize()
             img.box.up = up
             img.box.lookAt(v2.x, v2.y, v2.z)
-            console.log(img.box)
-
             img.box.renderOrder = -9
         }
 

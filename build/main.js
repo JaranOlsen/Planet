@@ -425,7 +425,7 @@ function handleController( controller ){
     }
 }
 
-function updateGamepadState(){
+/* function updateGamepadState(){
     const session = renderer.xr.getSession();
     
     const inputSource = session.inputSources[0];
@@ -450,6 +450,35 @@ function updateGamepadState(){
             console.warn("An error occurred setting the ui");
         }
     }
+} */
+
+function updateGamepadState(){
+    const session = renderer.xr.getSession();
+    
+    session.inputSources.forEach((inputSource) => {
+        if (inputSource && inputSource.gamepad && gamepadIndices && buttonStates){
+            const gamepad = inputSource.gamepad;
+
+            try{
+                Object.entries( buttonStates ).forEach( ( [ key, value ] ) => {
+                    const buttonIndex = gamepadIndices[key].button;
+                    if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
+                        const xAxisIndex = gamepadIndices[key].xAxis;
+                        const yAxisIndex = gamepadIndices[key].yAxis;
+                        buttonStates[key].button = gamepad.buttons[buttonIndex].value; 
+                        buttonStates[key].xAxis = gamepad.axes[xAxisIndex].toFixed(2); 
+                        buttonStates[key].yAxis = gamepad.axes[yAxisIndex].toFixed(2); 
+                    }else{
+                        buttonStates[key] = gamepad.buttons[buttonIndex].value;
+                    }
+                });
+            }catch(e){
+                console.warn("An error occurred setting the ui");
+            }
+        }
+    });
+
+    XRinSession = session !== null;
 }
 
 function moveDolly(dt){
@@ -2018,7 +2047,7 @@ function render() {
         const dt = clock.getDelta();
 
         if (controllers ){
-            Object.values( controllers).forEach( ( value ) => {
+            Object.values( controllers ).forEach( ( value ) => {
                 handleController( value.controller );
             });
         } 
@@ -2041,7 +2070,7 @@ function render() {
                 dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z) */
 
                 //JARANIUS ROTATE
-                jaranius.rotation.y -= xInput / 15
+                jaranius.rotation.y += xInput / 15
                 dollyLat += yInput
                 dollyRadius += ((0.1 * buttonStates.a_button) - (0.1 * buttonStates.b_button)) * (dollyRadius - 5)
                 const dollyPosit = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
