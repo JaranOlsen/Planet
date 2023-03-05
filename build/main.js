@@ -2041,7 +2041,7 @@ function render() {
                 dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z) */
 
                 //JARANIUS ROTATE
-                jaranius.rotation.y += xInput / 10
+                jaranius.rotation.y -= xInput / 15
                 dollyLat += yInput
                 dollyRadius += ((0.1 * buttonStates.a_button) - (0.1 * buttonStates.b_button)) * (dollyRadius - 5)
                 const dollyPosit = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
