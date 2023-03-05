@@ -10,6 +10,7 @@ export function initializeVersion(callback, postLoadingManager) {
             version1.style.display = "none";
             version2.style.display = "none";
             version3.style.display = "none";
+            version4.style.display = "none";
             keys.style.display = "none";
             playButton.style.display = "block";
             skipButton.style.display = "block";
@@ -21,6 +22,7 @@ export function initializeVersion(callback, postLoadingManager) {
             version1.style.display = "none";
             version2.style.display = "none";
             version3.style.display = "none";
+            version4.style.display = "none";
             keys.style.display = "none";
             playButton.style.display = "block";
             skipButton.style.display = "block";
@@ -32,12 +34,26 @@ export function initializeVersion(callback, postLoadingManager) {
             version1.style.display = "none";
             version2.style.display = "none";
             version3.style.display = "none";
+            version4.style.display = "none";
             keys.style.display = "none";
             playButton.style.display = "block";
             skipButton.style.display = "block";
             enableVRbutton.style.display = "block";
             credits.style.display = "block";
             return callback(3, postLoadingManager)
+        })
+    const vrVersionButton = document.getElementById("version4")
+    vrVersionButton.addEventListener("click", () => {
+            version1.style.display = "none";
+            version2.style.display = "none";
+            version3.style.display = "none";
+            version4.style.display = "none";
+            keys.style.display = "none";
+            playButton.style.display = "block";
+            skipButton.style.display = "block";
+            enableVRbutton.style.display = "block";
+            credits.style.display = "block";
+            return callback(4, postLoadingManager)
         })
 
 }
