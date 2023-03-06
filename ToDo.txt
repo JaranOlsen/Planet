@@ -111,6 +111,8 @@ SHORT-TERM DEVELOPMENT
         fog?
         nebula
 
+VR DEVELOPMENT
+    - fix gutta rotation ()
     
 GEOGRAPHICAL FEATURES
     Labyrinth
