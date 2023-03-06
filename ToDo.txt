@@ -113,6 +113,11 @@ SHORT-TERM DEVELOPMENT
 
 VR DEVELOPMENT
     - fix gutta rotation ()
+        -Perhaps with something like this:
+                let nuggetPosition = nuggets[i].nugget.position.clone()
+                nuggetPosition.applyMatrix4(jaranius.matrixWorld);
+    - buttonstates for both inputSources
+    - DOM overlay
     
 GEOGRAPHICAL FEATURES
     Labyrinth

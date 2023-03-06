@@ -7,6 +7,7 @@ import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'
 import { VRButton } from 'three/addons/webxr/VRButton.js'
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js'
 import { Constants as MotionControllerConstants, fetchProfile, MotionController } from 'three/examples/jsm/libs/motion-controllers.module.js'
+import ThreeMeshUI from 'three-mesh-ui'
 import { GUI } from 'dat.gui'
 import { lerp, smoothstep } from 'three/src/math/MathUtils.js';
 
@@ -54,6 +55,7 @@ import redmoonTexture from "../img/textures/moonRed1k.webp"
 import icemoonTexture from "../img/textures/moonIce1k.webp"
 import dash from '../img/textures/dash.webp'
 import tier from '../img/textures/tier.webp'
+import testPicture from '../img/test.jpg'
 
 // IMPORT MODELS
 import signModel from "../models/sign.glb"
@@ -184,6 +186,7 @@ export async function checkForXRSupport() {
         webXRInitialized = true
         const button = VRButton.createButton( renderer )
         document.body.appendChild( button );
+        createUI();
         setupXR();
     }
     });
@@ -203,6 +206,162 @@ function declareGlobalVariables() {
     window.dollyRadius = 8;
     window.XRinSession = false;
 }
+
+/* function createUI() {
+    const ui = new CanvasUI(  );
+    ui.updateElement("body", "Hello World" );
+    ui.update();
+    ui.mesh.position.set( 0, 1.5, -6 );
+    scene.add( ui.mesh );
+} */
+
+let UIcontainer
+function createUI() {
+    /* UIcontainer = new ThreeMeshUI.Block({
+        width: 3,
+        height: 3,
+        padding: 0.2,
+        fontFamily: '../Public/Roboto-msdf.json',
+        fontTexture: '../Public/Roboto-msdf.png',
+        fontSize: 0.1,
+    });
+    
+    
+    const text = new ThreeMeshUI.Text({
+        content: "Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! "
+    });
+    UIcontainer.add( text );
+    
+    scene.add( UIcontainer );
+    UIcontainer.position.set(0, 0, 6) */
+
+    const container = new ThreeMeshUI.Block({
+        ref: "container",
+        padding: 0.025,
+        fontFamily: '../fonts/Roboto-msdf.json',
+        fontTexture:'../fonts/Roboto-msdf.png',
+        fontColor: new THREE.Color(0xffffff),
+        backgroundOpacity: 0,
+      });
+    
+      container.position.set(0, 1, 5.3);
+      container.rotation.x = -0.15;
+      scene.add(container);
+    
+      //
+    
+      const title = new ThreeMeshUI.Block({
+        height: 0.2,
+        width: 1.5,
+        margin: 0.025,
+        justifyContent: "center",
+        fontSize: 0.09,
+      });
+    
+      title.add(
+        new ThreeMeshUI.Text({
+          content: "spiny bush viper",
+        })
+      );
+    
+      container.add(title);
+    
+      //
+    
+      const leftSubBlock = new ThreeMeshUI.Block({
+        height: 0.95,
+        width: 1.0,
+        margin: 0.025,
+        padding: 0.025,
+        textAlign: "left",
+        justifyContent: "end",
+      });
+    
+      const caption = new ThreeMeshUI.Block({
+        height: 0.07,
+        width: 0.37,
+        textAlign: "center",
+        justifyContent: "center",
+      });
+    
+      caption.add(
+        new ThreeMeshUI.Text({
+          content: "Mind your fingers",
+          fontSize: 0.04,
+        })
+      );
+    
+      leftSubBlock.add(caption);
+    
+      //
+    
+      const rightSubBlock = new ThreeMeshUI.Block({
+        margin: 0.025,
+      });
+    
+      const subSubBlock1 = new ThreeMeshUI.Block({
+        height: 0.35,
+        width: 0.5,
+        margin: 0.025,
+        padding: 0.02,
+        fontSize: 0.04,
+        justifyContent: "center",
+        backgroundOpacity: 0,
+      }).add(
+        new ThreeMeshUI.Text({
+          content: "Known for its extremely keeled dorsal scales that give it a ",
+        }),
+    
+        new ThreeMeshUI.Text({
+          content: "bristly",
+          fontColor: new THREE.Color(0x92e66c),
+        }),
+    
+        new ThreeMeshUI.Text({
+          content: " appearance.",
+        })
+      );
+    
+      const subSubBlock2 = new ThreeMeshUI.Block({
+        height: 0.53,
+        width: 0.5,
+        margin: 0.01,
+        padding: 0.02,
+        fontSize: 0.025,
+        alignItems: "start",
+        textAlign: 'justify',
+        backgroundOpacity: 0,
+      }).add(
+        new ThreeMeshUI.Text({
+          content:
+            "The males of this species grow to maximum total length of 73 cm (29 in): body 58 cm (23 in), tail 15 cm (5.9 in). Females grow to a maximum total length of 58 cm (23 in). The males are surprisingly long and slender compared to the females.\nThe head has a short snout, more so in males than in females.\nThe eyes are large and surrounded by 9–16 circumorbital scales. The orbits (eyes) are separated by 7–9 scales.",
+        })
+      );
+    
+      rightSubBlock.add(subSubBlock1, subSubBlock2);
+    
+      //
+    
+      const contentContainer = new ThreeMeshUI.Block({
+        contentDirection: "row",
+        padding: 0.02,
+        margin: 0.025,
+        backgroundOpacity: 0,
+      });
+    
+      contentContainer.add(leftSubBlock, rightSubBlock);
+      container.add(contentContainer);
+    
+      //
+    
+      new THREE.TextureLoader().load(testPicture, (texture) => {
+        leftSubBlock.set({
+          backgroundTexture: texture,
+        });
+      });
+    
+}
+   
 
 function setupXR() {
     renderer.xr.enabled = true;
@@ -2150,6 +2309,9 @@ function render() {
             camera.position.y += 0.2 / introTuneLength
         }
     }
+
+    // This is typically done in the render loop :  UI test
+    ThreeMeshUI.update();
 
     controls.update();
 

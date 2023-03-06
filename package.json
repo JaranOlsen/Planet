@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "drag-controls": "^1.0.4",
-    "three": "^0.147.0"
+    "three": "^0.147.0",
+    "three-mesh-ui": "^6.5.3"
   }
 }
