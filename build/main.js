@@ -2053,7 +2053,7 @@ function render() {
         } 
         if (elapsedTime===undefined) elapsedTime = 0;
         elapsedTime += dt;
-        if (elapsedTime > 0.03){  //reduce to make navigation even smoother?
+        if (elapsedTime > 0.1){  //reduce to make navigation even smoother?
             updateGamepadState();
             elapsedTime = 0;
         }
