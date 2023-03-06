@@ -452,7 +452,7 @@ function updateGamepadState(){
     }
 }
 
-f/* unction updateGamepadState(){
+/* function updateGamepadState(){
     const session = renderer.xr.getSession();
     
     session.inputSources.forEach((inputSource) => {
