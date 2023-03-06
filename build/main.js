@@ -425,7 +425,7 @@ function handleController( controller ){
     }
 }
 
-/* function updateGamepadState(){
+function updateGamepadState(){
     const session = renderer.xr.getSession();
     
     const inputSource = session.inputSources[0];
@@ -450,9 +450,9 @@ function handleController( controller ){
             console.warn("An error occurred setting the ui");
         }
     }
-} */
+}
 
-function updateGamepadState(){
+f/* unction updateGamepadState(){
     const session = renderer.xr.getSession();
     
     session.inputSources.forEach((inputSource) => {
@@ -479,7 +479,7 @@ function updateGamepadState(){
     });
 
     XRinSession = session !== null;
-}
+} */
 
 function moveDolly(dt){
     
