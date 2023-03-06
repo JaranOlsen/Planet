@@ -55,7 +55,7 @@ import redmoonTexture from "../img/textures/moonRed1k.webp"
 import icemoonTexture from "../img/textures/moonIce1k.webp"
 import dash from '../img/textures/dash.webp'
 import tier from '../img/textures/tier.webp'
-import testPicture from '../img/test.jpg'
+import testPicture from '../img/truth/Slide6.jpeg'
 
 // IMPORT MODELS
 import signModel from "../models/sign.glb"
@@ -238,21 +238,21 @@ function createUI() {
     const container = new ThreeMeshUI.Block({
         ref: "container",
         padding: 0.025,
-        fontFamily: '../fonts/Roboto-msdf.json',
-        fontTexture:'../fonts/Roboto-msdf.png',
+        fontFamily: './fonts/Roboto-msdf.json',
+        fontTexture:'./fonts/Roboto-msdf.png',
         fontColor: new THREE.Color(0xffffff),
         backgroundOpacity: 0,
       });
     
       container.position.set(0, 1, 5.3);
       container.rotation.x = -0.15;
-      scene.add(container);
+      jaranius.add(container);
     
       //
     
       const title = new ThreeMeshUI.Block({
         height: 0.2,
-        width: 1.5,
+        width: 2.25,
         margin: 0.025,
         justifyContent: "center",
         fontSize: 0.09,
@@ -260,7 +260,7 @@ function createUI() {
     
       title.add(
         new ThreeMeshUI.Text({
-          content: "spiny bush viper",
+          content: "TWO LEVELS OF TRUTH",
         })
       );
     
@@ -270,7 +270,7 @@ function createUI() {
     
       const leftSubBlock = new ThreeMeshUI.Block({
         height: 0.95,
-        width: 1.0,
+        width: 1.75,
         margin: 0.025,
         padding: 0.025,
         textAlign: "left",
@@ -279,15 +279,15 @@ function createUI() {
     
       const caption = new ThreeMeshUI.Block({
         height: 0.07,
-        width: 0.37,
+        width: 1.37,
         textAlign: "center",
         justifyContent: "center",
       });
     
       caption.add(
         new ThreeMeshUI.Text({
-          content: "Mind your fingers",
-          fontSize: 0.04,
+          content: "Must be transcended to realize Absolute Truth",
+          fontSize: 0.02,
         })
       );
     
@@ -309,16 +309,16 @@ function createUI() {
         backgroundOpacity: 0,
       }).add(
         new ThreeMeshUI.Text({
-          content: "Known for its extremely keeled dorsal scales that give it a ",
+          content: "Based on distinctions, concepts, language, symbols.",
         }),
     
         new ThreeMeshUI.Text({
-          content: "bristly",
+          content: " Sankhara",
           fontColor: new THREE.Color(0x92e66c),
         }),
     
         new ThreeMeshUI.Text({
-          content: " appearance.",
+          content: " = conditioned, constructed, fabricated, compounded.",
         })
       );
     
