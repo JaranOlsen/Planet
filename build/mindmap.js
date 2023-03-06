@@ -294,14 +294,14 @@ export function instantiateNugget(index, lat, lng, color, size, slides, context)
     let position = convertLatLngtoCartesian(lat, lng, 5 + 0.01);
     nugget.position.set(position.x, position.y, position.z);
 
-    let adjusted_lng = lng + 360
-    if (adjusted_lng >= 360) adjusted_lng -= 360
-    let pos = new THREE.Vector2(lat, adjusted_lng)
+/*     let adjusted_lng = lng + 360    // These three lines possibly never utilized
+    if (adjusted_lng >= 360) adjusted_lng -= 360   // These three lines possibly never utilized
+    let pos = new THREE.Vector2(lat, adjusted_lng)   // These three lines possibly never utilized */
 
     context.add(nugget);
     pinPositions.push(nugget);
 
-    return {nugget, slides, pos};
+    return {nugget, slides};  //, pos
 }
 
 export function hoverPins(intersects) {

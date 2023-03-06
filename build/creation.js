@@ -39,7 +39,7 @@ export function creation(version, postLoadingManager) {
     } 
     if (version == 4){
         initializeLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture2k, normalTexture1k, roughnessTexture1k, cloudsTexture1k)
+        createJaranius(diffuseTexture8k, normalTexture8k, roughnessTexture8k, cloudsTexture4k)
         //createGutta(200, 10, version)
     } 
 }
