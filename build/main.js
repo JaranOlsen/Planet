@@ -584,17 +584,8 @@ function handleController( controller ){
             const position = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
             UIcontainer.position.set(position.x, position.y, position.z)
 
-            // Calculate the direction vector from the container's position to the middleOfPlanet
-            const direction = new THREE.Vector3();
-            direction.subVectors(middleOfPlanet, UIcontainer.position).normalize();
-
-            // Calculate the rotation quaternion based on the direction vector
-            const up = new THREE.Vector3(0, 0, -1); // Define the up direction of your container
-            const quaternion = new THREE.Quaternion();
-            quaternion.setFromUnitVectors(up, direction);
-
-            // Apply the rotation to your container
-            UIcontainer.quaternion.copy(quaternion);
+            UIcontainer.lookAt(middleOfPlanet)
+            UIcontainer.rotateY(Math.PI)
             
             if (UIactive == false) {
                 jaranius.add(UI)
