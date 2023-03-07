@@ -516,11 +516,6 @@ function buildController( index, line, modelFactory ){
 function onSelectStart( ){
     console.log("select")
     this.userData.selectPressed = true;
-    //console.log(buttonStates.a_button, buttonStates.b_button, buttonStates.xr_standard_thumbstick.button, buttonStates.xr_standard_thumbstick.xAxis, buttonStates.xr_standard_thumbstick.yAxis)
-    /* console.log(buttonStates,
-    gamepadIndices,
-    info,
-    controllers) */
 }
 
 function onSelectEnd( ){
@@ -546,6 +541,7 @@ function onSqueezeEnd( ){
         this.userData.attachedObject = undefined;
     }
     console.log("squeezeend")
+    jaranius.remove(UI)
 }
 
 function onDisconnected(){
@@ -582,7 +578,7 @@ function handleController( controller ){
             console.log(activatedPin)
             const position = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
             UIcontainer.position.set(position.x, position.y, position.z)
-            UIcontainer.up = new THREE.Vector3(0, 1, -1)
+            UIcontainer.up = new THREE.Vector3(0, 1, 1)
             console.log(UIcontainer)
             UIcontainer.lookAt(middleOfPlanet)
 
