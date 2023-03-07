@@ -582,7 +582,7 @@ function handleController( controller ){
             console.log(activatedPin)
             const position = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
             UIcontainer.position.set(position.x, position.y, position.z)
-            UIcontainer.up = new THREE.Vector3(0, -1, 0)
+            UIcontainer.up = new THREE.Vector3(0, 1, -1)
             console.log(UIcontainer)
             UIcontainer.lookAt(middleOfPlanet)
 
