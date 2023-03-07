@@ -140,7 +140,7 @@ export function pushVRContent(index, UI, UIcontainer, contentContainer, jaranius
       }).add(
         new ThreeMeshUI.Text({
           content:
-            String(contentData[index])
+            String(contentData[index][0])
         })
       );
     
@@ -160,7 +160,7 @@ export function pushVRContent(index, UI, UIcontainer, contentContainer, jaranius
     
       //
     
-      new THREE.TextureLoader().load(String(contentData[index]), (texture) => {
+      new THREE.TextureLoader().load(String(contentData[index][0]), (texture) => {
         leftSubBlock.set({
           backgroundTexture: texture,
         });
