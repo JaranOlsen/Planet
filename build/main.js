@@ -186,7 +186,7 @@ export async function checkForXRSupport() {
         webXRInitialized = true
         const button = VRButton.createButton( renderer )
         document.body.appendChild( button );
-        createUI();
+        //createUI();
         setupXR();
     }
     });
@@ -218,7 +218,7 @@ function declareGlobalVariables() {
 const UI = new THREE.Object3D
 let UIcontainer
 let contentContainer
-let UIactive
+let UIactive = false
 function createUI() {
     /* UIcontainer = new ThreeMeshUI.Block({
         width: 3,
@@ -545,6 +545,7 @@ function onSqueezeEnd( ){
     console.log("squeezeend")
 
     if (UIactive == true) {
+        console.log(UI)
         jaranius.remove(UI)
         UIactive = false
     }
@@ -584,17 +585,9 @@ function handleController( controller ){
 
             if (activatedPin.source[activatedPin.index].slides !== undefined) {
                 const position = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
-                UIcontainer.position.set(position.x, position.y, position.z)
-
-                pushVRContent(activatedPin.source[activatedPin.index].slides, UI, UIcontainer, contentContainer, jaranius)
-                UIactive = true
-                //contentContainer.add(farRightBlock)
-
-                UIcontainer.lookAt(middleOfPlanet)
-                UIcontainer.rotateY(Math.PI)
                 
                 if (UIactive == false) {
-                    jaranius.add(UI)
+                    pushVRContent(activatedPin.source[activatedPin.index].slides, UI, UIcontainer, contentContainer, jaranius, position, middleOfPlanet)
                     UIactive = true
                 }
             }

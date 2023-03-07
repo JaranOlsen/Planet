@@ -37,7 +37,7 @@ export function pushContent(index) {
     const child = document.getElementById("ul_carousel");
     parent.replaceChild(slides, child);
 }
-export function pushVRContent(index, UI, UIcontainer, contentContainer, jaranius) {
+export function pushVRContent(index, UI, UIcontainer, contentContainer, jaranius, position, middleOfPlanet) {
     UIcontainer = new ThreeMeshUI.Block({
         ref: "UIcontainer",
         padding: 0.025,
@@ -46,14 +46,13 @@ export function pushVRContent(index, UI, UIcontainer, contentContainer, jaranius
         fontColor: new THREE.Color(0xffffff),
         backgroundOpacity: 0,
       });
-    
-      UIcontainer.position.set(0, 1, 5.3);
-      UIcontainer.rotation.x = -0.15;
       
-      UI.add(UIcontainer);
-      jaranius.add(UI)
+    UI.add(UIcontainer);
+    UIcontainer.position.set(position.x, position.y, position.z)
+    UIcontainer.lookAt(middleOfPlanet)
+    UIcontainer.rotateY(Math.PI)
+    jaranius.add(UI)
 
-      //UIactive = true
     
       //
     
@@ -166,8 +165,6 @@ export function pushVRContent(index, UI, UIcontainer, contentContainer, jaranius
           backgroundTexture: texture,
         });
       });
-    
-    return { UIcontainer }
 }
 
 /* export function pushVRContent(index) {
