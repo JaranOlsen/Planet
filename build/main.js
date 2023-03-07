@@ -580,16 +580,18 @@ function handleController( controller ){
 
         if (intersects.length>0){
             const activatedPin = intersects[0].object;
-            console.log(activatedPin)
-            const position = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
-            UIcontainer.position.set(position.x, position.y, position.z)
 
-            UIcontainer.lookAt(middleOfPlanet)
-            UIcontainer.rotateY(Math.PI)
-            
-            if (UIactive == false) {
-                jaranius.add(UI)
-                UIactive = true
+            if (activatedPin.source[activatedPin.index].slides !== undefined) {
+                const position = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
+                UIcontainer.position.set(position.x, position.y, position.z)
+
+                UIcontainer.lookAt(middleOfPlanet)
+                UIcontainer.rotateY(Math.PI)
+                
+                if (UIactive == false) {
+                    jaranius.add(UI)
+                    UIactive = true
+                }
             }
         }
     }
