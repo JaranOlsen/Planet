@@ -25,7 +25,7 @@ import { spiralTagData } from './data/spiralTagData.js'
 import { spiralConnections } from './data/spiralConnectionData.js'
 import { spiralImageData } from './data/spiralImageData.js'
 import { palette } from './data/palette.js'
-import { pushContent } from './content.js'
+import { pushContent, pushVRContent } from './content.js'
 import { initializeVersion } from './versions.js'
 import { creation } from './creation.js'
 
@@ -216,6 +216,7 @@ function declareGlobalVariables() {
 } */
 
 let UIcontainer
+let contentContainer
 let UIactive
 const UI = new THREE.Object3D
 function createUI() {
@@ -348,7 +349,7 @@ function createUI() {
     
       //
     
-      const contentContainer = new ThreeMeshUI.Block({
+      contentContainer = new ThreeMeshUI.Block({
         contentDirection: "row",
         padding: 0.02,
         margin: 0.025,
@@ -584,6 +585,9 @@ function handleController( controller ){
             if (activatedPin.source[activatedPin.index].slides !== undefined) {
                 const position = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
                 UIcontainer.position.set(position.x, position.y, position.z)
+
+                const farRightBlock = pushVRContent(activatedPin.source[activatedPin.index].slides)
+                contentContainer.add(farRightBlock)
 
                 UIcontainer.lookAt(middleOfPlanet)
                 UIcontainer.rotateY(Math.PI)

@@ -1,4 +1,5 @@
 import { contentData } from "./data/contentData";
+import ThreeMeshUI from 'three-mesh-ui'
 
 export function pushContent(index) {
     const slides = document.createElement("ul")
@@ -34,4 +35,23 @@ export function pushContent(index) {
     const parent = document.getElementById("div_carousel");
     const child = document.getElementById("ul_carousel");
     parent.replaceChild(slides, child);
+}
+export function pushVRContent(index) {
+    const farRightBlock = new ThreeMeshUI.Block({
+        height: 0.53,
+        width: 0.5,
+        margin: 0.01,
+        padding: 0.02,
+        fontSize: 0.025,
+        alignItems: "start",
+        textAlign: 'justify',
+        backgroundOpacity: 0,
+      }).add(
+        new ThreeMeshUI.Text({
+          content:
+            contentData[index]
+        })
+      );
+    
+    return { farRightBlock }
 }
