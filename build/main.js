@@ -215,10 +215,10 @@ function declareGlobalVariables() {
     scene.add( ui.mesh );
 } */
 
+const UI = new THREE.Object3D
 let UIcontainer
 let contentContainer
 let UIactive
-const UI = new THREE.Object3D
 function createUI() {
     /* UIcontainer = new ThreeMeshUI.Block({
         width: 3,
@@ -586,8 +586,9 @@ function handleController( controller ){
                 const position = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
                 UIcontainer.position.set(position.x, position.y, position.z)
 
-                const farRightBlock = pushVRContent(activatedPin.source[activatedPin.index].slides)
-                contentContainer.add(farRightBlock)
+                pushVRContent(activatedPin.source[activatedPin.index].slides, UI, UIcontainer, contentContainer, jaranius)
+                UIactive = true
+                //contentContainer.add(farRightBlock)
 
                 UIcontainer.lookAt(middleOfPlanet)
                 UIcontainer.rotateY(Math.PI)

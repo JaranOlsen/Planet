@@ -304,7 +304,7 @@ export const planetTagData = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see palet
 {id: "95BBCB02-420D-4FD9-A9BA-A404D72B41D3", text: "Nature of fundamental reality", lat: 21, lng: 176.3, color: 33, size: 25, slides: undefined},
 {id: "6A893E71-2F6B-4958-B917-5F145FA37CF5", text: "Matter", lat: 22, lng: 168.2, color: 33, size: 20, slides: undefined},
 {id: "3041389D-AD21-46F6-9721-2DD4E9FC1F65", text: "Consciousness", lat: 22, lng: 184, color: 33, size: 20, slides: undefined},
-{id: "CC97CAEF-3828-466E-B55A-BA85783CE034", text: "Acceptance and agency", lat: 89.3, lng: 348.4, color: 12, size: 50, slides: undefined},
+{id: "CC97CAEF-3828-466E-B55A-BA85783CE034", text: "Acceptance and agency", lat: 89.3, lng: 348.4, color: 12, size: 50, slides: 111},
 {id: "0F8B3461-7B9D-4E1D-A392-A6DE782AE537", text: "Motivation split", lat: 82, lng: 295.6, color: 12, size: 40, slides: undefined},
 {id: "DEADD385-73FB-4EA3-AACC-13C6B453E9E6", text: "Transcendence needs", lat: 83, lng: 309.6, color: 10, size: 40, slides: 87},
 {id: "CDC69285-DE4B-40DE-BDFB-73C750FA8CB4", text: "Fulfilment needs", lat: 95, lng: 299.7, color: 10, size: 40, slides: undefined},
