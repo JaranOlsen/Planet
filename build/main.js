@@ -541,7 +541,11 @@ function onSqueezeEnd( ){
         this.userData.attachedObject = undefined;
     }
     console.log("squeezeend")
-    jaranius.remove(UI)
+
+    if (UIactive == true) {
+        jaranius.remove(UI)
+        UIactive = false
+    }
 }
 
 function onDisconnected(){
@@ -578,17 +582,14 @@ function handleController( controller ){
             console.log(activatedPin)
             const position = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
             UIcontainer.position.set(position.x, position.y, position.z)
-            UIcontainer.up = new THREE.Vector3(0, 1, 1)
+            //UIcontainer.up = new THREE.Vector3(0, 1, 1)
             console.log(UIcontainer)
-            UIcontainer.lookAt(middleOfPlanet)
-
-            /* if (UIactive == true) {
-                jaranius.remove(UI)
-                UIactive = false
-            } else {
+            UIcontainer.lookAt(position)
+            
+            if (UIactive == false) {
                 jaranius.add(UI)
                 UIactive = true
-            } */
+            }
         }
     }
 }
