@@ -5,37 +5,13 @@ INITIATIVES
 
     find venue for weekend retreat in oslo and bergen
 
-    suggest fagdag to aksel fagdaggruppa - how do we find that transcendental part of me?
-     - challenge: some have found it, some have not, that's just the nature of this (compare to the insight puzzle), challenging to measure or graduate objectively - it took me 18 years to find it reliably (but it need not take that long - and everybody has it). qualities you have that was lacking in me. qualities i had that was instrumental in me getting there. if you try to get there - you won't, but if you don't try - you won't get there either... when we find it, it's real, but manifests differently through us (compare with håvard), it makes us blossom
-     - what am i? what am I not? what is real? what is real? how can something about me be real in the strong sense? (ontological perspectives)
-     - rogers: altered state of consciousness, that transcendental part of me
-     - maslow: self-transcendence. ajahn chah - die before you die. (sounds dark) vigdis garbarek - den som har et ansikt å tape har en maske å miste. det er masken vår som ajahn chah oppfordrer oss til å la dø. det vi virkelig er kan ikke dø - hvis det kunne dødd så hadde det ikke virkelig vært oss.
-     - gendlin: that beyond words(?)
-     - hvis du prøver å finne nirvana så finner du det ikke, men hvis du ikke prøver, få finner du det heller ikke..
-     - Carl rogers - transcendental part of me on way of the gut - insight meditation: important questions - deep states = focusing+ (compare to REALLY going into feelings and the significance of that / watching a tiktok about a topic vs. delving deep into it, running 1km once a month vs. 10km every day)
-
 CONTENT
-
     - Sappaya
     - sankhara vs asankhara
+    - Anapana (etc) tips and tricks
 
-     Tiny golden nuggets - poems - gutta land and eat at them. black predator with pointy wings chase them.
-        v tidy up nuggets
-        v fix open slides to nuggets click
-        - only looping through boids closeby would reduce load......
-        v add nuggets
-        v tidy up nuggetData
-        v fix nuggetmaterial - displacement/normal/roughness - might need to increase segments
-        v move instantiateNugget call
-        v remove testBird
-        v fix image path - poem not loading on ghpages
-
-    Restructure versions
-        define parameters at top of file
-        norwegian version
-            use chatGPT to translate file, add norwegian in same file
-
-    Anapana (etc) tips and tricks
+    norwegian version
+        use chatGPT to translate file, add norwegian in same file
 
     convert exercises to one background image and html text (saves loading time)
 
@@ -57,6 +33,7 @@ CONTENT
         -carl rogers
         -abraham maslow
         -carl jung
+        -eugene gendlin
         
         -rupert spira
         -ajahn chah
@@ -67,16 +44,43 @@ MAKE USABLE
     debug for iphone
         fix touch click controls - fixed? not quite..
 
-    re-enter VR / access to html elements in VR
-
-    gutta and vr controller fix
-        - add gutta to something other that jaranius? to fix rotation bug. test by rotating jaranius
-        - rotate jaranius instead of rotating camera? or keep both? on on left controller, one on the right?
-        - lower resolution textures for vr mode?
-        - perhaps make a separate vr mode in version screen?
-
-
 SHORT-TERM DEVELOPMENT
+
+
+VR DEVELOPMENT
+    - three-mesh-ui
+        - add buttons to view all images on node
+        - add hyperlink capability
+    - buttonstates for both inputSources
+    - fix gutta rotation ()
+        -Perhaps with something like this:
+                let nuggetPosition = nuggets[i].nugget.position.clone()
+                nuggetPosition.applyMatrix4(jaranius.matrixWorld);
+    
+GEOGRAPHICAL FEATURES
+    Labyrinth
+    Cities
+    Rivers
+    Lakes
+    Riverdeltas
+    Floodplanes/lush terrain next to Rivers
+
+    Geographical names
+        Desert of the real
+        Sea of Empathy
+
+
+LONG-TERM DEVELOPMENT
+
+    restructure / rewrite code
+        context independent functions (pass context parameters)
+
+    post-processing? bloom?
+
+    make procedural geography
+
+    add flyControls (see section under)
+
     rewrite entire click code, pinpositions, pins, tags. use source&index instead of all that jazzz...
 
     add stuff from notes in here?
@@ -103,45 +107,11 @@ SHORT-TERM DEVELOPMENT
     convert to functions:
     (slidecarousel buttons)
 
-    improve VR controllers
-
     light up area around when hover pin (create or move spotlight?)
 
     make background more colorful
         fog?
         nebula
-
-VR DEVELOPMENT
-    - fix gutta rotation ()
-        -Perhaps with something like this:
-                let nuggetPosition = nuggets[i].nugget.position.clone()
-                nuggetPosition.applyMatrix4(jaranius.matrixWorld);
-    - buttonstates for both inputSources
-    - DOM overlay
-    
-GEOGRAPHICAL FEATURES
-    Labyrinth
-    Cities
-    Rivers
-    Lakes
-    Riverdeltas
-    Floodplanes/lush terrain next to Rivers
-
-    Geographical names
-        Desert of the real
-        Sea of Empathy
-
-
-LONG-TERM DEVELOPMENT
-
-    restructure / rewrite code
-        context independent functions (pass context parameters)
-
-    post-processing? bloom?
-
-    make procedural geography
-
-    add flyControls (see section under)
 
 SCENE STRUCTURE
 - scene

@@ -11,7 +11,6 @@ import ThreeMeshUI from 'three-mesh-ui'
 import { GUI } from 'dat.gui'
 import { lerp, smoothstep } from 'three/src/math/MathUtils.js';
 
-
 //  IMPORT SCRIPTS
 import { createImages, createTags, pins, tags, pinPositions, createConnections, hoverPins, instantiateNugget } from './mindmap.js'
 import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
@@ -60,10 +59,8 @@ import testPicture from '../img/truth/Slide6.jpeg'
 // IMPORT MODELS
 import signModel from "../models/sign.glb"
 
-
 const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
 const DEFAULT_PROFILE = 'generic-trigger';
-
 
 const canvas = document.querySelector('#canvas');
 const renderer = new THREE.WebGLRenderer(
@@ -72,7 +69,6 @@ const renderer = new THREE.WebGLRenderer(
         antialias: true,
     });
 renderer.setPixelRatio(window.devicePixelRatio)
-//renderer.outputEncoding = THREE.sRGBEncoding;
 
 function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
@@ -173,71 +169,11 @@ export function initializeLoadingManager(loadingManager) {
     };
 }
 
-
-//WEB XR
-enableVRbutton.addEventListener("click", () => {
-    checkForXRSupport()
-    enableVRbutton.style.display = "none"; 
-})
-
-export async function checkForXRSupport() {
-    navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
-    if (supported) {
-        webXRInitialized = true
-        const button = VRButton.createButton( renderer )
-        document.body.appendChild( button );
-        //createUI();
-        setupXR();
-    }
-    });
-}
-
-function declareGlobalVariables() {
-    window.dolly = new THREE.Object3D();
-    window.dummyCam = new THREE.Object3D();
-    window.workingMatrix = new THREE.Matrix4();
-    window.buttonStates = {};
-    window.gamepadIndices = "";
-    window.info = {};
-    window.controllers = {};
-    window.elapsedTime = 0;
-    window.dollyLat = 90;
-    window.dollyLng = 180;
-    window.dollyRadius = 8;
-    window.XRinSession = false;
-}
-
-/* function createUI() {
-    const ui = new CanvasUI(  );
-    ui.updateElement("body", "Hello World" );
-    ui.update();
-    ui.mesh.position.set( 0, 1.5, -6 );
-    scene.add( ui.mesh );
-} */
-
+//THREE-MESH-UI
 let UI = new THREE.Object3D
 let UIcontainer
-let contentContainer
 let UIactive = false
 function createUI() {
-    /* UIcontainer = new ThreeMeshUI.Block({
-        width: 3,
-        height: 3,
-        padding: 0.2,
-        fontFamily: '../Public/Roboto-msdf.json',
-        fontTexture: '../Public/Roboto-msdf.png',
-        fontSize: 0.1,
-    });
-    
-    
-    const text = new ThreeMeshUI.Text({
-        content: "Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! Some text to be displayed! "
-    });
-    UIcontainer.add( text );
-    
-    scene.add( UIcontainer );
-    UIcontainer.position.set(0, 0, 6) */
-
     UIcontainer = new ThreeMeshUI.Block({
         ref: "UIcontainer",
         padding: 0.025,
@@ -369,16 +305,37 @@ function createUI() {
     
 }
 
+//WEB XR
+enableVRbutton.addEventListener("click", () => {
+    checkForXRSupport()
+    enableVRbutton.style.display = "none"; 
+})
 
+export async function checkForXRSupport() {
+    navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
+    if (supported) {
+        webXRInitialized = true
+        const button = VRButton.createButton( renderer )
+        document.body.appendChild( button );
+        setupXR();
+    }
+    });
+}
 
-
-
-
-
-
-
-
-
+function declareGlobalVariables() {
+    window.dolly = new THREE.Object3D();
+    window.dummyCam = new THREE.Object3D();
+    window.workingMatrix = new THREE.Matrix4();
+    window.buttonStates = {};
+    window.gamepadIndices = "";
+    window.info = {};
+    window.controllers = {};
+    window.elapsedTime = 0;
+    window.dollyLat = 90;
+    window.dollyLng = 180;
+    window.dollyRadius = 8;
+    window.XRinSession = false;
+}
 
 function setupXR() {
     renderer.xr.enabled = true;
@@ -545,7 +502,6 @@ function onSqueezeEnd( ){
     console.log("squeezeend")
 
     if (UIactive == true) {
-        console.log(UI)
         UI.remove(UIcontainer)
         UIactive = false
     }
@@ -589,10 +545,12 @@ function handleController( controller ){
                 if (UIactive == false) {
                     UIcontainer = pushVRContent(activatedPin.source[activatedPin.index].slides)
                     UI.add(UIcontainer)
-                    jaranius.add(UI)
                     UIcontainer.position.set(position.x, position.y, position.z)
                     UIcontainer.lookAt(middleOfPlanet)
                     UIcontainer.rotateY(Math.PI)
+                    
+                    jaranius.add(UI)
+                    
                     UIactive = true
                 }
             }
@@ -726,30 +684,6 @@ function initializeIntro() {
 
 //SLIDE CAROUSEL
 let activeCarousel
-
-/* const buttons = document.querySelectorAll("[data-carousel-button]")
-buttons.forEach(button => {
-    button.addEventListener("click", () => {
-        const carousel = document.querySelector('.carousel')
-        if (button.dataset.carouselButton === "exit") {
-            activeCarousel.style.display = "none"
-        } else {
-            const offset = button.dataset.carouselButton === "next" ? 1 : -1
-            const slides = button
-                .closest("[data-carousel]")
-                .querySelector("[data-slides]")
-        
-            const activeSlide = slides.querySelector("[data-active]")
-            let newIndex = [...slides.children].indexOf(activeSlide) + offset
-
-            slides.children[newIndex].dataset.active = true
-            delete activeSlide.dataset.active
-
-            console.log(button)
-        }
-    })
-}) */
-
 const buttons = document.querySelectorAll("[data-carousel-button]");
 
 function handleCarouselButton(button) {
@@ -2252,6 +2186,7 @@ function render() {
                 dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z)
             }
         }
+        ThreeMeshUI.update();
     }
 
     if (guttaInitialized == true) {
@@ -2325,9 +2260,6 @@ function render() {
             camera.position.y += 0.2 / introTuneLength
         }
     }
-
-    // This is typically done in the render loop :  UI test
-    ThreeMeshUI.update();
 
     controls.update();
 
