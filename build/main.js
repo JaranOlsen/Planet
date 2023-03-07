@@ -215,7 +215,7 @@ function declareGlobalVariables() {
     scene.add( ui.mesh );
 } */
 
-const UI = new THREE.Object3D
+let UI = new THREE.Object3D
 let UIcontainer
 let contentContainer
 let UIactive = false
@@ -546,7 +546,7 @@ function onSqueezeEnd( ){
 
     if (UIactive == true) {
         console.log(UI)
-        jaranius.remove(UI)
+        UI.remove(UIcontainer)
         UIactive = false
     }
 }
@@ -587,7 +587,12 @@ function handleController( controller ){
                 const position = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
                 
                 if (UIactive == false) {
-                    pushVRContent(activatedPin.source[activatedPin.index].slides, UI, UIcontainer, contentContainer, jaranius, position, middleOfPlanet)
+                    UIcontainer = pushVRContent(activatedPin.source[activatedPin.index].slides)
+                    UI.add(UIcontainer)
+                    jaranius.add(UI)
+                    UIcontainer.position.set(position.x, position.y, position.z)
+                    UIcontainer.lookAt(middleOfPlanet)
+                    UIcontainer.rotateY(Math.PI)
                     UIactive = true
                 }
             }
