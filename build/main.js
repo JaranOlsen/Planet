@@ -237,8 +237,8 @@ function createUI() {
     scene.add( UIcontainer );
     UIcontainer.position.set(0, 0, 6) */
 
-    const container = new ThreeMeshUI.Block({
-        ref: "container",
+    UIcontainer = new ThreeMeshUI.Block({
+        ref: "UIcontainer",
         padding: 0.025,
         fontFamily: './fonts/Roboto-msdf.json',
         fontTexture:'./fonts/Roboto-msdf.png',
@@ -246,10 +246,10 @@ function createUI() {
         backgroundOpacity: 0,
       });
     
-      container.position.set(0, 1, 5.3);
-      container.rotation.x = -0.15;
+      UIcontainer.position.set(0, 1, 5.3);
+      UIcontainer.rotation.x = -0.15;
       
-      UI.add(container);
+      UI.add(UIcontainer);
       jaranius.add(UI)
       UIactive = true
     
@@ -269,7 +269,7 @@ function createUI() {
         })
       );
     
-      container.add(title);
+      UIcontainer.add(title);
     
       //
     
@@ -355,7 +355,7 @@ function createUI() {
       });
     
       contentContainer.add(leftSubBlock, rightSubBlock);
-      container.add(contentContainer);
+      UIcontainer.add(contentContainer);
     
       //
     
@@ -578,16 +578,19 @@ function handleController( controller ){
         const intersects = raycaster.intersectObjects( pinPositions );
 
         if (intersects.length>0){
-            selectedPin = intersects[0].object;
-            const selectedPinIndex = pinPositions.findIndex((object) => object==intersects[0].object)
+            const activatedPin = intersects[0].object;
+            console.log(activatedPin)
+            const position = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
+            UIcontainer.position.set(position.x, position.y, position.z)
+            UIcontainer.lookAt(middleOfPlanet)
 
-            if (UIactive == true) {
+            /* if (UIactive == true) {
                 jaranius.remove(UI)
                 UIactive = false
             } else {
                 jaranius.add(UI)
                 UIactive = true
-            }
+            } */
         }
     }
 }
