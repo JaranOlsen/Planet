@@ -216,6 +216,8 @@ function declareGlobalVariables() {
 } */
 
 let UIcontainer
+let UIactive
+const UI = new THREE.Object3D
 function createUI() {
     /* UIcontainer = new ThreeMeshUI.Block({
         width: 3,
@@ -246,7 +248,10 @@ function createUI() {
     
       container.position.set(0, 1, 5.3);
       container.rotation.x = -0.15;
-      jaranius.add(container);
+      
+      UI.add(container);
+      jaranius.add(UI)
+      UIactive = true
     
       //
     
@@ -361,7 +366,17 @@ function createUI() {
       });
     
 }
-   
+
+
+
+
+
+
+
+
+
+
+
 
 function setupXR() {
     renderer.xr.enabled = true;
@@ -565,21 +580,14 @@ function handleController( controller ){
         if (intersects.length>0){
             selectedPin = intersects[0].object;
             const selectedPinIndex = pinPositions.findIndex((object) => object==intersects[0].object)
-            const selectedCarousel = planetTagData[selectedPinIndex][6]
-            if (selectedCarousel > 0) {
-                activeCarousel = document.querySelector(`.carousel.s${selectedCarousel}`)
-                activeCarousel.style.display = "block"
-            }
 
-            xrSession.end().then(() => xrSession = null);
-            /* renderer.xr.getSession().end();
-            renderer.xr.getSession(); */
-            /* window.XRinSession = false;
-            renderer.xr.enabled = true; */
-            
-            /* intersects[0].object.scale.set(2, 2, 2)
-            controller.children[0].scale.z = intersects[0].distance;
-            controller.userData.selected = intersects[0].object; */
+            if (UIactive == true) {
+                jaranius.remove(UI)
+                UIactive = false
+            } else {
+                jaranius.add(UI)
+                UIactive = true
+            }
         }
     }
 }
