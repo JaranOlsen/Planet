@@ -38,12 +38,87 @@ export function pushContent(index) {
     parent.replaceChild(slides, child);
 }
 
+
+
+
 export function pushVRContent(index) {
     const UIcontainer = new ThreeMeshUI.Block({
         ref: "UIcontainer",
         padding: 0.025,
-        fontFamily: './fonts/Roboto-msdf.json',
-        fontTexture:'./fonts/Roboto-msdf.png',
+        fontFamily: './fonts/SourceSans3-Regular-msdf.json',
+        fontTexture:'./fonts/SourceSans3-Regular-msdf.png',
+        fontColor: new THREE.Color(0xffffff),
+        backgroundOpacity: 0,
+      });
+
+      const contentContainer = new ThreeMeshUI.Block({
+        height: 0.9,
+        width: 1.6,
+        margin: 0.025,
+        padding: 0.025,
+        fontSize: 0.025,
+        bestFit: "auto",
+        textAlign: "center",
+        justifyContent: "center",
+      })
+
+      if (contentData[index][0].includes("http")) {
+        contentContainer.add(
+          new ThreeMeshUI.Text({
+            content: contentData[index][0],
+          })
+        );
+  
+        new THREE.TextureLoader().load("./img/background/solarsystem.webp", (texture) => {
+          contentContainer.set({
+            backgroundTexture: texture,
+          });
+        });
+
+    } else if (contentData[index][0].includes("/img/")) {
+      const url = String(contentData[index][0])
+      const textureLoader = new THREE.TextureLoader()
+      textureLoader.crossOrigin = "Anonymous"
+      const texture1 = textureLoader.load(url, (texture) => {
+        contentContainer.set({
+          backgroundTexture: texture,
+        });
+      });
+
+    } else {
+      const stripText = contentData[index][0].replace(/<br>/gi, "\n");
+      const text = stripText.replace(/(<([^>]+)>)/gi, "");
+      contentContainer.add(
+        new ThreeMeshUI.Text({
+          content: text,
+        })
+      );
+
+      new THREE.TextureLoader().load("./img/background/bagan.jpg", (texture) => {
+        contentContainer.set({
+          backgroundTexture: texture,
+        });
+      });
+    }
+    
+      
+  
+      UIcontainer.add(contentContainer);
+    
+      //
+
+     
+
+    return UIcontainer
+}
+
+
+/* export function pushVRContent(index) {
+    const UIcontainer = new ThreeMeshUI.Block({
+        ref: "UIcontainer",
+        padding: 0.025,
+        fontFamily: './fonts/SourceSans3-Regular-msdf.json',
+        fontTexture:'./fonts/SourceSans3-Regular-msdf.png',
         fontColor: new THREE.Color(0xffffff),
         backgroundOpacity: 0,
       });
@@ -162,3 +237,4 @@ export function pushVRContent(index) {
 
     return UIcontainer
 }
+ */
