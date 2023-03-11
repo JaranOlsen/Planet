@@ -222,7 +222,7 @@ export const planetTagData = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see palet
 {id: "D7191BF4-96AD-46A9-89F8-B015FD27C991", text: "virtuous conduct", lat: 92, lng: 89.2, color: 21, size: 30, slides: undefined},
 {id: "F63DCD53-F24F-4AE7-84C0-61419A5D6E68", text: "freedom from remorse", lat: 90, lng: 82, color: 21, size: 30, slides: undefined},
 {id: "6FD89C72-5D89-4A96-B643-4BDDDEC450AC", text: "gladness", lat: 85, lng: 77, color: 21, size: 30, slides: undefined},
-{id: "28B608E4-AED5-4042-977B-B32908F4DC0F", text: "rapture", lat: 81, lng: 77, color: 21, size: 30, slides: undefined},
+{id: "28B608E4-AED5-4042-977B-B32908F4DC0F", text: "rapture", lat: 81, lng: 76, color: 21, size: 30, slides: undefined},
 {id: "04FEF0CF-A123-4DB2-A9CC-72E134399258", text: "bodily tranquility", lat: 76, lng: 77, color: 21, size: 30, slides: undefined},
 {id: "E78076C8-224D-4606-81AD-7DF62AE1B946", text: "bliss", lat: 72, lng: 81, color: 21, size: 30, slides: undefined},
 {id: "6D9D49EF-63D9-441E-865B-80CFE99B3E48", text: "samādhi", lat: 68, lng: 87, color: 21, size: 30, slides: undefined},
@@ -406,6 +406,8 @@ export const planetTagData = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see palet
 {id: "3B448BEF-259A-47A2-BCC7-9559D595BC29", text: "Authenticity", lat: 117.9, lng: 295, color: 11, size: 35, slides: undefined},
 {id: "D5338437-FF62-4249-BC13-2119C1A92031", text: "Self-disclosure", lat: 116.4, lng: 290.3, color: 10, size: 30, slides: undefined},
 {id: "1F3B0749-A55A-4AE8-905A-8103424BB959", text: "Foundations", lat: 127.7, lng: 319.3, color: 10, size: 40, slides: 110},
+{id: "5EFE7D5C-504F-496C-AC80-EBBF66611D49", text: " saṅkhāra\n        vs. \nasaṅkhāra", lat: 33.1, lng: 96.9, color: 20, size: 15, slides: undefined},
+
 ];
 
 //Remember to add connection

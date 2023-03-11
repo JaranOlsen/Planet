@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { contentData } from "./data/contentData";
 import ThreeMeshUI from 'three-mesh-ui'
+import { previousVRSlide, nextVRSlide, openVRLink } from './main';
 
 export function pushContent(index) {
     const slides = document.createElement("ul")
@@ -41,7 +42,7 @@ export function pushContent(index) {
 
 
 
-export function pushVRContent(index) {
+export function pushVRContent(slideshow, slide) {
     const UIcontainer = new ThreeMeshUI.Block({
         ref: "UIcontainer",
         padding: 0.025,
@@ -50,6 +51,106 @@ export function pushVRContent(index) {
         fontColor: new THREE.Color(0xffffff),
         backgroundOpacity: 0,
       });
+
+      const slideshowContainer = new ThreeMeshUI.Block({
+        height: 0.9,
+        width: 1.8,
+        margin: 0.025,
+        padding: 0.025,
+        fontSize: 0.025,
+        textAlign: "center",
+        justifyContent: "center",
+        contentDirection: "row",
+        backgroundOpacity: 0,
+      })
+
+      const leftArrow = new ThreeMeshUI.Block({
+        ref: "left",
+        height: 0.1,
+        width: 0.1,
+        fontSize: 0.025,
+        bestFit: "auto",
+        textAlign: "center",
+        justifyContent: "center",
+        backgroundOpacity: 1,
+      }).add(
+        new ThreeMeshUI.Text({
+          content: "previous",
+        })
+      );
+      const rightArrow = new ThreeMeshUI.Block({
+        ref: "right",
+        height: 0.1,
+        width: 0.1,
+        fontSize: 0.025,
+        bestFit: "auto",
+        textAlign: "center",
+        justifyContent: "center",
+        backgroundOpacity: 1,
+      })
+        const rightButton = new ThreeMeshUI.Text({
+          content: "next",
+        })
+        rightArrow.add(rightButton)
+
+      const hoveredStateAttributes = {
+        state: 'hovered',
+        attributes: {
+          offset: 0.035,
+          backgroundColor: new THREE.Color( 0x999999 ),
+          backgroundOpacity: 1,
+          fontColor: new THREE.Color( 0xffffff )
+        },
+      };
+    
+      const idleStateAttributes = {
+        state: 'idle',
+        attributes: {
+          offset: 0.035,
+          backgroundColor: new THREE.Color( 0x666666 ),
+          backgroundOpacity: 0.3,
+          fontColor: new THREE.Color( 0xffffff )
+        },
+      };
+
+      // Create states for the buttons.
+      // In the loop, we will call component.setState( 'state-name' ) when mouse hover or click
+
+      const selectedAttributes = {
+        offset: 0.02,
+        backgroundColor: new THREE.Color( 0x777777 ),
+        fontColor: new THREE.Color( 0x222222 )
+      };
+
+      rightArrow.setupState( {
+        state: 'selected',
+        attributes: selectedAttributes,
+        onSet: () => {
+
+          nextVRSlide()
+
+        }
+      } );
+      rightArrow.setupState( hoveredStateAttributes );
+      rightArrow.setupState( idleStateAttributes );
+
+      //
+
+      leftArrow.setupState( {
+        state: 'selected',
+        attributes: selectedAttributes,
+        onSet: () => {
+
+          previousVRSlide()
+
+        }
+      } );
+      leftArrow.setupState( hoveredStateAttributes );
+      leftArrow.setupState( idleStateAttributes );
+
+      //
+
+        slideshowActions.push(leftArrow, rightArrow)
 
       const contentContainer = new ThreeMeshUI.Block({
         height: 0.9,
@@ -62,12 +163,24 @@ export function pushVRContent(index) {
         justifyContent: "center",
       })
 
-      if (contentData[index][0].includes("http")) {
-        contentContainer.add(
-          new ThreeMeshUI.Text({
-            content: contentData[index][0],
+      if (contentData[slideshow][slide].includes("http")) {
+        
+        const hyperLink = new ThreeMeshUI.Text({
+            content: contentData[slideshow][slide],
           })
-        );
+        
+        contentContainer.add(hyperLink)
+
+        hyperLink.setupState( {
+          state: 'selected',
+          attributes: selectedAttributes,
+          onSet: () => {
+            openVRLink()
+          }
+        } );
+        hyperLink.setupState( hoveredStateAttributes );
+        hyperLink.setupState( idleStateAttributes );
+        slideshowActions.push(hyperLink)
   
         new THREE.TextureLoader().load("./img/background/solarsystem.webp", (texture) => {
           contentContainer.set({
@@ -75,8 +188,8 @@ export function pushVRContent(index) {
           });
         });
 
-    } else if (contentData[index][0].includes("/img/")) {
-      const url = String(contentData[index][0])
+    } else if (contentData[slideshow][slide].includes("/img/")) {
+      const url = String(contentData[slideshow][slide])
       const textureLoader = new THREE.TextureLoader()
       textureLoader.crossOrigin = "Anonymous"
       const texture1 = textureLoader.load(url, (texture) => {
@@ -86,7 +199,7 @@ export function pushVRContent(index) {
       });
 
     } else {
-      const stripText = contentData[index][0].replace(/<br>/gi, "\n");
+      const stripText = contentData[slideshow][slide].replace(/<br>/gi, "\n");
       const text = stripText.replace(/(<([^>]+)>)/gi, "");
       contentContainer.add(
         new ThreeMeshUI.Text({
@@ -101,10 +214,12 @@ export function pushVRContent(index) {
       });
     }
     
-      
-  
-      UIcontainer.add(contentContainer);
+      slideshowContainer.add(leftArrow);
+      slideshowContainer.add(contentContainer);
+      slideshowContainer.add(rightArrow);
     
+      UIcontainer.add(slideshowContainer);
+
       //
 
      

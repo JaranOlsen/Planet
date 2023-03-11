@@ -23,6 +23,7 @@ import { planetNuggetData } from './data/planetNuggetData.js'
 import { spiralTagData } from './data/spiralTagData.js'
 import { spiralConnections } from './data/spiralConnectionData.js'
 import { spiralImageData } from './data/spiralImageData.js'
+import { contentData } from './data/contentData.js'
 import { palette } from './data/palette.js'
 import { pushContent, pushVRContent } from './content.js'
 import { initializeVersion } from './versions.js'
@@ -101,6 +102,7 @@ const scene = new THREE.Scene();
 
 const pointer = new THREE.Vector2;
 const raycaster = new THREE.Raycaster();
+
 const clock = new THREE.Clock();
 const timer = new THREE.Clock();
 
@@ -156,13 +158,13 @@ export function initializeLoadingManager(loadingManager) {
     const progressBar = document.getElementById('progress-bar');
     loadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
         progressBar.value = (itemsLoaded / itemsTotal ) * 100
-        console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+        //console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
     };
 
     const progressBarContainer = document.querySelector('.progress-bar-container')
     loadingManager.onLoad = function ( ) {
         progressBarContainer.style.display = 'none';
-        console.log( 'Loading complete!');
+        //console.log( 'Loading complete!');
     };
     loadingManager.onError = function ( url ) {
         console.log( 'There was an error loading ' + url );
@@ -173,6 +175,8 @@ export function initializeLoadingManager(loadingManager) {
 let UI = new THREE.Object3D
 let UIcontainer
 let UIactive = false
+let selectState = false
+let slideAction = false
 function createUI() {
     UIcontainer = new ThreeMeshUI.Block({
         ref: "UIcontainer",
@@ -335,6 +339,11 @@ function declareGlobalVariables() {
     window.dollyLng = 180;
     window.dollyRadius = 8;
     window.XRinSession = false;
+    window.activeVRSlideshow = undefined;
+    window.activeVRSlide = undefined;
+    window.activeVRSlideshowPosition = undefined;
+    window.activeVRSlideshowLength = undefined;
+    window.slideshowActions = []
 }
 
 function setupXR() {
@@ -473,15 +482,16 @@ function buildController( index, line, modelFactory ){
 }
 
 function onSelectStart( ){
-    console.log("select")
     this.userData.selectPressed = true;
+    selectState = true;
 }
 
 function onSelectEnd( ){
     this.children[0].scale.z = 0;
     this.userData.selectPressed = false;
     this.userData.selected = undefined;
-    console.log("selectend")
+    selectState = false;
+    slideAction = false;
 }
 
 function onSqueezeStart( ){
@@ -490,7 +500,6 @@ function onSqueezeStart( ){
         this.attach( this.userData.selected );
         this.userData.attachedObject = userData.selected;
     }
-    console.log("squeeze")
 }
 
 function onSqueezeEnd( ){
@@ -499,7 +508,6 @@ function onSqueezeEnd( ){
             room.attach( this.userData.attachedObject );
         this.userData.attachedObject = undefined;
     }
-    console.log("squeezeend")
 
     if (UIactive == true) {
         UI.remove(UIcontainer)
@@ -540,15 +548,18 @@ function handleController( controller ){
             const activatedPin = intersects[0].object;
 
             if (activatedPin.source[activatedPin.index].slides !== undefined) {
-                const position = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
                 
                 if (UIactive == false) {
-                    UIcontainer = pushVRContent(activatedPin.source[activatedPin.index].slides)
+                    activeVRSlideshow = activatedPin.source[activatedPin.index].slides
+                    activeVRSlideshowPosition = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
+                    activeVRSlideshowLength = contentData[activeVRSlideshow].length
+                    activeVRSlide = 1
+
+                    UIcontainer = pushVRContent(activeVRSlideshow, activeVRSlide)
                     UI.add(UIcontainer)
-                    UIcontainer.position.set(position.x, position.y, position.z)
+                    UIcontainer.position.set(activeVRSlideshowPosition.x, activeVRSlideshowPosition.y, activeVRSlideshowPosition.z)
                     UIcontainer.lookAt(middleOfPlanet)
                     UIcontainer.rotateY(Math.PI)
-                    
                     jaranius.add(UI)
                     
                     UIactive = true
@@ -584,35 +595,6 @@ function updateGamepadState(){
         }
     }
 }
-
-/* function updateGamepadState(){
-    const session = renderer.xr.getSession();
-    
-    session.inputSources.forEach((inputSource) => {
-        if (inputSource && inputSource.gamepad && gamepadIndices && buttonStates){
-            const gamepad = inputSource.gamepad;
-
-            try{
-                Object.entries( buttonStates ).forEach( ( [ key, value ] ) => {
-                    const buttonIndex = gamepadIndices[key].button;
-                    if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
-                        const xAxisIndex = gamepadIndices[key].xAxis;
-                        const yAxisIndex = gamepadIndices[key].yAxis;
-                        buttonStates[key].button = gamepad.buttons[buttonIndex].value; 
-                        buttonStates[key].xAxis = gamepad.axes[xAxisIndex].toFixed(2); 
-                        buttonStates[key].yAxis = gamepad.axes[yAxisIndex].toFixed(2); 
-                    }else{
-                        buttonStates[key] = gamepad.buttons[buttonIndex].value;
-                    }
-                });
-            }catch(e){
-                console.warn("An error occurred setting the ui");
-            }
-        }
-    });
-
-    XRinSession = session !== null;
-} */
 
 function moveDolly(dt){
     
@@ -1804,24 +1786,68 @@ function scanPins() {
     hoverPins(intersects)
 }
 
+export function previousVRSlide() {
+    if (slideAction == false) {
+        UI.remove(UIcontainer)
+        activeVRSlide -= 1
+        if (activeVRSlide < 0) activeVRSlide = activeVRSlideshowLength - 1
+        UIcontainer = pushVRContent(activeVRSlideshow, activeVRSlide)
+        UI.add(UIcontainer)
+        UIcontainer.position.set(activeVRSlideshowPosition.x, activeVRSlideshowPosition.y, activeVRSlideshowPosition.z)
+        UIcontainer.lookAt(middleOfPlanet)
+        UIcontainer.rotateY(Math.PI)
+        jaranius.add(UI)
+        console.log(activeVRSlide, activeVRSlideshowLength)
+        slideAction = true
+    }
+}
+export function nextVRSlide() {
+    if (slideAction == false) {
+        UI.remove(UIcontainer)
+        activeVRSlide += 1
+        if (activeVRSlide > activeVRSlideshowLength - 1) activeVRSlide = 0
+        UIcontainer = pushVRContent(activeVRSlideshow, activeVRSlide)
+        UI.add(UIcontainer)
+        UIcontainer.position.set(activeVRSlideshowPosition.x, activeVRSlideshowPosition.y, activeVRSlideshowPosition.z)
+        UIcontainer.lookAt(middleOfPlanet)
+        UIcontainer.rotateY(Math.PI)
+        jaranius.add(UI)
+        console.log(activeVRSlide)
+        slideAction = true
+    }
+}
+
+export function openVRLink() {
+    if (slideAction == false) {
+        let url = contentData[activeVRSlideshow][activeVRSlide]
+        if (url.includes("youtube")) {
+            const regex = /embed\/(\w+)/;
+            const match = url.match(regex);
+            url = "https://www.youtube.com/watch?v=" + match[1]; 
+        }
+        window.open(url, '_blank')
+        slideAction = true
+    }
+}
+
 //EVENTS KEYBOARD
 document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
 
     //Slide control
-    if (keyCode === 33 || keyCode === 37) { // left arrow
+    if (keyCode === 33 || keyCode === 37) { // left arrow or button on USB remote
         const prevButton = document.querySelector("[data-carousel-button='prev']");
         handleCarouselButton(prevButton);
     }
-    if (keyCode === 34 || keyCode === 39) { // right arrow
+    if (keyCode === 34 || keyCode === 39) { // right arrow or button on USB remote
         const nextButton = document.querySelector("[data-carousel-button='next']");
         handleCarouselButton(nextButton);
     }
-    if (keyCode == 116) { 
+    if (keyCode == 116) { //button on USB remote
         console.log("play")
     }
-    if (keyCode == 190) { 
+    if (keyCode == 190) { //button on USB remote
         activeCarousel.style.display = "none"
     }
 
@@ -2134,10 +2160,26 @@ function onClick(event) {
 
 window.addEventListener('pointermove', onPointerMove);
 window.addEventListener('click', onClick);
-window.addEventListener("touchstart", onClick);
+//window.addEventListener("touchstart", onClick);
 /* document.addEventListener("touchstart", touch2Mouse, true);
 document.addEventListener("touchmove", touch2Mouse, true);
 document.addEventListener("touchend", touch2Mouse, true); */
+window.addEventListener( 'pointerdown', () => {
+	selectState = true;
+} );
+window.addEventListener( 'pointerup', () => {
+	selectState = false;
+} );
+window.addEventListener( 'touchstart', ( event ) => {
+	selectState = true;
+	mouse.x = ( event.touches[ 0 ].clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = -( event.touches[ 0 ].clientY / window.innerHeight ) * 2 + 1;
+} );
+window.addEventListener( 'touchend', () => {
+	selectState = false;
+	mouse.x = null;
+	mouse.y = null;
+} );
 
 //TESTS
 if (planetTagData.length !== planetConnections.length) {
@@ -2145,6 +2187,40 @@ if (planetTagData.length !== planetConnections.length) {
 }
 
 //ANIMATIONLOOP
+function updateButtons() {
+	// Find closest intersecting object
+	let intersect = raycast();
+	// Update targeted button state (if any)
+	if ( intersect && intersect.object.isUI ) {
+		if ( selectState ) {
+			// Component.setState internally call component.set with the options you defined in component.setupState
+			intersect.object.setState( 'selected' );
+		} else {
+			// Component.setState internally call component.set with the options you defined in component.setupState
+			intersect.object.setState( 'hovered' );
+		}
+	}
+	// Update non-targeted buttons state
+	slideshowActions.forEach( ( obj ) => {
+		if ( ( !intersect || obj !== intersect.object ) && obj.isUI ) {
+			// Component.setState internally call component.set with the options you defined in component.setupState
+			obj.setState( 'idle' );
+		}
+	} );
+}
+
+function raycast() {
+	return slideshowActions.reduce( ( closestIntersection, obj ) => {
+		const intersection = raycaster.intersectObject( obj, true );
+		if ( !intersection[ 0 ] ) return closestIntersection;
+		if ( !closestIntersection || intersection[ 0 ].distance < closestIntersection.distance ) {
+			intersection[ 0 ].object = obj;
+			return intersection[ 0 ];
+		}
+		return closestIntersection;
+	}, null );
+}
+
 function animate() {
     renderer.setAnimationLoop( render );
 }
@@ -2187,6 +2263,7 @@ function render() {
             }
         }
         ThreeMeshUI.update();
+        updateButtons();
     }
 
     if (guttaInitialized == true) {
@@ -2272,5 +2349,4 @@ function render() {
 }
 
 animate()
-
 

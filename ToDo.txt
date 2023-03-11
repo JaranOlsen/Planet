@@ -9,6 +9,7 @@ CONTENT
     - Sappaya
     - sankhara vs asankhara
     - Anapana (etc) tips and tricks
+    - Foundations of EFT
 
     norwegian version
         use chatGPT to translate file, add norwegian in same file
@@ -42,15 +43,14 @@ CONTENT
 
 MAKE USABLE
     debug for iphone
-        fix touch click controls - fixed? not quite..
+        fix touch click controls - fixed? not quite.. CHECK IF EVENTLISTENERS ADDED DURING MESH-UI DEV MADE A DIFFERENCE
 
 SHORT-TERM DEVELOPMENT
 
 
 VR DEVELOPMENT
     - three-mesh-ui
-        - add buttons to view all images on node
-        - add hyperlink capability
+        - test youtube / insight timer thumbnail possibility
     - buttonstates for both inputSources
     - fix gutta rotation ()
         -Perhaps with something like this:
