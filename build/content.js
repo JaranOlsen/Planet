@@ -163,6 +163,7 @@ export function pushVRContent(slideshow, slide) {
         justifyContent: "center",
       })
 
+      console.log(slideshow, slide, contentData[slideshow][slide])
       if (contentData[slideshow][slide].includes("http")) {
         
         const hyperLink = new ThreeMeshUI.Text({

@@ -310,6 +310,7 @@ function createUI() {
 }
 
 //WEB XR
+let session
 enableVRbutton.addEventListener("click", () => {
     checkForXRSupport()
     enableVRbutton.style.display = "none"; 
@@ -553,7 +554,7 @@ function handleController( controller ){
                     activeVRSlideshow = activatedPin.source[activatedPin.index].slides
                     activeVRSlideshowPosition = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
                     activeVRSlideshowLength = contentData[activeVRSlideshow].length
-                    activeVRSlide = 1
+                    activeVRSlide = 0
 
                     UIcontainer = pushVRContent(activeVRSlideshow, activeVRSlide)
                     UI.add(UIcontainer)
@@ -570,7 +571,7 @@ function handleController( controller ){
 }
 
 function updateGamepadState(){
-    const session = renderer.xr.getSession();
+    session = renderer.xr.getSession();
     
     const inputSource = session.inputSources[0];
     
@@ -1825,6 +1826,7 @@ export function openVRLink() {
             const match = url.match(regex);
             url = "https://www.youtube.com/watch?v=" + match[1]; 
         }
+        session.end()
         window.open(url, '_blank')
         slideAction = true
     }
