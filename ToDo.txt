@@ -6,17 +6,22 @@ INITIATIVES
     find venue for weekend retreat in oslo and bergen
 
 CONTENT
+    - Triune brain
     - Sappaya
-    - sankhara vs asankhara
+        - Physical: posture, health/comfort, food, rest, airways, 
+        - External: dwelling, temperature, air quality, cushion/stool
+        - Social: community, teacher, teachings, meaning
     - Anapana (etc) tips and tricks
     - Foundations of EFT
+    - fix insightMeditation links
 
     norwegian version
         use chatGPT to translate file, add norwegian in same file
 
-    convert exercises to one background image and html text (saves loading time)
+    finish converting exercises to one background image and html text (saves loading time)
 
     wordclouds for difficult concepts
+     - try to make chatGPT write a function that creates a wordcloud based on an array of words and weights
 
     add beth upton, rupert spira clips 
 

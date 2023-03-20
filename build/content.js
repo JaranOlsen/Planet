@@ -19,6 +19,9 @@ export function pushContent(index) {
         } else if (contentData[index][i].includes("/img/")) {
             content = document.createElement("img");
             content.src = contentData[index][i]
+        } else if (contentData[index][i].includes("img.")) {
+            content = document.createElement("img");
+            content.src = "https://" + contentData[index][i]
         } else {
             content = document.createElement("div")
             content.className = "quote"
