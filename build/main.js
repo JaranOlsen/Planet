@@ -105,6 +105,7 @@ const raycaster = new THREE.Raycaster();
 
 const clock = new THREE.Clock();
 const timer = new THREE.Clock();
+let developer = false;
 
 let contexts = []
 let selectedContext = null;
@@ -674,6 +675,7 @@ function handleCarouselButton(button) {
 
   if (button.dataset.carouselButton === "exit") {
     carousel.style.display = "none";
+    activeCarousel = undefined
   } else {
     const offset = button.dataset.carouselButton === "next" ? 1 : -1;
     const slides = button.closest("[data-carousel]").querySelector("[data-slides]");
@@ -683,7 +685,6 @@ function handleCarouselButton(button) {
     if (newIndex < 0) {
       newIndex = slides.children.length - 1;
     } else if (newIndex >= slides.children.length) {
-      //newIndex = 0;
       newIndex = slides.children.length;
     }
 
@@ -1741,11 +1742,15 @@ spotlight.angle = Math.PI / 4
 scene.add(spotlight);
 
 //CREATE CONTEXTS
-contexts.push([planetTagData, planetTagData.length, planetConnections, jaraniusConnections, 5.01])
+export function createContexts(version) {
+    contexts.push([planetTagData, planetTagData.length, planetConnections, jaraniusConnections, 5.02])
 
-contexts.push([spiralTagData, contexts[contexts.length - 1][1] + spiralTagData.length, spiralConnections, spiralDynamicsConnections, 7.01])
+    contexts.push([spiralTagData, contexts[contexts.length - 1][1] + spiralTagData.length, spiralConnections, spiralDynamicsConnections, 7.01])
 
-contexts.push([planetNuggetData, contexts[contexts.length - 1][1] + planetNuggetData.length, , , 5.01])
+    contexts.push([planetNuggetData, contexts[contexts.length - 1][1] + planetNuggetData.length, , , 5.01])
+
+    if (version == 3) developer = true
+}
 
 //CREATE GUTTA STATS
 const guttaStats = document.querySelector('#guttaStats');
@@ -1838,19 +1843,20 @@ function onDocumentKeyUp(event) {
     const keyCode = event.which;
 
     //Slide control
-    if (keyCode === 33 || keyCode === 37) { // left arrow or button on USB remote
+    if (activeCarousel !== undefined && (keyCode === 33 || keyCode === 37)) { // left arrow or button on USB remote
         const prevButton = document.querySelector("[data-carousel-button='prev']");
         handleCarouselButton(prevButton);
     }
-    if (keyCode === 34 || keyCode === 39) { // right arrow or button on USB remote
+    if (activeCarousel !== undefined && (keyCode === 34 || keyCode === 39)) { // right arrow or button on USB remote
         const nextButton = document.querySelector("[data-carousel-button='next']");
         handleCarouselButton(nextButton);
     }
-    if (keyCode == 116) { //button on USB remote
+    if (activeCarousel !== undefined && keyCode == 116) { //button on USB remote
         console.log("play")
     }
-    if (keyCode == 190) { //button on USB remote
-        activeCarousel.style.display = "none"
+    if (activeCarousel !== undefined && keyCode == 190) { //button on USB remote
+        const exitButton = document.querySelector("[data-carousel-button='exit']");
+        handleCarouselButton(exitButton);
     }
 
 
@@ -1899,11 +1905,11 @@ function onDocumentKeyUp(event) {
     }
 
     //Node management
-    if (keyCode == 65) { //A
+    if (keyCode == 65 && developer == true) { //A - clear selection
         selectedNodes.length = 0
     }
 
-    if (keyCode == 90) { //Z
+    if (keyCode == 90 && developer == true) { //Z - add to selection
         if (selectedNode !== null) {
             if (selectedNodes.indexOf(selectedNode) == -1) {
                 selectedNodes.push(selectedNode)
@@ -1922,7 +1928,7 @@ function onDocumentKeyUp(event) {
             showContent = true
         }
     }
-    if (keyCode == 70) { //F
+    if (keyCode == 70 && developer == true) { //F - toggle fast move
         if (fastMove == true) {
             fastMove = false
         } else {
@@ -1930,7 +1936,7 @@ function onDocumentKeyUp(event) {
         }
     }
     
-   /*  if (keyCode == 78) { //N
+   /*  if (keyCode == 78 && developer == true) { //N
         const tempStore = []
         const context = contexts[selectedContext][0]
             context.push(context[selectedNode])
@@ -1945,7 +1951,7 @@ function onDocumentKeyUp(event) {
             createTags(tempStore, planetContent, 5) 
     } */
 
-    if (keyCode == 81) { //Q
+    if (keyCode == 81 && developer == true) { //Q - print tagdata
         let output = ""
         const context = contexts[selectedContext][0]
         for (let i = 0; i < context.length; i++) {
@@ -1961,17 +1967,20 @@ function onDocumentKeyUp(event) {
             scene.remove(spiral)
         }
     }
-    if (keyCode == 87) { //W
-        const context = [contexts[selectedContext][0], contexts[selectedContext][2], contexts[selectedContext][3], contexts[selectedContext][4]]
-        context[2].clear()
+    if (keyCode == 87 && developer == true) { //W - redraw connections
+        const context = {
+            tagSource: contexts[selectedContext][0],
+            connectionSource: contexts[selectedContext][2], 
+            curveMinAltitude: contexts[selectedContext][4], 
+            context: contexts[selectedContext][3]
+        }
+        context.context.clear()
         const curveThickness = 0.0002
         const curveRadiusSegments = 3
         const curveMaxAltitude = 0.03
-        const curveMinAltitude = 5.01
-        createConnections(context[0], context[1], curveThickness, curveRadiusSegments, curveMaxAltitude, context[3], context[2])
-        
+        createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context)
     } 
-    if (keyCode == 187) { //+
+    if (keyCode == 187 && developer == true) { //+
         let originalSize = 0
         let size = 0
         let context = {context: contexts[selectedContext][0]}
@@ -1986,7 +1995,7 @@ function onDocumentKeyUp(event) {
             selectedPin.scale.set(size / originalSize, size / originalSize, size / originalSize)
             selectedBox.scale.set(size / originalSize, size / originalSize, size / originalSize)
     }
-    if (keyCode == 189) { //-
+    if (keyCode == 189 && developer == true) { //-
         let originalSize = 0
         let size = 0
         let context = {context: contexts[selectedContext][0]}
@@ -2007,9 +2016,8 @@ document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     const keyCode = event.which;
 
-    if (selectedNodes.length > 0) {
+    if (selectedNodes.length > 0 && developer == true  && activeCarousel == undefined) {
         const context = {context: contexts[selectedContext][0], length: contexts[selectedContext][1], radius: contexts[selectedContext][4]}
-
         for (let node = 0; node < selectedNodes.length; node++) {
             if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
                 let posLatLng = convertCartesiantoLatLng(pins[selectedNodes[node]].pin.position.x, pins[selectedNodes[node]].pin.position.y, pins[selectedNodes[node]].pin.position.z);
@@ -2017,16 +2025,22 @@ function onDocumentKeyDown(event) {
                 if (keyCode == 38) {
                     if (fastMove) posLatLng.lat -= .4;
                     posLatLng.lat -= .1;
-                    // down
-                } else if (keyCode == 40) {
+                    
+                }
+                // down
+                if (keyCode == 40) {
                     if (fastMove)posLatLng.lat += .4;
                     posLatLng.lat += .1;
-                    // left
-                } else if (keyCode == 37) {
+                    
+                }
+                // left
+                if (keyCode == 37) {
                     if (fastMove)posLatLng.lng -= .4;
                     posLatLng.lng -= .1;
-                    // right
-                } else if (keyCode == 39) {
+                    
+                }
+                // right
+                if (keyCode == 39) {
                     if (fastMove)posLatLng.lng += .4;
                     posLatLng.lng += .1;
                 }
@@ -2051,7 +2065,7 @@ function onDocumentKeyDown(event) {
                 context.context[selectedNodes[node] - indexModifier].lng = posLatLng.lng.toFixed(1)
             }
         }
-    } else if (selectedPin != null) {
+    } else if (selectedPin != null && developer == true  && activeCarousel == undefined) {
         const context = {context: contexts[selectedContext][0], length: contexts[selectedContext][1], radius: contexts[selectedContext][4]}
 
         if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
@@ -2060,16 +2074,22 @@ function onDocumentKeyDown(event) {
             if (keyCode == 38) {
                 if (fastMove) posLatLng.lat -= .4;
                 posLatLng.lat -= .1;
-                // down
-            } else if (keyCode == 40) {
+                
+            }
+            // down
+            if (keyCode == 40) {
                 if (fastMove) posLatLng.lat += .4;
                 posLatLng.lat += .1;
-                // left
-            } else if (keyCode == 37) {
+                
+            }
+            // left
+            if (keyCode == 37) {
                 if (fastMove) posLatLng.lng -= .4;
                 posLatLng.lng -= .1;
-                // right
-            } else if (keyCode == 39) {
+                
+            }
+            // right
+            if (keyCode == 39) {
                 if (fastMove) posLatLng.lng += .4;
                 posLatLng.lng += .1;
             }

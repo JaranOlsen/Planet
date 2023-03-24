@@ -12,7 +12,7 @@ import dash from '../img/textures/dash.webp'
 import arrow from '../img/textures/arrow.webp'
 
 //  IMPORT MATERIALS
-import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWireframeMaterials } from './materials.js';
+import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWireframeMaterials } from './data/materials.js';
 import { planetNuggetData } from './data/planetNuggetData.js';
 import { planetTagData } from './data/planetTagData.js';
 

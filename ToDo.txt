@@ -6,14 +6,11 @@ INITIATIVES
     find venue for weekend retreat in oslo and bergen
 
 CONTENT
+    -change maslow pyramid picture to one with the name of the stages
+
     - Triune brain
-    - Sappaya
-        - Physical: posture, health/comfort, food, rest, airways, 
-        - External: dwelling, temperature, air quality, cushion/stool
-        - Social: community, teacher, teachings, meaning
     - Anapana (etc) tips and tricks
     - Foundations of EFT
-    - fix insightMeditation links
 
     norwegian version
         use chatGPT to translate file, add norwegian in same file
@@ -51,7 +48,13 @@ MAKE USABLE
         fix touch click controls - fixed? not quite.. CHECK IF EVENTLISTENERS ADDED DURING MESH-UI DEV MADE A DIFFERENCE
 
 SHORT-TERM DEVELOPMENT
-
+    make function for drawing connections (select multiple nodes, search through tag- and connection-data and add id's to the first selected node)
+    make function for adding nodes (at intersection of cursor and context surface? inputbox for text or just "add text here"?)
+        if this works can possibly change to move nodes with pointer
+    make function for changing color of nodes
+    make function for removing nodes
+    make function for removing connections
+    make function for drawing arrowed and dashed connections
 
 VR DEVELOPMENT
     - three-mesh-ui

@@ -1,5 +1,5 @@
 //  IMPORT SCRIPTS
-import { createJaranius, createGutta, initializeLoadingManager } from "./main.js"
+import { createJaranius, createContexts, createGutta, initializeLoadingManager } from "./main.js"
 
 //  IMPORT TEXTURES
     // ||Diffuse - 
@@ -23,23 +23,27 @@ import cloudsTexture1k from "../img/textures/clouds1k.webp"
 
 
 export function creation(version, postLoadingManager) {
-    if (version == 1){
+    if (version == 1){ //FULL VERSION
         initializeLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture4k, normalTexture2k, roughnessTexture2k, cloudsTexture4k)
+        createContexts(version)
         createGutta(200, 10, version)
     } 
-    if (version == 2){
+    if (version == 2){ //LIGHT VERSION
         initializeLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture2k, normalTexture1k, roughnessTexture1k, cloudsTexture1k)
+        createContexts(version)
     } 
-    if (version == 3){
+    if (version == 3){ //DEVELOPER VERSION
         initializeLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture8k, normalTexture8k, roughnessTexture8k, cloudsTexture4k)
+        createContexts(version)
         createGutta(400, 25, version)
     } 
-    if (version == 4){
+    if (version == 4){ //VR VERSION
         initializeLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture8k, normalTexture8k, roughnessTexture8k, cloudsTexture4k)
+        createContexts(version)
         //createGutta(200, 10, version)
     } 
 }

@@ -111,8 +111,9 @@ export const contentData = [ //slides ID = line number - 2
     ["Altered traits<br><br><i>&quot;Waking up to who you are requires letting go of who you imagine yourself to be.&quot;</i><br> - Alan Watts", "./img/books/alteredtraits.webp", "<br><br><br><font style=opacity:.6> I too have experienced this. When I am at my best as a group facilitator, or a therapist, I discover this characteristic. I find that when I am closest to my inner intuitive self, when I am somehow in touch with the unknown in me, when perhaps I am in a slightly altered state of consciousness, then what ever I do seems to be full of healing. Then simply my presence is releasing and helpful.<br><br>There is nothing I can do to force this experience. But when I can relax and be close to </font><b>the transcendental core of me</b><font style=opacity:.6>, then I may behave in strange and impulsive ways in the relationship, ways which I can't justify rationally which have nothing to do with my thought processes. But these strange behaviors turn out to be right in some odd way. At those moments it seems that my inner spirit has reached out and touched the inner spirit of the other. Our relationship transcends itself and had become part of something larger. Profound growth and healing and energy are present.<br><br><br><br><br>", "Exercise: How to discover the 'Transcendental Core of Me'?<br><br>What am I not?<br><br>What am i?<br><br>What is real?<br><br>How can something about me be real in the strong sense?", "https://www.youtube-nocookie.com/embed/10J6crRacZg"],
     ["./img/carlrogers/Slide1.jpeg", "./img/carlrogers/Slide3.jpeg", "./img/carlrogers/Slide4.jpeg", "https://www.youtube-nocookie.com/embed/iMi7uY83z-U", "./img/carlrogers/Slide7.jpeg", "./img/carlrogers/Slide8.jpeg", "./img/carlrogers/Slide9.jpeg", "./img/carlrogers/Slide10.jpeg", "./img/carlrogers/Slide11.jpeg", "./img/carlrogers/Slide12.jpeg", "./img/carlrogers/Slide13.jpeg", "./img/carlrogers/Slide14.jpeg", "./img/carlrogers/Slide15.jpeg", "./img/carlrogers/Slide16.jpeg", "./img/carlrogers/Slide18.jpeg", "./img/carlrogers/Slide17.jpeg", "https://www.youtube-nocookie.com/embed/idgjD5tir_w"],
     ["https://www.youtube-nocookie.com/embed/9oX2xFo7JA4", "https://www.youtube-nocookie.com/embed/XEHYK3TM2jc", "./img/carlrogers/Slide1.jpeg", "<u>Poem for a rainy day</u><br><br>I know it feels as if<br>this night through which we journey<br>will never end.<br><br>Darkness <br>is all you see,<br>as you have yet to rub<br>the sleep from your eyes.<br><br>You don't believe it,<br>but one day you will<br>awake from the dream<br>and see what I see<br><br>you too,<br>are a child of light –<br>shining brighter than a million suns,<br>shining bright through the darkest of nights.<br><br>- Hege Fridtun", "https://insig.ht/jZUguRAk7ub", "https://img.youtube.com/vi/XEHYK3TM2jc/hqdefault.jpg"],
-    ["https://www.youtube-nocookie.com/embed/XmdPY-hFSt0"], 
-    ["img.youtube.com/vi/XEHYK3TM2jc/hqdefault.jpg"],
+    ["https://www.youtube-nocookie.com/embed/XmdPY-hFSt0"],
+    ["https://www.youtube-nocookie.com/embed/neDutbcedUY"],
+    
   ];
 // REMEMBER TO ADD PICTURES TO PUBLIC FOLDER
 
@@ -120,6 +121,8 @@ export const contentData = [ //slides ID = line number - 2
 
 // azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBNéÉàÀèÈùÙëËüÜïÏâêîôûÂÊÎÔÛíÍáÁóÓúÚñÑłŁçÇýÝčČšŠæÆœŒāīūṅṇṭḍḷṃṁ/\*-–+7894561230,;:!?¡¿.%$£€={}()[]&~"'‘’\`#_°@АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯяüÜöÖäÄñÑςερτυθιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜåÅæÆøØ
 
+
+// ["img.youtube.com/vi/XEHYK3TM2jc/hqdefault.jpg"],
 
 /* 
 
