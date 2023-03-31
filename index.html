@@ -15,8 +15,8 @@
       <!-- <div id="credits">DEVELOPER VERSION</div> -->
       <!-- <div id="credits">Alan Watts on letting go. Music: Kevin MacLeod - Meditation Impromptu 1</div> -->
       <!-- <div id="credits">Alan Watts on swimming with the stream</div> -->
-      <!-- <div id="credits">An Honest Meditation</div> -->
-      <div id="credits">Ajahn Chah from the BBC documentary 'The Mindful Way' & Jack Kornfield speaking about Ajahn Chah and loving awareness. Music: Jaran Olsen - This is me</div>
+      <div id="credits">An Honest Meditation</div>
+      <!-- <div id="credits">Ajahn Chah from the BBC documentary 'The Mindful Way' & Jack Kornfield speaking about Ajahn Chah and loving awareness. Music: Jaran Olsen - This is me</div> -->
       <!-- <div id="credits">Carl Rogers on Empathic Listening, Presence and Healing. Music: Jaran Olsen - This Is Me</div> -->
       <!-- <div id="credits">Carl Rogers on Empathic Listening, Presence and Healing. Music: Hans Zimmer - First Step</div> -->
       <div class="progress-bar-container">
@@ -33,10 +33,12 @@
       <button id="skipbutton">skip intro</button>
       <button id="enableVRbutton">enable VR</button>
       <div id="fpsCounter"></div>
-      <div id="guttaStats"></div>
+      <div id="guttaStatScreen"></div>
       <div id="keys">
         Click nodes to see content. Wireframe nodes doesn't have content. Press 1 to 5 for spotlight intensity, 6 to 0 for ambient intensity.
       </div>
+
+      <input id="tagInput" type="text" style="display: none; position: absolute;" />
 
       <section class="slides" aria-label="Slides">  
         <div class="carousel s1" id="div_carousel" data-carousel>
@@ -52,7 +54,7 @@
     </div>
 
     <audio id="introTune">
-      <source src="/audio/ajahnchah2.mp3" type="audio/mpeg">
+      <source src="/audio/honestIntro.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio> 
     

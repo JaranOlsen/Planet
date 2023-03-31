@@ -7,13 +7,17 @@ import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'
 import { VRButton } from 'three/addons/webxr/VRButton.js'
 import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js'
 import { Constants as MotionControllerConstants, fetchProfile, MotionController } from 'three/examples/jsm/libs/motion-controllers.module.js'
+import { generateUUID } from 'three/src/math/MathUtils.js'
 import ThreeMeshUI from 'three-mesh-ui'
-import { GUI } from 'dat.gui'
-import { lerp, smoothstep } from 'three/src/math/MathUtils.js';
 
 //  IMPORT SCRIPTS
-import { createImages, createTags, pins, tags, pinPositions, createConnections, hoverPins, instantiateNugget } from './mindmap.js'
-import { getRandomNum, getRandomBell, getRandomInt, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
+import { createImages, createTags, hoveredPins, intersectObjectsArray, createConnections, hoverPins, instantiateNugget } from './mindmap.js'
+import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
+import { pushContent, pushVRContent } from './content.js'
+import { initializeVersion } from './versions.js'
+import { creation } from './creation.js'
+
+//IMPORT DATA
 import { planetTagData } from './data/planetTagData.js'
 import { planetConnections } from './data/planetConnectionData.js'
 import { planetDashedConnections } from './data/planetDashedConnectionData.js'
@@ -25,17 +29,15 @@ import { spiralConnections } from './data/spiralConnectionData.js'
 import { spiralImageData } from './data/spiralImageData.js'
 import { contentData } from './data/contentData.js'
 import { palette } from './data/palette.js'
-import { pushContent, pushVRContent } from './content.js'
-import { initializeVersion } from './versions.js'
-import { creation } from './creation.js'
+import { pinMaterials, pinWireframeMaterials, boxMaterials } from './data/materials.js'
 
 //  IMPORT SHADERS
 import atmosphericLightVertexShader from '../shaders/atmosphericLightVertex.glsl'
 import atmosphericLightFragmentShader from '../shaders/atmosphericLightFragment.glsl'
 import atmosphereVertexShader from '../shaders/atmosphereVertex.glsl'
 import atmosphereFragmentShader from '../shaders/atmosphereFragment.glsl'
-import sunVertexShader from '../shaders/sunVertex.glsl'
-import sunFragmentShader from '../shaders/sunFragment.glsl'
+/* import sunVertexShader from '../shaders/sunVertex.glsl'
+import sunFragmentShader from '../shaders/sunFragment.glsl' */
 import spiralVertexShader from '../shaders/spiralVertex.glsl'
 import spriralFragmentShader from '../shaders/spiralFragment.glsl'
 
@@ -107,8 +109,9 @@ const clock = new THREE.Clock();
 const timer = new THREE.Clock();
 let developer = false;
 
-let contexts = []
-let selectedContext = null;
+export let contexts = []
+//export let contexts = {}
+let selectedContext = 0;
 let selectedPin = null;
 let selectedBox = null;
 let selectedTag = null;
@@ -118,16 +121,25 @@ let nuggets = []
 let showContent = true;
 let fastMove = false;
 
-let kills = 0
-let totalHungerAtKill = 0
-let munch = 0
-let totalHungerAtMunch = 0
-
 let signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z)
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 const spiral = new THREE.Object3D()
+const guttaHelperCenter = new THREE.Object3D();
 
+let guttaState = {
+    gutta: [],
+    mara: [],
+    species: undefined,
+    initialized: false,
+}
+
+let guttaStats = {
+    kills: 0,
+    totalHungerAtKill: 0,
+    munch: 0,
+    totalHungerAtMunch: 0
+}
 
 //VERSION MANAGER
 
@@ -138,11 +150,10 @@ const playButton = document.getElementById("playbutton")
 const credits = document.getElementById("credits")
 const enableVRbutton = document.getElementById("enableVRbutton")
 const skipButton = document.getElementById("skipbutton")
-initializeVersion(creation, postLoadingManager)
+initializeVersion(creation, postLoadingManager, guttaState, scene, guttaHelperCenter)
 
 let webXRInitialized = false
 let jaraniusInitialized = false
-let guttaInitialized = false
 
 
 //LOADING MANAGER
@@ -544,7 +555,7 @@ function handleController( controller ){
         raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
         raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( workingMatrix );
 
-        const intersects = raycaster.intersectObjects( pinPositions );
+        const intersects = raycaster.intersectObjects( intersectObjectsArray );
 
         if (intersects.length>0){
             const activatedPin = intersects[0].object;
@@ -896,6 +907,10 @@ scene.add(stars, starsR5, starsR10, starsR15, starsR20, starsB5, starsB10, stars
 //CREATE SOLAR SYSTEM
 const center = new THREE.Object3D();
 scene.add(center);
+const jaraniusCenter = new THREE.Object3D();
+center.add(jaraniusCenter);
+const spiralCenter = new THREE.Object3D();
+center.add(spiralCenter);
 
 const pivot1 = new THREE.Object3D();
 const pivot2 = new THREE.Object3D();
@@ -918,11 +933,11 @@ center.add(pivot4);
 
 // CREATE JARANIUS
 let jaranius
-let jaraniusConnections
-let spiralDynamicsConnections
+let jaraniusConnections = new THREE.Object3D()
+let spiralDynamicsConnections = new THREE.Object3D()
 let clouds
 let sign
-const planetContent = new THREE.Object3D
+const planetContent = new THREE.Object3D()
 export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture) {
     jaraniusInitialized = true
     
@@ -941,8 +956,8 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
             side: FrontSide,
         })
     )
-    //scene.add(jaranius)
-    center.add(jaranius)
+    jaranius.name = "jaranius"
+    jaraniusCenter.add(jaranius)
 
     //create cloud layer
     const cloudsMaterial = new THREE.MeshLambertMaterial({
@@ -990,44 +1005,7 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     jaraniusLight.position.set(0, 0, 0);
     jaranius.add(jaraniusLight);
 
-    //create pictures
-    jaranius.add(planetContent)
-
-    for (let i = 0; i < planetImageData.length; i++) {
-        createImages(planetImageData[i].src, planetImageData[i].lat, planetImageData[i].lng - 180, planetImageData[i].size / 500, planetImageData[i].radius, planetContent);
-    }
-    for (let i = 0; i < spiralImageData.length; i++) {
-        createImages(spiralImageData[i].src, spiralImageData[i].lat, spiralImageData[i].lng - 180, spiralImageData[i].size / 500, spiralImageData[i].radius, spiral);
-    }
-
-    //create tags
-    createTags(planetTagData, planetContent, 5)
-
-    createTags(spiralTagData, spiral, 7)
-
-    //create nuggets
-    for (let i = 0; i < planetNuggetData.length; i++) { 
-        let nugget = instantiateNugget(i, planetNuggetData[i].lat, planetNuggetData[i].lng - 180, planetNuggetData[i].color, planetNuggetData[i].size / 100000, planetNuggetData[i].slides, jaranius);
-        nuggets.push(nugget)
-    }
-
-    //create connections
-    const curveThickness = 0.0001
-    const curveRadiusSegments = 3
-    const curveMaxAltitude = 0.03
-    const curveMinAltitude = 5.02
-    jaraniusConnections = new THREE.Object3D()
-    jaranius.add(jaraniusConnections)
-    let context = jaraniusConnections
-    createConnections(planetTagData, planetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, false)
-    createConnections(planetTagData, planetDashedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, true, false)
-    createConnections(planetTagData, planetArrowedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, true)
-
-    spiralDynamicsConnections = new THREE.Object3D()
-    spiral.add(spiralDynamicsConnections)
-    let context2 = spiralDynamicsConnections
-    createConnections(spiralTagData, spiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false, false)
-
+    
     //create sign
     sign = new THREE.Object3D()
     planetContent.add(sign)
@@ -1048,6 +1026,46 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
             console.log( 'An error happened' );
         }
     );
+}
+
+export function createMindmap() {
+    //create pictures
+    jaranius.add(planetContent)
+
+    for (let i = 0; i < planetImageData.length; i++) {
+        createImages(planetImageData[i].src, planetImageData[i].lat, planetImageData[i].lng - 180, planetImageData[i].size / 500, planetImageData[i].radius, planetContent);
+    }
+    for (let i = 0; i < spiralImageData.length; i++) {
+        createImages(spiralImageData[i].src, spiralImageData[i].lat, spiralImageData[i].lng - 180, spiralImageData[i].size / 500, spiralImageData[i].radius, spiral);
+    }
+
+    //create tags
+    const indexMod = 0
+
+    createTags(contexts[0].tagData, contexts[0].tagDestination, contexts[0].radius, 0, indexMod)
+
+    createTags(contexts[1].tagData, contexts[1].tagDestination, contexts[1].radius, 1, indexMod)
+
+    //create nuggets
+    for (let i = 0; i < planetNuggetData.length; i++) { 
+        let nugget = instantiateNugget(i, planetNuggetData[i].lat, planetNuggetData[i].lng - 180, planetNuggetData[i].color, planetNuggetData[i].size / 100000, planetNuggetData[i].slides, jaranius, 2);
+        nuggets.push(nugget)
+    }
+
+    //create connections
+    const curveThickness = 0.0001
+    const curveRadiusSegments = 3
+    const curveMaxAltitude = 0.03
+    const curveMinAltitude = 5.02
+    jaranius.add(jaraniusConnections)
+    let context = jaraniusConnections
+    createConnections(planetTagData, planetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, false)
+    createConnections(planetTagData, planetDashedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, true, false)
+    createConnections(planetTagData, planetArrowedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, true)
+
+    spiral.add(spiralDynamicsConnections)
+    let context2 = spiralDynamicsConnections
+    createConnections(spiralTagData, spiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false, false)
 }
 
 //CREATE SUN
@@ -1117,7 +1135,7 @@ for (let i = 0; i < moons.length; i++) {
 let spiralActivated = false
 function createSpiral() {
     spiralActivated = true
-    scene.add(spiral)
+    spiralCenter.add(spiral)
     let helixMaxRadius = 7;
     let helixRevolutions = 9;
     let helixPoints = []
@@ -1250,488 +1268,6 @@ function createSpiral() {
     spiral.add(tierRing)
 }
 
-//CREATE GUTTA
-let gutta
-let mara
-let species
-
-export function createGutta(numberOfGutta, numberOfMara, version) {
-    guttaInitialized = true
-    const guttaFlyAltitude = 0.01
-
-    class Gutt {
-        constructor(lat, lng, geometry, material, array, line) {
-            this.lat = lat;
-            this.lng = lng;
-            this.material = material;
-            this.geometry = geometry;
-            this.array = array;
-
-            this.gutt = new THREE.Mesh(this.geometry, this.material)
-    
-            this.pos = new THREE.Vector2(lat, lng)
-            this.velocity = new THREE.Vector2(getRandomNum(0, 0), getRandomNum(0, 1)).setLength(0.001)
-            this.acceleration = new THREE.Vector2
-            this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5 + guttaFlyAltitude)
-            this.presentHeading
-            this.originalHeading
-    
-            this.gutt.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
-
-            this.wander = new THREE.Vector2(0, 0)
-            this.alignment = new THREE.Vector2(0, 0)
-            this.cohesion = new THREE.Vector2(0, 0)
-            this.separation = new THREE.Vector2(0, 0)
-            this.hunt = new THREE.Vector2(0, 0)
-            this.flee = new THREE.Vector2(0, 0)
-            this.feed = new THREE.Vector2(0, 0)
-            this.avoidance = new THREE.Vector2(0, 0)
-
-            this.hunger = 0
-
-            //jaranius.add(this.gutt)
-            scene.add(this.gutt)
-        }
-
-        move(species, ID) {
-            if (this.hunger < 1) this.hunger += 0.0001
-
-            this.originalHeading = Math.atan2(this.velocity.x, this.velocity.y)
-
-            this.acceleration.set(0, 0)
-            if (species == "gutt") {
-                this.alignment.multiplyScalar(parameters.gutt_alignment)
-                this.cohesion.multiplyScalar(parameters.gutt_cohesion)
-                this.separation.multiplyScalar(parameters.gutt_separation)
-                this.flee.multiplyScalar(parameters.gutt_flee)
-                this.feed.multiplyScalar(parameters.gutt_feed)
-            }
-            if (species == "mara") {
-                this.alignment.multiplyScalar(parameters.mara_alignment)
-                this.cohesion.multiplyScalar(parameters.mara_cohesion)
-                this.separation.multiplyScalar(parameters.mara_separation)
-                this.hunt.multiplyScalar(parameters.mara_hunt)
-            }
-            //this.avoidance.multiplyScalar(parameters.avoidance)
-
-            /* if (species == "gutt" && ID == 0) {
-                console.log("lat: ", this.pos.x, "lng: ", this.pos.y)
-                console.log("alignment length: ", this.alignment.length())
-                console.log("cohesion length: ", this.cohesion.length())
-                console.log("separation length: ", this.separation.length())
-                console.log("flee length: ", this.flee.length())
-                console.log("feed length: ", this.feed.length())
-                console.log("wander length: ", this.wander.length())
-                console.log("lat: ", this.pos.x, "lng: ", this.pos.y)
-                console.log("alignment: ", this.alignment)
-                console.log("cohesion: ", this.cohesion)
-                console.log("separation: ", this.separation)
-                console.log("flee: ", this.flee)
-                console.log("feed: ", this.feed)
-                console.log("wander: ", this.wander)
-            } */
-
-            this.acceleration.add( this.wander )
-            this.acceleration.add( this.alignment )
-            this.acceleration.add( this.cohesion )
-            this.acceleration.add( this.separation )
-            if (species == "gutt") {
-                this.acceleration.add( this.flee )
-                this.acceleration.add( this.feed )
-            }
-            if (species == "mara") {
-                this.acceleration.add( this.hunt )
-            }
-            this.acceleration.add( this.avoidance )
-
-            this.velocity.add(this.acceleration)
-            if (species == "gutt") {
-                this.velocity.clampLength(-parameters.gutt_max_speed, parameters.gutt_max_speed)
-            }
-            if (species == "mara") {
-                this.velocity.clampLength(-parameters.mara_max_speed, parameters.mara_max_speed)
-            }
-            this.pos.add(this.velocity)
-        
-            if (this.pos.x < 0) {
-                this.pos.x = Math.abs(this.pos.x)
-                if (this.pos.y < 180) {
-                this.pos.y += 180
-                } else this.pos.y -= 180
-                this.velocity.x *= -1
-                this.velocity.y *= -1
-            }
-            if (this.pos.x > 180) {
-                this.pos.x = 180 - (this.pos.x - 180)
-                if (this.pos.y < 180) {
-                    this.pos.y += 180
-                } else this.pos.y -= 180
-                this.velocity.x *= -1
-                this.velocity.y *= -1
-            }
-            if (this.pos.y < 0) {this.pos.y = 360 + this.pos.y}
-            if (this.pos.y > 360) {this.pos.y = this.pos.y - 360}
-            
-            this.cartesianPosition = convertLatLngtoCartesian(this.pos.x, this.pos.y, 5 + guttaFlyAltitude)
-            this.cartesianVelocity = convertLatLngtoCartesian(this.velocity.x, this.velocity.y, 5 + guttaFlyAltitude)
-            
-            this.presentHeading = Math.atan2(this.velocity.x, this.velocity.y)
-            
-            this.cp = new THREE.Vector3
-            this.cp.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
-            this.gutt.lookAt(this.cp)
-            this.gutt.rotateZ(this.presentHeading - this.originalHeading)
-            this.gutt.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
-        }
-
-        calculateWander(species) {
-             this.wander.set(getRandomNum(-0.005, 0.005), getRandomNum(-0.005, 0.005))
-            if (species == "gutt") {
-                this.wander.clampLength(-parameters.gutt_max_force * (1 - this.hunger), parameters.gutt_max_force * (1 - this.hunger))
-            }
-            if (species == "mara") {
-                this.wander.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
-            }
-        }
-
-        calculateAlignment(species) {
-            let perception 
-            if (species == "gutt") {
-                perception = parameters.gutt_alignment_perception_distance
-            }
-            if (species == "mara") {
-                perception = parameters.mara_alignment_perception_distance
-            }
-            let counter = 0
-            this.alignment.set(0, 0)
-            for (let i = 0; i < this.array.length; i++) {
-                if (this.array[i] != this && this.gutt.position.distanceTo(this.array[i].gutt.position) < perception) {
-                    this.alignment.add(this.array[i].velocity)
-                    counter += 1
-                }
-            }
-            if (counter > 0 ) {
-                this.alignment.set(this.alignment.x / counter, this.alignment.y / counter)
-                this.alignment.sub(this.velocity)
-                if (species == "gutt") {
-                    this.alignment.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
-                }
-                if (species == "mara") {
-                    this.alignment.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
-                }
-            }
-        }
-
-        calculateCohesion(species) {
-            let perception 
-            if (species == "gutt") {
-                perception = parameters.gutt_cohesion_perception_distance
-            }
-            if (species == "mara") {
-                perception = parameters.mara_cohesion_perception_distance
-            }
-            let counter = 0
-            this.cohesion.set(0, 0)
-            for (let i = 0; i < this.array.length; i++) {
-                if (this.array[i] != this && this.gutt.position.distanceTo(this.array[i].gutt.position) < perception) {
-                    this.cohesion.add(this.array[i].pos)
-                    counter += 1
-                }
-            }
-            if (counter > 0 ) {
-                this.cohesion.set(this.cohesion.x / counter, this.cohesion.y / counter)
-                this.cohesion.sub(this.pos)
-                if (species == "gutt") {
-                    this.cohesion.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
-                }
-                if (species == "mara") {
-                    this.cohesion.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
-                }
-            }
-        }
-
-        calculateSeparation(species) {
-            let perception 
-            if (species == "gutt") {
-                perception = parameters.gutt_separation_perception_distance
-            }
-            if (species == "mara") {
-                perception = parameters.mara_separation_perception_distance
-            }
-            let counter = 0
-            this.separation.set(0, 0)
-            for (let i = 0; i < this.array.length; i++) {
-                if (this.array[i] != this && this.gutt.position.distanceTo(this.array[i].gutt.position) < perception) {
-                    let difference = new THREE.Vector2(this.pos.x - this.array[i].pos.x, this.pos.y - this.array[i].pos.y)
-                    difference.divideScalar(this.gutt.position.distanceTo(this.array[i].gutt.position))
-                    this.separation.add(difference)
-                    counter += 1
-                }
-            }
-            if (counter > 0 ) {
-                this.separation.set(this.separation.x / counter, this.separation.y / counter)
-                if (species == "gutt") {
-                    this.separation.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
-                }
-                if (species == "mara") {
-                    this.separation.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
-                }
-            }
-        }
-
-        calculateHunting() {
-            let counter = 0
-            this.hunt.set(0, 0)
-            for (let i = 0; i < gutta.length; i++) {
-                if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < parameters.mara_hunt_perception_distance) {
-                    if (gutta[i] != this && this.gutt.position.distanceTo(gutta[i].gutt.position) < 0.01) {
-                        if (this.hunger > 0.2) {
-                            kills += 1
-                            totalHungerAtKill += this.hunger
-                            this.hunger = 0
-                        }
-                    }
-                    this.hunt.add(gutta[i].pos)
-                    counter += 1
-                }
-            }
-            if (counter > 0 ) {
-                this.hunt.set(this.hunt.x / counter, this.hunt.y / counter)
-                this.hunt.sub(this.pos)
-                this.hunt.clampLength(-parameters.mara_max_force * this.hunger, parameters.mara_max_force * this.hunger)
-            }
-        }
-
-        calculateFleeing() {
-            let counter = 0
-            this.flee.set(0, 0)
-            for (let i = 0; i < mara.length; i++) {
-                if (mara[i] != this && this.gutt.position.distanceTo(mara[i].gutt.position) < parameters.gutt_flee_perception_distance) {
-                    let difference = new THREE.Vector2(this.pos.x - mara[i].pos.x, this.pos.y - mara[i].pos.y)
-                    difference.divideScalar(this.gutt.position.distanceTo(mara[i].gutt.position))
-                    this.flee.add(difference)
-                    counter += 1
-                }
-            }
-            if (counter > 0 ) {
-                this.flee.set(this.flee.x / counter, this.flee.y / counter)
-                this.flee.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
-            }
-        }
-
-        calculateFeeding() {
-            let counter = 0
-            this.feed.set(0, 0)
-            for (let i = 0; i < nuggets.length; i++) {
-                let nuggetPosition = nuggets[i].nugget.position.clone()
-                nuggetPosition.applyMatrix4(jaranius.matrixWorld);
-
-                if (this.gutt.position.distanceTo(nuggetPosition) < parameters.gutt_feed_perception_distance) { 
-                    if (this.gutt.position.distanceTo(nuggetPosition) < 0.005) {
-                        if (this.hunger > 0.05) {
-                            munch += 1
-                            totalHungerAtMunch += this.hunger
-                            this.hunger -= 0.05
-                        }
-                    }
-
-                    let nuggetLatLng = convertCartesiantoLatLng(nuggetPosition.x, nuggetPosition.y, nuggetPosition.z)
-
-                    let adjusted_lng = nuggetLatLng.lng + 360
-                    if (adjusted_lng >= 360) adjusted_lng -= 360
-                    let adjusted_nuggetLatLng = new THREE.Vector2 (nuggetLatLng.lat, adjusted_lng)
-            
-                    this.feed.add(adjusted_nuggetLatLng)
-
-                    counter += 1
-                }
-            }
-            if (counter > 0 ) {
-                this.feed.set(this.feed.x / counter, this.feed.y / counter)
-                this.feed.sub(this.pos)
-                this.feed.clampLength(-parameters.gutt_max_force * this.hunger, parameters.gutt_max_force * this.hunger)
-            }
-        }
-
-        calculateTemperature(species) {
-            this.avoidance.set(0, 0)
-            if (this.pos.x < 40) {
-                this.avoidance.set((Math.pow(40 - this.pos.x, 2)) / 100000, 0)
-                if (species == "gutt") {
-                    this.avoidance.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
-                }
-                if (species == "mara") {
-                    this.avoidance.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
-                }
-            }
-            if (this.pos.x > 140) {
-                this.avoidance.set(-(Math.pow(140 - this.pos.x, 2)) / 100000, 0)
-                if (species == "gutt") {
-                    this.avoidance.clampLength(-parameters.gutt_max_force, parameters.gutt_max_force)
-                }
-                if (species == "mara") {
-                    this.avoidance.clampLength(-parameters.mara_max_force, parameters.mara_max_force)
-                }
-            }
-        }
-    }
-
-    gutta = [];
-    const guttaScale = 0.0003;
-    //const guttaScale = 0.003;
-
-    const guttaShape = new THREE.Shape();
-    guttaShape.moveTo(guttaScale * 5,guttaScale * 5 );
-    guttaShape.bezierCurveTo(guttaScale * 5,guttaScale * 5,guttaScale * 4, 0, 0, 0 );
-    guttaShape.bezierCurveTo(- guttaScale * 6, 0,- guttaScale * 6,guttaScale * 7, - guttaScale * 6,guttaScale * 7 );
-    guttaShape.bezierCurveTo(- guttaScale * 6,guttaScale * 11,- guttaScale * 3,guttaScale * 15.4,guttaScale * 5,guttaScale * 19 );
-    guttaShape.bezierCurveTo(guttaScale * 12,guttaScale * 15.4,guttaScale * 16,guttaScale * 11,guttaScale * 16,guttaScale * 7 );
-    guttaShape.bezierCurveTo(guttaScale * 16,guttaScale * 7,guttaScale * 16, 0,guttaScale * 10, 0 );
-    guttaShape.bezierCurveTo(guttaScale * 7, 0,guttaScale * 5,guttaScale * 5,guttaScale * 5,guttaScale * 5 );
-
-    const guttaGeometry = new THREE.ShapeGeometry(guttaShape)
-    guttaGeometry.center = (5 * guttaScale, 9.5 * guttaScale, 0)
-    guttaGeometry.rotateZ(Math.PI/2)
-    guttaGeometry.rotateY(Math.PI/2)
-
-    for (let i = 0; i < numberOfGutta; i++) {
-        let lat = getRandomBell(40, 140, 5)
-        let lng = getRandomInt(0, 359)
-
-        let guttaMaterial
-        let testBird = new THREE.MeshBasicMaterial({
-            color: 0xff0000, 
-            side: DoubleSide,
-        })
-        let redBird = new THREE.MeshLambertMaterial({
-            color: 0xcc6655, 
-            side: DoubleSide,
-        })
-        let greyBird = new THREE.MeshLambertMaterial({
-            color: 0xcc7788, 
-            side: DoubleSide,
-        })
-        let darkBird = new THREE.MeshLambertMaterial({
-            color: 0xbb4455, 
-            side: DoubleSide,
-        })
-
-        if (i == 0) {
-            guttaMaterial = testBird
-        } else if (i <= numberOfGutta / 3) {
-            guttaMaterial = redBird
-        } else if (i < numberOfGutta / 3 * 2) {
-            guttaMaterial = greyBird
-        } else guttaMaterial = darkBird
-
-        gutta.push(new Gutt(lat, lng, guttaGeometry, guttaMaterial, gutta))
-    }
-
-    mara = [];
-    const maraScale = 0.0003;
-
-    const beakLength = 40
-    const tipLength = 8
-
-    const maraShape = new THREE.Shape();
-    maraShape.moveTo(maraScale * 5,maraScale * 5 );
-    maraShape.bezierCurveTo(maraScale * 5,maraScale * 5,maraScale * 4, 0, 0, maraScale * -tipLength );
-    maraShape.bezierCurveTo(- maraScale * 6, 0,- maraScale * 6,maraScale * 7, - maraScale * 6,maraScale * 7 );
-    maraShape.bezierCurveTo(- maraScale * 6,maraScale * 11,- maraScale * 3,maraScale * 15.4,maraScale * 5,maraScale * beakLength );
-    maraShape.bezierCurveTo(maraScale * 12,maraScale * 15.4,maraScale * 16,maraScale * 11,maraScale * 16,maraScale * 7 );
-    maraShape.bezierCurveTo(maraScale * 16,maraScale * 7,maraScale * 16, 0,maraScale * 10, maraScale * -tipLength );
-    maraShape.bezierCurveTo(maraScale * 7, 0,maraScale * 5,maraScale * 5,maraScale * 5,maraScale * 5 );
-
-    const maraGeometry = new THREE.ShapeGeometry(maraShape)
-    maraGeometry.center = (5 * maraScale, 9.5 * maraScale, 0)
-    maraGeometry.rotateZ(Math.PI/2)
-    maraGeometry.rotateY(Math.PI/2)
-
-    for (let i = 0; i < numberOfMara; i++) {
-        let lat = getRandomBell(40, 140, 5)
-        let lng = getRandomInt(0, 359)
-
-        let maraMaterial
-        let darkMara = new THREE.MeshLambertMaterial({
-            color: 0x222222, 
-            side: DoubleSide,
-        })
-        let plainMara = new THREE.MeshLambertMaterial({
-            color: 0x333333, 
-            side: DoubleSide,
-        })
-        let lightMara = new THREE.MeshLambertMaterial({
-            color: 0x444444, 
-            side: DoubleSide,
-        })
-
-        if (i <= numberOfMara / 3) {
-            maraMaterial = darkMara
-        } else if (i < numberOfMara / 3 * 2) {
-            maraMaterial = plainMara
-        } else maraMaterial = lightMara
-
-        mara.push(new Gutt(lat, lng, maraGeometry, maraMaterial, mara))
-    }
-
-    //Dat.GUI
-    const gui = new GUI()
-    let parameters = {
-        gutt_alignment: 0.7,
-        gutt_alignment_perception_distance: 0.2,
-        gutt_cohesion: 0.6,
-        gutt_cohesion_perception_distance: 0.4,
-        gutt_separation: 0.6,
-        gutt_separation_perception_distance: 0.03,
-        gutt_flee: 10,
-        gutt_flee_perception_distance: 0.1,
-        gutt_feed: 0.3,
-        gutt_feed_perception_distance: 1,
-        gutt_max_force: 0.0005,
-        gutt_max_speed: 0.01,
-
-        mara_alignment: 0.1,
-        mara_alignment_perception_distance: 0.6,
-        mara_cohesion: 0.1,
-        mara_cohesion_perception_distance: 0.6,
-        mara_separation: 0.4,
-        mara_separation_perception_distance: 0.5,
-        mara_hunt: 0.75,
-        mara_hunt_perception_distance: 0.8,
-        mara_max_force: 0.001,
-        mara_max_speed: 0.04,
-    }
-
-    const parameterFolder = gui.addFolder('Gutta parameters')
-        parameterFolder.add(parameters, 'gutt_alignment', 0, 1, 0.001)
-        parameterFolder.add(parameters, 'gutt_alignment_perception_distance', 0, 1, 0.001)
-        parameterFolder.add(parameters, 'gutt_cohesion', 0, 1, 0.001)
-        parameterFolder.add(parameters, 'gutt_cohesion_perception_distance', 0, 1, 0.001)
-        parameterFolder.add(parameters, 'gutt_separation', 0, 1, 0.001)
-        parameterFolder.add(parameters, 'gutt_separation_perception_distance', 0, 1, 0.001)
-        parameterFolder.add(parameters, 'gutt_flee', 0, 1, 0.001)
-        parameterFolder.add(parameters, 'gutt_flee_perception_distance', 0, 1, 0.001)
-        parameterFolder.add(parameters, 'gutt_feed', 0, 1, 0.001)
-        parameterFolder.add(parameters, 'gutt_feed_perception_distance', 0, 1, 0.001)
-        parameterFolder.add(parameters, 'gutt_max_force', 0, 0.001, 0.00001)
-        parameterFolder.add(parameters, 'gutt_max_speed', 0, 0.1, 0.001)
-    parameterFolder.close()
-
-    const parameterFolder2 = gui.addFolder('Mara parameters')
-        parameterFolder2.add(parameters, 'mara_alignment', 0, 1, 0.001)
-        parameterFolder2.add(parameters, 'mara_alignment_perception_distance', 0, 1, 0.001)
-        parameterFolder2.add(parameters, 'mara_cohesion', 0, 1, 0.001)
-        parameterFolder2.add(parameters, 'mara_cohesion_perception_distance', 0, 1, 0.001)
-        parameterFolder2.add(parameters, 'mara_separation', 0, 1, 0.001)
-        parameterFolder2.add(parameters, 'mara_separation_perception_distance', 0, 1, 0.001)
-        parameterFolder2.add(parameters, 'mara_hunt', 0, 1, 0.001)
-        parameterFolder2.add(parameters, 'mara_hunt_perception_distance', 0, 1, 0.001)
-        parameterFolder2.add(parameters, 'mara_max_force', 0, 0.01, 0.0001)
-        parameterFolder2.add(parameters, 'mara_max_speed', 0, 0.1, 0.001)
-    parameterFolder2.close()
-    if (version !== 0) gui.hide() //set to 3 to enable for developer mode
-}
-
 //CREATE LIGHTS
 const ambient = new THREE.AmbientLight(0xffffff, 0.02); //0.01
 scene.add(ambient);
@@ -1743,22 +1279,59 @@ scene.add(spotlight);
 
 //CREATE CONTEXTS
 export function createContexts(version) {
-    contexts.push([planetTagData, planetTagData.length, planetConnections, jaraniusConnections, 5.02])
+    //contexts.push([planetTagData, planetContent, planetConnections, jaraniusConnections, 5, [], [], []])
+    contexts.push({
+        tagData: planetTagData, 
+        tagDestination: planetContent, 
+        connectionData: planetConnections, 
+        arrowConnectionData: planetArrowedConnections,
+        dashedConnectionData: planetDashedConnections,
+        connectionDestination: jaraniusConnections, 
+        radius: 5, 
+        pins: [], 
+        boxes: [], 
+        tags: []
+    })
 
-    contexts.push([spiralTagData, contexts[contexts.length - 1][1] + spiralTagData.length, spiralConnections, spiralDynamicsConnections, 7.01])
+    //contexts.push([spiralTagData, spiral, spiralConnections, spiralDynamicsConnections, 7, [], [], []])
+    contexts.push({
+        tagData: spiralTagData, 
+        tagDestination: spiral, 
+        connectionData: spiralConnections, 
+        arrowConnectionData: undefined,
+        dashedConnectionData: undefined,
+        connectionDestination: spiralDynamicsConnections, 
+        radius: 7, 
+        pins: [], 
+        boxes: [], 
+        tags: []
+    })
 
-    contexts.push([planetNuggetData, contexts[contexts.length - 1][1] + planetNuggetData.length, , , 5.01])
+    //contexts.push([planetNuggetData, planetContent, , , 5, [], [], []])
+    contexts.push({
+        tagData: planetNuggetData, 
+        tagDestination: planetContent, 
+        connectionData: undefined, 
+        arrowConnectionData: undefined,
+        dashedConnectionData: undefined,
+        connectionDestination: undefined, 
+        radius: 5, 
+        pins: [], 
+        boxes: [], 
+        tags: []
+    })
 
     if (version == 3) developer = true
+
 }
 
 //CREATE GUTTA STATS
-const guttaStats = document.querySelector('#guttaStats');
+const guttaStatScreen = document.querySelector('#guttaStatScreen');
 const statsDisplay = document.createElement('div');
 
 function refreshStats() {
-    statsDisplay.innerHTML = "Number of munches: " + munch + "<br>Average hunger: " + Math.round(totalHungerAtMunch/munch * 100) / 100 + "<br><br>Number of kills: " + kills + "<br>Average hunger: " + Math.round(totalHungerAtKill/kills * 100) / 100
-    guttaStats.appendChild(statsDisplay)
+    statsDisplay.innerHTML = "Number of munches: " + guttaStats.munch + "<br>Average hunger: " + Math.round(guttaStats.totalHungerAtMunch/guttaStats.munch * 100) / 100 + "<br><br>Number of kills: " + guttaStats.kills + "<br>Average hunger: " + Math.round(guttaStats.totalHungerAtKill/guttaStats.kills * 100) / 100
+    guttaStatScreen.appendChild(statsDisplay)
 }
 
 //CREATE FPS COUNTER
@@ -1787,7 +1360,7 @@ refreshLoop();
 //INTERACTION FUNCTIONS
 function scanPins() {
     raycaster.setFromCamera(pointer, camera);
-    const intersects = raycaster.intersectObjects(pinPositions);
+    const intersects = raycaster.intersectObjects(intersectObjectsArray);
 
     hoverPins(intersects)
 }
@@ -1841,186 +1414,463 @@ export function openVRLink() {
 document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
-
-    //Slide control
-    if (activeCarousel !== undefined && (keyCode === 33 || keyCode === 37)) { // left arrow or button on USB remote
-        const prevButton = document.querySelector("[data-carousel-button='prev']");
-        handleCarouselButton(prevButton);
-    }
-    if (activeCarousel !== undefined && (keyCode === 34 || keyCode === 39)) { // right arrow or button on USB remote
-        const nextButton = document.querySelector("[data-carousel-button='next']");
-        handleCarouselButton(nextButton);
-    }
-    if (activeCarousel !== undefined && keyCode == 116) { //button on USB remote
-        console.log("play")
-    }
-    if (activeCarousel !== undefined && keyCode == 190) { //button on USB remote
-        const exitButton = document.querySelector("[data-carousel-button='exit']");
-        handleCarouselButton(exitButton);
-    }
-
-
-    //Light control
-    if (keyCode == 49) { 
-        spotlight.intensity = 0
-    }
-    if (keyCode == 50) { 
-        spotlight.intensity = 0.1
-    }
-    if (keyCode == 51) { 
-        spotlight.intensity = 0.25
-    }
-    if (keyCode == 52) { 
-        spotlight.intensity = 0.5
-    }
-    if (keyCode == 53) { 
-        spotlight.intensity = 1
-    }
-
-    if (keyCode == 54) { 
-        ambient.intensity = 0
-    }
-    if (keyCode == 55) { 
-        ambient.intensity = 0.02
-    }
-    if (keyCode == 56) { 
-        ambient.intensity = 0.05
-    }
-    if (keyCode == 57) { 
-        ambient.intensity = 0.1
-    }
-    if (keyCode == 48) { 
-        ambient.intensity = 0.3
-    }
-
-    //Stats display
-    if (keyCode == 71) { //G
-        if (fpsContainer.style.display == "block") {
-            fpsContainer.style.display = "none"
-            guttaStats.style.display = "none"
-        } else {
-            fpsContainer.style.display = "block"
-            guttaStats.style.display = "block" 
+    if (focusElement !== "tagInput") {
+        //Slide control
+        if (activeCarousel !== undefined && (keyCode === 33 || keyCode === 37)) { // left arrow or button on USB remote
+            const prevButton = document.querySelector("[data-carousel-button='prev']");
+            handleCarouselButton(prevButton);
         }
-    }
+        if (activeCarousel !== undefined && (keyCode === 34 || keyCode === 39)) { // right arrow or button on USB remote
+            const nextButton = document.querySelector("[data-carousel-button='next']");
+            handleCarouselButton(nextButton);
+        }
+        if (activeCarousel !== undefined && keyCode == 116) { //button on USB remote
+            console.log("play")
+        }
+        if (activeCarousel !== undefined && keyCode == 190) { //button on USB remote
+            const exitButton = document.querySelector("[data-carousel-button='exit']");
+            handleCarouselButton(exitButton);
+        }
 
-    //Node management
-    if (keyCode == 65 && developer == true) { //A - clear selection
-        selectedNodes.length = 0
-    }
+        //Light control
+        if (keyCode == 49) { 
+            spotlight.intensity = 0
+        }
+        if (keyCode == 50) { 
+            spotlight.intensity = 0.1
+        }
+        if (keyCode == 51) { 
+            spotlight.intensity = 0.25
+        }
+        if (keyCode == 52) { 
+            spotlight.intensity = 0.5
+        }
+        if (keyCode == 53) { 
+            spotlight.intensity = 1
+        }
 
-    if (keyCode == 90 && developer == true) { //Z - add to selection
-        if (selectedNode !== null) {
-            if (selectedNodes.indexOf(selectedNode) == -1) {
-                selectedNodes.push(selectedNode)
+        if (keyCode == 54) { 
+            ambient.intensity = 0
+        }
+        if (keyCode == 55) { 
+            ambient.intensity = 0.02
+        }
+        if (keyCode == 56) { 
+            ambient.intensity = 0.05
+        }
+        if (keyCode == 57) { 
+            ambient.intensity = 0.1
+        }
+        if (keyCode == 48) { 
+            ambient.intensity = 0.3
+        }
+
+        //Stats display
+        if (keyCode == 71) { //G
+            if (guttaStatScreen.style.display == "block") {
+                //fpsContainer.style.display = "none"
+                guttaStatScreen.style.display = "none"
+                scene.remove(guttaHelperCenter)
+            } else {
+                fpsContainer.style.display = "block"
+                guttaStatScreen.style.display = "block" 
+                scene.add(guttaHelperCenter)
             }
-            console.log(selectedNodes)
         }
-    }
-    if (keyCode == 67) { //C
-        if (showContent == true) {
-            jaranius.remove(planetContent)
-            jaranius.remove(jaraniusConnections)
-            showContent = false
-        } else {
-            jaranius.add(planetContent)
-            jaranius.add(jaraniusConnections)
-            showContent = true
+        if (keyCode == 72) { //H
+            jaranius.material.wireframe = true
         }
-    }
-    if (keyCode == 70 && developer == true) { //F - toggle fast move
-        if (fastMove == true) {
-            fastMove = false
-        } else {
-            fastMove = true
-        }
-    }
-    
-   /*  if (keyCode == 78 && developer == true) { //N
-        const tempStore = []
-        const context = contexts[selectedContext][0]
-            context.push(context[selectedNode])
-            tempStore.push(context[selectedNode])
-            context[selectedNode].id = "set new"
-            context[selectedNode].text = "new text"
-            tempStore[0].text = "new text"
-            context[selectedNode].lat -=1
-            tempStore[0].lat -=1
-            context[selectedNode].slides = undefined
 
-            createTags(tempStore, planetContent, 5) 
-    } */
+        //Content display
+        if (keyCode == 67) { //C
+            if (showContent == true) {
+                jaranius.remove(planetContent)
+                jaranius.remove(jaraniusConnections)
+                showContent = false
+            } else {
+                jaranius.add(planetContent)
+                jaranius.add(jaraniusConnections)
+                showContent = true
+            }
+        }
+        if (keyCode == 83) { //S
+            if (spiralActivated == false) {
+                createSpiral()
+            } else {
+                spiralActivated = false
+                spiralCenter.remove(spiral)
+            }
+        }
 
-    if (keyCode == 81 && developer == true) { //Q - print tagdata
-        let output = ""
-        const context = contexts[selectedContext][0]
-        for (let i = 0; i < context.length; i++) {
-            output = output + "    {id: \"" + context[i].id + "\", text: " + JSON.stringify(context[i].text) + ", lat: " + context[i].lat + ", lng: " + context[i].lng + ", color: " + context[i].color + ", size: " + context[i].size + ", slides: " + context[i].slides + "},\n"
+        //Node management
+        if (keyCode == 90 && developer == true) { //Z - clear selection
+            selectedNodes.length = 0
         }
-        console.log(output)
-    }
-    if (keyCode == 83) { //S
-        if (spiralActivated == false) {
-            createSpiral()
-        } else {
-            spiralActivated = false
-            scene.remove(spiral)
+        if (keyCode == 65 && developer == true) { //A - add to selection
+            if (selectedNode !== null) {
+                if (selectedNodes.indexOf(selectedNode) == -1) {
+                    selectedNodes.push(selectedNode)
+                }
+                console.log(selectedNodes)
+            }
+        }
+        if (keyCode == 70 && developer == true) { //F - toggle fast move
+            if (fastMove == true) {
+                fastMove = false
+            } else {
+                fastMove = true
+            }
+        }
+        if (keyCode == 81 && developer == true) { //Q - print tagdata and connectiondata
+            let tagOutput = ""
+            const tagSource = contexts[selectedContext].tagData
+            for (let i = 0; i < tagSource.length; i++) {
+                tagOutput = tagOutput + "    {id: \"" + tagSource[i].id + "\", text: " + JSON.stringify(tagSource[i].text) + ", lat: " + tagSource[i].lat + ", lng: " + tagSource[i].lng + ", color: " + tagSource[i].color + ", size: " + tagSource[i].size + ", slides: " + tagSource[i].slides + "},\n"
+            }
+            console.log(tagOutput)
+
+            console.log("\n\n\n")
+
+            let connectionOutput = ""
+            const connectionSource = contexts[selectedContext].connectionData
+            for (let i = 0; i < connectionSource.length; i++) {
+                connectionOutput = connectionOutput + "["
+                connectionSource[i].forEach((item) => {
+                    connectionOutput = connectionOutput + "\"" + item + "\", "
+                })
+                connectionOutput = connectionOutput + "],\n"
+            }
+            console.log(connectionOutput)
+
+            console.log("\n\n\n")
+
+            let arrowConnectionOutput = ""
+            const arrowConnectionSource = contexts[selectedContext].arrowConnectionData
+            for (let i = 0; i < arrowConnectionSource.length; i++) {
+                arrowConnectionOutput = arrowConnectionOutput + "["
+                arrowConnectionSource[i].forEach((item) => {
+                    arrowConnectionOutput = arrowConnectionOutput + "\"" + item + "\", "
+                })
+                arrowConnectionOutput = arrowConnectionOutput + "],\n"
+            }
+            console.log(arrowConnectionOutput)
+
+            console.log("\n\n\n")
+
+            let dashedConnectionOutput = ""
+            const dashedConnectionSource = contexts[selectedContext].dashedConnectionData
+            for (let i = 0; i < dashedConnectionSource.length; i++) {
+                dashedConnectionOutput = dashedConnectionOutput + "["
+                dashedConnectionSource[i].forEach((item) => {
+                    dashedConnectionOutput = dashedConnectionOutput + "\"" + item + "\", "
+                })
+                dashedConnectionOutput = dashedConnectionOutput + "],\n"
+            }
+            console.log(dashedConnectionOutput)
+        }
+        if (keyCode == 84 && developer == true) { //T - create new node
+            const tagInput = document.getElementById("tagInput");
+            const activeElement = document.activeElement;
+            focusElement = "tagInput"
+
+            if (event.key === 't' && pointer !== null && !(activeElement instanceof HTMLInputElement)) {
+                tagInput.style.display = "block";
+                tagInput.style.left = event.clientX + "px";
+                tagInput.style.top = event.clientY + "px";
+                tagInput.value = "";
+                tagInput.focus();
+
+                event.preventDefault();
+            }
+        }
+        if (keyCode == 88 && developer == true) { //X - remove node
+            if (selectedNode !== null) {
+                const index = intersectObjectsArray.indexOf(contexts[selectedContext].pins[selectedNode])
+                intersectObjectsArray.splice(index, 1)
+
+                const id = contexts[selectedContext].tagData[selectedNode].id
+
+                contexts[selectedContext].tagData.splice(selectedNode, 1)
+                contexts[selectedContext].connectionData.splice(selectedNode, 1)
+                contexts[selectedContext].arrowConnectionData.splice(selectedNode, 1)
+                contexts[selectedContext].dashedConnectionData.splice(selectedNode, 1)
+                contexts[selectedContext].pins.splice(selectedNode, 1)
+                contexts[selectedContext].boxes.splice(selectedNode, 1)
+                contexts[selectedContext].tags.splice(selectedNode, 1)
+                contexts[selectedContext].tagDestination.remove(selectedPin)
+                contexts[selectedContext].tagDestination.remove(selectedBox)
+                contexts[selectedContext].tagDestination.remove(selectedTag)
+
+                let counter = 0
+                for (let i = 0; i < contexts[selectedContext].tagData.length; i++) {
+                    const index1 = contexts[selectedContext].connectionData[i].indexOf(id)
+                    if (index1 !== -1) {contexts[selectedContext].connectionData[i].splice(index1, 1)
+                    counter += 1
+                    }
+                    
+                    const index2 = contexts[selectedContext].arrowConnectionData[i].indexOf(id)
+                    if (index2 !== -1) {contexts[selectedContext].arrowConnectionData[i].splice(index2, 1)
+                    counter += 1
+                    }
+
+                    const index3 = contexts[selectedContext].dashedConnectionData[i].indexOf(id)
+                    if (index3 !== -1) {contexts[selectedContext].dashedConnectionData[i].splice(index3, 1)
+                    counter += 1
+                    }
+                }
+                console.log(counter)
+
+                for (let i = selectedNode; i < contexts[selectedContext].tagData.length; i++) {
+                    contexts[selectedContext].pins[i].index -= 1
+                    contexts[selectedContext].boxes[i].index -= 1
+                    contexts[selectedContext].tags[i].index -= 1
+                }
+
+                hoveredPins.length = 0
+                selectedNode = null
+                selectedPin = null
+                selectedBox = null
+                selectedTag = null
+            }           
+        }
+        if (keyCode == 82 && developer == true) { //R - create new connections
+            if (selectedNodes.length > 1) {
+                for (let i = 1; i < selectedNodes.length; i++){
+                    if (contexts[selectedContext].connectionData[selectedNodes[0]].includes(contexts[selectedContext].tagData[selectedNodes[i]].id)) {
+                        const index = contexts[selectedContext].connectionData[selectedNodes[0]].indexOf(contexts[selectedContext].tagData[selectedNodes[i]].id)
+                        if (index > -1) {
+                            contexts[selectedContext].connectionData[selectedNodes[0]].splice(index, 1)
+                        }
+                    } else contexts[selectedContext].connectionData[selectedNodes[0]].push(contexts[selectedContext].tagData[selectedNodes[i]].id)
+                }
+
+                const context = {
+                    tagSource: contexts[selectedContext].tagData,
+                    connectionSource: contexts[selectedContext].connectionData, 
+                    curveMinAltitude: contexts[selectedContext].radius, 
+                    context: contexts[selectedContext].connectionDestination
+                }
+                context.context.clear()
+                const curveThickness = 0.0001
+                const curveRadiusSegments = 3
+                const curveMaxAltitude = 0.03
+                createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, false, false)
+            
+            } 
+        }
+        if (keyCode == 86 && developer == true) { //V - create new arrow connections
+            if (selectedNodes.length > 1) {
+                for (let i = 1; i < selectedNodes.length; i++){
+                    if (contexts[selectedContext].arrowConnectionData[selectedNodes[0]].includes(contexts[selectedContext].tagData[selectedNodes[i]].id)) {
+                        const index = contexts[selectedContext].arrowConnectionData[selectedNodes[0]].indexOf(contexts[selectedContext].tagData[selectedNodes[i]].id)
+                        if (index > -1) {
+                            contexts[selectedContext].arrowConnectionData[selectedNodes[0]].splice(index, 1)
+                        }
+                    } else contexts[selectedContext].arrowConnectionData[selectedNodes[0]].push(contexts[selectedContext].tagData[selectedNodes[i]].id)
+                }
+
+                const context = {
+                    tagSource: contexts[selectedContext].tagData,
+                    connectionSource: contexts[selectedContext].arrowConnectionData, 
+                    curveMinAltitude: contexts[selectedContext].radius, 
+                    context: contexts[selectedContext].connectionDestination
+                }
+                context.context.clear()
+                const curveThickness = 0.0001
+                const curveRadiusSegments = 3
+                const curveMaxAltitude = 0.03
+                createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, false, true)
+            } 
+        }
+        if (keyCode == 66 && developer == true) { //B - create new dashed connections
+            if (selectedNodes.length > 1) {
+                for (let i = 1; i < selectedNodes.length; i++){
+                    if (contexts[selectedContext].dashedConnectionData[selectedNodes[0]].includes(contexts[selectedContext].tagData[selectedNodes[i]].id)) {
+                        const index = contexts[selectedContext].dashedConnectionData[selectedNodes[0]].indexOf(contexts[selectedContext].tagData[selectedNodes[i]].id)
+                        if (index > -1) {
+                            contexts[selectedContext].dashedConnectionData[selectedNodes[0]].splice(index, 1)
+                        }
+                    } else contexts[selectedContext].dashedConnectionData[selectedNodes[0]].push(contexts[selectedContext].tagData[selectedNodes[i]].id)
+                }
+
+                const context = {
+                    tagSource: contexts[selectedContext].tagData,
+                    connectionSource: contexts[selectedContext].dashedConnectionData, 
+                    curveMinAltitude: contexts[selectedContext].radius, 
+                    context: contexts[selectedContext].connectionDestination
+                }
+                context.context.clear()
+                const curveThickness = 0.0001
+                const curveRadiusSegments = 3
+                const curveMaxAltitude = 0.03
+                createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, true, false)
+            } 
+        }
+        
+        if (keyCode == 87 && developer == true) { //W - redraw connections
+            const context = {
+                tagSource: contexts[selectedContext].tagData,
+                connectionSource: contexts[selectedContext].connectionData, 
+                curveMinAltitude: contexts[selectedContext].radius, 
+                context: contexts[selectedContext].connectionDestination
+            }
+            context.context.clear()
+            const curveThickness = 0.0001
+            const curveRadiusSegments = 3
+            const curveMaxAltitude = 0.03
+            createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, false, false)
+            
+            const arrowContext = {
+                tagSource: contexts[selectedContext].tagData,
+                connectionSource: contexts[selectedContext].arrowConnectionData, 
+                curveMinAltitude: contexts[selectedContext].radius, 
+                context: contexts[selectedContext].connectionDestination
+            }
+            createConnections(arrowContext.tagSource, arrowContext.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, arrowContext.curveMinAltitude, arrowContext.context, false, true)
+        
+            const dashedContext = {
+                tagSource: contexts[selectedContext].tagData,
+                connectionSource: contexts[selectedContext].dashedConnectionData, 
+                curveMinAltitude: contexts[selectedContext].radius, 
+                context: contexts[selectedContext].connectionDestination
+            }
+            createConnections(dashedContext.tagSource, dashedContext.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, dashedContext.curveMinAltitude, dashedContext.context, true, false)
+        
+        } 
+        if (keyCode == 69 && developer == true) { //E - change color
+            if (selectedNodes.length > 1) {
+                selectedNodes.forEach((node) => {
+                    if (fastMove == true) contexts[selectedContext].tagData[node].color += 9
+                    contexts[selectedContext].tagData[node].color += 1
+                    if (contexts[selectedContext].tagData[node].color >= palette.length) contexts[selectedContext].tagData[node].color -= palette.length
+
+                    let color = contexts[selectedContext].tagData[node].color
+                    if (!boxMaterials[color]) {
+                        color = (Math.floor(color / 10) + 1) * 10
+                        contexts[selectedContext].tagData[node].color = color
+                    }
+                    console.log(color)
+
+                    if (contexts[selectedContext].tagData[node].slides !== undefined) {
+                        contexts[selectedContext].pins[node].material = pinMaterials[color]
+                    } else contexts[selectedContext].pins[node].material = pinWireframeMaterials[color]
+                    contexts[selectedContext].boxes[node].material = boxMaterials[color]
+            })
+
+            } else if (selectedNode) {
+                if (fastMove == true) contexts[selectedContext].tagData[selectedNode].color += 9
+                contexts[selectedContext].tagData[selectedNode].color += 1
+                if (contexts[selectedContext].tagData[selectedNode].color >= palette.length) contexts[selectedContext].tagData[selectedNode].color -= palette.length
+                
+                let color = contexts[selectedContext].tagData[selectedNode].color
+                if (!boxMaterials[color]) {
+                    color = (Math.floor(color / 10) + 1) * 10
+                    contexts[selectedContext].tagData[selectedNode].color = color
+                } 
+                console.log(color)
+
+                if (contexts[selectedContext].tagData[selectedNode].slides !== undefined) {
+                    selectedPin.material = pinMaterials[color]
+                } else selectedPin.material = pinWireframeMaterials[color]
+                selectedBox.material = boxMaterials[color]
+                
+            }
+        }
+        if (keyCode == 68 && developer == true) { //D - change color
+            if (selectedNodes.length > 1) {
+                selectedNodes.forEach((node) => {
+                    if (fastMove == true) contexts[selectedContext].tagData[node].color -= 9
+
+                    let color = contexts[selectedContext].tagData[node].color
+                    do {
+                        color -= 1
+                        if (color < 0) color += palette.length
+                        console.log(color)
+                        contexts[selectedContext].tagData[node].color = color
+                    } while (!boxMaterials[color])
+
+                    if (contexts[selectedContext].tagData[node].slides !== undefined) {
+                        contexts[selectedContext].pins[node].material = pinMaterials[color]
+                    } else contexts[selectedContext].pins[node].material = pinWireframeMaterials[color]
+                    contexts[selectedContext].boxes[node].material = boxMaterials[color]
+            })
+
+            } else if (selectedNode) {
+                if (fastMove == true) contexts[selectedContext].tagData[selectedNode].color -= 9
+                
+                let color = contexts[selectedContext].tagData[selectedNode].color
+                do {
+                    color -= 1
+                    if (color < 0) color += palette.length
+                    console.log(color)
+                    contexts[selectedContext].tagData[selectedNode].color = color
+                } while (!boxMaterials[color])
+
+                if (contexts[selectedContext].tagData[selectedNode].slides !== undefined) {
+                    selectedPin.material = pinMaterials[color]
+                } else selectedPin.material = pinWireframeMaterials[color]
+                selectedBox.material = boxMaterials[color]
+                
+            }
+        }
+
+        if (keyCode == 187 && developer == true) { //+
+            let originalSize = 0
+            let size = 0
+
+            if (selectedNodes.length > 1) {
+                selectedNodes.forEach((node) => {
+                    originalSize = contexts[selectedContext].pins[node].originalSize
+                    contexts[selectedContext].tagData[node].size += 5
+
+                    size = contexts[selectedContext].tagData[node].size
+                    contexts[selectedContext].pins[node].scale.set(size / originalSize, size / originalSize, size / originalSize)
+                    contexts[selectedContext].boxes[node].scale.set(size / originalSize, size / originalSize, size / originalSize)
+                })
+
+            }else if (selectedNode) {
+                originalSize = contexts[selectedContext].pins[selectedNode].originalSize
+                contexts[selectedContext].tagData[selectedNode].size += 5
+
+                size = contexts[selectedContext].tagData[selectedNode].size
+                selectedPin.scale.set(size / originalSize, size / originalSize, size / originalSize)
+                selectedBox.scale.set(size / originalSize, size / originalSize, size / originalSize)
+            }
+        }
+        if (keyCode == 189 && developer == true) { //-
+            let originalSize = 0
+            let size = 0
+
+            if (selectedNodes.length > 1) {
+                selectedNodes.forEach((node) => {
+                    originalSize = contexts[selectedContext].pins[node].originalSize
+                    contexts[selectedContext].tagData[node].size -= 5
+
+                    size = contexts[selectedContext].tagData[node].size
+                    contexts[selectedContext].pins[node].scale.set(size / originalSize, size / originalSize, size / originalSize)
+                    contexts[selectedContext].boxes[node].scale.set(size / originalSize, size / originalSize, size / originalSize)
+                })
+
+            }else if (selectedNode) {
+                originalSize = contexts[selectedContext].pins[selectedNode].originalSize
+                contexts[selectedContext].tagData[selectedNode].size -= 5
+
+                size = contexts[selectedContext].tagData[selectedNode].size
+                selectedPin.scale.set(size / originalSize, size / originalSize, size / originalSize)
+                selectedBox.scale.set(size / originalSize, size / originalSize, size / originalSize)
+            }
         }
     }
-    if (keyCode == 87 && developer == true) { //W - redraw connections
-        const context = {
-            tagSource: contexts[selectedContext][0],
-            connectionSource: contexts[selectedContext][2], 
-            curveMinAltitude: contexts[selectedContext][4], 
-            context: contexts[selectedContext][3]
-        }
-        context.context.clear()
-        const curveThickness = 0.0002
-        const curveRadiusSegments = 3
-        const curveMaxAltitude = 0.03
-        createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context)
-    } 
-    if (keyCode == 187 && developer == true) { //+
-        let originalSize = 0
-        let size = 0
-        let context = {context: contexts[selectedContext][0]}
-        let indexModifier
-                if (selectedContext > 0) {
-                    indexModifier = contexts[selectedContext - 1][1]
-                } else indexModifier = 0
-        if (selectedNode)
-            originalSize = pins[selectedNode].originalSize
-            context.context[selectedNode - indexModifier].size += 5
-            size = context.context[selectedNode - indexModifier].size
-            selectedPin.scale.set(size / originalSize, size / originalSize, size / originalSize)
-            selectedBox.scale.set(size / originalSize, size / originalSize, size / originalSize)
-    }
-    if (keyCode == 189 && developer == true) { //-
-        let originalSize = 0
-        let size = 0
-        let context = {context: contexts[selectedContext][0]}
-        let indexModifier
-                if (selectedContext > 0) {
-                    indexModifier = contexts[selectedContext - 1][1]
-                } else indexModifier = 0
-        if (selectedNode)
-            originalSize = pins[selectedNode].originalSize
-            context.context[selectedNode - indexModifier].size -= 5
-            size = context.context[selectedNode - indexModifier].size
-            selectedPin.scale.set(size / originalSize, size / originalSize, size / originalSize)
-            selectedBox.scale.set(size / originalSize, size / originalSize, size / originalSize)
-    } 
 }
 
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     const keyCode = event.which;
 
-    if (selectedNodes.length > 0 && developer == true  && activeCarousel == undefined) {
-        const context = {context: contexts[selectedContext][0], length: contexts[selectedContext][1], radius: contexts[selectedContext][4]}
+    if (selectedNodes.length > 0 && developer == true  && activeCarousel == undefined && focusElement !== "tagInput") {
         for (let node = 0; node < selectedNodes.length; node++) {
             if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
-                let posLatLng = convertCartesiantoLatLng(pins[selectedNodes[node]].pin.position.x, pins[selectedNodes[node]].pin.position.y, pins[selectedNodes[node]].pin.position.z);
+                let posLatLng = convertCartesiantoLatLng(contexts[selectedContext].pins[selectedNodes[node]].position.x, contexts[selectedContext].pins[selectedNodes[node]].position.y, contexts[selectedContext].pins[selectedNodes[node]].position.z);
                 // up
                 if (keyCode == 38) {
                     if (fastMove) posLatLng.lat -= .4;
@@ -2045,48 +1895,42 @@ function onDocumentKeyDown(event) {
                     posLatLng.lng += .1;
                 }
 
-                const pinSphereRadius = context.radius
-                const boxSphereRadius = context.radius + 0.04
-                const tagSphereRadius = context.radius + 0.05
+                const pinSphereRadius = contexts[selectedContext].radius
+                const boxSphereRadius = pinSphereRadius + 0.04
+                const tagSphereRadius = pinSphereRadius + 0.05
                 
                 const pinPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, pinSphereRadius);
                 const boxPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, boxSphereRadius);
                 const tagPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, tagSphereRadius);
-                pins[selectedNodes[node]].pin.position.set(pinPos.x, pinPos.y, pinPos.z);
-                tags[selectedNodes[node]].box.position.set(boxPos.x, boxPos.y, boxPos.z);
-                tags[selectedNodes[node]].tag.position.set(tagPos.x, tagPos.y, tagPos.z);
-                posLatLng = constrainLatLng(posLatLng.lat, posLatLng.lng - 180)
 
-                let indexModifier
-                if (selectedContext > 0) {
-                    indexModifier = contexts[selectedContext - 1][1]
-                } else indexModifier = 0
-                context.context[selectedNodes[node] - indexModifier].lat = posLatLng.lat.toFixed(1)
-                context.context[selectedNodes[node] - indexModifier].lng = posLatLng.lng.toFixed(1)
+                contexts[selectedContext].pins[selectedNodes[node]].position.set(-pinPos.x, pinPos.y, -pinPos.z);
+                contexts[selectedContext].boxes[selectedNodes[node]].position.set(-boxPos.x, boxPos.y, -boxPos.z);
+                contexts[selectedContext].tags[selectedNodes[node]].position.set(-tagPos.x, tagPos.y, -tagPos.z);
+
+                posLatLng = constrainLatLng(posLatLng.lat, posLatLng.lng)
+
+                contexts[selectedContext].tagData[selectedNodes[node]].lat = posLatLng.lat.toFixed(1)
+                contexts[selectedContext].tagData[selectedNodes[node]].lng = posLatLng.lng.toFixed(1)
             }
         }
-    } else if (selectedPin != null && developer == true  && activeCarousel == undefined) {
-        const context = {context: contexts[selectedContext][0], length: contexts[selectedContext][1], radius: contexts[selectedContext][4]}
+    } else if (selectedPin != null && developer == true  && activeCarousel == undefined && focusElement !== "tagInput") {
 
         if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
             let posLatLng = convertCartesiantoLatLng(selectedPin.position.x, selectedPin.position.y, selectedPin.position.z);
             // up
             if (keyCode == 38) {
                 if (fastMove) posLatLng.lat -= .4;
-                posLatLng.lat -= .1;
-                
+                posLatLng.lat -= .1;                
             }
             // down
             if (keyCode == 40) {
                 if (fastMove) posLatLng.lat += .4;
                 posLatLng.lat += .1;
-                
             }
             // left
             if (keyCode == 37) {
                 if (fastMove) posLatLng.lng -= .4;
-                posLatLng.lng -= .1;
-                
+                posLatLng.lng -= .1;  
             }
             // right
             if (keyCode == 39) {
@@ -2094,27 +1938,66 @@ function onDocumentKeyDown(event) {
                 posLatLng.lng += .1;
             }
 
-            const pinSphereRadius = context.radius
-            const boxSphereRadius = context.radius + 0.04
-            const tagSphereRadius = context.radius + 0.05
+            const pinSphereRadius = contexts[selectedContext].radius
+            const boxSphereRadius = pinSphereRadius + 0.04
+            const tagSphereRadius = pinSphereRadius + 0.05
             
             const pinPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, pinSphereRadius);
             const boxPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, boxSphereRadius);
             const tagPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, tagSphereRadius);
-            selectedPin.position.set(pinPos.x, pinPos.y, pinPos.z);
-            selectedBox.position.set(boxPos.x, boxPos.y, boxPos.z);
-            selectedTag.position.set(tagPos.x, tagPos.y, tagPos.z);
-            posLatLng = constrainLatLng(posLatLng.lat, posLatLng.lng - 180)
 
-            let indexModifier
-                if (selectedContext > 0) {
-                    indexModifier = contexts[selectedContext - 1][1]
-                } else indexModifier = 0
-                context.context[selectedNode - indexModifier].lat = posLatLng.lat.toFixed(1)
-                context.context[selectedNode - indexModifier].lng = posLatLng.lng.toFixed(1)
+            selectedPin.position.set(-pinPos.x, pinPos.y, -pinPos.z);
+            selectedBox.position.set(-boxPos.x, boxPos.y, -boxPos.z);
+            selectedTag.position.set(-tagPos.x, tagPos.y, -tagPos.z);
+
+            posLatLng = constrainLatLng(posLatLng.lat, posLatLng.lng)
+
+            contexts[selectedContext].tagData[selectedNode].lat = posLatLng.lat.toFixed(1)
+            contexts[selectedContext].tagData[selectedNode].lng = posLatLng.lng.toFixed(1)
         }
     }     
 };
+
+let focusElement
+document.getElementById("tagInput").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        raycaster.setFromCamera(pointer, camera);
+        const intersects = raycaster.intersectObjects(jaraniusCenter.children, false); //add support for spiralCenter?
+
+        if (intersects.length > 0) {
+            const point = intersects[0].point;
+            const latLng = convertCartesiantoLatLng(point.x, point.y, point.z);
+
+            const id = generateUUID()
+
+            const newItem = {
+                id: id,
+                text: this.value,
+                lat: latLng.lat.toFixed(1),
+                lng: latLng.lng.toFixed(1),
+                color: 10,
+                size: 20,
+                slides: undefined
+            };
+            const newTagDestination = contexts[selectedContext].tagData
+            const newConnectionsDestination = contexts[selectedContext].connectionData
+            const newArrowConnectionsDestination = contexts[selectedContext].arrowConnectionData
+            const newDashedConnectionsDestination = contexts[selectedContext].dashedConnectionData
+
+            newTagDestination.push(newItem)
+            newConnectionsDestination.push([id])
+            newArrowConnectionsDestination.push([id])
+            newDashedConnectionsDestination.push([id])
+
+            const indexMod = contexts[selectedContext].tagData.length - 1
+
+            createTags([newItem], contexts[selectedContext].tagDestination, contexts[selectedContext].radius, selectedContext, indexMod);
+
+            this.style.display = "none";
+            focusElement = undefined
+        }
+    }
+})
 
 //EVENTS MOUSE
 function onPointerMove(event) {
@@ -2124,35 +2007,17 @@ function onPointerMove(event) {
 
 function onClick(event) {
     raycaster.setFromCamera(pointer, camera);
-    const intersects = raycaster.intersectObjects(pinPositions);
+    const intersects = raycaster.intersectObjects(intersectObjectsArray);
     if (intersects.length > 0) {
         selectedPin = intersects[0].object;
-        selectedNode = pinPositions.findIndex((object) => object==intersects[0].object)
-        if (tags.length > selectedNode){
-            selectedBox = tags[selectedNode].box;
-            selectedTag = tags[selectedNode].tag;
-        }
 
-        const currentContext = selectedContext
-        for (let i = 0; i < 100; i++){
-            if (selectedNode < contexts[i][1]) {
-                selectedContext = i
-                if (selectedContext !== currentContext) {
-                    selectedNodes.length = 0
-                }
-                break
-            }
-        }
+        selectedContext = intersects[0].object.context
+        selectedNode = intersects[0].object.index
+        if (contexts !== 2) selectedBox = contexts[selectedContext].boxes[selectedNode]
+        if (contexts !== 2) selectedTag = contexts[selectedContext].tags[selectedNode]
 
-        let indexModifier
-            if (selectedContext > 0) {
-                indexModifier = contexts[selectedContext - 1][1]
-            } else indexModifier = 0
-
-        let context = contexts[selectedContext][0]
-
-        if (camera.position.distanceTo(selectedPin.position) < 4 && context[selectedNode - indexModifier].slides !== undefined) {
-            const selectedCarousel = context[selectedNode - indexModifier].slides
+        if (camera.position.distanceTo(selectedPin.position) < 4 && contexts[selectedContext].tagData[selectedNode].slides !== undefined) {
+            const selectedCarousel = contexts[selectedContext].tagData[selectedNode].slides
             pushContent(selectedCarousel)
             activeCarousel = document.querySelector(`.carousel.s1`)
             activeCarousel.style.display = "block"
@@ -2288,31 +2153,32 @@ function render() {
         updateButtons();
     }
 
-    if (guttaInitialized == true) {
-        species = "gutt"
+    //console.log(camera.position.x, guttaState)
+    if (guttaState.initialized == true) {
+        guttaState.species = "gutt"
         let wander
         if ((getRandomNum(0, 1) > 0.95)) {
             wander = true
         } else wander = false
-        for (let i = 0; i < gutta.length; i++) {
-            if (wander == true) gutta[i].calculateWander(species);
-            gutta[i].calculateAlignment(species);
-            gutta[i].calculateCohesion(species);
-            gutta[i].calculateSeparation(species);
-            gutta[i].calculateFleeing();
-            gutta[i].calculateFeeding();
-            gutta[i].calculateTemperature(species);
-            gutta[i].move(species, i); 
+        for (let i = 0; i < guttaState.gutta.length; i++) {
+            if (wander == true) guttaState.gutta[i].calculateWander(guttaState.species);
+            guttaState.gutta[i].calculateAlignment(guttaState.species);
+            guttaState.gutta[i].calculateCohesion(guttaState.species);
+            guttaState.gutta[i].calculateSeparation(guttaState.species);
+            guttaState.gutta[i].calculateFleeing();
+            guttaStats = guttaState.gutta[i].calculateFeeding(guttaStats, jaranius, nuggets);
+            guttaState.gutta[i].calculateTemperature(guttaState.species);
+            guttaState.gutta[i].move(guttaState.species, i); 
         }
-        species = "mara"
-        for (let i = 0; i < mara.length; i++) {
-            if (wander == true) mara[i].calculateWander(species);
-            mara[i].calculateAlignment(species);
-            mara[i].calculateCohesion(species);
-            mara[i].calculateSeparation(species);
-            mara[i].calculateHunting();
-            mara[i].calculateTemperature(species);
-            mara[i].move(species);
+        guttaState.species = "mara"
+        for (let i = 0; i < guttaState.mara.length; i++) {
+            if (wander == true) guttaState.mara[i].calculateWander(guttaState.species);
+            guttaState.mara[i].calculateAlignment(guttaState.species);
+            guttaState.mara[i].calculateCohesion(guttaState.species);
+            guttaState.mara[i].calculateSeparation(guttaState.species);
+            guttaStats = guttaState.mara[i].calculateHunting(guttaStats);
+            guttaState.mara[i].calculateTemperature(guttaState.species);
+            guttaState.mara[i].move(guttaState.species);
         }
     }
 

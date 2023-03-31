@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { contentData } from "./data/contentData";
 import ThreeMeshUI from 'three-mesh-ui'
-import { previousVRSlide, nextVRSlide, openVRLink } from './main';
+import { previousVRSlide, nextVRSlide, openVRLink } from './main.js';
 
 export function pushContent(index) {
     const slides = document.createElement("ul")

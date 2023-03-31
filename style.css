@@ -426,16 +426,16 @@ label {
 }
 
 /*  || GUTTA STATS */
-#guttaStats{
+#guttaStatScreen{
   position: absolute;
   left: 90%;
-  top: 0;
+  top: 5%;
   width:max-content;
   background-color: black;
   z-index: 0;
   display: none;
 }
-#guttaStats>div {
+#guttaStatScreen>div {
   position: absolute;  /* let us position them inside the container */
   left: 90%;             /* make their default position the top left of the container */
   top: 0;

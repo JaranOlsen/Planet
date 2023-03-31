@@ -1,3 +1,19 @@
+v    selectedNodes
+v    originalSize
+v        indexModifier removal - only left here
+v    gutta arrowhelpers
+v    check if positions of new tags update
+v    go through all contexts dependent code
+v    go through all pins/tags dependent code
+    sort out the lng + 180 issue - seems like the spiral is turned 180 degrees compared to jaranius... i guess it might not be rotating either
+    create new tags on spiral - fix intersect so that it's added there..
+v    add connections
+v    fix so it works for spiral too
+    make straightconnections - gets visible with 'H' - make them thick like tunnels so they are well visible
+    fix move-node bug, greed/hatred/delusion skips to other side of the planet (redraw connections to find)
+
+
+
 INITIATIVES
     go through way of the gut with Thomas
 
@@ -47,14 +63,17 @@ MAKE USABLE
     debug for iphone
         fix touch click controls - fixed? not quite.. CHECK IF EVENTLISTENERS ADDED DURING MESH-UI DEV MADE A DIFFERENCE
 
+    this can be added at the beginning of my script to make sure that the DOM content is loaded before the script starts running:
+    document. addEventListener ('DOMContentLoaded', () = {
+
 SHORT-TERM DEVELOPMENT
-    make function for drawing connections (select multiple nodes, search through tag- and connection-data and add id's to the first selected node)
-    make function for adding nodes (at intersection of cursor and context surface? inputbox for text or just "add text here"?)
+ v   make function for drawing connections (select multiple nodes, search through tag- and connection-data and add id's to the first selected node)
+v    make function for adding nodes (at intersection of cursor and context surface? inputbox for text or just "add text here"?)
         if this works can possibly change to move nodes with pointer
-    make function for changing color of nodes
-    make function for removing nodes
-    make function for removing connections
-    make function for drawing arrowed and dashed connections
+v    make function for changing color of nodes
+ v   make function for removing nodes
+ v   make function for removing connections
+ v   make function for drawing arrowed and dashed connections
 
 VR DEVELOPMENT
     - three-mesh-ui
@@ -120,56 +139,6 @@ LONG-TERM DEVELOPMENT
     make background more colorful
         fog?
         nebula
-
-SCENE STRUCTURE
-- scene
-    - center
-        - jaranius
-            - clouds
-            - atmosphericLight
-            - atmosphere
-            - jaraniusLight
-            - planetContent
-                - createImages(planetImageData)
-                - createTags(planetTagData)
-                - sign
-                    - model
-            - jaraniusConnections
-                - createConnections(planetConnections)
-                - createConnections(planetDashedConnections)
-                - createConnections(planetArrowedConnections)
-            - instantiateNugget(planetNuggetData)
-        - pivot1
-            - moon1
-        - pivot2
-            - moon2
-        - pivot3
-            - moon3
-        - pivot4
-            - sunRadiance
-            - sunLight
-                - lensflare
-    - this.gutt
-    - spiral 
-        - createImages(spiralImageData)
-        - createTags(spiralTagData)
-        - spiralSection
-        - spiralSection2
-        - jointSection
-        - tierRing
-        - spiralDynamicsConnections
-            - createConnections(spiralConnections)
-    - stars, starsR5, starsR10, starsR15, starsR20, starsB5, starsB10, starsB15, starsB20
-
-    - dolly
-        - camera
-            - dummyCam
-        - controller
-            - line.clone()
-        - grip
-            - modelFactory.createControllerModel( grip )
-    - ambient
-    - spotlight
 
 USEFUL
     three.js examples that have useful feature/codesnippets

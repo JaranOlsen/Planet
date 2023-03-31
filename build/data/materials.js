@@ -20,6 +20,14 @@ const boxMaterial0 = new MeshStandardMaterial({
         emissive: palette[0],
         emissiveIntensity: 0.5,
     })
+const boxMaterial1 = new MeshStandardMaterial({
+        color: palette[1],
+        transparent: true,
+        opacity: 0.85, 
+        side: DoubleSide,
+        emissive: palette[1],
+        emissiveIntensity: 0.5,
+    })
     
 const boxMaterial10 = new MeshStandardMaterial({
         color: palette[10],

@@ -1,59 +1,31 @@
-export function initializeVersion(callback, postLoadingManager) {
-    const playButton = document.getElementById("playbutton")
-    const credits = document.getElementById("credits")
-    const skipButton = document.getElementById("skipbutton")
-    const enableVRbutton = document.getElementById("enableVRbutton")
-    const keys = document.getElementById("keys")
+export function initializeVersion(callback, postLoadingManager, guttaState, scene, guttaHelperCenter) {
+    const elements = {
+        playButton: document.getElementById("playbutton"),
+        credits: document.getElementById("credits"),
+        skipButton: document.getElementById("skipbutton"),
+        enableVRbutton: document.getElementById("enableVRbutton"),
+        keys: document.getElementById("keys"),
+        versionButtons: [
+            document.getElementById("version1"),
+            document.getElementById("version2"),
+            document.getElementById("version3"),
+            document.getElementById("version4"),
+        ],
+    };
 
-    const fullVersionButton = document.getElementById("version1")
-    fullVersionButton.addEventListener("click", () => {
-            version1.style.display = "none";
-            version2.style.display = "none";
-            version3.style.display = "none";
-            version4.style.display = "none";
-            keys.style.display = "none";
-            playButton.style.display = "block";
-            skipButton.style.display = "block";
-            credits.style.display = "block";
-            return callback(1, postLoadingManager)
-        })
-    const lightVersionButton = document.getElementById("version2")
-    lightVersionButton.addEventListener("click", () => {
-            version1.style.display = "none";
-            version2.style.display = "none";
-            version3.style.display = "none";
-            version4.style.display = "none";
-            keys.style.display = "none";
-            playButton.style.display = "block";
-            skipButton.style.display = "block";
-            credits.style.display = "block";
-            return callback(2, postLoadingManager)
-        })
-    const developerVersionButton = document.getElementById("version3")
-    developerVersionButton.addEventListener("click", () => {
-            version1.style.display = "none";
-            version2.style.display = "none";
-            version3.style.display = "none";
-            version4.style.display = "none";
-            keys.style.display = "none";
-            playButton.style.display = "block";
-            skipButton.style.display = "block";
-            enableVRbutton.style.display = "block";
-            credits.style.display = "block";
-            return callback(3, postLoadingManager)
-        })
-    const vrVersionButton = document.getElementById("version4")
-    vrVersionButton.addEventListener("click", () => {
-            version1.style.display = "none";
-            version2.style.display = "none";
-            version3.style.display = "none";
-            version4.style.display = "none";
-            keys.style.display = "none";
-            playButton.style.display = "block";
-            skipButton.style.display = "block";
-            enableVRbutton.style.display = "block";
-            credits.style.display = "block";
-            return callback(4, postLoadingManager)
-        })
+    const hideButtons = (showVR) => {
+        elements.versionButtons.forEach((btn) => (btn.style.display = "none"));
+        elements.keys.style.display = "none";
+        elements.playButton.style.display = "block";
+        elements.skipButton.style.display = "block";
+        elements.credits.style.display = "block";
+        elements.enableVRbutton.style.display = showVR ? "block" : "none";
+    };
 
+    elements.versionButtons.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+            hideButtons(index === 2 || index === 3);
+            return callback(index + 1, postLoadingManager, guttaState, scene, guttaHelperCenter);
+        });
+    });
 }

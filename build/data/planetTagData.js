@@ -330,7 +330,7 @@ export const planetTagData = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see palet
 {id: "04C21F20-915C-446A-902D-A8D5D7076C6F", text: "Unconditional \npositive regard", lat: 127.4, lng: 299.6, color: 11, size: 35, slides: undefined},
 {id: "23D5758E-178A-43BD-A82B-5D1F11CC1223", text: "Alliance work", lat: 133.7, lng: 304.9, color: 10, size: 30, slides: 18},
 {id: "7D0652E2-E579-47BC-8FB9-E1FBA3539A3F", text: "Conflict splits", lat: 112, lng: 284.5, color: 12, size: 40, slides: 21},
-{id: "5D8415B8-AD5B-44AE-804C-9A2A62B177F8", text: "Path of the Heart", lat: 110.4, lng: 81.0, color: 0, size: 90, slides: undefined},
+{id: "5D8415B8-AD5B-44AE-804C-9A2A62B177F8", text: "Path of the Heart", lat: 110.4, lng: 81, color: 0, size: 90, slides: undefined},
 {id: "025E5CB8-BF2F-46EC-A170-4F80BD2FCA54", text: "Anxiety splits", lat: 119, lng: 285, color: 12, size: 40, slides: 21},
 {id: "C120D32F-4E27-481A-97F9-9B62BB394DF9", text: "Evocative unfolding", lat: 128.5, lng: 286.5, color: 12, size: 40, slides: 27},
 {id: "94D5EB98-E41E-4DD5-8B8D-06598E285B4E", text: "Trauma retelling", lat: 137, lng: 289.7, color: 12, size: 40, slides: 28},
@@ -428,6 +428,8 @@ export const planetTagData = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see palet
 {id: "9FC8EA8E-9B5C-4588-9EB5-6D6CFA375656", text: "postural support", lat: 97.7, lng: 74.8, color: 21, size: 8, slides: undefined},
 {id: "3CEE76EB-E3AF-4C32-B60F-22A156E6BB15", text: "light", lat: 98.1, lng: 76.4, color: 21, size: 8, slides: undefined},
 {id: "7638D6DF-814D-4E9D-AAE1-17D8CC1015B7", text: "food", lat: 99.4, lng: 73.3, color: 21, size: 8, slides: undefined},
+{id: "4ac7eaf5-aff4-448b-b759-a08578e179b2", text: "hy", lat: 65.8, lng: 329.2, color: 20, size: 50, slides: undefined},
+{id: "71dd5681-0095-4fb4-9534-281eae1b327d", text: "hy", lat: 65.9, lng: 336.3, color: 20, size: 50, slides: undefined},
 
 ];
 
