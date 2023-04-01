@@ -2146,7 +2146,7 @@ function render() {
         updateButtons();
     }
 
-    console.log("test")
+    console.log(guttaState.initialized)
 
     if (guttaState.initialized == true) {
         guttaState.species = "gutt"
