@@ -2134,13 +2134,6 @@ function render() {
             const yInput = Number(buttonStates.xr_standard_thumbstick.yAxis)
             if (xInput != 0 || yInput != 0 || buttonStates.a_button != 0 || buttonStates.b_button != 0) {
 
-                //DOLLY ROTATE
-                /* dollyLng += xInput * 2
-                dollyLat += yInput
-                dollyRadius += ((0.1 * buttonStates.a_button) - (0.1 * buttonStates.b_button)) * (dollyRadius - 5)
-                const dollyPosit = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
-                dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z) */
-
                 //JARANIUS ROTATE
                 jaranius.rotation.y -= xInput / 15
                 dollyLat += yInput
@@ -2152,6 +2145,8 @@ function render() {
         ThreeMeshUI.update();
         updateButtons();
     }
+
+    console.log("test")
 
     if (guttaState.initialized == true) {
         guttaState.species = "gutt"

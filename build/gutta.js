@@ -132,8 +132,7 @@ export class Gutt {
         this.gutt.rotateZ(this.presentHeading - this.originalHeading)
         this.gutt.position.set(this.cartesianPosition.x, this.cartesianPosition.y, this.cartesianPosition.z)
 
-        // Add this at the end of your move() method
-        const arrowScaling = 50; // You can adjust this value to change the scaling of the arrows
+        const arrowScaling = 50;
 
         const alignment3D = convertLatLngtoCartesian(this.alignment.x + this.pos.x, this.alignment.y + this.pos.y, 5 + this.guttaFlyAltitude)
         const cohesion3D = convertLatLngtoCartesian(this.cohesion.x + this.pos.x, this.cohesion.y + this.pos.y, 5 + this.guttaFlyAltitude)
