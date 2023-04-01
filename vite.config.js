@@ -10,6 +10,7 @@ export default defineConfig({
     vitePluginString(), //changed from vitePluginString.default()
   ],
   build: {
+    sourcemap: true,
     rollupOptions: {
       input: {
         index: resolve('index.html'),

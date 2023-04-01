@@ -1,3 +1,4 @@
+    fix gutta on external
 v    selectedNodes
 v    originalSize
 v        indexModifier removal - only left here
