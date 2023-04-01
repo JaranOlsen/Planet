@@ -2153,7 +2153,6 @@ function render() {
         updateButtons();
     }
 
-    //console.log(camera.position.x, guttaState)
     if (guttaState.initialized == true) {
         guttaState.species = "gutt"
         let wander
