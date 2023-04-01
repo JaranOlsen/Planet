@@ -131,7 +131,7 @@ let guttaState = {
     gutta: [],
     mara: [],
     species: undefined,
-    initialized: false,
+    init: false,
 }
 
 let guttaStats = {
@@ -2146,9 +2146,9 @@ function render() {
         updateButtons();
     }
 
-    console.log(guttaState.initialized)
+    console.log(guttaState.init)
 
-    if (guttaState.initialized == true) {
+    if (guttaState.init == true) {
         guttaState.species = "gutt"
         let wander
         if ((getRandomNum(0, 1) > 0.95)) {
