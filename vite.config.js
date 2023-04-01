@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import vitePluginString from 'vite-plugin-string'
 import { resolve } from 'path'
 
 export default defineConfig({
@@ -6,6 +7,7 @@ export default defineConfig({
   base: '/Planet/',
   root: "./",
   plugins: [
+    vitePluginString(), //changed from vitePluginString.default()
   ],
   build: {
     sourcemap: true,
