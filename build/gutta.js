@@ -377,6 +377,7 @@ export class Gutt {
 
 export function createGutta(numberOfGutta, numberOfMara, version, guttaState, destination, guttaHelperCenter) {
     guttaState.initialized = true
+    console.log(guttaState.initialized)
 
     //Dat.GUI
     const gui = new GUI()
