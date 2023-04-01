@@ -131,7 +131,7 @@ let guttaState = {
     gutta: [],
     mara: [],
     species: undefined,
-    initialized: false,
+    initialized: true,
 }
 
 let guttaStats = {
