@@ -2001,7 +2001,55 @@ document.getElementById("tagInput").addEventListener("keydown", function (event)
 })
 
 //EVENTS MOUSE
+
+//GPT4
 function onPointerMove(event) {
+    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+
+function onPointerClick(event) {
+    // Check if the event is from a touchscreen, ignore if it's not a primary touch
+    if (event.pointerType === 'touch' && event.isPrimary === false) {
+        return;
+    }
+
+    // The rest of your onClick function
+    raycaster.setFromCamera(pointer, camera);
+    const intersects = raycaster.intersectObjects(intersectObjectsArray);
+    if (intersects.length > 0) {
+        selectedPin = intersects[0].object;
+
+        selectedContext = intersects[0].object.context
+        selectedNode = intersects[0].object.index
+        if (contexts !== 2) selectedBox = contexts[selectedContext].boxes[selectedNode]
+        if (contexts !== 2) selectedTag = contexts[selectedContext].tags[selectedNode]
+
+        if (camera.position.distanceTo(selectedPin.position) < 4 && contexts[selectedContext].tagData[selectedNode].slides !== undefined) {
+            const selectedCarousel = contexts[selectedContext].tagData[selectedNode].slides
+            pushContent(selectedCarousel)
+            activeCarousel = document.querySelector(`.carousel.s1`)
+            activeCarousel.style.display = "block"
+        }
+    }
+}
+
+window.addEventListener('pointermove', onPointerMove);
+window.addEventListener('pointerdown', (event) => {
+    selectState = true;
+});
+window.addEventListener('pointerup', (event) => {
+    if (selectState) {
+        onPointerClick(event);
+    }
+    selectState = false;
+});
+//
+
+
+
+
+/* function onPointerMove(event) {
     pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
     pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
@@ -2024,7 +2072,7 @@ function onClick(event) {
             activeCarousel.style.display = "block"
         }
     }
-}
+} */
 
 /* function touch2Mouse(e)
 {
@@ -2046,13 +2094,13 @@ function onClick(event) {
   e.preventDefault();
 } */
 
-window.addEventListener('pointermove', onPointerMove);
-window.addEventListener('click', onClick);
+/* window.addEventListener('pointermove', onPointerMove);
+window.addEventListener('click', onClick); */
 //window.addEventListener("touchstart", onClick);
 /* document.addEventListener("touchstart", touch2Mouse, true);
 document.addEventListener("touchmove", touch2Mouse, true);
 document.addEventListener("touchend", touch2Mouse, true); */
-window.addEventListener( 'pointerdown', () => {
+/* window.addEventListener( 'pointerdown', () => {
 	selectState = true;
 } );
 window.addEventListener( 'pointerup', () => {
@@ -2067,7 +2115,7 @@ window.addEventListener( 'touchend', () => {
 	selectState = false;
 	mouse.x = null;
 	mouse.y = null;
-} );
+} ); */
 
 //TESTS
 if (planetTagData.length !== planetConnections.length) {
