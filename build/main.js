@@ -2001,10 +2001,9 @@ document.getElementById("tagInput").addEventListener("keydown", function (event)
 })
 
 //EVENTS MOUSE
-let initialPointerPosition = { x: null, y: null };
-const moveThreshold = 5; // Adjust this value to set the allowed movement threshold
+let initialTouchPosition = { x: null, y: null };
+const tapMoveThreshold = 5; // Adjust this value to set the allowed movement threshold for taps
 
-//GPT4
 function onPointerMove(event) {
     pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
     pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -2036,23 +2035,79 @@ function onPointerClick(event) {
     }
 }
 
-function hasPointerMovedSignificantly(event) {
-    return Math.abs(event.clientX - initialPointerPosition.x) > moveThreshold ||
-        Math.abs(event.clientY - initialPointerPosition.y) > moveThreshold;
+function hasPointerMovedSignificantly(startEvent, endEvent) {
+    const dx = endEvent.clientX - startEvent.clientX;
+    const dy = endEvent.clientY - startEvent.clientY;
+    const squaredDistance = dx * dx + dy * dy;
+    const squaredMoveThreshold = tapMoveThreshold * tapMoveThreshold;
+
+    return squaredDistance > squaredMoveThreshold;
 }
 
 window.addEventListener('pointermove', onPointerMove);
 window.addEventListener('pointerdown', (event) => {
     selectState = true;
-    initialPointerPosition.x = event.clientX;
-    initialPointerPosition.y = event.clientY;
 });
 window.addEventListener('pointerup', (event) => {
-    if (selectState && !hasPointerMovedSignificantly(event)) {
+    if (selectState && event.pointerType !== 'touch') {
         onPointerClick(event);
     }
     selectState = false;
 });
+window.addEventListener('touchstart', (event) => {
+    selectState = true;
+    initialTouchPosition.x = event.touches[0].clientX;
+    initialTouchPosition.y = event.touches[0].clientY;
+});
+window.addEventListener('touchend', (event) => {
+    if (selectState && !hasPointerMovedSignificantly(initialTouchPosition, event.changedTouches[0])) {
+        onPointerClick(event);
+    }
+    selectState = false;
+});
+
+//GPT4
+/* function onPointerMove(event) {
+    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+
+function onPointerClick(event) {
+    // Check if the event is from a touchscreen, ignore if it's not a primary touch
+    if (event.pointerType === 'touch' && event.isPrimary === false) {
+        return;
+    }
+
+    // The rest of your onClick function
+    raycaster.setFromCamera(pointer, camera);
+    const intersects = raycaster.intersectObjects(intersectObjectsArray);
+    if (intersects.length > 0) {
+        selectedPin = intersects[0].object;
+
+        selectedContext = intersects[0].object.context
+        selectedNode = intersects[0].object.index
+        if (contexts !== 2) selectedBox = contexts[selectedContext].boxes[selectedNode]
+        if (contexts !== 2) selectedTag = contexts[selectedContext].tags[selectedNode]
+
+        if (camera.position.distanceTo(selectedPin.position) < 4 && contexts[selectedContext].tagData[selectedNode].slides !== undefined) {
+            const selectedCarousel = contexts[selectedContext].tagData[selectedNode].slides
+            pushContent(selectedCarousel)
+            activeCarousel = document.querySelector(`.carousel.s1`)
+            activeCarousel.style.display = "block"
+        }
+    }
+}
+
+window.addEventListener('pointermove', onPointerMove);
+window.addEventListener('pointerdown', (event) => {
+    selectState = true;
+});
+window.addEventListener('pointerup', (event) => {
+    if (selectState) {
+        onPointerClick(event);
+    }
+    selectState = false;
+}); */
 //
 
 

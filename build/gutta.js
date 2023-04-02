@@ -180,14 +180,21 @@ export class Gutt {
     }
 
     calculateWander(species) {
-        if (species == "gutt" && getRandomNum(0, 1) > 0.8) {
+        this.wander.set(getRandomNum(-0.005, 0.005), getRandomNum(-0.005, 0.005))
+        if (species == "gutt") {
+            this.wander.clampLength(-this.parameters.gutt_max_force * (1 - this.hunger), this.parameters.gutt_max_force * (1 - this.hunger))
+        }
+        if (species == "mara") {
+            this.wander.clampLength(-this.parameters.mara_max_force, this.parameters.mara_max_force)
+        }
+        /* if (species == "gutt" && getRandomNum(0, 1) > 0.8) {
             this.wander.set(getRandomNum(-0.005, 0.005), getRandomNum(-0.005, 0.005))
             this.wander.clampLength(-this.parameters.gutt_max_force * (1 - this.hunger), this.parameters.gutt_max_force * (1 - this.hunger))
         }
         if (species == "mara"&& getRandomNum(0, 1) > 0.5) {
             this.wander.set(getRandomNum(-0.005, 0.005), getRandomNum(-0.005, 0.005))
             this.wander.clampLength(-this.parameters.mara_max_force, this.parameters.mara_max_force)
-        }
+        } */
     }
 
     calculateAlignment(species) {
