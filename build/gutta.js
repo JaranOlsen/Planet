@@ -535,3 +535,33 @@ export function createGutta(numberOfGutta, numberOfMara, version, guttaState, de
         guttaState.mara.push(new Gutt(lat, lng, maraGeometry, maraMaterial, guttaState.mara, guttaState, destination, guttaHelperCenter, parameters))
     }
 }
+
+export function updateGutta(guttaState, guttaStats, jaranius, nuggets) {
+    if (guttaState.init == true) {
+        guttaState.species = "gutt"
+        let wander
+        if ((getRandomNum(0, 1) > 0.95)) {
+            wander = true
+        } else wander = false
+        for (let i = 0; i < guttaState.gutta.length; i++) {
+            if (wander == true) guttaState.gutta[i].calculateWander(guttaState.species);
+            guttaState.gutta[i].calculateAlignment(guttaState.species);
+            guttaState.gutta[i].calculateCohesion(guttaState.species);
+            guttaState.gutta[i].calculateSeparation(guttaState.species);
+            guttaState.gutta[i].calculateFleeing();
+            guttaStats = guttaState.gutta[i].calculateFeeding(guttaStats, jaranius, nuggets);
+            guttaState.gutta[i].calculateTemperature(guttaState.species);
+            guttaState.gutta[i].move(guttaState.species, i); 
+        }
+        guttaState.species = "mara"
+        for (let i = 0; i < guttaState.mara.length; i++) {
+            if (wander == true) guttaState.mara[i].calculateWander(guttaState.species);
+            guttaState.mara[i].calculateAlignment(guttaState.species);
+            guttaState.mara[i].calculateCohesion(guttaState.species);
+            guttaState.mara[i].calculateSeparation(guttaState.species);
+            guttaStats = guttaState.mara[i].calculateHunting(guttaStats);
+            guttaState.mara[i].calculateTemperature(guttaState.species);
+            guttaState.mara[i].move(guttaState.species);
+        }
+    }
+}
