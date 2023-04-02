@@ -2001,6 +2001,8 @@ document.getElementById("tagInput").addEventListener("keydown", function (event)
 })
 
 //EVENTS MOUSE
+let initialPointerPosition = { x: null, y: null };
+const moveThreshold = 5; // Adjust this value to set the allowed movement threshold
 
 //GPT4
 function onPointerMove(event) {
@@ -2034,12 +2036,19 @@ function onPointerClick(event) {
     }
 }
 
+function hasPointerMovedSignificantly(event) {
+    return Math.abs(event.clientX - initialPointerPosition.x) > moveThreshold ||
+        Math.abs(event.clientY - initialPointerPosition.y) > moveThreshold;
+}
+
 window.addEventListener('pointermove', onPointerMove);
 window.addEventListener('pointerdown', (event) => {
     selectState = true;
+    initialPointerPosition.x = event.clientX;
+    initialPointerPosition.y = event.clientY;
 });
 window.addEventListener('pointerup', (event) => {
-    if (selectState) {
+    if (selectState && !hasPointerMovedSignificantly(event)) {
         onPointerClick(event);
     }
     selectState = false;

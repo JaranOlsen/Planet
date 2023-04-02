@@ -180,11 +180,12 @@ export class Gutt {
     }
 
     calculateWander(species) {
-         this.wander.set(getRandomNum(-0.005, 0.005), getRandomNum(-0.005, 0.005))
-        if (species == "gutt") {
+        if (species == "gutt" && getRandomNum(0, 1) > 0.8) {
+            this.wander.set(getRandomNum(-0.005, 0.005), getRandomNum(-0.005, 0.005))
             this.wander.clampLength(-this.parameters.gutt_max_force * (1 - this.hunger), this.parameters.gutt_max_force * (1 - this.hunger))
         }
-        if (species == "mara") {
+        if (species == "mara"&& getRandomNum(0, 1) > 0.5) {
+            this.wander.set(getRandomNum(-0.005, 0.005), getRandomNum(-0.005, 0.005))
             this.wander.clampLength(-this.parameters.mara_max_force, this.parameters.mara_max_force)
         }
     }
@@ -377,7 +378,6 @@ export class Gutt {
 
 export function createGutta(numberOfGutta, numberOfMara, version, guttaState, destination, guttaHelperCenter) {
     guttaState.init = true
-    console.log(guttaState.init)
 
     //Dat.GUI
     const gui = new GUI()
@@ -540,7 +540,7 @@ export function updateGutta(guttaState, guttaStats, jaranius, nuggets) {
     if (guttaState.init == true) {
         guttaState.species = "gutt"
         let wander
-        if ((getRandomNum(0, 1) > 0.95)) {
+        if ((getRandomNum(0, 1) > 0.8)) {
             wander = true
         } else wander = false
         for (let i = 0; i < guttaState.gutta.length; i++) {
