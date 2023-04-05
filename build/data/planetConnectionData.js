@@ -428,7 +428,6 @@ export const planetConnections = [ //ID, connections, ...
 ["9FC8EA8E-9B5C-4588-9EB5-6D6CFA375656", ],
 ["3CEE76EB-E3AF-4C32-B60F-22A156E6BB15", ],
 ["7638D6DF-814D-4E9D-AAE1-17D8CC1015B7", ],
-["4ac7eaf5-aff4-448b-b759-a08578e179b2", ],
-["71dd5681-0095-4fb4-9534-281eae1b327d", ],
+
 
   ];

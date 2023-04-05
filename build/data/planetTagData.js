@@ -428,9 +428,6 @@ export const planetTagData = [ //ID, TEXT, LATITUDE, LONGITUDE, COLOR (see palet
 {id: "9FC8EA8E-9B5C-4588-9EB5-6D6CFA375656", text: "postural support", lat: 97.7, lng: 74.8, color: 21, size: 8, slides: undefined},
 {id: "3CEE76EB-E3AF-4C32-B60F-22A156E6BB15", text: "light", lat: 98.1, lng: 76.4, color: 21, size: 8, slides: undefined},
 {id: "7638D6DF-814D-4E9D-AAE1-17D8CC1015B7", text: "food", lat: 99.4, lng: 73.3, color: 21, size: 8, slides: undefined},
-{id: "4ac7eaf5-aff4-448b-b759-a08578e179b2", text: "hy", lat: 65.8, lng: 329.2, color: 20, size: 50, slides: undefined},
-{id: "71dd5681-0095-4fb4-9534-281eae1b327d", text: "hy", lat: 65.9, lng: 336.3, color: 20, size: 50, slides: undefined},
-
 ];
 
 //Remember to add connection

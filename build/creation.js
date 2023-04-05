@@ -29,7 +29,7 @@ export function creation(version, postLoadingManager, guttaState, scene, guttaHe
         createJaranius(diffuseTexture4k, normalTexture2k, roughnessTexture2k, cloudsTexture4k)
         createContexts(version)
         createMindmap()
-        createGutta(200, 10, version, guttaState, scene, guttaHelperCenter)
+        createGutta(400, 25, version, guttaState, scene, guttaHelperCenter)
     } 
     if (version == 2){ //LIGHT VERSION
         initializeLoadingManager(postLoadingManager)

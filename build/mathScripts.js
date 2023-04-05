@@ -1,22 +1,5 @@
 import * as THREE from 'three';
 
-export function latLngToUnitVector(lat, lng) {
-    const phi = THREE.MathUtils.degToRad(90 - lat);
-    const theta = THREE.MathUtils.degToRad(lng);
-  
-    const x = Math.sin(phi) * Math.cos(theta);
-    const y = Math.sin(phi) * Math.sin(theta);
-    const z = Math.cos(phi);
-  
-    return new THREE.Vector3(x, y, z);
-  }
-
-export function rotateVector2D(vector, angle) {
-    const x = vector.x * Math.cos(angle) - vector.y * Math.sin(angle);
-    const y = vector.x * Math.sin(angle) + vector.y * Math.cos(angle);
-    return new THREE.Vector2(x, y);
-}
-
 export function getRandomNum(min, max) {
     return Math.random() * (max - min) + min;
 }
@@ -49,14 +32,14 @@ export function convertLatLngtoCartesian(lat, lng, radius) {
 
 export function convertCartesiantoLatLng(x, y, z) {
     const latRad = Math.acos(y / Math.sqrt(x * x + y * y + z * z));
-    const lngRad = Math.atan(x / z);
+    const lngRad = Math.atan2(x, z);
 
     const lat = (latRad / Math.PI * 180);
-    const lng = ((lngRad) / Math.PI * 180) + 180;
+    const lng = ((lngRad / Math.PI * 180) + 360) % 360; // Added 180 and applied modulo 360
 
     return {
         lat,
-        lng: (x <= 0) ? lng - 180 : lng + 180,
+        lng,
     };
 }
 

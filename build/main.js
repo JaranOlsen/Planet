@@ -16,7 +16,7 @@ import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, const
 import { pushContent, pushVRContent } from './content.js'
 import { initializeVersion } from './versions.js'
 import { creation } from './creation.js'
-import { updateGutta } from './gutta.js'
+import { updateGutta, togglePerceptionCircles } from './gutta.js'
 
 //IMPORT DATA
 import { planetTagData } from './data/planetTagData.js'
@@ -1472,14 +1472,49 @@ function onDocumentKeyUp(event) {
                 //fpsContainer.style.display = "none"
                 guttaStatScreen.style.display = "none"
                 scene.remove(guttaHelperCenter)
+                if (developer == true) togglePerceptionCircles(guttaState)
             } else {
                 fpsContainer.style.display = "block"
                 guttaStatScreen.style.display = "block" 
                 scene.add(guttaHelperCenter)
+                if (developer == true) togglePerceptionCircles(guttaState)
             }
         }
         if (keyCode == 72) { //H
-            jaranius.material.wireframe = true
+            //jaranius.material.wireframe = true
+
+            for (let lat = 10; lat < 180; lat += 10) {
+                for (let lng = 0; lng < 360; lng += 10) {
+                    const id = generateUUID()
+                    const newItem = {
+                        id: id,
+                        text: "lat: " + lat + "\nlng: " + lng,
+                        lat: lat,
+                        lng: lng,
+                        color: 1,
+                        size: 10,
+                        slides: undefined
+                    };
+        
+                    contexts[0].tagData.push(newItem)
+                    contexts[0].connectionData.push([id])
+                    contexts[0].arrowConnectionData.push([id])
+                    contexts[0].dashedConnectionData.push([id])
+        
+                    const indexMod = contexts[0].tagData.length - 1
+        
+                    createTags([newItem], contexts[0].tagDestination, contexts[0].radius, 0, indexMod);
+                }
+            }
+            console.log(contexts)
+        }
+        if (keyCode == 73) { //I
+            for (let i = -180; i < 360; i += 10) {
+                let no = convertLatLngtoCartesian(90, i, 5)
+                console.log("90 ", i)
+                let no2 = convertCartesiantoLatLng(no.x, no.y, no.z)
+                console.log(no2.lat, no2.lng)
+            }
         }
 
         //Content display
@@ -1593,8 +1628,8 @@ function onDocumentKeyUp(event) {
 
                 contexts[selectedContext].tagData.splice(selectedNode, 1)
                 contexts[selectedContext].connectionData.splice(selectedNode, 1)
-                contexts[selectedContext].arrowConnectionData.splice(selectedNode, 1)
-                contexts[selectedContext].dashedConnectionData.splice(selectedNode, 1)
+                if (contexts[selectedContext].arrowConnectionData !== undefined) contexts[selectedContext].arrowConnectionData.splice(selectedNode, 1)
+                if (contexts[selectedContext].dashedConnectionData !== undefined) contexts[selectedContext].dashedConnectionData.splice(selectedNode, 1)
                 contexts[selectedContext].pins.splice(selectedNode, 1)
                 contexts[selectedContext].boxes.splice(selectedNode, 1)
                 contexts[selectedContext].tags.splice(selectedNode, 1)
@@ -1602,24 +1637,20 @@ function onDocumentKeyUp(event) {
                 contexts[selectedContext].tagDestination.remove(selectedBox)
                 contexts[selectedContext].tagDestination.remove(selectedTag)
 
-                let counter = 0
                 for (let i = 0; i < contexts[selectedContext].tagData.length; i++) {
                     const index1 = contexts[selectedContext].connectionData[i].indexOf(id)
-                    if (index1 !== -1) {contexts[selectedContext].connectionData[i].splice(index1, 1)
-                    counter += 1
-                    }
+                    if (index1 !== -1) contexts[selectedContext].connectionData[i].splice(index1, 1)
                     
-                    const index2 = contexts[selectedContext].arrowConnectionData[i].indexOf(id)
-                    if (index2 !== -1) {contexts[selectedContext].arrowConnectionData[i].splice(index2, 1)
-                    counter += 1
+                    if (contexts[selectedContext].arrowConnectionData !== undefined) {
+                        const index2 = contexts[selectedContext].arrowConnectionData[i].indexOf(id)
+                        if (index2 !== -1) contexts[selectedContext].arrowConnectionData[i].splice(index2, 1)
                     }
 
-                    const index3 = contexts[selectedContext].dashedConnectionData[i].indexOf(id)
-                    if (index3 !== -1) {contexts[selectedContext].dashedConnectionData[i].splice(index3, 1)
-                    counter += 1
+                    if (contexts[selectedContext].dashedConnectionData !== undefined) {
+                        const index3 = contexts[selectedContext].dashedConnectionData[i].indexOf(id)
+                        if (index3 !== -1) contexts[selectedContext].dashedConnectionData[i].splice(index3, 1)
                     }
                 }
-                console.log(counter)
 
                 for (let i = selectedNode; i < contexts[selectedContext].tagData.length; i++) {
                     contexts[selectedContext].pins[i].index -= 1
@@ -1959,7 +1990,7 @@ function onDocumentKeyDown(event) {
     }     
 };
 
-let focusElement
+let focusElement //create new Node
 document.getElementById("tagInput").addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         raycaster.setFromCamera(pointer, camera);
@@ -1968,6 +1999,8 @@ document.getElementById("tagInput").addEventListener("keydown", function (event)
         if (intersects.length > 0) {
             const point = intersects[0].point;
             const latLng = convertCartesiantoLatLng(point.x, point.y, point.z);
+
+            console.log(latLng)
 
             const id = generateUUID()
 
@@ -1987,8 +2020,8 @@ document.getElementById("tagInput").addEventListener("keydown", function (event)
 
             newTagDestination.push(newItem)
             newConnectionsDestination.push([id])
-            newArrowConnectionsDestination.push([id])
-            newDashedConnectionsDestination.push([id])
+            if (newArrowConnectionsDestination !== undefined) newArrowConnectionsDestination.push([id])
+            if (newDashedConnectionsDestination !== undefined) newDashedConnectionsDestination.push([id])
 
             const indexMod = contexts[selectedContext].tagData.length - 1
 
@@ -2065,121 +2098,6 @@ window.addEventListener('touchend', (event) => {
     }
     selectState = false;
 });
-
-//GPT4
-/* function onPointerMove(event) {
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-}
-
-function onPointerClick(event) {
-    // Check if the event is from a touchscreen, ignore if it's not a primary touch
-    if (event.pointerType === 'touch' && event.isPrimary === false) {
-        return;
-    }
-
-    // The rest of your onClick function
-    raycaster.setFromCamera(pointer, camera);
-    const intersects = raycaster.intersectObjects(intersectObjectsArray);
-    if (intersects.length > 0) {
-        selectedPin = intersects[0].object;
-
-        selectedContext = intersects[0].object.context
-        selectedNode = intersects[0].object.index
-        if (contexts !== 2) selectedBox = contexts[selectedContext].boxes[selectedNode]
-        if (contexts !== 2) selectedTag = contexts[selectedContext].tags[selectedNode]
-
-        if (camera.position.distanceTo(selectedPin.position) < 4 && contexts[selectedContext].tagData[selectedNode].slides !== undefined) {
-            const selectedCarousel = contexts[selectedContext].tagData[selectedNode].slides
-            pushContent(selectedCarousel)
-            activeCarousel = document.querySelector(`.carousel.s1`)
-            activeCarousel.style.display = "block"
-        }
-    }
-}
-
-window.addEventListener('pointermove', onPointerMove);
-window.addEventListener('pointerdown', (event) => {
-    selectState = true;
-});
-window.addEventListener('pointerup', (event) => {
-    if (selectState) {
-        onPointerClick(event);
-    }
-    selectState = false;
-}); */
-//
-
-
-
-
-/* function onPointerMove(event) {
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-}
-
-function onClick(event) {
-    raycaster.setFromCamera(pointer, camera);
-    const intersects = raycaster.intersectObjects(intersectObjectsArray);
-    if (intersects.length > 0) {
-        selectedPin = intersects[0].object;
-
-        selectedContext = intersects[0].object.context
-        selectedNode = intersects[0].object.index
-        if (contexts !== 2) selectedBox = contexts[selectedContext].boxes[selectedNode]
-        if (contexts !== 2) selectedTag = contexts[selectedContext].tags[selectedNode]
-
-        if (camera.position.distanceTo(selectedPin.position) < 4 && contexts[selectedContext].tagData[selectedNode].slides !== undefined) {
-            const selectedCarousel = contexts[selectedContext].tagData[selectedNode].slides
-            pushContent(selectedCarousel)
-            activeCarousel = document.querySelector(`.carousel.s1`)
-            activeCarousel.style.display = "block"
-        }
-    }
-} */
-
-/* function touch2Mouse(e)
-{
-  var theTouch = e.changedTouches[0];
-  var mouseEv;
-
-  switch(e.type)
-  {
-    case "touchstart": mouseEv="mousedown"; break;  
-    case "touchend":   mouseEv="mouseup"; break;
-    case "touchmove":  mouseEv="mousemove"; break;selectedNodes
-    default: return;
-  }
-
-  var mouseEvent = document.createEvent("MouseEvent");
-  mouseEvent.initMouseEvent(mouseEv, true, true, window, 1, theTouch.screenX, theTouch.screenY, theTouch.clientX, theTouch.clientY, false, false, false, false, 0, null);
-  theTouch.target.dispatchEvent(mouseEvent);
-
-  e.preventDefault();
-} */
-
-/* window.addEventListener('pointermove', onPointerMove);
-window.addEventListener('click', onClick); */
-//window.addEventListener("touchstart", onClick);
-/* document.addEventListener("touchstart", touch2Mouse, true);
-document.addEventListener("touchmove", touch2Mouse, true);
-document.addEventListener("touchend", touch2Mouse, true); */
-/* window.addEventListener( 'pointerdown', () => {
-	selectState = true;
-} );
-window.addEventListener( 'pointerup', () => {
-	selectState = false;
-} );
-window.addEventListener( 'touchstart', ( event ) => {
-	selectState = true;
-	mouse.x = ( event.touches[ 0 ].clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = -( event.touches[ 0 ].clientY / window.innerHeight ) * 2 + 1;
-} );
-window.addEventListener( 'touchend', () => {
-	selectState = false;
-	mouse.x = null;
-	mouse.y = null;
-} ); */
 
 //TESTS
 if (planetTagData.length !== planetConnections.length) {
@@ -2259,7 +2177,7 @@ function render() {
         updateButtons();
     }
 
-    updateGutta(guttaState, guttaStats, jaranius, nuggets)
+    updateGutta(guttaState, guttaStats, jaranius, nuggets, developer)
 
     const camPos = camera.position
     const camRot = camera.rotation
