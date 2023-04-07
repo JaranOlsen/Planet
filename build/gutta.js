@@ -580,7 +580,7 @@ export function createGutta(numberOfGutta, numberOfMara, version, guttaState, de
         parameterFolder2.add(parameters, 'mara_max_force', 0, 0.01, 0.0001)
         parameterFolder2.add(parameters, 'mara_max_speed', 0, 0.1, 0.001)   
     parameterFolder2.close()
-    if (version !== 3) gui.hide() //set to 3 to enable for developer mode
+    if (version !== 0) gui.hide() //set to 3 to enable for developer mode
 
     const guttaScale = 0.0003;
 

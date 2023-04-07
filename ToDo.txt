@@ -1,18 +1,5 @@
-    fix gutta on external
-v    selectedNodes
-v    originalSize
-v        indexModifier removal - only left here
-v    gutta arrowhelpers
-v    check if positions of new tags update
-v    go through all contexts dependent code
-v    go through all pins/tags dependent code
-    sort out the lng + 180 issue - seems like the spiral is turned 180 degrees compared to jaranius... i guess it might not be rotating either
-    create new tags on spiral - fix intersect so that it's added there..
-v    add connections
-v    fix so it works for spiral too
-    make straightconnections - gets visible with 'H' - make them thick like tunnels so they are well visible
-    fix move-node bug, greed/hatred/delusion skips to other side of the planet (redraw connections to find)
 
+    make straightconnections - gets visible with 'H' - make them thick like tunnels so they are well visible
 
 
 INITIATIVES
@@ -68,13 +55,7 @@ MAKE USABLE
     document. addEventListener ('DOMContentLoaded', () = {
 
 SHORT-TERM DEVELOPMENT
- v   make function for drawing connections (select multiple nodes, search through tag- and connection-data and add id's to the first selected node)
-v    make function for adding nodes (at intersection of cursor and context surface? inputbox for text or just "add text here"?)
-        if this works can possibly change to move nodes with pointer
-v    make function for changing color of nodes
- v   make function for removing nodes
- v   make function for removing connections
- v   make function for drawing arrowed and dashed connections
+
 
 VR DEVELOPMENT
     - three-mesh-ui

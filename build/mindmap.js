@@ -11,7 +11,7 @@ import { contexts } from './main.js'
 
 //  IMPORT TEXTURES
 import dash from '../img/textures/dash.webp'
-import arrow from '../img/textures/arrow2.webp'
+import arrow from '../img/textures/arrow4.webp'
 
 //  IMPORT MATERIALS
 import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWireframeMaterials } from './data/materials.js';
@@ -146,7 +146,8 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
                         if (target.id === targetId) {
                             const p1 = convertLatLngtoCartesian(sourceItem.lat, sourceItem.lng - 180, curveMinAltitude);
                             const p2 = convertLatLngtoCartesian(target.lat, target.lng - 180, curveMinAltitude);
-                            const weight = (sourceItem.size + target.size) / 2;
+                            let weight = (sourceItem.size + target.size) / 2;
+                            if (arrowed == true) weight *= 4
                             getCurve(p1, p2, weight, target.lat, target.lng - 180);
                         }
                     });
@@ -165,10 +166,8 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
             return p;
         });
 
-        const path = new THREE.CatmullRomCurve3(points);
-        const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments, false);
-
         let material = connectionMaterial;
+        let segmentModifier = 1
 
         if (dashed) {
             const dashTexture = textureLoader.load(dash);
@@ -189,13 +188,40 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         }
 
         if (arrowed) {
-            const img = createImages(arrow, lat, lng, 0.2, curveMinAltitude + 0.02, destination);
+            const arrowTexture = textureLoader.load(arrow);
+            const distance = Math.floor(v1.distanceTo(v2) * 25);
+            arrowTexture.repeat.set(7, 8 + distance / 2);
+            arrowTexture.wrapS = THREE.RepeatWrapping;
+            arrowTexture.wrapT = THREE.RepeatWrapping;
+            arrowTexture.rotation = Math.PI / 2;
+
+            const textureOffsetU = -0.1; // You can change this value to control the horizontal offset
+            const textureOffsetV = 0; // You can change this value to control the vertical offset
+            arrowTexture.offset.set(textureOffsetU, textureOffsetV);
+
+            material = new THREE.MeshStandardMaterial({
+                color: 0xffffaa,
+                transparent: true,
+                opacity: 0.8,
+                emissive: 0xffffff,
+                emissiveIntensity: 0.1,
+                alphaMap: arrowTexture,
+            });
+
+            segmentModifier = 5
+        }
+
+        /* if (arrowed) {
+            const img = createImages(arrow, lat, lng, weight / 200, curveMinAltitude + 0.02, destination);
             const up = new THREE.Vector3(v2.x - v1.x, v2.y - v1.y, v2.z - v1.z);
             up.normalize();
             img.box.up = up;
             img.box.lookAt(v2.x, v2.y, v2.z);
             img.box.renderOrder = -9;
-        }
+        } */
+
+        const path = new THREE.CatmullRomCurve3(points);
+        const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments * segmentModifier, false);
 
         const curve = new THREE.Mesh(geometry, material);
         curve.renderOrder = -10;

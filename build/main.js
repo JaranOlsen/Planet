@@ -19,14 +19,10 @@ import { creation } from './creation.js'
 import { updateGutta, togglePerceptionCircles } from './gutta.js'
 
 //IMPORT DATA
-import { planetTagData } from './data/planetTagData.js'
-import { planetConnections } from './data/planetConnectionData.js'
-import { planetDashedConnections } from './data/planetDashedConnectionData.js'
-import { planetArrowedConnections } from './data/planetArrowedConnectionData.js'
+import { planetTagData, planetConnections, planetArrowedConnections, planetDashedConnections } from './data/planetData.js'
 import { planetImageData } from './data/planetImageData.js'
 import { planetNuggetData } from './data/planetNuggetData.js'
-import { spiralTagData } from './data/spiralTagData.js'
-import { spiralConnections } from './data/spiralConnectionData.js'
+import { spiralTagData, spiralConnections, spiralArrowedConnections, spiralDashedConnections } from './data/spiralData.js'
 import { spiralImageData } from './data/spiralImageData.js'
 import { contentData } from './data/contentData.js'
 import { palette } from './data/palette.js'
@@ -1299,8 +1295,8 @@ export function createContexts(version) {
         tagData: spiralTagData, 
         tagDestination: spiral, 
         connectionData: spiralConnections, 
-        arrowConnectionData: undefined,
-        dashedConnectionData: undefined,
+        arrowConnectionData: spiralArrowedConnections,
+        dashedConnectionData: spiralDashedConnections,
         connectionDestination: spiralDynamicsConnections, 
         radius: 7, 
         pins: [], 
@@ -1558,51 +1554,43 @@ function onDocumentKeyUp(event) {
             }
         }
         if (keyCode == 81 && developer == true) { //Q - print tagdata and connectiondata
-            let tagOutput = ""
+            let output = "export const planetTagData = [\n"
             const tagSource = contexts[selectedContext].tagData
             for (let i = 0; i < tagSource.length; i++) {
-                tagOutput = tagOutput + "    {id: \"" + tagSource[i].id + "\", text: " + JSON.stringify(tagSource[i].text) + ", lat: " + tagSource[i].lat + ", lng: " + tagSource[i].lng + ", color: " + tagSource[i].color + ", size: " + tagSource[i].size + ", slides: " + tagSource[i].slides + "},\n"
+                output = output + "    {id: \"" + tagSource[i].id + "\", text: " + JSON.stringify(tagSource[i].text) + ", lat: " + tagSource[i].lat + ", lng: " + tagSource[i].lng + ", color: " + tagSource[i].color + ", size: " + tagSource[i].size + ", slides: " + tagSource[i].slides + "},\n"
             }
-            console.log(tagOutput)
+            output = output + "\n]\n\n// ā ī ū ṅ ñ ṇ ṭ ṭh ḍ ḍh ṇ ḷ ṃ ṁ ŋ \n\n //azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBNéÉàÀèÈùÙëËüÜïÏâêîôûÂÊÎÔÛíÍáÁóÓúÚñÑłŁçÇýÝčČšŠæÆœŒāīūṅṇṭḍḷṃṁ/\*-+7894561230,;:!?¡¿.%$£€={}()[]&~'\`#_°@АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯяüÜöÖäÄñÑςερτυθιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜåÅæÆøØ \n\nexport const planetConnections = [\n"
 
-            console.log("\n\n\n")
-
-            let connectionOutput = ""
             const connectionSource = contexts[selectedContext].connectionData
             for (let i = 0; i < connectionSource.length; i++) {
-                connectionOutput = connectionOutput + "["
+                output = output + "["
                 connectionSource[i].forEach((item) => {
-                    connectionOutput = connectionOutput + "\"" + item + "\", "
+                    output = output + "\"" + item + "\", "
                 })
-                connectionOutput = connectionOutput + "],\n"
+                output = output + "],\n"
             }
-            console.log(connectionOutput)
+            output = output + "\n]\n\nexport const planetArrowedConnections = [\n"
 
-            console.log("\n\n\n")
-
-            let arrowConnectionOutput = ""
             const arrowConnectionSource = contexts[selectedContext].arrowConnectionData
             for (let i = 0; i < arrowConnectionSource.length; i++) {
-                arrowConnectionOutput = arrowConnectionOutput + "["
+                output = output + "["
                 arrowConnectionSource[i].forEach((item) => {
-                    arrowConnectionOutput = arrowConnectionOutput + "\"" + item + "\", "
+                    output = output + "\"" + item + "\", "
                 })
-                arrowConnectionOutput = arrowConnectionOutput + "],\n"
+                output = output + "],\n"
             }
-            console.log(arrowConnectionOutput)
+            output = output + "\n]\n\nexport const planetDashedConnections = [\n"
 
-            console.log("\n\n\n")
-
-            let dashedConnectionOutput = ""
             const dashedConnectionSource = contexts[selectedContext].dashedConnectionData
             for (let i = 0; i < dashedConnectionSource.length; i++) {
-                dashedConnectionOutput = dashedConnectionOutput + "["
+                output = output + "["
                 dashedConnectionSource[i].forEach((item) => {
-                    dashedConnectionOutput = dashedConnectionOutput + "\"" + item + "\", "
+                    output = output + "\"" + item + "\", "
                 })
-                dashedConnectionOutput = dashedConnectionOutput + "],\n"
+                output = output + "],\n"
             }
-            console.log(dashedConnectionOutput)
+            output = output + "\n]"
+            console.log(output)
         }
         if (keyCode == 84 && developer == true) { //T - create new node
             const tagInput = document.getElementById("tagInput");
@@ -2009,8 +1997,8 @@ document.getElementById("tagInput").addEventListener("keydown", function (event)
                 text: this.value,
                 lat: latLng.lat.toFixed(1),
                 lng: latLng.lng.toFixed(1),
-                color: 10,
-                size: 20,
+                color: 22,
+                size: 6,
                 slides: undefined
             };
             const newTagDestination = contexts[selectedContext].tagData
