@@ -523,33 +523,6 @@ export function createGutta(numberOfGutta, numberOfMara, version, guttaState, de
         mara_max_force: 0.001,
         mara_max_speed: 0.04,
     }
-    /* let parameters = {  PREVIOUS WELL BALANCED PARAMETERS (very long perception distances)
-        gutt_alignment: 0.7,
-        gutt_alignment_perception_distance: 0.2,
-        gutt_cohesion: 0.6,
-        gutt_cohesion_perception_distance: 0.4,
-        gutt_separation: 0.6,
-        gutt_separation_perception_distance: 0.03,
-        gutt_flee: 10,
-        gutt_flee_perception_distance: 0.1,
-        gutt_feed: 0.3,
-        gutt_feed_perception_distance: 1,
-        gutt_wander: 0.9,
-        gutt_max_force: 0.0005,
-        gutt_max_speed: 0.01,
-
-        mara_alignment: 0.1,
-        mara_alignment_perception_distance: 0.55,
-        mara_cohesion: 0.1,
-        mara_cohesion_perception_distance: 0.6,
-        mara_separation: 0.4,
-        mara_separation_perception_distance: 0.5,
-        mara_hunt: 0.75,
-        mara_hunt_perception_distance: 0.8,
-        mara_wander: 0.6,
-        mara_max_force: 0.001,
-        mara_max_speed: 0.04,
-    } */
 
     const parameterFolder = gui.addFolder('Gutta parameters')
         parameterFolder.add(parameters, 'gutt_alignment', 0, 1, 0.001)

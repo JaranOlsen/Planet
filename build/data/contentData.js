@@ -113,7 +113,26 @@ export const contentData = [ //slides ID = line number - 2
     ["https://www.youtube-nocookie.com/embed/9oX2xFo7JA4", "https://www.youtube-nocookie.com/embed/XEHYK3TM2jc", "./img/carlrogers/Slide1.jpeg", "<u>Poem for a rainy day</u><br><br>I know it feels as if<br>this night through which we journey<br>will never end.<br><br>Darkness <br>is all you see,<br>as you have yet to rub<br>the sleep from your eyes.<br><br>You don't believe it,<br>but one day you will<br>awake from the dream<br>and see what I see<br><br>you too,<br>are a child of light –<br>shining brighter than a million suns,<br>shining bright through the darkest of nights.<br><br>- Hege Fridtun", "https://insig.ht/jZUguRAk7ub", "https://img.youtube.com/vi/XEHYK3TM2jc/hqdefault.jpg"],
     ["https://www.youtube-nocookie.com/embed/XmdPY-hFSt0"],
     ["https://www.youtube-nocookie.com/embed/neDutbcedUY"],
-    
+    ["Need for postulates or axioms: Every theory must begin with a set of basic assumptions or postulates that cannot be derived from or proven by the theory itself. These postulates serve as the foundation upon which the theory is built and can sometimes be subject to revision or rejection based on new evidence or insights."],
+    ["Incompleteness: No theory can provide a complete and exhaustive account of every aspect of a phenomenon. There will always be some level of uncertainty or unknowns that a theory cannot fully address or explain."],
+    ["Approximations: Many theories rely on simplifying assumptions or approximations to make them more manageable or easier to work with. While these approximations may be useful for certain purposes, they can also introduce inaccuracies or limit the applicability of the theory in certain situations."],
+    ["Underdetermination of theories by data: Empirical evidence is often insufficient to uniquely determine a single theory. Multiple competing theories may be consistent with the same set of data, making it difficult to conclusively establish one theory over another."],
+    ["Falsifiability and the problem of induction: The process of induction, or generalizing from specific observations to broader principles, is inherently uncertain. Even a theory that has been supported by a large body of evidence could potentially be falsified by new observations, which means that all theories are, in principle, provisional and subject to revision."],
+    ["Paradigm-dependence: The development and acceptance of theories are influenced by prevailing scientific paradigms and the broader cultural, social, and historical contexts in which they are formulated. This can sometimes lead to biases or blind spots in the way theories are constructed, evaluated, or interpreted."],
+    ["Language and conceptual constraints: Theories are expressed using human language and concepts, which are inevitably limited in their capacity to precisely capture or represent the full complexity of the phenomena they seek to explain."],
+    ["Cognitive biases: Human cognition is subject to various biases and heuristics, which can affect the way theories are formulated, tested, and accepted. Confirmation bias, for example, may lead researchers to favor evidence that supports their existing theories while discounting or overlooking contradictory evidence."],
+    ["Parsimony (Occam's Razor): The theory should be as simple as possible while still effectively explaining the phenomenon. It should avoid unnecessary complexity or assumptions."],
+    ["Explanatory power: The theory should be able to provide a comprehensive and clear explanation for the phenomenon it addresses, including the underlying mechanisms, causes, or principles."],
+    ["Internal consistency: The components and assumptions of the theory should be coherent and logically consistent with one another, avoiding contradictions or discrepancies."],
+    ["Empirical testability: A good theory should generate testable predictions or hypotheses that can be confirmed or refuted through empirical observation or experimentation."],
+    ["Falsifiability: The theory should be structured in a way that allows for the possibility of being proven wrong through empirical evidence."],
+    ["External consistency: The theory should be consistent with other well-established theories, principles, and empirical findings in the relevant domain or field."],
+    ["Generalizability: The theory should be able to apply to a wide range of contexts, situations, or cases, rather than being restricted to a specific set of circumstances."],
+    ["Fruitfulness: A good theory should inspire further research, generate new questions, and contribute to the development of new ideas and theories in the field."],
+    ["Operational definitions: The key concepts and constructs within the theory should be clearly and unambiguously defined, with measurable or observable indicators."],
+    ["Predictive accuracy: The theory should have a track record of making accurate predictions about future observations or phenomena, thus demonstrating its practical utility and reliability."]
+
+
   ];
 // REMEMBER TO ADD PICTURES TO PUBLIC FOLDER
 
