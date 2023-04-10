@@ -152,8 +152,6 @@ initializeVersion(creation, postLoadingManager, guttaState, scene, guttaHelperCe
 let webXRInitialized = false
 let jaraniusInitialized = false
 
-fullscreenButton.addEventListener("click", enterFullscreen);
-
 //LOADING MANAGER
 const initialLoadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(initialLoadingManager)
