@@ -2069,13 +2069,13 @@ function onPointerClick(event) {
     let x, y;
 
     // Check if the event is a touch event
-    if (event.touches) {
-        x = event.touches[0].clientX;
-        y = event.touches[0].clientY;
-    } else {
+    if (event.changedTouches) {
+        x = event.changedTouches[0].pageX;
+        y = event.changedTouches[0].pageY;
+      } else {
         x = event.clientX;
         y = event.clientY;
-    }
+      }
 
     pointer.x = (x / window.innerWidth) * 2 - 1;
     pointer.y = -(y / window.innerHeight) * 2 + 1;
