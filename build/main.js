@@ -152,6 +152,23 @@ initializeVersion(creation, postLoadingManager, guttaState, scene, guttaHelperCe
 let webXRInitialized = false
 let jaraniusInitialized = false
 
+//FULLSCREEN
+const fullscreenButton = document.getElementById("fullscreenButton");
+
+function enterFullscreen() {
+  if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen();
+  } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+    document.documentElement.mozRequestFullScreen();
+  } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+    document.documentElement.webkitRequestFullscreen();
+  } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+    document.documentElement.msRequestFullscreen();
+  }
+  this.parentElement.style.display = 'none';
+}
+
+fullscreenButton.addEventListener("click", enterFullscreen);
 
 //LOADING MANAGER
 const initialLoadingManager = new THREE.LoadingManager();
