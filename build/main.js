@@ -2067,22 +2067,22 @@ function onPointerClick(event) {
     event.preventDefault();
 
     let x, y;
-
+  
     // Check if the event is a touch event
     if (event.changedTouches) {
-        x = event.changedTouches[0].pageX;
-        y = event.changedTouches[0].pageY;
-      } else {
-        x = event.clientX;
-        y = event.clientY;
-      }
-
+      x = event.changedTouches[0].clientX;
+      y = event.changedTouches[0].clientY;
+    } else {
+      x = event.clientX;
+      y = event.clientY;
+    }
+  
     pointer.x = (x / window.innerWidth) * 2 - 1;
     pointer.y = -(y / window.innerHeight) * 2 + 1;
-
+  
     raycaster.setFromCamera(pointer, camera);
     const intersects = raycaster.intersectObjects(intersectObjectsArray);
-
+  
     if (intersects.length > 0) {
         selectedPin = intersects[0].object;
 
@@ -2111,6 +2111,19 @@ function hasPointerMovedSignificantly(startEvent, endEvent) {
 
 
 function processPointerUpEvent(event) {
+    if (selectState) {
+      onPointerClick(event);
+    }
+    selectState = false;
+  }
+  
+  window.addEventListener('pointermove', onPointerMove);
+  window.addEventListener('pointerdown', (event) => {
+    selectState = true;
+  });
+  window.addEventListener('pointerup', processPointerUpEvent);
+
+/* function processPointerUpEvent(event) {
     if (selectState) {
         onPointerClick(event);
     }
@@ -2148,7 +2161,7 @@ window.addEventListener('touchend', (event) => {
         processPointerUpEvent(touchEvent);
     }
     selectState = false;
-});
+}); */
 
 
 
