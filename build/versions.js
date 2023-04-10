@@ -22,10 +22,25 @@ export function initializeVersion(callback, postLoadingManager, guttaState, scen
         elements.enableVRbutton.style.display = showVR ? "block" : "none";
     };
 
-    elements.versionButtons.forEach((btn, index) => {
+    /* elements.versionButtons.forEach((btn, index) => {
         btn.addEventListener("click", () => {
             hideButtons(index === 2 || index === 3);
             return callback(index + 1, postLoadingManager, guttaState, scene, guttaHelperCenter);
+        });
+    }); */
+
+    const handleButtonClick = (index) => {
+        hideButtons(index === 2 || index === 3);
+        return callback(index + 1, postLoadingManager, guttaState, scene, guttaHelperCenter);
+    };
+
+    elements.versionButtons.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+            handleButtonClick(index);
+        });
+        btn.addEventListener("touchend", (event) => {
+            event.preventDefault(); // Prevent mouse event from firing after touch event
+            handleButtonClick(index);
         });
     });
 }
