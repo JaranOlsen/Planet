@@ -654,24 +654,34 @@ function initializeIntro() {
         introTune.volume = 1;
     introTuneLength = introTune.duration
 
-    playButton.addEventListener("click", () => {
-            introTune.play();
-            start = true;
-            playButton.style.display = "none";
-            skipButton.style.display = "none";
-            enableVRbutton.style.display = "none";
-            credits.style.display = "none";
-            
-        })
-
-    //skip intro
-    skipButton.addEventListener("click", () => {
-            playButton.style.display = "none";
-            skipButton.style.display = "none";
-            enableVRbutton.style.display = "none";
-            credits.style.display = "none";
-            camera.position.z = 15;
-        })
+    const handlePlayButtonClick = () => {
+        introTune.play();
+        start = true;
+        playButton.style.display = "none";
+        skipButton.style.display = "none";
+        enableVRbutton.style.display = "none";
+        credits.style.display = "none";
+    };
+    
+    const handleSkipButtonClick = () => {
+        playButton.style.display = "none";
+        skipButton.style.display = "none";
+        enableVRbutton.style.display = "none";
+        credits.style.display = "none";
+        camera.position.z = 15;
+    };
+    
+    playButton.addEventListener("click", handlePlayButtonClick);
+    playButton.addEventListener("touchend", (event) => {
+        event.preventDefault(); // Prevent mouse event from firing after touch event
+        handlePlayButtonClick();
+    });
+    
+    skipButton.addEventListener("click", handleSkipButtonClick);
+    skipButton.addEventListener("touchend", (event) => {
+        event.preventDefault(); // Prevent mouse event from firing after touch event
+        handleSkipButtonClick();
+    });
 }
 
 //SLIDE CAROUSEL
@@ -701,15 +711,22 @@ function handleCarouselButton(button) {
   }
 }
 
-buttons.forEach(button => {
-  button.addEventListener("click", () => {
-    handleCarouselButton(button);
-  });
-});
+const menuButtons = document.querySelectorAll("[data-menu-button]");
+const navButtons = document.querySelectorAll("[data-nav-button]");
 
-const menuButtons = document.querySelectorAll("[data-menu-button]")
-menuButtons.forEach(button => {
-    button.addEventListener("click", () => {
+buttons.forEach(button => {
+    const handleClick = () => {
+      handleCarouselButton(button);
+    };
+  
+    button.addEventListener("click", handleClick);
+    button.addEventListener("touchend", (event) => {
+      event.preventDefault(); // Prevent mouse event from firing after touch event
+      handleClick();
+    });
+});
+  
+    const handleMenuButtonClick = (button) => {
         const carousel = document.querySelector('.carousel')
         if (button.dataset.menuButton === "menu") {
             const slides = button
@@ -761,12 +778,19 @@ menuButtons.forEach(button => {
             slides.children[newIndex].dataset.active = true
             delete activeSlide.dataset.active
         }
-    })
-})
-
-const navButtons = document.querySelectorAll("[data-nav-button]")
-navButtons.forEach(button => {
-    button.addEventListener("click", () => {
+    }
+    
+    menuButtons.forEach(button => {
+        button.addEventListener("click", () => {
+        handleMenuButtonClick(button);
+        });
+        button.addEventListener("touchend", (event) => {
+        event.preventDefault(); // Prevent mouse event from firing after touch event
+        handleMenuButtonClick(button);
+        });
+    });
+      
+    const handleNavButtonClick = (button) => {
         const carousel = document.querySelector('.carousel')
         if (button.dataset.navButton === "one") {
             const slides = button
@@ -818,8 +842,17 @@ navButtons.forEach(button => {
             slides.children[newIndex].dataset.active = true
             delete activeSlide.dataset.active
         }
-    })
-})
+    }
+
+    navButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            handleNavButtonClick(button);
+        });
+        button.addEventListener("touchend", (event) => {
+            event.preventDefault(); // Prevent mouse event from firing after touch event
+            handleNavButtonClick(button);
+        });
+    });
 
 //CREATE STARS
 const starGeometry = new THREE.BufferGeometry()
