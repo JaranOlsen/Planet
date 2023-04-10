@@ -2023,7 +2023,7 @@ document.getElementById("tagInput").addEventListener("keydown", function (event)
 
 //EVENTS MOUSE
 let initialTouchPosition = { x: null, y: null };
-const tapMoveThreshold = 5; // Adjust this value to set the allowed movement threshold for taps
+const tapMoveThreshold = 50; // Adjust this value to set the allowed movement threshold for taps
 
 function onPointerMove(event) {
     pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -2087,8 +2087,13 @@ window.addEventListener('touchstart', (event) => {
     initialTouchPosition.x = event.touches[0].clientX;
     initialTouchPosition.y = event.touches[0].clientY;
 });
+window.addEventListener('touchmove', (event) => {
+    if (hasPointerMovedSignificantly(initialTouchPosition, event.touches[0])) {
+        selectState = false;
+    }
+});
 window.addEventListener('touchend', (event) => {
-    if (selectState && !hasPointerMovedSignificantly(initialTouchPosition, event.changedTouches[0])) {
+    if (selectState) {
         event.preventDefault(); // Prevent mouse event from firing after touch event
         const touch = event.changedTouches[0];
         const touchEvent = {
@@ -2100,6 +2105,7 @@ window.addEventListener('touchend', (event) => {
     }
     selectState = false;
 });
+
 
 
 /* let initialTouchPosition = { x: null, y: null };
