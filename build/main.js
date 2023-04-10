@@ -2064,14 +2064,25 @@ function onPointerMove(event) {
 }
 
 function onPointerClick(event) {
-    // Check if the event is from a touchscreen, ignore if it's not a primary touch
-    if (event.pointerType === 'touch' && event.isPrimary === false) {
-        return;
+    event.preventDefault();
+
+    let x, y;
+
+    // Check if the event is a touch event
+    if (event.touches) {
+        x = event.touches[0].clientX;
+        y = event.touches[0].clientY;
+    } else {
+        x = event.clientX;
+        y = event.clientY;
     }
 
-    // The rest of your onClick function
+    pointer.x = (x / window.innerWidth) * 2 - 1;
+    pointer.y = -(y / window.innerHeight) * 2 + 1;
+
     raycaster.setFromCamera(pointer, camera);
     const intersects = raycaster.intersectObjects(intersectObjectsArray);
+
     if (intersects.length > 0) {
         selectedPin = intersects[0].object;
 
