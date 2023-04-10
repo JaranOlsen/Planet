@@ -166,6 +166,7 @@ function enterFullscreen() {
     document.documentElement.msRequestFullscreen();
   }
   this.parentElement.style.display = 'none';
+  window.scrollTo(0, 1);
 }
 
 fullscreenButton.addEventListener("click", enterFullscreen);
