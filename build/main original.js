@@ -2065,86 +2065,6 @@ function hasPointerMovedSignificantly(startEvent, endEvent) {
     return squaredDistance > squaredMoveThreshold;
 }
 
-
-function processPointerUpEvent(event) {
-    if (selectState) {
-        onPointerClick(event);
-    }
-    selectState = false;
-}
-
-window.addEventListener('pointermove', onPointerMove);
-window.addEventListener('pointerdown', (event) => {
-    selectState = true;
-});
-window.addEventListener('pointerup', (event) => {
-    if (event.pointerType !== 'touch') {
-        processPointerUpEvent(event);
-    }
-});
-window.addEventListener('touchstart', (event) => {
-    selectState = true;
-    initialTouchPosition.x = event.touches[0].clientX;
-    initialTouchPosition.y = event.touches[0].clientY;
-});
-window.addEventListener('touchend', (event) => {
-    if (selectState && !hasPointerMovedSignificantly(initialTouchPosition, event.changedTouches[0])) {
-        event.preventDefault(); // Prevent mouse event from firing after touch event
-        const touch = event.changedTouches[0];
-        const touchEvent = {
-            ...touch,
-            pointerType: 'touch',
-            isPrimary: true,
-        };
-        processPointerUpEvent(touchEvent);
-    }
-    selectState = false;
-});
-
-
-/* let initialTouchPosition = { x: null, y: null };
-const tapMoveThreshold = 5; // Adjust this value to set the allowed movement threshold for taps
-
-function onPointerMove(event) {
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-}
-
-function onPointerClick(event) {
-    // Check if the event is from a touchscreen, ignore if it's not a primary touch
-    if (event.pointerType === 'touch' && event.isPrimary === false) {
-        return;
-    }
-
-    // The rest of your onClick function
-    raycaster.setFromCamera(pointer, camera);
-    const intersects = raycaster.intersectObjects(intersectObjectsArray);
-    if (intersects.length > 0) {
-        selectedPin = intersects[0].object;
-
-        selectedContext = intersects[0].object.context
-        selectedNode = intersects[0].object.index
-        if (contexts !== 2) selectedBox = contexts[selectedContext].boxes[selectedNode]
-        if (contexts !== 2) selectedTag = contexts[selectedContext].tags[selectedNode]
-
-        if (camera.position.distanceTo(selectedPin.position) < 4 && contexts[selectedContext].tagData[selectedNode].slides !== undefined) {
-            const selectedCarousel = contexts[selectedContext].tagData[selectedNode].slides
-            pushContent(selectedCarousel)
-            activeCarousel = document.querySelector(`.carousel.s1`)
-            activeCarousel.style.display = "block"
-        }
-    }
-}
-
-function hasPointerMovedSignificantly(startEvent, endEvent) {
-    const dx = endEvent.clientX - startEvent.clientX;
-    const dy = endEvent.clientY - startEvent.clientY;
-    const squaredDistance = dx * dx + dy * dy;
-    const squaredMoveThreshold = tapMoveThreshold * tapMoveThreshold;
-
-    return squaredDistance > squaredMoveThreshold;
-}
-
 window.addEventListener('pointermove', onPointerMove);
 window.addEventListener('pointerdown', (event) => {
     selectState = true;
@@ -2165,7 +2085,7 @@ window.addEventListener('touchend', (event) => {
         onPointerClick(event);
     }
     selectState = false;
-}); */
+});
 
 //TESTS
 if (planetTagData.length !== planetConnections.length) {

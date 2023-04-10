@@ -17,6 +17,7 @@ import { pushContent, pushVRContent } from './content.js'
 import { initializeVersion } from './versions.js'
 import { creation } from './creation.js'
 import { updateGutta, togglePerceptionCircles } from './gutta.js'
+import { checkForXRSupport, handleController, updateLine, updateGamepadState } from './vr.js'
 
 //IMPORT DATA
 import { planetTagData, planetConnections, planetArrowedConnections, planetDashedConnections } from './data/planetData.js'
@@ -59,8 +60,9 @@ import testPicture from '../img/truth/Slide6.jpeg'
 // IMPORT MODELS
 import signModel from "../models/sign.glb"
 
-const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
-const DEFAULT_PROFILE = 'generic-trigger';
+//VR
+/* const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
+const DEFAULT_PROFILE = 'generic-trigger'; */
 
 const canvas = document.querySelector('#canvas');
 const renderer = new THREE.WebGLRenderer(
@@ -107,7 +109,6 @@ const timer = new THREE.Clock();
 let developer = false;
 
 export let contexts = []
-//export let contexts = {}
 let selectedContext = 0;
 let selectedPin = null;
 let selectedBox = null;
@@ -186,6 +187,8 @@ let UIcontainer
 let UIactive = false
 let selectState = false
 let slideAction = false
+
+//THIS SEEMS TO NEVER GET CALLED???
 function createUI() {
     UIcontainer = new ThreeMeshUI.Block({
         ref: "UIcontainer",
@@ -321,11 +324,21 @@ function createUI() {
 //WEB XR
 let session
 enableVRbutton.addEventListener("click", () => {
-    checkForXRSupport()
+    //checkForXRSupport()
+    checkForXRSupport(renderer, camera, scene, selectState, slideAction, UI, UIcontainer, UIactive)
+        .then((initialized) => {
+            webXRInitialized = initialized;
+        })
+        .catch((error) => {
+            console.error('Error initializing WebXR:', error);
+        });
     enableVRbutton.style.display = "none"; 
+    playButton.style.display = "none";
+    skipButton.style.display = "none";
+    credits.style.display = "none";
 })
 
-export async function checkForXRSupport() {
+/* export async function checkForXRSupport() {
     navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
     if (supported) {
         webXRInitialized = true
@@ -336,7 +349,7 @@ export async function checkForXRSupport() {
     });
 }
 
-function declareGlobalVariables() {
+ function declareGlobalVariables() {
     window.dolly = new THREE.Object3D();
     window.dummyCam = new THREE.Object3D();
     window.workingMatrix = new THREE.Matrix4();
@@ -444,7 +457,7 @@ function updateControllers(info){
             right.addEventListener( 'squeezeend', onSqueezeEnd );
         }
         
-        right.addEventListener( 'disconnected', onDisconnected(right) );
+        right.addEventListener( 'disconnected', onDisconnected );
     }
     
     if (info.left !== undefined){
@@ -466,7 +479,7 @@ function updateControllers(info){
             left.addEventListener( 'squeezeend', onSqueezeEnd );
         }
         
-        left.addEventListener( 'disconnected', onDisconnected(left) );
+        left.addEventListener( 'disconnected', onDisconnected );
     }
 }
 
@@ -525,8 +538,8 @@ function onSqueezeEnd( ){
     }
 }
 
-function onDisconnected(controller){
-    const index = controller.userData.index;
+function onDisconnected(){
+    const index = userData.index;
     console.log(`Disconnected controller ${index}`);
     
     if ( controllers ){
@@ -640,7 +653,7 @@ function moveDolly(dt){
 
     //Restore the original rotation
     dolly.quaternion.copy( quaternion );
-}
+} */
 
 
 //INTRO
@@ -2065,86 +2078,6 @@ function hasPointerMovedSignificantly(startEvent, endEvent) {
     return squaredDistance > squaredMoveThreshold;
 }
 
-
-function processPointerUpEvent(event) {
-    if (selectState) {
-        onPointerClick(event);
-    }
-    selectState = false;
-}
-
-window.addEventListener('pointermove', onPointerMove);
-window.addEventListener('pointerdown', (event) => {
-    selectState = true;
-});
-window.addEventListener('pointerup', (event) => {
-    if (event.pointerType !== 'touch') {
-        processPointerUpEvent(event);
-    }
-});
-window.addEventListener('touchstart', (event) => {
-    selectState = true;
-    initialTouchPosition.x = event.touches[0].clientX;
-    initialTouchPosition.y = event.touches[0].clientY;
-});
-window.addEventListener('touchend', (event) => {
-    if (selectState && !hasPointerMovedSignificantly(initialTouchPosition, event.changedTouches[0])) {
-        event.preventDefault(); // Prevent mouse event from firing after touch event
-        const touch = event.changedTouches[0];
-        const touchEvent = {
-            ...touch,
-            pointerType: 'touch',
-            isPrimary: true,
-        };
-        processPointerUpEvent(touchEvent);
-    }
-    selectState = false;
-});
-
-
-/* let initialTouchPosition = { x: null, y: null };
-const tapMoveThreshold = 5; // Adjust this value to set the allowed movement threshold for taps
-
-function onPointerMove(event) {
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-}
-
-function onPointerClick(event) {
-    // Check if the event is from a touchscreen, ignore if it's not a primary touch
-    if (event.pointerType === 'touch' && event.isPrimary === false) {
-        return;
-    }
-
-    // The rest of your onClick function
-    raycaster.setFromCamera(pointer, camera);
-    const intersects = raycaster.intersectObjects(intersectObjectsArray);
-    if (intersects.length > 0) {
-        selectedPin = intersects[0].object;
-
-        selectedContext = intersects[0].object.context
-        selectedNode = intersects[0].object.index
-        if (contexts !== 2) selectedBox = contexts[selectedContext].boxes[selectedNode]
-        if (contexts !== 2) selectedTag = contexts[selectedContext].tags[selectedNode]
-
-        if (camera.position.distanceTo(selectedPin.position) < 4 && contexts[selectedContext].tagData[selectedNode].slides !== undefined) {
-            const selectedCarousel = contexts[selectedContext].tagData[selectedNode].slides
-            pushContent(selectedCarousel)
-            activeCarousel = document.querySelector(`.carousel.s1`)
-            activeCarousel.style.display = "block"
-        }
-    }
-}
-
-function hasPointerMovedSignificantly(startEvent, endEvent) {
-    const dx = endEvent.clientX - startEvent.clientX;
-    const dy = endEvent.clientY - startEvent.clientY;
-    const squaredDistance = dx * dx + dy * dy;
-    const squaredMoveThreshold = tapMoveThreshold * tapMoveThreshold;
-
-    return squaredDistance > squaredMoveThreshold;
-}
-
 window.addEventListener('pointermove', onPointerMove);
 window.addEventListener('pointerdown', (event) => {
     selectState = true;
@@ -2165,7 +2098,7 @@ window.addEventListener('touchend', (event) => {
         onPointerClick(event);
     }
     selectState = false;
-}); */
+});
 
 //TESTS
 if (planetTagData.length !== planetConnections.length) {
@@ -2214,18 +2147,22 @@ function animate() {
 function render() {  
 
     //WebXR
+    console.log(webXRInitialized)
     if (webXRInitialized == true && renderer.xr.isPresenting){
         const dt = clock.getDelta();
 
         if (controllers ){
             Object.values( controllers ).forEach( ( value ) => {
-                handleController( value.controller );
+                //handleController(value.controller)
+                handleController( value.controller, raycaster, intersectObjectsArray, UIactive, contentData, UIcontainer, UI, middleOfPlanet, jaranius)
+                updateLine( value.controller )
             });
         } 
         if (elapsedTime===undefined) elapsedTime = 0;
         elapsedTime += dt;
         if (elapsedTime > 0.1){  //reduce to make navigation even smoother?
-            updateGamepadState();
+            //updateGamepadState();
+            updateGamepadState( renderer, session );
             elapsedTime = 0;
         }
         if (XRinSession == true) {
@@ -2302,3 +2239,4 @@ function render() {
 }
 
 animate()
+
