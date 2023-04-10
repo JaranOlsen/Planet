@@ -9,52 +9,58 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+
+    <div class="scroll-wrapper">
+      <div class="content-container">
  
-    <div id="container">
-      <canvas id="canvas"></canvas>
-      <!-- <div id="credits">DEVELOPER VERSION</div> -->
-      <!-- <div id="credits">Alan Watts on letting go. Music: Kevin MacLeod - Meditation Impromptu 1</div> -->
-      <div id="credits">Alan Watts on swimming with the stream</div>
-      <!-- <div id="credits">An Honest Meditation</div> -->
-      <!-- <div id="credits">Ajahn Chah from the BBC documentary 'The Mindful Way' & Jack Kornfield speaking about Ajahn Chah and loving awareness. Music: Jaran Olsen - This is me</div> -->
-      <!-- <div id="credits">Carl Rogers on Empathic Listening, Presence and Healing. Music: Jaran Olsen - This Is Me</div> -->
-      <!-- <div id="credits">Carl Rogers on Empathic Listening, Presence and Healing. Music: Hans Zimmer - First Step</div> -->
-      <div class="progress-bar-container">
-        <label for="progress-bar">Loading...</label>
-        <progress id="progress-bar" value="0" max="100"></progress>
-      </div>
-      <div class="mobile-fullscreen-container">
-        <button id="fullscreenButton">Fullscreen</button>
-      </div>
-      
-      <div id="versions">
-        <button class="version-option" id="version1" alt="Requires powerful computer">Full version</button><br>
-        <button class="version-option" id="version2" alt="Suitable for light laptops and mobile devices">Light version</button><br>
-        <button class="version-option" id="version3" alt="Includes beta features - might not always work">Developer version</button><br>
-        <button class="version-option" id="version4" alt="Built for Oculus Quest II">VR version</button>
-      </div>
-      <button id="playbutton">&#9654;</button>
-      <button id="skipbutton">skip intro</button>
-      <button id="enableVRbutton">enable VR</button>
-      <div id="fpsCounter"></div>
-      <div id="guttaStatScreen"></div>
-      <div id="keys">
-        Click nodes to see content. Wireframe nodes doesn't have content. Press 1 to 5 for spotlight intensity, 6 to 0 for ambient intensity.
-      </div>
+        <div id="container">
+          <canvas id="canvas"></canvas>
+          <!-- <div id="credits">DEVELOPER VERSION</div> -->
+          <!-- <div id="credits">Alan Watts on letting go. Music: Kevin MacLeod - Meditation Impromptu 1</div> -->
+          <div id="credits">Alan Watts on swimming with the stream</div>
+          <!-- <div id="credits">An Honest Meditation</div> -->
+          <!-- <div id="credits">Ajahn Chah from the BBC documentary 'The Mindful Way' & Jack Kornfield speaking about Ajahn Chah and loving awareness. Music: Jaran Olsen - This is me</div> -->
+          <!-- <div id="credits">Carl Rogers on Empathic Listening, Presence and Healing. Music: Jaran Olsen - This Is Me</div> -->
+          <!-- <div id="credits">Carl Rogers on Empathic Listening, Presence and Healing. Music: Hans Zimmer - First Step</div> -->
+          <div class="progress-bar-container">
+            <label for="progress-bar">Loading...</label>
+            <progress id="progress-bar" value="0" max="100"></progress>
+          </div>
+          <div class="mobile-fullscreen-container">
+            <button id="fullscreenButton">Fullscreen</button>
+          </div>
+          
+          <div id="versions">
+            <button class="version-option" id="version1" alt="Requires powerful computer">Full version</button><br>
+            <button class="version-option" id="version2" alt="Suitable for light laptops and mobile devices">Light version</button><br>
+            <button class="version-option" id="version3" alt="Includes beta features - might not always work">Developer version</button><br>
+            <button class="version-option" id="version4" alt="Built for Oculus Quest II">VR version</button>
+          </div>
+          <button id="playbutton">&#9654;</button>
+          <button id="skipbutton">skip intro</button>
+          <button id="enableVRbutton">enable VR</button>
+          <div id="fpsCounter"></div>
+          <div id="guttaStatScreen"></div>
+          <div id="keys">
+            Click nodes to see content. Wireframe nodes doesn't have content. Press 1 to 5 for spotlight intensity, 6 to 0 for ambient intensity.
+          </div>
 
-      <input id="tagInput" type="text" style="display: none; position: absolute;" />
+          <input id="tagInput" type="text" style="display: none; position: absolute;" />
 
-      <section class="slides" aria-label="Slides">  
-        <div class="carousel s1" id="div_carousel" data-carousel>
-          <button class="carousel-button prev" data-carousel-button="prev">&#8666;</button>
-          <button class="carousel-button next" data-carousel-button="next">&#8667;</button>
-          <button class="carousel-button exit" data-carousel-button="exit">&#10005;</button>
-          <ul id="ul_carousel" data-slides>
-            <li class="slide" data-active>
-            </li>
-          </ul>
+          <section class="slides" aria-label="Slides">  
+            <div class="carousel s1" id="div_carousel" data-carousel>
+              <button class="carousel-button prev" data-carousel-button="prev">&#8666;</button>
+              <button class="carousel-button next" data-carousel-button="next">&#8667;</button>
+              <button class="carousel-button exit" data-carousel-button="exit">&#10005;</button>
+              <ul id="ul_carousel" data-slides>
+                <li class="slide" data-active>
+                </li>
+              </ul>
+            </div>
+          </section>
         </div>
-      </section>
+
+      </div>
     </div>
 
     <audio id="introTune">

@@ -7,6 +7,37 @@ html, body {
   overflow: hidden;
 }
 
+.scroll-wrapper {
+  height: 100%;
+  position: relative;
+}
+
+.content-container {
+  height: 100%;
+}
+
+.mobile-fullscreen-container {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .scroll-wrapper {
+    overflow: auto;
+  }
+
+  .content-container {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 1px; /* Slightly larger than 100% height to make the page scrollable on mobile devices */
+  }
+
+  .mobile-fullscreen-container {
+    display: block;
+  }
+}
+
+
+
 #container {
   position: relative;  /* makes this the origin of its children */
   width: 100%;
