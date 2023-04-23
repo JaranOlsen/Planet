@@ -404,18 +404,15 @@ function onConnected( event ){
         info.name = profile.profileId;
         info.targetRayMode = event.data.targetRayMode;
 
-        const handedness = getHandednessFromProfile(profile);
-
-        Object.entries(profile.layouts).forEach(([key, layout]) => {
+        Object.entries( profile.layouts ).forEach( ( [key, layout] ) => {
             const components = {};
-            Object.values(layout.components).forEach((component) => {
+            Object.values( layout.components ).forEach( ( component ) => {
                 components[component.rootNodeName] = component.gamepadIndices;
             });
             info[key] = components;
         });
 
-        createButtonStates(info.right, 'right');
-        createButtonStates(info.left, 'left');
+        createButtonStates( info.right );
         
         console.log( JSON.stringify(info) );
 
@@ -424,30 +421,16 @@ function onConnected( event ){
     } );
 }
 
-function getHandednessFromProfile(profile) {
-    const handedness = {};
-
-    Object.keys(profile.layouts).forEach((hand) => {
-        const components = profile.layouts[hand].components;
-        Object.keys(components).forEach((component) => {
-            handedness[component] = hand;
-        });
-    });
-
-    return handedness;
-}
-
-function createButtonStates(components, hand) {
-    if (!buttonStates) buttonStates = {};
-    buttonStates[hand] = {};
-    const handButtonStates = buttonStates[hand];
-    Object.keys(components).forEach((key) => {
-        if (key.indexOf('touchpad') != -1 || key.indexOf('thumbstick') != -1) {
-            handButtonStates[key] = { button: 0, xAxis: 0, yAxis: 0 };
-        } else {
-            handButtonStates[key] = 0;
+function createButtonStates(components){
+    buttonStates = {};
+    gamepadIndices = components
+    Object.keys( components ).forEach( (key) => {
+        if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
+            buttonStates[key] = { button: 0, xAxis: 0, yAxis: 0 };
+        }else{
+            buttonStates[key] = 0; 
         }
-    });
+    })
 }
 
 function updateControllers(info) {
@@ -2376,25 +2359,17 @@ function render() {
             elapsedTime = 0;
         }
         if (XRinSession == true) {
-            Object.entries(controllers).forEach(([hand, controllerData]) => {
-                const buttonState = buttonStates[hand];
-    
-                if (buttonState) {
-                    const xInput = Number(buttonState.xr_standard_thumbstick.xAxis);
-                    const yInput = Number(buttonState.xr_standard_thumbstick.yAxis);
-                    const aButton = Number(buttonState.a_button);
-                    const bButton = Number(buttonState.b_button);
-    
-                    if (xInput != 0 || yInput != 0 || aButton != 0 || bButton != 0) {
-                        //JARANIUS ROTATE
-                        jaranius.rotation.y -= xInput / 15;
-                        dollyLat += yInput;
-                        dollyRadius += (0.1 * aButton - 0.1 * bButton) * (dollyRadius - 5);
-                        const dollyPosit = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius);
-                        dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z);
-                    }
-                }
-            });
+            const xInput = Number(buttonStates.xr_standard_thumbstick.xAxis)
+            const yInput = Number(buttonStates.xr_standard_thumbstick.yAxis)
+            if (xInput != 0 || yInput != 0 || buttonStates.a_button != 0 || buttonStates.b_button != 0) {
+
+                //JARANIUS ROTATE
+                jaranius.rotation.y -= xInput / 15
+                dollyLat += yInput
+                dollyRadius += ((0.1 * buttonStates.a_button) - (0.1 * buttonStates.b_button)) * (dollyRadius - 5)
+                const dollyPosit = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
+                dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z)
+            }
         }
         ThreeMeshUI.update();
         updateButtons();
