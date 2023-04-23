@@ -433,7 +433,7 @@ function createButtonStates(components){
     })
 }
 
-function updateControllers(info){
+/* function updateControllers(info){
     if (info.right !== undefined){
         const right = renderer.xr.getController(0);
         
@@ -483,7 +483,42 @@ function updateControllers(info){
         left.addEventListener( 'disconnected', () => onDisconnected(left) );
 
     }
-}
+} */
+
+function updateControllers(info) {
+    const setupControllerEvents = (controller, controllerInfo) => {
+      let trigger = false,
+        squeeze = false;
+  
+      Object.keys(controllerInfo).forEach((key) => {
+        if (key.indexOf("trigger") != -1) trigger = true;
+        if (key.indexOf("squeeze") != -1) squeeze = true;
+      });
+  
+      if (trigger) {
+        controller.addEventListener("selectstart", onSelectStart);
+        controller.addEventListener("selectend", onSelectEnd);
+      }
+  
+      if (squeeze) {
+        controller.addEventListener("squeezestart", onSqueezeStart);
+        controller.addEventListener("squeezeend", onSqueezeEnd);
+      }
+  
+      controller.addEventListener("disconnected", () => onDisconnected(controller));
+    };
+  
+    if (info.right !== undefined) {
+      const right = renderer.xr.getController(0);
+      setupControllerEvents(right, info.right);
+    }
+  
+    if (info.left !== undefined) {
+      const left = renderer.xr.getController(1);
+      setupControllerEvents(left, info.left);
+    }
+  }
+  
 
 function buildController( index, line, modelFactory ){
     const controller = renderer.xr.getController( index );
