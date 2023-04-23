@@ -432,107 +432,92 @@ function createButtonStates(components){
         }
     })
 }
+
+/* function updateControllers(info){
+    if (info.right !== undefined){
+        const right = renderer.xr.getController(0);
+        
+        let trigger = false, squeeze = false;
+        
+        Object.keys( info.right ).forEach( (key) => {
+            if (key.indexOf('trigger')!=-1) trigger = true;                   
+            if (key.indexOf('squeeze')!=-1) squeeze = true;
+            
+        });
+        
+        if (trigger){
+            right.addEventListener( 'selectstart', onSelectStart );
+            right.addEventListener( 'selectend', onSelectEnd );
+        }
+
+        if (squeeze){
+            right.addEventListener( 'squeezestart', onSqueezeStart );
+            right.addEventListener( 'squeezeend', onSqueezeEnd );
+        }
+        
+        //right.addEventListener( 'disconnected', onDisconnected(right) );
+        right.addEventListener( 'disconnected', () => onDisconnected(right) );
+
+    }
+    
+    if (info.left !== undefined){
+        const left = renderer.xr.getController(1);
+        
+        let trigger = false, squeeze = false;
+        
+        Object.keys( info.left ).forEach( (key) => {
+            if (key.indexOf('trigger')!=-1) trigger = true;                   if (key.indexOf('squeeze')!=-1) squeeze = true;      
+        });
+        
+        if (trigger){
+            left.addEventListener( 'selectstart', onSelectStart );
+            left.addEventListener( 'selectend', onSelectEnd );
+        }
+
+        if (squeeze){
+            left.addEventListener( 'squeezestart', onSqueezeStart );
+            left.addEventListener( 'squeezeend', onSqueezeEnd );
+        }
+        
+        //left.addEventListener( 'disconnected', onDisconnected(left) );
+        left.addEventListener( 'disconnected', () => onDisconnected(left) );
+
+    }
+} */
+
 function updateControllers(info) {
-    console.log("Controller info:", info);
+    const setupControllerEvents = (controller, controllerInfo) => {
+      let trigger = false,
+        squeeze = false;
+  
+      Object.keys(controllerInfo).forEach((key) => {
+        if (key.indexOf("trigger") != -1) trigger = true;
+        if (key.indexOf("squeeze") != -1) squeeze = true;
+      });
+  
+      if (trigger) {
+        controller.addEventListener("selectstart", onSelectStart);
+        controller.addEventListener("selectend", onSelectEnd);
+      }
+  
+      if (squeeze) {
+        controller.addEventListener("squeezestart", onSqueezeStart);
+        controller.addEventListener("squeezeend", onSqueezeEnd);
+      }
+  
+      controller.addEventListener("disconnected", () => onDisconnected(controller));
+    };
   
     if (info.right !== undefined) {
-      setupController(info.right, 1);
+      const right = renderer.xr.getController(0);
+      setupControllerEvents(right, info.right);
     }
   
     if (info.left !== undefined) {
-      setupController(info.left, 0);
+      const left = renderer.xr.getController(1);
+      setupControllerEvents(left, info.left);
     }
-}
-  
-function setupController(controllerInfo, controllerIndex) {
-    const controller = renderer.xr.getController(controllerIndex);
-  
-    if (controllerInfo.xr_standard_trigger) {
-      controller.addEventListener("selectstart", onSelectStart.bind(null, controllerIndex, controller));
-      controller.addEventListener("selectend", onSelectEnd.bind(null, controllerIndex, controller));
-    }
-  
-    if (controllerInfo.xr_standard_squeeze) {
-      controller.addEventListener("squeezestart", onSqueezeStart.bind(null, controllerIndex, controller));
-      controller.addEventListener("squeezeend", onSqueezeEnd.bind(null, controllerIndex, controller));
-    }
-  
-    if (controllerInfo.a_button || controllerInfo.x_button) {
-      controller.addEventListener("a_button", onAButton.bind(null, controllerIndex, controller));
-      controller.addEventListener("x_button", onXButton.bind(null, controllerIndex, controller));
-    }
-  
-    if (controllerInfo.b_button || controllerInfo.y_button) {
-      controller.addEventListener("b_button", onBButton.bind(null, controllerIndex, controller));
-      controller.addEventListener("y_button", onYButton.bind(null, controllerIndex, controller));
-    }
-  
-    if (controllerInfo.xr_standard_thumbstick) {
-      controller.addEventListener("thumbstick", onThumbstick.bind(null, controllerIndex, controller));
-    }
-  
-    controller.addEventListener("disconnected", () => onDisconnected(controller));
-}
-  
-function onSelectStart(controllerIndex, controller, event) {
-    console.log("Select start on controller", controllerIndex, event);
-    controller.userData.selectPressed = true;
-    selectState = true;
-}
-  
-function onSelectEnd(controllerIndex, controller, event) {
-    console.log("Select end on controller", controllerIndex, event);
-    controller.children[0].scale.z = 0;
-    controller.userData.selectPressed = false;
-    controller.userData.selected = undefined;
-    selectState = false;
-    slideAction = false;
-}
-  
-function onSqueezeStart(controllerIndex, controller, event) {
-    console.log("Squeeze start on controller", controllerIndex, event);
-    controller.userData.squeezePressed = true;
-    if (controller.userData.selected !== undefined ){
-        controller.attach( controller.userData.selected );
-        controller.userData.attachedObject = userData.selected;
-    }}
-  
-function onSqueezeEnd(controllerIndex, controller, event) {
-    console.log("Squeeze end on controller", controllerIndex, event);
-    controller.userData.squeezePressed = false;
-    if (controller.userData.attachedObject !== undefined){
-            room.attach( controller.userData.attachedObject );
-        controller.userData.attachedObject = undefined;
-    }
-
-    if (UIactive == true) {
-        UI.remove(UIcontainer)
-        UIactive = false
-    }}
-
-  
-function onAButton(controllerIndex, controller, event) {
-    console.log("A/X button pressed on controller", controllerIndex, event);
-    // Your code to handle the A/X button press
-}
-  
-function onBButton(controllerIndex, controller, event) {
-    console.log("B/Y button pressed on controller", controllerIndex, event);
-    // Your code to handle the B/Y button press
-}
-  
-function onXButton(controllerIndex, controller, event) {
-    // Your code to handle the X button press (if you want it to be different from A button)
-}
-  
-function onYButton(controllerIndex, controller, event) {
-    // Your code to handle the Y button press (if you want it to be different from B button)
-}
-  
-function onThumbstick(controllerIndex, controller, event) {
-    console.log("Thumbstick on controller", controllerIndex, event);
-    // Your code to handle the thumbstick
-}  
+  }
   
 
 function buildController( index, line, modelFactory ){
@@ -556,6 +541,40 @@ function buildController( index, line, modelFactory ){
     return { controller, grip };
 }
 
+function onSelectStart( ){
+    this.userData.selectPressed = true;
+    selectState = true;
+}
+
+function onSelectEnd( ){
+    this.children[0].scale.z = 0;
+    this.userData.selectPressed = false;
+    this.userData.selected = undefined;
+    selectState = false;
+    slideAction = false;
+}
+
+function onSqueezeStart( ){
+    this.userData.squeezePressed = true;
+    if (this.userData.selected !== undefined ){
+        this.attach( this.userData.selected );
+        this.userData.attachedObject = userData.selected;
+    }
+}
+
+function onSqueezeEnd( ){
+    this.userData.squeezePressed = false;
+    if (this.userData.attachedObject !== undefined){
+            room.attach( this.userData.attachedObject );
+        this.userData.attachedObject = undefined;
+    }
+
+    if (UIactive == true) {
+        UI.remove(UIcontainer)
+        UIactive = false
+    }
+}
+
 function onDisconnected(controller){
     const index = controller.userData.index;
     console.log(`Disconnected controller ${index}`);
@@ -576,6 +595,7 @@ function onDisconnected(controller){
 
 function handleController( controller ){
     if (controller.userData.selectPressed ){
+        console.log(controller);
 
         controller.children[0].scale.z = 10;
 
@@ -611,48 +631,32 @@ function handleController( controller ){
     }
 }
 
-function updateGamepadState() {
+function updateGamepadState(){
     session = renderer.xr.getSession();
-
+    
     const inputSource = session.inputSources[0];
-
-    if (inputSource && inputSource.gamepad && gamepadIndices && buttonStates) {
+    
+    if (inputSource && inputSource.gamepad && gamepadIndices && buttonStates){
         const gamepad = inputSource.gamepad;
-        XRinSession = true;
-        try {
-            Object.entries(buttonStates).forEach(([key, value]) => {
+        XRinSession = true
+        try{
+            Object.entries( buttonStates ).forEach( ( [ key, value ] ) => {
                 const buttonIndex = gamepadIndices[key].button;
-                if (key.indexOf("touchpad") != -1 || key.indexOf("thumbstick") != -1) {
+                if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
                     const xAxisIndex = gamepadIndices[key].xAxis;
                     const yAxisIndex = gamepadIndices[key].yAxis;
-                    buttonStates[key].button = gamepad.buttons[buttonIndex].value;
-                    buttonStates[key].xAxis = gamepad.axes[xAxisIndex].toFixed(2);
-                    buttonStates[key].yAxis = gamepad.axes[yAxisIndex].toFixed(2);
-                } else {
+                    buttonStates[key].button = gamepad.buttons[buttonIndex].value; 
+                    buttonStates[key].xAxis = gamepad.axes[xAxisIndex].toFixed(2); 
+                    buttonStates[key].yAxis = gamepad.axes[yAxisIndex].toFixed(2); 
+                }else{
                     buttonStates[key] = gamepad.buttons[buttonIndex].value;
                 }
             });
-
-            // Dispatch custom events for A, B, X, and Y buttons
-            const controller = renderer.xr.getController(0);
-            if (buttonStates.a_button) {
-                controller.dispatchEvent(new Event("a_button"));
-            }
-            if (buttonStates.b_button) {
-                controller.dispatchEvent(new Event("b_button"));
-            }
-            if (buttonStates.x_button) {
-                controller.dispatchEvent(new Event("x_button"));
-            }
-            if (buttonStates.y_button) {
-                controller.dispatchEvent(new Event("y_button"));
-            }
-        } catch (e) {
+        }catch(e){
             console.warn("An error occurred setting the ui");
         }
     }
 }
-
 
 function moveDolly(dt){
     
