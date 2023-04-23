@@ -455,7 +455,9 @@ function updateControllers(info){
             right.addEventListener( 'squeezeend', onSqueezeEnd );
         }
         
-        right.addEventListener( 'disconnected', onDisconnected(right) );
+        //right.addEventListener( 'disconnected', onDisconnected(right) );
+        right.addEventListener( 'disconnected', () => onDisconnected(right) );
+
     }
     
     if (info.left !== undefined){
@@ -477,7 +479,9 @@ function updateControllers(info){
             left.addEventListener( 'squeezeend', onSqueezeEnd );
         }
         
-        left.addEventListener( 'disconnected', onDisconnected(left) );
+        //left.addEventListener( 'disconnected', onDisconnected(left) );
+        left.addEventListener( 'disconnected', () => onDisconnected(left) );
+
     }
 }
 
