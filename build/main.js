@@ -2,6 +2,7 @@
 import * as THREE from 'three'
 import { Float32BufferAttribute, FrontSide, DoubleSide, Vector2 } from 'three'
 import { OrbitControls } from "three/addons/controls/OrbitControls.js"
+import { FlyControls } from 'three/addons/controls/FlyControls.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'
 import { VRButton } from 'three/addons/webxr/VRButton.js'
@@ -19,7 +20,7 @@ import { creation } from './creation.js'
 import { updateGutta, togglePerceptionCircles } from './gutta.js'
 
 //IMPORT DATA
-import { planetTagData, planetConnections, planetArrowedConnections, planetDashedConnections } from './data/planetData.js'
+import { planetTagData, planetConnections, planetArrowedConnections, planetDashedConnections, planetTunnelConnections } from './data/planetData.js'
 import { planetImageData } from './data/planetImageData.js'
 import { planetNuggetData } from './data/planetNuggetData.js'
 import { spiralTagData, spiralConnections, spiralArrowedConnections, spiralDashedConnections } from './data/spiralData.js'
@@ -88,14 +89,25 @@ const far = 2000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 camera.position.z = 500
 
-const controls = new OrbitControls(camera, canvas);
-controls.enablePan = false
-controls.maxDistance = 1000
-controls.minDistance = 5.2
-controls.zoomSpeed = 0.3
-controls.rotateSpeed = 0.3
-controls.target.set(0, 0, 0);
-controls.update();
+const orbitControls = new OrbitControls(camera, canvas);
+orbitControls.enablePan = false
+orbitControls.maxDistance = 1000
+orbitControls.minDistance = 5.2
+orbitControls.zoomSpeed = 0.3
+orbitControls.rotateSpeed = 0.3
+orbitControls.target.set(0, 0, 0);
+orbitControls.update();
+orbitControls.enabled = true;
+
+const flyControls = new FlyControls(camera, renderer.domElement);
+flyControls.movementSpeed = 1;
+flyControls.domElement = renderer.domElement;
+flyControls.rollSpeed = Math.PI / 24;
+flyControls.autoForward = false;
+flyControls.dragToLook = false;
+flyControls.enabled = false;
+
+let controlMode = 'orbit';
 
 const scene = new THREE.Scene();
 
@@ -544,6 +556,8 @@ function onDisconnected(controller){
 
 function handleController( controller ){
     if (controller.userData.selectPressed ){
+        console.log(controller);
+
         controller.children[0].scale.z = 10;
 
         workingMatrix.identity().extractRotation( controller.matrixWorld );
@@ -965,7 +979,9 @@ let jaranius
 let jaraniusConnections = new THREE.Object3D()
 let spiralDynamicsConnections = new THREE.Object3D()
 let clouds
+let atmosphere
 let sign
+let atmosMaterial
 const planetContent = new THREE.Object3D()
 export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture) {
     jaraniusInitialized = true
@@ -1000,7 +1016,7 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
         cloudsMaterial
     )
     jaranius.add(clouds)
-
+    
     //create atmosphericLight
     const atmosphericLight = new THREE.Mesh(
         new THREE.SphereGeometry(5.0, 500, 500),
@@ -1014,11 +1030,16 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     jaranius.add(atmosphericLight);
 
     //create atmosphere
-    const atmosphere = new THREE.Mesh(
+    atmosphere = new THREE.Mesh(
         new THREE.SphereGeometry(5.3, 50, 50),
         new THREE.ShaderMaterial({
             vertexShader: atmosphereVertexShader,
             fragmentShader: atmosphereFragmentShader,
+            uniforms: {
+                lightPosition: { value: sunLight.position },
+                uniformCameraPosition: { value: camera.position },
+                planetPosition: { value: new THREE.Vector3(0, 0, 0) },
+            },
             blending: THREE.AdditiveBlending,
             side: THREE.BackSide,
             transparent: true,
@@ -1308,13 +1329,13 @@ scene.add(spotlight);
 
 //CREATE CONTEXTS
 export function createContexts(version) {
-    //contexts.push([planetTagData, planetContent, planetConnections, jaraniusConnections, 5, [], [], []])
     contexts.push({
         tagData: planetTagData, 
         tagDestination: planetContent, 
         connectionData: planetConnections, 
         arrowConnectionData: planetArrowedConnections,
         dashedConnectionData: planetDashedConnections,
+        tunnelConnectionData: planetTunnelConnections,
         connectionDestination: jaraniusConnections, 
         radius: 5, 
         pins: [], 
@@ -1322,7 +1343,6 @@ export function createContexts(version) {
         tags: []
     })
 
-    //contexts.push([spiralTagData, spiral, spiralConnections, spiralDynamicsConnections, 7, [], [], []])
     contexts.push({
         tagData: spiralTagData, 
         tagDestination: spiral, 
@@ -1336,7 +1356,6 @@ export function createContexts(version) {
         tags: []
     })
 
-    //contexts.push([planetNuggetData, planetContent, , , 5, [], [], []])
     contexts.push({
         tagData: planetNuggetData, 
         tagDestination: planetContent, 
@@ -1443,7 +1462,19 @@ export function openVRLink() {
 document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
-    if (focusElement !== "tagInput") {
+    //Controls
+    if (keyCode == 79) { 
+        if (controlMode === 'orbit') {
+            controlMode = 'fly';
+            orbitControls.enabled = false;
+            flyControls.enabled = true;
+          } else {
+            controlMode = 'orbit';
+            orbitControls.enabled = true;
+            flyControls.enabled = false;
+          }
+    }
+    if (focusElement !== "tagInput" && !flyControls.enabled) {
         //Slide control
         if (activeCarousel !== undefined && (keyCode === 33 || keyCode === 37)) { // left arrow or button on USB remote
             const prevButton = document.querySelector("[data-carousel-button='prev']");
@@ -1508,10 +1539,32 @@ function onDocumentKeyUp(event) {
                 if (developer == true) togglePerceptionCircles(guttaState)
             }
         }
-        if (keyCode == 72) { //H
-            //jaranius.material.wireframe = true
+        
+        if (keyCode == 73) { //I
+            for (let i = -180; i < 360; i += 10) {
+                let no = convertLatLngtoCartesian(90, i, 5)
+                console.log("90 ", i)
+                let no2 = convertCartesiantoLatLng(no.x, no.y, no.z)
+                console.log(no2.lat, no2.lng)
+            }
+        }
 
-            for (let lat = 10; lat < 180; lat += 10) {
+        //Content display
+        if (keyCode == 67) { //C
+            if (showContent == true) {
+                jaranius.remove(planetContent)
+                jaranius.remove(jaraniusConnections)
+                showContent = false
+            } else {
+                jaranius.add(planetContent)
+                jaranius.add(jaraniusConnections)
+                showContent = true
+            }
+        }
+        if (keyCode == 72) { //H
+            jaranius.material.wireframe = !jaranius.material.wireframe;
+
+            /* for (let lat = 10; lat < 180; lat += 10) {
                 for (let lng = 0; lng < 360; lng += 10) {
                     const id = generateUUID()
                     const newItem = {
@@ -1534,28 +1587,7 @@ function onDocumentKeyUp(event) {
                     createTags([newItem], contexts[0].tagDestination, contexts[0].radius, 0, indexMod);
                 }
             }
-            console.log(contexts)
-        }
-        if (keyCode == 73) { //I
-            for (let i = -180; i < 360; i += 10) {
-                let no = convertLatLngtoCartesian(90, i, 5)
-                console.log("90 ", i)
-                let no2 = convertCartesiantoLatLng(no.x, no.y, no.z)
-                console.log(no2.lat, no2.lng)
-            }
-        }
-
-        //Content display
-        if (keyCode == 67) { //C
-            if (showContent == true) {
-                jaranius.remove(planetContent)
-                jaranius.remove(jaraniusConnections)
-                showContent = false
-            } else {
-                jaranius.add(planetContent)
-                jaranius.add(jaraniusConnections)
-                showContent = true
-            }
+            console.log(contexts) */
         }
         if (keyCode == 83) { //S
             if (spiralActivated == false) {
@@ -1621,6 +1653,16 @@ function onDocumentKeyUp(event) {
                 })
                 output = output + "],\n"
             }
+            output = output + "\n]\n\nexport const planetTunnelConnections = [\n"
+
+            const tunnelConnectionSource = contexts[selectedContext].tunnelConnectionData
+            for (let i = 0; i < tunnelConnectionSource.length; i++) {
+                output = output + "["
+                tunnelConnectionSource[i].forEach((item) => {
+                    output = output + "\"" + item + "\", "
+                })
+                output = output + "],\n"
+            }
             output = output + "\n]"
             console.log(output)
         }
@@ -1650,6 +1692,7 @@ function onDocumentKeyUp(event) {
                 contexts[selectedContext].connectionData.splice(selectedNode, 1)
                 if (contexts[selectedContext].arrowConnectionData !== undefined) contexts[selectedContext].arrowConnectionData.splice(selectedNode, 1)
                 if (contexts[selectedContext].dashedConnectionData !== undefined) contexts[selectedContext].dashedConnectionData.splice(selectedNode, 1)
+                if (contexts[selectedContext].tunnelConnectionData !== undefined) contexts[selectedContext].tunnelConnectionData.splice(selectedNode, 1)
                 contexts[selectedContext].pins.splice(selectedNode, 1)
                 contexts[selectedContext].boxes.splice(selectedNode, 1)
                 contexts[selectedContext].tags.splice(selectedNode, 1)
@@ -1669,6 +1712,10 @@ function onDocumentKeyUp(event) {
                     if (contexts[selectedContext].dashedConnectionData !== undefined) {
                         const index3 = contexts[selectedContext].dashedConnectionData[i].indexOf(id)
                         if (index3 !== -1) contexts[selectedContext].dashedConnectionData[i].splice(index3, 1)
+                    }
+                    if (contexts[selectedContext].tunnelConnectionData !== undefined) {
+                        const index4 = contexts[selectedContext].tunnelConnectionData[i].indexOf(id)
+                        if (index4 !== -1) contexts[selectedContext].tunnelConnectionData[i].splice(index4, 1)
                     }
                 }
 
@@ -1731,7 +1778,7 @@ function onDocumentKeyUp(event) {
                 const curveThickness = 0.0001
                 const curveRadiusSegments = 3
                 const curveMaxAltitude = 0.03
-                createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, false, true)
+                createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, false, true, false)
             } 
         }
         if (keyCode == 66 && developer == true) { //B - create new dashed connections
@@ -1755,7 +1802,31 @@ function onDocumentKeyUp(event) {
                 const curveThickness = 0.0001
                 const curveRadiusSegments = 3
                 const curveMaxAltitude = 0.03
-                createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, true, false)
+                createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, true, false, false)
+            } 
+        }
+        if (keyCode == 78 && developer == true) { //N - create new tunnel connections
+            if (selectedNodes.length > 1) {
+                for (let i = 1; i < selectedNodes.length; i++){
+                    if (contexts[selectedContext].tunnelConnectionData[selectedNodes[0]].includes(contexts[selectedContext].tagData[selectedNodes[i]].id)) {
+                        const index = contexts[selectedContext].tunnelConnectionData[selectedNodes[0]].indexOf(contexts[selectedContext].tagData[selectedNodes[i]].id)
+                        if (index > -1) {
+                            contexts[selectedContext].tunnelConnectionData[selectedNodes[0]].splice(index, 1)
+                        }
+                    } else contexts[selectedContext].tunnelConnectionData[selectedNodes[0]].push(contexts[selectedContext].tagData[selectedNodes[i]].id)
+                }
+
+                const context = {
+                    tagSource: contexts[selectedContext].tagData,
+                    connectionSource: contexts[selectedContext].tunnelConnectionData, 
+                    curveMinAltitude: contexts[selectedContext].radius, 
+                    context: contexts[selectedContext].connectionDestination
+                }
+                context.context.clear()
+                const curveThickness = 0.001
+                const curveRadiusSegments = 6
+                const curveMaxAltitude = 0.1
+                createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, false, false, true)
             } 
         }
         
@@ -1770,7 +1841,7 @@ function onDocumentKeyUp(event) {
             const curveThickness = 0.0001
             const curveRadiusSegments = 3
             const curveMaxAltitude = 0.03
-            createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, false, false)
+            createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, false, false, false)
             
             const arrowContext = {
                 tagSource: contexts[selectedContext].tagData,
@@ -1778,7 +1849,7 @@ function onDocumentKeyUp(event) {
                 curveMinAltitude: contexts[selectedContext].radius, 
                 context: contexts[selectedContext].connectionDestination
             }
-            createConnections(arrowContext.tagSource, arrowContext.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, arrowContext.curveMinAltitude, arrowContext.context, false, true)
+            createConnections(arrowContext.tagSource, arrowContext.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, arrowContext.curveMinAltitude, arrowContext.context, false, true, false)
         
             const dashedContext = {
                 tagSource: contexts[selectedContext].tagData,
@@ -1786,7 +1857,15 @@ function onDocumentKeyUp(event) {
                 curveMinAltitude: contexts[selectedContext].radius, 
                 context: contexts[selectedContext].connectionDestination
             }
-            createConnections(dashedContext.tagSource, dashedContext.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, dashedContext.curveMinAltitude, dashedContext.context, true, false)
+            createConnections(dashedContext.tagSource, dashedContext.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, dashedContext.curveMinAltitude, dashedContext.context, true, false, false)
+        
+            const tunnelContext = {
+                tagSource: contexts[selectedContext].tagData,
+                connectionSource: contexts[selectedContext].tunnelConnectionData, 
+                curveMinAltitude: contexts[selectedContext].radius, 
+                context: contexts[selectedContext].connectionDestination
+            }
+            createConnections(tunnelContext.tagSource, tunnelContext.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, tunnelContext.curveMinAltitude, tunnelContext.context, false, false, true)
         
         } 
         if (keyCode == 69 && developer == true) { //E - change color
@@ -1919,7 +1998,7 @@ document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     const keyCode = event.which;
 
-    if (selectedNodes.length > 0 && developer == true  && activeCarousel == undefined && focusElement !== "tagInput") {
+    if (selectedNodes.length > 0 && developer == true  && activeCarousel == undefined && focusElement !== "tagInput" && !flyControls.enabled) {
         for (let node = 0; node < selectedNodes.length; node++) {
             if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
                 let posLatLng = convertCartesiantoLatLng(contexts[selectedContext].pins[selectedNodes[node]].position.x, contexts[selectedContext].pins[selectedNodes[node]].position.y, contexts[selectedContext].pins[selectedNodes[node]].position.z);
@@ -1965,7 +2044,7 @@ function onDocumentKeyDown(event) {
                 contexts[selectedContext].tagData[selectedNodes[node]].lng = posLatLng.lng.toFixed(1)
             }
         }
-    } else if (selectedPin != null && developer == true  && activeCarousel == undefined && focusElement !== "tagInput") {
+    } else if (selectedPin != null && developer == true  && activeCarousel == undefined && focusElement !== "tagInput" && !flyControls.enabled) {
 
         if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
             let posLatLng = convertCartesiantoLatLng(selectedPin.position.x, selectedPin.position.y, selectedPin.position.z);
@@ -2326,8 +2405,8 @@ function render() {
         //console.log("x: ", camera.position.x, "y: ", camera.position.y, "z: ", camera.position.z)
         if (camera.position.z > -15 && camera.position.z < 15) start = false
     
-        controls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);  //  /1
-        controls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;//  /3;
+        orbitControls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);  //  /1
+        orbitControls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;//  /3;
 
         if (sign) {
             signRotationVector.set(camera.position.x, camera.position.y, camera.position.z)
@@ -2338,6 +2417,36 @@ function render() {
         refreshStats();
 
         scanPins();
+
+        //ATMOSPHERE TEST
+        // Calculate the distance between the camera and the planet
+        let distance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) - 5;
+
+        // Compute a scale factor based on the distance to the camera
+        let scaleFactor = Math.max(1, 1 + 0.2 * Math.exp(-0.01 * distance));
+
+        // Set the scale of the atmosphere
+        atmosphere.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+        /* // Calculate the distance between the camera and the planet
+        let distance = camera.position.distanceTo(atmosphere.position);
+        let minDistance = 5.0;
+        let maxDistance = 25.0;
+
+        // Calculate a scale factor based on the distance
+        let scaleFactor = THREE.MathUtils.clamp(1.0 - (distance - minDistance) / (maxDistance - minDistance), 0.0, 1.0);
+
+        // Introduce a growth factor to control the amount of growth
+        let growthFactor = 0.25; // Adjust this value to change the amount of growth
+
+        // Introduce an exponent for exponential growth
+        let exponent = 2; // Adjust this value to control the exponential growth
+
+        // Apply the scale factor, growth factor, and exponent to the atmosphere
+        let baseScale = 1.2;
+        atmosphere.scale.set(baseScale + growthFactor * Math.pow(scaleFactor, exponent), baseScale + growthFactor * Math.pow(scaleFactor, exponent), baseScale + growthFactor * Math.pow(scaleFactor, exponent));
+ */
+
     }
 
     if (introTuneLength) {
@@ -2353,7 +2462,28 @@ function render() {
         }
     }
 
-    controls.update();
+    const delta = clock.getDelta();
+
+    if (flyControls.enabled) {
+        flyControls.update(delta);
+        // Check the distance from the camera to the planet center
+        const distance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0));
+
+        // Set a minimum distance to avoid the camera going into the planet
+        const minDistance = 5.4;
+
+        if (distance < minDistance) {
+            // Calculate the vector pointing from the planet center to the camera
+            const direction = camera.position.clone().sub(new THREE.Vector3(0, 0, 0)).normalize();
+
+            // Move the camera to the minimum distance in the same direction
+            camera.position.copy(direction.multiplyScalar(minDistance));
+        }
+    }
+
+    if (orbitControls.enabled) {
+        orbitControls.update();
+    }
 
     if (resizeRendererToDisplaySize(renderer)) {
         const canvas = renderer.domElement;

@@ -1,10 +1,6 @@
 
-    make straightconnections - gets visible with 'H' - make them thick like tunnels so they are well visible
-
 
 INITIATIVES
-    go through way of the gut with Thomas
-
     apply for a pimp
 
     find venue for weekend retreat in oslo and bergen
@@ -15,6 +11,8 @@ CONTENT
     - Triune brain
     - Anapana (etc) tips and tricks
     - Foundations of EFT
+
+    Sappaya- teachers(add tiny pictures to planet), traditions, sangha
 
     norwegian version
         use chatGPT to translate file, add norwegian in same file
@@ -48,14 +46,16 @@ CONTENT
         -
 
 MAKE USABLE
-    debug for iphone
-        fix touch click controls - fixed? not quite.. CHECK IF EVENTLISTENERS ADDED DURING MESH-UI DEV MADE A DIFFERENCE
 
     this can be added at the beginning of my script to make sure that the DOM content is loaded before the script starts running:
     document. addEventListener ('DOMContentLoaded', () = {
 
 SHORT-TERM DEVELOPMENT
 
+Text-content - [type][source/text]
+- centred, automatic font size
+    - For poems, quotes, short instructions/tips
+- justified for longer texts
 
 VR DEVELOPMENT
     - three-mesh-ui
@@ -83,14 +83,7 @@ LONG-TERM DEVELOPMENT
 
     restructure / rewrite code
         context independent functions (pass context parameters)
-
-    post-processing? bloom?
-
-    make procedural geography
-
-    add flyControls (see section under)
-
-    rewrite entire click code, pinpositions, pins, tags. use source&index instead of all that jazzz...
+        use attributes set to objects rather than variables for keeping track of stuff (eg. UIactive (stored in VR controller?), jaraniusInitialized (stored in center?))
 
     add stuff from notes in here?
 
@@ -167,4 +160,67 @@ USEFUL
         }
         Also this (for fixing possible problem with orbitcontrols)
         https://stackoverflow.com/questions/32412507/switch-between-flycontrols-and-orbitcontrols-threejs-mouse-clicked?noredirect=1#comment52768065_32412507
+
+
+Desert of the Real - The Matrix (1999), a metaphorical desert symbolizing the harsh reality outside of the simulated world.
+Sea of Empathy - Dr. Leslie Greenberg's Emotion-Focused Therapy (EFT), a metaphor for the therapeutic process of understanding and accepting one's emotions.
+The Shire - The Lord of the Rings (1954), a peaceful and idyllic place representing a close-knit community and simplicity.
+The Cave - Plato's Allegory of the Cave, a philosophical concept describing the process of enlightenment and awareness.
+Garden of Eden - Biblical reference, a symbol of innocence and humanity's connection to nature before the fall from grace.
+Room of Requirement - Harry Potter series (1997-2007), a magical room that appears when needed and adapts to the individual's needs, representing the power of the mind and imagination.
+The Hundred Acre Wood - Winnie-the-Pooh (1926), a serene and whimsical forest symbolizing the power of friendship, imagination, and personal growth.
+The Land of Oz - The Wonderful Wizard of Oz (1900), a fantastical land where characters learn about courage, heart, and wisdom.
+Nirvana - Buddhist concept, a transcendent state free from suffering and the cycle of rebirth, representing spiritual awakening.
+Atlantis - Ancient Greek myth, a lost city symbolizing an advanced, utopian society with a deep understanding of science and philosophy.
+The Forbidden Forest - Harry Potter series (1997-2007), representing the unknown and personal growth through facing fears.
+Rivendell - The Lord of the Rings (1954), an Elven sanctuary symbolizing wisdom, peace, and harmony.
+The Matrix - The Matrix (1999), a simulated reality highlighting the difference between illusion and reality.
+The Island - Lost (2004-2010), a mysterious place forcing characters to confront their past and personal growth.
+Utopia - Sir Thomas More's Utopia (1516), a fictional island society representing an ideal civilization with balance and equality.
+Shangri-La - Lost Horizon (1933), a hidden paradise symbolizing peace, longevity, and spiritual enlightenment.
+Walden Pond - Walden (1854), Henry David Thoreau's retreat representing simplicity, self-reliance, and connection with nature.
+Pemberley - Pride and Prejudice (1813), symbolizing the transformative power of love and self-reflection.
+The Chocolate Factory - Charlie and the Chocolate Factory (1964), a magical place teaching lessons about humility and kindness.
+The Lighthouse - To the Lighthouse (1927), a symbol of the quest for knowledge and understanding.
+Middle Earth - The Lord of the Rings (1954), a richly detailed world exploring themes of courage, friendship, and sacrifice.
+Narnia - The Chronicles of Narnia (1950-1956), a magical land symbolizing faith, redemption, and the battle between good and evil.
+The Overlook Hotel - The Shining (1977), a haunted hotel representing the descent into madness and the power of the subconscious mind.
+The Citadel - Mass Effect series (2007-2012), a space station fostering diplomacy and cooperation among diverse species.
+The Village - The Prisoner (1967-1968), a mysterious and controlled society symbolizing the struggle for individualism and freedom.
+The Island of Dr. Moreau - The Island of Dr. Moreau (1896), exploring the ethics and consequences of playing with nature and creation.
+Winterfell - A Song of Ice and Fire (1996-2021), a castle symbolizing resilience, loyalty, and the struggle for power.
+Camelot - Arthurian legends, a symbol of chivalry, justice, and the quest for knowledge.
+Neverland - Peter Pan (1904), an enchanted island representing the power of imagination, youth, and freedom.
+Wonderland - Alice's Adventures in Wonderland (1865), a whimsical world exploring themes of identity, perception, and the nature of reality.
+The Emerald City - The Wonderful Wizard of Oz (1900), a city representing the illusion of power and the importance of self-discovery.
+The World State - Brave New World (1932), a dystopian society exploring themes of technology, conformity, and the search for happiness.
+Galt's Gulch - Atlas Shrugged (1957), a secret society representing individualism, self-sufficiency, and the importance of personal achievement.
+Terabithia - Bridge to Terabithia (1977), an imaginary kingdom symbolizing friendship, creativity, and overcoming loss.
+Westeros - A Song of Ice and Fire (1996-2021), a realm exploring themes of power, morality, and the human condition.
+The Great Library of Alexandria - Ancient history, a center of learning and knowledge that symbolizes the pursuit of wisdom and intellectual growth.
+The Savage Reservation - Brave New World (1932), a place outside of the controlled society representing the contrast between the artificial and natural worlds.
+The Road - The Road (2006), a post-apocalyptic landscape symbolizing the endurance of the human spirit and the importance of hope.
+The Magic School Bus - The Magic School Bus series (1986-2010), a vehicle for exploring the wonders of science and the natural world.
+The Island of Misfit Toys - Rudolph the Red-Nosed Reindeer (1964), an island symbolizing the acceptance of differences and the power of belonging.
+The Ministry of Love - 1984 (1949), a place of psychological manipulation representing the control of the mind and the suppression of individual thought.
+The Lonely Mountain - The Hobbit (1937), a symbol of the quest for treasure, wisdom, and personal growth.
+Diagon Alley - Harry Potter series (1997-2007), a magical marketplace symbolizing the wonder and discovery of entering a new world.
+Xanadu - Kubla Khan (1797), Samuel Taylor Coleridge's poem describing a dreamlike landscape symbolizing the power of imagination and the pursuit of beauty.
+The House on Mango Street - The House on Mango Street (1984), representing the power of community, identity, and the search for self-actualization.
+The Abyss - The Abyss (1989), a deep-sea trench symbolizing the exploration of the unknown and the potential for human connection and understanding.
+Vulcan - Star Trek (1966-present), the home planet of the logical and rational Vulcans, representing the balance between emotion and reason.
+The Garden of Forking Paths - The Garden of Forking Paths (1941), a labyrinthine world symbolizing the nature of time, choice, and the infinite possibilities of existence.
+The Center of the Labyrinth - House of Leaves (2000), a metaphorical space representing the exploration of the self and the complexity of the human psyche.
+The Village Green - The Prisoner (1967-1968), a central gathering place symbolizing the illusion of freedom and the power of conformity.
+The Zone - Stalker (1979), a mysterious and dangerous area representing the search for truth, meaning, and the ultimate desires of the human heart.
+The Oasis - Ready Player One (2011), a virtual world exploring the potential for human connection, creativity, and the importance of balancing virtual and real life.
+Avalon - Arthurian legends, a mythical island symbolizing the spiritual realm and the eternal nature of the human soul.
+The House of Usher - The Fall of the House of Usher (1839), a decaying mansion representing the decline of the human spirit and the power of the subconscious mind.
+The Mountains of Madness - At the Mountains of Madness (1936), a remote Antarctic location symbolizing the limits of human understanding and the terrifying unknown.
+The Edge of the World - His Dark Materials series (1995-2000), a boundary between parallel universes representing the potential for discovery, growth, and understanding.
+The Oracle's Temple - The Matrix (1999), a place of wisdom and guidance representing the search for truth and self-awareness.
+The Dreaming - Neil Gaiman's The Sandman series (1989-1996), a realm of dreams and imagination symbolizing the power of stories and the
+
+
+
 

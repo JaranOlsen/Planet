@@ -137,7 +137,7 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
     });
 }    
 
-export function createConnections(tagSource, connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, destination, dashed, arrowed) {
+export function createConnections(tagSource, connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, destination, dashed, arrowed, tunnel) {
     tagSource.forEach((sourceItem, i) => {
         connectionSource.forEach((connection, j) => {
             if (sourceItem.id === connection[0]) {
@@ -148,7 +148,9 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
                             const p2 = convertLatLngtoCartesian(target.lat, target.lng - 180, curveMinAltitude);
                             let weight = (sourceItem.size + target.size) / 2;
                             if (arrowed == true) weight *= 4
-                            getCurve(p1, p2, weight, target.lat, target.lng - 180);
+                            if (tunnel !== true) {
+                                getCurve(p1, p2, weight);
+                            } else digTunnel(p1, p2, weight)
                         }
                     });
                 });
@@ -156,7 +158,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         });
     });
 
-    function getCurve(p1, p2, weight, lat, lng){
+    function getCurve(p1, p2, weight){
         const v1 = new THREE.Vector3(p1.x, p1.y, p1.z);
         const v2 = new THREE.Vector3(p2.x, p2.y, p2.z);
         const points = Array.from({length: 21}, (_, i) => {
@@ -211,17 +213,31 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
             segmentModifier = 5
         }
 
-        /* if (arrowed) {
-            const img = createImages(arrow, lat, lng, weight / 200, curveMinAltitude + 0.02, destination);
-            const up = new THREE.Vector3(v2.x - v1.x, v2.y - v1.y, v2.z - v1.z);
-            up.normalize();
-            img.box.up = up;
-            img.box.lookAt(v2.x, v2.y, v2.z);
-            img.box.renderOrder = -9;
-        } */
-
         const path = new THREE.CatmullRomCurve3(points);
         const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments * segmentModifier, false);
+
+        const curve = new THREE.Mesh(geometry, material);
+        curve.renderOrder = -10;
+        destination.add(curve);
+    }
+
+    function digTunnel(p1, p2, weight){
+        const v1 = new THREE.Vector3(p1.x, p1.y, p1.z);
+        const v2 = new THREE.Vector3(p2.x, p2.y, p2.z);
+        const points = []
+        points.push(v1, v2)
+
+        let material = new THREE.MeshStandardMaterial({
+            color: 0xffffff,
+            transparent: false,
+            emissive: 0xffffff,
+            emissiveIntensity: 1,
+        })
+
+        let segmentModifier = 1
+
+        const path = new THREE.CatmullRomCurve3(points);
+        const geometry = new THREE.TubeGeometry(path, 2, curveThickness * weight, curveRadiusSegments * segmentModifier, false);
 
         const curve = new THREE.Mesh(geometry, material);
         curve.renderOrder = -10;

@@ -4,16 +4,19 @@ import { createGutta } from './gutta.js';
 
 //  IMPORT TEXTURES
     // ||Diffuse - 
+import diffuseTexture16k from "../img/textures/diffuse16kTest2.jpg"
 import diffuseTexture8k from "../img/textures/diffuse8kNew.webp"
 import diffuseTexture4k from "../img/textures/diffuse4k.webp"
 import diffuseTexture2k from "../img/textures/diffuse2k.webp"
 
     // ||Normals - White = high altitude - see https://www.youtube.com/watch?v=YJqWHsllczY&t=1s on how to best generate
+import normalTexture16k from "../img/textures/normal16kTest.jpg"
 import normalTexture8k from "../img/textures/normal8k.webp"
 import normalTexture2k from "../img/textures/normal2k.webp"
 import normalTexture1k from "../img/textures/normal1k.webp"
 
     // ||Roughness - Green (white) = high roughness (green channel - see documentation). 
+import roughnessTexture16k from "../img/textures/roughness16kTest.jpg"
 import roughnessTexture8k from "../img/textures/roughness8k.webp"
 import roughnessTexture2k from "../img/textures/roughness2k.webp"
 import roughnessTexture1k from "../img/textures/roughness1k.webp"
