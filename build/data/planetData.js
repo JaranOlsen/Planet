@@ -33,7 +33,7 @@ export const planetTagData = [
     {id: "B90D2293-D457-4567-8102-363F70D95781", text: "Monist ontologies", lat: 27, lng: 184.5, color: 30, size: 20, slides: undefined},
     {id: "2930997B-A726-473E-B6E9-333C2732271F", text: "Idealism", lat: 24, lng: 184, color: 30, size: 30, slides: 4},
     {id: "CCCF1876-3199-41C1-AE98-25A78D1C7F51", text: "Analytic \nidealism", lat: 25, lng: 186, color: 30, size: 10, slides: 3},
-    {id: "2B64F02A-BEAA-4403-8380-A8B2614D5F90", text: "Panpsychism", lat: 24, lng: 176.3, color: 30, size: 30, slides: undefined},
+    {id: "2B64F02A-BEAA-4403-8380-A8B2614D5F90", text: "Panpsychism", lat: 24, lng: 176.3, color: 30, size: 30, slides: 132},
     {id: "4D70D48E-D8D1-45C6-8E15-C0837ABBC1D7", text: "Physicalism", lat: 24, lng: 167.8, color: 30, size: 30, slides: undefined},
     {id: "EFDE4F51-B2DD-443A-9C35-39F5DA1C1DB6", text: "Emergence", lat: 25.5, lng: 164.8, color: 30, size: 20, slides: undefined},
     {id: "FBC53F23-9EA7-4B55-B6D4-BC9C456FD9B8", text: "weak", lat: 27, lng: 162.5, color: 30, size: 15, slides: undefined},
@@ -131,7 +131,7 @@ export const planetTagData = [
     {id: "7BD9A4A4-29F0-46A8-8D8E-FAD18F242DB6", text: "Heart", lat: 61, lng: 238.2, color: 20, size: 45, slides: undefined},
     {id: "EB83C866-FF54-449B-A65C-24ECDE2820C1", text: "Action", lat: 65, lng: 239.3, color: 20, size: 30, slides: undefined},
     {id: "3D5EC2BE-F6E7-4BC2-A093-B8ABFF663C58", text: "Felt view", lat: 58, lng: 240.3, color: 20, size: 30, slides: undefined},
-    {id: "A35D6C5D-B56F-416F-B337-41FB9E923AE0", text: "Existential problem: \n   What - and how - \n        do I know?", lat: 153.3, lng: 210, color: 30, size: 40, slides: undefined},
+    {id: "A35D6C5D-B56F-416F-B337-41FB9E923AE0", text: "Existential problem:\n What can I control?\n   What - and how - \n        do I know?", lat: 153, lng: 210, color: 30, size: 40, slides: undefined},
     {id: "EDCAFFF6-FD78-40E0-B719-97569DCD8819", text: "The Human - \n     Reason", lat: 165, lng: 211, color: 30, size: 40, slides: 113},
     {id: "46CBB5AE-79D5-4808-A400-4B804DA91E12", text: "What matters to \n       your head", lat: 171, lng: 211, color: 30, size: 50, slides: undefined},
     {id: "8D82CC00-C9F5-4B9E-B256-A879D4623B3C", text: "What matters to \n      your heart", lat: 171, lng: 90, color: 20, size: 50, slides: undefined},
@@ -475,7 +475,7 @@ export const planetTagData = [
 
 ]
 
-// ā ī ū ṅ ñ ṇ ṭ ṭh ḍ ḍh ṇ ḷ ṃ ṁ ŋ 
+// ā ī ū ṅ ñ ṇ ṭ ṭh ḍ ḍh ṇ ḷ ṃ ṁ ŋ  /
 
  //azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBNéÉàÀèÈùÙëËüÜïÏâêîôûÂÊÎÔÛíÍáÁóÓúÚñÑłŁçÇýÝčČšŠæÆœŒāīūṅṇṭḍḷṃṁ/*-+7894561230,;:!?¡¿.%$£€={}()[]&~'`#_°@АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯяüÜöÖäÄñÑςερτυθιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜåÅæÆøØ 
 

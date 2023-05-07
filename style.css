@@ -200,6 +200,20 @@ a:active {
   outline: 1px solid black;
 }
 
+/*  || SUBTITLES */
+#subtitle-container {
+  position: absolute;
+  bottom: 5%;
+  width: 90%;
+  translate: 5%;
+  text-align: center;
+  pointer-events: none;
+  font-family: Arial, sans-serif;
+  font-size: 2.5rem;
+  color: white;
+  display: none;
+}
+
 /*  || SLIDE SCREENS */
 .carousel {
   position: absolute;

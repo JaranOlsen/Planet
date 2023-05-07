@@ -28,6 +28,7 @@ import { spiralImageData } from './data/spiralImageData.js'
 import { contentData } from './data/contentData.js'
 import { palette } from './data/palette.js'
 import { pinMaterials, pinWireframeMaterials, boxMaterials } from './data/materials.js'
+import { subtitles_carlrogers as subtitles} from './data/subtitles.js'
 
 //  IMPORT SHADERS
 import atmosphericLightVertexShader from '../shaders/atmosphericLightVertex.glsl'
@@ -97,7 +98,7 @@ orbitControls.zoomSpeed = 0.3
 orbitControls.rotateSpeed = 0.3
 orbitControls.target.set(0, 0, 0);
 orbitControls.update();
-orbitControls.enabled = true;
+orbitControls.enabled = false;
 
 const flyControls = new FlyControls(camera, renderer.domElement);
 flyControls.movementSpeed = 1;
@@ -114,12 +115,15 @@ const scene = new THREE.Scene();
 const pointer = new THREE.Vector2;
 const raycaster = new THREE.Raycaster();
 
+const subtitleContainer = document.getElementById('subtitle-container');
+let elapsedTime = 0;
+let currentSubtitle = null;
+
 const clock = new THREE.Clock();
 const timer = new THREE.Clock();
 let developer = false;
 
 export let contexts = []
-//export let contexts = {}
 let selectedContext = 0;
 let selectedPin = null;
 let selectedBox = null;
@@ -645,9 +649,10 @@ function moveDolly(dt){
 //INTRO
 let start = false
 let introTuneLength
+let introTune
 initializeIntro()
 function initializeIntro() {
-    const introTune = document.getElementById("introTune");
+    introTune = document.getElementById("introTune");
         introTune.preload = "auto";
         introTune.currentTime = 0;
         introTune.volume = 1;
@@ -660,6 +665,8 @@ function initializeIntro() {
         skipButton.style.display = "none";
         enableVRbutton.style.display = "none";
         credits.style.display = "none";
+        subtitleContainer.style.display = "block";
+        orbitControls.enabled = true
     };
     
     const handleSkipButtonClick = () => {
@@ -668,6 +675,7 @@ function initializeIntro() {
         enableVRbutton.style.display = "none";
         credits.style.display = "none";
         camera.position.z = 15;
+        orbitControls.enabled = true
     };
     
     playButton.addEventListener("click", handlePlayButtonClick);
@@ -1313,6 +1321,32 @@ spotlight.penumbra = 0.8
 spotlight.angle = Math.PI / 4
 scene.add(spotlight);
 
+const targetIntensities = {
+    spotlight: spotlight.intensity,
+    ambient: ambient.intensity
+  };
+
+let lightTransitionStart = null;
+let lightTransitionDuration = 0.5;
+
+const updateLightIntensity = () => {
+    if (lightTransitionStart === null) {
+      return;
+    }
+  
+    const elapsed = clock.getElapsedTime() - lightTransitionStart;
+  
+    if (elapsed >= lightTransitionDuration) {
+      spotlight.intensity = targetIntensities.spotlight;
+      ambient.intensity = targetIntensities.ambient;
+      lightTransitionStart = null;
+    } else {
+      const t = elapsed / lightTransitionDuration;
+      spotlight.intensity = THREE.MathUtils.lerp(spotlight.intensity, targetIntensities.spotlight, t);
+      ambient.intensity = THREE.MathUtils.lerp(ambient.intensity, targetIntensities.ambient, t);
+    }
+  };
+
 //CREATE CONTEXTS
 export function createContexts(version) {
     contexts.push({
@@ -1479,7 +1513,23 @@ function onDocumentKeyUp(event) {
         }
 
         //Light control
-        if (keyCode == 49) { 
+        if (keyCode >= 49 && keyCode <= 53) {
+            const intensities = [0, 0.1, 0.25, 0.5, 1];
+            targetIntensities.spotlight = intensities[keyCode - 49];
+            lightTransitionStart = clock.getElapsedTime();
+          }
+        
+          if (keyCode >= 54 && keyCode <= 57) {
+            const intensities = [0, 0.02, 0.05, 0.1];
+            targetIntensities.ambient = intensities[keyCode - 54];
+            lightTransitionStart = clock.getElapsedTime();
+          }
+        
+          if (keyCode == 48) {
+            targetIntensities.ambient = 0.3;
+            lightTransitionStart = clock.getElapsedTime();
+          }
+        /* if (keyCode == 49) { 
             spotlight.intensity = 0
         }
         if (keyCode == 50) { 
@@ -1509,7 +1559,7 @@ function onDocumentKeyUp(event) {
         }
         if (keyCode == 48) { 
             ambient.intensity = 0.3
-        }
+        } */
 
         //Stats display
         if (keyCode == 71) { //G
@@ -2407,6 +2457,8 @@ function render() {
 
         scanPins();
 
+        updateLightIntensity();
+
         //ATMOSPHERE TEST
         // Calculate the distance between the camera and the planet
         let distance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) - 5;
@@ -2448,6 +2500,15 @@ function render() {
         if (start == true) {
             camera.position.x += 0.4 / introTuneLength
             camera.position.y += 0.2 / introTuneLength
+        }
+
+        elapsedTime = introTune.currentTime;
+
+        const newSubtitle = subtitles.find(({ start, end }) => elapsedTime >= start && elapsedTime <= end);
+        
+        if (newSubtitle && newSubtitle !== currentSubtitle) {
+            currentSubtitle = newSubtitle;
+            subtitleContainer.textContent = currentSubtitle.text;
         }
     }
 
