@@ -648,7 +648,7 @@ function moveDolly(dt){
 
 
 //INTRO
-let start = false
+let introStarted = false
 let introTuneLength
 let introTune
 initializeIntro()
@@ -661,7 +661,7 @@ function initializeIntro() {
 
     const handlePlayButtonClick = () => {
         introTune.play();
-        start = true;
+        introStarted = true;
         playButton.style.display = "none";
         skipButton.style.display = "none";
         enableVRbutton.style.display = "none";
@@ -2443,7 +2443,7 @@ function render() {
         clouds.rotation.y += 0.00001;
 
         //console.log("x: ", camera.position.x, "y: ", camera.position.y, "z: ", camera.position.z)
-        if (camera.position.z > -15 && camera.position.z < 15) start = false
+        if (camera.position.z > -15 && camera.position.z < 15) introStarted = false
     
         orbitControls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);  //  /1
         orbitControls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;//  /3;
@@ -2468,13 +2468,14 @@ function render() {
     }
 
     if (introTuneLength) {
-        if (camera.position.z > 15 && start == true) {
+        console.log(introTuneLength, introStarted)
+        if (camera.position.z > 15 && introStarted == true) {
             camera.position.z -= 0.0213 * Math.pow(camera.position.z - 10, 1.35) / introTuneLength
         }
-        if (camera.position.z < -15 && start == true) {
+        if (camera.position.z < -15 && introStarted == true) {
             camera.position.z += 0.213 * Math.pow(Math.abs(camera.position.z) - 10, 1.35) / introTuneLength
         }
-        if (start == true) {
+        if (introStarted == true) {
             camera.position.x += 0.4 / introTuneLength
             camera.position.y += 0.2 / introTuneLength
         }
