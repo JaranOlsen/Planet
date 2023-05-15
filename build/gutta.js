@@ -281,6 +281,8 @@ export class Gutt {
         }
     }
 
+    
+
     calculateAlignment() {
         let perception 
         if (this.species == "gutt") {

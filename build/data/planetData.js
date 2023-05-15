@@ -182,7 +182,7 @@ export const planetTagData = [
     {id: "B477D774-01E4-4F6A-93B1-111E699FFE75", text: "Components of \n        emotion", lat: 141.2, lng: 0.1, color: 10, size: 30, slides: undefined},
     {id: "E2D52070-A83C-4D48-A218-BB3DC7BEAF21", text: "Emotional style", lat: 142.9, lng: 355, color: 10, size: 30, slides: undefined},
     {id: "EBCF0E75-DA1D-4533-BEEA-73657C4588AF", text: "Types of \nemotion", lat: 150, lng: 6.9, color: 10, size: 30, slides: 31},
-    {id: "4AF3AF2F-5D76-4620-911E-54398F84F288", text: " Degree of \nemotional \nprocessing", lat: 145.9, lng: 10, color: 10, size: 30, slides: undefined},
+    {id: "4AF3AF2F-5D76-4620-911E-54398F84F288", text: "  Level of \nemotional \n   arousal", lat: 145.9, lng: 10, color: 10, size: 30, slides: undefined},
     {id: "672E2CBD-7421-4E94-9728-95353BCD772E", text: "High", lat: 84.9, lng: 354.4, color: 10, size: 40, slides: undefined},
     {id: "14BA8BEB-FA35-44B7-9DE3-A1503614069D", text: "Samādhi", lat: 64.5, lng: 71.5, color: 22, size: 60, slides: undefined},
     {id: "1EABAD2F-1D1A-4124-A324-4EFAD6DDF176", text: "Methods", lat: 68.1, lng: 63.6, color: 20, size: 40, slides: undefined},
@@ -251,8 +251,8 @@ export const planetTagData = [
     {id: "39717030-47DE-4D14-8D3B-9D454BE3AF3B", text: "Authenticity vs. \n   attachment", lat: 130.4, lng: 349.7, color: 10, size: 30, slides: 12},
     {id: "A5D7A8C8-3B1D-44A4-AA31-4B1602B10252", text: "In terms of needs", lat: 103, lng: 330.8, color: 10, size: 40, slides: undefined},
     {id: "08A7BDCA-0161-40B1-9F74-EF7E09C1BE13", text: "Adaptations \nin the world", lat: 113, lng: 321.6, color: 10, size: 40, slides: undefined},
-    {id: "8DFECF54-6362-48C2-84A0-B9A79FD7371A", text: "Psychological \nadaptations", lat: 94, lng: 321.6, color: 10, size: 40, slides: undefined},
-    {id: "4D115C88-FC8E-4544-AC27-0B775B126D44", text: "In terms of emotion", lat: 103.5, lng: 340.5, color: 10, size: 40, slides: 33},
+    {id: "8DFECF54-6362-48C2-84A0-B9A79FD7371A", text: "Psychological \n  adaptations", lat: 94, lng: 321.6, color: 10, size: 40, slides: undefined},
+    {id: "4D115C88-FC8E-4544-AC27-0B775B126D44", text: "In terms of\nemotional \nprocessing", lat: 103.5, lng: 340.5, color: 10, size: 40, slides: 33},
     {id: "84C0342B-29BC-4E8A-A39D-0D638491312E", text: "Embracing vulnerability", lat: 85.8, lng: 336, color: 10, size: 40, slides: undefined},
     {id: "F0CABC11-FB43-49D3-B32C-F6AC2F728BEF", text: "Resisting vulnerability", lat: 117.7, lng: 353.4, color: 10, size: 40, slides: undefined},
     {id: "FF0DE3EB-BA66-4B54-9700-1075754A5EB3", text: "Motivated by: \nPain / Pleasure", lat: 157.2, lng: 318.3, color: 10, size: 35, slides: undefined},
@@ -475,7 +475,7 @@ export const planetTagData = [
 
 ]
 
-// ā ī ū ṅ ñ ṇ ṭ ṭh ḍ ḍh ṇ ḷ ṃ ṁ ŋ  /
+// ā ī ū ṅ ñ ṇ ṭ ṭh ḍ ḍh ṇ ḷ ṃ ṁ ŋ 
 
  //azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBNéÉàÀèÈùÙëËüÜïÏâêîôûÂÊÎÔÛíÍáÁóÓúÚñÑłŁçÇýÝčČšŠæÆœŒāīūṅṇṭḍḷṃṁ/*-+7894561230,;:!?¡¿.%$£€={}()[]&~'`#_°@АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯяüÜöÖäÄñÑςερτυθιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜåÅæÆøØ 
 
@@ -657,7 +657,7 @@ export const planetConnections = [
 ["83BC3254-7B62-4D9C-BC20-192D2D442466", ],
 ["4788E206-DE47-48FA-8DC4-326274991F8D", ],
 ["111EBFA8-E400-4984-A638-63120DDC1590", ],
-["1D823800-DD7A-4B6F-94EA-517D4DE9876B", "C0993BB8-9C64-4F7A-A673-289EA2A33D0D", "4AF3AF2F-5D76-4620-911E-54398F84F288", ],
+["1D823800-DD7A-4B6F-94EA-517D4DE9876B", "C0993BB8-9C64-4F7A-A673-289EA2A33D0D", ],
 ["C0993BB8-9C64-4F7A-A673-289EA2A33D0D", "00E891B6-75E2-43B7-97B4-62F6DD69B15B", ],
 ["00E891B6-75E2-43B7-97B4-62F6DD69B15B", "B477D774-01E4-4F6A-93B1-111E699FFE75", "E2D52070-A83C-4D48-A218-BB3DC7BEAF21", "EBCF0E75-DA1D-4533-BEEA-73657C4588AF", "4AF3AF2F-5D76-4620-911E-54398F84F288", "83BA614D-5560-48B0-8377-217CF04E01FC", "FF356F2F-2107-4629-921F-C964A87A70A4", ],
 ["B477D774-01E4-4F6A-93B1-111E699FFE75", ],
@@ -787,9 +787,9 @@ export const planetConnections = [
 ["3041389D-AD21-46F6-9721-2DD4E9FC1F65", ],
 ["CC97CAEF-3828-466E-B55A-BA85783CE034", ],
 ["0F8B3461-7B9D-4E1D-A392-A6DE782AE537", ],
-["DEADD385-73FB-4EA3-AACC-13C6B453E9E6", "CDC69285-DE4B-40DE-BDFB-73C750FA8CB4", ],
-["CDC69285-DE4B-40DE-BDFB-73C750FA8CB4", "EEF6AD45-1ABB-4D2E-BCA0-A3BE592FCE95", ],
-["EEF6AD45-1ABB-4D2E-BCA0-A3BE592FCE95", "662B5EE1-6533-44B3-BC7A-2DF7708F1658", ],
+["DEADD385-73FB-4EA3-AACC-13C6B453E9E6", ],
+["CDC69285-DE4B-40DE-BDFB-73C750FA8CB4", ],
+["EEF6AD45-1ABB-4D2E-BCA0-A3BE592FCE95", ],
 ["662B5EE1-6533-44B3-BC7A-2DF7708F1658", ],
 ["973015FD-576A-40F3-A86C-2E8EDA196B5F", ],
 ["29155A2F-FCBB-4347-90DE-E8D3F86A3FFA", ],
@@ -1265,9 +1265,9 @@ export const planetArrowedConnections = [
 ["CC97CAEF-3828-466E-B55A-BA85783CE034", ],
 ["0F8B3461-7B9D-4E1D-A392-A6DE782AE537", ],
 ["DEADD385-73FB-4EA3-AACC-13C6B453E9E6", ],
-["CDC69285-DE4B-40DE-BDFB-73C750FA8CB4", ],
-["EEF6AD45-1ABB-4D2E-BCA0-A3BE592FCE95", ],
-["662B5EE1-6533-44B3-BC7A-2DF7708F1658", ],
+["CDC69285-DE4B-40DE-BDFB-73C750FA8CB4", "DEADD385-73FB-4EA3-AACC-13C6B453E9E6", ],
+["EEF6AD45-1ABB-4D2E-BCA0-A3BE592FCE95", "CDC69285-DE4B-40DE-BDFB-73C750FA8CB4", ],
+["662B5EE1-6533-44B3-BC7A-2DF7708F1658", "EEF6AD45-1ABB-4D2E-BCA0-A3BE592FCE95", ],
 ["973015FD-576A-40F3-A86C-2E8EDA196B5F", "4F5D4105-E8C7-4F54-97E6-F9549BC75D4F", ],
 ["29155A2F-FCBB-4347-90DE-E8D3F86A3FFA", "4F5D4105-E8C7-4F54-97E6-F9549BC75D4F", ],
 ["E400970C-2383-40ED-90F4-793AFAD87E45", ],
@@ -1909,6 +1909,7 @@ export const planetDashedConnections = [
 ["ad028f69-e759-4775-84fc-9c1e3078cf73", ],
 
 ]
+
 export const planetTunnelConnections = [
 ["8BD3708E-8E3D-44B8-9E92-1050FA7987E5", ],
 ["D4724AD1-EECD-4975-920C-CDAD71AA53C3", ],

@@ -6,7 +6,7 @@ export const subtitles_carlrogers = [
     { start: 91, end: 95, text: "When I can let myself enter softly and delicately," },
     { start: 95, end: 98, text: "the vulnerable inner world of the other person." },
     { start: 99, end: 104, text: "When I can temporarily lay aside my views and values and prejudices." },
-    { start: 105, end: 111, text: "When I can let myself be at home in the fright, the concern, the pain." },
+    { start: 105, end: 111, text: "When I can let myself be at home in the fright, the concern, the pain," },
     { start: 111, end: 118, text: "the anger, the tenderness, the confusion, which fills his or her life." },
     { start: 119, end: 122, text: "When I can move about in that inner world without making judgments." },
     { start: 123, end: 127, text: "When I can see that world with fresh unfrightened eyes." },

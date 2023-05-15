@@ -11,6 +11,7 @@ import { Constants as MotionControllerConstants, fetchProfile, MotionController 
 import { generateUUID } from 'three/src/math/MathUtils.js'
 import ThreeMeshUI from 'three-mesh-ui'
 
+
 //  IMPORT SCRIPTS
 import { createImages, createTags, hoveredPins, intersectObjectsArray, createConnections, hoverPins, instantiateNugget } from './mindmap.js'
 import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
@@ -2460,33 +2461,9 @@ function render() {
         updateLightIntensity();
 
         //ATMOSPHERE TEST
-        // Calculate the distance between the camera and the planet
         let distance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) - 5;
-
-        // Compute a scale factor based on the distance to the camera
         let scaleFactor = Math.max(1, 1 + 0.2 * Math.exp(-0.01 * distance));
-
-        // Set the scale of the atmosphere
         atmosphere.scale.set(scaleFactor, scaleFactor, scaleFactor);
-
-        /* // Calculate the distance between the camera and the planet
-        let distance = camera.position.distanceTo(atmosphere.position);
-        let minDistance = 5.0;
-        let maxDistance = 25.0;
-
-        // Calculate a scale factor based on the distance
-        let scaleFactor = THREE.MathUtils.clamp(1.0 - (distance - minDistance) / (maxDistance - minDistance), 0.0, 1.0);
-
-        // Introduce a growth factor to control the amount of growth
-        let growthFactor = 0.25; // Adjust this value to change the amount of growth
-
-        // Introduce an exponent for exponential growth
-        let exponent = 2; // Adjust this value to control the exponential growth
-
-        // Apply the scale factor, growth factor, and exponent to the atmosphere
-        let baseScale = 1.2;
-        atmosphere.scale.set(baseScale + growthFactor * Math.pow(scaleFactor, exponent), baseScale + growthFactor * Math.pow(scaleFactor, exponent), baseScale + growthFactor * Math.pow(scaleFactor, exponent));
- */
 
     }
 
