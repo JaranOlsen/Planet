@@ -2468,7 +2468,6 @@ function render() {
     }
 
     if (introTuneLength) {
-        console.log(introTuneLength, introStarted)
         if (camera.position.z > 15 && introStarted == true) {
             camera.position.z -= 0.0213 * Math.pow(camera.position.z - 10, 1.35) / introTuneLength
         }
