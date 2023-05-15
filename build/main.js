@@ -2442,7 +2442,6 @@ function render() {
         pivot4.rotation.y += -0.0001;
         clouds.rotation.y += 0.00001;
 
-        //console.log("x: ", camera.position.x, "y: ", camera.position.y, "z: ", camera.position.z)
         if (camera.position.z > -15 && camera.position.z < 15) introStarted = false
     
         orbitControls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);  //  /1
@@ -2454,20 +2453,21 @@ function render() {
             sign.lookAt(signRotationVector.x, signRotationVector.y, signRotationVector.z ) 
         }
 
+        //ATMOSPHERE
+        let distance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) - 8;
+        let scaleFactor = Math.max(1.2, 1 + 0.75 * Math.exp(-0.1 * distance));
+        atmosphere.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
         refreshStats();
 
         scanPins();
 
         updateLightIntensity();
 
-        //ATMOSPHERE TEST
-        let distance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) - 5;
-        let scaleFactor = Math.max(1, 1 + 0.2 * Math.exp(-0.01 * distance));
-        atmosphere.scale.set(scaleFactor, scaleFactor, scaleFactor);
-
     }
 
     if (introTuneLength) {
+        console.log(introTuneLength, introStarted)
         if (camera.position.z > 15 && introStarted == true) {
             camera.position.z -= 0.0213 * Math.pow(camera.position.z - 10, 1.35) / introTuneLength
         }
