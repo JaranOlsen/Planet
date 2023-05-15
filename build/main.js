@@ -654,10 +654,17 @@ let introTune
 initializeIntro()
 function initializeIntro() {
     introTune = document.getElementById("introTune");
-        introTune.preload = "auto";
-        introTune.currentTime = 0;
-        introTune.volume = 1;
-    introTuneLength = introTune.duration
+    introTune.preload = "auto";
+    introTune.currentTime = 0;
+    introTune.volume = 1;
+    
+    if (introTune.readyState > 0) {
+        introTuneLength = introTune.duration;
+    } else {
+        introTune.addEventListener("loadedmetadata", function() {
+            introTuneLength = introTune.duration;
+        });
+    }
 
     const handlePlayButtonClick = () => {
         introTune.play();
@@ -2393,7 +2400,6 @@ function animate() {
 }
 
 function render() {  
-
     //WebXR
     if (webXRInitialized == true && renderer.xr.isPresenting){
         const dt = clock.getDelta();
@@ -2467,7 +2473,6 @@ function render() {
     }
 
     if (introTuneLength) {
-        console.log(introTuneLength, introStarted)
         if (camera.position.z > 15 && introStarted == true) {
             camera.position.z -= 0.0213 * Math.pow(camera.position.z - 10, 1.35) / introTuneLength
         }
