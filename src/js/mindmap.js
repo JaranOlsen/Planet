@@ -17,8 +17,8 @@ import arrow from '/assets/textures/arrow4.webp'
 import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWireframeMaterials } from './data/materials.js';
 import { planetNuggetData } from './data/planetNuggetData.js';
 
-//const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
-const tagFont = "/assets/fonts/SourceSans3_Regular.json"
+const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
+//const tagFont = "/assets/fonts/SourceSans3_Regular.json"
 
 const textureLoader = new THREE.TextureLoader()
 
