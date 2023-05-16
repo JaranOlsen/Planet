@@ -1135,9 +1135,7 @@ const sunLight = new THREE.PointLight(0xffffff, 1.2, 2000)
 sunLight.position.set(sunRadiance.position.x, sunRadiance.position.y, sunRadiance.position.z - sunRadius * 1.5)
 pivot4.add(sunLight)
 
-//const textureFlare0 = textureLoader.load("https://jaranolsen.github.io/Planet/sunflare.webp");
 const textureFlare0 = textureLoader.load("/Planet/assets/textures/sunflare.webp");
-//const textureFlare3 = textureLoader.load("https://jaranolsen.github.io/Planet/lensflare.webp");
 const textureFlare3 = textureLoader.load("/Planet/assets/textures/lensflare.webp");
 const lensflare = new Lensflare();
 lensflare.position.set( 0, 0, 0 );
