@@ -1,0 +1,505 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+#container {
+  position: relative;  /* makes this the origin of its children */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#canvas {
+  width: 100%;  /* let our container decide our size */
+  height: 100%;
+  display: block;
+}
+
+/*  || COMMON ELEMENTS
+p
+h1, h2, h3, h4, h5
+ul and ol
+The table properties
+Links
+*/
+
+
+/*  ||  VERSION SCREEN */
+#versions {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 20;
+  padding: 20;
+  transform: translateY(-50%);
+
+}
+.version-option {
+  position: relative;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  transform: translateX(-50%);
+  font-size: 2rem;
+  line-height: 4rem;
+}
+/* Media query for medium screens (tablets) */
+@media (max-width: 768px) {
+  .version-option {
+    font-size: 1.5rem;
+  }
+}
+/* Media query for small screens (mobile devices) */
+@media (max-width: 480px) {
+  .version-option {
+    font-size: 1.25rem;
+  }
+}
+
+.version-option:hover,
+.version-option:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.version-option:focus{
+  outline: 1px solid black;
+}
+
+#keys {
+  position: absolute;
+  left: 50%;
+  bottom: 0%;
+  width: 100%;
+  height: 5%;
+  margin: 20;
+  padding: 20;
+  font-size: x-small;
+  color: white;
+  line-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+/* unvisited link */
+a:link {
+  color: white;
+  text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+  color: lightblue;
+  text-decoration: none;
+  display: block;
+}
+
+/* selected link */
+a:active {
+  color: lightblue;
+  text-decoration: none;
+}
+
+
+/*  || INTRO SCREEN */
+#credits {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0 .5rem;
+  width: 90%;
+  text-align: center;
+  left: 50%;
+  top: 5%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: .75rem;
+  display: none;
+}
+#playbutton {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 10rem;
+  display: none;
+}
+#playbutton:hover,
+#playbutton:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#playbutton:focus{
+  outline: 1px solid black;
+}
+#skipbutton {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 50%;
+  top: 85%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 1rem;
+  display: none;
+}
+#skipbutton:hover,
+#skipbutton:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#skipbutton:focus{
+  outline: 1px solid black;
+}
+#enableVRbutton {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 50%;
+  top: 95%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 1rem;
+  display: none;
+}
+#enableVRbutton:hover,
+#enableVRbutton:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#enableVRbutton:focus{
+  outline: 1px solid black;
+}
+
+/*  || SUBTITLES */
+#subtitle-container {
+  position: absolute;
+  bottom: 5%;
+  width: 90%;
+  translate: 5%;
+  text-align: center;
+  pointer-events: none;
+  font-family: Arial, sans-serif;
+  font-size: 2.5rem;
+  color: white;
+  display: none;
+}
+
+/*  || SLIDE SCREENS */
+.carousel {
+  position: absolute;
+  top: 5vh;
+  left: 5vw;
+  z-index: 1;
+  /* position: relative;  */
+  width: 90vw;
+  height: 90vh;
+  display: none;
+}
+.carousel > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none ;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: 200ms opacity ease-in-out;
+  transition-delay: 200ms;
+}
+.slide > img {
+  display: block;
+  border-color: blue; 
+  border-width: 10px;
+  border-radius: 10px;
+  width: 90vw;
+  height: 90vh;
+  object-fit: contain;
+}
+.verticalImg {
+  object-fit: contain !important;
+}
+.slide > iframe {
+  display: block;
+  border-color: rgba(0, 0, 255, 0.3);
+  border-width: 10px;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  width: 90vw;
+  height: 90vh;
+  object-fit: fill;
+}
+.quote {
+  position: absolute;
+  display: block;
+  background-color: linen;
+  background-image: url("./img/background/bagan.jpg");
+  background-size: cover;
+  opacity: 95%;
+  border-width: 10px;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  width: 90vw;
+  height: 90vh;
+  transform: translate(0, 0);
+  object-fit: fill;
+}
+.quote > p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width:fit-content;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  line-height: 1.5;
+}
+.slide[data-active] {
+  opacity: 1;
+  z-index: 2;
+  transition-delay: 0ms;
+}
+.carousel-button {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4)
+}
+.carousel-button:hover,
+.carousel-button:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.carousel-button:focus{
+  outline: 1px solid black;
+}
+.carousel-button.prev {
+  left: -2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+}
+.carousel-button.next {
+  top: 50%;
+  transform: translateY(-50%);
+  right: -2.5rem; 
+  font-size: 2rem;
+}
+.carousel-button.exit {
+  right: 0.1rem;
+  top: 0.1rem;
+  font-size: 1rem;
+}
+.menu-button {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4)
+}
+.menu-button:hover,
+.menu-button:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.menu-button:focus{
+  outline: 1px solid black;
+}
+.menu-button.menu {
+  left: 0.5%;
+  top: 1%;
+  font-size: 1rem;
+}
+.menu-button.definition {
+  left: 33%;
+  top: 33%;
+  font-size: 5rem;
+}
+.menu-button.exercise {
+  left: 66%;
+  top: 33%;
+  font-size: 5rem;
+}
+.menu-button.theory {
+  left: 33%;
+  top: 66%;
+  font-size: 5rem;
+}
+.menu-button.media {
+  left: 66%;
+  top: 66%;
+  font-size: 5rem;
+}
+.nav-button {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4)
+}
+.nav-button:hover,
+.nav-button:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.nav-button:focus{
+  outline: 1px solid black;
+}
+.nav-button.one {
+  font-size: 1rem;
+}
+.nav-button.two {
+  font-size: 1rem;
+}
+.nav-button.three {
+  font-size: 1rem;
+}
+.nav-button.four {
+  font-size: 1rem;
+}
+.nav-button.five {
+  font-size: 1rem;
+}
+
+/*  || PROGRESS BAR */
+.progress-bar-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 500;
+}
+
+#progress-bar {
+  width: 30%;
+  margin-top: 0.5%;
+  height: 2%;
+}
+
+label {
+  color: white;
+  font-size: 2rem;
+}
+
+
+/*  || FPS COUNTER */
+#fpsCounter {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: black;
+  z-index: 0;
+  display: none;
+}
+#fpsCounter>div {
+  position: absolute;  /* let us position them inside the container */
+  left: 0;             /* make their default position the top left of the container */
+  top: 0;
+  padding: 5px;
+  color: white;
+  text-align: center;
+  cursor: pointer;     /* change the cursor to a hand when over us */
+  font-size: x-small;
+  user-select: none; 
+}
+
+/*  || GUTTA STATS */
+#guttaStatScreen{
+  position: absolute;
+  left: 90%;
+  top: 5%;
+  width:max-content;
+  background-color: black;
+  z-index: 0;
+  display: none;
+}
+#guttaStatScreen>div {
+  position: absolute;  /* let us position them inside the container */
+  left: 90%;             /* make their default position the top left of the container */
+  top: 0;
+  width: max-content;
+  padding: 5px;
+  color: white;
+  text-align: right;
+  cursor: pointer;     /* change the cursor to a hand when over us */
+  font-size: x-small;
+  user-select: none; 
+}
+
+/*  || WEBXR (from where?) */
+:xr-overlay {
+  /* force a transparent background */
+  background: rgba(0,0,0,0) !important;
+
+  /* act as containing block for descendants */
+  contain: paint !important;
+
+  /* the following styling is identical to :fullscreen */
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform: none !important;
+
+  /* intentionally not !important */
+  object-fit: contain;
+}

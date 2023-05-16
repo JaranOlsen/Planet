@@ -1,20 +1,3 @@
-EFFICIENT Boids
-Optimizing a boids simulation for such a large number of entities in Three.js can be challenging due to JavaScript's single-threaded nature. However, there are a few techniques that you can employ to help improve performance.
-
-Web Workers: JavaScript is single-threaded, but Web Workers allow you to run JavaScript in the background on a separate thread. You could use a Web Worker to handle the boid calculations, leaving the main thread free to handle rendering.
-Spatial partitioning: Spatial partitioning can drastically improve performance in a boids simulation. This involves dividing the simulation space into a grid, and only checking for neighbors within the same cell or adjacent cells. This can reduce the number of comparisons from quadratic to nearly linear.
-Instanced rendering: This is a technique that allows you to draw many instances of the same geometry and material in a single draw call. This can significantly reduce the load on the GPU, which is crucial when dealing with large numbers of objects.
-
-In addition, there are other considerations you might have to take into account such as avoiding memory allocation in your update loop, optimizing your code logic, and making sure your shaders are efficient.
-
-GPT prompts
-Prompts Frameworks: 
-
-Answer: Let's work this out in a step by step way to be sure we have the right answer
-
-You are a researcher tasked with investigating the X response options provided. List the flaws and faulty logic of each answer option. Let's work this out in a step by step way to be sure we have all the errors:
-
-You are a resolver tasked with 1) finding which of the X answer options the researcher thought was best 2) improving that answer, and 3) Printing the improved answer in full. Let's work this out in a step by step way to be sure we have the right answer:
 
 INITIATIVES
     apply for a pimp
@@ -67,6 +50,15 @@ MAKE USABLE
     document. addEventListener ('DOMContentLoaded', () = {
 
 SHORT-TERM DEVELOPMENT
+
+Add dimension to slide carousel
+    - up and down to access subslides/slides in the series
+    - array in the contentfile. if array then 2.1
+
+Make GPT help with structuring folders and Paths   
+    - images in public folder and img folder...
+    - font
+    - lensflare
 
 Text-content - [type][source/text]
 - centred, automatic font size
@@ -132,6 +124,24 @@ LONG-TERM DEVELOPMENT
         nebula
 
 USEFUL
+    EFFICIENT Boids
+        Optimizing a boids simulation for such a large number of entities in Three.js can be challenging due to JavaScript's single-threaded nature. However, there are a few techniques that you can employ to help improve performance.
+
+        Web Workers: JavaScript is single-threaded, but Web Workers allow you to run JavaScript in the background on a separate thread. You could use a Web Worker to handle the boid calculations, leaving the main thread free to handle rendering.
+        Spatial partitioning: Spatial partitioning can drastically improve performance in a boids simulation. This involves dividing the simulation space into a grid, and only checking for neighbors within the same cell or adjacent cells. This can reduce the number of comparisons from quadratic to nearly linear.
+        Instanced rendering: This is a technique that allows you to draw many instances of the same geometry and material in a single draw call. This can significantly reduce the load on the GPU, which is crucial when dealing with large numbers of objects.
+
+        In addition, there are other considerations you might have to take into account such as avoiding memory allocation in your update loop, optimizing your code logic, and making sure your shaders are efficient.
+
+    GPT prompts
+        Prompts Frameworks: 
+
+        Answer: Let's work this out in a step by step way to be sure we have the right answer
+
+        You are a researcher tasked with investigating the X response options provided. List the flaws and faulty logic of each answer option. Let's work this out in a step by step way to be sure we have all the errors:
+
+        You are a resolver tasked with 1) finding which of the X answer options the researcher thought was best 2) improving that answer, and 3) Printing the improved answer in full. Let's work this out in a step by step way to be sure we have the right answer:
+
     three.js examples that have useful feature/codesnippets
         Better CSS labels: https://github.com/mrdoob/three.js/blob/master/examples/css2d_label.html
         Fly controls: https://github.com/mrdoob/three.js/blob/master/examples/misc_controls_fly.html
@@ -141,41 +151,6 @@ USEFUL
         Instancing: https://github.com/mrdoob/three.js/blob/master/examples/webgl_instancing_performance.html
 
     link to json font converter: http://gero3.github.io/facetype.js/
-
-    flyControls - swap between control modes
-        function onClick() {
-
-            var prevCamera = camera;
-
-            camera = new THREE.PerspectiveCamera(...);
-            camera.position.copy( prevCamera.position );
-            camera.rotation.copy( prevCamera.rotation );
-
-            var MODE = { TRACKBALL: 0, FLY: 1 };
-
-            switch( mode ) {
-
-                case MODE.FLY:
-
-                    controls = new THREE.TrackballControls( camera );
-
-                    mode = MODE.TRACKBALL;
-
-                    break;
-
-                case MODE.TRACKBALL:
-
-                    controls = new THREE.FlyControls( camera );
-
-                    mode = MODE.FLY;
-
-                    break;
-
-            }
-
-        }
-        Also this (for fixing possible problem with orbitcontrols)
-        https://stackoverflow.com/questions/32412507/switch-between-flycontrols-and-orbitcontrols-threejs-mouse-clicked?noredirect=1#comment52768065_32412507
 
 
 Desert of the Real - The Matrix (1999), a metaphorical desert symbolizing the harsh reality outside of the simulated world.

@@ -3,7 +3,7 @@ import vitePluginString from 'vite-plugin-string'
 import { resolve } from 'path'
 
 export default defineConfig({
-  assetsInclude: ['models/*.glb'],
+  assetsInclude: ['models/*.glb', 'src/models/*.glb'],
   base: '/Planet/',
   root: "./",
   plugins: [
