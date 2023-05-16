@@ -36,8 +36,6 @@ import atmosphericLightVertexShader from '../shaders/atmosphericLightVertex.glsl
 import atmosphericLightFragmentShader from '../shaders/atmosphericLightFragment.glsl'
 import atmosphereVertexShader from '../shaders/atmosphereVertex.glsl'
 import atmosphereFragmentShader from '../shaders/atmosphereFragment.glsl'
-/* import sunVertexShader from '../shaders/sunVertex.glsl'
-import sunFragmentShader from '../shaders/sunFragment.glsl' */
 import spiralVertexShader from '../shaders/spiralVertex.glsl'
 import spriralFragmentShader from '../shaders/spiralFragment.glsl'
 
