@@ -18,7 +18,7 @@ import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWirefr
 import { planetNuggetData } from './data/planetNuggetData.js';
 
 //const tagFont = "https://jaranolsen.github.io/Planet/SourceSans3_Regular.json"
-const tagFont = "/assets/fonts/SourceSans3_Regular.json"
+const tagFont = "/Planet/assets/fonts/SourceSans3_Regular.json"
 
 const textureLoader = new THREE.TextureLoader()
 

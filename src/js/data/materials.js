@@ -2,11 +2,11 @@ import { MeshBasicMaterial, MeshStandardMaterial, DoubleSide, LoadingManager, Te
 import { palette } from "./palette";
 
 //IMPORT TEXTURES
-import nugget_diffuse from "/img/textures/nugget_diffuse.jpg"
-import nugget_ao from "/img/textures/nugget_ao.jpg"
-import nugget_normal from "/img/textures/nugget_normal.jpg"
-import nugget_displacement from "/img/textures/nugget_displacement.png"
-import nugget_roughness from "/img/textures/nugget_roughness.jpg"
+import nugget_diffuse from "/assets/textures/nugget_diffuse.jpg"
+import nugget_ao from "/assets/textures/nugget_ao.jpg"
+import nugget_normal from "/assets/textures/nugget_normal.jpg"
+import nugget_displacement from "/assets/textures/nugget_displacement.png"
+import nugget_roughness from "/assets/textures/nugget_roughness.jpg"
 
 const materialLoadingManager = new LoadingManager();
 const textureLoader3 = new TextureLoader(materialLoadingManager)
