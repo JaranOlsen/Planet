@@ -264,7 +264,7 @@ a:active {
   position: absolute;
   display: block;
   background-color: linen;
-  background-image: url("./img/background/bagan.jpg");
+  background-image: url("/assets/images/background/bagan.jpg");
   background-size: cover;
   opacity: 95%;
   border-width: 10px;
