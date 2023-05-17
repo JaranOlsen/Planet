@@ -1,7 +1,7 @@
 export const contentData = [ //slides ID = line number - 2
     [],
-    ["./img/ontology/Slide154.jpeg", "./img/ontology/Slide155.jpeg", "./img/ontology/Slide156.jpeg", "./img/ontology/Slide157.jpeg", "./img/ontology/Slide158.jpeg", "./img/ontology/Slide159.jpeg", "./img/ontology/Slide160.jpeg", "./img/ontology/Slide161.jpeg", "./img/ontology/Slide162.jpeg", "./img/ontology/Slide163.jpeg", "./img/ontology/Slide164.jpeg", "./img/ontology/Slide165.jpeg", "./img/ontology/Slide166.jpeg", "./img/ontology/Slide167.jpeg", "./img/ontology/Slide168.jpeg", "./img/ontology/Slide169.jpeg", "./img/ontology/Slide170.jpeg", "./img/ontology/Slide171.jpeg", "./img/ontology/Slide172.jpeg", "./img/ontology/Slide173.jpeg", "./img/ontology/Slide174.jpeg", "./img/ontology/Slide175.jpeg", "./img/ontology/Slide176.jpeg"],
-    ["./img/truth/Slide1.jpeg", "./img/truth/Slide2.jpeg", "./img/truth/Slide3.jpeg", "./img/truth/Slide4.jpeg", "./img/truth/Slide5.jpeg", "./img/truth/Slide6.jpeg", "./img/truth/Slide7.jpeg"],
+    ["/assets/images/ontology/Slide154.jpeg", "/assets/images/ontology/Slide155.jpeg", "/assets/images/ontology/Slide156.jpeg", "/assets/images/ontology/Slide157.jpeg", "/assets/images/ontology/Slide158.jpeg", "/assets/images/ontology/Slide159.jpeg", "/assets/images/ontology/Slide160.jpeg", "/assets/images/ontology/Slide161.jpeg", "/assets/images/ontology/Slide162.jpeg", "/assets/images/ontology/Slide163.jpeg", "/assets/images/ontology/Slide164.jpeg", "/assets/images/ontology/Slide165.jpeg", "/assets/images/ontology/Slide166.jpeg", "/assets/images/ontology/Slide167.jpeg", "/assets/images/ontology/Slide168.jpeg", "/assets/images/ontology/Slide169.jpeg", "/assets/images/ontology/Slide170.jpeg", "/assets/images/ontology/Slide171.jpeg", "/assets/images/ontology/Slide172.jpeg", "/assets/images/ontology/Slide173.jpeg", "/assets/images/ontology/Slide174.jpeg", "/assets/images/ontology/Slide175.jpeg", "/assets/images/ontology/Slide176.jpeg"],
+    ["/assets/images/truth/Slide1.jpeg", "/assets/images/truth/Slide2.jpeg", "/assets/images/truth/Slide3.jpeg", "/assets/images/truth/Slide4.jpeg", "/assets/images/truth/Slide5.jpeg", "/assets/images/truth/Slide6.jpeg", "/assets/images/truth/Slide7.jpeg"],
     ["https://www.youtube-nocookie.com/embed/hDbCTxm6_Ps", "https://www.youtube-nocookie.com/embed/BbnfnveWUh0", "https://www.youtube-nocookie.com/embed/T7QbZePP_7w", "https://www.youtube-nocookie.com/embed/UPIvI8IsnHc", "https://www.youtube-nocookie.com/embed/B4RsXr02M0U", "https://www.youtube-nocookie.com/embed/C4sgtZa7LEI", "https://www.youtube-nocookie.com/embed/mwt7qF40KF0"],
     ["https://www.youtube-nocookie.com/embed/Nls4o_mR-sY", "https://www.youtube-nocookie.com/embed/wJG6yL4ncK8", "https://www.youtube-nocookie.com/embed/59dWdQuSMnk"],
     ["https://www.youtube-nocookie.com/embed/L70T4pQv7P8"],
@@ -9,30 +9,30 @@ export const contentData = [ //slides ID = line number - 2
     ["https://www.youtube-nocookie.com/embed/1Evwgu369Jw?start=8", "https://www.youtube-nocookie.com/embed/l7AWnfFRc7g"],
     ["Close your eyes and relax.<br>Just listen.", "Opening awareness up to it all.<br>Letting everything be as it is.", "Being right here, right now.<br>No doing, just being.", "Allowing the mind to settle.<br>Welcoming stillness and calm.", "No need to strain or concentrate.<br>The mind is naturally awake and aware.", "Just being the knowing.<br>Being now, being here."],
     ["https://www.youtube-nocookie.com/embed/H-SEfK4uFa8"],
-    ["https://www.youtube-nocookie.com/embed/H-SEfK4uFa8", "./img/exercises/experience1/Slide1.jpeg", "./img/exercises/experience1/Slide2.jpeg", "./img/exercises/experience1/Slide3.jpeg", "./img/exercises/experience1/Slide4.jpeg", "./img/exercises/experience1/Slide5.jpeg", "./img/exercises/experience1/Slide6.jpeg"],
-    ["https://www.youtube-nocookie.com/embed/H-SEfK4uFa8", "./img/exercises/experience2/Slide1.jpeg", "./img/exercises/experience2/Slide2.jpeg", "./img/exercises/experience2/Slide3.jpeg", "./img/exercises/experience2/Slide4.jpeg", "./img/exercises/experience2/Slide5.jpeg", "./img/exercises/experience2/Slide6.jpeg", "./img/exercises/experience2/Slide7.jpeg", "./img/exercises/experience2/Slide8.jpeg", "./img/exercises/experience2/Slide9.jpeg", "./img/exercises/experience2/Slide10.jpeg", "./img/exercises/experience2/Slide11.jpeg", "./img/exercises/awareness1/Slide1.jpeg", "./img/exercises/awareness1/Slide2.jpeg", "./img/exercises/awareness1/Slide3.jpeg", "./img/exercises/awareness1/Slide4.jpeg", "./img/exercises/awareness1/Slide5.jpeg", "./img/exercises/awareness1/Slide6.jpeg", "./img/exercises/awareness1/Slide7.jpeg", "./img/exercises/awareness1/Slide8.jpeg", "./img/exercises/awareness1/Slide9.jpeg", "./img/exercises/awareness1/Slide10.jpeg", "./img/exercises/awareness1/Slide11.jpeg"],
+    ["https://www.youtube-nocookie.com/embed/H-SEfK4uFa8", "/assets/images/exercises/experience1/Slide1.jpeg", "/assets/images/exercises/experience1/Slide2.jpeg", "/assets/images/exercises/experience1/Slide3.jpeg", "/assets/images/exercises/experience1/Slide4.jpeg", "/assets/images/exercises/experience1/Slide5.jpeg", "/assets/images/exercises/experience1/Slide6.jpeg"],
+    ["https://www.youtube-nocookie.com/embed/H-SEfK4uFa8", "/assets/images/exercises/experience2/Slide1.jpeg", "/assets/images/exercises/experience2/Slide2.jpeg", "/assets/images/exercises/experience2/Slide3.jpeg", "/assets/images/exercises/experience2/Slide4.jpeg", "/assets/images/exercises/experience2/Slide5.jpeg", "/assets/images/exercises/experience2/Slide6.jpeg", "/assets/images/exercises/experience2/Slide7.jpeg", "/assets/images/exercises/experience2/Slide8.jpeg", "/assets/images/exercises/experience2/Slide9.jpeg", "/assets/images/exercises/experience2/Slide10.jpeg", "/assets/images/exercises/experience2/Slide11.jpeg", "/assets/images/exercises/awareness1/Slide1.jpeg", "/assets/images/exercises/awareness1/Slide2.jpeg", "/assets/images/exercises/awareness1/Slide3.jpeg", "/assets/images/exercises/awareness1/Slide4.jpeg", "/assets/images/exercises/awareness1/Slide5.jpeg", "/assets/images/exercises/awareness1/Slide6.jpeg", "/assets/images/exercises/awareness1/Slide7.jpeg", "/assets/images/exercises/awareness1/Slide8.jpeg", "/assets/images/exercises/awareness1/Slide9.jpeg", "/assets/images/exercises/awareness1/Slide10.jpeg", "/assets/images/exercises/awareness1/Slide11.jpeg"],
     ["https://www.youtube-nocookie.com/embed/l3bynimi8HQ"],
     ["https://www.youtube-nocookie.com/embed/TK-MbNj83NM"],
     ["https://www.youtube-nocookie.com/embed/x_uUEaeqFog"],
-    ["./img/anomalies/biology/Slide1.jpeg", "https://www.youtube-nocookie.com/embed/bJ53o73QCRA", "./img/anomalies/biology/Slide2.jpeg", "https://www.youtube-nocookie.com/embed/CYuDbfFRTsw", "./img/anomalies/biology/Slide3.jpeg", "https://www.youtube-nocookie.com/embed/5YrmQvu5Eus"],
+    ["/assets/images/anomalies/biology/Slide1.jpeg", "https://www.youtube-nocookie.com/embed/bJ53o73QCRA", "/assets/images/anomalies/biology/Slide2.jpeg", "https://www.youtube-nocookie.com/embed/CYuDbfFRTsw", "/assets/images/anomalies/biology/Slide3.jpeg", "https://www.youtube-nocookie.com/embed/5YrmQvu5Eus"],
     ["https://www.youtube-nocookie.com/embed/O4ndIDcDSGc", "https://www.youtube-nocookie.com/embed/mccoBBf0VDM"],
-    ["./img/exercises/sixsenses/Slide1.jpeg", "./img/exercises/sixsenses/Slide2.jpeg", "./img/exercises/sixsenses/Slide3.jpeg", "./img/exercises/sixsenses/Slide4.jpeg", "./img/exercises/sixsenses/Slide5.jpeg", "./img/exercises/sixsenses/Slide6.jpeg", "./img/exercises/sixsenses/Slide7.jpeg", "./img/exercises/sixsenses/Slide8.jpeg", "./img/exercises/sixsenses/Slide9.jpeg", "./img/exercises/sixsenses/Slide10.jpeg", "./img/exercises/sixsenses/Slide11.jpeg", "./img/exercises/sixsenses/Slide12.jpeg", "./img/exercises/sixsenses/Slide13.jpeg", "./img/exercises/sixsenses/Slide14.jpeg"],
-    ["./img/mindmaps/allianceFormation.png", "./img/mindmaps/allianceRepair.png", "./img/mindmaps/selfDisclosure.png"],
-    ["./img/mindmaps/caseFormulation.png"],
-    ["./img/mindmaps/clearingSpace.png", "./img/mindmaps/focusing.png"],
-    ["./img/mindmaps/conflictSplit.png"],
-    ["https://www.youtube-nocookie.com/embed/ynHioCxAMEI", "https://www.youtube-nocookie.com/embed/D8lmjmJ0OPg", "./img/mindmaps/emotionTheory.png"],
-    ["./img/mindmaps/empathyExploration.png", "./img/mindmaps/emphaticExploration.png"],
-    ["./img/mindmaps/meaningCreation.png"],
-    ["https://www.youtube-nocookie.com/embed/RuZRc8Axln0", "https://www.youtube-nocookie.com/embed/VfsVqk-ke_s", "./img/mindmaps/pascualLeoneModel.png"],
-    ["./img/mindmaps/selfSoothing.png"],
-    ["./img/mindmaps/SEU.png"],
-    ["./img/mindmaps/traumaRetelling.png"],
-    ["https://www.youtube-nocookie.com/embed/XcymHw9AZvg", "https://www.youtube-nocookie.com/embed/4AHJkOF6eR8", "https://www.youtube-nocookie.com/embed/wfCRSMr5eUk", "https://www.youtube-nocookie.com/embed/-CxfrVifuUA", "https://www.youtube-nocookie.com/embed/LRuoHv-ODrI", "https://www.youtube-nocookie.com/embed/5OIy0Fdg3Ko", "./img/mindmaps/treatmentPrinciples.png"],
-    ["./img/mindmaps/unfinishedBusiness.png"],
+    ["/assets/images/exercises/sixsenses/Slide1.jpeg", "/assets/images/exercises/sixsenses/Slide2.jpeg", "/assets/images/exercises/sixsenses/Slide3.jpeg", "/assets/images/exercises/sixsenses/Slide4.jpeg", "/assets/images/exercises/sixsenses/Slide5.jpeg", "/assets/images/exercises/sixsenses/Slide6.jpeg", "/assets/images/exercises/sixsenses/Slide7.jpeg", "/assets/images/exercises/sixsenses/Slide8.jpeg", "/assets/images/exercises/sixsenses/Slide9.jpeg", "/assets/images/exercises/sixsenses/Slide10.jpeg", "/assets/images/exercises/sixsenses/Slide11.jpeg", "/assets/images/exercises/sixsenses/Slide12.jpeg", "/assets/images/exercises/sixsenses/Slide13.jpeg", "/assets/images/exercises/sixsenses/Slide14.jpeg"],
+    ["/assets/images/mindmaps/allianceFormation.png", "/assets/images/mindmaps/allianceRepair.png", "/assets/images/mindmaps/selfDisclosure.png"],
+    ["/assets/images/mindmaps/caseFormulation.png"],
+    ["/assets/images/mindmaps/clearingSpace.png", "/assets/images/mindmaps/focusing.png"],
+    ["/assets/images/mindmaps/conflictSplit.png"],
+    ["https://www.youtube-nocookie.com/embed/ynHioCxAMEI", "https://www.youtube-nocookie.com/embed/D8lmjmJ0OPg", "/assets/images/mindmaps/emotionTheory.png"],
+    ["/assets/images/mindmaps/empathyExploration.png", "/assets/images/mindmaps/emphaticExploration.png"],
+    ["/assets/images/mindmaps/meaningCreation.png"],
+    ["https://www.youtube-nocookie.com/embed/RuZRc8Axln0", "https://www.youtube-nocookie.com/embed/VfsVqk-ke_s", "/assets/images/mindmaps/pascualLeoneModel.png"],
+    ["/assets/images/mindmaps/selfSoothing.png"],
+    ["/assets/images/mindmaps/SEU.png"],
+    ["/assets/images/mindmaps/traumaRetelling.png"],
+    ["https://www.youtube-nocookie.com/embed/XcymHw9AZvg", "https://www.youtube-nocookie.com/embed/4AHJkOF6eR8", "https://www.youtube-nocookie.com/embed/wfCRSMr5eUk", "https://www.youtube-nocookie.com/embed/-CxfrVifuUA", "https://www.youtube-nocookie.com/embed/LRuoHv-ODrI", "https://www.youtube-nocookie.com/embed/5OIy0Fdg3Ko", "/assets/images/mindmaps/treatmentPrinciples.png"],
+    ["/assets/images/mindmaps/unfinishedBusiness.png"],
     ["https://www.youtube-nocookie.com/embed/7xTwvfGckLo", "https://www.youtube-nocookie.com/embed/31RQw-cLgOQ", "https://www.youtube-nocookie.com/embed/BqshniPymrQ", "https://www.youtube-nocookie.com/embed/sJl3GJLTUj4"],
     ["https://www.youtube-nocookie.com/embed/hEHbrQ6hwFs"],
-    ["https://www.youtube-nocookie.com/embed/kNRg2DFtgOw", "./img/mindmaps/pascualLeoneModel.png"],
+    ["https://www.youtube-nocookie.com/embed/kNRg2DFtgOw", "/assets/images/mindmaps/pascualLeoneModel.png"],
     ["https://www.youtube-nocookie.com/embed/TKztYwAniaw"],
     ["https://www.youtube-nocookie.com/embed/W-koCNHdiBA", "https://www.youtube-nocookie.com/embed/7H7SGkhdtNQ"],
     ["https://www.youtube-nocookie.com/embed/OwVhyod-Ar4"],
@@ -43,8 +43,8 @@ export const contentData = [ //slides ID = line number - 2
     ["https://www.youtube-nocookie.com/embed/WmYGtKB9EEA?start=1196", "https://www.youtube-nocookie.com/embed/nRSBaq3vAeY", "https://www.youtube-nocookie.com/embed/AQDILJb9yK8"],
     ["https://www.youtube-nocookie.com/embed/Wxe1PkyJev8", "https://www.youtube-nocookie.com/embed/hvf4seEFtnY", "https://www.youtube-nocookie.com/embed/dFs9WO2B8uI", "https://www.youtube-nocookie.com/embed/OjCt-L0Ph5o", "https://www.youtube-nocookie.com/embed/TTSYzWkK5Qo", "https://www.youtube-nocookie.com/embed/Ko2SPWgDH6o", "https://www.youtube-nocookie.com/embed/TluNbkNrRKU", "https://www.youtube-nocookie.com/embed/6g0_c-je7ag", "https://www.youtube-nocookie.com/embed/_ee7MAtfhkM"],
     ["https://www.youtube-nocookie.com/embed/vo8izCKHiF0", "https://www.youtube-nocookie.com/embed/IxXaizglscw"],
-    ["./img/emotion/westeast.jpg"],
-    ["./img/consciousness/venn.webp"],
+    ["/assets/images/emotion/westeast.jpg"],
+    ["/assets/images/consciousness/venn.webp"],
     ["https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-1-just-listen"],
     ["https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-2-distracted-by-truth"],
     ["https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-3-breath"],
@@ -108,9 +108,9 @@ export const contentData = [ //slides ID = line number - 2
     ["Greed is trying to create what isn't.<br>Hate is trying to destroy what is.<br>This is samsara.<br>Delusion is believing in this.<br><br>Peace is allowing what isn't not to be.<br>Love is allowing what is to be.<br>This is Nirvana.<br>Wisdom is knowing this."],
     ["<br><br><br><br>Although he died an agnostic, toward the end of his life, Rogers began speaking about transcendental or mystical experiences (Thorne, 1992). These spiritual statements were mostly made in the context of interpersonal mutuality and human connection, derived from person-centered or I-Thou experiences. Within the person-centered world, his statements about spirituality have been viewed as controversial (Fruehwirth, 2013).<br><br><br><br>"],
     ["Altered states<br><br><i>&quot;You can't force your mind to be silent. That would be like trying to smooth ripples in water with a flatiron. Water becomes clear and calm only when left alone.&quot;</i><br>- Alan Watts", "<br><br><br><font style=opacity:.6> I too have experienced this. When I am at my best as a group facilitator, or a therapist, I discover this characteristic. I find that when I am closest to my </font><b>inner intuitive self</b><font style=opacity:.6>, when I am somehow in touch with </font><b>the unknown in me</b><font style=opacity:.6>, when perhaps I am in a slightly </font><b>altered state of consciousness</b><font style=opacity:.6>, then what ever I do seems to be full of healing. Then simply my presence is releasing and helpful.<br><br>There is </font><b>nothing I can do to force this experience</b><font style=opacity:.6>. But when I can </font><b>relax</b><font style=opacity:.6> and be close to </font><b>the transcendental core of me</b><font style=opacity:.6>, then I may behave in strange and impulsive ways in the relationship, ways which I can't justify rationally which </font><b>have nothing to do with my thought processes</b><font style=opacity:.6>. But these strange behaviors turn out to be right in some odd way. At those moments it seems that my inner spirit has reached out and touched the inner spirit of the other. Our relationship transcends itself and had become part of something larger. Profound growth and healing and energy are present.<br><br><br><br><br>"],
-    ["Altered traits<br><br><i>&quot;Waking up to who you are requires letting go of who you imagine yourself to be.&quot;</i><br> - Alan Watts", "./img/books/alteredtraits.webp", "<br><br><br><font style=opacity:.6> I too have experienced this. When I am at my best as a group facilitator, or a therapist, I discover this characteristic. I find that when I am closest to my inner intuitive self, when I am somehow in touch with the unknown in me, when perhaps I am in a slightly altered state of consciousness, then what ever I do seems to be full of healing. Then simply my presence is releasing and helpful.<br><br>There is nothing I can do to force this experience. But when I can relax and be close to </font><b>the transcendental core of me</b><font style=opacity:.6>, then I may behave in strange and impulsive ways in the relationship, ways which I can't justify rationally which have nothing to do with my thought processes. But these strange behaviors turn out to be right in some odd way. At those moments it seems that my inner spirit has reached out and touched the inner spirit of the other. Our relationship transcends itself and had become part of something larger. Profound growth and healing and energy are present.<br><br><br><br><br>", "Exercise: How to discover the 'Transcendental Core of Me'?<br><br>What am I not?<br><br>What am i?<br><br>What is real?<br><br>How can something about me be real in the strong sense?", "https://www.youtube-nocookie.com/embed/10J6crRacZg"],
-    ["./img/carlrogers/Slide1.jpeg", "./img/carlrogers/Slide3.jpeg", "./img/carlrogers/Slide4.jpeg", "https://www.youtube-nocookie.com/embed/iMi7uY83z-U", "./img/carlrogers/Slide7.jpeg", "./img/carlrogers/Slide8.jpeg", "./img/carlrogers/Slide9.jpeg", "./img/carlrogers/Slide10.jpeg", "./img/carlrogers/Slide11.jpeg", "./img/carlrogers/Slide12.jpeg", "./img/carlrogers/Slide13.jpeg", "./img/carlrogers/Slide14.jpeg", "./img/carlrogers/Slide15.jpeg", "./img/carlrogers/Slide16.jpeg", "./img/carlrogers/Slide18.jpeg", "./img/carlrogers/Slide17.jpeg", "https://www.youtube-nocookie.com/embed/idgjD5tir_w"],
-    ["https://www.youtube-nocookie.com/embed/9oX2xFo7JA4", "https://www.youtube-nocookie.com/embed/XEHYK3TM2jc", "./img/carlrogers/Slide1.jpeg", "<u>Poem for a rainy day</u><br><br>I know it feels as if<br>this night through which we journey<br>will never end.<br><br>Darkness <br>is all you see,<br>as you have yet to rub<br>the sleep from your eyes.<br><br>You don't believe it,<br>but one day you will<br>awake from the dream<br>and see what I see<br><br>you too,<br>are a child of light –<br>shining brighter than a million suns,<br>shining bright through the darkest of nights.<br><br>- Hege Fridtun", "https://insig.ht/jZUguRAk7ub", "https://img.youtube.com/vi/XEHYK3TM2jc/hqdefault.jpg"],
+    ["Altered traits<br><br><i>&quot;Waking up to who you are requires letting go of who you imagine yourself to be.&quot;</i><br> - Alan Watts", "/assets/images/books/alteredtraits.webp", "<br><br><br><font style=opacity:.6> I too have experienced this. When I am at my best as a group facilitator, or a therapist, I discover this characteristic. I find that when I am closest to my inner intuitive self, when I am somehow in touch with the unknown in me, when perhaps I am in a slightly altered state of consciousness, then what ever I do seems to be full of healing. Then simply my presence is releasing and helpful.<br><br>There is nothing I can do to force this experience. But when I can relax and be close to </font><b>the transcendental core of me</b><font style=opacity:.6>, then I may behave in strange and impulsive ways in the relationship, ways which I can't justify rationally which have nothing to do with my thought processes. But these strange behaviors turn out to be right in some odd way. At those moments it seems that my inner spirit has reached out and touched the inner spirit of the other. Our relationship transcends itself and had become part of something larger. Profound growth and healing and energy are present.<br><br><br><br><br>", "Exercise: How to discover the 'Transcendental Core of Me'?<br><br>What am I not?<br><br>What am i?<br><br>What is real?<br><br>How can something about me be real in the strong sense?", "https://www.youtube-nocookie.com/embed/10J6crRacZg"],
+    ["/assets/images/carlrogers/Slide1.jpeg", "/assets/images/carlrogers/Slide3.jpeg", "/assets/images/carlrogers/Slide4.jpeg", "https://www.youtube-nocookie.com/embed/iMi7uY83z-U", "/assets/images/carlrogers/Slide7.jpeg", "/assets/images/carlrogers/Slide8.jpeg", "/assets/images/carlrogers/Slide9.jpeg", "/assets/images/carlrogers/Slide10.jpeg", "/assets/images/carlrogers/Slide11.jpeg", "/assets/images/carlrogers/Slide12.jpeg", "/assets/images/carlrogers/Slide13.jpeg", "/assets/images/carlrogers/Slide14.jpeg", "/assets/images/carlrogers/Slide15.jpeg", "/assets/images/carlrogers/Slide16.jpeg", "/assets/images/carlrogers/Slide18.jpeg", "/assets/images/carlrogers/Slide17.jpeg", "https://www.youtube-nocookie.com/embed/idgjD5tir_w"],
+    ["https://www.youtube-nocookie.com/embed/9oX2xFo7JA4", "https://www.youtube-nocookie.com/embed/XEHYK3TM2jc", "/assets/images/carlrogers/Slide1.jpeg", "<u>Poem for a rainy day</u><br><br>I know it feels as if<br>this night through which we journey<br>will never end.<br><br>Darkness <br>is all you see,<br>as you have yet to rub<br>the sleep from your eyes.<br><br>You don't believe it,<br>but one day you will<br>awake from the dream<br>and see what I see<br><br>you too,<br>are a child of light –<br>shining brighter than a million suns,<br>shining bright through the darkest of nights.<br><br>- Hege Fridtun", "https://insig.ht/jZUguRAk7ub", "https://img.youtube.com/vi/XEHYK3TM2jc/hqdefault.jpg"],
     ["https://www.youtube-nocookie.com/embed/XmdPY-hFSt0"],
     ["https://www.youtube-nocookie.com/embed/neDutbcedUY"],
     ["Need for postulates or axioms: Every theory must begin with a set of basic assumptions or postulates that cannot be derived from or proven by the theory itself. These postulates serve as the foundation upon which the theory is built and can sometimes be subject to revision or rejection based on new evidence or insights."],
@@ -163,7 +163,7 @@ export const contentData = [ //slides ID = line number - 2
         /* <div class="carousel s998" data-carousel>
           <ul data-slides>
             <li class="slide" menu data-active>
-              <img src=.              "./img/textures/moon1k.webp"    >         
+              <img src=.              "/assets/images/textures/moon1k.webp"    >         
               <button class="menu-button definition" data-menu-button="definition"    >         definition</button>
               <button class="menu-button exercise" data-menu-button="exercise"    >         exercise</button>
               <button class="menu-button theory" data-menu-button="theory"    >         theory</button>
@@ -171,30 +171,30 @@ export const contentData = [ //slides ID = line number - 2
             </li>
             <li class="slide" definition>
               <button class="menu-button menu" data-menu-button="menu"    >         menu</button>
-              <img src=.              "./img/textures/moonIce1k.webp"    >         
+              <img src=.              "/assets/images/textures/moonIce1k.webp"    >         
             </li>
             <li class="slide"    >         
               <button class="menu-button menu" data-menu-button="menu"    >         menu</button>
-              <img src=.              "./img/textures/moonRed1k.webp"    >         
+              <img src=.              "/assets/images/textures/moonRed1k.webp"    >         
             </li>
             <li class="slide" exercise>
               <button class="menu-button menu" data-menu-button="menu"    >         menu</button>
-              <img src=.              "./img/textures/terrain4k.webp"    >         
+              <img src=.              "/assets/images/textures/terrain4k.webp"    >         
             </li>
             <li class="slide" theory>
               <button class="menu-button menu" data-menu-button="menu"    >         menu</button>
-              <img src=.              "./img/textures/normal1k.webp"    >         
+              <img src=.              "/assets/images/textures/normal1k.webp"    >         
             </li>
             <li class="slide" media>
               <button class="menu-button menu" data-menu-button="menu"    >         menu</button>
-              <img src=.              "./img/textures/roughness1k.webp"    >         
+              <img src=.              "/assets/images/textures/roughness1k.webp"    >         
             </li>
           </ul>
         </div>
         <div class="carousel s999" data-carousel>
           <ul data-slides>
             <li class="slide" menu data-active>
-              <img src=.              "./img/textures/moon1k.webp"    >         
+              <img src=.              "/assets/images/textures/moon1k.webp"    >         
               <button class="menu-button definition" data-menu-button="definition"    >         definition</button>
               <button class="menu-button exercise" data-menu-button="exercise"    >         exercise</button>
               <button class="menu-button theory" data-menu-button="theory"    >         theory</button>
@@ -202,23 +202,23 @@ export const contentData = [ //slides ID = line number - 2
             </li>
             <li class="slide" definition>
               <button class="menu-button menu" data-menu-button="menu"    >         menu</button>
-              <img src=.              "./img/mindmaps/allianceFormation.png"    >         
+              <img src=.              "/assets/images/mindmaps/allianceFormation.png"    >         
             </li>
             <li class="slide"    >         
               <button class="menu-button menu" data-menu-button="menu"    >         menu</button>
-              <img src=.              "./img/mindmaps/allianceRepair.png"    >         
+              <img src=.              "/assets/images/mindmaps/allianceRepair.png"    >         
             </li>
             <li class="slide" exercise>
               <button class="menu-button menu" data-menu-button="menu"    >         menu</button>
-              <img src=.              "./img/mindmaps/selfDisclosure.png"    >         
+              <img src=.              "/assets/images/mindmaps/selfDisclosure.png"    >         
             </li>
             <li class="slide" theory>
               <button class="menu-button menu" data-menu-button="menu"    >         menu</button>
-              <img src=.              "./img/mindmaps/emotionTheory.png"    >         
+              <img src=.              "/assets/images/mindmaps/emotionTheory.png"    >         
             </li>
             <li class="slide" media>
               <button class="menu-button menu" data-menu-button="menu"    >         menu</button>
-              <img src=.              "./img/mindmaps/traumaRetelling.png"    >         
+              <img src=.              "/assets/images/mindmaps/traumaRetelling.png"    >         
             </li>
           </ul>
         </div> */

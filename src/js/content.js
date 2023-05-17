@@ -16,7 +16,7 @@ export function pushContent(index) {
         if (contentData[index][i].includes("http")) {
             content = document.createElement("iframe");
             content.src = contentData[index][i]
-        } else if (contentData[index][i].includes("/img/")) {
+        } else if (contentData[index][i].includes("/assets/images/")) {
             content = document.createElement("img");
             content.src = contentData[index][i]
         } else if (contentData[index][i].includes("img.")) {

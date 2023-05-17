@@ -983,7 +983,7 @@ let atmosphere
 let sign
 let atmosMaterial
 const planetContent = new THREE.Object3D()
-export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture) {
+export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture, cloudsNormal) {
     jaraniusInitialized = true
     
     const jaraniusGeometry = new THREE.SphereGeometry(5, 250, 250);
@@ -1007,6 +1007,8 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     //create cloud layer
     const cloudsMaterial = new THREE.MeshLambertMaterial({
         map: textureLoader2.load(cloudsTexture),
+        normalMap: textureLoader2.load(cloudsNormal),
+        normalScale: new THREE.Vector2(0.5, 0.5), 
         transparent: true,
         side: DoubleSide,
         opacity: 0.8,
@@ -1489,7 +1491,7 @@ document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
     //Controls
-    if (keyCode == 79) { 
+    if (keyCode == 79) { //O
         if (controlMode === 'orbit') {
             controlMode = 'fly';
             orbitControls.enabled = false;
@@ -1535,63 +1537,23 @@ function onDocumentKeyUp(event) {
             targetIntensities.ambient = 0.3;
             lightTransitionStart = clock.getElapsedTime();
           }
-        /* if (keyCode == 49) { 
-            spotlight.intensity = 0
-        }
-        if (keyCode == 50) { 
-            spotlight.intensity = 0.1
-        }
-        if (keyCode == 51) { 
-            spotlight.intensity = 0.25
-        }
-        if (keyCode == 52) { 
-            spotlight.intensity = 0.5
-        }
-        if (keyCode == 53) { 
-            spotlight.intensity = 1
-        }
-
-        if (keyCode == 54) { 
-            ambient.intensity = 0
-        }
-        if (keyCode == 55) { 
-            ambient.intensity = 0.02
-        }
-        if (keyCode == 56) { 
-            ambient.intensity = 0.05
-        }
-        if (keyCode == 57) { 
-            ambient.intensity = 0.1
-        }
-        if (keyCode == 48) { 
-            ambient.intensity = 0.3
-        } */
 
         //Stats display
         if (keyCode == 71) { //G
             if (guttaStatScreen.style.display == "block") {
-                //fpsContainer.style.display = "none"
                 guttaStatScreen.style.display = "none"
                 scene.remove(guttaHelperCenter)
                 if (developer == true) togglePerceptionCircles(guttaState)
             } else {
-                fpsContainer.style.display = "block"
                 guttaStatScreen.style.display = "block" 
                 scene.add(guttaHelperCenter)
                 if (developer == true) togglePerceptionCircles(guttaState)
             }
         }
-        
-        if (keyCode == 73) { //I
-            for (let i = -180; i < 360; i += 10) {
-                let no = convertLatLngtoCartesian(90, i, 5)
-                console.log("90 ", i)
-                let no2 = convertCartesiantoLatLng(no.x, no.y, no.z)
-                console.log(no2.lat, no2.lng)
-            }
-        }
-        if (keyCode == 219) { //Å use for testing
-            console.log(buttonStates)
+        if (keyCode == 74) { //J
+            if (fpsContainer.style.display == "block") {
+                fpsContainer.style.display = "none"
+            } else fpsContainer.style.display = "block"
         }
 
         //Content display
@@ -1606,7 +1568,7 @@ function onDocumentKeyUp(event) {
                 showContent = true
             }
         }
-        if (keyCode == 72) { //H
+        if (keyCode == 73) { //I
             jaranius.material.wireframe = !jaranius.material.wireframe;
 
             /* for (let lat = 10; lat < 180; lat += 10) {
@@ -1641,6 +1603,16 @@ function onDocumentKeyUp(event) {
                 spiralActivated = false
                 spiralCenter.remove(spiral)
             }
+        }
+
+        const hotKeys = document.querySelector('#hotKeys')
+        if (keyCode == 75) { //K
+            if (hotKeys.style.display == "block") {
+                hotKeys.style.display = "none"
+            } else {
+                hotKeys.style.display = "block" 
+            }
+            console.log(hotKeys, hotKeys.style.display)
         }
 
         //Node management
@@ -2462,7 +2434,7 @@ function render() {
         let scaleFactor = Math.max(1.2, 1 + 0.75 * Math.exp(-0.1 * distance));
         atmosphere.scale.set(scaleFactor, scaleFactor, scaleFactor);
 
-        refreshStats();
+        if (guttaStatScreen.style.display == 'block') refreshStats();
 
         scanPins();
 

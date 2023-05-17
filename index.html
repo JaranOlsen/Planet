@@ -35,8 +35,132 @@
       <button id="enableVRbutton">enable VR</button>
       <div id="fpsCounter"></div>
       <div id="guttaStatScreen"></div>
-      <div id="keys">
-        Click nodes to see content. Wireframe nodes doesn't have content. Press 1 to 5 for spotlight intensity, 6 to 0 for ambient intensity.
+
+      <div id="hotKeys">
+
+        <p>Movement control:</p>
+        <div class="hotkey-line">
+            <span class="hotkey">O</span>
+            <span class="description">Switch between Orbit controls and Fly controls</span>
+        </div>
+
+        <p>Slide control:</p>
+        <div class="hotkey-line">
+            <span class="hotkey">&#8592;</span>
+            <span class="description">Previous slide</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">&#8594;</span>
+            <span class="description">Next slide</span>
+        </div>
+
+        <p>Light control:</p>
+        <div class="hotkey-line">
+            <span class="hotkey">1-5</span>
+            <span class="description">Spotlight intensity</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">6-0</span>
+            <span class="description">Ambient light intensity</span>
+        </div>
+
+        <p>Boids control:</p>
+        <div class="hotkey-line">
+            <span class="hotkey">G</span>
+            <span class="description">Boids stats</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">H</span>
+            <span class="description">Boids parameters control</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">J</span>
+            <span class="description">FPS counter</span>
+        </div>
+
+        <p>Content display:</p>
+        <div class="hotkey-line">
+            <span class="hotkey">C</span>
+            <span class="description">Show/hide planet content</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">I</span>
+            <span class="description">Show/hide planet interior</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">S</span>
+            <span class="description">Show/hide spiral dynamics</span>
+        </div>
+
+        <p>Developer tools:</p>
+        <div class="hotkey-line">
+            <span class="hotkey">Z</span>
+            <span class="description">Clear selection of nodes</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">A</span>
+            <span class="description">Add to selection of nodes</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">F</span>
+            <span class="description">Toggle fast mode</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Q</span>
+            <span class="description">Print nodedata</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">T</span>
+            <span class="description">Create new node</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">X</span>
+            <span class="description">Remove selected node(s)</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">R</span>
+            <span class="description">Create connection(s) to first selected node</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">V</span>
+            <span class="description">Create arrowed connection(s) to first selected node</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">B</span>
+            <span class="description">Create dashed connection(s) to first selected node</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">N</span>
+            <span class="description">Create tunneled connection(s) to first selected node</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">W</span>
+            <span class="description">Redraw connections</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">E</span>
+            <span class="description">Change color (next) of selected node(s)</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">D</span>
+            <span class="description">Change color (previous) of selected node(s)</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">+</span>
+            <span class="description">Increase size of selected node(s)</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">-</span>
+            <span class="description">Decrease size of selected node(s)</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Arrows</span>
+            <span class="description">Move selected node(s)</span>
+        </div>
+      </div>
+
+      <div id="footer">
+        Click nodes to see content. Wireframe nodes doesn't have content. Press K for hotkeys.
         <br><br>&#169;2023 Jaran de los Santos Olsen
       </div>
       <div id="subtitle-container"></div>

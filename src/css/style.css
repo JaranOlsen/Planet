@@ -73,7 +73,7 @@ Links
   outline: 1px solid black;
 }
 
-#keys {
+#footer {
   position: absolute;
   left: 50%;
   bottom: 0%;
@@ -474,6 +474,36 @@ label {
   cursor: pointer;     /* change the cursor to a hand when over us */
   font-size: x-small;
   user-select: none; 
+}
+
+/*  || HOTKEYS */
+#hotKeys {
+  position: absolute;
+  left: 5%;
+  top: 10%;
+  width: max-content;
+  color: white;
+  font-size: small;
+  text-align: left;
+  z-index: 0;
+  display: none;
+  user-select: none; 
+  cursor: pointer;
+}
+#hotKeys .hotkey-line {
+  display: flex;
+}
+#hotKeys .hotkey {
+  width: 40px; /* You can adjust this width as needed */
+  text-align: center;
+}
+#hotKeys .description {
+  text-align: left;
+  margin-left: 10px; /* Space between hotkey and description */
+}
+#hotKeys > p {
+  margin-top:20px;
+  margin-bottom:5px;
 }
 
 /*  || WEBXR (from where?) */
