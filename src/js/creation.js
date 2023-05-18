@@ -3,20 +3,20 @@ import { createJaranius, createContexts, initializeLoadingManager, createMindmap
 import { createGutta } from './gutta.js';
 
 //  IMPORT TEXTURES
-    // ||Diffuse - 
-import diffuseTexture16k from "/assets/textures/diffuse16kTest2.jpg"
+    // ||Diffuse - All maps can now easily be adjusted/regenerated in Jaranius 16K production developement.psb (use repair layers and clone stamp)
+import diffuseTexture16k from "/assets/textures/diffuse16k2.jpg"
 import diffuseTexture8k from "/assets/textures/diffuse8kNew.webp"
 import diffuseTexture4k from "/assets/textures/diffuse4k.webp"
 import diffuseTexture2k from "/assets/textures/diffuse2k.webp"
 
     // ||Normals - White = high altitude - see https://youtu.be/YJqWHsllczY?t=43 on how to best generate
-import normalTexture16k from "/assets/textures/normal16kTest.jpg"
+import normalTexture16k from "/assets/textures/normal16k.jpg"
 import normalTexture8k from "/assets/textures/normal8k.webp"
 import normalTexture2k from "/assets/textures/normal2k.webp"
 import normalTexture1k from "/assets/textures/normal1k.webp"
 
     // ||Roughness - Green (white) = high roughness (green channel - see documentation). 
-import roughnessTexture16k from "/assets/textures/roughness16kTest.jpg"
+import roughnessTexture16k from "/assets/textures/roughness16k.jpg"
 import roughnessTexture8k from "/assets/textures/roughness8k.webp"
 import roughnessTexture2k from "/assets/textures/roughness2k.webp"
 import roughnessTexture1k from "/assets/textures/roughness1k.webp"
@@ -48,7 +48,7 @@ export function creation(version, postLoadingManager, guttaState, scene, guttaHe
         createJaranius(diffuseTexture16k, normalTexture16k, roughnessTexture16k, cloudsTexture4k, cloudsNormal4k)
         createContexts(version)
         createMindmap()
-        createGutta(400, 25, version, guttaState, scene, guttaHelperCenter)
+        createGutta(300, 20, version, guttaState, scene, guttaHelperCenter)
     } 
     if (version == 4){ //VR VERSION
         initializeLoadingManager(postLoadingManager)

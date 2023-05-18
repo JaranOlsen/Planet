@@ -1,4 +1,10 @@
 
+IN PROGRESS
+fix cliffs in normal map (south pole, some islands)
+add noise to ocean roughness map
+add rivers and lakes in roughness and normal map.
+    And fjords! Looks really cool on Direct experience island
+
 INITIATIVES
     apply for a pimp
 
