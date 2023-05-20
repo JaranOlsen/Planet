@@ -58,3 +58,8 @@ export function constrainLatLng(lat, lng) {
         lng: (lng < 0) ? 360 + lng : (lng > 360) ? lng - 360 : lng,
     };
 }
+
+export function easeInOutQuad(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+  

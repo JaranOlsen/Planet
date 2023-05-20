@@ -1,16 +1,23 @@
+//  IMPORT DEPENDENCIES
+import * as THREE from 'three';
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+
 //  IMPORT SCRIPTS
 import { createJaranius, createContexts, initializeLoadingManager, createMindmap } from "./main.js"  //createGutta
 import { createGutta } from './gutta.js';
 
+//  IMPORT MATERIALS
+import { textMaterial } from './data/materials.js';
+
 //  IMPORT TEXTURES
     // ||Diffuse - All maps can now easily be adjusted/regenerated in Jaranius 16K production developement.psb (use repair layers and clone stamp)
-import diffuseTexture16k from "/assets/textures/diffuse16k2.jpg"
+import diffuseTexture16k from "/assets/textures/diffuse16k.jpg"
 import diffuseTexture8k from "/assets/textures/diffuse8kNew.webp"
 import diffuseTexture4k from "/assets/textures/diffuse4k.webp"
 import diffuseTexture2k from "/assets/textures/diffuse2k.webp"
 
     // ||Normals - White = high altitude - see https://youtu.be/YJqWHsllczY?t=43 on how to best generate
-import normalTexture16k from "/assets/textures/normal16k.jpg"
+import normalTexture16k from "/assets/textures/normal16kTest.jpg"
 import normalTexture8k from "/assets/textures/normal8k.webp"
 import normalTexture2k from "/assets/textures/normal2k.webp"
 import normalTexture1k from "/assets/textures/normal1k.webp"
@@ -30,6 +37,7 @@ import cloudsNormal1k from "/assets/textures/clouds1kNormal.webp"
 
 
 export function creation(version, postLoadingManager, guttaState, scene, guttaHelperCenter) {
+    createTitle(scene)
     if (version == 1){ //FULL VERSION
         initializeLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture4k, normalTexture2k, roughnessTexture2k, cloudsTexture4k, cloudsNormal4k)
@@ -57,4 +65,29 @@ export function creation(version, postLoadingManager, guttaState, scene, guttaHe
         createMindmap()
         //createGutta(200, 10, version, guttaState, scene, guttaHelperCenter)
     } 
+}
+
+function createTitle(scene) {
+    const tagFont = "/Planet/assets/fonts/SourceSans3_Regular.json"
+
+        const loader = new FontLoader();
+        loader.load(tagFont, function (font) {
+            const titleGeometry = new THREE.ShapeGeometry(font.generateShapes('     Proxima                    Transcendāra', 1));
+            titleGeometry.computeBoundingBox();
+            titleGeometry.translate(-0.5 * (titleGeometry.boundingBox.max.x - titleGeometry.boundingBox.min.x), (titleGeometry.boundingBox.max.y - titleGeometry.boundingBox.min.y), 0);
+
+            const titleMaterial = new THREE.MeshBasicMaterial({ 
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.5
+            });
+            
+            const title = new THREE.Mesh(titleGeometry, titleMaterial);
+            title.name = 'title';
+            title.position.set(0, -2, 400);
+            title.scale.set(4, 4, 4)
+            const cameraPosition = new THREE.Vector3(0, 300, 500)
+            title.lookAt(cameraPosition)
+            scene.add(title);
+        })
 }

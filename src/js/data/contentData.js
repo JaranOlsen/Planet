@@ -132,6 +132,8 @@ export const contentData = [ //slides ID = line number - 2
     ["Operational definitions: The key concepts and constructs within the theory should be clearly and unambiguously defined, with measurable or observable indicators."],
     ["Predictive accuracy: The theory should have a track record of making accurate predictions about future observations or phenomena, thus demonstrating its practical utility and reliability."],
     ["https://www.youtube-nocookie.com/embed/BCdV6BMMpOo"],
+    ["/assets/images/truth/Slide1.jpeg", ["/assets/images/ontology/Slide154.jpeg", "/assets/images/ontology/Slide155.jpeg"]],
+
 
   ];
 // REMEMBER TO ADD PICTURES TO PUBLIC FOLDER

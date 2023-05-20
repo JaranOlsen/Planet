@@ -14,7 +14,7 @@ import ThreeMeshUI from 'three-mesh-ui'
 
 //  IMPORT SCRIPTS
 import { createImages, createTags, hoveredPins, intersectObjectsArray, createConnections, hoverPins, instantiateNugget } from './mindmap.js'
-import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng } from './mathScripts.js'
+import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng, easeInOutQuad } from './mathScripts.js'
 import { pushContent, pushVRContent } from './content.js'
 import { initializeVersion } from './versions.js'
 import { creation } from './creation.js'
@@ -682,6 +682,8 @@ function initializeIntro() {
         credits.style.display = "none";
         camera.position.z = 15;
         orbitControls.enabled = true
+        const titleMesh = scene.getObjectByName('title')
+        scene.remove(titleMesh)
     };
     
     playButton.addEventListener("click", handlePlayButtonClick);
@@ -960,7 +962,7 @@ const pivot2 = new THREE.Object3D();
 const pivot3 = new THREE.Object3D();
 const pivot4 = new THREE.Object3D();
 
-pivot1.rotation.y = - Math.PI / 2.5;
+pivot1.rotation.y = Math.PI / 2.5;//- Math.PI / 2.5;
 pivot1.rotation.x = 0.15
 pivot2.rotation.y = 2 * Math.PI / 16;
 pivot2.rotation.x = 0.22
@@ -980,13 +982,14 @@ let jaraniusConnections = new THREE.Object3D()
 let spiralDynamicsConnections = new THREE.Object3D()
 let clouds
 let atmosphere
+let atmosphericLight
 let sign
 let atmosMaterial
 const planetContent = new THREE.Object3D()
 export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture, cloudsNormal) {
     jaraniusInitialized = true
     
-    const jaraniusGeometry = new THREE.SphereGeometry(5, 250, 250);
+    const jaraniusGeometry = new THREE.SphereGeometry(5, 50, 50);
     jaraniusGeometry.computeBoundingSphere();
     jaranius = new THREE.Mesh(
         jaraniusGeometry,
@@ -1019,15 +1022,30 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     )
     jaranius.add(clouds)
     
-    //create atmosphericLight
-    const atmosphericLight = new THREE.Mesh(
-        new THREE.SphereGeometry(5.0, 500, 500),
+    //create atmosphericLight  
+    atmosphericLight = new THREE.Mesh(
+        new THREE.SphereGeometry(5.01, 50, 50),
         new THREE.ShaderMaterial({
             vertexShader: atmosphericLightVertexShader,
             fragmentShader: atmosphericLightFragmentShader,
             blending: THREE.AdditiveBlending,
+            uniforms: {
+                baseIntensity: { value: 0.9 },
+                atmosphereStrength: { value: 2.5 },
+                uniformCameraPosition: { value: camera.position },
+                planetPosition: { value: new THREE.Vector3(0, 0, 0) },
+                lightPosition: { value: sunObjectWorldPosition },
+                closeDistanceThreshold: { value: 7 },
+                standardColor: { value: new THREE.Vector3(0.3, 0.6, 1.0) },
+                sunsetColor: { value: new THREE.Vector3(0.8, 0.4, 0.2) },
+                nightColor: { value: new THREE.Vector3(0.0, 0.0, 0.0) },
+                sunsetMinAngleThreshold: { value: 90 },
+                sunsetMaxAngleThreshold: { value: 125 },
+                nightMaxAngleThreshold: { value: 150 },
+            },
         })
-    )
+    );
+    
     atmosphericLight.position.set(0, 0, 0)
     jaranius.add(atmosphericLight);
 
@@ -1038,16 +1056,29 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
             vertexShader: atmosphereVertexShader,
             fragmentShader: atmosphereFragmentShader,
             uniforms: {
-                lightPosition: { value: sunLight.position },
+                baseIntensity: { value: 0.1 },
+                intensityPower: { value: 1.1 },
+                lightPosition: { value: sunObjectWorldPosition },
                 uniformCameraPosition: { value: camera.position },
                 planetPosition: { value: new THREE.Vector3(0, 0, 0) },
+                minDistance: { value: 5.0 },
+                maxDistance: { value: 5000.0 },
+                closeDistanceThreshold: { value: 7 },
+                standardColor: { value: new THREE.Vector3(0.3, 0.6, 1.0) }, // Standard atmosphere color
+                sunsetColor: { value: new THREE.Vector3(1.0, 0.5, 0.0) }, // Sunset color
+                nightColor: { value: new THREE.Vector3(0.0, 0.0, 0.0) }, // Night color
+                sunsetMinAngleThreshold: { value: 90 },
+                sunsetMaxAngleThreshold: { value: 125 },
+                nightMaxAngleThreshold: { value: 150 },
+                
             },
             blending: THREE.AdditiveBlending,
             side: THREE.BackSide,
             transparent: true,
             depthWrite: false,
         })
-    )
+    );
+    
     atmosphere.position.set(0, 0, 0)
     atmosphere.scale.set(1.2, 1.2, 1.2)
     jaranius.add(atmosphere);
@@ -1134,6 +1165,8 @@ pivot4.add(sunRadiance)
 const sunLight = new THREE.PointLight(0xffffff, 1.2, 2000)
 sunLight.position.set(sunRadiance.position.x, sunRadiance.position.y, sunRadiance.position.z - sunRadius * 1.5)
 pivot4.add(sunLight)
+
+let sunObjectWorldPosition = new THREE.Vector3();
 
 const textureFlare0 = textureLoader.load("/Planet/assets/textures/sunflare.webp");
 const textureFlare3 = textureLoader.load("/Planet/assets/textures/lensflare.webp");
@@ -1335,7 +1368,7 @@ const targetIntensities = {
   };
 
 let lightTransitionStart = null;
-let lightTransitionDuration = 0.5;
+let lightTransitionDuration = 5;
 
 const updateLightIntensity = () => {
     if (lightTransitionStart === null) {
@@ -1490,6 +1523,7 @@ export function openVRLink() {
 document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
+
     //Controls
     if (keyCode == 79) { //O
         if (controlMode === 'orbit') {
@@ -1522,13 +1556,13 @@ function onDocumentKeyUp(event) {
 
         //Light control
         if (keyCode >= 49 && keyCode <= 53) {
-            const intensities = [0, 0.1, 0.25, 0.5, 1];
+            const intensities = [0, 0.25, 0.5, 0.75, 1];
             targetIntensities.spotlight = intensities[keyCode - 49];
             lightTransitionStart = clock.getElapsedTime();
           }
         
           if (keyCode >= 54 && keyCode <= 57) {
-            const intensities = [0, 0.02, 0.05, 0.1];
+            const intensities = [0, 0.05, 0.1, 0.2];
             targetIntensities.ambient = intensities[keyCode - 54];
             lightTransitionStart = clock.getElapsedTime();
           }
@@ -2300,7 +2334,11 @@ function render() {
         pivot4.rotation.y += -0.0001;
         clouds.rotation.y += 0.00001;
 
-        if (camera.position.z > -15 && camera.position.z < 15) introStarted = false
+        if (camera.position.z > -15 && camera.position.z < 15 && introStarted == true) {
+            introStarted = false
+            const titleMesh = scene.getObjectByName('title')
+            scene.remove(titleMesh)
+        }
     
         orbitControls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);  //  /1
         orbitControls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;//  /3;
@@ -2315,6 +2353,11 @@ function render() {
         let distance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) - 8;
         let scaleFactor = Math.max(1.2, 1 + 0.75 * Math.exp(-0.1 * distance));
         atmosphere.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+        sunObjectWorldPosition = sunRadiance.getWorldPosition(sunObjectWorldPosition);
+
+        atmosphere.material.uniforms.lightPosition.value.copy(sunObjectWorldPosition);
+        atmosphericLight.material.uniforms.lightPosition.value.copy(sunObjectWorldPosition);
 
         if (guttaStatScreen.style.display == 'block') refreshStats();
 
@@ -2348,8 +2391,10 @@ function render() {
 
     const delta = clock.getDelta();
 
-    if (flyControls.enabled) {
+    if (flyControls.enabled) {  
+        // Update the fly controls
         flyControls.update(delta);
+
         // Check the distance from the camera to the planet center
         const distance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0));
 
@@ -2363,6 +2408,16 @@ function render() {
             // Move the camera to the minimum distance in the same direction
             camera.position.copy(direction.multiplyScalar(minDistance));
         }
+
+        let toSun = new THREE.Vector3().subVectors(sunObjectWorldPosition, middleOfPlanet);
+        let toCamera = new THREE.Vector3().subVectors(camera.position, middleOfPlanet);
+
+        toSun.normalize();
+        toCamera.normalize();
+
+        let angle = Math.acos(toSun.dot(toCamera)) * 180.0 / Math.PI;
+        console.log(angle);
+
     }
 
     if (orbitControls.enabled) {

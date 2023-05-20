@@ -13,6 +13,33 @@ export function pushContent(index) {
         slide.className="slide"
         if (i == 0) slide.dataset.active = true
         let content
+
+        //ALMOST WORKING SLIDES SERIES ARRAY
+        /* if (Array.isArray(contentData[index][i])) {
+            console.log("array")
+            for(let j = 0; j < contentData[index][i].length; j++){
+                if (contentData[index][i][j].includes("http")) {
+                  content = document.createElement("iframe");
+                  content.src = contentData[index][i][j]
+                } else if (contentData[index][i][j].includes("/assets/images/")) {
+                    content = document.createElement("img");
+                    content.src = contentData[index][i][j]
+                } else if (contentData[index][i][j].includes("img.")) {
+                    content = document.createElement("img");
+                    content.src = "https://" + contentData[index][i][j]
+                } else {
+                    content = document.createElement("div")
+                    content.className = "quote"
+                    const p = document.createElement("p")
+                    p.innerHTML = contentData[index][i][j]
+                    let count = Math.round((3 - (p.innerHTML.match(/<br>/g) || []).length / 20) * 10) / 10
+                    let size = String(count + "vh")
+                    p.style.fontSize = size
+                    content.appendChild(p)  
+                }
+            }
+        } else  */
+        
         if (contentData[index][i].includes("http")) {
             content = document.createElement("iframe");
             content.src = contentData[index][i]
