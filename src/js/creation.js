@@ -12,19 +12,22 @@ import { textMaterial } from './data/materials.js';
 //  IMPORT TEXTURES
     // ||Diffuse - All maps can now easily be adjusted/regenerated in Jaranius 16K production developement.psb (use repair layers and clone stamp)
 import diffuseTexture16k from "/assets/textures/diffuse16k.jpg"
-import diffuseTexture8k from "/assets/textures/diffuse8kNew.webp"
+import diffuseTexture8k from "/assets/textures/diffuse8k.webp"
 import diffuseTexture4k from "/assets/textures/diffuse4k.webp"
 import diffuseTexture2k from "/assets/textures/diffuse2k.webp"
+import diffuseTexture1k from "/assets/textures/diffuse1k.webp"
 
     // ||Normals - White = high altitude - see https://youtu.be/YJqWHsllczY?t=43 on how to best generate
-import normalTexture16k from "/assets/textures/normal16kTest.jpg"
+import normalTexture16k from "/assets/textures/normal16k.jpg"
 import normalTexture8k from "/assets/textures/normal8k.webp"
+import normalTexture4k from "/assets/textures/normal4k.webp"
 import normalTexture2k from "/assets/textures/normal2k.webp"
 import normalTexture1k from "/assets/textures/normal1k.webp"
 
     // ||Roughness - Green (white) = high roughness (green channel - see documentation). 
 import roughnessTexture16k from "/assets/textures/roughness16k.jpg"
 import roughnessTexture8k from "/assets/textures/roughness8k.webp"
+import roughnessTexture4k from "/assets/textures/roughness4k.webp"
 import roughnessTexture2k from "/assets/textures/roughness2k.webp"
 import roughnessTexture1k from "/assets/textures/roughness1k.webp"
 
@@ -40,7 +43,7 @@ export function creation(version, postLoadingManager, guttaState, scene, guttaHe
     createTitle(scene)
     if (version == 1){ //FULL VERSION
         initializeLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture4k, normalTexture2k, roughnessTexture2k, cloudsTexture4k, cloudsNormal4k)
+        createJaranius(diffuseTexture8k, normalTexture8k, roughnessTexture8k, cloudsTexture4k, cloudsNormal4k)
         createContexts(version)
         createMindmap()
         createGutta(400, 25, version, guttaState, scene, guttaHelperCenter)

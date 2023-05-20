@@ -999,7 +999,7 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
             roughnessMap: textureLoader2.load(roughnessTexture),  //works well
             normalScale: new THREE.Vector2(3, 3),  //works well
             metalness: 0,  //works well
-            roughness: 0.85,  //works well
+            //roughness: 1,  //0.85 works well
             flatShading: false,
             side: FrontSide,
         })
@@ -1037,7 +1037,7 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
                 lightPosition: { value: sunObjectWorldPosition },
                 closeDistanceThreshold: { value: 7 },
                 standardColor: { value: new THREE.Vector3(0.3, 0.6, 1.0) },
-                sunsetColor: { value: new THREE.Vector3(0.8, 0.4, 0.2) },
+                sunsetColor: { value: new THREE.Vector3(1.0, 0.4, 0.1) }, //(0.8, 0.4, 0.2) },
                 nightColor: { value: new THREE.Vector3(0.0, 0.0, 0.0) },
                 sunsetMinAngleThreshold: { value: 90 },
                 sunsetMaxAngleThreshold: { value: 125 },
@@ -1065,7 +1065,7 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
                 maxDistance: { value: 5000.0 },
                 closeDistanceThreshold: { value: 7 },
                 standardColor: { value: new THREE.Vector3(0.3, 0.6, 1.0) }, // Standard atmosphere color
-                sunsetColor: { value: new THREE.Vector3(1.0, 0.5, 0.0) }, // Sunset color
+                sunsetColor: { value: new THREE.Vector3(1.0, 0.4, 0.1) }, // Sunset color
                 nightColor: { value: new THREE.Vector3(0.0, 0.0, 0.0) }, // Night color
                 sunsetMinAngleThreshold: { value: 90 },
                 sunsetMaxAngleThreshold: { value: 125 },

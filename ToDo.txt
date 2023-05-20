@@ -5,17 +5,6 @@ add noise to ocean roughness map
 add rivers and lakes in roughness and normal map.
     And fjords! Looks really cool on Direct experience island
 
-Normal map improvements
-    - fjords and a couple of bays have to steep slopes
-    - raise center of island
-
-Roughness map improvements
-    - more wobbly reflections, render clouds? (in roughness map? in normal map?)
-
-Diffuse map improvements
-    - visible tile on south head island
-
-
 Consiousness
     three common definitions
         - functional consciousness - responsiveness and agency
