@@ -46,6 +46,7 @@ export function pushContent(index) {
         } else if (contentData[index][i].includes("/assets/images/")) {
             content = document.createElement("img");
             content.src = contentData[index][i]
+            console.log(content.src)
         } else if (contentData[index][i].includes("img.")) {
             content = document.createElement("img");
             content.src = "https://" + contentData[index][i]
