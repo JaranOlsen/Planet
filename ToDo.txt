@@ -73,6 +73,8 @@ MAKE USABLE
 
 SHORT-TERM DEVELOPMENT
 
+Flux lines from north to south pole
+
 Add dimension to slide carousel
     - up and down to access subslides/slides in the series
     - array in the contentfile. if array then 2.1

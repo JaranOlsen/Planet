@@ -75,7 +75,8 @@ function createTitle(scene) {
 
         const loader = new FontLoader();
         loader.load(tagFont, function (font) {
-            const titleGeometry = new THREE.ShapeGeometry(font.generateShapes('     Proxima                    Transcendāra', 1));
+            //const titleGeometry = new THREE.ShapeGeometry(font.generateShapes('     Proxima                    Transcendāra', 1));
+            const titleGeometry = new THREE.ShapeGeometry(font.generateShapes('Proxima Transcendāra', 1));
             titleGeometry.computeBoundingBox();
             titleGeometry.translate(-0.5 * (titleGeometry.boundingBox.max.x - titleGeometry.boundingBox.min.x), (titleGeometry.boundingBox.max.y - titleGeometry.boundingBox.min.y), 0);
 
@@ -87,10 +88,12 @@ function createTitle(scene) {
             
             const title = new THREE.Mesh(titleGeometry, titleMaterial);
             title.name = 'title';
-            title.position.set(0, -2, 400);
+            //title.position.set(0, -2, 400);
+            title.position.set(0, 20, 400);
             title.scale.set(4, 4, 4)
-            const cameraPosition = new THREE.Vector3(0, 300, 500)
-            title.lookAt(cameraPosition)
+            //const lookAtPoint = new THREE.Vector3(0, 300, 500)
+            const lookAtPoint = new THREE.Vector3(0, 0, 500)
+            title.lookAt(lookAtPoint)
             scene.add(title);
         })
 }
