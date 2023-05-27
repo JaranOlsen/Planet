@@ -19,13 +19,13 @@ export async function pushContent(slideshowStatus) {
   let cssFileName
   let jsFileName
   /* if (subSlide == undefined) { */
-    slideFileName = `/src/slides/${slideshow}/${slide}.html`;
-    /* if (String(slide).includes('c')) cssFileName = `/src/slides/${slideshow}/${slide}.css`;
-    if (String(slide).includes('j')) jsFileName = `/src/slides/${slideshow}/${slide}.js`; */
+    slideFileName = `/Planet/assets/slides/${slideshow}/${slide}.html`;
+    /* if (String(slide).includes('c')) cssFileName = `/Planet/assets/slides/${slideshow}/${slide}.css`;
+    if (String(slide).includes('j')) jsFileName = `/Planet/assets/slides/${slideshow}/${slide}.js`; */
   /* } else {
-    slideFileName = `/src/slides/${slideshow}/${slide}-${subSlide}.html`;
-    cssFileName = `/src/slides/${slideshow}/${slide}-${subSlide}.css`;
-    jsFileName = `/src/slides/${slideshow}/${slide}-${subSlide}.js`;
+    slideFileName = `/Planet/assets/slides/${slideshow}/${slide}-${subSlide}.html`;
+    cssFileName = `/Planet/assets/slides/${slideshow}/${slide}-${subSlide}.css`;
+    jsFileName = `/Planet/assets/slides/${slideshow}/${slide}-${subSlide}.js`;
   } */
 
   console.log(slideFileName)
@@ -38,10 +38,10 @@ export async function pushContent(slideshowStatus) {
 
   const cssLink = document.createElement('link');
   cssLink.rel = 'stylesheet';
-  cssLink.href = '/src/css/slides.css';
+  cssLink.href = '/Planet/assets/slides/slides.css';
   content.appendChild(cssLink);
   if (String(slide).includes('c')) {
-    cssFileName = `/src/slides/${slideshow}/${slide}.css`;
+    cssFileName = `/Planet/assets/slides/${slideshow}/${slide}.css`;
     const customCssLink = document.createElement('link');
     customCssLink.rel = 'stylesheet';
     customCssLink.href = cssFileName;
@@ -49,10 +49,10 @@ export async function pushContent(slideshowStatus) {
   }
 
   const script = document.createElement('script');
-  script.src = '/src/js/slides.js';
+  script.src = '/Planet/assets/slides/slides.js';
   content.appendChild(script);
   if (String(slide).includes('j')) {
-    jsFileName = `/src/slides/${slideshow}/${slide}.js`;
+    jsFileName = `/Planet/assets/slides/${slideshow}/${slide}.js`;
     const customScript = document.createElement('script');
     customScript.src = jsFileName;
     content.appendChild(customScript);
