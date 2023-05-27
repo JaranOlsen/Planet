@@ -51,19 +51,16 @@ Links
   font-size: 2rem;
   line-height: 4rem;
 }
-/* Media query for medium screens (tablets) */
 @media (max-width: 768px) {
   .version-option {
     font-size: 1.5rem;
   }
 }
-/* Media query for small screens (mobile devices) */
 @media (max-width: 480px) {
   .version-option {
     font-size: 1.25rem;
   }
 }
-
 .version-option:hover,
 .version-option:focus{
   color: white;
@@ -72,7 +69,6 @@ Links
 .version-option:focus{
   outline: 1px solid black;
 }
-
 #footer {
   position: absolute;
   left: 50%;
@@ -88,27 +84,19 @@ Links
   transform: translateX(-50%);
   text-align: center;
 }
-
-/* unvisited link */
 a:link {
   color: white;
   text-decoration: none;
 }
-
-/* visited link */
 a:visited {
   color: white;
   text-decoration: none;
 }
-
-/* mouse over link */
 a:hover {
   color: lightblue;
   text-decoration: none;
   display: block;
 }
-
-/* selected link */
 a:active {
   color: lightblue;
   text-decoration: none;
@@ -215,12 +203,11 @@ a:active {
 }
 
 /*  || SLIDE SCREENS */
-.carousel {
+/* .carousel {
   position: absolute;
   top: 5vh;
   left: 5vw;
   z-index: 1;
-  /* position: relative;  */
   width: 90vw;
   height: 90vh;
   display: none;
@@ -322,12 +309,47 @@ a:active {
   right: -2.5rem; 
   font-size: 2rem;
 }
+.carousel-button.up {
+  left: 50%;
+  top: 5%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+}
+.carousel-button.down {
+  right: 50%; 
+  top: 95%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+}
 .carousel-button.exit {
   right: 0.1rem;
   top: 0.1rem;
   font-size: 1rem;
+} */
+
+/*  || SLIDE SCREENS */
+.slides {
+  position: absolute;
+  top: 5vh;
+  left: 5vw;
+  z-index: 1;
+  width: 90vw;
+  height: 90vh;
+  display: none;
+  background-color: rgba(0, 0, 255, 0.3);
 }
-.menu-button {
+#slide {
+  position: absolute;
+  transition: 200ms opacity ease-in-out;
+  transition-delay: 200ms;
+  color: white;
+  background-color: rgba(0, 0, 255, 0);
+  top: 1.5%;
+  left: 1.5%;
+  width:97%;
+  height: 97%;
+}
+.carousel-button {
   position: absolute;
   z-index: 3;
   border: none;
@@ -337,70 +359,41 @@ a:active {
   padding: 0 .5rem;
   background-color: rgba(0, 0, 0, 0.4)
 }
-.menu-button:hover,
-.menu-button:focus{
+.carousel-button:hover,
+.carousel-button:focus{
   color: white;
   background-color: rgba(0, 0, 0, 0.6);
 }
-.menu-button:focus{
+.carousel-button:focus{
   outline: 1px solid black;
 }
-.menu-button.menu {
-  left: 0.5%;
-  top: 1%;
-  font-size: 1rem;
+.carousel-button.left {
+  left: -2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
 }
-.menu-button.definition {
-  left: 33%;
-  top: 33%;
-  font-size: 5rem;
+.carousel-button.right {
+  top: 50%;
+  transform: translateY(-50%);
+  right: -2.5rem; 
+  font-size: 2rem;
 }
-.menu-button.exercise {
-  left: 66%;
-  top: 33%;
-  font-size: 5rem;
+.carousel-button.up {
+  left: 50%;
+  top: 5%;
+  transform: translateY(-50%);
+  font-size: 2rem;
 }
-.menu-button.theory {
-  left: 33%;
-  top: 66%;
-  font-size: 5rem;
+.carousel-button.down {
+  right: 50%; 
+  top: 95%;
+  transform: translateY(-50%);
+  font-size: 2rem;
 }
-.menu-button.media {
-  left: 66%;
-  top: 66%;
-  font-size: 5rem;
-}
-.nav-button {
-  position: absolute;
-  z-index: 3;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  border-radius: .25rem;
-  padding: 0 .5rem;
-  background-color: rgba(0, 0, 0, 0.4)
-}
-.nav-button:hover,
-.nav-button:focus{
-  color: white;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-.nav-button:focus{
-  outline: 1px solid black;
-}
-.nav-button.one {
-  font-size: 1rem;
-}
-.nav-button.two {
-  font-size: 1rem;
-}
-.nav-button.three {
-  font-size: 1rem;
-}
-.nav-button.four {
-  font-size: 1rem;
-}
-.nav-button.five {
+.carousel-button.exit {
+  right: 0.1rem;
+  top: 0.1rem;
   font-size: 1rem;
 }
 
@@ -419,13 +412,11 @@ a:active {
   align-items: center;
   z-index: 500;
 }
-
 #progress-bar {
   width: 30%;
   margin-top: 0.5%;
   height: 2%;
 }
-
 label {
   color: white;
   font-size: 2rem;

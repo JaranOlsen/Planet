@@ -36,7 +36,7 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
             txtGeo.translate(-0.5 * (txtGeo.boundingBox.max.x - txtGeo.boundingBox.min.x), (txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y), 0);
 
             const tag = new THREE.Mesh(txtGeo, textMaterial);
-            const latLng = convertLatLngtoCartesian(lat, lng, radius + 0.06);
+            const latLng = convertLatLngtoCartesian(lat, lng, radius + 0.061);
             const rotationVector = new THREE.Vector3(latLng.x, latLng.y, latLng.z);
             tag.lookAt(rotationVector);
             tag.position.copy(rotationVector);
@@ -82,13 +82,13 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
             boxGeo.translate(-0.5 * (boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x), 0, 0);
 
             const box = new THREE.Mesh(boxGeo, boxMaterials[color]);
-            const boxLatLng = convertLatLngtoCartesian(lat, lng, radius + 0.05);
+            const boxLatLng = convertLatLngtoCartesian(lat, lng, radius + 0.06);
             const boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
             box.lookAt(boxRotationVector);
             box.position.copy(boxRotationVector);
 
-            box.renderOrder = -8;
-            tag.renderOrder = -7;
+            box.renderOrder = 10;
+            tag.renderOrder = 11;
 
             box.source = dataSource;
             box.context = context;
@@ -216,7 +216,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments * segmentModifier, false);
 
         const curve = new THREE.Mesh(geometry, material);
-        curve.renderOrder = -10;
+        curve.renderOrder = 9;
         destination.add(curve);
     }
 
@@ -239,7 +239,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         const geometry = new THREE.TubeGeometry(path, 2, curveThickness * weight, curveRadiusSegments * segmentModifier, false);
 
         const curve = new THREE.Mesh(geometry, material);
-        curve.renderOrder = -10;
+        curve.renderOrder = 9;
         destination.add(curve);
     }
 }

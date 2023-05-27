@@ -15,10 +15,11 @@ import ThreeMeshUI from 'three-mesh-ui'
 //  IMPORT SCRIPTS
 import { createImages, createTags, hoveredPins, intersectObjectsArray, createConnections, hoverPins, instantiateNugget } from './mindmap.js'
 import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng, easeInOutQuad } from './mathScripts.js'
-import { pushContent, pushVRContent } from './content.js'
+import { pushContent, pushVRContent, handleCarouselButton } from './content.js'
 import { initializeVersion } from './versions.js'
 import { creation } from './creation.js'
 import { updateGutta, togglePerceptionCircles } from './gutta.js'
+import { createField } from './podcast.js'
 
 //IMPORT DATA
 import { planetTagData, planetConnections, planetArrowedConnections, planetDashedConnections, planetTunnelConnections } from './data/planetData.js'
@@ -106,6 +107,7 @@ flyControls.rollSpeed = Math.PI / 24;
 flyControls.autoForward = false;
 flyControls.dragToLook = false;
 flyControls.enabled = false;
+flyControls.minDistance = 5.15;
 
 let controlMode = 'orbit';
 
@@ -132,6 +134,14 @@ let selectedNodes = []
 let nuggets = []
 let showContent = true;
 let fastMove = false;
+
+let slideshowStatus = {
+    activeSlideshow: undefined,
+    activeSlideshowLength: undefined,
+    activeSlide: undefined,
+    activeSlideLength: undefined,
+    activeSubSlide: undefined
+}
 
 let signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z)
 
@@ -702,7 +712,7 @@ function initializeIntro() {
 //SLIDE CAROUSEL
 let activeCarousel
 const buttons = document.querySelectorAll("[data-carousel-button]");
-
+/* 
 function handleCarouselButton(button) {
   const carousel = document.querySelector('.carousel');
 
@@ -725,13 +735,10 @@ function handleCarouselButton(button) {
     delete activeSlide.dataset.active;
   }
 }
-
-const menuButtons = document.querySelectorAll("[data-menu-button]");
-const navButtons = document.querySelectorAll("[data-nav-button]");
-
+ */
 buttons.forEach(button => {
     const handleClick = () => {
-      handleCarouselButton(button);
+      slideshowStatus = handleCarouselButton(button, slideshowStatus);
     };
   
     button.addEventListener("click", handleClick);
@@ -741,133 +748,7 @@ buttons.forEach(button => {
     });
 });
   
-    const handleMenuButtonClick = (button) => {
-        const carousel = document.querySelector('.carousel')
-        if (button.dataset.menuButton === "menu") {
-            const slides = button
-                .closest("[data-carousel]")
-                .querySelector("[data-slides]")
-            const activeSlide = slides.querySelector("[data-active]")
-            const targetSlide = slides.querySelector("[menu]")
-            let newIndex = [...slides.children].indexOf(targetSlide)
-            slides.children[newIndex].dataset.active = true
-            delete activeSlide.dataset.active
-        }
-        if (button.dataset.menuButton === "definition") {
-            const slides = button
-                .closest("[data-carousel]")
-                .querySelector("[data-slides]")
-            const activeSlide = slides.querySelector("[data-active]")
-            const targetSlide = slides.querySelector("[definition]")
-            let newIndex = [...slides.children].indexOf(targetSlide)
-            slides.children[newIndex].dataset.active = true
-            delete activeSlide.dataset.active
-        }
-        if (button.dataset.menuButton === "exercise") {
-            const slides = button
-                .closest("[data-carousel]")
-                .querySelector("[data-slides]")
-            const activeSlide = slides.querySelector("[data-active]")
-            const targetSlide = slides.querySelector("[exercise]")
-            let newIndex = [...slides.children].indexOf(targetSlide)
-            slides.children[newIndex].dataset.active = true
-            delete activeSlide.dataset.active
-        }
-        if (button.dataset.menuButton === "theory") {
-            const slides = button
-                .closest("[data-carousel]")
-                .querySelector("[data-slides]")
-            const activeSlide = slides.querySelector("[data-active]")
-            const targetSlide = slides.querySelector("[theory]")
-            let newIndex = [...slides.children].indexOf(targetSlide)
-            slides.children[newIndex].dataset.active = true
-            delete activeSlide.dataset.active
-        }
-        if (button.dataset.menuButton === "media") {
-            const slides = button
-                .closest("[data-carousel]")
-                .querySelector("[data-slides]")
-            const activeSlide = slides.querySelector("[data-active]")
-            const targetSlide = slides.querySelector("[media]")
-            let newIndex = [...slides.children].indexOf(targetSlide)
-            slides.children[newIndex].dataset.active = true
-            delete activeSlide.dataset.active
-        }
-    }
-    
-    menuButtons.forEach(button => {
-        button.addEventListener("click", () => {
-        handleMenuButtonClick(button);
-        });
-        button.addEventListener("touchend", (event) => {
-        event.preventDefault(); // Prevent mouse event from firing after touch event
-        handleMenuButtonClick(button);
-        });
-    });
-      
-    const handleNavButtonClick = (button) => {
-        const carousel = document.querySelector('.carousel')
-        if (button.dataset.navButton === "one") {
-            const slides = button
-                .closest("[data-carousel]")
-                .querySelector("[data-slides]")
-            const activeSlide = slides.querySelector("[data-active]")
-            const targetSlide = slides.querySelector("[one]")
-            let newIndex = [...slides.children].indexOf(targetSlide)
-            slides.children[newIndex].dataset.active = true
-            delete activeSlide.dataset.active
-        }
-        if (button.dataset.navButton === "two") {
-            const slides = button
-                .closest("[data-carousel]")
-                .querySelector("[data-slides]")
-            const activeSlide = slides.querySelector("[data-active]")
-            const targetSlide = slides.querySelector("[two]")
-            let newIndex = [...slides.children].indexOf(targetSlide)
-            slides.children[newIndex].dataset.active = true
-            delete activeSlide.dataset.active
-        }
-        if (button.dataset.navButton === "three") {
-            const slides = button
-                .closest("[data-carousel]")
-                .querySelector("[data-slides]")
-            const activeSlide = slides.querySelector("[data-active]")
-            const targetSlide = slides.querySelector("[three]")
-            let newIndex = [...slides.children].indexOf(targetSlide)
-            slides.children[newIndex].dataset.active = true
-            delete activeSlide.dataset.active
-        }
-        if (button.dataset.navButton === "four") {
-            const slides = button
-                .closest("[data-carousel]")
-                .querySelector("[data-slides]")
-            const activeSlide = slides.querySelector("[data-active]")
-            const targetSlide = slides.querySelector("[four]")
-            let newIndex = [...slides.children].indexOf(targetSlide)
-            slides.children[newIndex].dataset.active = true
-            delete activeSlide.dataset.active
-        }
-        if (button.dataset.navButton === "five") {
-            const slides = button
-                .closest("[data-carousel]")
-                .querySelector("[data-slides]")
-            const activeSlide = slides.querySelector("[data-active]")
-            const targetSlide = slides.querySelector("[five]")
-            let newIndex = [...slides.children].indexOf(targetSlide)
-            slides.children[newIndex].dataset.active = true
-            delete activeSlide.dataset.active
-        }
-    }
 
-    navButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            handleNavButtonClick(button);
-        });
-        button.addEventListener("touchend", (event) => {
-            event.preventDefault(); // Prevent mouse event from firing after touch event
-            handleNavButtonClick(button);
-        });
-    });
 
 //CREATE STARS
 const starGeometry = new THREE.BufferGeometry()
@@ -988,8 +869,9 @@ let atmosMaterial
 const planetContent = new THREE.Object3D()
 export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture, cloudsNormal) {
     jaraniusInitialized = true
+    const jaraniusSegments = 200
     
-    const jaraniusGeometry = new THREE.SphereGeometry(5, 50, 50);
+    const jaraniusGeometry = new THREE.SphereGeometry(5, jaraniusSegments, jaraniusSegments);
     jaraniusGeometry.computeBoundingSphere();
     jaranius = new THREE.Mesh(
         jaraniusGeometry,
@@ -1015,16 +897,17 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
         transparent: true,
         side: DoubleSide,
         opacity: 0.8,
+        depthWrite: false,
     })
     clouds = new THREE.Mesh(
-        new THREE.SphereGeometry(5.04, 50, 50),
+        new THREE.SphereGeometry(5.04, jaraniusSegments, jaraniusSegments),
         cloudsMaterial
     )
     jaranius.add(clouds)
     
     //create atmosphericLight  
     atmosphericLight = new THREE.Mesh(
-        new THREE.SphereGeometry(5.01, 50, 50),
+        new THREE.SphereGeometry(5.01, jaraniusSegments, jaraniusSegments),
         new THREE.ShaderMaterial({
             vertexShader: atmosphericLightVertexShader,
             fragmentShader: atmosphericLightFragmentShader,
@@ -1039,9 +922,9 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
                 standardColor: { value: new THREE.Vector3(0.3, 0.6, 1.0) },
                 sunsetColor: { value: new THREE.Vector3(1.0, 0.4, 0.1) }, //(0.8, 0.4, 0.2) },
                 nightColor: { value: new THREE.Vector3(0.0, 0.0, 0.0) },
-                sunsetMinAngleThreshold: { value: 90 },
-                sunsetMaxAngleThreshold: { value: 125 },
-                nightMaxAngleThreshold: { value: 150 },
+                sunsetMinAngleThreshold: { value: 75 },
+                sunsetMaxAngleThreshold: { value: 102 },
+                nightMaxAngleThreshold: { value: 130 },
             },
         })
     );
@@ -1051,7 +934,7 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
 
     //create atmosphere
     atmosphere = new THREE.Mesh(
-        new THREE.SphereGeometry(5.3, 50, 50),
+        new THREE.SphereGeometry(5.3, 100, 100),
         new THREE.ShaderMaterial({
             vertexShader: atmosphereVertexShader,
             fragmentShader: atmosphereFragmentShader,
@@ -1067,10 +950,9 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
                 standardColor: { value: new THREE.Vector3(0.3, 0.6, 1.0) }, // Standard atmosphere color
                 sunsetColor: { value: new THREE.Vector3(1.0, 0.4, 0.1) }, // Sunset color
                 nightColor: { value: new THREE.Vector3(0.0, 0.0, 0.0) }, // Night color
-                sunsetMinAngleThreshold: { value: 90 },
-                sunsetMaxAngleThreshold: { value: 125 },
-                nightMaxAngleThreshold: { value: 150 },
-                
+                sunsetMinAngleThreshold: { value: 75 },
+                sunsetMaxAngleThreshold: { value: 102 },
+                nightMaxAngleThreshold: { value: 130 },
             },
             blending: THREE.AdditiveBlending,
             side: THREE.BackSide,
@@ -1151,9 +1033,22 @@ export function createMindmap() {
     createConnections(spiralTagData, spiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false, false)
 }
 
+//PODCAST FIELDS TEST
+createField('/src/models/field.glb', new THREE.Vector3(1.0, 0, 0), scene)
+createField('/src/models/field2.glb', new THREE.Vector3(0, 1.0, 0), scene)
+createField('/src/models/field3.glb', new THREE.Vector3(0, 0, 1.0), scene)
+createField('/src/models/field4.glb', new THREE.Vector3(0, 1.0, 1.0), scene)
+// How to make fields in Blender
+// 1. Add Bezier curve. Edit mode. Use draw tool, make sure surface is selected. Draw on planet. Delete original bezier vertices
+// 2. Object mode. Object - convert to - Mesh
+// 3. Edit mode. Select all vertices. Press F to create face. Select face, right click face, Triangulate faces.
+// 4. Select a face. Go to transform orientations and select Normal. press Shift + NumPad 7. This will align the view to the normal of the selected face. Make a new transform orientation.
+// 5. Object mode. Choose the newly made transform orientation and move the objects the desired distance out from the planet
+// 6. Export object.
+
 //CREATE SUN
 const sunRadius = 5
-const sunRadianceGeo = new THREE.SphereGeometry(sunRadius, 50, 50)
+const sunRadianceGeo = new THREE.SphereGeometry(sunRadius, 25, 25)
 
 const sunMat = new THREE.MeshBasicMaterial({
     map: textureLoader.load(sunTexture)
@@ -1199,7 +1094,7 @@ let moons = [moon1,moon2,moon3];
 
 for (let i = 0; i < moons.length; i++) {
     const mesh = new THREE.Mesh(
-        new THREE.SphereGeometry(moons[i].radius, 50, 50),
+        new THREE.SphereGeometry(moons[i].radius, 25, 25),
         new THREE.MeshStandardMaterial({
             map: textureLoader.load(moons[i].texture),
             metalness: 0,
@@ -1536,15 +1431,21 @@ function onDocumentKeyUp(event) {
             flyControls.enabled = false;
           }
     }
+    if (keyCode == 188) { //,
+        if (controlMode === 'fly') {
+            flyControls.dragToLook = !flyControls.dragToLook
+            console.log(flyControls.dragToLook)
+          }
+    }
     if (focusElement !== "tagInput" && !flyControls.enabled) {
         //Slide control
         if (activeCarousel !== undefined && (keyCode === 33 || keyCode === 37)) { // left arrow or button on USB remote
-            const prevButton = document.querySelector("[data-carousel-button='prev']");
-            handleCarouselButton(prevButton);
+            const leftButton = document.querySelector("[data-carousel-button='left']");
+            handleCarouselButton(leftButton);
         }
         if (activeCarousel !== undefined && (keyCode === 34 || keyCode === 39)) { // right arrow or button on USB remote
-            const nextButton = document.querySelector("[data-carousel-button='next']");
-            handleCarouselButton(nextButton);
+            const rightButton = document.querySelector("[data-carousel-button='right']");
+            handleCarouselButton(rightButton);
         }
         if (activeCarousel !== undefined && keyCode == 116) { //button on USB remote
             console.log("play")
@@ -2220,10 +2121,28 @@ function onPointerClick(event) {
         if (contexts !== 2) selectedTag = contexts[selectedContext].tags[selectedNode]
 
         if (camera.position.distanceTo(selectedPin.position) < 4 && contexts[selectedContext].tagData[selectedNode].slides !== undefined) {
-            const selectedCarousel = contexts[selectedContext].tagData[selectedNode].slides
+            slideshowStatus.activeSlideshow = contexts[selectedContext].tagData[selectedNode].slides
+            slideshowStatus.activeSlideshowLength = contentData[slideshowStatus.activeSlideshow].length
+            if (Array.isArray(contentData[slideshowStatus.activeSlideshow][0])) {
+                slideshowStatus.activeSlide = 0
+                slideshowStatus.activeSlideLength = contentData[slideshowStatus.activeSlideshow][0].length
+                slideshowStatus.activeSubSlide = 0
+            } else {
+                slideshowStatus.activeSlide = 0
+                slideshowStatus.activeSlideLength = undefined
+                slideshowStatus.activeSubSlide = undefined
+
+            }
+
+            pushContent(slideshowStatus)
+            console.log(slideshowStatus)
+            const slideShowScreen = document.querySelector(`.slides`)
+            slideShowScreen.style.display = "block"
+
+            /* const selectedCarousel = contexts[selectedContext].tagData[selectedNode].slides
             pushContent(selectedCarousel)
             activeCarousel = document.querySelector(`.carousel.s1`)
-            activeCarousel.style.display = "block"
+            activeCarousel.style.display = "block" */
         }
     }
 }
@@ -2398,15 +2317,12 @@ function render() {
         // Check the distance from the camera to the planet center
         const distance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0));
 
-        // Set a minimum distance to avoid the camera going into the planet
-        const minDistance = 5.4;
-
-        if (distance < minDistance) {
+        if (distance < flyControls.minDistance) {
             // Calculate the vector pointing from the planet center to the camera
             const direction = camera.position.clone().sub(new THREE.Vector3(0, 0, 0)).normalize();
 
             // Move the camera to the minimum distance in the same direction
-            camera.position.copy(direction.multiplyScalar(minDistance));
+            camera.position.copy(direction.multiplyScalar(flyControls.minDistance));
         }
 
         let toSun = new THREE.Vector3().subVectors(sunObjectWorldPosition, middleOfPlanet);

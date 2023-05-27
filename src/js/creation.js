@@ -32,6 +32,8 @@ import roughnessTexture2k from "/assets/textures/roughness2k.webp"
 import roughnessTexture1k from "/assets/textures/roughness1k.webp"
 
     // ||Clouds
+import cloudsTexture8k from "/assets/textures/clouds8k.webp"
+import cloudsNormal8k from "/assets/textures/clouds8kNormal.webp"
 import cloudsTexture4k from "/assets/textures/clouds4k.webp"
 import cloudsNormal4k from "/assets/textures/clouds4kNormal.webp"
 import cloudsTexture1k from "/assets/textures/clouds1k.webp"
@@ -56,7 +58,7 @@ export function creation(version, postLoadingManager, guttaState, scene, guttaHe
     } 
     if (version == 3){ //DEVELOPER VERSION
         initializeLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture16k, normalTexture16k, roughnessTexture16k, cloudsTexture4k, cloudsNormal4k)
+        createJaranius(diffuseTexture16k, normalTexture16k, roughnessTexture16k, cloudsTexture8k, cloudsNormal8k)
         createContexts(version)
         createMindmap()
         createGutta(300, 20, version, guttaState, scene, guttaHelperCenter)
