@@ -18,22 +18,15 @@ export async function pushContent(slideshowStatus) {
   let slideFileName
   let cssFileName
   let jsFileName
-  /* if (subSlide == undefined) { */
-    slideFileName = `/Planet/assets/slides/${slideshow}/${slide}.html`;
-    /* if (String(slide).includes('c')) cssFileName = `/Planet/assets/slides/${slideshow}/${slide}.css`;
-    if (String(slide).includes('j')) jsFileName = `/Planet/assets/slides/${slideshow}/${slide}.js`; */
-  /* } else {
-    slideFileName = `/Planet/assets/slides/${slideshow}/${slide}-${subSlide}.html`;
-    cssFileName = `/Planet/assets/slides/${slideshow}/${slide}-${subSlide}.css`;
-    jsFileName = `/Planet/assets/slides/${slideshow}/${slide}-${subSlide}.js`;
-  } */
 
+  slideFileName = `/Planet/assets/slides/${slideshow}/${slide}.html`;
   console.log(slideFileName)
 
   const slideFileResponse = await fetch(slideFileName);
   const slideHtml = await slideFileResponse.text();
 
   let content = document.createElement("div");
+  content.id = 'slide';
   content.innerHTML = slideHtml;
 
   const cssLink = document.createElement('link');
@@ -58,7 +51,7 @@ export async function pushContent(slideshowStatus) {
     content.appendChild(customScript);
   }
 
-  const destination = document.getElementById("slide");
+  const destination = document.getElementById("slideContainer");
   destination.innerHTML = "";
   destination.appendChild(content);
 }

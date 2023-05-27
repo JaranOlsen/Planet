@@ -328,7 +328,7 @@ a:active {
 } */
 
 /*  || SLIDE SCREENS */
-.slides {
+/* .slides {
   position: absolute;
   top: 5vh;
   left: 5vw;
@@ -395,7 +395,7 @@ a:active {
   right: 0.1rem;
   top: 0.1rem;
   font-size: 1rem;
-}
+} */
 
 /*  || PROGRESS BAR */
 .progress-bar-container {
