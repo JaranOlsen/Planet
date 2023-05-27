@@ -7,8 +7,10 @@
     <title>Planet</title>
 
     
-    <script type="module" crossorigin src="/Planet/assets/index-1768dd41.js"></script>
-    <link rel="stylesheet" href="/Planet/assets/index-dc5f6615.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="module" crossorigin src="/Planet/assets/index-61b08434.js"></script>
+    <link rel="stylesheet" href="/Planet/assets/index-61f32310.css">
   </head>
   <body>
  
@@ -44,6 +46,10 @@
         <div class="hotkey-line">
             <span class="hotkey">O</span>
             <span class="description">Switch between Orbit controls and Fly controls</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">,</span>
+            <span class="description">In Fly controls: Switch between point-to-look and drag-to-look</span>
         </div>
 
         <p>Slide control:</p>
@@ -169,15 +175,29 @@
       
       <input id="tagInput" type="text" style="display: none; position: absolute;" />
 
-      <section class="slides" aria-label="Slides">  
+      <!-- <section class="slides" aria-label="Slides">  
         <div class="carousel s1" id="div_carousel" data-carousel>
           <button class="carousel-button prev" data-carousel-button="prev">&#8666;</button>
           <button class="carousel-button next" data-carousel-button="next">&#8667;</button>
+          <button class="carousel-button up" data-carousel-button="up">&#8666;</button>
+          <button class="carousel-button down" data-carousel-button="down">&#8667;</button>
           <button class="carousel-button exit" data-carousel-button="exit">&#10005;</button>
           <ul id="ul_carousel" data-slides>
             <li class="slide" data-active>
             </li>
           </ul>
+        </div>
+      </section> -->
+      <section aria-label="Slides">  
+        <div class="slides" data-carousel>
+            <button class="carousel-button left" data-carousel-button="left">&#8666;</button>
+            <button class="carousel-button right" data-carousel-button="right">&#8667;</button>
+            <button class="carousel-button up" data-carousel-button="up">&#8666;</button>
+            <button class="carousel-button down" data-carousel-button="down">&#8667;</button>
+            <button class="carousel-button exit" data-carousel-button="exit">&#10005;</button>
+            <div id="slide">
+
+            </div>
         </div>
       </section>
     </div>
