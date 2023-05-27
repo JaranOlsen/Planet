@@ -5,7 +5,6 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import fieldVertex from '../shaders/fieldVertex.glsl'
 import fieldFragment from '../shaders/fieldFragment.glsl'
 
-
 export function createField(model, color, scene) {
 
     const loader = new GLTFLoader();

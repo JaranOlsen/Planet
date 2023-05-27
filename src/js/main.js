@@ -60,6 +60,10 @@ import testPicture from '/assets/images/truth/Slide6.jpeg'
 
 // IMPORT MODELS
 import signModel from "../models/sign.glb"
+import field1 from '/src/models/field.glb'
+import field2 from '/src/models/field2.glb'
+import field3 from '/src/models/field3.glb'
+import field4 from '/src/models/field4.glb'
 
 const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
 const DEFAULT_PROFILE = 'generic-trigger';
@@ -1034,10 +1038,10 @@ export function createMindmap() {
 }
 
 //PODCAST FIELDS TEST
-createField('/src/models/field.glb', new THREE.Vector3(1.0, 0, 0), scene)
-createField('/src/models/field2.glb', new THREE.Vector3(0, 1.0, 0), scene)
-createField('/src/models/field3.glb', new THREE.Vector3(0, 0, 1.0), scene)
-createField('/src/models/field4.glb', new THREE.Vector3(0, 1.0, 1.0), scene)
+createField(field1, new THREE.Vector3(1.0, 0, 0), scene)
+createField(field2, new THREE.Vector3(0, 1.0, 0), scene)
+createField(field3, new THREE.Vector3(0, 0, 1.0), scene)
+createField(field4, new THREE.Vector3(0, 1.0, 1.0), scene)
 // How to make fields in Blender
 // 1. Add Bezier curve. Edit mode. Use draw tool, make sure surface is selected. Draw on planet. Delete original bezier vertices
 // 2. Object mode. Object - convert to - Mesh
