@@ -1,3 +1,88 @@
+.slides {
+    position: absolute;
+    top: 5vh;
+    left: 5vw;
+    z-index: 1;
+    width: 90vw;
+    height: 90vh;
+    display: none;
+    background-color: rgba(0, 0, 255, 0.3);
+  }
+  #slide {
+    position: absolute;
+    transition: 200ms opacity ease-in-out;
+    transition-delay: 200ms;
+    color: white;
+    background-color: rgba(0, 0, 255, 0);
+    top: 1%;
+    left: 1%;
+    width:98%;
+    height: 98%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #slide > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  #slide > iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
+  .carousel-button {
+    position: absolute;
+    z-index: 3;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    border-radius: .25rem;
+    padding: 0 .5rem;
+    background-color: rgba(0, 0, 0, 0.4)
+  }
+  .carousel-button:hover,
+  .carousel-button:focus{
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  .carousel-button:focus{
+    outline: 1px solid black;
+  }
+  .carousel-button.left {
+    left: -2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+  }
+  .carousel-button.right {
+    top: 50%;
+    transform: translateY(-50%);
+    right: -2.5rem; 
+    font-size: 2rem;
+  }
+  .carousel-button.up {
+    left: 50%;
+    top: 5%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+  }
+  .carousel-button.down {
+    right: 50%; 
+    top: 95%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+  }
+  .carousel-button.exit {
+    right: 0.1rem;
+    top: 0.1rem;
+    font-size: 1rem;
+  }
+
+/* FOR TESTING */
 .slide1-slide-content {
     position: absolute;
     width: 100%;
