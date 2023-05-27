@@ -6,11 +6,11 @@ const bulletPointsContainer = document.querySelector('.bullet-points-container')
 const adjustFontSize = () => {
     const numPoints = bulletPoints.length;
     if (numPoints <= 3) {
-        bulletPointsContainer.style.fontSize = "4em";
+        bulletPointsContainer.style.fontSize = "3vw";
     } else if (numPoints <= 5) {
-        bulletPointsContainer.style.fontSize = "3em";
+        bulletPointsContainer.style.fontSize = "2vw";
     } else {
-        bulletPointsContainer.style.fontSize = "2em";
+        bulletPointsContainer.style.fontSize = "1vw";
     }
 };
 
