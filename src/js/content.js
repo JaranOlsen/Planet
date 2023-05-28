@@ -51,10 +51,69 @@ export async function pushContent(slideshowStatus) {
     content.appendChild(customScript);
   }
 
+  /* const destination = document.getElementById("slideContainer");
+  destination.innerHTML = ""; */
+
+  const destination = document.getElementById("slideContainer");
+  const oldContent = document.getElementById('slide');
+  if(oldContent) {
+    console.log('yep')
+    oldContent.style.opacity = '0';
+    oldContent.addEventListener('transitionend', function() {
+      oldContent.parentNode.removeChild(oldContent);
+    });
+  }
+
+  destination.appendChild(content);
+}
+/* export async function pushContent(slideshowStatus) {
+  const slideshow = slideshowStatus.activeSlideshow
+  let slide
+  if (slideshowStatus.activeSubSlide >= 0) {
+    slide = contentData[slideshow][slideshowStatus.activeSlide][slideshowStatus.activeSubSlide]
+  } else {
+    slide = contentData[slideshow][slideshowStatus.activeSlide]
+  }
+  let slideFileName
+  let cssFileName
+  let jsFileName
+
+  slideFileName = `/Planet/assets/slides/${slideshow}/${slide}.html`;
+  console.log(slideFileName)
+
+  const slideFileResponse = await fetch(slideFileName);
+  const slideHtml = await slideFileResponse.text();
+
+  let content = document.createElement("div");
+  content.id = 'slide';
+  content.innerHTML = slideHtml;
+
+  const cssLink = document.createElement('link');
+  cssLink.rel = 'stylesheet';
+  cssLink.href = '/Planet/assets/slides/slides.css';
+  content.appendChild(cssLink);
+  if (String(slide).includes('c')) {
+    cssFileName = `/Planet/assets/slides/${slideshow}/${slide}.css`;
+    const customCssLink = document.createElement('link');
+    customCssLink.rel = 'stylesheet';
+    customCssLink.href = cssFileName;
+    content.appendChild(customCssLink);
+  }
+
+  const script = document.createElement('script');
+  script.src = '/Planet/assets/slides/slides.js';
+  content.appendChild(script);
+  if (String(slide).includes('j')) {
+    jsFileName = `/Planet/assets/slides/${slideshow}/${slide}.js`;
+    const customScript = document.createElement('script');
+    customScript.src = jsFileName;
+    content.appendChild(customScript);
+  }
+
   const destination = document.getElementById("slideContainer");
   destination.innerHTML = "";
   destination.appendChild(content);
-}
+} */
 
 export function handleCarouselButton(button, slideshowStatus) {
   const slideShow = document.querySelector('.slides');
@@ -130,7 +189,15 @@ export function handleCarouselButton(button, slideshowStatus) {
 
   if (change) pushContent(slideshowStatus)
 
-  console.log(slideshowStatus)
+  /* if (change) {
+    const slideContainer = document.querySelector('#slideContainer');
+    slideContainer.style.opacity = '0';
+    
+    setTimeout(() => {
+        pushContent(slideshowStatus);
+        slideContainer.style.opacity = '1';
+    }, 100);
+  } */
 
   return slideshowStatus
 }
