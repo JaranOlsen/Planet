@@ -1,7 +1,7 @@
 export const planetTagData = [
-    {id: "8BD3708E-8E3D-44B8-9E92-1050FA7987E5", text: " the essence of \n love / meaning", lat: 14.5, lng: 90, color: 20, size: 40, slides: 133},
+    {id: "8BD3708E-8E3D-44B8-9E92-1050FA7987E5", text: " the essence of \n love / meaning", lat: 14.5, lng: 90, color: 20, size: 40, slides: undefined},
     {id: "D4724AD1-EECD-4975-920C-CDAD71AA53C3", text: "the essence of \n wisdom / will", lat: 14.5, lng: 210, color: 30, size: 40, slides: undefined},
-    {id: "0027E01B-C40A-49F0-9833-30244700C39E", text: "   the essence of \n salvation / peace", lat: 14.5, lng: 330, color: 10, size: 40, slides: 134},
+    {id: "0027E01B-C40A-49F0-9833-30244700C39E", text: "   the essence of \n salvation / peace", lat: 14.5, lng: 330, color: 10, size: 40, slides: undefined},
     {id: "66F19982-732D-4744-AF06-F1F8A68D898B", text: "Rewiring the gut", lat: 18, lng: 330, color: 10, size: 40, slides: undefined},
     {id: "287B1377-9E86-42B2-99F1-EBBEA971AB08", text: "Rewiring the heart", lat: 18, lng: 90, color: 20, size: 40, slides: undefined},
     {id: "B5027C8B-D476-49B0-A713-ACC447159AE1", text: "Rewiring the head", lat: 18, lng: 211, color: 30, size: 40, slides: undefined},

@@ -1490,6 +1490,7 @@ function onDocumentKeyUp(event) {
             }
         }
         if (keyCode == 74) { //J
+            automate()
             if (fpsContainer.style.display == "block") {
                 fpsContainer.style.display = "none"
             } else fpsContainer.style.display = "block"
