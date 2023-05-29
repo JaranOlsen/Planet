@@ -139,13 +139,14 @@ let nuggets = []
 let showContent = true;
 let fastMove = false;
 
-let slideshowStatus = {
+export let slideshowStatus = {
     activeSlideshow: undefined,
     activeSlideshowLength: undefined,
     activeSlide: undefined,
     activeSlideLength: undefined,
     activeSubSlide: undefined
 }
+window.actionsCompleted = true;
 
 let signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z)
 
@@ -714,32 +715,7 @@ function initializeIntro() {
 }
 
 //SLIDE CAROUSEL
-let activeCarousel
 const buttons = document.querySelectorAll("[data-carousel-button]");
-/* 
-function handleCarouselButton(button) {
-  const carousel = document.querySelector('.carousel');
-
-  if (button.dataset.carouselButton === "exit") {
-    carousel.style.display = "none";
-    activeCarousel = undefined
-  } else {
-    const offset = button.dataset.carouselButton === "next" ? 1 : -1;
-    const slides = button.closest("[data-carousel]").querySelector("[data-slides]");
-    const activeSlide = slides.querySelector("[data-active]");
-    let newIndex = [...slides.children].indexOf(activeSlide) + offset;
-
-    if (newIndex < 0) {
-      newIndex = slides.children.length - 1;
-    } else if (newIndex >= slides.children.length) {
-      newIndex = slides.children.length;
-    }
-
-    slides.children[newIndex].dataset.active = true;
-    delete activeSlide.dataset.active;
-  }
-}
- */
 buttons.forEach(button => {
     const handleClick = () => {
       slideshowStatus = handleCarouselButton(button, slideshowStatus);
@@ -883,7 +859,7 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
             map: textureLoader2.load(diffuseTexture),
             normalMap: textureLoader2.load(normalTexture),
             roughnessMap: textureLoader2.load(roughnessTexture),  //works well
-            normalScale: new THREE.Vector2(3, 3),  //works well
+            normalScale: new THREE.Vector2(5, 5),  //works well
             metalness: 0,  //works well
             //roughness: 1,  //0.85 works well
             flatShading: false,
@@ -1038,10 +1014,10 @@ export function createMindmap() {
 }
 
 //PODCAST FIELDS TEST
-createField(field1, new THREE.Vector3(1.0, 0, 0), scene)
+/* createField(field1, new THREE.Vector3(1.0, 0, 0), scene)
 createField(field2, new THREE.Vector3(0, 1.0, 0), scene)
 createField(field3, new THREE.Vector3(0, 0, 1.0), scene)
-createField(field4, new THREE.Vector3(0, 1.0, 1.0), scene)
+createField(field4, new THREE.Vector3(0, 1.0, 1.0), scene) */
 // How to make fields in Blender
 // 1. Add Bezier curve. Edit mode. Use draw tool, make sure surface is selected. Draw on planet. Delete original bezier vertices
 // 2. Object mode. Object - convert to - Mesh
@@ -1443,20 +1419,21 @@ function onDocumentKeyUp(event) {
     }
     if (focusElement !== "tagInput" && !flyControls.enabled) {
         //Slide control
-        if (activeCarousel !== undefined && (keyCode === 33 || keyCode === 37)) { // left arrow or button on USB remote
+        if (slideshowStatus.activeSlideshow !== undefined && (keyCode === 37 || keyCode === 116)) { // left arrow or play button on USB remote
             const leftButton = document.querySelector("[data-carousel-button='left']");
-            handleCarouselButton(leftButton);
+            slideshowStatus = handleCarouselButton(leftButton, slideshowStatus);
         }
-        if (activeCarousel !== undefined && (keyCode === 34 || keyCode === 39)) { // right arrow or button on USB remote
+        if (slideshowStatus.activeSlideshow !== undefined && (keyCode === 39 || keyCode === 190)) { // right arrow or sceen button on USB remote
             const rightButton = document.querySelector("[data-carousel-button='right']");
-            handleCarouselButton(rightButton);
+            slideshowStatus = handleCarouselButton(rightButton, slideshowStatus);
         }
-        if (activeCarousel !== undefined && keyCode == 116) { //button on USB remote
-            console.log("play")
+        if (slideshowStatus.activeSlideshow !== undefined && (keyCode === 38 || keyCode == 33)) { // up arrow or left button on USB remote
+            const upButton = document.querySelector("[data-carousel-button='up']");
+            slideshowStatus = handleCarouselButton(upButton, slideshowStatus);
         }
-        if (activeCarousel !== undefined && keyCode == 190) { //button on USB remote
-            const exitButton = document.querySelector("[data-carousel-button='exit']");
-            handleCarouselButton(exitButton);
+        if (slideshowStatus.activeSlideshow !== undefined && (keyCode === 40 || keyCode == 34)) { // down arrow or right button on USB remote
+            const downButton = document.querySelector("[data-carousel-button='down']");
+            slideshowStatus = handleCarouselButton(downButton, slideshowStatus);
         }
 
         //Light control
@@ -1490,7 +1467,6 @@ function onDocumentKeyUp(event) {
             }
         }
         if (keyCode == 74) { //J
-            automate()
             if (fpsContainer.style.display == "block") {
                 fpsContainer.style.display = "none"
             } else fpsContainer.style.display = "block"
@@ -1954,7 +1930,7 @@ document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     const keyCode = event.which;
 
-    if (selectedNodes.length > 0 && developer == true  && activeCarousel == undefined && focusElement !== "tagInput" && !flyControls.enabled) {
+    if (selectedNodes.length > 0 && developer == true  && slideshowStatus.activeSlideshow == undefined && focusElement !== "tagInput" && !flyControls.enabled) {
         for (let node = 0; node < selectedNodes.length; node++) {
             if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
                 let posLatLng = convertCartesiantoLatLng(contexts[selectedContext].pins[selectedNodes[node]].position.x, contexts[selectedContext].pins[selectedNodes[node]].position.y, contexts[selectedContext].pins[selectedNodes[node]].position.z);
@@ -2000,7 +1976,7 @@ function onDocumentKeyDown(event) {
                 contexts[selectedContext].tagData[selectedNodes[node]].lng = posLatLng.lng.toFixed(1)
             }
         }
-    } else if (selectedPin != null && developer == true  && activeCarousel == undefined && focusElement !== "tagInput" && !flyControls.enabled) {
+    } else if (selectedPin != null && developer == true  && slideshowStatus.activeSlideshow == undefined && focusElement !== "tagInput" && !flyControls.enabled) {
 
         if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
             let posLatLng = convertCartesiantoLatLng(selectedPin.position.x, selectedPin.position.y, selectedPin.position.z);
@@ -2140,14 +2116,8 @@ function onPointerClick(event) {
             }
 
             pushContent(slideshowStatus)
-            console.log(slideshowStatus)
             const slideShowScreen = document.querySelector(`.slides`)
             slideShowScreen.style.display = "block"
-
-            /* const selectedCarousel = contexts[selectedContext].tagData[selectedNode].slides
-            pushContent(selectedCarousel)
-            activeCarousel = document.querySelector(`.carousel.s1`)
-            activeCarousel.style.display = "block" */
         }
     }
 }

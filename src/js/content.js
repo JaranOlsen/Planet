@@ -3,10 +3,6 @@ import { contentData } from "./data/contentData";
 import ThreeMeshUI from 'three-mesh-ui'
 import { previousVRSlide, nextVRSlide, openVRLink } from './main.js';
 
-// Close to making CSS slides work
-  // pushContent() both at nodeclick and arrowclicks (add up and down arrow for slideseries)
-    //pushing each slide in this manner eliminates css and js conflicts
-
 export async function pushContent(slideshowStatus) {
   const slideshow = slideshowStatus.activeSlideshow
   let slide
@@ -19,7 +15,7 @@ export async function pushContent(slideshowStatus) {
   let cssFileName
   let jsFileName
 
-  slideFileName = `/Planet/assets/slides/${slideshow}/${slide}.html`;
+  slideFileName = `/Planet/assets/slides/data/${slideshow}/${slide}.html`;
   console.log(slideFileName)
 
   const slideFileResponse = await fetch(slideFileName);
@@ -34,7 +30,7 @@ export async function pushContent(slideshowStatus) {
   cssLink.href = '/Planet/assets/slides/slides.css';
   content.appendChild(cssLink);
   if (String(slide).includes('c')) {
-    cssFileName = `/Planet/assets/slides/${slideshow}/${slide}.css`;
+    cssFileName = `/Planet/assets/slides/data/${slideshow}/${slide}.css`;
     const customCssLink = document.createElement('link');
     customCssLink.rel = 'stylesheet';
     customCssLink.href = cssFileName;
@@ -45,19 +41,15 @@ export async function pushContent(slideshowStatus) {
   script.src = '/Planet/assets/slides/slides.js';
   content.appendChild(script);
   if (String(slide).includes('j')) {
-    jsFileName = `/Planet/assets/slides/${slideshow}/${slide}.js`;
+    jsFileName = `/Planet/assets/slides/data/${slideshow}/${slide}.js`;
     const customScript = document.createElement('script');
     customScript.src = jsFileName;
     content.appendChild(customScript);
   }
 
-  /* const destination = document.getElementById("slideContainer");
-  destination.innerHTML = ""; */
-
   const destination = document.getElementById("slideContainer");
   const oldContent = document.getElementById('slide');
   if(oldContent) {
-    console.log('yep')
     oldContent.style.opacity = '0';
     oldContent.addEventListener('transitionend', function() {
       oldContent.parentNode.removeChild(oldContent);
@@ -66,54 +58,6 @@ export async function pushContent(slideshowStatus) {
 
   destination.appendChild(content);
 }
-/* export async function pushContent(slideshowStatus) {
-  const slideshow = slideshowStatus.activeSlideshow
-  let slide
-  if (slideshowStatus.activeSubSlide >= 0) {
-    slide = contentData[slideshow][slideshowStatus.activeSlide][slideshowStatus.activeSubSlide]
-  } else {
-    slide = contentData[slideshow][slideshowStatus.activeSlide]
-  }
-  let slideFileName
-  let cssFileName
-  let jsFileName
-
-  slideFileName = `/Planet/assets/slides/${slideshow}/${slide}.html`;
-  console.log(slideFileName)
-
-  const slideFileResponse = await fetch(slideFileName);
-  const slideHtml = await slideFileResponse.text();
-
-  let content = document.createElement("div");
-  content.id = 'slide';
-  content.innerHTML = slideHtml;
-
-  const cssLink = document.createElement('link');
-  cssLink.rel = 'stylesheet';
-  cssLink.href = '/Planet/assets/slides/slides.css';
-  content.appendChild(cssLink);
-  if (String(slide).includes('c')) {
-    cssFileName = `/Planet/assets/slides/${slideshow}/${slide}.css`;
-    const customCssLink = document.createElement('link');
-    customCssLink.rel = 'stylesheet';
-    customCssLink.href = cssFileName;
-    content.appendChild(customCssLink);
-  }
-
-  const script = document.createElement('script');
-  script.src = '/Planet/assets/slides/slides.js';
-  content.appendChild(script);
-  if (String(slide).includes('j')) {
-    jsFileName = `/Planet/assets/slides/${slideshow}/${slide}.js`;
-    const customScript = document.createElement('script');
-    customScript.src = jsFileName;
-    content.appendChild(customScript);
-  }
-
-  const destination = document.getElementById("slideContainer");
-  destination.innerHTML = "";
-  destination.appendChild(content);
-} */
 
 export function handleCarouselButton(button, slideshowStatus) {
   const slideShow = document.querySelector('.slides');
@@ -126,6 +70,8 @@ export function handleCarouselButton(button, slideshowStatus) {
     slideshowStatus.activeSlide = undefined;
     slideshowStatus.activeSlideLength = undefined;
     slideshowStatus.activeSubSlide = undefined;
+    const oldContent = document.getElementById('slide');
+    oldContent.parentNode.removeChild(oldContent);
     return slideshowStatus;
   } 
   if (button.dataset.carouselButton === "left") {
@@ -170,7 +116,7 @@ export function handleCarouselButton(button, slideshowStatus) {
       }
     }
   } 
-  if (button.dataset.carouselButton === "down") {
+  if (button.dataset.carouselButton === "down" && window.actionsCompleted == true) {
     if (slideshowStatus.activeSubSlide < slideshowStatus.activeSlideLength - 1 && slideshowStatus.activeSubSlide >= 0) {
       slideshowStatus.activeSubSlide += 1
       change = true
@@ -189,125 +135,8 @@ export function handleCarouselButton(button, slideshowStatus) {
 
   if (change) pushContent(slideshowStatus)
 
-  /* if (change) {
-    const slideContainer = document.querySelector('#slideContainer');
-    slideContainer.style.opacity = '0';
-    
-    setTimeout(() => {
-        pushContent(slideshowStatus);
-        slideContainer.style.opacity = '1';
-    }, 100);
-  } */
-
   return slideshowStatus
 }
-
-/* 
-export async function pushContent(index) {
-  const slides = document.createElement("ul");
-  slides.id = "ul_carousel";
-  slides.dataset.slides = true;
-
-  for (let i = 0; i < contentData[index].length; i++) {
-    const slide = document.createElement("li");
-    slide.className = "slide";
-    if (i == 0) slide.dataset.active = true;
-
-    // Fetch slide HTML
-    const slideFileName = `/src/slides/slide${contentData[index][i]}.html`; // Update this as per your file naming convention and location
-    const slideFileResponse = await fetch(slideFileName);
-    const slideHtml = await slideFileResponse.text();
-
-    // Create a new element and set its innerHTML to the loaded HTML
-    let content = document.createElement("div");
-    content.innerHTML = slideHtml;
-
-    // Load associated CSS and JavaScript files
-    const cssLink = document.createElement('link');
-    cssLink.rel = 'stylesheet';
-    cssLink.href = `/src/slides/slide${contentData[index][i]}.css`;
-    content.appendChild(cssLink);
-
-    const script = document.createElement('script');
-    script.src = `/src/slides/slide${contentData[index][i]}.js`;
-    content.appendChild(script);
-
-    slide.appendChild(content);
-    slides.appendChild(slide);
-  }
-
-  const parent = document.getElementById("div_carousel");
-  const child = document.getElementById("ul_carousel");
-  parent.replaceChild(slides, child);
-}
- */
-
-/* 
-export function pushContent(index) {
-    const slides = document.createElement("ul")
-    slides.id="ul_carousel"
-    slides.dataset.slides = true
-
-    for(let i = 0; i < contentData[index].length; i++){
-        const slide = document.createElement("li")
-        slide.className="slide"
-        if (i == 0) slide.dataset.active = true
-        let content
-
-        //ALMOST WORKING SLIDES SERIES ARRAY - CSS slides as I'm working on above would make this much easier...
-        // if (Array.isArray(contentData[index][i])) {
-        //     console.log("array")
-        //     for(let j = 0; j < contentData[index][i].length; j++){
-        //         if (contentData[index][i][j].includes("http")) {
-        //           content = document.createElement("iframe");
-        //           content.src = contentData[index][i][j]
-        //         } else if (contentData[index][i][j].includes("/assets/images/")) {
-        //             content = document.createElement("img");
-        //             content.src = contentData[index][i][j]
-        //         } else if (contentData[index][i][j].includes("img.")) {
-        //             content = document.createElement("img");
-        //             content.src = "https://" + contentData[index][i][j]
-        //         } else {
-        //             content = document.createElement("div")
-        //             content.className = "quote"
-        //             const p = document.createElement("p")
-        //             p.innerHTML = contentData[index][i][j]
-        //             let count = Math.round((3 - (p.innerHTML.match(/<br>/g) || []).length / 20) * 10) / 10
-        //             let size = String(count + "vh")
-        //             p.style.fontSize = size
-        //             content.appendChild(p)  
-        //         }
-        //     }
-        // } else 
-        
-        if (contentData[index][i].includes("http")) {
-            content = document.createElement("iframe");
-            content.src = contentData[index][i]
-        } else if (contentData[index][i].includes("/assets/images/")) {
-            content = document.createElement("img");
-            content.src = contentData[index][i]
-        } else if (contentData[index][i].includes("img.")) {
-            content = document.createElement("img");
-            content.src = "https://" + contentData[index][i]
-        } else {
-            content = document.createElement("div")
-            content.className = "quote"
-            const p = document.createElement("p")
-            p.innerHTML = contentData[index][i]
-            let count = Math.round((3 - (p.innerHTML.match(/<br>/g) || []).length / 20) * 10) / 10
-            let size = String(count + "vh")
-            p.style.fontSize = size
-            content.appendChild(p)  
-        }
-
-        slide.appendChild(content)
-        slides.appendChild(slide)
-    }
-
-    const parent = document.getElementById("div_carousel");
-    const child = document.getElementById("ul_carousel");
-    parent.replaceChild(slides, child);
-} */
 
 export function pushVRContent(slideshow, slide) {
     const UIcontainer = new ThreeMeshUI.Block({
@@ -494,26 +323,3 @@ export function pushVRContent(slideshow, slide) {
 
     return UIcontainer
 }
-
-/* export function handleCarouselButton(button) {
-  const carousel = document.querySelector('.carousel');
-
-  if (button.dataset.carouselButton === "exit") {
-    carousel.style.display = "none";
-    activeCarousel = undefined
-  } else {
-    const offset = button.dataset.carouselButton === "next" ? 1 : -1;
-    const slides = button.closest("[data-carousel]").querySelector("[data-slides]");
-    const activeSlide = slides.querySelector("[data-active]");
-    let newIndex = [...slides.children].indexOf(activeSlide) + offset;
-
-    if (newIndex < 0) {
-      newIndex = slides.children.length - 1;
-    } else if (newIndex >= slides.children.length) {
-      newIndex = slides.children.length;
-    }
-
-    slides.children[newIndex].dataset.active = true;
-    delete activeSlide.dataset.active;
-  }
-} */

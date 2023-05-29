@@ -19,13 +19,52 @@ html, body {
   display: block;
 }
 
-/*  || COMMON ELEMENTS
-p
+/*  || COMMON ELEMENTS */
+/*p
 h1, h2, h3, h4, h5
 ul and ol
 The table properties
 Links
 */
+.p {
+  font-size: 1.5vw
+}
+.h1 {
+  font-size: 5vw;
+  padding-top: 20%;
+}
+.h2 {
+  font-size: 4vw;
+  padding-top: 20%;
+}
+.h3 {
+  font-size: 3.5vw;
+  padding-top: 20%;
+}
+.h4 {
+  font-size: 3vw;
+  padding-top: 10%;
+}
+.h5 {
+  font-size: 2.5vw;
+  padding-top: 10%;
+}
+.emphasis {
+  display: inline;
+  font-style: italic;
+}
+.strong {
+  display: inline;
+  font-weight: bold;
+}
+.underline {
+  display: inline;
+  text-decoration: underline;
+}
+.semi-transparent {
+  display: inline;
+  opacity: 0.6;
+}
 
 
 /*  ||  VERSION SCREEN */

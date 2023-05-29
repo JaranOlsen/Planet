@@ -1,9 +1,25 @@
-
 IN PROGRESS
-fix cliffs in normal map (south pole, some islands)
-add noise to ocean roughness map
-add rivers and lakes in roughness and normal map.
-    And fjords! Looks really cool on Direct experience island
+    CSS slides
+        - full-slide-templates
+            v poems
+        - content templates
+            - COUNTING PROBLEM
+            v bullets and images
+            v image and bullets
+            v bullets and fading image
+            - fading image and bullets
+            - bullets and content
+            - title and content
+        - transistions
+            v clear slide on exit?
+        v fix keypresses
+        v make so that downarrow can be used to trigger slide actions, and prevent it from changing slide until all actions are completed
+        - clean up style.css
+        v move slide folders one level down (data), so slides.css and slides.js are more accessible? and template files?
+        - style buttons
+        - add pagination dots
+        - fix for VR
+
 
 Consiousness
     three common definitions
@@ -27,7 +43,7 @@ INITIATIVES
     find venue for weekend retreat in oslo and bergen
 
 CONTENT
-    -change maslow pyramid picture to one with the name of the stages
+    -change maslow pyramid picture to one with the name of the stages?
 
     - Triune brain
     - Anapana (etc) tips and tricks
@@ -73,21 +89,7 @@ MAKE USABLE
 
 SHORT-TERM DEVELOPMENT
 
-Flux lines from north to south pole
-
-Add dimension to slide carousel
-    - up and down to access subslides/slides in the series
-    - array in the contentfile. if array then 2.1
-
-Make GPT help with structuring folders and Paths   
-    - images in public folder and img folder...
-    - font
-    - lensflare
-
-Text-content - [type][source/text]
-- centred, automatic font size
-    - For poems, quotes, short instructions/tips
-- justified for longer texts
+Flux lines from north to south pole - enneagram
 
 VR DEVELOPMENT
     - three-mesh-ui
@@ -113,35 +115,13 @@ GEOGRAPHICAL FEATURES
 
 LONG-TERM DEVELOPMENT
 
-    restructure / rewrite code
-        context independent functions (pass context parameters)
-        use attributes set to objects rather than variables for keeping track of stuff (eg. UIactive (stored in VR controller?), jaraniusInitialized (stored in center?))
-
     add stuff from notes in here?
 
     clickable images?
 
-    alpha maps on colored sphere for podcast links
-        https://r105.threejsfundamentals.org/threejs/lessons/threejs-picking.html
-
-    investigate how to render multiple layers of transparent object
-
     convert all images to webp
 
-    Limit double-side rendering (especially on high tris geometry)
-
-    tweak terrain colors - deeper blue oceans? higher contrast? see real photo
-
     make functions of init processes
-    
-    improve planet icon
-
-    make design improvements to slidecarousel
-
-    convert to functions:
-    (slidecarousel buttons)
-
-    light up area around when hover pin (create or move spotlight?)
 
     make background more colorful
         fog?
