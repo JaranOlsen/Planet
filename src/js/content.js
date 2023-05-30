@@ -3,6 +3,19 @@ import { contentData } from "./data/contentData";
 import ThreeMeshUI from 'three-mesh-ui'
 import { previousVRSlide, nextVRSlide, openVRLink } from './main.js';
 
+function scrapSlide() {
+  const oldContent = document.querySelector("#slide")
+  oldContent.id = "old-slide"
+  oldContent.removeAttribute("data-active");
+  window.actionsCompleted = true
+  if (window.slideEvents && window.slideEvents.handleClick) {
+    window.removeEventListener('click', window.slideEvents.handleClick);
+  }
+  if (window.slideEvents && window.slideEvents.handleKeyUp) {
+      window.removeEventListener('keyup', window.slideEvents.handleKeyUp);
+  }
+}
+
 export async function pushContent(slideshowStatus) {
   const slideshow = slideshowStatus.activeSlideshow
   let slide
@@ -16,13 +29,13 @@ export async function pushContent(slideshowStatus) {
   let jsFileName
 
   slideFileName = `/Planet/assets/slides/data/${slideshow}/${slide}.html`;
-  console.log(slideFileName)
 
   const slideFileResponse = await fetch(slideFileName);
   const slideHtml = await slideFileResponse.text();
 
   let content = document.createElement("div");
   content.id = 'slide';
+  if (slideHtml.includes("bulletSlide")) content.setAttribute("data-active", "bullets");
   content.innerHTML = slideHtml;
 
   const cssLink = document.createElement('link');
@@ -48,7 +61,7 @@ export async function pushContent(slideshowStatus) {
   }
 
   const destination = document.getElementById("slideContainer");
-  const oldContent = document.getElementById('slide');
+  const oldContent = document.querySelector('#old-slide');
   if(oldContent) {
     oldContent.style.opacity = '0';
     oldContent.addEventListener('transitionend', function() {
@@ -133,7 +146,10 @@ export function handleCarouselButton(button, slideshowStatus) {
     }
   } 
 
-  if (change) pushContent(slideshowStatus)
+  if (change) {
+    scrapSlide()
+    pushContent(slideshowStatus)
+  }
 
   return slideshowStatus
 }

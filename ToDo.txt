@@ -3,11 +3,11 @@ IN PROGRESS
         - full-slide-templates
             v poems
         - content templates
-            - COUNTING PROBLEM
+            v COUNTING PROBLEM
             v bullets and images
             v image and bullets
             v bullets and fading image
-            - fading image and bullets
+            v fading image and bullets
             - bullets and content
             - title and content
         - transistions
