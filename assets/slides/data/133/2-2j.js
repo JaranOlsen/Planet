@@ -1,4 +1,4 @@
-
+/* 
 (function() {
     let currentPoint = 0;
     const bulletPoints = document.querySelectorAll(".bulletFade");
@@ -38,3 +38,4 @@
     adjustFontSize();
 })();
 
+ */

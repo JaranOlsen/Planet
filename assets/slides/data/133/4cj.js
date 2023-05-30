@@ -1,4 +1,4 @@
-(function() {
+/* (function() {
     let currentPoint = 0;
     const bulletPoints = document.querySelectorAll(".bullet");
     const bulletPointsContainer = document.querySelector('.bullet-points-container');
@@ -36,3 +36,4 @@
     adjustFontSize();
 })();
 
+ */

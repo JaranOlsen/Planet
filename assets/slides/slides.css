@@ -16,10 +16,26 @@
   #slide {
     position: absolute;
     transition: opacity 0.1s ease-in-out;
-    /* transition: 200ms opacity ease-in-out;
-    transition-delay: 200ms; */
+    transition: 200ms opacity ease-in-out;
+    transition-delay: 200ms;
     color: white;
-    background-color: rgba(0, 0, 255, 0);
+    background-color: rgba(0, 0, 0, 0.9);
+    top: 2px;
+    left: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -10;
+  }
+  #old-slide {
+    position: absolute;
+    transition: opacity 0.1s ease-in-out;
+    transition: 200ms opacity ease-in-out;
+    transition-delay: 200ms;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.9);
     top: 1%;
     left: 1%;
     width:98%;
@@ -27,6 +43,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: -10;
   }
 
   /* WHOLE SLIDE STYLES */
@@ -123,6 +140,10 @@
   /* NAVIGATION */
   .carousel-button {
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     z-index: 3;
     border: none;
     color: rgba(255, 255, 255, 0.5);
@@ -140,31 +161,31 @@
     outline: 1px solid black;
   }
   .carousel-button.left {
-    left: -2.5rem;
     top: 50%;
     transform: translateY(-50%);
+    left: -3rem;
     font-size: 2rem;
   }
   .carousel-button.right {
     top: 50%;
     transform: translateY(-50%);
-    right: -2.5rem; 
+    right: -3rem; 
     font-size: 2rem;
   }
   .carousel-button.up {
     left: 50%;
-    top: 5%;
-    transform: translateY(-50%);
+    top: -2.5rem;
+    transform: translateX(-50%);
     font-size: 2rem;
   }
   .carousel-button.down {
-    right: 50%; 
-    top: 95%;
-    transform: translateY(-50%);
+    left: 50%; 
+    bottom: -2.5rem;
+    transform: translateX(-50%);
     font-size: 2rem;
   }
   .carousel-button.exit {
-    right: 0.1rem;
+    left: 0.1rem;
     top: 0.1rem;
     font-size: 1rem;
   }
@@ -179,6 +200,7 @@
     height: 100%;
     padding: 3%;
     background-color: black;
+    z-index: -10;
 }
 .bullet-content {
     display: flex;
@@ -196,7 +218,7 @@
 
 .bullet {
     opacity: 0;
-    /* transition: opacity 0.5s ease; */
+    transition: opacity 0.5s ease;
     padding-bottom: 2%;
 }
 
@@ -260,12 +282,9 @@
   list-style-type: disc;
   padding-left: 10%;
 }
-
-.bulletFade {
-  margin-bottom: 2%;
-  font-size: 1.2em;
-  opacity: 0;
-  /* transition: opacity 0.5s ease; */
+#bulletFade-points.right {
+  width: 100%;
+  padding-left: 50%;
 }
 
 #bulletFade-image {
