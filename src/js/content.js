@@ -3,6 +3,39 @@ import { contentData } from "./data/contentData";
 import ThreeMeshUI from 'three-mesh-ui'
 import { previousVRSlide, nextVRSlide, openVRLink } from './main.js';
 
+function updateMainDots(slideshowStatus) {
+  const mainDotContainer = document.getElementById("mainDotContainer");
+  mainDotContainer.innerHTML = ""; // Clear the previous dots
+  
+  if (slideshowStatus.activeSlide != undefined) {
+    for(let i = 0; i < slideshowStatus.activeSlideshowLength; i++) {
+        let dot = document.createElement("div");
+        dot.classList.add("dot"); 
+        if(i === slideshowStatus.activeSlide) {
+            dot.classList.add("active"); 
+        }
+        mainDotContainer.appendChild(dot);
+    }
+  }
+}
+
+function updateSubDots(slideshowStatus) {
+  const subDotContainer = document.getElementById("subDotContainer");
+  subDotContainer.innerHTML = ""; // Clear the previous dots
+
+  if (slideshowStatus.activeSubSlide != undefined) {
+    for(let i = 0; i < slideshowStatus.activeSlideLength; i++) {
+        let dot = document.createElement("div");
+        dot.classList.add("dot"); 
+        if(i === slideshowStatus.activeSubSlide) {
+            dot.classList.add("active"); 
+        }
+        subDotContainer.appendChild(dot);
+    }
+  }
+}
+
+
 function scrapSlide() {
   const oldContent = document.querySelector("#slide")
   oldContent.id = "old-slide"
@@ -70,6 +103,9 @@ export async function pushContent(slideshowStatus) {
   }
 
   destination.appendChild(content);
+
+  updateMainDots(slideshowStatus);
+  updateSubDots(slideshowStatus);
 }
 
 export function handleCarouselButton(button, slideshowStatus) {
@@ -85,6 +121,8 @@ export function handleCarouselButton(button, slideshowStatus) {
     slideshowStatus.activeSubSlide = undefined;
     const oldContent = document.getElementById('slide');
     oldContent.parentNode.removeChild(oldContent);
+    updateMainDots(slideshowStatus);
+    updateSubDots(slideshowStatus);
     return slideshowStatus;
   } 
   if (button.dataset.carouselButton === "left") {

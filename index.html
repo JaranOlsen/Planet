@@ -173,18 +173,64 @@
       
       <input id="tagInput" type="text" style="display: none; position: absolute;" />
 
-      <section aria-label="Slides">  
+      <section aria-label="Slides">
+      <div class="slides" id="flexbox">
+        <div class="child" id="leftPanel"></div>
+        <div class="parent" id="midParent">
+            <div class="child" id="topPanel"></div>
+            <div class="child" id="topFrame">
+                <button class="close-button" data-carousel-button="exit">&times;</button>
+            </div>
+            <div class="parent" id="centerParent">
+                <div class="child" id="leftFrame"></div>
+                <div class="child" id="content">
+                    <div id="slideContainer">
+
+                    </div>
+                </div>
+                <div class="child" id="rightFrame">
+                    <div id="subDotContainer" class="dot-container"></div>
+                </div>
+            </div>
+            <div class="child" id="bottomFrame">
+                <div id="mainDotContainer" class="dot-container"></div>
+            </div>
+            <div class="child" id="bottomPanel">
+                <div class="mainButtons">
+                    <button class="carousel-button left" data-carousel-button="left"></button>
+                    <button class="carousel-button right" data-carousel-button="right"></button>
+                </div>
+            </div>
+        </div>
+        <div class="child" id="rightPanel">
+            <div class="subButtons">
+                <button class="carousel-button up" data-carousel-button="up"></button>
+                <button class="carousel-button down" data-carousel-button="down"></button>
+            </div>
+        </div>
+      </div>
+      </section>
+    
+      <!-- <section aria-label="Slides">
         <div class="slides" data-carousel>
-            <button class="carousel-button left" data-carousel-button="left">&#10594;</button>
-            <button class="carousel-button right" data-carousel-button="right">&#10596;</button>
-            <button class="carousel-button up" data-carousel-button="up">&#10595;</button>
-            <button class="carousel-button down" data-carousel-button="down">&#10597;</button>
-            <button class="carousel-button exit" data-carousel-button="exit">&#10005;</button>
+            <div class="mainButtons">
+                <button class="carousel-button left" data-carousel-button="left"></button>
+                <button class="carousel-button right" data-carousel-button="right"></button>
+            </div>
+            <div class="subButtons">
+                <button class="carousel-button up" data-carousel-button="up"></button>
+                <button class="carousel-button down" data-carousel-button="down"></button>
+            </div>
+            <button class="close-button" data-carousel-button="exit">&times;</button>
+
+            <div id="mainDotContainer" class="dot-container"></div>
+            <div id="subDotContainer" class="dot-container"></div>
+
             <div id="slideContainer">
 
             </div>
         </div>
-      </section>
+      </section> -->
     </div>
 
     <audio id="introTune">

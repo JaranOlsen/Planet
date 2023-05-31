@@ -2117,7 +2117,7 @@ function onPointerClick(event) {
 
             pushContent(slideshowStatus)
             const slideShowScreen = document.querySelector(`.slides`)
-            slideShowScreen.style.display = "block"
+            slideShowScreen.style.display = "flex"
         }
     }
 }

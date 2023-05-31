@@ -9,15 +9,16 @@ IN PROGRESS
             v bullets and fading image
             v fading image and bullets
             - bullets and content
-            - title and content
+            - title and content (deep states of calm)
         - transistions
             v clear slide on exit?
         v fix keypresses
         v make so that downarrow can be used to trigger slide actions, and prevent it from changing slide until all actions are completed
         - clean up style.css
+        - clean up css
         v move slide folders one level down (data), so slides.css and slides.js are more accessible? and template files?
-        - style buttons
-        - add pagination dots
+        v style buttons
+        v add pagination dots
         - fix for VR
 
 
