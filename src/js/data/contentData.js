@@ -130,7 +130,7 @@ export const contentData = [ [], ['1', ['2-1', '2-2', '2-3', '2-4', '2-5'], ['3-
   ['1'],
   ['1'],
   ['1'],
-  ['1', ['2-1j', '2-2j', '2-3cj'], '3cj', '4cj'] //for testing - on salvation/peace
+  [['1-1', '1-2'], ['2-1', '2-2', '2-3'], '3', '4', '5cj'] //for testing - on salvation/peace
 ];
 // 111 is empty
 

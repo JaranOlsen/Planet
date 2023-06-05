@@ -66,7 +66,7 @@ import field3 from '/src/models/field3.glb'
 import field4 from '/src/models/field4.glb'
 
 const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
-const DEFAULT_PROFILE = 'generic-trigger';
+const DEFAULT_PROFILE = 'generic-trigger'; 
 
 const canvas = document.querySelector('#canvas');
 const renderer = new THREE.WebGLRenderer(
@@ -146,7 +146,8 @@ export let slideshowStatus = {
     activeSlideLength: undefined,
     activeSubSlide: undefined
 }
-window.actionsCompleted = true;
+
+window.actionsCompleted = true
 
 let signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z)
 
@@ -1444,13 +1445,13 @@ function onDocumentKeyUp(event) {
           }
         
           if (keyCode >= 54 && keyCode <= 57) {
-            const intensities = [0, 0.05, 0.1, 0.2];
+            const intensities = [0, 0.1, 0.2, 0.3];
             targetIntensities.ambient = intensities[keyCode - 54];
             lightTransitionStart = clock.getElapsedTime();
           }
         
           if (keyCode == 48) {
-            targetIntensities.ambient = 0.3;
+            targetIntensities.ambient = 0.5;
             lightTransitionStart = clock.getElapsedTime();
           }
 

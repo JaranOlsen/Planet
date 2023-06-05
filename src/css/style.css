@@ -26,28 +26,31 @@ ul and ol
 The table properties
 Links
 */
-.p {
-  font-size: 1.5vw
+p {
+  font-size: 2.5vw
 }
-.h1 {
+h1 {
   font-size: 5vw;
-  padding-top: 20%;
 }
-.h2 {
+h2 {
+  font-size: 4.5vw;
+}
+h3 {
   font-size: 4vw;
-  padding-top: 20%;
 }
-.h3 {
+h4 {
   font-size: 3.5vw;
-  padding-top: 20%;
 }
-.h4 {
+h5 {
   font-size: 3vw;
-  padding-top: 10%;
 }
-.h5 {
+ul {
+  height: 100%;
+  margin: 0;
   font-size: 2.5vw;
-  padding-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .emphasis {
   display: inline;
@@ -65,7 +68,6 @@ Links
   display: inline;
   opacity: 0.6;
 }
-
 
 /*  ||  VERSION SCREEN */
 #versions {
@@ -241,201 +243,6 @@ a:active {
   display: none;
 }
 
-/*  || SLIDE SCREENS */
-/* .carousel {
-  position: absolute;
-  top: 5vh;
-  left: 5vw;
-  z-index: 1;
-  width: 90vw;
-  height: 90vh;
-  display: none;
-}
-.carousel > ul {
-  margin: 0;
-  padding: 0;
-  list-style: none ;
-}
-.slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: 200ms opacity ease-in-out;
-  transition-delay: 200ms;
-}
-.slide > img {
-  display: block;
-  border-color: blue; 
-  border-width: 10px;
-  border-radius: 10px;
-  width: 90vw;
-  height: 90vh;
-  object-fit: contain;
-}
-.verticalImg {
-  object-fit: contain !important;
-}
-.slide > iframe {
-  display: block;
-  border-color: rgba(0, 0, 255, 0.3);
-  border-width: 10px;
-  border-radius: 10px;
-  top: 0;
-  left: 0;
-  width: 90vw;
-  height: 90vh;
-  object-fit: fill;
-}
-.quote {
-  position: absolute;
-  display: block;
-  background-color: linen;
-  background-image: url("/assets/images/background/bagan.jpg");
-  background-size: cover;
-  opacity: 95%;
-  border-width: 10px;
-  border-radius: 10px;
-  top: 0;
-  left: 0;
-  width: 90vw;
-  height: 90vh;
-  transform: translate(0, 0);
-  object-fit: fill;
-}
-.quote > p {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width:fit-content;
-  text-align: center;
-  transform: translate(-50%, -50%);
-  font-family: Arial, Helvetica, sans-serif;
-  color: white;
-  line-height: 1.5;
-}
-.slide[data-active] {
-  opacity: 1;
-  z-index: 2;
-  transition-delay: 0ms;
-}
-.carousel-button {
-  position: absolute;
-  z-index: 3;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  border-radius: .25rem;
-  padding: 0 .5rem;
-  background-color: rgba(0, 0, 0, 0.4)
-}
-.carousel-button:hover,
-.carousel-button:focus{
-  color: white;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-.carousel-button:focus{
-  outline: 1px solid black;
-}
-.carousel-button.prev {
-  left: -2.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-}
-.carousel-button.next {
-  top: 50%;
-  transform: translateY(-50%);
-  right: -2.5rem; 
-  font-size: 2rem;
-}
-.carousel-button.up {
-  left: 50%;
-  top: 5%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-}
-.carousel-button.down {
-  right: 50%; 
-  top: 95%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-}
-.carousel-button.exit {
-  right: 0.1rem;
-  top: 0.1rem;
-  font-size: 1rem;
-} */
-
-/*  || SLIDE SCREENS */
-/* .slides {
-  position: absolute;
-  top: 5vh;
-  left: 5vw;
-  z-index: 1;
-  width: 90vw;
-  height: 90vh;
-  display: none;
-  background-color: rgba(0, 0, 255, 0.3);
-}
-#slide {
-  position: absolute;
-  transition: 200ms opacity ease-in-out;
-  transition-delay: 200ms;
-  color: white;
-  background-color: rgba(0, 0, 255, 0);
-  top: 1.5%;
-  left: 1.5%;
-  width:97%;
-  height: 97%;
-}
-.carousel-button {
-  position: absolute;
-  z-index: 3;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  border-radius: .25rem;
-  padding: 0 .5rem;
-  background-color: rgba(0, 0, 0, 0.4)
-}
-.carousel-button:hover,
-.carousel-button:focus{
-  color: white;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-.carousel-button:focus{
-  outline: 1px solid black;
-}
-.carousel-button.left {
-  left: -2.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-}
-.carousel-button.right {
-  top: 50%;
-  transform: translateY(-50%);
-  right: -2.5rem; 
-  font-size: 2rem;
-}
-.carousel-button.up {
-  left: 50%;
-  top: 5%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-}
-.carousel-button.down {
-  right: 50%; 
-  top: 95%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-}
-.carousel-button.exit {
-  right: 0.1rem;
-  top: 0.1rem;
-  font-size: 1rem;
-} */
-
 /*  || PROGRESS BAR */
 .progress-bar-container {
   position: absolute;
@@ -460,7 +267,6 @@ label {
   color: white;
   font-size: 2rem;
 }
-
 
 /*  || FPS COUNTER */
 #fpsCounter {

@@ -1,6 +1,7 @@
 IN PROGRESS
     CSS slides
-        - full-slide-templates
+        v continue working on bullet slides. click for text to appear? subActionsCOmpleted < actionsCompleted?
+        v full-slide-templates
             v poems
         - content templates
             v COUNTING PROBLEM
@@ -8,14 +9,17 @@ IN PROGRESS
             v image and bullets
             v bullets and fading image
             v fading image and bullets
-            - bullets and content
-            - title and content (deep states of calm)
+            - frosted glass over background
+            v bullets and content
+            v title and content (deep states of calm)
         - transistions
             v clear slide on exit?
+            - old slides sometimes messing things up, it seems particularly when I flip through quickly
+            - transistion sometimes jumbles up stuff in the background of new slide (old slide problems?)
         v fix keypresses
         v make so that downarrow can be used to trigger slide actions, and prevent it from changing slide until all actions are completed
-        - clean up style.css
-        - clean up css
+        v clean up style.css
+        v clean up css
         v move slide folders one level down (data), so slides.css and slides.js are more accessible? and template files?
         v style buttons
         v add pagination dots
