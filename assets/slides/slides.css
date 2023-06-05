@@ -8,7 +8,7 @@
     width: 100%;
     height: 100%;
 }
-  #slide {
+#slide {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -19,33 +19,38 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  #old-slide {
+}
+#old-slide {
     position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
     transition: opacity 0.1s ease-in-out 200ms;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: -10;
-  }
+    z-index: 0;
+}
 
-  /* WHOLE SLIDE STYLES */
-  #slide > img {
+/* WHOLE SLIDE STYLES */
+#fullscreenImageSlide {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: contain;
-  }
-  #slide > iframe {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+#fullscreenIframeSlide {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: fill;
-  }
+    background-color: rgba(0, 0, 0, 0.75);
+}
 
-  /* TEMPLATE STYLES */
-  .quote {
+.fullscreenTextSlide {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,179 +59,169 @@
     height: 100%;
     padding: 20%;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 2vw;
-    line-height: 3vw;
     overflow-wrap: break-word;
     color: white;
     text-align: center;
     background-image: url("/Planet/assets/images/background/bagan.jpg");
     background-size: cover;
-  }
-  .quote.long {
+}
+.quote, .instructions {
+    font-size: 2vw;
+}
+.quote {
+    line-height: 3vw;
+}
+.instructions {
+    line-height: 4vw;
+}
+.quote.long {
     font-size: 1.5vw;
     line-height: 2.5vw;
-    padding: 10%
-  }
-  .quote.alignJustify {
+    padding: 10%;
+}
+.quote.alignJustify, .definition {
     text-align: justify;
-  }
-
-  .instructions {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    padding: 20%;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 2vw;
-    line-height: 4vw;
-    color: white;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-image: url("/Planet/assets/images/background/bagan.jpg");
-    background-size: cover;
-  }
-
-  .poem {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+}
+.poem {
     padding: 5%;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 1vw;
     line-height: 1.25vw;
-    color: white;
+}
+.definition {
+    font-size: 1.5vw;
+    line-height: 1.5vw;
+}
+
+
+/* TEMPLATE DESIGNS */
+/* MULTI PANEL DESIGNS */
+.panel-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: black;
+    background-image: url("/Planet/assets/images/background/bagan.jpg");
+    background-size: cover;
+    user-select: none;
+}
+.title-container {
+    width: 100%;
+    height: 25%;
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: url("/Planet/assets/images/background/bagan.jpg");
-    background-size: cover;
-  }
-
-  .definition {
+    /* border: 2px solid blue; */
+}
+.content-container {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    overflow: hidden;
+}
+.side-container {
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* border: 2px solid blue; */
+}
+.side-container > img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+.bottom-container{
+    width: 90%;
+    height: 75%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    /* border: 2px solid blue; */
+}
+.bottom-short-container{
+    width: 90%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid blue; */
+}
+
+/* NEW - BACKGROUND FADING IMAGE */
+.background-fade {
+    background: linear-gradient(
+          to right, 
+          rgba(0, 0, 0, 0.9), 
+          rgba(0, 0, 0, 0.8) 40%, 
+          rgba(0, 0, 0, 0.7) 60%, 
+          rgba(0, 0, 0, 0.5) 80%, 
+          rgba(0, 0, 0, 0)
+      );
+  }
+  .background-fade.right {
+    background: linear-gradient(
+          to left, 
+          rgba(0, 0, 0, 0.9), 
+          rgba(0, 0, 0, 0.8) 40%, 
+          rgba(0, 0, 0, 0.7) 60%, 
+          rgba(0, 0, 0, 0.5) 80%, 
+          rgba(0, 0, 0, 0)
+      );
+  }
+  #fading-image {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    padding: 20%;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.5vw;
-    line-height: 1.5vw;
-    overflow-wrap: break-word;
-    color: white;
-    text-align: justify;
-    background-image: url("/Planet/assets/images/background/bagan.jpg");
-    background-size: cover;
+    object-fit: cover;
+    z-index: -1;
   }
 
-/* UNDER DEVELOPMENT */
-/* BULLET SLIDE - COVER IMAGE ON LEFT/RIGHT */
-#bulletSlide {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    z-index: -10;
-}
-.bullet-content {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-items: center;
-}
-
-#bullet-points {
+/* HALF SLIDE IMAGE */
+.halfSlideImage {
+    position: absolute;
     width: 50%;
-    list-style-type: disc;
-    margin-right: 5%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    object-position: left;
+}
+.solidBackground {
+    background-color: darkolivegreen;
+    background-image: none;
 }
 
+/* NEW - ANIMATIONS */
+.appear {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* NEW - BULLETS */
+.bullets {
+    list-style-type: disc;
+}
 .bullet {
     opacity: 0;
     transition: opacity 0.5s ease;
-    padding-bottom: 2%;
 }
-
-.bullet-image-container {
-  position: relative;
-  width: 45%;
-  height: 100%;
-}
-
-#bullet-image {
-  position: absolute;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-
-/* BULLET SLIDE - BACKGROUND FADING IMAGE */
-
-#bulletFadeSlide {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 3%;
-  color: #ffffff;
-}
-
-.bulletFade-content {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-        to right, 
-        rgba(0, 0, 0, 0.9), 
-        rgba(0, 0, 0, 0.8) 40%, 
-        rgba(0, 0, 0, 0.7) 60%, 
-        rgba(0, 0, 0, 0.5) 80%, 
-        rgba(0, 0, 0, 0)
-    );
-}
-.bulletFade-content.right {
-  background: linear-gradient(
-        to left, 
-        rgba(0, 0, 0, 0.9), 
-        rgba(0, 0, 0, 0.8) 40%, 
-        rgba(0, 0, 0, 0.7) 60%, 
-        rgba(0, 0, 0, 0.5) 80%, 
-        rgba(0, 0, 0, 0)
-    );
-}
-
-#bulletFade-points {
-  width: 50%;
-  list-style-type: disc;
-  padding-left: 10%;
-}
-#bulletFade-points.right {
-  width: 100%;
-  padding-left: 55%;
-}
-
-#bulletFade-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
+.textContent {
+    opacity: 1;
 }
 
 /* NAVIGATION */
@@ -307,6 +302,7 @@
   cursor: pointer;
   font-size: 2rem;
   transition: color 0.3s ease-in-out;
+  z-index: 3;
 }
 .close-button:hover {
   color: white;
@@ -338,12 +334,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 3;
 }
 #subDotContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 3;
 }
 
 /* FLEXBOX */
