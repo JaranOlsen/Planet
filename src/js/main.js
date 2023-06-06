@@ -104,10 +104,14 @@ orbitControls.target.set(0, 0, 0);
 orbitControls.update();
 orbitControls.enabled = false;
 
+const baseMovementSpeed = 1;
+let baseMovementSpeedModifier = 1;
+const baseRollSpeed = Math.PI / 24;
+let baseRollSpeedModifier = 1;
 const flyControls = new FlyControls(camera, renderer.domElement);
-flyControls.movementSpeed = 1;
 flyControls.domElement = renderer.domElement;
-flyControls.rollSpeed = Math.PI / 24;
+flyControls.movementSpeed = baseMovementSpeed * baseMovementSpeedModifier;
+flyControls.rollSpeed = baseRollSpeed * baseRollSpeedModifier;
 flyControls.autoForward = false;
 flyControls.dragToLook = false;
 flyControls.enabled = false;
@@ -1406,10 +1410,12 @@ function onDocumentKeyUp(event) {
             controlMode = 'fly';
             orbitControls.enabled = false;
             flyControls.enabled = true;
+            document.body.style.cursor = 'crosshair';
           } else {
             controlMode = 'orbit';
             orbitControls.enabled = true;
             flyControls.enabled = false;
+            document.body.style.cursor = 'default';
           }
     }
     if (keyCode == 188) { //,
@@ -2301,6 +2307,17 @@ function render() {
             camera.position.copy(direction.multiplyScalar(flyControls.minDistance));
         }
 
+        const brakePoint = 7
+        const fullStopPoint = 5
+        const fullRollStopPoint = 3
+        if (distance < brakePoint) {
+            baseMovementSpeedModifier = 1 * ((distance - fullStopPoint)/(brakePoint-fullStopPoint))
+            baseRollSpeedModifier = 1 / ((distance - fullRollStopPoint)/(brakePoint-fullRollStopPoint))
+            flyControls.movementSpeed = baseMovementSpeed * baseMovementSpeedModifier;
+            flyControls.rollSpeed = baseRollSpeed * baseRollSpeedModifier;
+        }
+
+
         let toSun = new THREE.Vector3().subVectors(sunObjectWorldPosition, middleOfPlanet);
         let toCamera = new THREE.Vector3().subVectors(camera.position, middleOfPlanet);
 
@@ -2308,7 +2325,7 @@ function render() {
         toCamera.normalize();
 
         let angle = Math.acos(toSun.dot(toCamera)) * 180.0 / Math.PI;
-        console.log(angle);
+        console.log("Angle: ", angle, "\nDistance: ", distance, "\nSpeed: ", flyControls.movementSpeed, "\nRoll speed: ", flyControls.rollSpeed);
 
     }
 
