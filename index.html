@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Planet</title>
 
-    <link rel="stylesheet" href="./src/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./src/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./src/css/slides.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
@@ -40,7 +41,7 @@
 
       <div id="hotKeys">
 
-        <p>Movement control:</p>
+        <p class="hotkeyTitle">Movement control:</p>
         <div class="hotkey-line">
             <span class="hotkey">O</span>
             <span class="description">Switch between Orbit controls and Fly controls</span>
@@ -50,7 +51,7 @@
             <span class="description">In Fly controls: Switch between point-to-look and drag-to-look</span>
         </div>
 
-        <p>Slide control:</p>
+        <p class="hotkeyTitle">Slide control:</p>
         <div class="hotkey-line">
             <span class="hotkey">&#8592;</span>
             <span class="description">Previous slide</span>
@@ -60,7 +61,7 @@
             <span class="description">Next slide</span>
         </div>
 
-        <p>Light control:</p>
+        <p class="hotkeyTitle">Light control:</p>
         <div class="hotkey-line">
             <span class="hotkey">1-5</span>
             <span class="description">Spotlight intensity</span>
@@ -70,7 +71,7 @@
             <span class="description">Ambient light intensity</span>
         </div>
 
-        <p>Boids control:</p>
+        <p class="hotkeyTitle">Boids control:</p>
         <div class="hotkey-line">
             <span class="hotkey">G</span>
             <span class="description">Boids stats</span>
@@ -84,7 +85,7 @@
             <span class="description">FPS counter</span>
         </div>
 
-        <p>Content display:</p>
+        <p class="hotkeyTitle">Content display:</p>
         <div class="hotkey-line">
             <span class="hotkey">C</span>
             <span class="description">Show/hide planet content</span>
@@ -97,8 +98,12 @@
             <span class="hotkey">S</span>
             <span class="description">Show/hide spiral dynamics</span>
         </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Y</span>
+            <span class="description">Show/hide enneagram</span>
+        </div>
 
-        <p>Developer tools:</p>
+        <p class="hotkeyTitle">Developer tools:</p>
         <div class="hotkey-line">
             <span class="hotkey">Z</span>
             <span class="description">Clear selection of nodes</span>
@@ -175,7 +180,7 @@
 
       <!-- SLIDES -->
       <section aria-label="Slides">
-      <div class="slides" id="flexbox">
+      <div id="slides" class="slides-flexbox" >
         <div class="child" id="leftPanel"></div>
         <div class="parent" id="midParent">
             <div class="child" id="topPanel"></div>

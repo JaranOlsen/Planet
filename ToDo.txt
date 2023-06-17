@@ -25,6 +25,8 @@ IN PROGRESS
         v add pagination dots
         - fix for VR
 
+    Flux lines from north to south pole - enneagram
+
 
 Consiousness
     three common definitions
@@ -94,7 +96,8 @@ MAKE USABLE
 
 SHORT-TERM DEVELOPMENT
 
-Flux lines from north to south pole - enneagram
+Shader materials for connections and nodes - lights on the night side.
+Shader material for arrow connections
 
 VR DEVELOPMENT
     - three-mesh-ui

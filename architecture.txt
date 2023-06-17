@@ -43,6 +43,12 @@ SCENE STRUCTURE
                 - tierRing
                 - spiralDynamicsConnections
                     - createConnections(spiralConnections)
+        - enneaCenter
+            - enneagram 
+                - createImages(enneaImageData)
+                - createTags(enneaTagData)
+                - enneaDynamicsConnections
+                    - createConnections(enneaConnections)
         - pivot1
             - moon1
         - pivot2

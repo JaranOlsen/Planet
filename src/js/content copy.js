@@ -2,7 +2,6 @@ import * as THREE from 'three'
 import { contentData } from "./data/contentData";
 import ThreeMeshUI from 'three-mesh-ui'
 import { previousVRSlide, nextVRSlide, openVRLink } from './main.js';
-import { updateSlide } from './slides';
 
 function scrapSlide() {
   const oldContent = document.querySelector("#slide")
@@ -33,7 +32,7 @@ export async function pushContent(slideshowStatus) {
   const currentSlide = document.querySelector("#slide")
   if(currentSlide) {
     currentSlide.removeAttribute("data-active");
-    currentSlide.classList.add("fade-out") 
+    currentSlide.style.opacity = '0';
     currentSlide.classList.add("old-slide") 
   }
 
@@ -57,6 +56,10 @@ export async function pushContent(slideshowStatus) {
   content.id = 'slide';
   content.innerHTML = slideHtml;
 
+  const cssLink = document.createElement('link');
+  cssLink.rel = 'stylesheet';
+  cssLink.href = '/Planet/assets/slides/slides.css';
+  content.appendChild(cssLink);
   if (String(slide).includes('c')) {
     cssFileName = `/Planet/assets/slides/data/${slideshow}/${slide}.css`;
     const customCssLink = document.createElement('link');
@@ -65,6 +68,9 @@ export async function pushContent(slideshowStatus) {
     content.appendChild(customCssLink);
   }
 
+  const script = document.createElement('script');
+  script.src = '/Planet/assets/slides/slides.js';
+  content.appendChild(script);
   if (String(slide).includes('j')) {
     jsFileName = `/Planet/assets/slides/data/${slideshow}/${slide}.js`;
     const customScript = document.createElement('script');
@@ -73,13 +79,7 @@ export async function pushContent(slideshowStatus) {
   }
 
   // Append the new slide
-destination.appendChild(content);
-
-  // Set the ID to new content and remove fade-out if it's there
-  content.id = 'slide';
-  content.classList.remove('fade-out');
-
-  updateSlide()
+  destination.appendChild(content);
 
   // Remove old slides
   const oldContents = document.querySelectorAll('.old-slide');
@@ -95,6 +95,7 @@ destination.appendChild(content);
     // Save the current transition end event handler
     window.currentTransitionEndHandler = removeOldSlide;
     oldContent.addEventListener('transitionend', window.currentTransitionEndHandler);
+    //oldContent.addEventListener('transitionend', removeOldSlide);
   
     let fallbackTimer = setTimeout(() => {
       if (oldContent && oldContent.parentNode) {
@@ -107,11 +108,19 @@ destination.appendChild(content);
   updateMainDots(slideshowStatus);
   updateSubDots(slideshowStatus);
 
-  //window.actionsCompleted = true;
+  // Remove old event listeners
+  if (window.slideEvents && window.slideEvents.handleClick) {
+    window.removeEventListener('click', window.slideEvents.handleClick);
+  }
+  if (window.slideEvents && window.slideEvents.handleKeyUp) {
+    window.removeEventListener('keyup', window.slideEvents.handleKeyUp);
+  }
+
+  window.actionsCompleted = true;
 }
 
 export function handleCarouselButton(button, slideshowStatus) {
-  const slideShow = document.querySelector('#slides');
+  const slideShow = document.querySelector('.slides');
   let change = false
 
   if (button.dataset.carouselButton === "exit") {

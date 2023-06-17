@@ -20,6 +20,7 @@ import { initializeVersion } from './versions.js'
 import { creation } from './creation.js'
 import { updateGutta, togglePerceptionCircles } from './gutta.js'
 import { createField } from './podcast.js'
+import { createFieldLines } from './flux.js'
 
 //IMPORT DATA
 import { planetTagData, planetConnections, planetArrowedConnections, planetDashedConnections, planetTunnelConnections } from './data/planetData.js'
@@ -27,6 +28,7 @@ import { planetImageData } from './data/planetImageData.js'
 import { planetNuggetData } from './data/planetNuggetData.js'
 import { spiralTagData, spiralConnections, spiralArrowedConnections, spiralDashedConnections } from './data/spiralData.js'
 import { spiralImageData } from './data/spiralImageData.js'
+import { enneagramTagData, enneagramConnections, enneagramArrowedConnections, enneagramDashedConnections, enneagramTunnelConnections } from './data/enneagramData.js'
 import { contentData } from './data/contentData.js'
 import { palette } from './data/palette.js'
 import { pinMaterials, pinWireframeMaterials, boxMaterials } from './data/materials.js'
@@ -152,6 +154,15 @@ export let slideshowStatus = {
 }
 
 window.actionsCompleted = true
+window.currentTransitionEndHandler = null;
+
+window.onload = function() {
+    let allElements = document.querySelectorAll('#slide .appear');
+    allElements.forEach(function(element) {
+      element.style.opacity = "1";
+    });
+  };
+  
 
 let signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z)
 
@@ -821,7 +832,9 @@ scene.add(center);
 const jaraniusCenter = new THREE.Object3D();
 center.add(jaraniusCenter);
 const spiralCenter = new THREE.Object3D();
+const enneaCenter = new THREE.Object3D();
 center.add(spiralCenter);
+center.add(enneaCenter);
 
 const pivot1 = new THREE.Object3D();
 const pivot2 = new THREE.Object3D();
@@ -846,6 +859,7 @@ center.add(pivot4);
 let jaranius
 let jaraniusConnections = new THREE.Object3D()
 let spiralDynamicsConnections = new THREE.Object3D()
+let enneaConnections = new THREE.Object3D()
 let clouds
 let atmosphere
 let atmosphericLight
@@ -996,6 +1010,8 @@ export function createMindmap() {
 
     createTags(contexts[1].tagData, contexts[1].tagDestination, contexts[1].radius, 1, indexMod)
 
+    createTags(contexts[3].tagData, contexts[3].tagDestination, contexts[3].radius, 3, indexMod)
+
     //create nuggets
     for (let i = 0; i < planetNuggetData.length; i++) { 
         let nugget = instantiateNugget(i, planetNuggetData[i].lat, planetNuggetData[i].lng - 180, planetNuggetData[i].color, planetNuggetData[i].size / 100000, planetNuggetData[i].slides, jaranius, 2);
@@ -1016,6 +1032,11 @@ export function createMindmap() {
     spiral.add(spiralDynamicsConnections)
     let context2 = spiralDynamicsConnections
     createConnections(spiralTagData, spiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false, false)
+
+    enneagram.add(enneaConnections)
+    let context4 = enneaConnections
+    createConnections(enneagramTagData, enneagramConnections, 0.0002, curveRadiusSegments, 0.1, 8.01, context4, false, false, false)
+    createConnections(enneagramTagData, enneagramTunnelConnections, 0.0002, curveRadiusSegments, 0.1, 8.01, context4, false, false, true)
 }
 
 //PODCAST FIELDS TEST
@@ -1030,6 +1051,32 @@ createField(field4, new THREE.Vector3(0, 1.0, 1.0), scene) */
 // 4. Select a face. Go to transform orientations and select Normal. press Shift + NumPad 7. This will align the view to the normal of the selected face. Make a new transform orientation.
 // 5. Object mode. Choose the newly made transform orientation and move the objects the desired distance out from the planet
 // 6. Export object.
+
+//CREATE ENNEAGRAM FLUX LINES
+const enneagram = new THREE.Object3D
+let enneagramActivated = false
+function createEnneagram(enneagram) {
+    enneaCenter.add(enneagram)
+    enneagramActivated = true
+    createFieldLines(enneagram, 10, 1.2, 200, false, 0.02)
+    createFieldLines(enneagram, 15, 1.225, 200, false, 0.01)
+    createFieldLines(enneagram, 20, 1.25, 200, false, 0)
+    createFieldLines(enneagram, 25, 1.375, 200, false, 0.01)
+    createFieldLines(enneagram, 30, 1.5, 200, false, 0.02)
+    createFieldLines(enneagram, 40, 1.675, 200, false, 0.03)
+    createFieldLines(enneagram, 50, 1.75, 200, false, 0.04)
+    createFieldLines(enneagram, 70, 1.875, 200, false, 0.05)
+    createFieldLines(enneagram, 90, 2, 200, false, 0.06)
+    createFieldLines(enneagram, 70, 2.125, 200, false, 0.07)
+    createFieldLines(enneagram, 50, 2.25, 200, false, 0.08)
+    createFieldLines(enneagram, 40, 2.375, 200, false, 0.09)
+    createFieldLines(enneagram, 30, 2.5, 200, false, 0.1)
+    createFieldLines(enneagram, 25, 2.675, 200, false, 0.11)
+    createFieldLines(enneagram, 20, 2.75, 200, false, 0.12)
+    createFieldLines(enneagram, 15, 2.875, 200, false, 0.13)
+    createFieldLines(enneagram, 10, 3, 200, false, 0.14)
+    createFieldLines(enneagram, 9, 2, 200, true, 5.75)
+}
 
 //CREATE SUN
 const sunRadius = 5
@@ -1310,6 +1357,20 @@ export function createContexts(version) {
         tags: []
     })
 
+    contexts.push({
+        tagData: enneagramTagData, 
+        tagDestination: enneagram, 
+        connectionData: enneagramConnections, 
+        arrowConnectionData: enneagramArrowedConnections,
+        dashedConnectionData: enneagramDashedConnections,
+        tunnelConnectionData: enneagramTunnelConnections,
+        connectionDestination: enneagramConnections, 
+        radius: 8, 
+        pins: [], 
+        boxes: [], 
+        tags: []
+    })
+
     if (version == 3) developer = true
 
 }
@@ -1525,6 +1586,14 @@ function onDocumentKeyUp(event) {
             } else {
                 spiralActivated = false
                 spiralCenter.remove(spiral)
+            }
+        }
+        if (keyCode == 89) { //Y
+            if (enneagramActivated == false) {
+                createEnneagram(enneagram)
+            } else {
+                enneagramActivated = false
+                enneaCenter.remove(enneagram)
             }
         }
 
@@ -2108,7 +2177,7 @@ function onPointerClick(event) {
         if (contexts !== 2) selectedBox = contexts[selectedContext].boxes[selectedNode]
         if (contexts !== 2) selectedTag = contexts[selectedContext].tags[selectedNode]
 
-        if (camera.position.distanceTo(selectedPin.position) < 4 && contexts[selectedContext].tagData[selectedNode].slides !== undefined) {
+        if (camera.position.distanceTo(selectedPin.position) < 4 && contexts[selectedContext].tagData[selectedNode].slides !== undefined && slideshowStatus.activeSlideshow == undefined) {
             slideshowStatus.activeSlideshow = contexts[selectedContext].tagData[selectedNode].slides
             slideshowStatus.activeSlideshowLength = contentData[slideshowStatus.activeSlideshow].length
             if (Array.isArray(contentData[slideshowStatus.activeSlideshow][0])) {
@@ -2123,7 +2192,7 @@ function onPointerClick(event) {
             }
 
             pushContent(slideshowStatus)
-            const slideShowScreen = document.querySelector(`.slides`)
+            const slideShowScreen = document.querySelector(`#slides`)
             slideShowScreen.style.display = "flex"
         }
     }

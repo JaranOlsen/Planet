@@ -16,6 +16,7 @@ import arrow from '/assets/textures/arrow4.webp'
 //  IMPORT MATERIALS
 import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWireframeMaterials } from './data/materials.js';
 import { planetNuggetData } from './data/planetNuggetData.js';
+import { enneagramTagData } from './data/enneagramData.js';
 
 const tagFont = "/Planet/assets/fonts/SourceSans3_Regular.json"
 
@@ -36,7 +37,15 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
             txtGeo.translate(-0.5 * (txtGeo.boundingBox.max.x - txtGeo.boundingBox.min.x), (txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y), 0);
 
             const tag = new THREE.Mesh(txtGeo, textMaterial);
-            const latLng = convertLatLngtoCartesian(lat, lng, radius + 0.061);
+            let latLng = convertLatLngtoCartesian(lat, lng, radius + 0.061);
+
+            //TEST
+            if (dataSource == enneagramTagData) {
+                const radiusModifier = Math.abs(lat - 90) / 45  //0 - 90
+                latLng = convertLatLngtoCartesian(lat, lng, radius - radiusModifier + 0.061);
+            }
+            //TEST
+
             const rotationVector = new THREE.Vector3(latLng.x, latLng.y, latLng.z);
             tag.lookAt(rotationVector);
             tag.position.copy(rotationVector);
@@ -82,7 +91,13 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
             boxGeo.translate(-0.5 * (boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x), 0, 0);
 
             const box = new THREE.Mesh(boxGeo, boxMaterials[color]);
-            const boxLatLng = convertLatLngtoCartesian(lat, lng, radius + 0.06);
+            let boxLatLng = convertLatLngtoCartesian(lat, lng, radius + 0.06);
+            //TEST
+            if (dataSource == enneagramTagData) {
+                const radiusModifier = Math.abs(lat - 90) / 45  //0 - 90
+                boxLatLng = convertLatLngtoCartesian(lat, lng, radius - radiusModifier + 0.06);
+            }
+            //TEST
             const boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
             box.lookAt(boxRotationVector);
             box.position.copy(boxRotationVector);
@@ -123,7 +138,14 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
         pin.index = index + indexMod;
         pin.originalSize = size
     
-        const pos = convertLatLngtoCartesian(lat, lng, radius + 0.01);
+        let pos = convertLatLngtoCartesian(lat, lng, radius + 0.01);
+        //TEST
+        if (dataSource == enneagramTagData) {
+            const radiusModifier = Math.abs(lat - 90) / 45  //0 - 90
+            pos = convertLatLngtoCartesian(lat, lng, radius - radiusModifier + 0.01);
+        }
+        //TEST
+        
         pin.position.set(pos.x, pos.y, pos.z);
     
         destination.add(pin);
