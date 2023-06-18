@@ -18,6 +18,17 @@ html, body {
   height: 100%;
   display: block;
 }
+#scrollable-container {
+  overflow-y: auto; 
+  height: 100vh; 
+}
+@media (max-width: 480px) {
+  #scrollable-container {
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+  }
+}
+
 
 /*  || COMMON ELEMENTS */
 /*p

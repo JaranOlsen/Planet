@@ -14,8 +14,8 @@ IN PROGRESS
             v title and content (deep states of calm)
         - transistions
             v clear slide on exit?
-            - old slides sometimes messing things up, it seems particularly when I flip through quickly
-            - transistion sometimes jumbles up stuff in the background of new slide (old slide problems?)
+            v old slides sometimes messing things up, it seems particularly when I flip through quickly
+            v transistion sometimes jumbles up stuff in the background of new slide (old slide problems?)
         v fix keypresses
         v make so that downarrow can be used to trigger slide actions, and prevent it from changing slide until all actions are completed
         v clean up style.css
@@ -23,6 +23,7 @@ IN PROGRESS
         v move slide folders one level down (data), so slides.css and slides.js are more accessible? and template files?
         v style buttons
         v add pagination dots
+        - better transistions
         - fix for VR
 
     Flux lines from north to south pole - enneagram

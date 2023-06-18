@@ -89,6 +89,18 @@ function resizeRendererToDisplaySize(renderer) {
     return needResize;
 }
 
+document.getElementById('fullscreen-button').addEventListener('click', function() {
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+        document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+        document.documentElement.msRequestFullscreen();
+    }
+});
+
 const fov = 50;
 const aspect = 2;  // the canvas default
 const near = 0.1;
