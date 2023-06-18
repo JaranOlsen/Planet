@@ -72,7 +72,7 @@ export async function pushContent(slideshowStatus) {
   }
 
   if (String(slide).includes('j')) {
-    jsFileName = `/src/js/data/slides/${slideshow}/${slide}.js`;
+    jsFileName = `/Planet/assets/slides/data/${slideshow}/${slide}.js`;
     const scriptResponse = await fetch(jsFileName);
     const scriptText = await scriptResponse.text();
     eval(scriptText);
