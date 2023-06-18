@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "three": "^0.147.0",
-    "three-mesh-ui": "^6.5.3"
+    "three-mesh-ui": "^6.5.3",
+    "wordcloud": "^1.2.2"
   }
 }

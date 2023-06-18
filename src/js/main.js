@@ -10,6 +10,8 @@ import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerM
 import { Constants as MotionControllerConstants, fetchProfile, MotionController } from 'three/examples/jsm/libs/motion-controllers.module.js'
 import { generateUUID } from 'three/src/math/MathUtils.js'
 import ThreeMeshUI from 'three-mesh-ui'
+import WordCloud from 'wordcloud';
+window.WordCloud = WordCloud;
 
 
 //  IMPORT SCRIPTS
@@ -89,18 +91,7 @@ function resizeRendererToDisplaySize(renderer) {
     return needResize;
 }
 
-document.getElementById('fullscreen-button').addEventListener('click', function() {
-    if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-        document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-        document.documentElement.webkitRequestFullscreen();
-    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-        document.documentElement.msRequestFullscreen();
-    }
-    document.getElementById('fullscreen-button').style.display = "none"
-});
+
 
 const fov = 50;
 const aspect = 2;  // the canvas default
@@ -206,6 +197,7 @@ const playButton = document.getElementById("playbutton")
 const credits = document.getElementById("credits")
 const enableVRbutton = document.getElementById("enableVRbutton")
 const skipButton = document.getElementById("skipbutton")
+const fullscreenButton = document.getElementById('fullscreen-button')
 initializeVersion(creation, postLoadingManager, guttaState, scene, guttaHelperCenter)
 
 let webXRInitialized = false
@@ -741,7 +733,20 @@ function initializeIntro() {
         event.preventDefault(); // Prevent mouse event from firing after touch event
         handleSkipButtonClick();
     });
+    fullscreenButton.addEventListener('click', function() {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+            document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+            document.documentElement.msRequestFullscreen();
+        }
+        fullscreenButton.style.display = "none"
+    });
 }
+
 
 //SLIDE CAROUSEL
 const buttons = document.querySelectorAll("[data-carousel-button]");

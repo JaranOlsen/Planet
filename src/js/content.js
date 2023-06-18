@@ -36,6 +36,12 @@ export async function pushContent(slideshowStatus) {
     currentSlide.classList.add("fade-out") 
     currentSlide.classList.add("old-slide") 
   }
+  // Remove old scripts
+  const oldScripts = Array.from(document.querySelectorAll('script'));
+  for (let i = oldScripts.length - 1; i >= 0; i--) {
+    const oldScript = oldScripts[i];
+    oldScript.parentNode.removeChild(oldScript);
+  }
 
   const slideshow = slideshowStatus.activeSlideshow
   let slide
@@ -66,14 +72,18 @@ export async function pushContent(slideshowStatus) {
   }
 
   if (String(slide).includes('j')) {
-    jsFileName = `/Planet/assets/slides/data/${slideshow}/${slide}.js`;
-    const customScript = document.createElement('script');
-    customScript.src = jsFileName;
-    content.appendChild(customScript);
+    jsFileName = `/src/js/data/slides/${slideshow}/${slide}.js`;
+    const scriptResponse = await fetch(jsFileName);
+    const scriptText = await scriptResponse.text();
+    eval(scriptText);
   }
 
   // Append the new slide
 destination.appendChild(content);
+
+// Dispatch an event to signal that the new slide has been loaded
+let event = new CustomEvent('slideLoaded');
+window.dispatchEvent(event);
 
   // Set the ID to new content and remove fade-out if it's there
   content.id = 'slide';
@@ -106,8 +116,6 @@ destination.appendChild(content);
 
   updateMainDots(slideshowStatus);
   updateSubDots(slideshowStatus);
-
-  //window.actionsCompleted = true;
 }
 
 export function handleCarouselButton(button, slideshowStatus) {

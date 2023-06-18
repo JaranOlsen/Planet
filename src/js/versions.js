@@ -5,6 +5,7 @@ export function initializeVersion(callback, postLoadingManager, guttaState, scen
         skipButton: document.getElementById("skipbutton"),
         enableVRbutton: document.getElementById("enableVRbutton"),
         footer: document.getElementById("footer"),
+        fullscreenButton: document.getElementById("fullscreen-button"),
         versionButtons: [
             document.getElementById("version1"),
             document.getElementById("version2"),
@@ -16,6 +17,7 @@ export function initializeVersion(callback, postLoadingManager, guttaState, scen
     const hideButtons = (showVR) => {
         elements.versionButtons.forEach((btn) => (btn.style.display = "none"));
         elements.footer.style.display = "none";
+        elements.fullscreenButton.style.display = "none";
         elements.playButton.style.display = "block";
         elements.skipButton.style.display = "block";
         elements.credits.style.display = "block";
