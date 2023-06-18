@@ -150,6 +150,10 @@ a:active {
   color: lightblue;
   text-decoration: none;
 }
+#fullscreen-button {
+  padding-top: 10vh;
+  font-size: 1rem;
+}
 
 
 /*  || INTRO SCREEN */

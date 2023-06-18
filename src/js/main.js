@@ -99,6 +99,7 @@ document.getElementById('fullscreen-button').addEventListener('click', function(
     } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
         document.documentElement.msRequestFullscreen();
     }
+    document.getElementById('fullscreen-button').style.display = "none"
 });
 
 const fov = 50;
