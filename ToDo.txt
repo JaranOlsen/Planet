@@ -9,7 +9,7 @@ IN PROGRESS
             ✅ image and bullets
             ✅ bullets and fading image
             ✅ fading image and bullets
-            𝇈 frosted glass over background
+            𝇈 frosted glass over background - several types of semi-transparent textures?
             ✅ bullets and content
             ✅ title and content (deep states of calm)
         - transistions
@@ -24,12 +24,20 @@ IN PROGRESS
         ✅ style buttons
         ✅ add pagination dots
         𝇈 better transistions
+        𝇈 title moving in from top..? feature or bug? not a feature
         𝇈 fix for VR
 
-    Flux lines from north to south pole - enneagram
 
+INITIATIVES
+    apply for a pimp
 
-Consiousness
+    find venue for weekend retreat in oslo and bergen
+
+CONTENT
+    Resisting vulnerability
+        - strategies (intellectualisation, addiction...)
+
+    Consiousness
     three common definitions
         - functional consciousness - responsiveness and agency
         - phenomenal consciousness - subjective experience
@@ -44,13 +52,6 @@ Consiousness
         - adjectival consciousness
             - that which is on the screen of adverbial consciousness
 
-
-INITIATIVES
-    apply for a pimp
-
-    find venue for weekend retreat in oslo and bergen
-
-CONTENT
     -change maslow pyramid picture to one with the name of the stages?
 
     - Triune brain

@@ -18,6 +18,10 @@ import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWirefr
 import { planetNuggetData } from './data/planetNuggetData.js';
 import { enneagramTagData } from './data/enneagramData.js';
 
+//  IMPORT SHADERS
+import arrowConnectionVertexShader from '../shaders/arrowConnectionVertex.glsl'
+import arrowConnectionFragmentShader from '../shaders/arrowConnectionFragment.glsl'
+
 const tagFont = "/Planet/assets/fonts/SourceSans3_Regular.json"
 
 const textureLoader = new THREE.TextureLoader()

@@ -4,21 +4,129 @@ import ThreeMeshUI from 'three-mesh-ui'
 import { previousVRSlide, nextVRSlide, openVRLink } from './main.js';
 import { updateSlide } from './slides';
 
-function scrapSlide() {
-  const oldContent = document.querySelector("#slide")
-  oldContent.classList.add("old-slide") 
-  oldContent.removeAttribute("data-active");
-  window.actionsCompleted = true
-  
-  if (window.slideEvents && window.slideEvents.handleClick) {
-    window.removeEventListener('click', window.slideEvents.handleClick);
+export async function pushContent(slideshowStatus) {
+  const oldSlide = document.querySelector('.old-slide');
+  if (oldSlide) {
+    oldSlide.removeEventListener('transitionend', window.currentTransitionEndHandler);
+    if (oldSlide.parentNode) {
+      oldSlide.parentNode.removeChild(oldSlide);
+    }
   }
-  if (window.slideEvents && window.slideEvents.handleKeyUp) {
-    window.removeEventListener('keyup', window.slideEvents.handleKeyUp);
+
+  const destination = document.getElementById("slideContainer");
+
+  // Prepare current slide for removal
+  const currentSlide = document.querySelector("#slide")
+  if(currentSlide) {
+    currentSlide.removeAttribute("data-active");
+    currentSlide.classList.add("fade-out") 
+    currentSlide.classList.add("old-slide") 
   }
+  // Remove old scripts
+  const oldScripts = Array.from(document.querySelectorAll('script'));
+  for (let i = oldScripts.length - 1; i >= 0; i--) {
+    const oldScript = oldScripts[i];
+    oldScript.parentNode.removeChild(oldScript);
+  }
+
+  const slideshow = slideshowStatus.activeSlideshow
+  let slide
+  if (slideshowStatus.activeSubSlide >= 0) {
+    slide = contentData[slideshow][slideshowStatus.activeSlide][slideshowStatus.activeSubSlide]
+  } else {
+    slide = contentData[slideshow][slideshowStatus.activeSlide]
+  }
+  let slideFileName
+  let cssFileName
+  let jsFileName
+
+  slideFileName = `/Planet/assets/slides/data/${slideshow}/${slide}.html`;
+
+  const slideFileResponse = await fetch(slideFileName);
+  const slideHtml = await slideFileResponse.text();
+
+  let content = document.createElement("div");
+  content.id = 'slide';
+  content.innerHTML = slideHtml;
+
+  // Fetch the JS file
+  let jsPromise = Promise.resolve();
+  if (String(slide).includes('j')) {
+    jsFileName = `/Planet/assets/slides/data/${slideshow}/${slide}.js`;
+    jsPromise = fetch(jsFileName).then(response => response.text());
+  }
+
+  // Load the CSS file
+  let cssPromise = Promise.resolve();
+  const oldCssLink = document.getElementById('slideCss');
+  if (oldCssLink) {
+    document.head.removeChild(oldCssLink);
+  }
+  if (String(slide).includes('c')) {
+    cssFileName = `/Planet/assets/slides/data/${slideshow}/${slide}.css`;
+    const customCssLink = document.createElement('link');
+    customCssLink.id = 'slideCss';
+    customCssLink.rel = 'stylesheet';
+    customCssLink.href = cssFileName;
+    cssPromise = new Promise((resolve, reject) => {
+      customCssLink.onload = resolve;
+      customCssLink.onerror = reject;
+      document.head.appendChild(customCssLink);
+    });
+  }
+
+  Promise.all([cssPromise, jsPromise]).then(values => {
+    if (String(slide).includes('j')) {
+      eval(values[1]); // values[1] contains JS file text
+    }
+
+    destination.appendChild(content);
+
+    // Dispatch an event to signal that the new slide has been loaded
+    let event = new CustomEvent('slideLoaded');
+    window.dispatchEvent(event);
+
+    // Set the ID to new content and remove fade-out if it's there
+    content.id = 'slide';
+    content.classList.remove('fade-out');
+
+    updateSlide();
+
+    removeOldSlides();
+
+    updateMainDots(slideshowStatus);
+    updateSubDots(slideshowStatus);
+  }).catch(e => {
+    console.error('Error loading CSS/JS:', e);
+  });
 }
 
-export async function pushContent(slideshowStatus) {
+function removeOldSlides() {
+  // Remove old slides
+  const oldContents = document.querySelectorAll('.old-slide');
+  oldContents.forEach(oldContent => {
+    const removeOldSlide = (e) => {
+      if (e.propertyName === 'opacity' && oldContent && oldContent.parentNode) {
+        oldContent.parentNode.removeChild(oldContent);
+        oldContent.removeEventListener('transitionend', removeOldSlide);
+        clearTimeout(fallbackTimer);
+      }
+    }
+
+    // Save the current transition end event handler
+    window.currentTransitionEndHandler = removeOldSlide;
+    oldContent.addEventListener('transitionend', window.currentTransitionEndHandler);
+  
+    let fallbackTimer = setTimeout(() => {
+      if (oldContent && oldContent.parentNode) {
+        oldContent.parentNode.removeChild(oldContent);
+        oldContent.removeEventListener('transitionend', removeOldSlide);
+      }
+    }, 1000); // Timeout duration set to 1000ms, adjust based on your transition duration
+  });
+};
+
+/* export async function pushContent(slideshowStatus) {
   const oldSlide = document.querySelector('.old-slide');
   if (oldSlide) {
     oldSlide.removeEventListener('transitionend', window.currentTransitionEndHandler);
@@ -116,7 +224,7 @@ window.dispatchEvent(event);
 
   updateMainDots(slideshowStatus);
   updateSubDots(slideshowStatus);
-}
+} */
 
 export function handleCarouselButton(button, slideshowStatus) {
   const slideShow = document.querySelector('#slides');

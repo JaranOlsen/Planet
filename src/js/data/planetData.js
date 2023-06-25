@@ -472,6 +472,11 @@ export const planetTagData = [
     {id: "5e878fac-c366-419f-ad57-fcc4725e1362", text: "Paradigm-dependence", lat: 54.1, lng: 190.5, color: 33, size: 6, slides: 119},
     {id: "03dbc0e6-be97-40d6-bacd-aaed827df4fa", text: "Language and conceptual \n              constraints", lat: 54.5, lng: 189.2, color: 33, size: 6, slides: 120},
     {id: "ad028f69-e759-4775-84fc-9c1e3078cf73", text: "Cognitive biases", lat: 54.6, lng: 187.6, color: 33, size: 6, slides: 121},
+    {id: "4cc9d1a9-fb24-4f7a-a107-7723f58f5fa2", text: "       Denial and \nAvoidance-Based \n       Strategies", lat: 118.5, lng: 348.6, color: 11, size: 11, slides: undefined},
+    {id: "cf19df5f-26ed-45b8-b413-4b5df2210b0a", text: "  Intellectualization\n and Rationalization \n          Strategies", lat: 119.7, lng: 351, color: 11, size: 11, slides: undefined},
+    {id: "9f4d3aa4-ef61-42e3-b7d3-949bc1e12c99", text: "Externalization \n     Strategies", lat: 119.9, lng: 353.6, color: 11, size: 11, slides: undefined},
+    {id: "55c930a2-cbee-4d1b-a0ff-3e691105b8fb", text: "   Control and \nCompensation \n    Strategies", lat: 119.5, lng: 356.1, color: 11, size: 11, slides: undefined},
+    {id: "a0f81980-29b7-4b70-88b2-beb48cf8f782", text: " Substance Use \nand Body-Based \n       Strategies", lat: 118.6, lng: 358.2, color: 11, size: 11, slides: undefined},
 
 ]
 
@@ -735,7 +740,7 @@ export const planetConnections = [
 ["8DFECF54-6362-48C2-84A0-B9A79FD7371A", ],
 ["4D115C88-FC8E-4544-AC27-0B775B126D44", "4D115C88-FC8E-4544-AC27-0B775B126D44", "84C0342B-29BC-4E8A-A39D-0D638491312E", "F0CABC11-FB43-49D3-B32C-F6AC2F728BEF", ],
 ["84C0342B-29BC-4E8A-A39D-0D638491312E", ],
-["F0CABC11-FB43-49D3-B32C-F6AC2F728BEF", ],
+["F0CABC11-FB43-49D3-B32C-F6AC2F728BEF", "4cc9d1a9-fb24-4f7a-a107-7723f58f5fa2", "cf19df5f-26ed-45b8-b413-4b5df2210b0a", "9f4d3aa4-ef61-42e3-b7d3-949bc1e12c99", "55c930a2-cbee-4d1b-a0ff-3e691105b8fb", "a0f81980-29b7-4b70-88b2-beb48cf8f782", ],
 ["FF0DE3EB-BA66-4B54-9700-1075754A5EB3", ],
 ["53CADF73-2F2C-4BCC-8748-842EE8177A85", "D733DA5C-E0BC-4EAE-BD64-92B116E15988", ],
 ["D733DA5C-E0BC-4EAE-BD64-92B116E15988", ],
@@ -953,6 +958,11 @@ export const planetConnections = [
 ["5e878fac-c366-419f-ad57-fcc4725e1362", ],
 ["03dbc0e6-be97-40d6-bacd-aaed827df4fa", ],
 ["ad028f69-e759-4775-84fc-9c1e3078cf73", ],
+["4cc9d1a9-fb24-4f7a-a107-7723f58f5fa2", ],
+["cf19df5f-26ed-45b8-b413-4b5df2210b0a", ],
+["9f4d3aa4-ef61-42e3-b7d3-949bc1e12c99", ],
+["55c930a2-cbee-4d1b-a0ff-3e691105b8fb", ],
+["a0f81980-29b7-4b70-88b2-beb48cf8f782", ],
 
 ]
 
@@ -1270,7 +1280,7 @@ export const planetArrowedConnections = [
 ["662B5EE1-6533-44B3-BC7A-2DF7708F1658", "EEF6AD45-1ABB-4D2E-BCA0-A3BE592FCE95", ],
 ["973015FD-576A-40F3-A86C-2E8EDA196B5F", "4F5D4105-E8C7-4F54-97E6-F9549BC75D4F", ],
 ["29155A2F-FCBB-4347-90DE-E8D3F86A3FFA", "4F5D4105-E8C7-4F54-97E6-F9549BC75D4F", ],
-["E400970C-2383-40ED-90F4-793AFAD87E45", ],
+["E400970C-2383-40ED-90F4-793AFAD87E45", "973015FD-576A-40F3-A86C-2E8EDA196B5F", ],
 ["788AC673-A0A0-4E77-93EC-2A21B981D7A8", "3C66F9F4-19C8-497C-AD5A-377F74970968", "E400970C-2383-40ED-90F4-793AFAD87E45", ],
 ["3C66F9F4-19C8-497C-AD5A-377F74970968", "DFDD1307-4F65-4A71-AC89-9E7B8A3D22FB", "829B047D-0C32-4887-8A3B-690BED8B847B", "E400970C-2383-40ED-90F4-793AFAD87E45", ],
 ["829B047D-0C32-4887-8A3B-690BED8B847B", "65FB0CCF-F7C4-4159-9D6D-0F929AB12136", ],
@@ -1430,6 +1440,11 @@ export const planetArrowedConnections = [
 ["5e878fac-c366-419f-ad57-fcc4725e1362", ],
 ["03dbc0e6-be97-40d6-bacd-aaed827df4fa", ],
 ["ad028f69-e759-4775-84fc-9c1e3078cf73", ],
+["4cc9d1a9-fb24-4f7a-a107-7723f58f5fa2", ],
+["cf19df5f-26ed-45b8-b413-4b5df2210b0a", ],
+["9f4d3aa4-ef61-42e3-b7d3-949bc1e12c99", ],
+["55c930a2-cbee-4d1b-a0ff-3e691105b8fb", ],
+["a0f81980-29b7-4b70-88b2-beb48cf8f782", ],
 
 ]
 
@@ -1907,6 +1922,11 @@ export const planetDashedConnections = [
 ["5e878fac-c366-419f-ad57-fcc4725e1362", ],
 ["03dbc0e6-be97-40d6-bacd-aaed827df4fa", ],
 ["ad028f69-e759-4775-84fc-9c1e3078cf73", ],
+["4cc9d1a9-fb24-4f7a-a107-7723f58f5fa2", ],
+["cf19df5f-26ed-45b8-b413-4b5df2210b0a", ],
+["9f4d3aa4-ef61-42e3-b7d3-949bc1e12c99", ],
+["55c930a2-cbee-4d1b-a0ff-3e691105b8fb", ],
+["a0f81980-29b7-4b70-88b2-beb48cf8f782", ],
 
 ]
 
