@@ -1,0 +1,12 @@
+.radialOverlayTextSlide {
+    background-image: url(/Planet/assets/images/background/tree1.jpg); 
+    background-position: bottom; 
+}
+.radialOverlayTextSlide::before {
+    background: radial-gradient(ellipse 65% 40% at center, rgba(20, 20, 50, 0.8) 70%, transparent 150%);
+    opacity: 1;
+}
+.textInFront {
+    display: flex;
+    align-items: center;
+}
