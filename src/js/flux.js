@@ -2,17 +2,17 @@ import * as THREE from 'three';
 import fluxVertexShader from '../shaders/fluxVertex.glsl'
 import fluxFragmentShader from '../shaders/fluxFragment.glsl'
 
-export function createFieldLines(destination, numLines, radius, segments, tube, rotY = 0) {
+export function createFieldLines(destination, numLines, radius, segments, tube, thickness, rotY = 0, opacity) {
     const group = new THREE.Group();
     for (let i = 0; i < numLines; i++) {
         const phi = i * 2 * Math.PI / numLines;
-        const line = createHalfNephroidCurve(radius, segments, tube);
+        const line = createHalfNephroidCurve(radius, segments, tube, thickness, opacity);
 
         // rotate the line around the x-axis by phi
         line.rotation.x = phi;
 
         if (line.material.type == "ShaderMaterial") {
-            let h = line.rotation.x / (Math.PI * 2); // hue
+            let h = line.rotation.x / (Math.PI * 2) + (rotY - 5.75) / (Math.PI * 2); // hue
             let s = 0.6; // saturation
             let l = 0.3; // lightness
 
@@ -34,7 +34,7 @@ export function createFieldLines(destination, numLines, radius, segments, tube, 
     destination.add(group);
 }
 
-function createHalfNephroidCurve(radius, segments, tube) {
+function createHalfNephroidCurve(radius, segments, tube, thickness, opacity) {
     const curve = new THREE.Curve();
 
     curve.getPoint = function(t) {
@@ -48,12 +48,13 @@ function createHalfNephroidCurve(radius, segments, tube) {
     let material;
     let line;
     if (tube == true) {
-        geometry = new THREE.TubeGeometry(curve, segments, 0.5, 32, false);
+        geometry = new THREE.TubeGeometry(curve, segments, thickness, 32, false);
         material = new THREE.ShaderMaterial({ 
             vertexShader: fluxVertexShader,
             fragmentShader: fluxFragmentShader,
             uniforms: {
                 rotation: { value: new THREE.Vector3(0.0, 1.0, 0,0) },
+                opacity: { value: opacity },
             },
             transparent: true,
          });

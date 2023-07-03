@@ -35,6 +35,41 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
     loader.load(tagFont, function (font) {
 
         function instantiateTag(index, txt, lat, lng, color, size) {
+
+            function calculateTextWidth(txt, font, size) {
+                const shapes = font.generateShapes(txt, size);
+                const geometry = new THREE.ShapeGeometry(shapes);
+                geometry.computeBoundingBox();
+            
+                // The actual width of the text
+                const width = geometry.boundingBox.max.x - geometry.boundingBox.min.x;
+            
+                return width;
+            }
+            
+            function centerText(txt, font, size) {
+                const lines = txt.split('\n');
+                const lineWidths = lines.map(line => calculateTextWidth(line, font, size));
+                const longest = Math.max(...lineWidths);
+            
+                // Calculate width of a single space character
+                let spaceWidth = calculateTextWidth(' ', font, size);
+            
+                // If space width isn't finite, use width of 'M' as a rough estimation
+                if (!isFinite(spaceWidth)) {
+                    spaceWidth = calculateTextWidth('M', font, size);
+                }
+            
+                const centeredText = lines.map((line, i) => {
+                    const spaceFactor = 1.38 //lower to add fewer spaces
+                    const spacesNeeded = Math.floor((longest - lineWidths[i]) / spaceWidth * spaceFactor); 
+                    return ' '.repeat(spacesNeeded) + line;
+                });
+            
+                return centeredText.join('\n');
+            }
+            txt = centerText(txt, font, size);
+
             // create text
             const txtGeo = new THREE.ShapeGeometry(font.generateShapes(txt, 100));
             txtGeo.computeBoundingBox();
@@ -43,12 +78,13 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
             const tag = new THREE.Mesh(txtGeo, textMaterial);
             let latLng = convertLatLngtoCartesian(lat, lng, radius + 0.061);
 
-            //TEST
             if (dataSource == enneagramTagData) {
-                const radiusModifier = Math.abs(lat - 90) / 45  //0 - 90
-                latLng = convertLatLngtoCartesian(lat, lng, radius - radiusModifier + 0.061);
+                const t = (lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
+                const radiusModifier = -Math.cos(t); // creates a cosine wave from -1 to 1
+                const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
+                const constrictFactor = 2.5 // adjust this value to shrink the curve to match your flux-tube shape
+                latLng = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.061);
             }
-            //TEST
 
             const rotationVector = new THREE.Vector3(latLng.x, latLng.y, latLng.z);
             tag.lookAt(rotationVector);
@@ -96,12 +132,15 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
 
             const box = new THREE.Mesh(boxGeo, boxMaterials[color]);
             let boxLatLng = convertLatLngtoCartesian(lat, lng, radius + 0.06);
-            //TEST
+
             if (dataSource == enneagramTagData) {
-                const radiusModifier = Math.abs(lat - 90) / 45  //0 - 90
-                boxLatLng = convertLatLngtoCartesian(lat, lng, radius - radiusModifier + 0.06);
+                const t = (lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
+                const radiusModifier = -Math.cos(t); // creates a cosine wave from -1 to 1
+                const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
+                const constrictFactor = 2.5 // adjust this value to shrink the curve to match your flux-tube shape
+                boxLatLng = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.06);
             }
-            //TEST
+            
             const boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
             box.lookAt(boxRotationVector);
             box.position.copy(boxRotationVector);
@@ -143,12 +182,14 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
         pin.originalSize = size
     
         let pos = convertLatLngtoCartesian(lat, lng, radius + 0.01);
-        //TEST
+
         if (dataSource == enneagramTagData) {
-            const radiusModifier = Math.abs(lat - 90) / 45  //0 - 90
-            pos = convertLatLngtoCartesian(lat, lng, radius - radiusModifier + 0.01);
+            const t = (lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
+            const radiusModifier = -Math.cos(t); // creates a cosine wave from -1 to 1
+            const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
+            const constrictFactor = 2.5 // adjust this value to shrink the curve to match your flux-tube shape
+            pos = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor);
         }
-        //TEST
         
         pin.position.set(pos.x, pos.y, pos.z);
     
@@ -169,8 +210,22 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
                 connection.slice(1).forEach((targetId, k) => {
                     tagSource.forEach((target, l) => {
                         if (target.id === targetId) {
-                            const p1 = convertLatLngtoCartesian(sourceItem.lat, sourceItem.lng - 180, curveMinAltitude);
-                            const p2 = convertLatLngtoCartesian(target.lat, target.lng - 180, curveMinAltitude);
+                            let p1 = convertLatLngtoCartesian(sourceItem.lat, sourceItem.lng - 180, curveMinAltitude);
+                            let p2 = convertLatLngtoCartesian(target.lat, target.lng - 180, curveMinAltitude);
+
+                            if (tagSource == enneagramTagData) {
+                                const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
+                                const constrictFactor = 2.5 // adjust this value to shrink the curve to match your flux-tube shape
+
+                                const tP1 = (sourceItem.lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
+                                const p1radiusModifier = -Math.cos(tP1); // creates a cosine wave from -1 to 1
+                                p1 = convertLatLngtoCartesian(sourceItem.lat, sourceItem.lng - 180, curveMinAltitude + p1radiusModifier * scaleFactor - constrictFactor);
+                                
+                                const tP2 = (target.lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
+                                const p2radiusModifier = -Math.cos(tP2); // creates a cosine wave from -1 to 1
+                                p2 = convertLatLngtoCartesian(target.lat, target.lng - 180, curveMinAltitude + p2radiusModifier * scaleFactor - constrictFactor);
+                            }
+
                             let weight = (sourceItem.size + target.size) / 2;
                             if (arrowed == true) weight *= 4
                             if (tunnel !== true) {

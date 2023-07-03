@@ -47,7 +47,7 @@ SCENE STRUCTURE
             - enneagram 
                 - createImages(enneaImageData)
                 - createTags(enneaTagData)
-                - enneaDynamicsConnections
+                - enneagramConnectionsObj
                     - createConnections(enneaConnections)
         - pivot1
             - moon1

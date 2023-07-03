@@ -69,7 +69,22 @@ export async function pushContent(slideshowStatus) {
     customCssLink.rel = 'stylesheet';
     customCssLink.href = cssFileName;
     cssPromise = new Promise((resolve, reject) => {
-      customCssLink.onload = resolve;
+      /* customCssLink.onload = resolve; */
+      
+      
+      customCssLink.onload = () => {
+        const bgImageUrl = extractBackgroundUrl(customCssLink.sheet.cssRules[0].cssText);
+        if (bgImageUrl) {
+          const img = new Image();
+          img.src = bgImageUrl;
+          img.onload = resolve;
+          img.onerror = reject;
+        } else {
+          resolve();
+        }
+      };
+
+
       customCssLink.onerror = reject;
       document.head.appendChild(customCssLink);
     });
@@ -99,6 +114,11 @@ export async function pushContent(slideshowStatus) {
   }).catch(e => {
     console.error('Error loading CSS/JS:', e);
   });
+}
+
+function extractBackgroundUrl(cssText) {
+  const urlMatch = cssText.match(/url\(["']?([^"')]+)["']?\)/);
+  return urlMatch ? urlMatch[1] : null;
 }
 
 function removeOldSlides() {

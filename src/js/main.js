@@ -1053,7 +1053,7 @@ export function createMindmap() {
 
     enneagram.add(enneaConnections)
     let context4 = enneaConnections
-    createConnections(enneagramTagData, enneagramConnections, 0.0002, curveRadiusSegments, 0.1, 8.01, context4, false, false, false)
+    //createConnections(enneagramTagData, enneagramConnections, 0.0002, curveRadiusSegments, 0.1, 8.01, context4, false, false, false)
     createConnections(enneagramTagData, enneagramTunnelConnections, 0.0002, curveRadiusSegments, 0.1, 8.01, context4, false, false, true)
 }
 
@@ -1072,28 +1072,36 @@ createField(field4, new THREE.Vector3(0, 1.0, 1.0), scene) */
 
 //CREATE ENNEAGRAM FLUX LINES
 const enneagram = new THREE.Object3D
+const enneagramConnectionsObj = new THREE.Object3D
 let enneagramActivated = false
 function createEnneagram(enneagram) {
     enneaCenter.add(enneagram)
+    enneagram.add(enneagramConnectionsObj)
     enneagramActivated = true
-    createFieldLines(enneagram, 10, 1.2, 200, false, 0.02)
-    createFieldLines(enneagram, 15, 1.225, 200, false, 0.01)
-    createFieldLines(enneagram, 20, 1.25, 200, false, 0)
-    createFieldLines(enneagram, 25, 1.375, 200, false, 0.01)
-    createFieldLines(enneagram, 30, 1.5, 200, false, 0.02)
-    createFieldLines(enneagram, 40, 1.675, 200, false, 0.03)
-    createFieldLines(enneagram, 50, 1.75, 200, false, 0.04)
-    createFieldLines(enneagram, 70, 1.875, 200, false, 0.05)
-    createFieldLines(enneagram, 90, 2, 200, false, 0.06)
-    createFieldLines(enneagram, 70, 2.125, 200, false, 0.07)
-    createFieldLines(enneagram, 50, 2.25, 200, false, 0.08)
-    createFieldLines(enneagram, 40, 2.375, 200, false, 0.09)
-    createFieldLines(enneagram, 30, 2.5, 200, false, 0.1)
-    createFieldLines(enneagram, 25, 2.675, 200, false, 0.11)
-    createFieldLines(enneagram, 20, 2.75, 200, false, 0.12)
-    createFieldLines(enneagram, 15, 2.875, 200, false, 0.13)
-    createFieldLines(enneagram, 10, 3, 200, false, 0.14)
-    createFieldLines(enneagram, 9, 2, 200, true, 5.75)
+    
+    //main flux lines
+    createFieldLines(enneagram, 9, 2, 200, true, 0.5, 5.761, 0.5)
+    //wing flux lines
+    createFieldLines(enneagram, 9, 2, 200, true, 0.35, 5.561, 0.35)
+    createFieldLines(enneagram, 9, 2, 200, true, 0.35, 5.961, 0.35)
+    //thin flux lines
+    createFieldLines(enneagram, 10, 1.2, 200, false, undefined, 0.02)
+    createFieldLines(enneagram, 15, 1.225, 200, false, undefined, 0.01)
+    createFieldLines(enneagram, 20, 1.25, 200, false, undefined, 0)
+    createFieldLines(enneagram, 25, 1.375, 200, false, undefined, 0.01)
+    createFieldLines(enneagram, 30, 1.5, 200, false, undefined, 0.02)
+    createFieldLines(enneagram, 40, 1.675, 200, false, undefined, 0.03)
+    createFieldLines(enneagram, 50, 1.75, 200, false, undefined, 0.04)
+    createFieldLines(enneagram, 70, 1.875, 200, false, undefined, 0.05)
+    createFieldLines(enneagram, 90, 2, 200, false, undefined, 0.06)
+    createFieldLines(enneagram, 70, 2.125, 200, false, undefined, 0.07)
+    createFieldLines(enneagram, 50, 2.25, 200, false, undefined, 0.08)
+    createFieldLines(enneagram, 40, 2.375, 200, false, undefined, 0.09)
+    createFieldLines(enneagram, 30, 2.5, 200, false, undefined, 0.1)
+    createFieldLines(enneagram, 25, 2.675, 200, false, undefined, 0.11)
+    createFieldLines(enneagram, 20, 2.75, 200, false, undefined, 0.12)
+    createFieldLines(enneagram, 15, 2.875, 200, false, undefined, 0.13)
+    createFieldLines(enneagram, 10, 3, 200, false, undefined, 0.14)
 }
 
 //CREATE SUN
@@ -1382,7 +1390,7 @@ export function createContexts(version) {
         arrowConnectionData: enneagramArrowedConnections,
         dashedConnectionData: enneagramDashedConnections,
         tunnelConnectionData: enneagramTunnelConnections,
-        connectionDestination: enneagramConnections, 
+        connectionDestination: enneagramConnectionsObj, 
         radius: 8, 
         pins: [], 
         boxes: [], 
@@ -1775,7 +1783,9 @@ function onDocumentKeyUp(event) {
                     curveMinAltitude: contexts[selectedContext].radius, 
                     context: contexts[selectedContext].connectionDestination
                 }
-                context.context.clear()
+                console.log(context.context)
+                context.context.clear()//What on earth is the point of this???
+                console.log(context.context)
                 const curveThickness = 0.0001
                 const curveRadiusSegments = 3
                 const curveMaxAltitude = 0.03
@@ -1800,7 +1810,7 @@ function onDocumentKeyUp(event) {
                     curveMinAltitude: contexts[selectedContext].radius, 
                     context: contexts[selectedContext].connectionDestination
                 }
-                context.context.clear()
+                context.context.clear() //What on earth is the point of this???
                 const curveThickness = 0.0001
                 const curveRadiusSegments = 3
                 const curveMaxAltitude = 0.03
@@ -1824,7 +1834,7 @@ function onDocumentKeyUp(event) {
                     curveMinAltitude: contexts[selectedContext].radius, 
                     context: contexts[selectedContext].connectionDestination
                 }
-                context.context.clear()
+                context.context.clear()//What on earth is the point of this???
                 const curveThickness = 0.0001
                 const curveRadiusSegments = 3
                 const curveMaxAltitude = 0.03
@@ -1848,7 +1858,7 @@ function onDocumentKeyUp(event) {
                     curveMinAltitude: contexts[selectedContext].radius, 
                     context: contexts[selectedContext].connectionDestination
                 }
-                context.context.clear()
+                context.context.clear()//What on earth is the point of this???
                 const curveThickness = 0.001
                 const curveRadiusSegments = 6
                 const curveMaxAltitude = 0.1
@@ -2195,7 +2205,7 @@ function onPointerClick(event) {
         if (contexts !== 2) selectedBox = contexts[selectedContext].boxes[selectedNode]
         if (contexts !== 2) selectedTag = contexts[selectedContext].tags[selectedNode]
 
-        if (camera.position.distanceTo(selectedPin.position) < 4 && contexts[selectedContext].tagData[selectedNode].slides !== undefined && slideshowStatus.activeSlideshow == undefined) {
+        if (camera.position.distanceTo(selectedPin.position) < 6 && contexts[selectedContext].tagData[selectedNode].slides !== undefined && slideshowStatus.activeSlideshow == undefined) {
             slideshowStatus.activeSlideshow = contexts[selectedContext].tagData[selectedNode].slides
             slideshowStatus.activeSlideshowLength = contentData[slideshowStatus.activeSlideshow].length
             if (Array.isArray(contentData[slideshowStatus.activeSlideshow][0])) {

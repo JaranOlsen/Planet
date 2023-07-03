@@ -1,41 +1,27 @@
 IN PROGRESS
+    Fix connection bug - context.context.clear()?!?
+
+
     CSS slides
-        ✅ continue working on bullet slides. click for text to appear? subActionsCOmpleted < actionsCompleted?
-        ✅ full-slide-templates
-            ✅ poems
-        - content templates
-            ✅ COUNTING PROBLEM
-            ✅ bullets and images
-            ✅ image and bullets
-            ✅ bullets and fading image
-            ✅ fading image and bullets
-            𝇈 frosted glass over background - several types of semi-transparent textures?
-            ✅ bullets and content
-            ✅ title and content (deep states of calm)
-        - transistions
-            ✅ clear slide on exit?
-            ✅ old slides sometimes messing things up, it seems particularly when I flip through quickly
-            ✅ transistion sometimes jumbles up stuff in the background of new slide (old slide problems?)
-        ✅ fix keypresses
-        ✅ make so that downarrow can be used to trigger slide actions, and prevent it from changing slide until all actions are completed
-        ✅ clean up style.css
-        ✅ clean up css
-        ✅ move slide folders one level down (data), so slides.css and slides.js are more accessible? and template files?
-        ✅ style buttons
-        ✅ add pagination dots
-        𝇈 better transistions
         𝇈 title moving in from top..? feature or bug? not a feature
         𝇈 fix for VR
 
 
 INITIATIVES
+    speak with Thomas about marker and intervention for realising the unconditioned
+
     apply for a pimp
 
     find venue for weekend retreat in oslo and bergen
 
 CONTENT
-    Resisting vulnerability
-        - strategies (intellectualisation, addiction...)
+    Bullets and boxes for interventions. PRP? More missing? Self-interruptions?
+        - Re-arrange?
+
+    Core pain schemas
+     - Maladaptive shame
+     - Maladaptive sadness
+     - Maladaptive fear
 
     Consiousness
     three common definitions
@@ -65,9 +51,6 @@ CONTENT
 
     finish converting exercises to one background image and html text (saves loading time)
 
-    ✅ wordclouds for difficult concepts
-     ✅ try to make chatGPT write a function that creates a wordcloud based on an array of words and weights
-
     add beth upton, rupert spira clips 
 
     short, medium, long videos featuring key teachers/academics/subjects
@@ -92,9 +75,6 @@ CONTENT
         -
 
 MAKE USABLE
-
-    this can be added at the beginning of my script to make sure that the DOM content is loaded before the script starts running:
-    document. addEventListener ('DOMContentLoaded', () = {
 
 SHORT-TERM DEVELOPMENT
 
