@@ -2205,7 +2205,7 @@ function onPointerClick(event) {
         if (contexts !== 2) selectedBox = contexts[selectedContext].boxes[selectedNode]
         if (contexts !== 2) selectedTag = contexts[selectedContext].tags[selectedNode]
 
-        if (camera.position.distanceTo(selectedPin.position) < 6 && contexts[selectedContext].tagData[selectedNode].slides !== undefined && slideshowStatus.activeSlideshow == undefined) {
+        if (camera.position.distanceTo(selectedPin.position) < 10 && contexts[selectedContext].tagData[selectedNode].slides !== undefined && slideshowStatus.activeSlideshow == undefined) {
             slideshowStatus.activeSlideshow = contexts[selectedContext].tagData[selectedNode].slides
             slideshowStatus.activeSlideshowLength = contentData[slideshowStatus.activeSlideshow].length
             if (Array.isArray(contentData[slideshowStatus.activeSlideshow][0])) {

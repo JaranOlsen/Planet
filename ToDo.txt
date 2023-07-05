@@ -5,6 +5,7 @@ IN PROGRESS
     CSS slides
         𝇈 title moving in from top..? feature or bug? not a feature
         𝇈 fix for VR
+        - cutout overlays
 
 
 INITIATIVES
