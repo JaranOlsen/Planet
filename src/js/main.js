@@ -60,7 +60,6 @@ import redmoonTexture from "/assets/textures/moonRed1k.webp"
 import icemoonTexture from "/assets/textures/moonIce1k.webp"
 import dash from '/assets/textures/dash.webp'
 import tier from '/assets/textures/tier.webp'
-import testPicture from '/assets/images/truth/Slide6.jpeg'
 
 // IMPORT MODELS
 import signModel from "../models/sign.glb"
@@ -359,12 +358,6 @@ function createUI() {
       UIcontainer.add(contentContainer);
     
       //
-    
-      new THREE.TextureLoader().load(testPicture, (texture) => {
-        leftSubBlock.set({
-          backgroundTexture: texture,
-        });
-      });
     
 }
 
@@ -799,7 +792,8 @@ function createStarVertices(source, number) {
         const x = (Math.random() - 0.5) * 2000
         const y = (Math.random() - 0.5) * 2000
         const z = (Math.random() - 0.5) * 2000
-        if (Math.abs(x) + Math.abs(y) + Math.abs(z) > 400) {
+        const star = new THREE.Vector3(x, y, z)
+        if (middleOfPlanet.distanceTo(star) > 500) {
             source.push(x, y, z)
         }
     }
@@ -1492,24 +1486,26 @@ function onDocumentKeyUp(event) {
     const keyCode = event.which;
 
     //Controls
-    if (keyCode == 79) { //O
-        if (controlMode === 'orbit') {
-            controlMode = 'fly';
-            orbitControls.enabled = false;
-            flyControls.enabled = true;
-            document.body.style.cursor = 'crosshair';
-          } else {
-            controlMode = 'orbit';
-            orbitControls.enabled = true;
-            flyControls.enabled = false;
-            document.body.style.cursor = 'default';
-          }
-    }
-    if (keyCode == 188) { //,
-        if (controlMode === 'fly') {
-            flyControls.dragToLook = !flyControls.dragToLook
-            console.log(flyControls.dragToLook)
-          }
+    if (focusElement !== "tagInput") {
+        if (keyCode == 79) { //O
+            if (controlMode === 'orbit') {
+                controlMode = 'fly';
+                orbitControls.enabled = false;
+                flyControls.enabled = true;
+                document.body.style.cursor = 'crosshair';
+            } else {
+                controlMode = 'orbit';
+                orbitControls.enabled = true;
+                flyControls.enabled = false;
+                document.body.style.cursor = 'default';
+            }
+        }
+        if (keyCode == 188) { //,
+            if (controlMode === 'fly') {
+                flyControls.dragToLook = !flyControls.dragToLook
+                console.log(flyControls.dragToLook)
+            }
+        }
     }
     if (focusElement !== "tagInput" && !flyControls.enabled) {
         //Slide control

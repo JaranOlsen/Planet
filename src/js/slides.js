@@ -85,7 +85,7 @@
     if (bullets.length > 0) {
         const adjustFontSize = (item) => {
             let bulletPoints = Array.from(item.querySelectorAll('.bullet'));
-            let fontSize = 5; // Start from a large value, you can adjust this
+            let fontSize = 3; // Start from a large value, you can adjust this
 
             bulletPoints.forEach(bulletPoint => {
                 bulletPoint.style.fontSize = `${fontSize}vw`;
@@ -113,7 +113,7 @@
                 }
 
                 if(!fitsContainer) {
-                    fontSize -= 0.1;
+                    fontSize -= fontSize / 20;
                     bulletPoints.forEach(bulletPoint => {
                         let parentBullet = bulletPoint.closest('li.bullet ul');
                         if (parentBullet) {

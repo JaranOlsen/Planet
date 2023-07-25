@@ -10,7 +10,7 @@ export function initializeVersion(callback, postLoadingManager, guttaState, scen
             document.getElementById("version1"),
             document.getElementById("version2"),
             document.getElementById("version3"),
-            document.getElementById("version4"),
+            //document.getElementById("version4"),
         ],
     };
 

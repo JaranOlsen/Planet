@@ -84,7 +84,7 @@
     overflow-wrap: break-word;
     color: white;
     text-align: center;
-    background-image: url("/Planet/assets/images/background/bagan.jpg");
+    background-image: url("/Planet/assets/images/background/bagan.webp");
     background-size: cover;
 }
 .quote, .instructions {
@@ -168,7 +168,7 @@
     align-items: center;
     justify-content: flex-end;
     background-color: black;
-    background-image: url("/Planet/assets/images/background/bagan.jpg");
+    background-image: url("/Planet/assets/images/background/bagan.webp");
     background-size: cover;
     user-select: none;
 }
@@ -294,9 +294,6 @@
   list-style-type: disc;
   padding-left: 0;  /* Remove padding to align bullet points with text */
 }
-/* .bullets {
-    list-style-type: disc;
-} */
 .bullet {
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -308,6 +305,9 @@
 }
 .bullet > ul > .bullet {
   margin-bottom: 0.5em;  /* Add space between sub-points */
+}
+.visible {
+  opacity: 1;
 }
 .textContent {
     opacity: 1;

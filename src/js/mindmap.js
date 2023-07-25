@@ -82,7 +82,7 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
                 const t = (lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
                 const radiusModifier = -Math.cos(t); // creates a cosine wave from -1 to 1
                 const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
-                const constrictFactor = 2.5 // adjust this value to shrink the curve to match your flux-tube shape
+                const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
                 latLng = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.061);
             }
 
@@ -137,7 +137,7 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
                 const t = (lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
                 const radiusModifier = -Math.cos(t); // creates a cosine wave from -1 to 1
                 const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
-                const constrictFactor = 2.5 // adjust this value to shrink the curve to match your flux-tube shape
+                const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
                 boxLatLng = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.06);
             }
             
@@ -187,7 +187,7 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
             const t = (lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
             const radiusModifier = -Math.cos(t); // creates a cosine wave from -1 to 1
             const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
-            const constrictFactor = 2.5 // adjust this value to shrink the curve to match your flux-tube shape
+            const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
             pos = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor);
         }
         
@@ -215,7 +215,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
 
                             if (tagSource == enneagramTagData) {
                                 const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
-                                const constrictFactor = 2.5 // adjust this value to shrink the curve to match your flux-tube shape
+                                const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
 
                                 const tP1 = (sourceItem.lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
                                 const p1radiusModifier = -Math.cos(tP1); // creates a cosine wave from -1 to 1

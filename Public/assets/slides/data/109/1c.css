@@ -1,5 +1,5 @@
 .backgroundVignette {
-    background-image: url(/Planet/assets/images/background/tree1.jpg); 
+    background-image: url(/Planet/assets/images/background/tree1.webp); 
     background-position: bottom; 
 }
 .backgroundVignette::before {

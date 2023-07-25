@@ -71,7 +71,7 @@ ul {
 #versions {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 60%;
   margin: 20;
   padding: 20;
   transform: translateY(-50%);

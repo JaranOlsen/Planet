@@ -1,11 +1,13 @@
 IN PROGRESS
-    Fix connection bug - context.context.clear()?!?
-
+    add fields for the continents
 
     CSS slides
         𝇈 title moving in from top..? feature or bug? not a feature
-        𝇈 fix for VR
-        - cutout overlays
+        - fix for VR - not possible as of yet. Wait for three-mesh-ui support for html+css content on elements.
+        𝇈 cutout overlays
+
+SHORT-TERM
+    bypass contentData.js? read straight from folders? or generate contentData array from foldercontent at init?
 
 
 INITIATIVES
