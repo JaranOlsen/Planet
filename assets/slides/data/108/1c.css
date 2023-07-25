@@ -1,5 +1,5 @@
 .backgroundVignette {
-    background-image: url(/Planet/assets/images/background/rippleLake.jpg); 
+    background-image: url(/Planet/assets/images/background/rippleLake.webp); 
     background-position: bottom; 
 }
 .backgroundVignette::before {
