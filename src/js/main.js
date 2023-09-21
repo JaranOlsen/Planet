@@ -45,6 +45,8 @@ import spiralVertexShader from '../shaders/spiralVertex.glsl'
 import spriralFragmentShader from '../shaders/spiralFragment.glsl'
 
 //  IMPORT TEXTURES
+
+import milkyway from "/assets/textures/milkyway.webp"
 import starW from "/assets/textures/starW.webp"
 import starR5 from "/assets/textures/starR5.webp"
 import starR10 from "/assets/textures/starR10.webp"
@@ -89,8 +91,6 @@ function resizeRendererToDisplaySize(renderer) {
     }
     return needResize;
 }
-
-
 
 const fov = 50;
 const aspect = 2;  // the canvas default
@@ -229,451 +229,6 @@ export function initializeLoadingManager(loadingManager) {
     };
 }
 
-//THREE-MESH-UI
-let UI = new THREE.Object3D
-let UIcontainer
-let UIactive = false
-let selectState = false
-let slideAction = false
-function createUI() {
-    UIcontainer = new ThreeMeshUI.Block({
-        ref: "UIcontainer",
-        padding: 0.025,
-        fontFamily: './fonts/Roboto-msdf.json',
-        fontTexture:'./fonts/Roboto-msdf.png',
-        fontColor: new THREE.Color(0xffffff),
-        backgroundOpacity: 0,
-      });
-    
-      UIcontainer.position.set(0, 1, 5.3);
-      UIcontainer.rotation.x = -0.15;
-      
-      UI.add(UIcontainer);
-      jaranius.add(UI)
-
-      UIactive = true
-    
-      //
-    
-      const title = new ThreeMeshUI.Block({
-        height: 0.2,
-        width: 2.25,
-        margin: 0.025,
-        justifyContent: "center",
-        fontSize: 0.09,
-      });
-    
-      title.add(
-        new ThreeMeshUI.Text({
-          content: "TWO LEVELS OF TRUTH",
-        })
-      );
-    
-      UIcontainer.add(title);
-    
-      //
-    
-      const leftSubBlock = new ThreeMeshUI.Block({
-        height: 0.95,
-        width: 1.75,
-        margin: 0.025,
-        padding: 0.025,
-        textAlign: "left",
-        justifyContent: "end",
-      });
-    
-      const caption = new ThreeMeshUI.Block({
-        height: 0.07,
-        width: 1.37,
-        textAlign: "center",
-        justifyContent: "center",
-      });
-    
-      caption.add(
-        new ThreeMeshUI.Text({
-          content: "Must be transcended to realize Absolute Truth",
-          fontSize: 0.02,
-        })
-      );
-    
-      leftSubBlock.add(caption);
-    
-      //
-    
-      const rightSubBlock = new ThreeMeshUI.Block({
-        margin: 0.025,
-      });
-    
-      const subSubBlock1 = new ThreeMeshUI.Block({
-        height: 0.35,
-        width: 0.5,
-        margin: 0.025,
-        padding: 0.02,
-        fontSize: 0.04,
-        justifyContent: "center",
-        backgroundOpacity: 0,
-      }).add(
-        new ThreeMeshUI.Text({
-          content: "Based on distinctions, concepts, language, symbols.",
-        }),
-    
-        new ThreeMeshUI.Text({
-          content: " Sankhara",
-          fontColor: new THREE.Color(0x92e66c),
-        }),
-    
-        new ThreeMeshUI.Text({
-          content: " = conditioned, constructed, fabricated, compounded.",
-        })
-      );
-    
-      const subSubBlock2 = new ThreeMeshUI.Block({
-        height: 0.53,
-        width: 0.5,
-        margin: 0.01,
-        padding: 0.02,
-        fontSize: 0.025,
-        alignItems: "start",
-        textAlign: 'justify',
-        backgroundOpacity: 0,
-      }).add(
-        new ThreeMeshUI.Text({
-          content:
-            "The males of this species grow to maximum total length of 73 cm (29 in): body 58 cm (23 in), tail 15 cm (5.9 in). Females grow to a maximum total length of 58 cm (23 in). The males are surprisingly long and slender compared to the females.\nThe head has a short snout, more so in males than in females.\nThe eyes are large and surrounded by 9–16 circumorbital scales. The orbits (eyes) are separated by 7–9 scales.",
-        })
-      );
-    
-      rightSubBlock.add(subSubBlock1, subSubBlock2);
-    
-      //
-    
-      contentContainer = new ThreeMeshUI.Block({
-        contentDirection: "row",
-        padding: 0.02,
-        margin: 0.025,
-        backgroundOpacity: 0,
-      });
-    
-      contentContainer.add(leftSubBlock, rightSubBlock);
-      UIcontainer.add(contentContainer);
-    
-      //
-    
-}
-
-//WEB XR
-let session
-enableVRbutton.addEventListener("click", () => {
-    checkForXRSupport()
-    enableVRbutton.style.display = "none"; 
-})
-
-export async function checkForXRSupport() {
-    navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
-    if (supported) {
-        webXRInitialized = true
-        const button = VRButton.createButton( renderer )
-        document.body.appendChild( button );
-        setupXR();
-    }
-    });
-}
-
-function declareGlobalVariables() {
-    window.dolly = new THREE.Object3D();
-    window.dummyCam = new THREE.Object3D();
-    window.workingMatrix = new THREE.Matrix4();
-    window.buttonStates = {};
-    window.gamepadIndices = "";
-    window.info = {};
-    window.controllers = {};
-    window.elapsedTime = 0;
-    window.dollyLat = 90;
-    window.dollyLng = 180;
-    window.dollyRadius = 8;
-    window.XRinSession = false;
-    window.activeVRSlideshow = undefined;
-    window.activeVRSlide = undefined;
-    window.activeVRSlideshowPosition = undefined;
-    window.activeVRSlideshowLength = undefined;
-    window.slideshowActions = []
-}
-
-function setupXR() {
-    renderer.xr.enabled = true;
-
-    declareGlobalVariables();
-    
-    camera.position.set( 0, 1.6, 0 );
-    const dollyPos = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
-    dolly.position.set(dollyPos.x, dollyPos.y - 1.6, dollyPos.z)
-    dolly.add( camera );
-    scene.add( dolly );
-    camera.add( dummyCam );
-
-    const controller = renderer.xr.getController( 0 );
-    controller.addEventListener( 'connected', onConnected );
-    const modelFactory = new XRControllerModelFactory();
-    const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0,0,0 ), new THREE.Vector3( 0,0,-1 ) ] );
-    const line = new THREE.Line( geometry );
-    line.scale.z = 0;
-    
-    controllers = {};
-    controllers.right = buildController( 0, line, modelFactory );
-    controllers.left = buildController( 1, line, modelFactory );
-}
-
-function onConnected( event ){
-    playButton.style.display = "none";
-    skipButton.style.display = "none";
-    credits.style.display = "none";
-
-    info = {};
-    
-    fetchProfile( event.data, DEFAULT_PROFILES_PATH, DEFAULT_PROFILE ).then( ( { profile, assetPath } ) => {
-        console.log( JSON.stringify(profile));
-        
-        info.name = profile.profileId;
-        info.targetRayMode = event.data.targetRayMode;
-
-        Object.entries( profile.layouts ).forEach( ( [key, layout] ) => {
-            const components = {};
-            Object.values( layout.components ).forEach( ( component ) => {
-                components[component.rootNodeName] = component.gamepadIndices;
-            });
-            info[key] = components;
-        });
-
-        createButtonStates( info.right );
-        
-        console.log( JSON.stringify(info) );
-
-        updateControllers( info );
-
-    } );
-}
-
-function createButtonStates(components){
-    buttonStates = {};
-    gamepadIndices = components
-    Object.keys( components ).forEach( (key) => {
-        if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
-            buttonStates[key] = { button: 0, xAxis: 0, yAxis: 0 };
-        }else{
-            buttonStates[key] = 0; 
-        }
-    })
-}
-
-function updateControllers(info) {
-    const setupControllerEvents = (controller, controllerInfo) => {
-      let trigger = false,
-        squeeze = false;
-  
-      Object.keys(controllerInfo).forEach((key) => {
-        if (key.indexOf("trigger") != -1) trigger = true;
-        if (key.indexOf("squeeze") != -1) squeeze = true;
-      });
-  
-      if (trigger) {
-        controller.addEventListener("selectstart", onSelectStart);
-        controller.addEventListener("selectend", onSelectEnd);
-      }
-  
-      if (squeeze) {
-        controller.addEventListener("squeezestart", onSqueezeStart);
-        controller.addEventListener("squeezeend", onSqueezeEnd);
-      }
-  
-      controller.addEventListener("disconnected", () => onDisconnected(controller));
-    };
-  
-    if (info.right !== undefined) {
-      const right = renderer.xr.getController(0);
-      setupControllerEvents(right, info.right);
-    }
-  
-    if (info.left !== undefined) {
-      const left = renderer.xr.getController(1);
-      setupControllerEvents(left, info.left);
-    }
-  }
-  
-
-function buildController( index, line, modelFactory ){
-    const controller = renderer.xr.getController( index );
-    
-    controller.userData.selectPressed = false;
-    controller.userData.index = index;
-    
-    if (line) controller.add( line.clone() );
-    
-    dolly.add( controller );
-    
-    let grip;
-    
-    if ( modelFactory ){
-        grip = renderer.xr.getControllerGrip( index );
-        grip.add( modelFactory.createControllerModel( grip ));
-        dolly.add( grip );
-    }
-    
-    return { controller, grip };
-}
-
-function onSelectStart( ){
-    this.userData.selectPressed = true;
-    selectState = true;
-}
-
-function onSelectEnd( ){
-    this.children[0].scale.z = 0;
-    this.userData.selectPressed = false;
-    this.userData.selected = undefined;
-    selectState = false;
-    slideAction = false;
-}
-
-function onSqueezeStart( ){
-    this.userData.squeezePressed = true;
-    if (this.userData.selected !== undefined ){
-        this.attach( this.userData.selected );
-        this.userData.attachedObject = userData.selected;
-    }
-}
-
-function onSqueezeEnd( ){
-    this.userData.squeezePressed = false;
-    if (this.userData.attachedObject !== undefined){
-            room.attach( this.userData.attachedObject );
-        this.userData.attachedObject = undefined;
-    }
-
-    if (UIactive == true) {
-        UI.remove(UIcontainer)
-        UIactive = false
-    }
-}
-
-function onDisconnected(controller){
-    const index = controller.userData.index;
-    console.log(`Disconnected controller ${index}`);
-    
-    if ( controllers ){
-        const obj = (index==0) ? controllers.right : controllers.left;
-        
-        if (obj){
-            if (obj.controller){
-                const controller = obj.controller;
-                while( controller.children.length > 0 ) controller.remove( controller.children[0] );
-                dolly.remove( controller );
-            }
-            if (obj.grip) dolly.remove( obj.grip );
-        }
-    }
-}
-
-function handleController( controller ){
-    if (controller.userData.selectPressed ){
-
-        controller.children[0].scale.z = 10;
-
-        workingMatrix.identity().extractRotation( controller.matrixWorld );
-
-        raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
-        raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( workingMatrix );
-
-        const intersects = raycaster.intersectObjects( intersectObjectsArray );
-
-        if (intersects.length>0){
-            const activatedPin = intersects[0].object;
-
-            if (activatedPin.source[activatedPin.index].slides !== undefined) {
-                
-                if (UIactive == false) {
-                    activeVRSlideshow = activatedPin.source[activatedPin.index].slides
-                    activeVRSlideshowPosition = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
-                    activeVRSlideshowLength = contentData[activeVRSlideshow].length
-                    activeVRSlide = 0
-
-                    UIcontainer = pushVRContent(activeVRSlideshow, activeVRSlide)
-                    UI.add(UIcontainer)
-                    UIcontainer.position.set(activeVRSlideshowPosition.x, activeVRSlideshowPosition.y, activeVRSlideshowPosition.z)
-                    UIcontainer.lookAt(middleOfPlanet)
-                    UIcontainer.rotateY(Math.PI)
-                    jaranius.add(UI)
-                    
-                    UIactive = true
-                }
-            }
-        }
-    }
-}
-
-function updateGamepadState(){
-    session = renderer.xr.getSession();
-    
-    const inputSource = session.inputSources[0];
-    
-    if (inputSource && inputSource.gamepad && gamepadIndices && buttonStates){
-        const gamepad = inputSource.gamepad;
-        XRinSession = true
-        try{
-            Object.entries( buttonStates ).forEach( ( [ key, value ] ) => {
-                const buttonIndex = gamepadIndices[key].button;
-                if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
-                    const xAxisIndex = gamepadIndices[key].xAxis;
-                    const yAxisIndex = gamepadIndices[key].yAxis;
-                    buttonStates[key].button = gamepad.buttons[buttonIndex].value; 
-                    buttonStates[key].xAxis = gamepad.axes[xAxisIndex].toFixed(2); 
-                    buttonStates[key].yAxis = gamepad.axes[yAxisIndex].toFixed(2); 
-                }else{
-                    buttonStates[key] = gamepad.buttons[buttonIndex].value;
-                }
-            });
-        }catch(e){
-            console.warn("An error occurred setting the ui");
-        }
-    }
-}
-
-function moveDolly(dt){
-    
-    const speed = 0.2;
-    let pos = dolly.position.clone();
-    pos.y += 1;
-    
-    let dir = new THREE.Vector3();
-    const q = new THREE.Quaternion();
-    //Store original dolly rotation
-    const quaternion = dolly.quaternion.clone();
-    //Get rotation for movement from the headset pose
-    dolly.quaternion.copy( dummyCam.getWorldQuaternion(q) );
-    dolly.getWorldDirection(dir);
-    dir.negate();
-    
-        dolly.translateZ(-dt*speed);
-        pos = dolly.getWorldPosition( origin );
-
-    //cast left
-    dir.set(-1,0,0);
-    dir.applyMatrix4(dolly.matrix);
-    dir.normalize();
-
-    //cast right
-    dir.set(1,0,0);
-    dir.applyMatrix4(dolly.matrix);
-    dir.normalize();
-
-    //cast down
-    dir.set(0,-1,0);
-    pos.y += 1.5;
-
-    //Restore the original rotation
-    dolly.quaternion.copy( quaternion );
-}
-
-
 //INTRO
 let introStarted = false
 let introTuneLength
@@ -755,7 +310,24 @@ buttons.forEach(button => {
     });
 });
   
+//CREATE OUTER SPACE
+function createGalaxy() {
+    const radius = 1000;
+    const segments = 50;
+    const geometry = new THREE.SphereGeometry(radius, segments, segments);
 
+    const material = new THREE.MeshBasicMaterial({
+        map: textureLoader.load(milkyway),
+        side: THREE.BackSide
+    });
+
+    const milkyWay = new THREE.Mesh(geometry, material);
+    milkyWay.rotation.set(0.1, 0.1, 0.1)
+
+    return milkyWay
+}
+const galaxy = createGalaxy()
+scene.add(galaxy);
 
 //CREATE STARS
 const starGeometry = new THREE.BufferGeometry()
@@ -1426,6 +998,451 @@ function refreshLoop() {
 fpsContainer.appendChild(fpsDisplay);
 
 refreshLoop();
+
+//THREE-MESH-UI
+let UI = new THREE.Object3D
+let UIcontainer
+let UIactive = false
+let selectState = false
+let slideAction = false
+function createUI() {
+    UIcontainer = new ThreeMeshUI.Block({
+        ref: "UIcontainer",
+        padding: 0.025,
+        fontFamily: './fonts/Roboto-msdf.json',
+        fontTexture:'./fonts/Roboto-msdf.png',
+        fontColor: new THREE.Color(0xffffff),
+        backgroundOpacity: 0,
+      });
+    
+      UIcontainer.position.set(0, 1, 5.3);
+      UIcontainer.rotation.x = -0.15;
+      
+      UI.add(UIcontainer);
+      jaranius.add(UI)
+
+      UIactive = true
+    
+      //
+    
+      const title = new ThreeMeshUI.Block({
+        height: 0.2,
+        width: 2.25,
+        margin: 0.025,
+        justifyContent: "center",
+        fontSize: 0.09,
+      });
+    
+      title.add(
+        new ThreeMeshUI.Text({
+          content: "TWO LEVELS OF TRUTH",
+        })
+      );
+    
+      UIcontainer.add(title);
+    
+      //
+    
+      const leftSubBlock = new ThreeMeshUI.Block({
+        height: 0.95,
+        width: 1.75,
+        margin: 0.025,
+        padding: 0.025,
+        textAlign: "left",
+        justifyContent: "end",
+      });
+    
+      const caption = new ThreeMeshUI.Block({
+        height: 0.07,
+        width: 1.37,
+        textAlign: "center",
+        justifyContent: "center",
+      });
+    
+      caption.add(
+        new ThreeMeshUI.Text({
+          content: "Must be transcended to realize Absolute Truth",
+          fontSize: 0.02,
+        })
+      );
+    
+      leftSubBlock.add(caption);
+    
+      //
+    
+      const rightSubBlock = new ThreeMeshUI.Block({
+        margin: 0.025,
+      });
+    
+      const subSubBlock1 = new ThreeMeshUI.Block({
+        height: 0.35,
+        width: 0.5,
+        margin: 0.025,
+        padding: 0.02,
+        fontSize: 0.04,
+        justifyContent: "center",
+        backgroundOpacity: 0,
+      }).add(
+        new ThreeMeshUI.Text({
+          content: "Based on distinctions, concepts, language, symbols.",
+        }),
+    
+        new ThreeMeshUI.Text({
+          content: " Sankhara",
+          fontColor: new THREE.Color(0x92e66c),
+        }),
+    
+        new ThreeMeshUI.Text({
+          content: " = conditioned, constructed, fabricated, compounded.",
+        })
+      );
+    
+      const subSubBlock2 = new ThreeMeshUI.Block({
+        height: 0.53,
+        width: 0.5,
+        margin: 0.01,
+        padding: 0.02,
+        fontSize: 0.025,
+        alignItems: "start",
+        textAlign: 'justify',
+        backgroundOpacity: 0,
+      }).add(
+        new ThreeMeshUI.Text({
+          content:
+            "The males of this species grow to maximum total length of 73 cm (29 in): body 58 cm (23 in), tail 15 cm (5.9 in). Females grow to a maximum total length of 58 cm (23 in). The males are surprisingly long and slender compared to the females.\nThe head has a short snout, more so in males than in females.\nThe eyes are large and surrounded by 9–16 circumorbital scales. The orbits (eyes) are separated by 7–9 scales.",
+        })
+      );
+    
+      rightSubBlock.add(subSubBlock1, subSubBlock2);
+    
+      //
+    
+      contentContainer = new ThreeMeshUI.Block({
+        contentDirection: "row",
+        padding: 0.02,
+        margin: 0.025,
+        backgroundOpacity: 0,
+      });
+    
+      contentContainer.add(leftSubBlock, rightSubBlock);
+      UIcontainer.add(contentContainer);
+    
+      //
+    
+}
+
+//WEB XR
+let session
+enableVRbutton.addEventListener("click", () => {
+    checkForXRSupport()
+    enableVRbutton.style.display = "none"; 
+})
+
+export async function checkForXRSupport() {
+    navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
+    if (supported) {
+        webXRInitialized = true
+        const button = VRButton.createButton( renderer )
+        document.body.appendChild( button );
+        setupXR();
+    }
+    });
+}
+
+function declareGlobalVariables() {
+    window.dolly = new THREE.Object3D();
+    window.dummyCam = new THREE.Object3D();
+    window.workingMatrix = new THREE.Matrix4();
+    window.buttonStates = {};
+    window.gamepadIndices = "";
+    window.info = {};
+    window.controllers = {};
+    window.elapsedTime = 0;
+    window.dollyLat = 90;
+    window.dollyLng = 180;
+    window.dollyRadius = 8;
+    window.XRinSession = false;
+    window.activeVRSlideshow = undefined;
+    window.activeVRSlide = undefined;
+    window.activeVRSlideshowPosition = undefined;
+    window.activeVRSlideshowLength = undefined;
+    window.slideshowActions = []
+}
+
+function setupXR() {
+    renderer.xr.enabled = true;
+
+    declareGlobalVariables();
+    
+    camera.position.set( 0, 1.6, 0 );
+    const dollyPos = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
+    dolly.position.set(dollyPos.x, dollyPos.y - 1.6, dollyPos.z)
+    dolly.add( camera );
+    scene.add( dolly );
+    camera.add( dummyCam );
+
+    const controller = renderer.xr.getController( 0 );
+    controller.addEventListener( 'connected', onConnected );
+    const modelFactory = new XRControllerModelFactory();
+    const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0,0,0 ), new THREE.Vector3( 0,0,-1 ) ] );
+    const line = new THREE.Line( geometry );
+    line.scale.z = 0;
+    
+    controllers = {};
+    controllers.right = buildController( 0, line, modelFactory );
+    controllers.left = buildController( 1, line, modelFactory );
+}
+
+function onConnected( event ){
+    playButton.style.display = "none";
+    skipButton.style.display = "none";
+    credits.style.display = "none";
+
+    info = {};
+    
+    fetchProfile( event.data, DEFAULT_PROFILES_PATH, DEFAULT_PROFILE ).then( ( { profile, assetPath } ) => {
+        console.log( JSON.stringify(profile));
+        
+        info.name = profile.profileId;
+        info.targetRayMode = event.data.targetRayMode;
+
+        Object.entries( profile.layouts ).forEach( ( [key, layout] ) => {
+            const components = {};
+            Object.values( layout.components ).forEach( ( component ) => {
+                components[component.rootNodeName] = component.gamepadIndices;
+            });
+            info[key] = components;
+        });
+
+        createButtonStates( info.right );
+        
+        console.log( JSON.stringify(info) );
+
+        updateControllers( info );
+
+    } );
+}
+
+function createButtonStates(components){
+    buttonStates = {};
+    gamepadIndices = components
+    Object.keys( components ).forEach( (key) => {
+        if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
+            buttonStates[key] = { button: 0, xAxis: 0, yAxis: 0 };
+        }else{
+            buttonStates[key] = 0; 
+        }
+    })
+}
+
+function updateControllers(info) {
+    const setupControllerEvents = (controller, controllerInfo) => {
+      let trigger = false,
+        squeeze = false;
+  
+      Object.keys(controllerInfo).forEach((key) => {
+        if (key.indexOf("trigger") != -1) trigger = true;
+        if (key.indexOf("squeeze") != -1) squeeze = true;
+      });
+  
+      if (trigger) {
+        controller.addEventListener("selectstart", onSelectStart);
+        controller.addEventListener("selectend", onSelectEnd);
+      }
+  
+      if (squeeze) {
+        controller.addEventListener("squeezestart", onSqueezeStart);
+        controller.addEventListener("squeezeend", onSqueezeEnd);
+      }
+  
+      controller.addEventListener("disconnected", () => onDisconnected(controller));
+    };
+  
+    if (info.right !== undefined) {
+      const right = renderer.xr.getController(0);
+      setupControllerEvents(right, info.right);
+    }
+  
+    if (info.left !== undefined) {
+      const left = renderer.xr.getController(1);
+      setupControllerEvents(left, info.left);
+    }
+  }
+  
+
+function buildController( index, line, modelFactory ){
+    const controller = renderer.xr.getController( index );
+    
+    controller.userData.selectPressed = false;
+    controller.userData.index = index;
+    
+    if (line) controller.add( line.clone() );
+    
+    dolly.add( controller );
+    
+    let grip;
+    
+    if ( modelFactory ){
+        grip = renderer.xr.getControllerGrip( index );
+        grip.add( modelFactory.createControllerModel( grip ));
+        dolly.add( grip );
+    }
+    
+    return { controller, grip };
+}
+
+function onSelectStart( ){
+    this.userData.selectPressed = true;
+    selectState = true;
+}
+
+function onSelectEnd( ){
+    this.children[0].scale.z = 0;
+    this.userData.selectPressed = false;
+    this.userData.selected = undefined;
+    selectState = false;
+    slideAction = false;
+}
+
+function onSqueezeStart( ){
+    this.userData.squeezePressed = true;
+    if (this.userData.selected !== undefined ){
+        this.attach( this.userData.selected );
+        this.userData.attachedObject = userData.selected;
+    }
+}
+
+function onSqueezeEnd( ){
+    this.userData.squeezePressed = false;
+    if (this.userData.attachedObject !== undefined){
+            room.attach( this.userData.attachedObject );
+        this.userData.attachedObject = undefined;
+    }
+
+    if (UIactive == true) {
+        UI.remove(UIcontainer)
+        UIactive = false
+    }
+}
+
+function onDisconnected(controller){
+    const index = controller.userData.index;
+    console.log(`Disconnected controller ${index}`);
+    
+    if ( controllers ){
+        const obj = (index==0) ? controllers.right : controllers.left;
+        
+        if (obj){
+            if (obj.controller){
+                const controller = obj.controller;
+                while( controller.children.length > 0 ) controller.remove( controller.children[0] );
+                dolly.remove( controller );
+            }
+            if (obj.grip) dolly.remove( obj.grip );
+        }
+    }
+}
+
+function handleController( controller ){
+    if (controller.userData.selectPressed ){
+
+        controller.children[0].scale.z = 10;
+
+        workingMatrix.identity().extractRotation( controller.matrixWorld );
+
+        raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
+        raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( workingMatrix );
+
+        const intersects = raycaster.intersectObjects( intersectObjectsArray );
+
+        if (intersects.length>0){
+            const activatedPin = intersects[0].object;
+
+            if (activatedPin.source[activatedPin.index].slides !== undefined) {
+                
+                if (UIactive == false) {
+                    activeVRSlideshow = activatedPin.source[activatedPin.index].slides
+                    activeVRSlideshowPosition = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
+                    activeVRSlideshowLength = contentData[activeVRSlideshow].length
+                    activeVRSlide = 0
+
+                    UIcontainer = pushVRContent(activeVRSlideshow, activeVRSlide)
+                    UI.add(UIcontainer)
+                    UIcontainer.position.set(activeVRSlideshowPosition.x, activeVRSlideshowPosition.y, activeVRSlideshowPosition.z)
+                    UIcontainer.lookAt(middleOfPlanet)
+                    UIcontainer.rotateY(Math.PI)
+                    jaranius.add(UI)
+                    
+                    UIactive = true
+                }
+            }
+        }
+    }
+}
+
+function updateGamepadState(){
+    session = renderer.xr.getSession();
+    
+    const inputSource = session.inputSources[0];
+    
+    if (inputSource && inputSource.gamepad && gamepadIndices && buttonStates){
+        const gamepad = inputSource.gamepad;
+        XRinSession = true
+        try{
+            Object.entries( buttonStates ).forEach( ( [ key, value ] ) => {
+                const buttonIndex = gamepadIndices[key].button;
+                if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
+                    const xAxisIndex = gamepadIndices[key].xAxis;
+                    const yAxisIndex = gamepadIndices[key].yAxis;
+                    buttonStates[key].button = gamepad.buttons[buttonIndex].value; 
+                    buttonStates[key].xAxis = gamepad.axes[xAxisIndex].toFixed(2); 
+                    buttonStates[key].yAxis = gamepad.axes[yAxisIndex].toFixed(2); 
+                }else{
+                    buttonStates[key] = gamepad.buttons[buttonIndex].value;
+                }
+            });
+        }catch(e){
+            console.warn("An error occurred setting the ui");
+        }
+    }
+}
+
+function moveDolly(dt){
+    
+    const speed = 0.2;
+    let pos = dolly.position.clone();
+    pos.y += 1;
+    
+    let dir = new THREE.Vector3();
+    const q = new THREE.Quaternion();
+    //Store original dolly rotation
+    const quaternion = dolly.quaternion.clone();
+    //Get rotation for movement from the headset pose
+    dolly.quaternion.copy( dummyCam.getWorldQuaternion(q) );
+    dolly.getWorldDirection(dir);
+    dir.negate();
+    
+        dolly.translateZ(-dt*speed);
+        pos = dolly.getWorldPosition( origin );
+
+    //cast left
+    dir.set(-1,0,0);
+    dir.applyMatrix4(dolly.matrix);
+    dir.normalize();
+
+    //cast right
+    dir.set(1,0,0);
+    dir.applyMatrix4(dolly.matrix);
+    dir.normalize();
+
+    //cast down
+    dir.set(0,-1,0);
+    pos.y += 1.5;
+
+    //Restore the original rotation
+    dolly.quaternion.copy( quaternion );
+}
+
 
 //INTERACTION FUNCTIONS
 function scanPins() {
