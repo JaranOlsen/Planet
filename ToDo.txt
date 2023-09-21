@@ -9,6 +9,7 @@ IN PROGRESS
 SHORT-TERM
     bypass contentData.js? read straight from folders? or generate contentData array from foldercontent at init?
 
+    tidy up and flesh out palette.js and materials.js
 
 INITIATIVES
     speak with Thomas about marker and intervention for realising the unconditioned
