@@ -61,6 +61,30 @@ const boxMaterial13 = new MeshStandardMaterial({
         emissive: palette[13],
         emissiveIntensity: 0.1,
     })
+const boxMaterial14 = new MeshStandardMaterial({
+        color: palette[14],
+        transparent: true,
+        opacity: 0.85, 
+        side: DoubleSide,
+        emissive: palette[14],
+        emissiveIntensity: 0.1,
+    })
+const boxMaterial15 = new MeshStandardMaterial({
+        color: palette[15],
+        transparent: true,
+        opacity: 0.85, 
+        side: DoubleSide,
+        emissive: palette[15],
+        emissiveIntensity: 0.1,
+    })
+const boxMaterial16 = new MeshStandardMaterial({
+        color: palette[16],
+        transparent: true,
+        opacity: 0.85, 
+        side: DoubleSide,
+        emissive: palette[16],
+        emissiveIntensity: 0.1,
+    })
     
 const boxMaterial20 = new MeshStandardMaterial({
         color: palette[20],
@@ -246,6 +270,21 @@ const pinMaterial13 = new MeshStandardMaterial({
     emissive: palette[13],
     emissiveIntensity: 0.2,
 })
+const pinMaterial14 = new MeshStandardMaterial({
+    color: palette[14],
+    emissive: palette[14],
+    emissiveIntensity: 0.2,
+})
+const pinMaterial15 = new MeshStandardMaterial({
+    color: palette[15],
+    emissive: palette[15],
+    emissiveIntensity: 0.2,
+})
+const pinMaterial16 = new MeshStandardMaterial({
+    color: palette[16],
+    emissive: palette[16],
+    emissiveIntensity: 0.2,
+})
 
 const pinMaterial20 = new MeshStandardMaterial({
     color: palette[20],
@@ -370,6 +409,24 @@ const pinWireframeMaterial12 = new MeshStandardMaterial({
 const pinWireframeMaterial13 = new MeshStandardMaterial({
     color: palette[13],
     emissive: palette[13],
+    emissiveIntensity: 0.2,
+    wireframe: true
+})
+const pinWireframeMaterial14 = new MeshStandardMaterial({
+    color: palette[14],
+    emissive: palette[14],
+    emissiveIntensity: 0.2,
+    wireframe: true
+})
+const pinWireframeMaterial15 = new MeshStandardMaterial({
+    color: palette[15],
+    emissive: palette[15],
+    emissiveIntensity: 0.2,
+    wireframe: true
+})
+const pinWireframeMaterial16 = new MeshStandardMaterial({
+    color: palette[16],
+    emissive: palette[16],
     emissiveIntensity: 0.2,
     wireframe: true
 })
@@ -498,21 +555,21 @@ export const connectionMaterial = new MeshStandardMaterial({
 
 export const boxMaterials = [
     boxMaterial0, , , , , , , , , , 
-    boxMaterial10, boxMaterial11, boxMaterial12, boxMaterial13, , , , , , , 
+    boxMaterial10, boxMaterial11, boxMaterial12, boxMaterial13, boxMaterial14, boxMaterial15, boxMaterial16, , , , 
     boxMaterial20, boxMaterial21, boxMaterial22, , , , , , , , 
     boxMaterial30, boxMaterial31, boxMaterial32, boxMaterial33, , , , , , , 
     boxMaterial40, boxMaterial41, boxMaterial42, boxMaterial43, boxMaterial44, boxMaterial45, boxMaterial46, boxMaterial47, boxMaterial48, boxMaterial49, 
 ]
 export const pinMaterials = [
     pinMaterial0, pinMaterial1, pinMaterial2, , , , , , , , 
-    pinMaterial10, pinMaterial11, pinMaterial12, pinMaterial13, , , , , , , 
+    pinMaterial10, pinMaterial11, pinMaterial12, pinMaterial13, pinMaterial14, pinMaterial15, pinMaterial16, , , , 
     pinMaterial20, pinMaterial21, pinMaterial22, , , , , , , , 
     pinMaterial30, pinMaterial31, pinMaterial32, pinMaterial33, , , , , , , 
     pinMaterial40, pinMaterial41, pinMaterial42, pinMaterial43, pinMaterial44, pinMaterial45, pinMaterial46, pinMaterial47, pinMaterial48, pinMaterial49, 
 ]
 export const pinWireframeMaterials = [
     pinWireframeMaterial0,pinWireframeMaterial1, , , , , , , , , 
-    pinWireframeMaterial10, pinWireframeMaterial11, pinWireframeMaterial12, pinWireframeMaterial13, , , , , , ,
+    pinWireframeMaterial10, pinWireframeMaterial11, pinWireframeMaterial12, pinWireframeMaterial13, pinWireframeMaterial14, pinWireframeMaterial15, pinWireframeMaterial16, , , ,
     pinWireframeMaterial20, pinWireframeMaterial21, pinWireframeMaterial22, , , , , , , ,
     pinWireframeMaterial30, pinWireframeMaterial31, pinWireframeMaterial32, pinWireframeMaterial33, , , , , , , 
     pinWireframeMaterial40, pinWireframeMaterial41, pinWireframeMaterial42, pinWireframeMaterial43, pinWireframeMaterial44, pinWireframeMaterial45, pinWireframeMaterial46, pinWireframeMaterial47, pinWireframeMaterial48, pinWireframeMaterial49, 

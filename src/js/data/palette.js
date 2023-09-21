@@ -1,4 +1,4 @@
-export const palette = [
+export const palette = [ //Remember to add materials in materials.js
 0x74121D,   //Global colors
 0xFF0000,
 0xFFD700,
@@ -13,9 +13,9 @@ export const palette = [
 0xD1BBD7,
 0x882E72,
 0xFDAA98,
-0x000000,
-0x000000,
-0x000000,
+0xC0392B,
+0xF1C40F,
+0x239B56,
 0x000000,
 0x000000,
 0xffffff,

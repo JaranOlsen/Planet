@@ -23,7 +23,7 @@ export const planetTagData = [
     {id: "6BDD61FD-3F46-453B-8714-64AF81BCE3F9", text: "limitations of", lat: 35, lng: 223, color: 30, size: 30, slides: undefined},
     {id: "A81C54C1-D640-4297-AFA9-346A25B8132E", text: "contextual", lat: 39.7, lng: 227.9, color: 33, size: 15, slides: undefined},
     {id: "9E19FF41-5144-4745-9C0B-A99858302CDE", text: "ways of cutting the apple", lat: 36.3, lng: 229.9, color: 33, size: 15, slides: undefined},
-    {id: "050308DE-F371-436D-AE9F-B0D5B7F8C282", text: "lost in reduction", lat: 38.0, lng: 229.4, color: 33, size: 15, slides: undefined},
+    {id: "050308DE-F371-436D-AE9F-B0D5B7F8C282", text: "lost in reduction", lat: 38, lng: 229.4, color: 33, size: 15, slides: undefined},
     {id: "A7D7AE08-AFD8-49B2-A964-2098C4ACEAF4", text: "Diversity", lat: 35, lng: 197.1, color: 30, size: 30, slides: undefined},
     {id: "0EC034DC-AFC0-4C17-84CF-0DD0991AFDAD", text: "Dualist ontologies", lat: 30.3, lng: 184.5, color: 30, size: 20, slides: undefined},
     {id: "302B64FD-4E04-4823-8E13-C7F2FAA4E7C9", text: "Dualism", lat: 36, lng: 177, color: 30, size: 30, slides: undefined},
@@ -304,19 +304,19 @@ export const planetTagData = [
     {id: "95BBCB02-420D-4FD9-A9BA-A404D72B41D3", text: "Nature of fundamental reality", lat: 21, lng: 176.3, color: 33, size: 25, slides: undefined},
     {id: "6A893E71-2F6B-4958-B917-5F145FA37CF5", text: "Matter", lat: 22, lng: 168.2, color: 33, size: 20, slides: undefined},
     {id: "3041389D-AD21-46F6-9721-2DD4E9FC1F65", text: "Consciousness", lat: 22, lng: 184, color: 33, size: 20, slides: undefined},
-    {id: "CC97CAEF-3828-466E-B55A-BA85783CE034", text: "Acceptance and agency", lat: 89.3, lng: 348.4, color: 12, size: 50, slides: undefined},
+    {id: "CC97CAEF-3828-466E-B55A-BA85783CE034", text: "Acceptance and agency", lat: 89.3, lng: 348.4, color: 16, size: 40, slides: undefined},
     {id: "0F8B3461-7B9D-4E1D-A392-A6DE782AE537", text: "Motivation split", lat: 82, lng: 295.6, color: 12, size: 40, slides: undefined},
     {id: "DEADD385-73FB-4EA3-AACC-13C6B453E9E6", text: "Transcendence \nneeds", lat: 84.6, lng: 309.8, color: 10, size: 55, slides: 87},
     {id: "CDC69285-DE4B-40DE-BDFB-73C750FA8CB4", text: "Fulfilment \nneeds", lat: 95.7, lng: 299.7, color: 10, size: 55, slides: undefined},
     {id: "EEF6AD45-1ABB-4D2E-BCA0-A3BE592FCE95", text: "Psychological \nneeds", lat: 109, lng: 299.9, color: 10, size: 55, slides: undefined},
     {id: "662B5EE1-6533-44B3-BC7A-2DF7708F1658", text: "Basic \nneeds", lat: 117.3, lng: 312.2, color: 10, size: 55, slides: undefined},
-    {id: "973015FD-576A-40F3-A86C-2E8EDA196B5F", text: "Assertive anger /\nself-compassion", lat: 95.2, lng: 354.8, color: 12, size: 50, slides: undefined},
-    {id: "29155A2F-FCBB-4347-90DE-E8D3F86A3FFA", text: "Grief / hurt", lat: 95.2, lng: 343.4, color: 12, size: 50, slides: undefined},
-    {id: "E400970C-2383-40ED-90F4-793AFAD87E45", text: "Rejecting anger", lat: 107.4, lng: 3.5, color: 12, size: 50, slides: undefined},
-    {id: "788AC673-A0A0-4E77-93EC-2A21B981D7A8", text: "Global distress", lat: 113.3, lng: 358.5, color: 12, size: 50, slides: undefined},
-    {id: "3C66F9F4-19C8-497C-AD5A-377F74970968", text: "Fear / shame", lat: 107.4, lng: 352, color: 12, size: 50, slides: undefined},
-    {id: "829B047D-0C32-4887-8A3B-690BED8B847B", text: "Needs", lat: 101.1, lng: 355.7, color: 12, size: 50, slides: undefined},
-    {id: "DFDD1307-4F65-4A71-AC89-9E7B8A3D22FB", text: "Negative self-\nevaluation", lat: 101.1, lng: 346.9, color: 12, size: 50, slides: undefined},
+    {id: "973015FD-576A-40F3-A86C-2E8EDA196B5F", text: "Assertive anger /\nself-compassion", lat: 95.2, lng: 354.8, color: 16, size: 40, slides: undefined},
+    {id: "29155A2F-FCBB-4347-90DE-E8D3F86A3FFA", text: "Grief / hurt", lat: 95.2, lng: 343.4, color: 16, size: 40, slides: undefined},
+    {id: "E400970C-2383-40ED-90F4-793AFAD87E45", text: "Rejecting anger", lat: 107.4, lng: 2.8, color: 14, size: 40, slides: undefined},
+    {id: "788AC673-A0A0-4E77-93EC-2A21B981D7A8", text: "Global distress", lat: 113.3, lng: 357.8, color: 14, size: 40, slides: undefined},
+    {id: "3C66F9F4-19C8-497C-AD5A-377F74970968", text: "Fear / shame", lat: 107.4, lng: 352, color: 15, size: 40, slides: undefined},
+    {id: "829B047D-0C32-4887-8A3B-690BED8B847B", text: "Needs", lat: 101.1, lng: 355.7, color: 15, size: 40, slides: undefined},
+    {id: "DFDD1307-4F65-4A71-AC89-9E7B8A3D22FB", text: "Negative self-\nevaluation", lat: 101.1, lng: 346.9, color: 15, size: 40, slides: undefined},
     {id: "88244D22-DAEF-4189-83EB-E7B5D5726E62", text: "Meaning protest", lat: 93, lng: 288.7, color: 12, size: 40, slides: 24},
     {id: "9CE480B4-FB41-45F1-ABF5-D956A5526141", text: "Path of the Head", lat: 93.5, lng: 191.3, color: 0, size: 110, slides: 141},
     {id: "F2CA7E5B-766D-48F0-941D-D4B1FD54C097", text: "Unfinished business", lat: 100, lng: 286.3, color: 12, size: 40, slides: 30},
@@ -335,8 +335,8 @@ export const planetTagData = [
     {id: "C120D32F-4E27-481A-97F9-9B62BB394DF9", text: "Evocative unfolding", lat: 128.5, lng: 286.5, color: 12, size: 40, slides: 27},
     {id: "94D5EB98-E41E-4DD5-8B8D-06598E285B4E", text: "Trauma retelling", lat: 137, lng: 289.7, color: 12, size: 40, slides: 28},
     {id: "2E8B960D-5F3B-4AB7-8A28-23D9FE4326DB", text: "Self-soothing", lat: 143, lng: 299.6, color: 12, size: 40, slides: 26},
-    {id: "4F5D4105-E8C7-4F54-97E6-F9549BC75D4F", text: "← back and forth between →", lat: 95.2, lng: 348.5, color: 12, size: 20, slides: undefined},
-    {id: "65FB0CCF-F7C4-4159-9D6D-0F929AB12136", text: "← back and forth between →", lat: 101.1, lng: 351.9, color: 12, size: 20, slides: undefined},
+    {id: "4F5D4105-E8C7-4F54-97E6-F9549BC75D4F", text: "← back and forth between →", lat: 95.2, lng: 348.5, color: 16, size: 20, slides: undefined},
+    {id: "65FB0CCF-F7C4-4159-9D6D-0F929AB12136", text: "← back and forth between →", lat: 101.1, lng: 351.9, color: 15, size: 20, slides: undefined},
     {id: "09031914-223C-480D-AB64-C610996CEB0D", text: "aversive", lat: 46, lng: 58.3, color: 21, size: 25, slides: undefined},
     {id: "E0B2DE70-FC3F-42BB-A62C-F00F8F73B376", text: "existential angst", lat: 39.2, lng: 50.5, color: 10, size: 30, slides: undefined},
     {id: "FF356F2F-2107-4629-921F-C964A87A70A4", text: "Emotions and \nintentional root", lat: 145.5, lng: 352.1, color: 10, size: 30, slides: 44},
@@ -498,6 +498,9 @@ export const planetTagData = [
     {id: "24a89fb0-66cd-4be8-91a8-de30f375e121", text: "Theology", lat: 83.5, lng: 189.6, color: 33, size: 21, slides: undefined},
     {id: "e1b65d3a-47c1-405a-b726-235c44e06124", text: "Psychology \nPhilosophy \nSpirituality", lat: 80.5, lng: 197.8, color: 33, size: 21, slides: undefined},
     {id: "571c75bb-3243-404f-97e9-991f3ed745cf", text: "back-and-forth", lat: 86, lng: 179, color: 32, size: 21, slides: undefined},
+    {id: "81d40a9e-a6fb-4b70-8415-be4c54cf1e96", text: "Secondary \nemotions", lat: 110.0, lng: 9.6, color: 14, size: 41, slides: undefined},
+    {id: "caaf863a-113c-455c-9ab0-8b4b7b71c4a9", text: "Primary \nmaladaptive \nemotions", lat: 100.3, lng: 4.2, color: 15, size: 41, slides: undefined},
+    {id: "9e43a20d-e120-4a9a-813f-01571e7290c2", text: "Primary \nadaptive \nemotions", lat: 90.2, lng: 358.5, color: 16, size: 41, slides: undefined},
 
 ]
 
@@ -1005,6 +1008,9 @@ export const planetConnections = [
 ["24a89fb0-66cd-4be8-91a8-de30f375e121", ],
 ["e1b65d3a-47c1-405a-b726-235c44e06124", ],
 ["571c75bb-3243-404f-97e9-991f3ed745cf", "37A0AEC4-634C-4BF4-A14B-7B6E25172BBC", "263D9AEE-6F33-4D35-B945-CE35173E2F11", ],
+["81d40a9e-a6fb-4b70-8415-be4c54cf1e96", ],
+["caaf863a-113c-455c-9ab0-8b4b7b71c4a9", ],
+["9e43a20d-e120-4a9a-813f-01571e7290c2", ],
 
 ]
 
@@ -1508,6 +1514,9 @@ export const planetArrowedConnections = [
 ["24a89fb0-66cd-4be8-91a8-de30f375e121", ],
 ["e1b65d3a-47c1-405a-b726-235c44e06124", ],
 ["571c75bb-3243-404f-97e9-991f3ed745cf", ],
+["81d40a9e-a6fb-4b70-8415-be4c54cf1e96", ],
+["caaf863a-113c-455c-9ab0-8b4b7b71c4a9", ],
+["9e43a20d-e120-4a9a-813f-01571e7290c2", ],
 
 ]
 
@@ -2011,6 +2020,9 @@ export const planetDashedConnections = [
 ["24a89fb0-66cd-4be8-91a8-de30f375e121", ],
 ["e1b65d3a-47c1-405a-b726-235c44e06124", "68B6E135-509A-4064-9FF9-DE55C3B66A8E", "6A92592D-70EE-451D-941A-AD8F8435EF6E", "DC5F27E6-E594-4651-A151-4F70145EDFD5", ],
 ["571c75bb-3243-404f-97e9-991f3ed745cf", ],
+["81d40a9e-a6fb-4b70-8415-be4c54cf1e96", ],
+["caaf863a-113c-455c-9ab0-8b4b7b71c4a9", ],
+["9e43a20d-e120-4a9a-813f-01571e7290c2", ],
 
 ]
 
