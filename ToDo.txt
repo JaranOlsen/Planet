@@ -9,8 +9,6 @@ IN PROGRESS
 SHORT-TERM
     bypass contentData.js? read straight from folders? or generate contentData array from foldercontent at init?
 
-    tidy up and flesh out palette.js and materials.js
-
 INITIATIVES
     speak with Thomas about marker and intervention for realising the unconditioned
 
@@ -209,7 +207,6 @@ The Mountains of Madness - At the Mountains of Madness (1936), a remote Antarcti
 The Edge of the World - His Dark Materials series (1995-2000), a boundary between parallel universes representing the potential for discovery, growth, and understanding.
 The Oracle's Temple - The Matrix (1999), a place of wisdom and guidance representing the search for truth and self-awareness.
 The Dreaming - Neil Gaiman's The Sandman series (1989-1996), a realm of dreams and imagination symbolizing the power of stories and the
-
 
 
 

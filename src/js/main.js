@@ -158,6 +158,7 @@ export let slideshowStatus = {
 
 window.actionsCompleted = true
 window.currentTransitionEndHandler = null;
+window.curveMeshes = [];
 
 window.onload = function() {
     let allElements = document.querySelectorAll('#slide .appear');
@@ -2344,6 +2345,11 @@ function render() {
         pivot3.rotation.y += -0.000009;
         pivot4.rotation.y += -0.0001;
         clouds.rotation.y += 0.00001;
+
+        window.curveMeshes.forEach(curveData => {
+            curveData.texture.offset.y += 0.004;
+            curveData.texture.offset.x += 0.001;
+        });
 
         if (camera.position.z > -15 && camera.position.z < 15 && introStarted == true) {
             introStarted = false

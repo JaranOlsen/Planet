@@ -11,7 +11,7 @@ import { contexts } from './main.js'
 
 //  IMPORT TEXTURES
 import dash from '/assets/textures/dash.webp'
-import arrow from '/assets/textures/arrow4.webp'
+import arrow from '/assets/textures/arrow6.webp'
 
 //  IMPORT MATERIALS
 import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWireframeMaterials } from './data/materials.js';
@@ -250,6 +250,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
 
         let material = connectionMaterial;
         let segmentModifier = 1
+        let curveTexture
 
         if (dashed) {
             const dashTexture = textureLoader.load(dash);
@@ -270,26 +271,28 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         }
 
         if (arrowed) {
-            const arrowTexture = textureLoader.load(arrow);
-            const distance = Math.floor(v1.distanceTo(v2) * 25);
-            arrowTexture.repeat.set(7, 8 + distance / 2);
-            arrowTexture.wrapS = THREE.RepeatWrapping;
-            arrowTexture.wrapT = THREE.RepeatWrapping;
-            arrowTexture.rotation = Math.PI / 2;
-
-            const textureOffsetU = -0.1; // You can change this value to control the horizontal offset
-            const textureOffsetV = 0; // You can change this value to control the vertical offset
-            arrowTexture.offset.set(textureOffsetU, textureOffsetV);
-
+            curveTexture = textureLoader.load(arrow);  // Load the arrow texture
+            
+            const distance = Math.floor(v1.distanceTo(v2) * 15);  
+            curveTexture.repeat.set(3, 4 + distance);  // Set repeat based on distance
+            
+            curveTexture.wrapS = THREE.RepeatWrapping;
+            curveTexture.wrapT = THREE.RepeatWrapping;
+            curveTexture.rotation = Math.PI / 2;
+        
+            const textureOffsetU = -0.1;
+            const textureOffsetV = 0;
+            curveTexture.offset.set(textureOffsetU, textureOffsetV);
+        
             material = new THREE.MeshStandardMaterial({
                 color: 0xffffaa,
                 transparent: true,
                 opacity: 0.8,
                 emissive: 0xffffff,
                 emissiveIntensity: 0.1,
-                alphaMap: arrowTexture,
+                alphaMap: curveTexture,
             });
-
+            
             segmentModifier = 5
         }
 
@@ -297,6 +300,13 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments * segmentModifier, false);
 
         const curve = new THREE.Mesh(geometry, material);
+        if (arrowed) {
+            // Save the mesh and its texture in the global curveMeshes array
+            window.curveMeshes.push({
+                mesh: curve,
+                texture: curveTexture
+            });
+        }
         curve.renderOrder = 9;
         destination.add(curve);
     }
