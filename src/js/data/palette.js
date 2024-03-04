@@ -10,7 +10,7 @@ export const palette = [
     0x236940, // Dark Jungle Green
     0x7F8C8D, // Neutral Gray
 
-    // Gut colors (shades of pink)
+    // Gut colors (shades of pink transitioning to pronounced purple)
     0xFFF0F5, // Lavender Blush (lightest pink)
     0xFEE3EC, // Almost White Pink
     0xFCD6E4, // Very Light Pink
@@ -18,9 +18,9 @@ export const palette = [
     0xF8BDD3, // Soft Pink
     0xF6A0CB, // Medium Light Pink
     0xF484C2, // Medium Pink
-    0xEF68B4, // Less Saturated Medium Dark Pink, slight purple hue
-    0xEA4DA6, // Less Saturated Dark Pink, more pronounced purple hue
-    0xE53298, // Less Saturated Deepest Pink, strong purple hue
+    0xE56AB3, // Medium Dark Pink transitioning to Purple
+    0xD452A5, // Dark Pink transitioning to Pronounced Purple
+    0xC33A97, // Deepest Pink transitioning to Pronounced Purple
 
     // Heart colors (shades of blue)
     0xF0F8FF, // Alice Blue (lightest blue)
