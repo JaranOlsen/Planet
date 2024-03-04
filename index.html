@@ -10,8 +10,8 @@
     
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="module" crossorigin src="/Planet/assets/index-7343a4ae.js"></script>
-    <link rel="stylesheet" href="/Planet/assets/index-80461b06.css">
+    <script type="module" crossorigin src="/Planet/assets/index-b34c4336.js"></script>
+    <link rel="stylesheet" href="/Planet/assets/index-d2a2aa3b.css">
   </head>
   <body>
  
@@ -53,7 +53,7 @@
         <!-- <button class="version-option" id="version4" alt="Built for Oculus Quest II">VR version</button><br> 
         Un-comment line 13 in versions.js to re-enable
         -->
-        <button class="version-option" id="fullscreen-button">Go Fullscreen</button>
+        <!-- <button class="version-option" id="fullscreen-button">Go Fullscreen</button> -->
     </div>
       
       <button id="playbutton">&#9654;</button>
@@ -192,6 +192,15 @@
             <span class="description">Move selected node(s)</span>
         </div>
       </div>
+
+      <!-- SILENCE SCREEN -->
+      <div class="silence-center-container">
+        <div id="silence">SILENCE</div>
+      </div>
+      <audio id="silenceAudio">
+        <source src="/Planet/assets/audio/singingbowl.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
 
       <div id="footer">
         Click nodes to see content. Wireframe nodes doesn't have content. Press K for hotkeys.
