@@ -71,7 +71,7 @@ ul {
 #versions {
   position: absolute;
   left: 50%;
-  top: 60%;
+  top: 50%;
   margin: 20;
   padding: 20;
   transform: translateY(-50%);
@@ -161,6 +161,71 @@ a:active {
   font-size: .75rem;
   display: none;
 }
+
+
+.silence-center-container {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#silence {
+  position: relative;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 0 .5rem;
+  width: auto;
+  text-align: center;
+  font-size: 5rem;
+  letter-spacing: 4rem;
+  display: none;
+}
+
+
+#intro-label {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: .85rem;
+}
+#intro-select {
+  background-color: transparent; /* Makes the dropdown background transparent */
+  color: rgba(255, 255, 255, 0.5); /* Sets the text color to white with some transparency */
+  font-size: .75rem; /* Matches the font size with intro-label */
+  border: none; /* Removes the default border */
+  outline: none; /* Removes the outline to maintain a minimalist style */
+  -webkit-appearance: none; /* Removes default style in WebKit browsers */
+  -moz-appearance: none; /* Removes default style in Mozilla browsers */
+  appearance: none; /* Removes default style for other browsers */
+  text-align: center; /* Center the text */
+  padding-right: 30px; /* Add right padding to prevent text from overlapping with the background arrow */
+  
+}
+
+/* You might also want to style the dropdown arrow if you want a completely custom look */
+#intro-select::-ms-expand {
+  display: none; /* Hides the default dropdown arrow in IE/Edge */
+}
+
+#intro-select:-webkit-autofill,
+#intro-select:-webkit-autofill:hover, 
+#intro-select:-webkit-autofill:focus,
+#intro-select:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+/* Custom arrow for browsers other than IE/Edge */
+#intro-select {
+  /* Adding a custom arrow icon */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="%23ffffff"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.7rem top 50%; /* Position the arrow nicely */
+  background-size: 1.2rem; /* Size of the arrow */
+}
+
 #playbutton {
   position: absolute;
   z-index: 3;

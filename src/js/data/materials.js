@@ -12,6 +12,23 @@ import nugget_roughness from "/assets/textures/nugget_roughness.jpg";
 const materialLoadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(materialLoadingManager);
 
+//Text Materials
+export const textMaterial = new THREE.MeshBasicMaterial( {
+    color: 0x000000,
+    transparent: false,
+    //opacity: 0.8,
+    side: DoubleSide
+} );
+
+//Connection Material
+export const connectionMaterial = new THREE.MeshStandardMaterial({
+    color: 0xffffaa,
+    transparent: true,
+    opacity: 0.6,
+    emissive: 0xffffff,
+    emissiveIntensity: 0.1,
+});
+
 // Prepare the materials for the boxes and pins
 export const boxMaterials = [];
 export const pinMaterials = [];
@@ -72,21 +89,3 @@ boxMaterials[5].opacity = 0.7;
 boxMaterials[6].opacity = 0.5;
 boxMaterials[7].opacity = 0.5;
 boxMaterials[8].opacity = 0.5;
-
-
-//Text Materials
-export const textMaterial = new THREE.MeshBasicMaterial( {
-    color: 0x000000,
-    transparent: false,
-    //opacity: 0.8,
-    side: DoubleSide
-} );
-
-//Connection Material
-export const connectionMaterial = new THREE.MeshStandardMaterial({
-    color: 0xffffaa,
-    transparent: true,
-    opacity: 0.6,
-    emissive: 0xffffff,
-    emissiveIntensity: 0.1,
-});

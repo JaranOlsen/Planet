@@ -64,6 +64,13 @@
     object-fit: contain;
     background-color: rgba(0, 0, 0, 0.75);
 }
+.insightTimerSlide {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: white;
+}
 #fullscreenIframeSlide {
     display: block;
     width: 100%;

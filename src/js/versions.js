@@ -1,4 +1,4 @@
-export function initializeVersion(callback, postLoadingManager, guttaState, scene, guttaHelperCenter) {
+export function initialiseVersion(callback, postLoadingManager, guttaState, scene, guttaHelperCenter) {
     const elements = {
         playButton: document.getElementById("playbutton"),
         credits: document.getElementById("credits"),
@@ -17,7 +17,7 @@ export function initializeVersion(callback, postLoadingManager, guttaState, scen
     const hideButtons = (showVR) => {
         elements.versionButtons.forEach((btn) => (btn.style.display = "none"));
         elements.footer.style.display = "none";
-        elements.fullscreenButton.style.display = "none";
+        /* elements.fullscreenButton.style.display = "none"; */
         elements.playButton.style.display = "block";
         elements.skipButton.style.display = "block";
         elements.credits.style.display = "block";
@@ -32,6 +32,7 @@ export function initializeVersion(callback, postLoadingManager, guttaState, scen
     elements.versionButtons.forEach((btn, index) => {
         btn.addEventListener("click", () => {
             handleButtonClick(index);
+            window.appStatus = "intro-menu"
         });
         btn.addEventListener("touchend", (event) => {
             event.preventDefault(); // Prevent mouse event from firing after touch event

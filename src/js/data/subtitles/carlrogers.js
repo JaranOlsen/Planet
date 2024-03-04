@@ -1,0 +1,53 @@
+const subtitles = [
+    { start: 9, end: 12, text: "You've heard much in this conference about the skill of empathic listening."},
+    { start: 13, end: 18, text: "I simply want to underscore what has been said because I believe that it plays a large part in our future."},
+    { start: 20, end: 24, text: "I've come to believe that a very sensitive listening"},
+    { start: 24, end: 27, text: "is one of the most powerful forces for growth that I know."},
+    { start: 29, end: 33, text: "When I can let myself enter softly and delicately,"},
+    { start: 33, end: 36, text: "the vulnerable inner world of the other person;"},
+    { start: 37, end: 42, text: "When I can temporarily lay aside my views and values and prejudices;"},
+    { start: 43, end: 50, text: "When I can let myself be at home in the fright, the concern, the pain,"},
+    { start: 50, end: 56, text: "the anger, the tenderness, the confusion, which fills his or her life;"},
+    { start: 57, end: 60, text: "When I can move about in that inner world without making judgments;"},
+    { start: 61, end: 65, text: "When I can see that world with fresh unfrightened eyes;"},
+    { start: 66, end: 70, text: "When I can check the accuracy of my sensings with him or her,"},
+    { start: 70, end: 73, text: "being guided by the responses I receive;"},
+    { start: 73, end: 77, text: "Then I can be a companion to that inner person,"},
+    { start: 77, end: 81, text: "pointing to the felt meanings of what is being experienced."},
+    { start: 81, end: 85, text: "Then I find myself to be a true helper,"},
+    { start: 85, end: 88, text: "a welcome companion, an aid to growth and help."},
+    { start: 91, end: 94, text: "Listening seems such an easy word,"},
+    { start: 94, end: 99, text: "I find it a lifetime task to achieve true listening,"},
+    { start: 99, end: 101, text: "and a task well worth the effort."},
+    { start: 142, end: 147, text: "There is another very subtle factor in the healing relationship which I have experienced,"},
+    { start: 147, end: 150, text: "and that I would call presence."},
+    { start: 150, end: 152, text: "It is certainly known to physicians;"},
+    { start: 152, end: 156, text: "Dr. William Henry Welch, speaking with his father,"},
+    { start: 156, end: 160, text: "said the art of healing seemed to surround his physical body like an aura."},
+    { start: 160, end: 164, text: "It was often not his treatment, but his presence that cured."},
+    { start: 166, end: 168, text: "I too have experienced this."},
+    { start: 169, end: 173, text: "When I am at my best as a group facilitator, or a therapist,"},
+    { start: 173, end: 175, text: "I discover this characteristic."},
+    { start: 176, end: 181, text: "I find that when I am closest to my innerst intuitive self,"},
+    { start: 181, end: 184, text: "when I am somehow in touch with the unknown in me,"},
+    { start: 184, end: 189, text: "when perhaps I am in a slightly altered state of consciousness,"},
+    { start: 189, end: 192, text: "then what ever I do seems to be full of healing."},
+    { start: 193, end: 197, text: "Then simply my presence is releasing and helpful."},
+    { start: 198, end: 201, text: "There is nothing I can do to force this experience."},
+    { start: 201, end: 203, text: "But when I can relax"},
+    { start: 203, end: 207, text: "and be close to the transcendental core of me,"},
+    { start: 207, end: 213, text: "then I may behave in strange and impulsive ways in the relationship,"},
+    { start: 213, end: 216, text: "ways which I can't justify rationally,"},
+    { start: 216, end: 219, text: "which have nothing to do with my thought processes."},
+    { start: 219, end: 224, text: "But these strange behaviors turn out to be right in some odd way."},
+    { start: 226, end: 232, text: "At those moments it seems that my inner spirit has reached out and touched the inner spirit of the other."},
+    { start: 233, end: 239, text: "Our relationship transcends itself and has become part of something larger."},
+    { start: 240, end: 245, text: "Profound growth and healing and energy are present."},
+    { start: 245, end: 246, text: ""}
+  ];
+
+  export default subtitles;
+
+      
+
+   

@@ -18,7 +18,7 @@ window.WordCloud = WordCloud;
 import { createImages, createTags, hoveredPins, intersectObjectsArray, createConnections, hoverPins, instantiateNugget } from './mindmap.js'
 import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng, easeInOutQuad } from './mathScripts.js'
 import { pushContent, pushVRContent, handleCarouselButton } from './content.js'
-import { initializeVersion } from './versions.js'
+import { initialiseVersion } from './versions.js'
 import { creation } from './creation.js'
 import { updateGutta, togglePerceptionCircles } from './gutta.js'
 import { createField } from './podcast.js'
@@ -34,7 +34,7 @@ import { enneagramTagData, enneagramConnections, enneagramArrowedConnections, en
 import { contentData } from './data/contentData.js'
 import { palette } from './data/palette.js'
 import { pinMaterials, pinWireframeMaterials, boxMaterials } from './data/materials.js'
-import { subtitles_carlrogers as subtitles} from './data/subtitles.js'
+//import { subtitles_carlrogers as subtitles} from './data/subtitles.js'
 
 //  IMPORT SHADERS
 import atmosphericLightVertexShader from '../shaders/atmosphericLightVertex.glsl'
@@ -45,8 +45,7 @@ import spiralVertexShader from '../shaders/spiralVertex.glsl'
 import spriralFragmentShader from '../shaders/spiralFragment.glsl'
 
 //  IMPORT TEXTURES
-
-import milkyway from "/assets/textures/milkyway.webp"
+import milkyway from "/assets/textures/milkyway4.webp"
 import starW from "/assets/textures/starW.webp"
 import starR5 from "/assets/textures/starR5.webp"
 import starR10 from "/assets/textures/starR10.webp"
@@ -72,6 +71,8 @@ import field4 from '/src/models/field4.glb'
 
 const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
 const DEFAULT_PROFILE = 'generic-trigger'; 
+
+window.appStatus = "initialising";
 
 const canvas = document.querySelector('#canvas');
 const renderer = new THREE.WebGLRenderer(
@@ -122,16 +123,10 @@ flyControls.dragToLook = false;
 flyControls.enabled = false;
 flyControls.minDistance = 5.15;
 
-let controlMode = 'orbit';
-
 const scene = new THREE.Scene();
 
 const pointer = new THREE.Vector2;
 const raycaster = new THREE.Raycaster();
-
-const subtitleContainer = document.getElementById('subtitle-container');
-let elapsedTime = 0;
-let currentSubtitle = null;
 
 const clock = new THREE.Clock();
 const timer = new THREE.Clock();
@@ -198,7 +193,8 @@ const credits = document.getElementById("credits")
 const enableVRbutton = document.getElementById("enableVRbutton")
 const skipButton = document.getElementById("skipbutton")
 const fullscreenButton = document.getElementById('fullscreen-button')
-initializeVersion(creation, postLoadingManager, guttaState, scene, guttaHelperCenter)
+initialiseVersion(creation, postLoadingManager, guttaState, scene, guttaHelperCenter)
+window.appStatus = "version-menu"
 
 let webXRInitialized = false
 let jaraniusInitialized = false
@@ -207,9 +203,9 @@ let jaraniusInitialized = false
 const initialLoadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(initialLoadingManager)
 
-initializeLoadingManager(initialLoadingManager)
+initialiseLoadingManager(initialLoadingManager)
 
-export function initializeLoadingManager(loadingManager) {
+export function initialiseLoadingManager(loadingManager) {
     loadingManager.onStart = function () {
         if (loadingManager == postLoadingManager) progressBarContainer.style.display = 'flex';
     };
@@ -230,12 +226,173 @@ export function initializeLoadingManager(loadingManager) {
     };
 }
 
+//SILENCE SCREEN
+function animateLetterSpacing() {
+    const element = document.getElementById('silence');
+    let start = null;
+    const initialSpacing = 4; // Starting letter-spacing in rem
+    const maxSpacing = 8; // Maximum letter-spacing in rem
+    const duration = 50000; // Duration in milliseconds
+
+    function step(timestamp) {
+        if (!start) start = timestamp;
+        const progress = (timestamp - start) / duration;
+        const easing = 1 - Math.pow(1 - progress, 3); // Cubic easing out: 1 - (1 - t)^3
+        const currentSpacing = Math.min(initialSpacing + easing * (maxSpacing - initialSpacing), maxSpacing);
+
+        element.style.letterSpacing = `${currentSpacing}rem`;
+        // Adjust margin-right to be the negative value of currentSpacing
+        element.style.marginRight = `-${currentSpacing}rem`;
+
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            element.style.letterSpacing = `${maxSpacing}rem`; // Ensure it ends at maxSpacing
+            element.style.marginRight = `-${maxSpacing}rem`; // Ensure margin-right matches the final letter-spacing
+        }
+    }
+
+    window.requestAnimationFrame(step);
+}
+function fadeOutAudio(audioElement, fadeDuration = 3000) {
+    const originalVolume = audioElement.volume;
+    const intervalSpeed = 50; // How quickly the volume decreases
+    const decrementAmount = (originalVolume / fadeDuration) * intervalSpeed; // Calculate decrement amount
+  
+    const fadeOut = setInterval(() => {
+      if (audioElement.volume > decrementAmount) {
+        audioElement.volume -= decrementAmount;
+      } else {
+        audioElement.volume = 0;
+        audioElement.pause(); // Stop the audio
+        audioElement.currentTime = 0; // Reset the audio to the start
+        clearInterval(fadeOut);
+      }
+    }, intervalSpeed);
+  }
+  
+
 //INTRO
+function updateIntro() {
+    const selection = document.getElementById('intro-select').value;
+    const credits = document.getElementById('credits');
+    const subtitleContainer = document.getElementById('subtitle-container');
+    const audioElement = document.getElementById('introTune');
+    const sourceElement = audioElement.getElementsByTagName('source')[0];
+  
+    switch(selection) {
+      case 'desiderata':
+        credits.textContent = 'Desiderata - Max Ehrmann. RedFrost Motivation';
+        subtitleContainer.dataset.subtitleFile = 'null';
+        sourceElement.src = '/assets/audio/desiderata.mp3';
+        break;
+      case 'astronomer':
+        credits.textContent = "When I Heard the Learn'd Astronomer - Walt Whitman. RedFrost Motivation";
+        subtitleContainer.dataset.subtitleFile = 'astronomer';
+        sourceElement.src = '/assets/audio/astronomer.mp3';
+        break;
+      case 'carlrogers':
+        credits.textContent = "Carl Rogers speaking about listening and presence. Music: First Step - Hans Zimmer";
+        subtitleContainer.dataset.subtitleFile = 'carlrogers';
+        sourceElement.src = '/assets/audio/carlrogers.mp3';
+        break;
+      case 'carlrogers2':
+        credits.textContent = "Carl Rogers speaking about listening and presence. Music: This Is Me - Jaran de los Santos Olsen";
+        subtitleContainer.dataset.subtitleFile = 'carlrogers2';
+        sourceElement.src = '/assets/audio/carlrogers2.mp3';
+        break;
+      case 'alanwatts':
+        credits.textContent = "Alan Watts on Swimming With the Stream. Music: Agarb - Bilro & Barbosa and Passion - Sappheiros";
+        subtitleContainer.dataset.subtitleFile = 'null';
+        sourceElement.src = '/assets/audio/alanwatts.mp3';
+        break;
+      case 'alanwatts2':
+        credits.textContent = "Alan Watts on Letting Go. Music: Kevin MacLeod - Meditation Impromptu 1";
+        subtitleContainer.dataset.subtitleFile = 'null';
+        sourceElement.src = '/assets/audio/alanwatts2.mp3';
+        break;
+      case 'ajahnchah':
+        credits.textContent = "Ajahn Chah from the BBC documentary 'The Mindful Way' & Jack Kornfield speaking about Ajahn Chah and loving awareness. Music: Jaran Olsen - This is me";
+        subtitleContainer.dataset.subtitleFile = 'null';
+        sourceElement.src = '/assets/audio/ajahnchah.mp3';
+        break;
+      case 'honestIntro':
+        credits.textContent = "An Honest Meditation";
+        subtitleContainer.dataset.subtitleFile = 'null';
+        sourceElement.src = '/assets/audio/honestIntro.mp3';
+        break;
+      case 'guesthouse':
+        credits.textContent = "The Guesthouse - Rumi. Read by Helena Bonham Carter";
+        subtitleContainer.dataset.subtitleFile = 'null';
+        sourceElement.src = '/assets/audio/guesthouse.mp3';
+        break;
+      case 'ramanamaharsi':
+        credits.textContent = "Jack Kornfield reads about Ramana Maharsi";
+        subtitleContainer.dataset.subtitleFile = 'null';
+        sourceElement.src = '/assets/audio/ramanamaharsi.mp3';
+        break;
+      case 'krishnamurti':
+        credits.textContent = "Krishnamurti on Meditation and Love";
+        subtitleContainer.dataset.subtitleFile = 'null';
+        sourceElement.src = '/assets/audio/krishnamurti.mp3';
+        break;
+      case 'rupertspira':
+        credits.textContent = "I am Always I - Rupert Spira";
+        subtitleContainer.dataset.subtitleFile = 'null';
+        sourceElement.src = '/assets/audio/rupertspira.mp3';
+        break;
+      case 'rupertspira2':
+        credits.textContent = "I am That - Rupert Spira";
+        subtitleContainer.dataset.subtitleFile = 'null';
+        sourceElement.src = '/assets/audio/rupertspira2.mp3';
+        break;
+    }
+    audioElement.load();
+    audioElement.addEventListener("loadedmetadata", function() {
+        introTuneLength = audioElement.duration;
+    });
+    loadSubtitles(subtitleContainer.dataset.subtitleFile)
+}
+document.getElementById('intro-select').addEventListener('change', updateIntro);
+
+const subtitleContainer = document.getElementById('subtitle-container');
+const subtitleFile = subtitleContainer.getAttribute('data-subtitle-file');
+let subtitles = null;
+let elapsedTime = 0;
+let currentSubtitle = null;
+
+async function loadSubtitles(subtitleFileName) {
+    if (subtitleFileName && subtitleFileName !== 'false' && subtitleFileName !== 'null') {
+        try {
+            const module = await import(`./data/subtitles/${subtitleFileName}.js`);
+            subtitles = module.default;
+        } catch (error) {
+            console.error(`Failed to load subtitles: ${error}`);
+        }
+    }
+}
+
+function updateSubtitles() {
+    if (!subtitles) return;
+    
+    const newSubtitle = subtitles.find(({ start, end }) => elapsedTime >= start && elapsedTime <= end);
+    if (newSubtitle && newSubtitle !== currentSubtitle) {
+        currentSubtitle = newSubtitle;
+        subtitleContainer.textContent = currentSubtitle.text;
+    } else if (!newSubtitle) {
+        subtitleContainer.textContent = ''; // Clear subtitles if there's no match
+    }
+}
+
+loadSubtitles(subtitleFile).then(() => {
+    introTune.addEventListener('timeupdate', updateSubtitles);
+});
+
 let introStarted = false
 let introTuneLength
 let introTune
-initializeIntro()
-function initializeIntro() {
+initialiseIntro()
+function initialiseIntro() {
     introTune = document.getElementById("introTune");
     introTune.preload = "auto";
     introTune.currentTime = 0;
@@ -252,15 +409,18 @@ function initializeIntro() {
     const handlePlayButtonClick = () => {
         introTune.play();
         introStarted = true;
+        window.appStatus = "orbit"
         playButton.style.display = "none";
         skipButton.style.display = "none";
         enableVRbutton.style.display = "none";
         credits.style.display = "none";
         subtitleContainer.style.display = "block";
         orbitControls.enabled = true
+        document.body.style.cursor = 'none';
     };
     
     const handleSkipButtonClick = () => {
+        window.appStatus = "orbit"
         playButton.style.display = "none";
         skipButton.style.display = "none";
         enableVRbutton.style.display = "none";
@@ -282,7 +442,7 @@ function initializeIntro() {
         event.preventDefault(); // Prevent mouse event from firing after touch event
         handleSkipButtonClick();
     });
-    fullscreenButton.addEventListener('click', function() {
+    /* fullscreenButton.addEventListener('click', function() {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         } else if (document.documentElement.mozRequestFullScreen) { // Firefox
@@ -293,7 +453,7 @@ function initializeIntro() {
             document.documentElement.msRequestFullscreen();
         }
         fullscreenButton.style.display = "none"
-    });
+    }); */
 }
 
 
@@ -319,11 +479,13 @@ function createGalaxy() {
 
     const material = new THREE.MeshBasicMaterial({
         map: textureLoader.load(milkyway),
+        transparent: false,
+        opacity: 1,
         side: THREE.BackSide
     });
 
     const milkyWay = new THREE.Mesh(geometry, material);
-    milkyWay.rotation.set(0.1, 0.1, 0.1)
+    milkyWay.rotation.set(-Math.PI / 3, 0.1, Math.PI / 2)
 
     return milkyWay
 }
@@ -1506,20 +1668,20 @@ function onDocumentKeyUp(event) {
     //Controls
     if (focusElement !== "tagInput") {
         if (keyCode == 79) { //O
-            if (controlMode === 'orbit') {
-                controlMode = 'fly';
+            if (window.appStatus === "orbit") {
+                window.appStatus = "flight";
                 orbitControls.enabled = false;
                 flyControls.enabled = true;
                 document.body.style.cursor = 'crosshair';
             } else {
-                controlMode = 'orbit';
+                window.appStatus = "orbit";
                 orbitControls.enabled = true;
                 flyControls.enabled = false;
                 document.body.style.cursor = 'default';
             }
         }
         if (keyCode == 188) { //,
-            if (controlMode === 'fly') {
+            if (window.appStatus === "flight") {
                 flyControls.dragToLook = !flyControls.dragToLook
                 console.log(flyControls.dragToLook)
             }
@@ -1621,12 +1783,46 @@ function onDocumentKeyUp(event) {
             console.log(contexts) */
         }
         if (keyCode == 83) { //S
-            if (spiralActivated == false) {
-                createSpiral()
-            } else {
-                spiralActivated = false
-                spiralCenter.remove(spiral)
+            if (window.appStatus == "intro-menu") {
+                const silence = document.getElementById('silence')
+                const credits = document.getElementById('credits')
+                const skipbutton = document.getElementById('skipbutton')
+                const playbutton = document.getElementById('playbutton')
+                silence.style.display = "block"
+                credits.style.display = "none"
+                skipbutton.style.display = "none"
+                playbutton.style.display = "none"
+                window.appStatus = "silence"
+                const title = scene.getObjectByName('title')
+                title.visible = false
+                document.body.style.cursor = 'none';
+                silenceAudio.volume = 1;
+                silenceAudio.play();
+                animateLetterSpacing()
+            } else if (window.appStatus == "silence") {
+                const silence = document.getElementById('silence')
+                const credits = document.getElementById('credits')
+                const skipbutton = document.getElementById('skipbutton')
+                const playbutton = document.getElementById('playbutton')
+                silence.style.display = "none"
+                credits.style.display = "block"
+                skipbutton.style.display = "block"
+                playbutton.style.display = "block"
+                window.appStatus = "intro-menu"
+                const title = scene.getObjectByName('title')
+                title.visible = true
+                document.body.style.cursor = 'default';
+                fadeOutAudio(silenceAudio, 5000)
             }
+            if (window.appStatus == "orbit") {
+                if (spiralActivated == false) {
+                    createSpiral()
+                } else {
+                    spiralActivated = false
+                    spiralCenter.remove(spiral)
+                }
+            }
+            
         }
         if (keyCode == 89) { //Y
             if (enneagramActivated == false) {
@@ -2234,6 +2430,12 @@ function onPointerClick(event) {
             }
 
             pushContent(slideshowStatus)
+            if (window.appStatus == "flight") {
+                orbitControls.enabled = true;
+                flyControls.enabled = false;
+                document.body.style.cursor = 'default';
+            }
+            window.appStatus = "slideshow"
             const slideShowScreen = document.querySelector(`#slides`)
             slideShowScreen.style.display = "flex"
         }
@@ -2339,12 +2541,14 @@ function render() {
     
     
     if (jaraniusInitialized == true) {
-        center.rotation.y += -0.00001;
-        pivot1.rotation.y += -0.0003;
-        pivot2.rotation.y += -0.00003;
-        pivot3.rotation.y += -0.000009;
-        pivot4.rotation.y += -0.0001;
-        clouds.rotation.y += 0.00001;
+        if (window.appStatus !== "initialising" && window.appStatus !== "version-menu" && window.appStatus !== "intro-menu"&& window.appStatus !== "silence") {
+            center.rotation.y += -0.00001;
+            pivot1.rotation.y += -0.0003;
+            pivot2.rotation.y += -0.00003;
+            pivot3.rotation.y += -0.000009;
+            pivot4.rotation.y += -0.0001;
+            clouds.rotation.y += 0.00001;
+        }
 
         window.curveMeshes.forEach(curveData => {
             curveData.texture.offset.y += 0.004;
@@ -2355,10 +2559,11 @@ function render() {
             introStarted = false
             const titleMesh = scene.getObjectByName('title')
             scene.remove(titleMesh)
+            document.body.style.cursor = 'default';
         }
     
-        orbitControls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);  //  /1
-        orbitControls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;//  /3;
+        orbitControls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);
+        orbitControls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;
 
         if (sign) {
             signRotationVector.set(camera.position.x, camera.position.y, camera.position.z)
@@ -2397,24 +2602,14 @@ function render() {
         }
 
         elapsedTime = introTune.currentTime;
-
-        const newSubtitle = subtitles.find(({ start, end }) => elapsedTime >= start && elapsedTime <= end);
-        
-        if (newSubtitle && newSubtitle !== currentSubtitle) {
-            currentSubtitle = newSubtitle;
-            subtitleContainer.textContent = currentSubtitle.text;
-        }
     }
 
     const delta = clock.getDelta();
 
     if (flyControls.enabled) {  
-        // Update the fly controls
         flyControls.update(delta);
 
-        // Check the distance from the camera to the planet center
         const distance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0));
-
         if (distance < flyControls.minDistance) {
             // Calculate the vector pointing from the planet center to the camera
             const direction = camera.position.clone().sub(new THREE.Vector3(0, 0, 0)).normalize();

@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 //  IMPORT SCRIPTS
-import { createJaranius, createContexts, initializeLoadingManager, createMindmap } from "./main.js"  //createGutta
+import { createJaranius, createContexts, initialiseLoadingManager, createMindmap } from "./main.js"  //createGutta
 import { createGutta } from './gutta.js';
 
 //  IMPORT MATERIALS
@@ -44,27 +44,27 @@ import cloudsNormal1k from "/assets/textures/clouds1kNormal.webp"
 export function creation(version, postLoadingManager, guttaState, scene, guttaHelperCenter) {
     createTitle(scene)
     if (version == 1){ //FULL VERSION
-        initializeLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture8k, normalTexture8k, roughnessTexture8k, cloudsTexture4k, cloudsNormal4k)
+        initialiseLoadingManager(postLoadingManager)
+        createJaranius(diffuseTexture16k, normalTexture16k, roughnessTexture16k, cloudsTexture8k, cloudsNormal8k)
         createContexts(version)
         createMindmap()
         createGutta(400, 25, version, guttaState, scene, guttaHelperCenter)
     } 
     if (version == 2){ //LIGHT VERSION
-        initializeLoadingManager(postLoadingManager)
+        initialiseLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture2k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k)
         createContexts(version)
         createMindmap()
     } 
     if (version == 3){ //DEVELOPER VERSION
-        initializeLoadingManager(postLoadingManager)
+        initialiseLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture16k, normalTexture16k, roughnessTexture16k, cloudsTexture8k, cloudsNormal8k)
         createContexts(version)
         createMindmap()
         createGutta(300, 20, version, guttaState, scene, guttaHelperCenter)
     } 
     if (version == 4){ //VR VERSION
-        initializeLoadingManager(postLoadingManager)
+        initialiseLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture8k, normalTexture8k, roughnessTexture8k, cloudsTexture4k, cloudsNormal4k)
         createContexts(version)
         createMindmap()
@@ -77,7 +77,6 @@ function createTitle(scene) {
 
         const loader = new FontLoader();
         loader.load(tagFont, function (font) {
-            //const titleGeometry = new THREE.ShapeGeometry(font.generateShapes('     Proxima                    Transcendāra', 1));
             const titleGeometry = new THREE.ShapeGeometry(font.generateShapes('Proxima Transcendāra', 1));
             titleGeometry.computeBoundingBox();
             titleGeometry.translate(-0.5 * (titleGeometry.boundingBox.max.x - titleGeometry.boundingBox.min.x), (titleGeometry.boundingBox.max.y - titleGeometry.boundingBox.min.y), 0);

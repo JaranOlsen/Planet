@@ -162,6 +162,7 @@ export function handleCarouselButton(button, slideshowStatus) {
     updateMainDots(slideshowStatus);
     updateSubDots(slideshowStatus);
     window.actionsCompleted = true;
+    window.appStatus = "orbit";
     return slideshowStatus;
   } 
   if (button.dataset.carouselButton === "left") {

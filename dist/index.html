@@ -10,20 +10,37 @@
     
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="module" crossorigin src="/Planet/assets/index-0e325c6f.js"></script>
-    <link rel="stylesheet" href="/Planet/assets/index-9576bb04.css">
+    <script type="module" crossorigin src="/Planet/assets/index-7343a4ae.js"></script>
+    <link rel="stylesheet" href="/Planet/assets/index-80461b06.css">
   </head>
   <body>
  
     <div id="container">
       <canvas id="canvas"></canvas>
-      <!-- <div id="credits">DEVELOPER VERSION</div> -->
-      <!-- <div id="credits">Alan Watts on letting go. Music: Kevin MacLeod - Meditation Impromptu 1</div> -->
-      <!-- <div id="credits">Alan Watts on swimming with the stream</div> -->
+      <div id="credits">
+        <label id="intro-label" for="intro-select">Choose an intro:</label>
+        <select id="intro-select">
+          <option value="welcome">Welcome to my Planet - Jaran de los Santos Olsen</option>
+          <option value="desiderata">Desiderata - Max Ehrmann</option>
+          <option value="astronomer">When I Heard the Learn'd Astronomer - Walt Whitman</option>
+          <option value="carlrogers">Carl Rogers on Presence. Music: First Step - Hans Zimmer</option>
+          <option value="carlrogers2">Carl Rogers on Presence. Music: This Is Me - Jaran de los Santos Olsen</option>
+          <option value="alanwatts">Alan Watts on Swimming With the Stream</option>
+          <option value="alanwatts2">Alan Watts on Letting Go</option>
+          <option value="ajahnchah">Ajahn Chah and Jack Kornfield</option>
+          <option value="honestIntro">An Honest Meditation</option>
+          <option value="guesthouse">The Guesthouse - Rumi</option>
+          <option value="ramanamaharsi">Jack Kornfield reading about Ramana Maharsi</option>
+          <option value="krishnamurti">Krishnamurti on Meditation and Love</option>
+          <option value="rupertspira">I am Always I - Rupert Spira</option>
+          <option value="rupertspira2">I am That - Rupert Spira</option>
+        </select>
+      </div>
+      
       <!-- <div id="credits">An Honest Meditation</div> -->
-      <!-- <div id="credits">Ajahn Chah from the BBC documentary 'The Mindful Way' & Jack Kornfield speaking about Ajahn Chah and loving awareness. Music: Jaran Olsen - This is me</div> -->
-      <div id="credits">Carl Rogers on Empathic Listening, Presence and Healing. Music: Jaran de los Santos Olsen - This Is Me</div>
-      <!-- <div id="credits">Carl Rogers on Empathic Listening, Presence and Healing. Music: Hans Zimmer - First Step</div> -->
+      <!-- <div id="credits">The Guesthouse - Rumi. Read by Helena Bonham Carter</div> -->
+      <!-- <div id="credits">Jack Kornfield reading about Ramana Maharsi</div> -->
+      
       <div class="progress-bar-container">
         <label for="progress-bar">Loading...</label>
         <progress id="progress-bar" value="0" max="100"></progress>
@@ -180,8 +197,8 @@
         Click nodes to see content. Wireframe nodes doesn't have content. Press K for hotkeys.
         <br><br>&#169;2023 Jaran de los Santos Olsen
       </div>
-      <div id="subtitle-container"></div>
-      
+      <!-- SUBTITLES -->
+      <div id="subtitle-container" data-subtitle-file="null"></div> 
       <input id="tagInput" type="text" style="display: none; position: absolute;" />
 
       <!-- SLIDES -->
@@ -226,8 +243,9 @@
     </div>
 
     <audio id="introTune">
-      <source src="/Planet/assets/audio/carlrogers2.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
+        <!-- INTROTUNE -->
+        <source src="/Planet/assets/audio/candle.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio> 
     
     <!-- Remove this when import maps will be widely supported  -->

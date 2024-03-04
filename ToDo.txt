@@ -1,4 +1,6 @@
 IN PROGRESS
+    
+
     add fields for the continents
 
     CSS slides
@@ -7,7 +9,9 @@ IN PROGRESS
         𝇈 cutout overlays
 
 SHORT-TERM
-    bypass contentData.js? read straight from folders? or generate contentData array from foldercontent at init?
+
+    open in new tab links for insighttimer
+
 
 INITIATIVES
     speak with Thomas about marker and intervention for realising the unconditioned
@@ -17,6 +21,34 @@ INITIATIVES
     find venue for weekend retreat in oslo and bergen
 
 CONTENT
+    Restraint
+    - Anne Lembke https://youtu.be/yKL0Pw3Q6mA?si=jkSIVcdr4EqcYIDi
+
+    JHANA
+     - Making the mind like the mind of a Brahma
+        - singular
+        - unified
+        - still
+        - silent
+        - loving
+        - present
+        - happy
+        - fulfilled
+        - open
+        - confident
+        - energetic
+        - this is why we use the meditation objects we use, to make the mind recognise/recall a brahmic way of experiencing
+        - gotrabhu-citta in connection with jhana: when the mind flips from the sensual (kama) perceptual framework to the brahmic/rupa/jhanic perceptual framework
+        - stuff we need to be ready to let go of, that distinguish the kama loka from the rupa loka:
+            - control
+            - action 
+            - past / present
+            - analysis
+            - getting / getting rid of
+        
+    -Ennegram panels 
+    -Enneagram meditations (holy ideas youtube clips)
+
     Bullets and boxes for interventions. PRP? More missing? Self-interruptions?
         - Re-arrange?
 
@@ -101,8 +133,14 @@ GEOGRAPHICAL FEATURES
     Floodplanes/lush terrain next to Rivers
 
     Geographical names
-        Desert of the real
+        Desert of the Real
         Sea of Empathy
+        Uncanny Valley
+        Plato's Cave
+        Atlantis
+        The Hundred Acre Wood
+        Garden of Eden
+        The Lonely Mountain
 
 
 LONG-TERM DEVELOPMENT
