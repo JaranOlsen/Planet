@@ -1,5 +1,4 @@
 export const palette = [ 
-    // Global colors
     0x74121D, // Deep Maroon
     0xFF0000, // Red
     0xFFD700, // Gold
@@ -12,41 +11,41 @@ export const palette = [
     0x7F8C8D, // Neutral Gray
 
     // Gut colors (shades of pink)
-    0xAE76A3, // Vintage Pink
-    0xD1BBD7, // Pastel Pink
-    0x882E72, // Deep Magenta
-    0xFDAA98, // Peachy Pink
-    0xF48FB1, // Light Pink
-    0xE91E63, // Magenta
-    0xC71585, // Medium Violet Red
-    0xFF69B4, // Hot Pink
-    0xD81B60, // Deep Pink
-    0xFFB6C1, // Cotton Candy
+    0xFFF0F5, // Lavender Blush (lightest pink)
+    0xFEE3EC, // Almost White Pink
+    0xFCD6E4, // Very Light Pink
+    0xFAC9DB, // Light Pink
+    0xF8BDD3, // Soft Pink
+    0xF6A0CB, // Medium Light Pink
+    0xF484C2, // Medium Pink
+    0xEF68B4, // Less Saturated Medium Dark Pink, slight purple hue
+    0xEA4DA6, // Less Saturated Dark Pink, more pronounced purple hue
+    0xE53298, // Less Saturated Deepest Pink, strong purple hue
 
     // Heart colors (shades of blue)
-    0x5289C7, // Cerulean
-    0x7BAFDE, // Baby Blue
-    0x1965B0, // Royal Blue
-    0x2980B9, // Ocean Blue
-    0x5DADE2, // Powder Blue
-    0x154360, // Dark Blue
-    0x45AAB8, // Teal
-    0x2E86C1, // Steel Blue
-    0xAED6F1, // Light Sky Blue
-    0x2874A6, // Intermediate Blue
+    0xF0F8FF, // Alice Blue (lightest blue)
+    0xDCE7F3, // Almost White Blue
+    0xB9CFE8, // Very Light Blue
+    0x97B8DD, // Light Blue
+    0x74A1D2, // Soft Blue
+    0x5289C7, // Medium Light Blue
+    0x3072BC, // Medium Blue
+    0x0E5BB1, // Medium Dark Blue
+    0x0044A6, // Dark Blue
+    0x002C9B, // Deepest Blue
 
     // Head colors (shades of yellow/orange)
-    0xF7F056, // Lemon Yellow
-    0xF6C141, // Sunflower Yellow
-    0xF1932D, // Tangerine
-    0xFFFC90, // Light Lemon
-    0xF5B041, // Orange
-    0xFCF3CF, // Eggshell Yellow
-    0xF39C12, // Pumpkin Orange
-    0xF7DC6F, // Pale Goldenrod
-    0xFAE5D3, // Vanilla
-    0xF8C471, // Saffron
-    
+    0xFFFFF0, // Ivory (lightest yellow)
+    0xFDFCDD, // Almost White Yellow
+    0xFBF9BB, // Very Light Yellow
+    0xF9F699, // Light Yellow
+    0xF8F377, // Soft Yellow
+    0xF6F055, // Medium Light Yellow
+    0xF4D633, // Medium Yellow with a hint of orange
+    0xF2C411, // Medium Dark Yellow with orange tint
+    0xF0B200, // Dark Yellow with orange hue
+    0xED9C00, // Deepest Yellow with strong orange undertone
+
     // Spiral dynamics colors
     0xd2b48c, // Tan
     0x6a5acd, // Slate Blue
@@ -58,4 +57,4 @@ export const palette = [
     0x40e0d0, // Turquoise
     0xff7f50, // Coral
     0xffffff, // White
-]
+];

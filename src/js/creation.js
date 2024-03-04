@@ -58,7 +58,7 @@ export function creation(version, postLoadingManager, guttaState, scene, guttaHe
     } 
     if (version == 3){ //DEVELOPER VERSION
         initialiseLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture16k, normalTexture16k, roughnessTexture16k, cloudsTexture8k, cloudsNormal8k)
+        createJaranius(diffuseTexture2k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k)
         createContexts(version)
         createMindmap()
         createGutta(300, 20, version, guttaState, scene, guttaHelperCenter)
