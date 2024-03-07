@@ -15,7 +15,7 @@ export class Gutt {
         this.species = species;
 
         this.gutt = new THREE.Mesh(this.geometry, this.material)
-        this.guttaFlyAltitude = 0.01
+        this.guttaFlyAltitude = 0.02 //0.01
 
         this.pos = new THREE.Vector2(lat, lng)
         this.velocity = new THREE.Vector2(getRandomNum(0, 0), getRandomNum(0, 1)).setLength(0.001)
