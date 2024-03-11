@@ -1,8 +1,5 @@
 IN PROGRESS
     
-
-    add fields for the continents
-
     CSS slides
         𝇈 title moving in from top..? feature or bug? not a feature
         - fix for VR - not possible as of yet. Wait for three-mesh-ui support for html+css content on elements.
@@ -10,15 +7,21 @@ IN PROGRESS
 
 SHORT-TERM
 
-    open in new tab links for insighttimer
+    What is missing?
+        - Psychotherapy
+            - Disidentification from thoughts, memories and emotion (partly there implicitly)
+        - Buddhism
+            - Dealing effectively with hindrances caused by emotional processing difficulties and/or trauma
+            - Attention to metaphysical questions, and awareness about implicit/sub-conscious/underlying metaphysical assumptions
+        - Philosophy / non-dual traditions
+            - Grounding in the body, emotions, needs, personal history. Therapeutic framework.
+            - Practice for building a solid foundation, and for integration/stabilisation of insights.
 
+    Major influences
 
 INITIATIVES
-    speak with Thomas about marker and intervention for realising the unconditioned
 
     apply for a pimp
-
-    find venue for weekend retreat in oslo and bergen
 
 CONTENT
     Restraint
@@ -152,10 +155,6 @@ LONG-TERM DEVELOPMENT
     convert all images to webp
 
     make functions of init processes
-
-    make background more colorful
-        fog?
-        nebula
 
 USEFUL
     EFFICIENT Boids
