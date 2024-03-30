@@ -480,10 +480,9 @@ function createGalaxy() {
     const radius = 1000;
     const segments = 50;
     const geometry = new THREE.SphereGeometry(radius, segments, segments);
-    const galaxyDiffuseTexture = textureLoader.load(milkyway)
-    galaxyDiffuseTexture.colorSpace = THREE.SRGBColorSpace
+
     const material = new THREE.MeshBasicMaterial({
-        map: galaxyDiffuseTexture,
+        map: textureLoader.load(milkyway),
         transparent: false,
         opacity: 1,
         side: THREE.BackSide
@@ -526,15 +525,6 @@ const starMatB5 = createStarMaterial(starB5)
 const starMatB10 = createStarMaterial(starB10)
 const starMatB15 = createStarMaterial(starB15)
 const starMatB20 = createStarMaterial(starB20)
-starMaterial.colorSpace = THREE.SRGBColorSpace
-starMatR5.colorSpace = THREE.SRGBColorSpace
-starMatR10.colorSpace = THREE.SRGBColorSpace
-starMatR15.colorSpace = THREE.SRGBColorSpace
-starMatR20.colorSpace = THREE.SRGBColorSpace
-starMatB5.colorSpace = THREE.SRGBColorSpace
-starMatB10.colorSpace = THREE.SRGBColorSpace
-starMatB15.colorSpace = THREE.SRGBColorSpace
-starMatB20.colorSpace = THREE.SRGBColorSpace
 
 function createStarVertices(source, number) {
     for (let i = 0; i < number; i++) {
@@ -635,14 +625,13 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     const jaraniusGeometry = new THREE.SphereGeometry(5, jaraniusSegments, jaraniusSegments);
     jaraniusGeometry.computeBoundingSphere();
 
-    const diffuse = textureLoader2.load(diffuseTexture)
-    diffuse.colorSpace = THREE.SRGBColorSpace;
     const jaraniusMaterial = new THREE.MeshStandardMaterial({ 
-        map: diffuse,
+        map: textureLoader2.load(diffuseTexture),
         normalMap: textureLoader2.load(normalTexture),
         roughnessMap: textureLoader2.load(roughnessTexture),  //works well
         normalScale: new THREE.Vector2(5, 5),  //works well
         metalness: 0,  //works well
+        //roughness: 1,  //0.85 works well
         flatShading: false,
         side: FrontSide,
     })
@@ -656,10 +645,8 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     jaranius.castShadow = true;
 
     //create cloud layer
-    const cloudsDiffuseTexture = textureLoader2.load(cloudsTexture)
-    cloudsDiffuseTexture.colorSpace = THREE.SRGBColorSpace;
     const cloudsMaterial = new THREE.MeshLambertMaterial({
-        map: cloudsDiffuseTexture,
+        map: textureLoader2.load(cloudsTexture),
         normalMap: textureLoader2.load(cloudsNormal),
         normalScale: new THREE.Vector2(0.5, 0.5), 
         transparent: true,
@@ -868,10 +855,8 @@ function createEnneagram(enneagram) {
 const sunRadius = 5
 const sunRadianceGeo = new THREE.SphereGeometry(sunRadius, 25, 25)
 
-const sunDiffuseTexture = textureLoader.load(sunTexture)
-sunDiffuseTexture.colorSpace = THREE.SRGBColorSpace
 const sunMat = new THREE.MeshBasicMaterial({
-    map: sunDiffuseTexture
+    map: textureLoader.load(sunTexture)
 })
 const sunRadiance = new THREE.Mesh(sunRadianceGeo, sunMat)
 sunRadiance.position.set(0, 0, 490)
@@ -921,12 +906,10 @@ let moon3 = new Moon(1, icemoonTexture, 250, -0.0001, pivot3, 0.005);
 let moons = [moon1,moon2,moon3];
 
 for (let i = 0; i < moons.length; i++) {
-    const moonDiffuseTexture = textureLoader.load(moons[i].texture)
-    moonDiffuseTexture.colorSpace = THREE.SRGBColorSpace
     const mesh = new THREE.Mesh(
         new THREE.SphereGeometry(moons[i].radius, 25, 25),
         new THREE.MeshStandardMaterial({
-            map: moonDiffuseTexture,
+            map: textureLoader.load(moons[i].texture),
             metalness: 0,
             flatShading: false,
             side: FrontSide,

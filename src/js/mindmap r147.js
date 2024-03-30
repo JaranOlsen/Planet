@@ -364,7 +364,6 @@ export function instantiateNugget(index, lat, lng, color, size, slides, destinat
 
 export function createImages(textureSrc, lat, lng, size, radius, destination) {
     const img = textureLoader.load(textureSrc);
-    img.colorSpace = THREE.SRGBColorSpace;
     const boxMat = new THREE.MeshStandardMaterial({
         map: img,
         transparent: true,

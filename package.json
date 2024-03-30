@@ -19,7 +19,7 @@
     "vite-plugin-string": "^1.2.1"
   },
   "dependencies": {
-    "three": "^0.147.0",
+    "three": "^0.163.0",
     "three-csm": "^4.2.1",
     "three-mesh-ui": "^6.5.3",
     "wordcloud": "^1.2.2"
