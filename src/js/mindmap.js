@@ -148,6 +148,8 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
             box.renderOrder = 10;
             tag.renderOrder = 11;
 
+            box.castShadow = true;
+
             box.source = dataSource;
             box.context = context;
             box.index = index + indexMod;
@@ -192,6 +194,8 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
         }
         
         pin.position.set(pos.x, pos.y, pos.z);
+
+        pin.castShadow = true;
     
         destination.add(pin);
         intersectObjectsArray.push(pin);
@@ -308,6 +312,9 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
             });
         }
         curve.renderOrder = 9;
+
+        curve.castShadow = true;
+
         destination.add(curve);
     }
 
@@ -362,6 +369,7 @@ export function createImages(textureSrc, lat, lng, size, radius, destination) {
         transparent: true,
         side: DoubleSide,
     });
+    boxMat.alphaTest = 0.5;
 
     const roundingFactor = 0.01;
     const shape = new THREE.Shape()
@@ -396,6 +404,9 @@ export function createImages(textureSrc, lat, lng, size, radius, destination) {
     boxGeo.translate(-0.5 * (boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x), -0.5 * (boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y), 0);
 
     const box = new THREE.Mesh(boxGeo, boxMat);
+    // Enable shadow casting for the mesh
+    box.castShadow = true;
+
     const boxLatLng = convertLatLngtoCartesian(lat, lng, radius);
     const boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
 

@@ -45,27 +45,27 @@ export function creation(version, postLoadingManager, guttaState, scene, guttaHe
     createTitle(scene)
     if (version == 1){ //FULL VERSION
         initialiseLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture16k, normalTexture16k, roughnessTexture16k, cloudsTexture8k, cloudsNormal8k)
+        createJaranius(diffuseTexture16k, normalTexture16k, roughnessTexture16k, cloudsTexture8k, cloudsNormal8k, version)
         createContexts(version)
         createMindmap()
         createGutta(400, 25, version, guttaState, scene, guttaHelperCenter)
     } 
     if (version == 2){ //LIGHT VERSION
         initialiseLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture2k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k)
+        createJaranius(diffuseTexture2k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k, version)
         createContexts(version)
         createMindmap()
     } 
     if (version == 3){ //DEVELOPER VERSION
         initialiseLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture2k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k)
+        createJaranius(diffuseTexture2k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k, version)
         createContexts(version)
         createMindmap()
         createGutta(300, 20, version, guttaState, scene, guttaHelperCenter)
     } 
     if (version == 4){ //VR VERSION
         initialiseLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture8k, normalTexture8k, roughnessTexture8k, cloudsTexture4k, cloudsNormal4k)
+        createJaranius(diffuseTexture8k, normalTexture8k, roughnessTexture8k, cloudsTexture4k, cloudsNormal4k, version)
         createContexts(version)
         createMindmap()
         //createGutta(200, 10, version, guttaState, scene, guttaHelperCenter)

@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "three": "^0.147.0",
+    "three-csm": "^4.2.1",
     "three-mesh-ui": "^6.5.3",
     "wordcloud": "^1.2.2"
   }

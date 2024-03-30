@@ -81,6 +81,9 @@ const renderer = new THREE.WebGLRenderer(
         antialias: true,
     });
 renderer.setPixelRatio(window.devicePixelRatio)
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.logarithmicDepthBuffer = false; //turn on if z-fighting
 
 function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
@@ -98,6 +101,7 @@ const aspect = 2;  // the canvas default
 const near = 0.1;
 const far = 2000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+
 camera.position.z = 500
 
 const orbitControls = new OrbitControls(camera, canvas);
@@ -613,27 +617,31 @@ let atmosphericLight
 let sign
 let atmosMaterial
 const planetContent = new THREE.Object3D()
-export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture, cloudsNormal) {
+export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture, cloudsNormal, version) {
     jaraniusInitialized = true
+    if (version == "2") renderer.shadowMap.enabled = false
     const jaraniusSegments = 200
     
     const jaraniusGeometry = new THREE.SphereGeometry(5, jaraniusSegments, jaraniusSegments);
     jaraniusGeometry.computeBoundingSphere();
+    const jaraniusMaterial = new THREE.MeshStandardMaterial({ 
+        map: textureLoader2.load(diffuseTexture),
+        normalMap: textureLoader2.load(normalTexture),
+        roughnessMap: textureLoader2.load(roughnessTexture),  //works well
+        normalScale: new THREE.Vector2(5, 5),  //works well
+        metalness: 0,  //works well
+        //roughness: 1,  //0.85 works well
+        flatShading: false,
+        side: FrontSide,
+    })
     jaranius = new THREE.Mesh(
         jaraniusGeometry,
-        new THREE.MeshStandardMaterial({ 
-            map: textureLoader2.load(diffuseTexture),
-            normalMap: textureLoader2.load(normalTexture),
-            roughnessMap: textureLoader2.load(roughnessTexture),  //works well
-            normalScale: new THREE.Vector2(5, 5),  //works well
-            metalness: 0,  //works well
-            //roughness: 1,  //0.85 works well
-            flatShading: false,
-            side: FrontSide,
-        })
+        jaraniusMaterial 
     )
     jaranius.name = "jaranius"
     jaraniusCenter.add(jaranius)
+    jaranius.receiveShadow = true;
+    jaranius.castShadow = true;
 
     //create cloud layer
     const cloudsMaterial = new THREE.MeshLambertMaterial({
@@ -649,6 +657,9 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
         new THREE.SphereGeometry(5.04, jaraniusSegments, jaraniusSegments),
         cloudsMaterial
     )
+
+    clouds.receiveShadow = true;
+    clouds.castShadow = false;
     jaranius.add(clouds)
     
     //create atmosphericLight  
@@ -712,7 +723,7 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     jaranius.add(atmosphere);
     
     //create jaranius light
-    const jaraniusLight = new THREE.PointLight(0xffffff, 0.01);
+    const jaraniusLight = new THREE.PointLight(0xffffff, 0); //0.01
     jaraniusLight.position.set(0, 0, 0);
     jaranius.add(jaraniusLight);
 
@@ -729,6 +740,12 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
             model.scale.set(5, 5, 5)
             model.rotation.y += Math.PI / 2;
             model.rotation.x += Math.PI / 3;
+            // Enable shadow casting for each mesh in the model
+            model.traverse(function (object) {
+                if (object.isMesh) {
+                    object.castShadow = true;
+                }
+            });
         },
         function ( xhr ) {
             //console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
@@ -843,9 +860,17 @@ const sunMat = new THREE.MeshBasicMaterial({
 const sunRadiance = new THREE.Mesh(sunRadianceGeo, sunMat)
 sunRadiance.position.set(0, 0, 490)
 pivot4.add(sunRadiance)
+sunRadiance.castShadow = false
 
-const sunLight = new THREE.PointLight(0xffffff, 1.2, 2000)
+const sunLight = new THREE.DirectionalLight(0xffffff, 1.2) //1.2
 sunLight.position.set(sunRadiance.position.x, sunRadiance.position.y, sunRadiance.position.z - sunRadius * 1.5)
+sunLight.castShadow = true;
+sunLight.shadow.camera.near = 475;
+sunLight.shadow.camera.far = 700;
+sunLight.shadow.mapSize.width = 8192;
+sunLight.shadow.mapSize.height = 8192;
+sunLight.shadow.bias = 0.0001;
+sunLight.shadow.radius = 1;
 pivot4.add(sunLight)
 
 let sunObjectWorldPosition = new THREE.Vector3();
@@ -892,6 +917,8 @@ for (let i = 0; i < moons.length; i++) {
 
     mesh.position.set(moons[i].z, 0, 0)
     moons[i].pivot.add(mesh);
+    mesh.castShadow = true
+    mesh.receiveShadow = true
 
     const moonlight = new THREE.PointLight(0xffffff, moons[i].intensity);
     moonlight.position.set(moons[i].z, 0, 0);
@@ -1036,7 +1063,7 @@ function createSpiral() {
 }
 
 //CREATE LIGHTS
-const ambient = new THREE.AmbientLight(0xffffff, 0.02); //0.01
+const ambient = new THREE.AmbientLight(0xffffff, 0.01);
 scene.add(ambient);
 
 const spotlight = new THREE.SpotLight(0xefebd8, 0);
@@ -2649,6 +2676,7 @@ function render() {
         camera.aspect = canvas.clientWidth / canvas.clientHeight;
         camera.updateProjectionMatrix();
     }
+
     renderer.render(scene, camera);
 }
 
