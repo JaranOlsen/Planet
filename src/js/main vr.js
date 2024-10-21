@@ -307,7 +307,7 @@ function updateIntro() {
         break;
       case 'alanwatts':
         credits.textContent = "Alan Watts on Swimming With the Stream. Music: Agarb - Bilro & Barbosa and Passion - Sappheiros";
-        subtitleContainer.dataset.subtitleFile = 'null';
+        subtitleContainer.dataset.subtitleFile = 'alanwatts';
         sourceElement.src = '/assets/audio/alanwatts.mp3';
         break;
       case 'alanwatts2':
@@ -480,9 +480,10 @@ function createGalaxy() {
     const radius = 1000;
     const segments = 50;
     const geometry = new THREE.SphereGeometry(radius, segments, segments);
-
+    const galaxyDiffuseTexture = textureLoader.load(milkyway)
+    galaxyDiffuseTexture.colorSpace = THREE.SRGBColorSpace
     const material = new THREE.MeshBasicMaterial({
-        map: textureLoader.load(milkyway),
+        map: galaxyDiffuseTexture,
         transparent: false,
         opacity: 1,
         side: THREE.BackSide
@@ -525,6 +526,15 @@ const starMatB5 = createStarMaterial(starB5)
 const starMatB10 = createStarMaterial(starB10)
 const starMatB15 = createStarMaterial(starB15)
 const starMatB20 = createStarMaterial(starB20)
+starMaterial.colorSpace = THREE.SRGBColorSpace
+starMatR5.colorSpace = THREE.SRGBColorSpace
+starMatR10.colorSpace = THREE.SRGBColorSpace
+starMatR15.colorSpace = THREE.SRGBColorSpace
+starMatR20.colorSpace = THREE.SRGBColorSpace
+starMatB5.colorSpace = THREE.SRGBColorSpace
+starMatB10.colorSpace = THREE.SRGBColorSpace
+starMatB15.colorSpace = THREE.SRGBColorSpace
+starMatB20.colorSpace = THREE.SRGBColorSpace
 
 function createStarVertices(source, number) {
     for (let i = 0; i < number; i++) {
@@ -625,13 +635,14 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     const jaraniusGeometry = new THREE.SphereGeometry(5, jaraniusSegments, jaraniusSegments);
     jaraniusGeometry.computeBoundingSphere();
 
+    const diffuse = textureLoader2.load(diffuseTexture)
+    diffuse.colorSpace = THREE.SRGBColorSpace;
     const jaraniusMaterial = new THREE.MeshStandardMaterial({ 
-        map: textureLoader2.load(diffuseTexture),
+        map: diffuse,
         normalMap: textureLoader2.load(normalTexture),
         roughnessMap: textureLoader2.load(roughnessTexture),  //works well
         normalScale: new THREE.Vector2(5, 5),  //works well
         metalness: 0,  //works well
-        //roughness: 1,  //0.85 works well
         flatShading: false,
         side: FrontSide,
     })
@@ -645,8 +656,10 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     jaranius.castShadow = true;
 
     //create cloud layer
+    const cloudsDiffuseTexture = textureLoader2.load(cloudsTexture)
+    cloudsDiffuseTexture.colorSpace = THREE.SRGBColorSpace;
     const cloudsMaterial = new THREE.MeshLambertMaterial({
-        map: textureLoader2.load(cloudsTexture),
+        map: cloudsDiffuseTexture,
         normalMap: textureLoader2.load(cloudsNormal),
         normalScale: new THREE.Vector2(0.5, 0.5), 
         transparent: true,
@@ -855,8 +868,10 @@ function createEnneagram(enneagram) {
 const sunRadius = 5
 const sunRadianceGeo = new THREE.SphereGeometry(sunRadius, 25, 25)
 
+const sunDiffuseTexture = textureLoader.load(sunTexture)
+sunDiffuseTexture.colorSpace = THREE.SRGBColorSpace
 const sunMat = new THREE.MeshBasicMaterial({
-    map: textureLoader.load(sunTexture)
+    map: sunDiffuseTexture
 })
 const sunRadiance = new THREE.Mesh(sunRadianceGeo, sunMat)
 sunRadiance.position.set(0, 0, 490)
@@ -906,10 +921,12 @@ let moon3 = new Moon(1, icemoonTexture, 250, -0.0001, pivot3, 0.005);
 let moons = [moon1,moon2,moon3];
 
 for (let i = 0; i < moons.length; i++) {
+    const moonDiffuseTexture = textureLoader.load(moons[i].texture)
+    moonDiffuseTexture.colorSpace = THREE.SRGBColorSpace
     const mesh = new THREE.Mesh(
         new THREE.SphereGeometry(moons[i].radius, 25, 25),
         new THREE.MeshStandardMaterial({
-            map: textureLoader.load(moons[i].texture),
+            map: moonDiffuseTexture,
             metalness: 0,
             flatShading: false,
             side: FrontSide,
@@ -1070,6 +1087,7 @@ scene.add(ambient);
 const spotlight = new THREE.SpotLight(0xefebd8, 0);
 spotlight.penumbra = 0.8
 spotlight.angle = Math.PI / 4
+spotlight.decay = 0.5
 scene.add(spotlight);
 
 const targetIntensities = {
@@ -1736,7 +1754,7 @@ function onDocumentKeyUp(event) {
 
         //Light control
         if (keyCode >= 49 && keyCode <= 53) {
-            const intensities = [0, 0.25, 0.5, 0.75, 1];
+            const intensities = [0, 0.5, 0.75, 1, 1.5];
             targetIntensities.spotlight = intensities[keyCode - 49];
             lightTransitionStart = clock.getElapsedTime();
           }
@@ -2390,11 +2408,13 @@ document.getElementById("tagInput").addEventListener("keydown", function (event)
             const newConnectionsDestination = contexts[selectedContext].connectionData
             const newArrowConnectionsDestination = contexts[selectedContext].arrowConnectionData
             const newDashedConnectionsDestination = contexts[selectedContext].dashedConnectionData
+            const newTunnelConnectionsDestination = contexts[selectedContext].tunnelConnectionData
 
             newTagDestination.push(newItem)
             newConnectionsDestination.push([id])
             if (newArrowConnectionsDestination !== undefined) newArrowConnectionsDestination.push([id])
             if (newDashedConnectionsDestination !== undefined) newDashedConnectionsDestination.push([id])
+            if (newTunnelConnectionsDestination !== undefined) newTunnelConnectionsDestination.push([id])
 
             const indexMod = contexts[selectedContext].tagData.length - 1
 
@@ -2485,7 +2505,38 @@ function processPointerUpEvent(event) {
 
 //TESTS
 if (planetTagData.length !== planetConnections.length) {
-    console.log("ERROR: planetTagData.length !== planetConnections.length")
+    console.log("ERROR: planetTagData.length !== planetConnections.length", planetTagData.length, planetConnections.length)
+    for (let i = 0; i < planetConnections.length; i++) {
+        if (planetTagData[i].id !== planetConnections[i][0]) {
+            console.log(i, planetTagData[i].id)
+        }
+    }
+    
+}
+if (planetTagData.length !== planetArrowedConnections.length) {
+    console.log("ERROR: planetTagData.length !== planetArrowedConnections.length", planetTagData.length, planetArrowedConnections.length)
+    for (let i = 0; i < planetArrowedConnections.length; i++) {
+        if (planetConnections[i][0] !== planetArrowedConnections[i][0]) {
+            console.log(i, planetConnections[i][0])
+        }
+    }
+}
+if (planetTagData.length !== planetDashedConnections.length) {
+    console.log("ERROR: planetTagData.length !== planetDashedConnections.length", planetTagData.length, planetDashedConnections.length)
+    for (let i = 0; i < planetDashedConnections.length; i++) {
+        if (planetConnections[i][0] !== planetDashedConnections[i][0]) {
+            console.log(i, planetConnections[i][0])
+        }
+    }
+}
+
+if (planetTagData.length !== planetTunnelConnections.length) {
+    console.log("ERROR: planetTagData.length !== planetTunnelConnections.length", planetTagData.length, planetTunnelConnections.length)
+    for (let i = 0; i < planetTunnelConnections.length; i++) {
+        if (planetConnections[i][0] !== planetTunnelConnections[i][0]) {
+            console.log(i, planetConnections[i][0])
+        }
+    }
 }
 
 //ANIMATIONLOOP
@@ -2528,7 +2579,7 @@ function animate() {
 }
 
 function render() {  
-    //WebXR
+   //WebXR
     if (webXRInitialized == true && renderer.xr.isPresenting){
         const dt = clock.getDelta();
 
@@ -2569,6 +2620,7 @@ function render() {
     
     
     if (jaraniusInitialized == true) {
+
         if (window.appStatus !== "initialising" && window.appStatus !== "version-menu" && window.appStatus !== "intro-menu"&& window.appStatus !== "silence") {
             center.rotation.y += -0.00001;
             pivot1.rotation.y += -0.0003;

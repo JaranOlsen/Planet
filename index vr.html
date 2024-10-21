@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg" href="/assets/icons/planet.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planet</title>
+
+    <link rel="stylesheet" type="text/css" href="./src/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./src/css/slides.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+ 
+    <div id="container">
+      <canvas id="canvas"></canvas>
+      <div id="credits">
+        <label id="intro-label" for="intro-select">Choose an intro:</label>
+        <select id="intro-select">
+          <option value="welcome">Welcome to my Planet - Jaran de los Santos Olsen</option>
+          <option value="desiderata">Desiderata - Max Ehrmann</option>
+          <option value="astronomer">When I Heard the Learn'd Astronomer - Walt Whitman</option>
+          <option value="carlrogers">Carl Rogers on Presence. Music: First Step - Hans Zimmer</option>
+          <option value="carlrogers2">Carl Rogers on Presence. Music: This Is Me - Jaran de los Santos Olsen</option>
+          <option value="alanwatts">Alan Watts on Swimming With the Stream</option>
+          <option value="alanwatts2">Alan Watts on Letting Go</option>
+          <option value="ajahnchah">Ajahn Chah and Jack Kornfield</option>
+          <option value="honestIntro">An Honest Meditation</option>
+          <option value="guesthouse">The Guesthouse - Rumi</option>
+          <option value="ramanamaharsi">Jack Kornfield reading about Ramana Maharsi</option>
+          <option value="krishnamurti">Krishnamurti on Meditation and Love</option>
+          <option value="rupertspira">I am Always I - Rupert Spira</option>
+          <option value="rupertspira2">I am That - Rupert Spira</option>
+        </select>
+      </div>
+      
+      <!-- <div id="credits">An Honest Meditation</div> -->
+      <!-- <div id="credits">The Guesthouse - Rumi. Read by Helena Bonham Carter</div> -->
+      <!-- <div id="credits">Jack Kornfield reading about Ramana Maharsi</div> -->
+      
+      <div class="progress-bar-container">
+        <label for="progress-bar">Loading...</label>
+        <progress id="progress-bar" value="0" max="100"></progress>
+      </div>
+      
+    <div id="versions">
+        <button class="version-option" id="version1" alt="Requires powerful computer">Full version</button><br>
+        <button class="version-option" id="version2" alt="Suitable for light laptops and mobile devices">Light version</button><br>
+        <button class="version-option" id="version3" alt="Includes beta features - might not always work">Developer version</button><br>
+        <!-- <button class="version-option" id="version4" alt="Built for Oculus Quest II">VR version</button><br> 
+        Un-comment line 13 in versions.js to re-enable
+        -->
+        <!-- <button class="version-option" id="fullscreen-button">Go Fullscreen</button> -->
+    </div>
+      
+      <button id="playbutton">&#9654;</button>
+      <button id="skipbutton">skip intro</button>
+      <button id="enableVRbutton">enable VR</button>
+      <div id="fpsCounter"></div>
+      <div id="guttaStatScreen"></div>
+
+      <div id="hotKeys">
+
+        <p class="hotkeyTitle">Movement control:</p>
+        <div class="hotkey-line">
+            <span class="hotkey">O</span>
+            <span class="description">Switch between Orbit controls and Fly controls</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">,</span>
+            <span class="description">In Fly controls: Switch between point-to-look and drag-to-look</span>
+        </div>
+
+        <p class="hotkeyTitle">Slide control:</p>
+        <div class="hotkey-line">
+            <span class="hotkey">&#8592;</span>
+            <span class="description">Previous slide</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">&#8594;</span>
+            <span class="description">Next slide</span>
+        </div>
+
+        <p class="hotkeyTitle">Light control:</p>
+        <div class="hotkey-line">
+            <span class="hotkey">1-5</span>
+            <span class="description">Spotlight intensity</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">6-0</span>
+            <span class="description">Ambient light intensity</span>
+        </div>
+
+        <p class="hotkeyTitle">Boids control:</p>
+        <div class="hotkey-line">
+            <span class="hotkey">G</span>
+            <span class="description">Boids stats</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">H</span>
+            <span class="description">Boids parameters control</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">J</span>
+            <span class="description">FPS counter</span>
+        </div>
+
+        <p class="hotkeyTitle">Content display:</p>
+        <div class="hotkey-line">
+            <span class="hotkey">C</span>
+            <span class="description">Show/hide planet content</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">I</span>
+            <span class="description">Show/hide planet interior</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">S</span>
+            <span class="description">Show/hide spiral dynamics</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Y</span>
+            <span class="description">Show/hide enneagram</span>
+        </div>
+
+        <p class="hotkeyTitle">Developer tools:</p>
+        <div class="hotkey-line">
+            <span class="hotkey">Z</span>
+            <span class="description">Clear selection of nodes</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">A</span>
+            <span class="description">Add to selection of nodes</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">F</span>
+            <span class="description">Toggle fast mode</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Q</span>
+            <span class="description">Print nodedata</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">T</span>
+            <span class="description">Create new node</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">X</span>
+            <span class="description">Remove selected node(s)</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">R</span>
+            <span class="description">Create connection(s) to first selected node</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">V</span>
+            <span class="description">Create arrowed connection(s) to first selected node</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">B</span>
+            <span class="description">Create dashed connection(s) to first selected node</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">N</span>
+            <span class="description">Create tunneled connection(s) to first selected node</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">W</span>
+            <span class="description">Redraw connections</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">E</span>
+            <span class="description">Change color (next) of selected node(s)</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">D</span>
+            <span class="description">Change color (previous) of selected node(s)</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">+</span>
+            <span class="description">Increase size of selected node(s)</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">-</span>
+            <span class="description">Decrease size of selected node(s)</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Arrows</span>
+            <span class="description">Move selected node(s)</span>
+        </div>
+      </div>
+
+      <!-- SILENCE SCREEN -->
+      <div class="silence-center-container">
+        <div id="silence">SILENCE</div>
+      </div>
+      <audio id="silenceAudio">
+        <source src="/assets/audio/singingbowl.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+
+      <div id="footer">
+        Click nodes to see content. Wireframe nodes doesn't have content. Press K for hotkeys.
+        <br><br>&#169;2023 Jaran de los Santos Olsen
+      </div>
+      <!-- SUBTITLES -->
+      <div id="subtitle-container" data-subtitle-file="null"></div> 
+      <input id="tagInput" type="text" style="display: none; position: absolute;" />
+
+      <!-- SLIDES -->
+      <section aria-label="Slides">
+      <div id="slides" class="slides-flexbox" >
+        <div class="child" id="leftPanel"></div>
+        <div class="parent" id="midParent">
+            <div class="child" id="topPanel"></div>
+            <div class="child" id="topFrame">
+                <button class="close-button" data-carousel-button="exit">&times;</button>
+            </div>
+            <div class="parent" id="centerParent">
+                <div class="child" id="leftFrame"></div>
+                <div class="child" id="content">
+                    <div id="slideContainer">
+
+                    </div>
+                </div>
+                <div class="child" id="rightFrame">
+                    <div id="subDotContainer" class="dot-container"></div>
+                </div>
+            </div>
+            <div class="child" id="bottomFrame">
+                <div id="mainDotContainer" class="dot-container"></div>
+            </div>
+            <div class="child" id="bottomPanel">
+                <div class="mainButtons">
+                    <button class="carousel-button left" data-carousel-button="left"></button>
+                    <button class="carousel-button right" data-carousel-button="right"></button>
+                </div>
+            </div>
+        </div>
+        <div class="child" id="rightPanel">
+            <div class="subButtons">
+                <button class="carousel-button up" data-carousel-button="up"></button>
+                <button class="carousel-button down" data-carousel-button="down"></button>
+            </div>
+        </div>
+      </div>
+      </section>
+    
+    </div>
+
+    <audio id="introTune">
+        <!-- INTROTUNE -->
+        <source src="/assets/audio/candle.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio> 
+    
+    <!-- Remove this when import maps will be widely supported  -->
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

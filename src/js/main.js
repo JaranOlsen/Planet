@@ -5,11 +5,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js"
 import { FlyControls } from 'three/addons/controls/FlyControls.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'
-import { VRButton } from 'three/addons/webxr/VRButton.js'
-import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory.js'
-import { Constants as MotionControllerConstants, fetchProfile, MotionController } from 'three/examples/jsm/libs/motion-controllers.module.js'
 import { generateUUID } from 'three/src/math/MathUtils.js'
-import ThreeMeshUI from 'three-mesh-ui'
 import WordCloud from 'wordcloud';
 window.WordCloud = WordCloud;
 
@@ -17,7 +13,7 @@ window.WordCloud = WordCloud;
 //  IMPORT SCRIPTS
 import { createImages, createTags, hoveredPins, intersectObjectsArray, createConnections, hoverPins, instantiateNugget } from './mindmap.js'
 import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng, easeInOutQuad } from './mathScripts.js'
-import { pushContent, pushVRContent, handleCarouselButton } from './content.js'
+import { pushContent, handleCarouselButton } from './content.js'
 import { initialiseVersion } from './versions.js'
 import { creation } from './creation.js'
 import { updateGutta, togglePerceptionCircles } from './gutta.js'
@@ -34,7 +30,6 @@ import { enneagramTagData, enneagramConnections, enneagramArrowedConnections, en
 import { contentData } from './data/contentData.js'
 import { palette } from './data/palette.js'
 import { pinMaterials, pinWireframeMaterials, boxMaterials } from './data/materials.js'
-//import { subtitles_carlrogers as subtitles} from './data/subtitles.js'
 
 //  IMPORT SHADERS
 import atmosphericLightVertexShader from '../shaders/atmosphericLightVertex.glsl'
@@ -68,9 +63,6 @@ import field1 from '/src/models/field.glb'
 import field2 from '/src/models/field2.glb'
 import field3 from '/src/models/field3.glb'
 import field4 from '/src/models/field4.glb'
-
-const DEFAULT_PROFILES_PATH = 'https://cdn.jsdelivr.net/npm/@webxr-input-profiles/assets@1.0/dist/profiles';
-const DEFAULT_PROFILE = 'generic-trigger'; 
 
 window.appStatus = "initialising";
 
@@ -133,7 +125,6 @@ const pointer = new THREE.Vector2;
 const raycaster = new THREE.Raycaster();
 
 const clock = new THREE.Clock();
-const timer = new THREE.Clock();
 let developer = false;
 
 export let contexts = []
@@ -194,13 +185,10 @@ const textureLoader2 = new THREE.TextureLoader(postLoadingManager)
 
 const playButton = document.getElementById("playbutton")
 const credits = document.getElementById("credits")
-const enableVRbutton = document.getElementById("enableVRbutton")
 const skipButton = document.getElementById("skipbutton")
-const fullscreenButton = document.getElementById('fullscreen-button')
 initialiseVersion(creation, postLoadingManager, guttaState, scene, guttaHelperCenter)
 window.appStatus = "version-menu"
 
-let webXRInitialized = false
 let jaraniusInitialized = false
 
 //LOADING MANAGER
@@ -307,7 +295,7 @@ function updateIntro() {
         break;
       case 'alanwatts':
         credits.textContent = "Alan Watts on Swimming With the Stream. Music: Agarb - Bilro & Barbosa and Passion - Sappheiros";
-        subtitleContainer.dataset.subtitleFile = 'null';
+        subtitleContainer.dataset.subtitleFile = 'alanwatts';
         sourceElement.src = '/assets/audio/alanwatts.mp3';
         break;
       case 'alanwatts2':
@@ -416,7 +404,6 @@ function initialiseIntro() {
         window.appStatus = "orbit"
         playButton.style.display = "none";
         skipButton.style.display = "none";
-        enableVRbutton.style.display = "none";
         credits.style.display = "none";
         subtitleContainer.style.display = "block";
         orbitControls.enabled = true
@@ -427,7 +414,6 @@ function initialiseIntro() {
         window.appStatus = "orbit"
         playButton.style.display = "none";
         skipButton.style.display = "none";
-        enableVRbutton.style.display = "none";
         credits.style.display = "none";
         camera.position.z = 15;
         orbitControls.enabled = true
@@ -446,18 +432,6 @@ function initialiseIntro() {
         event.preventDefault(); // Prevent mouse event from firing after touch event
         handleSkipButtonClick();
     });
-    /* fullscreenButton.addEventListener('click', function() {
-        if (document.documentElement.requestFullscreen) {
-            document.documentElement.requestFullscreen();
-        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-            document.documentElement.mozRequestFullScreen();
-        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-            document.documentElement.webkitRequestFullscreen();
-        } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-            document.documentElement.msRequestFullscreen();
-        }
-        fullscreenButton.style.display = "none"
-    }); */
 }
 
 
@@ -625,7 +599,6 @@ let clouds
 let atmosphere
 let atmosphericLight
 let sign
-let atmosMaterial
 const planetContent = new THREE.Object3D()
 export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture, cloudsNormal, version) {
     jaraniusInitialized = true
@@ -1087,6 +1060,7 @@ scene.add(ambient);
 const spotlight = new THREE.SpotLight(0xefebd8, 0);
 spotlight.penumbra = 0.8
 spotlight.angle = Math.PI / 4
+spotlight.decay = 0.5
 scene.add(spotlight);
 
 const targetIntensities = {
@@ -1207,450 +1181,6 @@ fpsContainer.appendChild(fpsDisplay);
 
 refreshLoop();
 
-//THREE-MESH-UI
-let UI = new THREE.Object3D
-let UIcontainer
-let UIactive = false
-let selectState = false
-let slideAction = false
-function createUI() {
-    UIcontainer = new ThreeMeshUI.Block({
-        ref: "UIcontainer",
-        padding: 0.025,
-        fontFamily: './fonts/Roboto-msdf.json',
-        fontTexture:'./fonts/Roboto-msdf.png',
-        fontColor: new THREE.Color(0xffffff),
-        backgroundOpacity: 0,
-      });
-    
-      UIcontainer.position.set(0, 1, 5.3);
-      UIcontainer.rotation.x = -0.15;
-      
-      UI.add(UIcontainer);
-      jaranius.add(UI)
-
-      UIactive = true
-    
-      //
-    
-      const title = new ThreeMeshUI.Block({
-        height: 0.2,
-        width: 2.25,
-        margin: 0.025,
-        justifyContent: "center",
-        fontSize: 0.09,
-      });
-    
-      title.add(
-        new ThreeMeshUI.Text({
-          content: "TWO LEVELS OF TRUTH",
-        })
-      );
-    
-      UIcontainer.add(title);
-    
-      //
-    
-      const leftSubBlock = new ThreeMeshUI.Block({
-        height: 0.95,
-        width: 1.75,
-        margin: 0.025,
-        padding: 0.025,
-        textAlign: "left",
-        justifyContent: "end",
-      });
-    
-      const caption = new ThreeMeshUI.Block({
-        height: 0.07,
-        width: 1.37,
-        textAlign: "center",
-        justifyContent: "center",
-      });
-    
-      caption.add(
-        new ThreeMeshUI.Text({
-          content: "Must be transcended to realize Absolute Truth",
-          fontSize: 0.02,
-        })
-      );
-    
-      leftSubBlock.add(caption);
-    
-      //
-    
-      const rightSubBlock = new ThreeMeshUI.Block({
-        margin: 0.025,
-      });
-    
-      const subSubBlock1 = new ThreeMeshUI.Block({
-        height: 0.35,
-        width: 0.5,
-        margin: 0.025,
-        padding: 0.02,
-        fontSize: 0.04,
-        justifyContent: "center",
-        backgroundOpacity: 0,
-      }).add(
-        new ThreeMeshUI.Text({
-          content: "Based on distinctions, concepts, language, symbols.",
-        }),
-    
-        new ThreeMeshUI.Text({
-          content: " Sankhara",
-          fontColor: new THREE.Color(0x92e66c),
-        }),
-    
-        new ThreeMeshUI.Text({
-          content: " = conditioned, constructed, fabricated, compounded.",
-        })
-      );
-    
-      const subSubBlock2 = new ThreeMeshUI.Block({
-        height: 0.53,
-        width: 0.5,
-        margin: 0.01,
-        padding: 0.02,
-        fontSize: 0.025,
-        alignItems: "start",
-        textAlign: 'justify',
-        backgroundOpacity: 0,
-      }).add(
-        new ThreeMeshUI.Text({
-          content:
-            "The males of this species grow to maximum total length of 73 cm (29 in): body 58 cm (23 in), tail 15 cm (5.9 in). Females grow to a maximum total length of 58 cm (23 in). The males are surprisingly long and slender compared to the females.\nThe head has a short snout, more so in males than in females.\nThe eyes are large and surrounded by 9–16 circumorbital scales. The orbits (eyes) are separated by 7–9 scales.",
-        })
-      );
-    
-      rightSubBlock.add(subSubBlock1, subSubBlock2);
-    
-      //
-    
-      contentContainer = new ThreeMeshUI.Block({
-        contentDirection: "row",
-        padding: 0.02,
-        margin: 0.025,
-        backgroundOpacity: 0,
-      });
-    
-      contentContainer.add(leftSubBlock, rightSubBlock);
-      UIcontainer.add(contentContainer);
-    
-      //
-    
-}
-
-//WEB XR
-let session
-enableVRbutton.addEventListener("click", () => {
-    checkForXRSupport()
-    enableVRbutton.style.display = "none"; 
-})
-
-export async function checkForXRSupport() {
-    navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
-    if (supported) {
-        webXRInitialized = true
-        const button = VRButton.createButton( renderer )
-        document.body.appendChild( button );
-        setupXR();
-    }
-    });
-}
-
-function declareGlobalVariables() {
-    window.dolly = new THREE.Object3D();
-    window.dummyCam = new THREE.Object3D();
-    window.workingMatrix = new THREE.Matrix4();
-    window.buttonStates = {};
-    window.gamepadIndices = "";
-    window.info = {};
-    window.controllers = {};
-    window.elapsedTime = 0;
-    window.dollyLat = 90;
-    window.dollyLng = 180;
-    window.dollyRadius = 8;
-    window.XRinSession = false;
-    window.activeVRSlideshow = undefined;
-    window.activeVRSlide = undefined;
-    window.activeVRSlideshowPosition = undefined;
-    window.activeVRSlideshowLength = undefined;
-    window.slideshowActions = []
-}
-
-function setupXR() {
-    renderer.xr.enabled = true;
-
-    declareGlobalVariables();
-    
-    camera.position.set( 0, 1.6, 0 );
-    const dollyPos = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
-    dolly.position.set(dollyPos.x, dollyPos.y - 1.6, dollyPos.z)
-    dolly.add( camera );
-    scene.add( dolly );
-    camera.add( dummyCam );
-
-    const controller = renderer.xr.getController( 0 );
-    controller.addEventListener( 'connected', onConnected );
-    const modelFactory = new XRControllerModelFactory();
-    const geometry = new THREE.BufferGeometry().setFromPoints( [ new THREE.Vector3( 0,0,0 ), new THREE.Vector3( 0,0,-1 ) ] );
-    const line = new THREE.Line( geometry );
-    line.scale.z = 0;
-    
-    controllers = {};
-    controllers.right = buildController( 0, line, modelFactory );
-    controllers.left = buildController( 1, line, modelFactory );
-}
-
-function onConnected( event ){
-    playButton.style.display = "none";
-    skipButton.style.display = "none";
-    credits.style.display = "none";
-
-    info = {};
-    
-    fetchProfile( event.data, DEFAULT_PROFILES_PATH, DEFAULT_PROFILE ).then( ( { profile, assetPath } ) => {
-        console.log( JSON.stringify(profile));
-        
-        info.name = profile.profileId;
-        info.targetRayMode = event.data.targetRayMode;
-
-        Object.entries( profile.layouts ).forEach( ( [key, layout] ) => {
-            const components = {};
-            Object.values( layout.components ).forEach( ( component ) => {
-                components[component.rootNodeName] = component.gamepadIndices;
-            });
-            info[key] = components;
-        });
-
-        createButtonStates( info.right );
-        
-        console.log( JSON.stringify(info) );
-
-        updateControllers( info );
-
-    } );
-}
-
-function createButtonStates(components){
-    buttonStates = {};
-    gamepadIndices = components
-    Object.keys( components ).forEach( (key) => {
-        if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
-            buttonStates[key] = { button: 0, xAxis: 0, yAxis: 0 };
-        }else{
-            buttonStates[key] = 0; 
-        }
-    })
-}
-
-function updateControllers(info) {
-    const setupControllerEvents = (controller, controllerInfo) => {
-      let trigger = false,
-        squeeze = false;
-  
-      Object.keys(controllerInfo).forEach((key) => {
-        if (key.indexOf("trigger") != -1) trigger = true;
-        if (key.indexOf("squeeze") != -1) squeeze = true;
-      });
-  
-      if (trigger) {
-        controller.addEventListener("selectstart", onSelectStart);
-        controller.addEventListener("selectend", onSelectEnd);
-      }
-  
-      if (squeeze) {
-        controller.addEventListener("squeezestart", onSqueezeStart);
-        controller.addEventListener("squeezeend", onSqueezeEnd);
-      }
-  
-      controller.addEventListener("disconnected", () => onDisconnected(controller));
-    };
-  
-    if (info.right !== undefined) {
-      const right = renderer.xr.getController(0);
-      setupControllerEvents(right, info.right);
-    }
-  
-    if (info.left !== undefined) {
-      const left = renderer.xr.getController(1);
-      setupControllerEvents(left, info.left);
-    }
-  }
-  
-
-function buildController( index, line, modelFactory ){
-    const controller = renderer.xr.getController( index );
-    
-    controller.userData.selectPressed = false;
-    controller.userData.index = index;
-    
-    if (line) controller.add( line.clone() );
-    
-    dolly.add( controller );
-    
-    let grip;
-    
-    if ( modelFactory ){
-        grip = renderer.xr.getControllerGrip( index );
-        grip.add( modelFactory.createControllerModel( grip ));
-        dolly.add( grip );
-    }
-    
-    return { controller, grip };
-}
-
-function onSelectStart( ){
-    this.userData.selectPressed = true;
-    selectState = true;
-}
-
-function onSelectEnd( ){
-    this.children[0].scale.z = 0;
-    this.userData.selectPressed = false;
-    this.userData.selected = undefined;
-    selectState = false;
-    slideAction = false;
-}
-
-function onSqueezeStart( ){
-    this.userData.squeezePressed = true;
-    if (this.userData.selected !== undefined ){
-        this.attach( this.userData.selected );
-        this.userData.attachedObject = userData.selected;
-    }
-}
-
-function onSqueezeEnd( ){
-    this.userData.squeezePressed = false;
-    if (this.userData.attachedObject !== undefined){
-            room.attach( this.userData.attachedObject );
-        this.userData.attachedObject = undefined;
-    }
-
-    if (UIactive == true) {
-        UI.remove(UIcontainer)
-        UIactive = false
-    }
-}
-
-function onDisconnected(controller){
-    const index = controller.userData.index;
-    console.log(`Disconnected controller ${index}`);
-    
-    if ( controllers ){
-        const obj = (index==0) ? controllers.right : controllers.left;
-        
-        if (obj){
-            if (obj.controller){
-                const controller = obj.controller;
-                while( controller.children.length > 0 ) controller.remove( controller.children[0] );
-                dolly.remove( controller );
-            }
-            if (obj.grip) dolly.remove( obj.grip );
-        }
-    }
-}
-
-function handleController( controller ){
-    if (controller.userData.selectPressed ){
-
-        controller.children[0].scale.z = 10;
-
-        workingMatrix.identity().extractRotation( controller.matrixWorld );
-
-        raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
-        raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( workingMatrix );
-
-        const intersects = raycaster.intersectObjects( intersectObjectsArray );
-
-        if (intersects.length>0){
-            const activatedPin = intersects[0].object;
-
-            if (activatedPin.source[activatedPin.index].slides !== undefined) {
-                
-                if (UIactive == false) {
-                    activeVRSlideshow = activatedPin.source[activatedPin.index].slides
-                    activeVRSlideshowPosition = convertLatLngtoCartesian(activatedPin.source[activatedPin.index].lat, activatedPin.source[activatedPin.index].lng + 180, 5.3)
-                    activeVRSlideshowLength = contentData[activeVRSlideshow].length
-                    activeVRSlide = 0
-
-                    UIcontainer = pushVRContent(activeVRSlideshow, activeVRSlide)
-                    UI.add(UIcontainer)
-                    UIcontainer.position.set(activeVRSlideshowPosition.x, activeVRSlideshowPosition.y, activeVRSlideshowPosition.z)
-                    UIcontainer.lookAt(middleOfPlanet)
-                    UIcontainer.rotateY(Math.PI)
-                    jaranius.add(UI)
-                    
-                    UIactive = true
-                }
-            }
-        }
-    }
-}
-
-function updateGamepadState(){
-    session = renderer.xr.getSession();
-    
-    const inputSource = session.inputSources[0];
-    
-    if (inputSource && inputSource.gamepad && gamepadIndices && buttonStates){
-        const gamepad = inputSource.gamepad;
-        XRinSession = true
-        try{
-            Object.entries( buttonStates ).forEach( ( [ key, value ] ) => {
-                const buttonIndex = gamepadIndices[key].button;
-                if ( key.indexOf('touchpad')!=-1 || key.indexOf('thumbstick')!=-1){
-                    const xAxisIndex = gamepadIndices[key].xAxis;
-                    const yAxisIndex = gamepadIndices[key].yAxis;
-                    buttonStates[key].button = gamepad.buttons[buttonIndex].value; 
-                    buttonStates[key].xAxis = gamepad.axes[xAxisIndex].toFixed(2); 
-                    buttonStates[key].yAxis = gamepad.axes[yAxisIndex].toFixed(2); 
-                }else{
-                    buttonStates[key] = gamepad.buttons[buttonIndex].value;
-                }
-            });
-        }catch(e){
-            console.warn("An error occurred setting the ui");
-        }
-    }
-}
-
-function moveDolly(dt){
-    
-    const speed = 0.2;
-    let pos = dolly.position.clone();
-    pos.y += 1;
-    
-    let dir = new THREE.Vector3();
-    const q = new THREE.Quaternion();
-    //Store original dolly rotation
-    const quaternion = dolly.quaternion.clone();
-    //Get rotation for movement from the headset pose
-    dolly.quaternion.copy( dummyCam.getWorldQuaternion(q) );
-    dolly.getWorldDirection(dir);
-    dir.negate();
-    
-        dolly.translateZ(-dt*speed);
-        pos = dolly.getWorldPosition( origin );
-
-    //cast left
-    dir.set(-1,0,0);
-    dir.applyMatrix4(dolly.matrix);
-    dir.normalize();
-
-    //cast right
-    dir.set(1,0,0);
-    dir.applyMatrix4(dolly.matrix);
-    dir.normalize();
-
-    //cast down
-    dir.set(0,-1,0);
-    pos.y += 1.5;
-
-    //Restore the original rotation
-    dolly.quaternion.copy( quaternion );
-}
-
 
 //INTERACTION FUNCTIONS
 function scanPins() {
@@ -1658,51 +1188,6 @@ function scanPins() {
     const intersects = raycaster.intersectObjects(intersectObjectsArray);
 
     hoverPins(intersects)
-}
-
-export function previousVRSlide() {
-    if (slideAction == false) {
-        UI.remove(UIcontainer)
-        activeVRSlide -= 1
-        if (activeVRSlide < 0) activeVRSlide = activeVRSlideshowLength - 1
-        UIcontainer = pushVRContent(activeVRSlideshow, activeVRSlide)
-        UI.add(UIcontainer)
-        UIcontainer.position.set(activeVRSlideshowPosition.x, activeVRSlideshowPosition.y, activeVRSlideshowPosition.z)
-        UIcontainer.lookAt(middleOfPlanet)
-        UIcontainer.rotateY(Math.PI)
-        jaranius.add(UI)
-        console.log(activeVRSlide, activeVRSlideshowLength)
-        slideAction = true
-    }
-}
-export function nextVRSlide() {
-    if (slideAction == false) {
-        UI.remove(UIcontainer)
-        activeVRSlide += 1
-        if (activeVRSlide > activeVRSlideshowLength - 1) activeVRSlide = 0
-        UIcontainer = pushVRContent(activeVRSlideshow, activeVRSlide)
-        UI.add(UIcontainer)
-        UIcontainer.position.set(activeVRSlideshowPosition.x, activeVRSlideshowPosition.y, activeVRSlideshowPosition.z)
-        UIcontainer.lookAt(middleOfPlanet)
-        UIcontainer.rotateY(Math.PI)
-        jaranius.add(UI)
-        console.log(activeVRSlide)
-        slideAction = true
-    }
-}
-
-export function openVRLink() {
-    if (slideAction == false) {
-        let url = contentData[activeVRSlideshow][activeVRSlide]
-        if (url.includes("youtube")) {
-            const regex = /embed\/(\w+)/;
-            const match = url.match(regex);
-            url = "https://www.youtube.com/watch?v=" + match[1]; 
-        }
-        session.end()
-        window.open(url, '_blank')
-        slideAction = true
-    }
 }
 
 //EVENTS KEYBOARD
@@ -1753,7 +1238,7 @@ function onDocumentKeyUp(event) {
 
         //Light control
         if (keyCode >= 49 && keyCode <= 53) {
-            const intensities = [0, 0.25, 0.5, 0.75, 1];
+            const intensities = [0, 0.5, 0.75, 1, 1.5];
             targetIntensities.spotlight = intensities[keyCode - 49];
             lightTransitionStart = clock.getElapsedTime();
           }
@@ -2407,11 +1892,13 @@ document.getElementById("tagInput").addEventListener("keydown", function (event)
             const newConnectionsDestination = contexts[selectedContext].connectionData
             const newArrowConnectionsDestination = contexts[selectedContext].arrowConnectionData
             const newDashedConnectionsDestination = contexts[selectedContext].dashedConnectionData
+            const newTunnelConnectionsDestination = contexts[selectedContext].tunnelConnectionData
 
             newTagDestination.push(newItem)
             newConnectionsDestination.push([id])
             if (newArrowConnectionsDestination !== undefined) newArrowConnectionsDestination.push([id])
             if (newDashedConnectionsDestination !== undefined) newDashedConnectionsDestination.push([id])
+            if (newTunnelConnectionsDestination !== undefined) newTunnelConnectionsDestination.push([id])
 
             const indexMod = contexts[selectedContext].tagData.length - 1
 
@@ -2487,6 +1974,7 @@ function onPointerClick(event) {
     }
 }
 
+let selectState = false
 function processPointerUpEvent(event) {
     if (selectState) {
       onPointerClick(event);
@@ -2502,81 +1990,48 @@ function processPointerUpEvent(event) {
 
 //TESTS
 if (planetTagData.length !== planetConnections.length) {
-    console.log("ERROR: planetTagData.length !== planetConnections.length")
+    console.log("ERROR: planetTagData.length !== planetConnections.length", planetTagData.length, planetConnections.length)
+    for (let i = 0; i < planetConnections.length; i++) {
+        if (planetTagData[i].id !== planetConnections[i][0]) {
+            console.log(i, planetTagData[i].id)
+        }
+    }
+    
+}
+if (planetTagData.length !== planetArrowedConnections.length) {
+    console.log("ERROR: planetTagData.length !== planetArrowedConnections.length", planetTagData.length, planetArrowedConnections.length)
+    for (let i = 0; i < planetArrowedConnections.length; i++) {
+        if (planetConnections[i][0] !== planetArrowedConnections[i][0]) {
+            console.log(i, planetConnections[i][0])
+        }
+    }
+}
+if (planetTagData.length !== planetDashedConnections.length) {
+    console.log("ERROR: planetTagData.length !== planetDashedConnections.length", planetTagData.length, planetDashedConnections.length)
+    for (let i = 0; i < planetDashedConnections.length; i++) {
+        if (planetConnections[i][0] !== planetDashedConnections[i][0]) {
+            console.log(i, planetConnections[i][0])
+        }
+    }
+}
+
+if (planetTagData.length !== planetTunnelConnections.length) {
+    console.log("ERROR: planetTagData.length !== planetTunnelConnections.length", planetTagData.length, planetTunnelConnections.length)
+    for (let i = 0; i < planetTunnelConnections.length; i++) {
+        if (planetConnections[i][0] !== planetTunnelConnections[i][0]) {
+            console.log(i, planetConnections[i][0])
+        }
+    }
 }
 
 //ANIMATIONLOOP
-function updateButtons() {
-	// Find closest intersecting object
-	let intersect = raycast();
-	// Update targeted button state (if any)
-	if ( intersect && intersect.object.isUI ) {
-		if ( selectState ) {
-			// Component.setState internally call component.set with the options you defined in component.setupState
-			intersect.object.setState( 'selected' );
-		} else {
-			// Component.setState internally call component.set with the options you defined in component.setupState
-			intersect.object.setState( 'hovered' );
-		}
-	}
-	// Update non-targeted buttons state
-	slideshowActions.forEach( ( obj ) => {
-		if ( ( !intersect || obj !== intersect.object ) && obj.isUI ) {
-			// Component.setState internally call component.set with the options you defined in component.setupState
-			obj.setState( 'idle' );
-		}
-	} );
-}
-
-function raycast() {
-	return slideshowActions.reduce( ( closestIntersection, obj ) => {
-		const intersection = raycaster.intersectObject( obj, true );
-		if ( !intersection[ 0 ] ) return closestIntersection;
-		if ( !closestIntersection || intersection[ 0 ].distance < closestIntersection.distance ) {
-			intersection[ 0 ].object = obj;
-			return intersection[ 0 ];
-		}
-		return closestIntersection;
-	}, null );
-}
 
 function animate() {
     renderer.setAnimationLoop( render );
 }
 
 function render() {  
-    //WebXR
-    if (webXRInitialized == true && renderer.xr.isPresenting){
-        const dt = clock.getDelta();
-
-        if (controllers ){
-            Object.values( controllers ).forEach( ( value ) => {
-                handleController( value.controller );
-            });
-        } 
-        if (elapsedTime===undefined) elapsedTime = 0;
-        elapsedTime += dt;
-        if (elapsedTime > 0.1){  //reduce to make navigation even smoother?
-            updateGamepadState();
-            elapsedTime = 0;
-        }
-        if (XRinSession == true) {
-            const xInput = Number(buttonStates.xr_standard_thumbstick.xAxis)
-            const yInput = Number(buttonStates.xr_standard_thumbstick.yAxis)
-            if (xInput != 0 || yInput != 0 || buttonStates.a_button != 0 || buttonStates.b_button != 0) {
-
-                //JARANIUS ROTATE
-                jaranius.rotation.y -= xInput / 15
-                dollyLat += yInput
-                dollyRadius += ((0.1 * buttonStates.a_button) - (0.1 * buttonStates.b_button)) * (dollyRadius - 5)
-                const dollyPosit = convertLatLngtoCartesian(dollyLat, dollyLng, dollyRadius)
-                dolly.position.set(dollyPosit.x, dollyPosit.y - 1.6, dollyPosit.z)
-            }
-        }
-        ThreeMeshUI.update();
-        updateButtons();
-    }
-
+   
     updateGutta(guttaState, guttaStats, jaranius, nuggets, developer)
 
     const camPos = camera.position
@@ -2586,6 +2041,7 @@ function render() {
     
     
     if (jaraniusInitialized == true) {
+
         if (window.appStatus !== "initialising" && window.appStatus !== "version-menu" && window.appStatus !== "intro-menu"&& window.appStatus !== "silence") {
             center.rotation.y += -0.00001;
             pivot1.rotation.y += -0.0003;

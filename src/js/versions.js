@@ -3,25 +3,20 @@ export function initialiseVersion(callback, postLoadingManager, guttaState, scen
         playButton: document.getElementById("playbutton"),
         credits: document.getElementById("credits"),
         skipButton: document.getElementById("skipbutton"),
-        enableVRbutton: document.getElementById("enableVRbutton"),
         footer: document.getElementById("footer"),
-        fullscreenButton: document.getElementById("fullscreen-button"),
         versionButtons: [
             document.getElementById("version1"),
             document.getElementById("version2"),
             document.getElementById("version3"),
-            //document.getElementById("version4"),
         ],
     };
 
-    const hideButtons = (showVR) => {
+    const hideButtons = () => {
         elements.versionButtons.forEach((btn) => (btn.style.display = "none"));
         elements.footer.style.display = "none";
-        /* elements.fullscreenButton.style.display = "none"; */
         elements.playButton.style.display = "block";
         elements.skipButton.style.display = "block";
         elements.credits.style.display = "block";
-        elements.enableVRbutton.style.display = showVR ? "block" : "none";
     };
 
     const handleButtonClick = (index) => {

@@ -58,17 +58,10 @@ export function creation(version, postLoadingManager, guttaState, scene, guttaHe
     } 
     if (version == 3){ //DEVELOPER VERSION
         initialiseLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture2k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k, version)
+        createJaranius(diffuseTexture4k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k, version)
         createContexts(version)
         createMindmap()
         createGutta(300, 20, version, guttaState, scene, guttaHelperCenter)
-    } 
-    if (version == 4){ //VR VERSION
-        initialiseLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture8k, normalTexture8k, roughnessTexture8k, cloudsTexture4k, cloudsNormal4k, version)
-        createContexts(version)
-        createMindmap()
-        //createGutta(200, 10, version, guttaState, scene, guttaHelperCenter)
     } 
 }
 
