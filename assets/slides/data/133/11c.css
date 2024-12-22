@@ -1,0 +1,16 @@
+/* Ensure the slide content fills the slide area */
+#slide-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+  }
+  
+  /* Position the image in the top-left corner */
+  #moving-image-initial {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Adjust size as needed */
+  }
