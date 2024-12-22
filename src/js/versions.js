@@ -1,4 +1,4 @@
-export function initialiseVersion(callback, postLoadingManager, guttaState, scene, guttaHelperCenter) {
+export function initialiseVersion(callback, postLoadingManager, guttaState, scene) {
     const elements = {
         playButton: document.getElementById("playbutton"),
         credits: document.getElementById("credits"),
@@ -21,7 +21,7 @@ export function initialiseVersion(callback, postLoadingManager, guttaState, scen
 
     const handleButtonClick = (index) => {
         hideButtons(index === 2 || index === 3);
-        return callback(index + 1, postLoadingManager, guttaState, scene, guttaHelperCenter);
+        return callback(index + 1, postLoadingManager, guttaState, scene);
     };
 
     elements.versionButtons.forEach((btn, index) => {

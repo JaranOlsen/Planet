@@ -1,4 +1,3 @@
-import * as THREE from 'three'
 import { contentData } from "./data/contentData";
 import { updateSlide } from './slides';
 

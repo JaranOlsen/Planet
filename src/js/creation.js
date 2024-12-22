@@ -41,14 +41,14 @@ import cloudsNormal1k from "/assets/textures/clouds1kNormal.webp"
 
 
 
-export function creation(version, postLoadingManager, guttaState, scene, guttaHelperCenter) {
+export function creation(version, postLoadingManager, guttaState, scene) {
     createTitle(scene)
     if (version == 1){ //FULL VERSION
         initialiseLoadingManager(postLoadingManager)
         createJaranius(diffuseTexture16k, normalTexture16k, roughnessTexture16k, cloudsTexture8k, cloudsNormal8k, version)
         createContexts(version)
         createMindmap()
-        createGutta(400, 25, version, guttaState, scene, guttaHelperCenter)
+        createGutta(4000, 200, version, guttaState, scene)
     } 
     if (version == 2){ //LIGHT VERSION
         initialiseLoadingManager(postLoadingManager)
@@ -61,7 +61,7 @@ export function creation(version, postLoadingManager, guttaState, scene, guttaHe
         createJaranius(diffuseTexture4k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k, version)
         createContexts(version)
         createMindmap()
-        createGutta(300, 20, version, guttaState, scene, guttaHelperCenter)
+        createGutta(100, 10, version, guttaState, scene)
     } 
 }
 

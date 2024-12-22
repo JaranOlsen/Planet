@@ -19,9 +19,12 @@
     "vite-plugin-string": "^1.2.1"
   },
   "dependencies": {
+    "@babel/generator": "^7.26.3",
+    "@babel/parser": "^7.26.3",
+    "@babel/traverse": "^7.26.4",
+    "d3": "^7.9.0",
     "three": "^0.169.0",
     "three-csm": "^4.2.1",
-    "three-mesh-ui": "^6.5.3",
     "wordcloud": "^1.2.2"
   }
 }

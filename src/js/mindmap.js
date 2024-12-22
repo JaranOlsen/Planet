@@ -79,8 +79,8 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
             let latLng = convertLatLngtoCartesian(lat, lng, radius + 0.061);
 
             if (dataSource == enneagramTagData) {
-                const t = (lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
-                const radiusModifier = -Math.cos(t); // creates a cosine wave from -1 to 1
+                const t = lat * Math.PI / 180; // convert to radians
+                const radiusModifier = Math.cos(t); // creates a cosine wave from -1 to 1
                 const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
                 const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
                 latLng = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.061);
@@ -134,8 +134,8 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
             let boxLatLng = convertLatLngtoCartesian(lat, lng, radius + 0.06);
 
             if (dataSource == enneagramTagData) {
-                const t = (lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
-                const radiusModifier = -Math.cos(t); // creates a cosine wave from -1 to 1
+                const t = lat * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
+                const radiusModifier = Math.cos(t); // creates a cosine wave from -1 to 1
                 const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
                 const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
                 boxLatLng = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.06);
@@ -165,7 +165,7 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
         }
     
         dataSource.forEach((item, index) => {
-            instantiateTag(index, item.text, item.lat, item.lng - 180, item.color, item.size / 100000);
+            instantiateTag(index, item.text, item.lat, item.lng, item.color, item.size / 100000);
         });
     });
     
@@ -186,8 +186,8 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
         let pos = convertLatLngtoCartesian(lat, lng, radius + 0.01);
 
         if (dataSource == enneagramTagData) {
-            const t = (lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
-            const radiusModifier = -Math.cos(t); // creates a cosine wave from -1 to 1
+            const t = lat * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
+            const radiusModifier = Math.cos(t); // creates a cosine wave from -1 to 1
             const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
             const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
             pos = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor);
@@ -203,7 +203,7 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
     }
     
     dataSource.forEach((item, index) => {
-        instantiatePin(index, item.lat, item.lng - 180, item.color, item.size, item.slides, destination);
+        instantiatePin(index, item.lat, item.lng, item.color, item.size, item.slides, destination);
     });
 }    
 
@@ -214,20 +214,20 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
                 connection.slice(1).forEach((targetId, k) => {
                     tagSource.forEach((target, l) => {
                         if (target.id === targetId) {
-                            let p1 = convertLatLngtoCartesian(sourceItem.lat, sourceItem.lng - 180, curveMinAltitude);
-                            let p2 = convertLatLngtoCartesian(target.lat, target.lng - 180, curveMinAltitude);
+                            let p1 = convertLatLngtoCartesian(sourceItem.lat, sourceItem.lng, curveMinAltitude);
+                            let p2 = convertLatLngtoCartesian(target.lat, target.lng, curveMinAltitude);
 
                             if (tagSource == enneagramTagData) {
                                 const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
                                 const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
 
-                                const tP1 = (sourceItem.lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
-                                const p1radiusModifier = -Math.cos(tP1); // creates a cosine wave from -1 to 1
-                                p1 = convertLatLngtoCartesian(sourceItem.lat, sourceItem.lng - 180, curveMinAltitude + p1radiusModifier * scaleFactor - constrictFactor);
+                                const tP1 = (sourceItem.lat) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
+                                const p1radiusModifier = Math.cos(tP1); // creates a cosine wave from -1 to 1
+                                p1 = convertLatLngtoCartesian(sourceItem.lat, sourceItem.lng, curveMinAltitude + p1radiusModifier * scaleFactor - constrictFactor);
                                 
-                                const tP2 = (target.lat + 90) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
-                                const p2radiusModifier = -Math.cos(tP2); // creates a cosine wave from -1 to 1
-                                p2 = convertLatLngtoCartesian(target.lat, target.lng - 180, curveMinAltitude + p2radiusModifier * scaleFactor - constrictFactor);
+                                const tP2 = (target.lat) * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
+                                const p2radiusModifier = Math.cos(tP2); // creates a cosine wave from -1 to 1
+                                p2 = convertLatLngtoCartesian(target.lat, target.lng, curveMinAltitude + p2radiusModifier * scaleFactor - constrictFactor);
                             }
 
                             let weight = (sourceItem.size + target.size) / 2;

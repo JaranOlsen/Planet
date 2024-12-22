@@ -16,7 +16,7 @@ import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, const
 import { pushContent, handleCarouselButton } from './content.js'
 import { initialiseVersion } from './versions.js'
 import { creation } from './creation.js'
-import { updateGutta, togglePerceptionCircles } from './gutta.js'
+import { updateGutta } from './gutta.js'
 import { createField } from './podcast.js'
 import { createFieldLines } from './flux.js'
 
@@ -76,6 +76,7 @@ renderer.setPixelRatio(window.devicePixelRatio)
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.logarithmicDepthBuffer = false; //turn on if z-fighting
+renderer.frustumCulled = true;
 
 function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
@@ -90,11 +91,26 @@ function resizeRendererToDisplaySize(renderer) {
 
 const fov = 50;
 const aspect = 2;  // the canvas default
-const near = 0.1;
+const near = 0.01;
 const far = 2000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
 camera.position.z = 500
+
+const clock = new THREE.Clock();
+
+// -- TRANSITION VARIABLES --
+let transitioningToOrbit = false;
+let transitionStartTime = 0;
+let transitionDuration = 1.5; // in seconds, tweak as desired
+
+// We'll store the camera position/orientation at the moment of switching out of flight mode
+let flightCamPos = new THREE.Vector3();
+let flightCamQuat = new THREE.Quaternion();
+
+// And the orbit "destination" position/orientation we'll end up at
+let orbitCamPos = new THREE.Vector3(0, 0, 500);
+let orbitCamQuat = new THREE.Quaternion();
 
 const orbitControls = new OrbitControls(camera, canvas);
 orbitControls.enablePan = false
@@ -106,9 +122,9 @@ orbitControls.target.set(0, 0, 0);
 orbitControls.update();
 orbitControls.enabled = false;
 
-const baseMovementSpeed = 1;
+const baseMovementSpeed = 0.1;
 let baseMovementSpeedModifier = 1;
-const baseRollSpeed = Math.PI / 24;
+const baseRollSpeed = Math.PI / 48;
 let baseRollSpeedModifier = 1;
 const flyControls = new FlyControls(camera, renderer.domElement);
 flyControls.domElement = renderer.domElement;
@@ -119,12 +135,74 @@ flyControls.dragToLook = false;
 flyControls.enabled = false;
 flyControls.minDistance = 5.15;
 
+// Add momentum and roll variables
+let velocity = new THREE.Vector3(0, 0, 0); // Movement velocity
+let rollVelocity = 0; // Roll velocity
+const damping = 0.999; // Damping factor for momentum
+const rollDamping = 0.999; // Damping factor for roll
+
+// Override the FlyControls update method
+const originalUpdate = flyControls.update.bind(flyControls);
+flyControls.update = function (delta) {
+    // Use the original update for basic control handling
+    originalUpdate(delta);
+
+    // Transform velocity into the camera's local space
+    const localVelocity = velocity.clone().applyQuaternion(camera.quaternion);
+
+    // Apply damping for inertia
+    velocity.multiplyScalar(damping);
+    rollVelocity *= rollDamping;
+
+    // Update position and rotation based on momentum
+    camera.position.add(localVelocity);
+    camera.rotateZ(rollVelocity);
+};
+
+// Listen for keypresses to control movement and roll
+document.addEventListener('keydown', (event) => {
+    const speed = 0.001; // Adjust speed for movement
+    const rollSpeed = 0.000001; // Adjust speed for rolling
+    switch (event.code) {
+        case 'KeyW': // Move forward
+            velocity.z -= speed;
+            break;
+        case 'KeyS': // Move backward
+            velocity.z += speed;
+            break;
+        case 'KeyA': // Move left
+            velocity.x -= speed;
+            break;
+        case 'KeyD': // Move right
+            velocity.x += speed;
+            break;
+        case 'Space': // Move up
+            velocity.y += speed;
+            break;
+        case 'ShiftLeft': // Move down
+            velocity.y -= speed;
+            break;
+        case 'KeyQ': // Roll counterclockwise
+            rollVelocity += rollSpeed;
+            break;
+        case 'KeyE': // Roll clockwise
+            rollVelocity -= rollSpeed;
+            break;
+    }
+});
+
+
+
+
+
+
+
+
 const scene = new THREE.Scene();
 
 const pointer = new THREE.Vector2;
 const raycaster = new THREE.Raycaster();
 
-const clock = new THREE.Clock();
 let developer = false;
 
 export let contexts = []
@@ -162,7 +240,6 @@ let signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y,
 
 const middleOfPlanet = new THREE.Vector3(0, 0, 0);
 const spiral = new THREE.Object3D()
-const guttaHelperCenter = new THREE.Object3D();
 
 let guttaState = {
     gutta: [],
@@ -186,7 +263,7 @@ const textureLoader2 = new THREE.TextureLoader(postLoadingManager)
 const playButton = document.getElementById("playbutton")
 const credits = document.getElementById("credits")
 const skipButton = document.getElementById("skipbutton")
-initialiseVersion(creation, postLoadingManager, guttaState, scene, guttaHelperCenter)
+initialiseVersion(creation, postLoadingManager, guttaState, scene)
 window.appStatus = "version-menu"
 
 let jaraniusInitialized = false
@@ -262,7 +339,6 @@ function fadeOutAudio(audioElement, fadeDuration = 3000) {
       }
     }, intervalSpeed);
   }
-  
 
 //INTRO
 function updateIntro() {
@@ -276,67 +352,72 @@ function updateIntro() {
       case 'desiderata':
         credits.textContent = 'Desiderata - Max Ehrmann. RedFrost Motivation';
         subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/assets/audio/desiderata.mp3';
+        sourceElement.src = '/Planet/assets/audio/desiderata.mp3';
         break;
       case 'astronomer':
         credits.textContent = "When I Heard the Learn'd Astronomer - Walt Whitman. RedFrost Motivation";
         subtitleContainer.dataset.subtitleFile = 'astronomer';
-        sourceElement.src = '/assets/audio/astronomer.mp3';
+        sourceElement.src = '/Planet//assets/audio/astronomer.mp3';
         break;
       case 'carlrogers':
         credits.textContent = "Carl Rogers speaking about listening and presence. Music: First Step - Hans Zimmer";
         subtitleContainer.dataset.subtitleFile = 'carlrogers';
-        sourceElement.src = '/assets/audio/carlrogers.mp3';
+        sourceElement.src = '/Planet/assets/audio/carlrogers.mp3';
         break;
       case 'carlrogers2':
         credits.textContent = "Carl Rogers speaking about listening and presence. Music: This Is Me - Jaran de los Santos Olsen";
         subtitleContainer.dataset.subtitleFile = 'carlrogers2';
-        sourceElement.src = '/assets/audio/carlrogers2.mp3';
+        sourceElement.src = '/Planet/assets/audio/carlrogers2.mp3';
         break;
       case 'alanwatts':
         credits.textContent = "Alan Watts on Swimming With the Stream. Music: Agarb - Bilro & Barbosa and Passion - Sappheiros";
         subtitleContainer.dataset.subtitleFile = 'alanwatts';
-        sourceElement.src = '/assets/audio/alanwatts.mp3';
+        sourceElement.src = '/Planet/assets/audio/alanwatts.mp3';
         break;
       case 'alanwatts2':
         credits.textContent = "Alan Watts on Letting Go. Music: Kevin MacLeod - Meditation Impromptu 1";
         subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/assets/audio/alanwatts2.mp3';
+        sourceElement.src = '/Planet/assets/audio/alanwatts2.mp3';
         break;
       case 'ajahnchah':
         credits.textContent = "Ajahn Chah from the BBC documentary 'The Mindful Way' & Jack Kornfield speaking about Ajahn Chah and loving awareness. Music: Jaran Olsen - This is me";
         subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/assets/audio/ajahnchah.mp3';
+        sourceElement.src = '/Planet/assets/audio/ajahnchah.mp3';
         break;
       case 'honestIntro':
         credits.textContent = "An Honest Meditation";
         subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/assets/audio/honestIntro.mp3';
+        sourceElement.src = '/Planet/assets/audio/honestIntro.mp3';
         break;
       case 'guesthouse':
         credits.textContent = "The Guesthouse - Rumi. Read by Helena Bonham Carter";
         subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/assets/audio/guesthouse.mp3';
+        sourceElement.src = '/Planet/assets/audio/guesthouse.mp3';
         break;
       case 'ramanamaharsi':
         credits.textContent = "Jack Kornfield reads about Ramana Maharsi";
         subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/assets/audio/ramanamaharsi.mp3';
+        sourceElement.src = '/Planet/assets/audio/ramanamaharsi.mp3';
         break;
       case 'krishnamurti':
         credits.textContent = "Krishnamurti on Meditation and Love";
         subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/assets/audio/krishnamurti.mp3';
+        sourceElement.src = '/Planet/assets/audio/krishnamurti.mp3';
         break;
       case 'rupertspira':
         credits.textContent = "I am Always I - Rupert Spira";
         subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/assets/audio/rupertspira.mp3';
+        sourceElement.src = '/Planet/assets/audio/rupertspira.mp3';
         break;
       case 'rupertspira2':
         credits.textContent = "I am That - Rupert Spira";
         subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/assets/audio/rupertspira2.mp3';
+        sourceElement.src = '/Planet/assets/audio/rupertspira2.mp3';
+        break;
+      case 'portianelson':
+        credits.textContent = "Autobiography in five chapters - Portia Nelson";
+        subtitleContainer.dataset.subtitleFile = 'null';
+        sourceElement.src = '/Planet/assets/audio/portianelson.mp3';
         break;
     }
     audioElement.load();
@@ -610,6 +691,7 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
 
     const diffuse = textureLoader2.load(diffuseTexture)
     diffuse.colorSpace = THREE.SRGBColorSpace;
+
     const jaraniusMaterial = new THREE.MeshStandardMaterial({ 
         map: diffuse,
         normalMap: textureLoader2.load(normalTexture),
@@ -748,10 +830,10 @@ export function createMindmap() {
     jaranius.add(planetContent)
 
     for (let i = 0; i < planetImageData.length; i++) {
-        createImages(planetImageData[i].src, planetImageData[i].lat, planetImageData[i].lng - 180, planetImageData[i].size / 500, planetImageData[i].radius, planetContent);
+        createImages(planetImageData[i].src, planetImageData[i].lat, planetImageData[i].lng, planetImageData[i].size / 500, planetImageData[i].radius, planetContent);
     }
     for (let i = 0; i < spiralImageData.length; i++) {
-        createImages(spiralImageData[i].src, spiralImageData[i].lat, spiralImageData[i].lng - 180, spiralImageData[i].size / 500, spiralImageData[i].radius, spiral);
+        createImages(spiralImageData[i].src, spiralImageData[i].lat, spiralImageData[i].lng, spiralImageData[i].size / 500, spiralImageData[i].radius, spiral);
     }
 
     //create tags
@@ -765,7 +847,7 @@ export function createMindmap() {
 
     //create nuggets
     for (let i = 0; i < planetNuggetData.length; i++) { 
-        let nugget = instantiateNugget(i, planetNuggetData[i].lat, planetNuggetData[i].lng - 180, planetNuggetData[i].color, planetNuggetData[i].size / 100000, planetNuggetData[i].slides, jaranius, 2);
+        let nugget = instantiateNugget(i, planetNuggetData[i].lat, planetNuggetData[i].lng, planetNuggetData[i].color, planetNuggetData[i].size / 100000, planetNuggetData[i].slides, jaranius, 2);
         nuggets.push(nugget)
     }
 
@@ -1139,7 +1221,7 @@ export function createContexts(version) {
         dashedConnectionData: enneagramDashedConnections,
         tunnelConnectionData: enneagramTunnelConnections,
         connectionDestination: enneagramConnectionsObj, 
-        radius: 8, 
+        radius: 8.5, 
         pins: [], 
         boxes: [], 
         tags: []
@@ -1153,10 +1235,10 @@ export function createContexts(version) {
 const guttaStatScreen = document.querySelector('#guttaStatScreen');
 const statsDisplay = document.createElement('div');
 
-function refreshStats() {
+/* function refreshStats() {
     statsDisplay.innerHTML = "Number of munches: " + guttaStats.munch + "<br>Average hunger: " + Math.round(guttaStats.totalHungerAtMunch/guttaStats.munch * 100) / 100 + "<br><br>Number of kills: " + guttaStats.kills + "<br>Average hunger: " + Math.round(guttaStats.totalHungerAtKill/guttaStats.kills * 100) / 100
     guttaStatScreen.appendChild(statsDisplay)
-}
+} */
 
 //CREATE FPS COUNTER
 const times = [];
@@ -1244,7 +1326,7 @@ function onDocumentKeyUp(event) {
           }
         
           if (keyCode >= 54 && keyCode <= 57) {
-            const intensities = [0, 0.1, 0.2, 0.3];
+            const intensities = [0, 0.05, 0.15, 0.25];
             targetIntensities.ambient = intensities[keyCode - 54];
             lightTransitionStart = clock.getElapsedTime();
           }
@@ -1258,11 +1340,9 @@ function onDocumentKeyUp(event) {
         if (keyCode == 71) { //G
             if (guttaStatScreen.style.display == "block") {
                 guttaStatScreen.style.display = "none"
-                scene.remove(guttaHelperCenter)
                 if (developer == true) togglePerceptionCircles(guttaState)
             } else {
                 guttaStatScreen.style.display = "block" 
-                scene.add(guttaHelperCenter)
                 if (developer == true) togglePerceptionCircles(guttaState)
             }
         }
@@ -1287,8 +1367,8 @@ function onDocumentKeyUp(event) {
         if (keyCode == 73) { //I
             jaranius.material.wireframe = !jaranius.material.wireframe;
 
-            /* for (let lat = 10; lat < 180; lat += 10) {
-                for (let lng = 0; lng < 360; lng += 10) {
+            for (let lat = -80; lat < 90; lat += 10) {
+                for (let lng = -170; lng <= 180; lng += 10) {
                     const id = generateUUID()
                     const newItem = {
                         id: id,
@@ -1310,7 +1390,7 @@ function onDocumentKeyUp(event) {
                     createTags([newItem], contexts[0].tagDestination, contexts[0].radius, 0, indexMod);
                 }
             }
-            console.log(contexts) */
+            console.log(contexts)
         }
         if (keyCode == 83) { //S
             if (window.appStatus == "intro-menu") {
@@ -1780,26 +1860,26 @@ function onDocumentKeyDown(event) {
                 let posLatLng = convertCartesiantoLatLng(contexts[selectedContext].pins[selectedNodes[node]].position.x, contexts[selectedContext].pins[selectedNodes[node]].position.y, contexts[selectedContext].pins[selectedNodes[node]].position.z);
                 // up
                 if (keyCode == 38) {
-                    if (fastMove) posLatLng.lat -= .4;
-                    posLatLng.lat -= .1;
+                    if (fastMove) posLatLng.lat += .4;
+                    posLatLng.lat += .1;
                     
                 }
                 // down
                 if (keyCode == 40) {
-                    if (fastMove)posLatLng.lat += .4;
-                    posLatLng.lat += .1;
+                    if (fastMove)posLatLng.lat -= .4;
+                    posLatLng.lat -= .1;
                     
                 }
                 // left
                 if (keyCode == 37) {
-                    if (fastMove)posLatLng.lng -= .4;
-                    posLatLng.lng -= .1;
+                    if (fastMove)posLatLng.lng += .4;
+                    posLatLng.lng += .1;
                     
                 }
                 // right
                 if (keyCode == 39) {
-                    if (fastMove)posLatLng.lng += .4;
-                    posLatLng.lng += .1;
+                    if (fastMove)posLatLng.lng -= .4;
+                    posLatLng.lng -= .1;
                 }
 
                 const pinSphereRadius = contexts[selectedContext].radius
@@ -1810,9 +1890,9 @@ function onDocumentKeyDown(event) {
                 const boxPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, boxSphereRadius);
                 const tagPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, tagSphereRadius);
 
-                contexts[selectedContext].pins[selectedNodes[node]].position.set(-pinPos.x, pinPos.y, -pinPos.z);
-                contexts[selectedContext].boxes[selectedNodes[node]].position.set(-boxPos.x, boxPos.y, -boxPos.z);
-                contexts[selectedContext].tags[selectedNodes[node]].position.set(-tagPos.x, tagPos.y, -tagPos.z);
+                contexts[selectedContext].pins[selectedNodes[node]].position.set(pinPos.x, pinPos.y, pinPos.z);
+                contexts[selectedContext].boxes[selectedNodes[node]].position.set(boxPos.x, boxPos.y, boxPos.z);
+                contexts[selectedContext].tags[selectedNodes[node]].position.set(tagPos.x, tagPos.y, tagPos.z);
 
                 posLatLng = constrainLatLng(posLatLng.lat, posLatLng.lng)
 
@@ -1824,25 +1904,26 @@ function onDocumentKeyDown(event) {
 
         if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
             let posLatLng = convertCartesiantoLatLng(selectedPin.position.x, selectedPin.position.y, selectedPin.position.z);
+            console.log(posLatLng)
             // up
             if (keyCode == 38) {
-                if (fastMove) posLatLng.lat -= .4;
-                posLatLng.lat -= .1;                
+                if (fastMove) posLatLng.lat += .4;
+                posLatLng.lat += .1;                
             }
             // down
             if (keyCode == 40) {
-                if (fastMove) posLatLng.lat += .4;
-                posLatLng.lat += .1;
+                if (fastMove) posLatLng.lat -= .4;
+                posLatLng.lat -= .1;
             }
             // left
             if (keyCode == 37) {
-                if (fastMove) posLatLng.lng -= .4;
-                posLatLng.lng -= .1;  
+                if (fastMove) posLatLng.lng += .4;
+                posLatLng.lng += .1;  
             }
             // right
             if (keyCode == 39) {
-                if (fastMove) posLatLng.lng += .4;
-                posLatLng.lng += .1;
+                if (fastMove) posLatLng.lng -= .4;
+                posLatLng.lng -= .1;
             }
 
             const pinSphereRadius = contexts[selectedContext].radius
@@ -1853,9 +1934,9 @@ function onDocumentKeyDown(event) {
             const boxPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, boxSphereRadius);
             const tagPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, tagSphereRadius);
 
-            selectedPin.position.set(-pinPos.x, pinPos.y, -pinPos.z);
-            selectedBox.position.set(-boxPos.x, boxPos.y, -boxPos.z);
-            selectedTag.position.set(-tagPos.x, tagPos.y, -tagPos.z);
+            selectedPin.position.set(pinPos.x, pinPos.y, pinPos.z);
+            selectedBox.position.set(boxPos.x, boxPos.y, boxPos.z);
+            selectedTag.position.set(tagPos.x, tagPos.y, tagPos.z);
 
             posLatLng = constrainLatLng(posLatLng.lat, posLatLng.lng)
 
@@ -1963,8 +2044,7 @@ function onPointerClick(event) {
 
             pushContent(slideshowStatus)
             if (window.appStatus == "flight") {
-                orbitControls.enabled = true;
-                flyControls.enabled = false;
+                flyControls.enabled = false
                 document.body.style.cursor = 'default';
             }
             window.appStatus = "slideshow"
@@ -2024,6 +2104,9 @@ if (planetTagData.length !== planetTunnelConnections.length) {
     }
 }
 
+let octreeHelperRoot = new THREE.Object3D();
+scene.add(octreeHelperRoot);
+
 //ANIMATIONLOOP
 
 function animate() {
@@ -2031,9 +2114,9 @@ function animate() {
 }
 
 function render() {  
-   
-    updateGutta(guttaState, guttaStats, jaranius, nuggets, developer)
 
+    updateGutta(guttaState, guttaStats, jaranius, nuggets, developer, octreeHelperRoot)
+    
     const camPos = camera.position
     const camRot = camera.rotation
     spotlight.position.set(camPos.x, camPos.y, camPos.z);
@@ -2081,8 +2164,6 @@ function render() {
 
         atmosphere.material.uniforms.lightPosition.value.copy(sunObjectWorldPosition);
         atmosphericLight.material.uniforms.lightPosition.value.copy(sunObjectWorldPosition);
-
-        if (guttaStatScreen.style.display == 'block') refreshStats();
 
         scanPins();
 
@@ -2137,7 +2218,6 @@ function render() {
         toCamera.normalize();
 
         let angle = Math.acos(toSun.dot(toCamera)) * 180.0 / Math.PI;
-        console.log("Angle: ", angle, "\nDistance: ", distance, "\nSpeed: ", flyControls.movementSpeed, "\nRoll speed: ", flyControls.rollSpeed);
 
     }
 

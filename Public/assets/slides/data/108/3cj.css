@@ -1,0 +1,28 @@
+#d3-quadrant-chart {
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+}
+
+.axis path,
+.axis line {
+    stroke: #fff; /* White axes lines */
+    stroke-width: 2px; /* Increased stroke width */
+}
+
+.axis text {
+    fill: #fff; /* White axes labels */
+    font-size: 18px; /* Increased font size */
+}
+
+.quadrant-label {
+    pointer-events: none;
+    white-space: pre-line; /* Allows line breaks in labels */
+    fill: #fff; /* White quadrant labels */
+    font-size: 20px; /* Increased font size */
+    text-align: center;
+}
+
+.quadrant {
+    opacity: 0.2;
+}
