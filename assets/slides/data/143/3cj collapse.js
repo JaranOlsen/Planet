@@ -79,11 +79,23 @@
         { source: "Non-dual", target: "Awareness of Awareness" }
       ]
     };
-  
+
+    // Preserve copies of the full node/link lists for re-adding them upon expansion
+    const originalNodes = data.nodes.map(d => ({ ...d }));
+    const originalLinks = data.links.map(d => ({ ...d }));
+
+    // OPTIONAL: Initialize collapsed flags
+    // We’ll track which nodes are collapsed (e.g., group 2 nodes). 
+    data.nodes.forEach((n) => {
+      if (n.group === 2) {
+        n.collapsed = false; 
+      }
+    });
+
     const container = document.getElementById("d3-mindmap");
     const width = container.offsetWidth;
     const height = container.offsetHeight;
-  
+
     const svg = d3
       .select("#d3-mindmap")
       .append("svg")
@@ -91,18 +103,16 @@
       .attr("height", "100%")
       .attr("viewBox", `0 0 ${width} ${height}`)
       .attr("preserveAspectRatio", "xMidYMid meet");
-  
-    // Detect group 2 nodes (branch starting points)
+
+    // Detect group 2 nodes (branch starting points) for color generation
     const branchNodes = data.nodes.filter((node) => node.group === 2);
     const branchCount = branchNodes.length;
-  
-    // Generate hues for each branch
     const branchColors = branchNodes.reduce((acc, node, index) => {
       const hue = (360 / branchCount) * index; // Spread hues evenly
       acc[node.id] = hue;
       return acc;
     }, {});
-  
+
     // Dynamic color generation
     const color = (node) => {
       if (node.group === 1) return `hsl(0, 0%, 100%)`; // Central node is always white
@@ -111,7 +121,8 @@
       const lightness = 50 + (node.group - 2) * 15; // Scale lightness by depth
       return `hsl(${hue}, 80%, ${lightness}%)`;
     };
-  
+
+    // Set up the simulation
     const simulation = d3
       .forceSimulation(data.nodes)
       .force("link", d3.forceLink(data.links).id((d) => d.id).distance(60))
@@ -119,16 +130,18 @@
       .force("center", d3.forceCenter(width / 2, height / 2))
       .force("collision", d3.forceCollide().radius(60))
       .force("bounding", forceBoundingBox(120, 120, width - 120, height - 120));
-  
-    const link = svg
+
+    // Draw links
+    let link = svg
       .append("g")
       .attr("stroke", "#aaa")
       .selectAll("line")
       .data(data.links)
       .join("line")
       .attr("stroke-width", 2);
-  
-    const node = svg
+
+    // Draw nodes
+    let node = svg
       .append("g")
       .attr("stroke", "#fff")
       .attr("stroke-width", 1.5)
@@ -140,71 +153,76 @@
       .call(drag(simulation))
       .on("mouseover", function (event, d) {
         d3.select(this).attr("r", 20); // Enlarge node
-      
+
         const textElement = d3.selectAll("text").filter((n) => n === d);
         textElement
           .raise() // Bring the hovered text in front of everything else
           .style("font-size", "40px")
           .style("fill", color(d))
-          //.style("stroke", "black") // Add a black stroke to the text
-          //.style("stroke-width", "1px") // Thin stroke
-          .style("text-shadow", "2px 2px 4px rgba(0, 0, 0, 0.8)"); // Add subtle shadow
-      
+          .style("text-shadow", "2px 2px 4px rgba(0, 0, 0, 0.8)");
+
         // Adjust position dynamically based on the number of lines and position
         textElement.attr("transform", function (d) {
-          const lines = d3.select(this).selectAll("tspan").size(); // Count lines
+          const lines = d3.select(this).selectAll("tspan").size(); 
           const verticalOffset = d.y < height / 2 
-            ? -30 - (lines - 1) * 50 // Shift up further if multi-line and above the node
+            ? -30 - (lines - 1) * 50
             : 50;
           return `translate(${d.x}, ${d.y + verticalOffset})`;
         });
       })
       .on("mouseout", function (event, d) {
         d3.select(this).attr("r", 15); // Restore node size
-      
+
         d3.selectAll("text")
           .filter((n) => n === d)
           .style("fill", (d) => {
             if (d.group === 1) return "white"; // Central node
-            if (d.group === 2) return "hsl(0, 0%, 95%)"; // Immediate children almost white
-            return "grey"; // Other nodes
+            if (d.group === 2) return "hsl(0, 0%, 95%)"; 
+            return "grey"; 
           })
           .style("font-size", (d) => {
-            if (d.group === 1) return "60px"; // Central node larger
-            if (d.group === 2) return "30px"; // Immediate children slightly larger
-            return `${20 - d.group * 2}px`; // Other nodes
+            if (d.group === 1) return "60px";
+            if (d.group === 2) return "30px";
+            return `${20 - d.group * 2}px`;
           })
-          .style("stroke", "none") // Remove stroke
-          .style("text-shadow", "none") // Remove shadow
+          .style("stroke", "none")
+          .style("text-shadow", "none")
           .attr("transform", function (d) {
             const lines = d3.select(this).selectAll("tspan").size();
             const verticalOffset = d.y < height / 2
-              ? -25 - (lines - 1) * 15 // Text is above the node
+              ? -25 - (lines - 1) * 15 
               : d.group === 1
-                ? 50 + (lines - 1) * 15 // Higher offset for group 1 below the node
+                ? 50 + (lines - 1) * 15 
                 : d.group === 2
-                  ? 40 + (lines - 1) * 15 // Slightly lower offset for group 2 below the node
-                  : 30; // Default offset for other groups below the node
+                  ? 40 + (lines - 1) * 15 
+                  : 30; 
             return `translate(${d.x}, ${d.y + verticalOffset})`;
           });
       })
+      // NEW: Click to toggle expand/collapse (only for group 2 by default)
+      .on("click", function (event, d) {
+        if (d.group === 2) {
+          toggleNode(d);
+        }
+      })
       .call(drag(simulation));
 
-      const label = svg
+    // Draw labels
+    let label = svg
       .append("g")
       .selectAll("text")
       .data(data.nodes)
       .join("text")
       .attr("text-anchor", "middle")
       .attr("fill", (d) => {
-        if (d.group === 1) return "white"; // Central node
-        if (d.group === 2) return "hsl(0, 0%, 95%)"; // Immediate children almost white
-        return "grey"; // Other nodes
+        if (d.group === 1) return "white";       // Central node
+        if (d.group === 2) return "hsl(0, 0%, 95%)"; 
+        return "grey";
       })
       .attr("font-size", (d) => {
-        if (d.group === 1) return "60px"; // Central node larger
-        if (d.group === 2) return "30px"; // Immediate children slightly larger
-        return `${20 - d.group * 2}px`; // Other nodes
+        if (d.group === 1) return "60px";  // Central node larger
+        if (d.group === 2) return "30px";  
+        return `${20 - d.group * 2}px`;    // Other nodes
       })
       .each(function (d) {
         const lines = wrapText(d.id, 25);
@@ -217,6 +235,7 @@
         });
       });
 
+    // Simulation tick
     simulation.on("tick", () => {
       link
         .attr("x1", (d) => d.source.x)
@@ -229,15 +248,192 @@
       label.attr("transform", function (d) {
         const lines = d3.select(this).selectAll("tspan").size();
         const verticalOffset = d.y < height / 2 
-        ? -25 - (lines - 1) * 15 // Text is above the node
-        : d.group === 1
-          ? 50 + (lines - 1) * 15 // Higher offset for group 1 below the node
-          : d.group === 2
-            ? 40 + (lines - 1) * 15 // Slightly lower offset for group 2 below the node
-            : 30; // Default offset for other groups below the node
+          ? -25 - (lines - 1) * 15
+          : d.group === 1
+            ? 50 + (lines - 1) * 15
+            : d.group === 2
+              ? 40 + (lines - 1) * 15
+              : 30;
         return `translate(${d.x}, ${d.y + verticalOffset})`;
       });
     });
+
+    //----------------------------
+    // Expand/Collapse Logic
+    //----------------------------
+
+    /**
+     * Recursively gather all descendants of a node (based on "parent" property).
+     */
+    function getAllDescendants(nodeId, nodeList) {
+      const directChildren = nodeList.filter(n => n.parent === nodeId);
+      let all = [...directChildren];
+      directChildren.forEach(child => {
+        all.push(...getAllDescendants(child.id, nodeList));
+      });
+      return all;
+    }
+
+    /**
+     * Hide all descendants of a given node by removing them from `data.nodes` and `data.links`.
+     * Store them in a `_descendants` property for later restoration.
+     */
+    function hideChildren(node) {
+      // If already stored, skip
+      if (node._descendants) return;
+
+      const descendants = getAllDescendants(node.id, data.nodes);
+      node._descendants = descendants; 
+      
+      // Remove descendant nodes
+      data.nodes = data.nodes.filter(n => !descendants.includes(n));
+
+      // Remove descendant links
+      data.links = data.links.filter(l => {
+        const isSourceDesc = descendants.some(d => d.id === (l.source.id || l.source));
+        const isTargetDesc = descendants.some(d => d.id === (l.target.id || l.target));
+        return !isSourceDesc && !isTargetDesc;
+      });
+    }
+
+    /**
+     * Show (restore) all previously hidden descendants of a given node.
+     * Pull them back from the originalNodes/originalLinks using `node._descendants`.
+     */
+    function showChildren(node) {
+      if (!node._descendants) return;
+
+      // Add back the descendant nodes from the original full list
+      node._descendants.forEach(desc => {
+        // Ensure we don't add duplicates
+        if (!data.nodes.find(n => n.id === desc.id)) {
+          data.nodes.push(desc);
+        }
+      });
+
+      // Add back the links from the original list that connect these descendants
+      // or connect the node itself to these descendants
+      const idsToAdd = new Set(node._descendants.map(d => d.id).concat(node.id));
+      originalLinks.forEach(link => {
+        const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+        const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+        const sourceInSet = idsToAdd.has(sourceId);
+        const targetInSet = idsToAdd.has(targetId);
+
+        // If the link connects any node in our set to another in our set 
+        // (or to the parent node), restore it
+        if ((sourceInSet || targetInSet) && !data.links.includes(link)) {
+          data.links.push({ ...link });
+        }
+      });
+
+      // Clear stored descendants
+      node._descendants = null;
+    }
+
+    /**
+     * Toggle function called on click for group 2 nodes.
+     */
+    function toggleNode(d) {
+      d.collapsed = !d.collapsed;
+      if (d.collapsed) {
+        // Collapse: hide children
+        hideChildren(d);
+      } else {
+        // Expand: show children
+        showChildren(d);
+      }
+
+      // Re-bind data to node/link selections
+      node = node.data(data.nodes, d => d.id);
+      node.exit().remove();
+      node = node
+        .enter()
+        .append("circle")
+        .attr("r", 15)
+        .attr("fill", (d) => color(d))
+        .attr("stroke", "#fff")
+        .attr("stroke-width", 1.5)
+        .call(drag(simulation))
+        .on("mouseover", function (event, d) {
+          d3.select(this).attr("r", 20);
+          const textElement = d3.selectAll("text").filter((n) => n === d);
+          textElement
+            .raise()
+            .style("font-size", "40px")
+            .style("fill", color(d))
+            .style("text-shadow", "2px 2px 4px rgba(0, 0, 0, 0.8)");
+        })
+        .on("mouseout", function (event, d) {
+          d3.select(this).attr("r", 15);
+          d3.selectAll("text")
+            .filter((n) => n === d)
+            .style("fill", (d) => {
+              if (d.group === 1) return "white";
+              if (d.group === 2) return "hsl(0, 0%, 95%)";
+              return "grey";
+            })
+            .style("font-size", (d) => {
+              if (d.group === 1) return "60px";
+              if (d.group === 2) return "30px";
+              return `${20 - d.group * 2}px`;
+            })
+            .style("text-shadow", "none");
+        })
+        .on("click", function (event, d) {
+          if (d.group === 2) {
+            toggleNode(d);
+          }
+        })
+        .merge(node);
+
+      link = link.data(data.links, d => d.source.id + '-' + d.target.id);
+      link.exit().remove();
+      link = link
+        .enter()
+        .append("line")
+        .attr("stroke", "#aaa")
+        .attr("stroke-width", 2)
+        .merge(link);
+
+      // Re-bind data to labels (similarly) 
+      label = label.data(data.nodes, d => d.id);
+      label.exit().remove();
+      let labelEnter = label
+        .enter()
+        .append("text")
+        .attr("text-anchor", "middle")
+        .attr("fill", (d) => {
+          if (d.group === 1) return "white";
+          if (d.group === 2) return "hsl(0, 0%, 95%)";
+          return "grey";
+        })
+        .attr("font-size", (d) => {
+          if (d.group === 1) return "60px";
+          if (d.group === 2) return "30px";
+          return `${20 - d.group * 2}px`;
+        })
+        .each(function (d) {
+          const lines = wrapText(d.id, 25);
+          lines.forEach((line, i) => {
+            d3.select(this)
+              .append("tspan")
+              .attr("x", 0)
+              .attr("dy", i === 0 ? 0 : "1.2em")
+              .text(line);
+          });
+        });
+      label = labelEnter.merge(label);
+
+      // Update the simulation with the new data set
+      simulation.nodes(data.nodes);
+      simulation.force("link").links(data.links);
+      simulation.alpha(0.3).restart();
+    }
+
+    //-----------
+    // Utility
+    //-----------
 
     function drag(simulation) {
       function dragstarted(event, d) {
