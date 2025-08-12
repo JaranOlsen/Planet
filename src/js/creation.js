@@ -45,23 +45,24 @@ export function creation(version, postLoadingManager, guttaState, scene) {
     createTitle(scene)
     if (version == 1){ //FULL VERSION
         initialiseLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture16k, normalTexture16k, roughnessTexture16k, cloudsTexture8k, cloudsNormal8k, version)
+        const jaranius = createJaranius(diffuseTexture16k, normalTexture16k, roughnessTexture16k, cloudsTexture8k, cloudsNormal8k, version)
         createContexts(version)
         createMindmap()
-        createGutta(4000, 200, version, guttaState, scene)
+        createGutta(4000, 200, version, guttaState, jaranius)
     } 
     if (version == 2){ //LIGHT VERSION
         initialiseLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture2k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k, version)
+        const jaranius = createJaranius(diffuseTexture2k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k, version)
         createContexts(version)
         createMindmap()
+        //createGutta(10, 3, version, guttaState, jaranius)
     } 
     if (version == 3){ //DEVELOPER VERSION
         initialiseLoadingManager(postLoadingManager)
-        createJaranius(diffuseTexture4k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k, version)
+        const jaranius = createJaranius(diffuseTexture4k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k, version)
         createContexts(version)
         createMindmap()
-        createGutta(100, 10, version, guttaState, scene)
+        createGutta(10, 3, version, guttaState, jaranius)
     } 
 }
 

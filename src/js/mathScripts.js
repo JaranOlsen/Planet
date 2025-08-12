@@ -122,7 +122,7 @@ export function easeInOutQuad(t) {
     return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
   }
 
-export function angularDistance(lat1, lng1, lat2, lng2) {
+/* export function angularDistance(lat1, lng1, lat2, lng2) {
     // Convert degrees to radians
     const toRad = (deg) => deg * Math.PI / 180;
 
@@ -141,6 +141,33 @@ export function angularDistance(lat1, lng1, lat2, lng2) {
 
     const distanceRad = Math.acos(clampedCosDistance);
     const distanceDeg = distanceRad * 180 / Math.PI;
+
+    return distanceDeg;
+} */
+
+export function angularDistance(lat1, lng1, lat2, lng2) {
+    const toRad = (deg) => (deg * Math.PI) / 180;
+
+    // Convert lat, lng to radians
+    const latRad1 = toRad(lat1);
+    const latRad2 = toRad(lat2);
+    const lngRad1 = toRad(lng1);
+    const lngRad2 = toRad(lng2);
+
+    // Difference in longitude
+    const dLng = lngRad2 - lngRad1;
+
+    // Spherical law of cosines
+    const cosDistance =
+        Math.sin(latRad1) * Math.sin(latRad2) +
+        Math.cos(latRad1) * Math.cos(latRad2) * Math.cos(dLng);
+
+    // Clamp the result to [-1, 1] to avoid floating-point issues
+    const clamped = Math.min(1, Math.max(-1, cosDistance));
+
+    // Convert from radians to degrees
+    const distanceRad = Math.acos(clamped);
+    const distanceDeg = (distanceRad * 180) / Math.PI;
 
     return distanceDeg;
 }

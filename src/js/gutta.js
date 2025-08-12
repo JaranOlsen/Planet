@@ -10,6 +10,17 @@ import { planetTagData } from './data/planetData.js';
 let guttaInstancedMeshes = {};
 let maraInstancedMeshes = {};
 
+// InstancedMesh for Gutt crumbs and Mara crumbs:
+export let guttCrumbMesh;
+export let maraCrumbMesh;
+
+const MAX_CRUMBS = 3000;   // e.g. how many crumbs we allow
+let guttCrumbIndex = 0;    // ring buffer index for Gutt crumb mesh
+let maraCrumbIndex = 0;    // ring buffer index for Mara crumb mesh
+let frameCount = 0;
+
+let debugFrameCount = 0;
+
 // ================================
 // Octree Implementation (3D)
 // ================================
@@ -211,10 +222,11 @@ export class Gutt {
         this.version = version;
 
         // === NEW: add a "mode" property ===
-        // Possible modes:
-        //   Gutta:   "exploring", "mating", "feeding"
-        //   Mara:    "exploring", "mating", "hunting"
-        this.mode = "exploring";  
+        this.mode = "Exploring";  
+
+        this.nuggetMemories = [];
+        
+        this.feedingDuration = 15000;   // 15 seconds
 
         // Random initial position
         const radius = 5.1;
@@ -248,7 +260,8 @@ export class Gutt {
         this.avoidance = new THREE.Vector3(0, 0, 0)
 
         this.name = generateRandomSanskritName()
-        this.hunger = 0.5
+        this.energy = parameters.maxEnergy;
+        this.hunger = 0.65
         this.munches = 0
         this.kills = 0
         this.closestCall = Infinity
@@ -264,120 +277,469 @@ export class Gutt {
         this.updateInstanceMatrix();
     }
 
-    updateMode(octtree, jaranius, nuggets) {
-        // This is just an example. Customize the logic and thresholds to your liking.
-        if (this.species === "gutt") {
-            // Example: If hunger > 0.7 => feed mode, else exploring
-            if (this.hunger > 0.7) {
-                this.mode = "feeding";
-            } else {
-                this.mode = "exploring";
-            }
-            // If you wanted a mating mode, you'd also check some condition, e.g.:
-            // if (someMateIsClose) this.mode = "mating";
-        } 
-        else if (this.species === "mara") {
-            // Example: If hunger > 0.7 => hunting mode, else exploring
-            if (this.hunger > 0.7) {
-                this.mode = "hunting";
-            } else {
-                this.mode = "exploring";
-            }
-            // If you wanted a mating mode, you'd do similarly here.
+    updateMode() {
+        // If we are in "Landing," "Feeding," or "Fleeing," do not override automatically
+        if (this.mode === "Landing" || this.mode === "Feeding" || this.mode === "Fleeing") {
+            return;
+        }
+    
+        // Otherwise, decide "Foraging" or "Exploring" based on hunger
+        if (this.hunger > 0.7) {
+            this.mode = "Foraging";
+        } else {
+            this.mode = "Exploring";
         }
     }
 
-    move() {
+    move(guttaStats) {
+        // ------------------------------------------------------
+        // 1) Decide which forces or behaviors to skip
+        // ------------------------------------------------------
+        let skipBoundaries = false;
+        let skipSeparation = false;
+        
+        // If landing or feeding, ignore boundary & separation
+        if (this.mode === "Landing" || this.mode === "Feeding") {
+            skipBoundaries = true;
+            skipSeparation = true;
+        }
     
-        // Hunger mechanics
-        if (this.hunger < 1) this.hunger += 0.0001;
+        // ------------------------------------------------------
+        // 2) Update hunger over time
+        // ------------------------------------------------------
+        if (this.hunger < 1) {
+            this.hunger += 0.0001;
+        }
     
-        // Compute net acceleration from all steering behaviors
-        this.acceleration3D.set(0,0,0);
+        // ------------------------------------------------------
+        // 3) Clear acceleration
+        // ------------------------------------------------------
+        this.acceleration3D.set(0, 0, 0);
+    
+        // ------------------------------------------------------
+        // 4) Apply steering forces (wander, alignment, etc.)
+        // ------------------------------------------------------
         this.acceleration3D.add(this.wander);
         this.acceleration3D.add(this.alignment);
         this.acceleration3D.add(this.cohesion);
-        this.acceleration3D.add(this.separation);
     
-        // Species-specific behaviors
-        if (this.species === "gutt") {
-            this.acceleration3D.add(this.flee);
-            this.acceleration3D.add(this.feed);
-        } else if (this.species === "mara") {
-            this.acceleration3D.add(this.hunt);
+        if (!skipSeparation) {
+            this.acceleration3D.add(this.separation);
         }
     
-        this.acceleration3D.add(this.avoidance);
+        this.acceleration3D.add(this.flee);
+        this.acceleration3D.add(this.feed);
     
-        // Limit acceleration
-        const maxAcceleration = (this.species === "gutt") ? this.parameters.gutt_max_acceleration : this.parameters.mara_max_acceleration;
-        const rawAcceleration = this.acceleration3D.clone();
+        if (!skipBoundaries) {
+            this.acceleration3D.add(this.avoidance);
+        }
+    
+        // ------------------------------------------------------
+        // 5) Limit acceleration
+        // ------------------------------------------------------
+        const maxAcceleration = this.parameters.gutt_max_acceleration;
         if (this.acceleration3D.length() > maxAcceleration) {
             this.acceleration3D.setLength(maxAcceleration);
         }
     
-        // Apply drag
-        this.acceleration3D.add(this.velocity3D.clone().multiplyScalar(-this.parameters.dragCoefficient));
+        // ------------------------------------------------------
+        // 6) Apply drag
+        // ------------------------------------------------------
+        const speed = this.velocity3D.length();
+        const dragMagnitude = this.parameters.dragCoefficient * speed * speed;
+        const dragDirection = this.velocity3D.clone().normalize().multiplyScalar(-1);
+        const dragForce = dragDirection.multiplyScalar(dragMagnitude);
+        this.acceleration3D.add(dragForce);
     
-        // Update velocity
+        // ------------------------------------------------------
+        // 7) Gravity
+        // ------------------------------------------------------
+        let planetNormal = this.position3D.clone().normalize();
+        const gravityForce = planetNormal.clone().multiplyScalar(-this.parameters.gravityStrength);
+        this.acceleration3D.add(gravityForce);
+
+        // ------------------------------------------------------
+        // 8) Lift
+        // ------------------------------------------------------
+        let forward = this.velocity3D.clone();
+        let liftVector = new THREE.Vector3(0,0,0);
+        if (forward.lengthSq() < 0.000001) {
+            forward.set(0,0,1);
+        } else {
+            forward.normalize();
+        }
+        const dotUp = forward.dot(planetNormal);
+        if (dotUp > 0 && this.energy > 0) {
+            const climbForce = dotUp * this.parameters.liftCoefficient;
+            const actualLift = climbForce * this.energy;
+            liftVector = planetNormal.clone().multiplyScalar(actualLift);
+            this.acceleration3D.add(liftVector);
+    
+            // Deplete energy
+            const energyUsed = actualLift * this.parameters.liftCost;
+            this.energy = Math.max(0, this.energy - energyUsed);
+        }
+    
+        // ------------------------------------------------------
+        // 8) Handle "Landing" mode
+        // ------------------------------------------------------
+        if (this.mode === "Landing" && this.targetNugget) {
+            // Convert lat/lng to 3D at radius ~5.01
+            const { lat, lng } = this.targetNugget;
+            const targetPos = convertLatLngtoCartesian(lat, lng, 5.01);
+    
+            // Approach vector
+            const approach = new THREE.Vector3(targetPos.x, targetPos.y, targetPos.z).sub(this.position3D);
+            approach.clampLength(0, this.parameters.gutt_max_force);
+            this.acceleration3D.copy(approach);
+    
+            // Check if close enough or speed is low => switch to feeding
+            const distToNugget = this.position3D.distanceTo(
+                new THREE.Vector3(targetPos.x, targetPos.y, targetPos.z)
+            );
+            if (distToNugget < 0.01 || this.velocity3D.length() < 0.0001) {
+                this.mode = "Feeding";
+                this.munches += 1;
+                guttaStats.munch += 1;
+                guttaStats.totalHungerAtMunch += this.hunger;
+            }
+        }
+    
+        // ------------------------------------------------------
+        // 9) Handle "Feeding" mode
+        // ------------------------------------------------------
+        if (this.mode === "Feeding") {
+            // Stop movement
+            this.velocity3D.set(0,0,0);
+            this.acceleration3D.set(0,0,0);
+    
+            // Eat => reduce hunger
+            this.hunger -= 0.001; // tune rate
+            if (this.hunger < 0.1) {
+                this.hunger = 0;
+            }
+    
+            // If done feeding, revert to exploring
+            if (this.hunger <= 0.1) {
+                this.mode = "Exploring";
+                if (this.targetNugget) {
+                    // Refine lat/lng with Gutta's final position
+                    const { lat: gutLat, lng: gutLng } = convertCartesiantoLatLng(
+                        this.position3D.x, 
+                        this.position3D.y, 
+                        this.position3D.z
+                    );
+                    const alpha = 0.3; 
+                    this.targetNugget.lat = THREE.MathUtils.lerp(this.targetNugget.lat, gutLat, alpha);
+                    this.targetNugget.lng = THREE.MathUtils.lerp(this.targetNugget.lng, gutLng, alpha);
+                    this.targetNugget.visits += 1;
+                    this.targetNugget.attractiveness += 0.2;
+                }
+                this.targetNugget = null;
+            }
+    
+            // Update instance matrix with no motion
+            const m = new THREE.Matrix4();
+            m.compose(this.position3D, this.currentQuaternion, new THREE.Vector3(1,1,1));
+            this.meshRef.setMatrixAt(this.instanceIndex, m);
+            this.meshRef.instanceMatrix.needsUpdate = true;
+    
+            return; // end early
+        }
+
+        // ------------------------------------------------------
+        // 10) Add final acceleration to velocity
+        // ------------------------------------------------------  
         this.velocity3D.add(this.acceleration3D);
     
-        // Limit speed
-        const maxSpeed = (this.species === "gutt") ? this.parameters.gutt_max_speed : this.parameters.mara_max_speed;
-        if (this.velocity3D.length() > maxSpeed) {
-            this.velocity3D.setLength(maxSpeed);
+        // ------------------------------------------------------
+        // 10) Normal motion if not feeding
+        // ------------------------------------------------------
+    
+        // (B) Adjust speed using thrustSpeed vs. diveSpeed
+        const thrustSpeed = this.parameters.gutt_thrust_speed;
+        const diveSpeed   = this.parameters.gutt_dive_speed;
+        const diving      = (dotUp < 0);  // dotUp < 0 => forward vector angled inward => diving
+    
+        if (!diving) {
+            if (speed > thrustSpeed) {
+                const clampStrength = 0.1; // Adjust between 0 (no clamp) and 1 (immediate clamp)
+                const newSpeed = THREE.MathUtils.lerp(speed, thrustSpeed, clampStrength);
+                this.velocity3D.setLength(newSpeed);
+            }
+        } else {
+            if (speed > diveSpeed) {
+                const clampStrength = 0.01; // Adjust between 0 (no clamp) and 1 (immediate clamp)
+                const newSpeed = THREE.MathUtils.lerp(speed, diveSpeed, clampStrength);
+                this.velocity3D.setLength(newSpeed);
+            }
         }
     
         // Update position
         this.position3D.add(this.velocity3D);
     
-        // Compute forward direction
-        let forward = this.velocity3D.clone();
+        // If still in "Landing," check if we can switch to feeding
+        if (this.mode === "Landing") {
+            if (this.velocity3D.length() < 0.0001) {
+                this.mode = "Feeding";
+            }
+        }
+    
+        // ------------------------------------------------------
+        // 11) Orientation & Rolling
+        // ------------------------------------------------------
+        forward = this.velocity3D.clone();
         if (forward.lengthSq() < 0.000001) {
-            forward.set(0,0,1); // Default forward if almost stationary
+            forward.set(0,0,1);
         } else {
             forward.normalize();
         }
     
-        // Determine orientation from forward direction
-        const globalUp = new THREE.Vector3(0,1,0);
-        let right = new THREE.Vector3().crossVectors(globalUp, forward).normalize();
+        // Planet normal might be re-defined if needed
+        planetNormal = this.position3D.clone().normalize();
+    
+        // Right & Up vectors
+        let right = new THREE.Vector3().crossVectors(planetNormal, forward).normalize();
         if (right.lengthSq() < 0.000001) {
             right.set(1,0,0);
         }
         let up = new THREE.Vector3().crossVectors(forward, right).normalize();
     
-        // Create a rotation matrix from forward/up/right
-        // We'll build a rotation matrix from the basis vectors:
+        // Build the rotation basis
         const rotationMatrix = new THREE.Matrix4();
         rotationMatrix.makeBasis(right, up, forward);
     
-        // Convert to a quaternion
+        // Slerp current quaternion
         let desiredQuaternion = new THREE.Quaternion().setFromRotationMatrix(rotationMatrix);
-    
-        // Smooth orientation changes
         this.currentQuaternion.slerp(desiredQuaternion, this.parameters.smoothingFactor);
     
-        // Compute roll based on turning
+        // Roll (bank) around forward axis
         let deltaForward = forward.clone().sub(this.previousForward).normalize();
-        let turnAngle = Math.asin(deltaForward.length() / 2); // Approximate small angle turns
-        const maxRoll = THREE.MathUtils.degToRad(this.parameters.maxRoll);
-        let rollAngle = THREE.MathUtils.clamp(turnAngle * this.parameters.rollMultiplier, -maxRoll, maxRoll);
-    
-        // Apply roll around the forward axis
+        let turnAngle = Math.asin(deltaForward.length() / 2);
+        const maxRollRad = THREE.MathUtils.degToRad(this.parameters.maxRoll);
+        let rollAngle = THREE.MathUtils.clamp(
+            turnAngle * this.parameters.rollMultiplier,
+            -maxRollRad,
+            maxRollRad
+        );
         let qRoll = new THREE.Quaternion().setFromAxisAngle(forward, rollAngle);
         this.currentQuaternion.multiply(qRoll);
     
-        // Update previous forward
         this.previousForward.copy(forward);
     
-        // Compose the final transformation matrix for this instance
-        const m = new THREE.Matrix4();
-        m.compose(this.position3D, this.currentQuaternion, new THREE.Vector3(1,1,1));
-    
-        // Update the InstancedMesh
-        this.meshRef.setMatrixAt(this.instanceIndex, m);
+        // ------------------------------------------------------
+        // 12) Update instance matrix
+        // ------------------------------------------------------
+        const mat = new THREE.Matrix4();
+        mat.compose(this.position3D, this.currentQuaternion, new THREE.Vector3(1,1,1));
+        this.meshRef.setMatrixAt(this.instanceIndex, mat);
         this.meshRef.instanceMatrix.needsUpdate = true;
+    
+        // ------------------------------------------------------
+        // 13) Regenerate energy
+        // ------------------------------------------------------
+        const hungerFactor = (1 - this.hunger); 
+        const regen = hungerFactor * this.parameters.energyRegenRate;
+        this.energy = Math.min(this.parameters.maxEnergy, this.energy + regen);
+    
+        // ---------------------------------------------------------
+        // DEBUG LOG (print once every 60 frames, only for ID=0)
+        // ---------------------------------------------------------
+        /* debugFrameCount++;
+        if (this.ID === 0 && debugFrameCount % 60 === 0 && this.avoidance.length() > 0) {
+            console.log(`%c[Gutta #0] Frame: ${debugFrameCount}`, "color: orange; font-weight: bold;");
+            console.log({
+                forces: {
+                    drag: dragForce.length().toFixed(8),
+                    gravity: gravityForce.length().toFixed(8),
+                    lift: dotUp > 0 ? (liftVector.length().toFixed(8)) : "N/A",
+                    alignment: this.alignment.length().toFixed(8),
+                    cohesion: this.cohesion.length().toFixed(8),
+                    separation: this.separation.length().toFixed(8),
+                    flee: this.flee.length().toFixed(8),
+                    feed: this.feed.length().toFixed(8),
+                    avoidance: this.avoidance.length().toFixed(8),
+                },
+                speed: this.velocity3D.length().toFixed(5),
+                accel: this.acceleration3D.length().toFixed(5),
+                isDiving: diving,
+            });
+            console.log("----------------------------------------");
+        } */
+    }
+
+    glide() {
+        // ------------------------------------------------------
+        // 1) Update hunger
+        // ------------------------------------------------------
+        if (this.hunger < 1) {
+            this.hunger += 0.00005;
+        }
+    
+        // ------------------------------------------------------
+        // 2) Clear acceleration
+        // ------------------------------------------------------
+        this.acceleration3D.set(0,0,0);
+    
+        // ------------------------------------------------------
+        // 3) Apply steering forces
+        // ------------------------------------------------------
+        this.acceleration3D.add(this.wander);
+        this.acceleration3D.add(this.alignment);
+        this.acceleration3D.add(this.cohesion);
+        this.acceleration3D.add(this.separation);
+        this.acceleration3D.add(this.hunt);
+        this.acceleration3D.add(this.avoidance);
+    
+        // ------------------------------------------------------
+        // 4) Limit acceleration
+        // ------------------------------------------------------
+        const maxAcceleration = this.parameters.mara_max_acceleration;
+        if (this.acceleration3D.length() > maxAcceleration) {
+            this.acceleration3D.setLength(maxAcceleration);
+        }
+    
+        // ------------------------------------------------------
+        // 5) Apply drag
+        // ------------------------------------------------------
+        const speed = this.velocity3D.length();
+        const dragMagnitude = this.parameters.dragCoefficient * speed * speed;
+        const dragDirection = this.velocity3D.clone().normalize().multiplyScalar(-1);
+        const dragForce = dragDirection.multiplyScalar(dragMagnitude);
+        this.acceleration3D.add(dragForce);
+    
+        // ------------------------------------------------------
+        // 6) Gravity
+        // ------------------------------------------------------
+        let planetNormal = this.position3D.clone().normalize();
+        const gravityForce = planetNormal.clone().multiplyScalar(-this.parameters.gravityStrength);
+        this.acceleration3D.add(gravityForce);
+
+        // ------------------------------------------------------
+        // 7) Lift
+        // ------------------------------------------------------
+        let forward = this.velocity3D.clone();
+        let liftVector = new THREE.Vector3(0,0,0);
+        if (forward.lengthSq() < 0.000001) {
+            forward.set(0,0,1);
+        } else {
+            forward.normalize();
+        }
+        const dotUp = forward.dot(planetNormal);
+        if (dotUp > 0 && this.energy > 0) {
+            const climbForce = dotUp * this.parameters.liftCoefficient;
+            const actualLift = climbForce * this.energy;
+            liftVector = planetNormal.clone().multiplyScalar(actualLift);
+            this.acceleration3D.add(liftVector);
+    
+            // Deplete energy
+            const energyUsed = actualLift * this.parameters.liftCost;
+            this.energy = Math.max(0, this.energy - energyUsed);
+        }
+    
+        // ------------------------------------------------------
+        // 8) Update velocity
+        // ------------------------------------------------------
+        this.velocity3D.add(this.acceleration3D);
+    
+        const thrustSpeed = this.parameters.mara_thrust_speed;
+        const diveSpeed   = this.parameters.mara_dive_speed;
+        const diving      = (dotUp < 0);  // dotUp < 0 => forward vector angled inward => diving
+    
+        if (!diving) {
+            if (speed > thrustSpeed) {
+                const clampStrength = 0.1; // Adjust between 0 (no clamp) and 1 (immediate clamp)
+                const newSpeed = THREE.MathUtils.lerp(speed, thrustSpeed, clampStrength);
+                this.velocity3D.setLength(newSpeed);
+            }
+        } else {
+            if (speed > diveSpeed) {
+                const clampStrength = 0.01; // Adjust between 0 (no clamp) and 1 (immediate clamp)
+                const newSpeed = THREE.MathUtils.lerp(speed, diveSpeed, clampStrength);
+                this.velocity3D.setLength(newSpeed);
+            }
+        }
+    
+        // ------------------------------------------------------
+        // 8) Update position
+        // ------------------------------------------------------
+        this.position3D.add(this.velocity3D);
+    
+        // ------------------------------------------------------
+        // 9) Orientation & Rolling
+        // ------------------------------------------------------
+        forward = this.velocity3D.clone();
+        if (forward.lengthSq() < 0.000001) {
+            forward.set(0,0,1);
+        } else {
+            forward.normalize();
+        }
+    
+        planetNormal = this.position3D.clone().normalize();
+        let right = new THREE.Vector3().crossVectors(planetNormal, forward).normalize();
+        if (right.lengthSq() < 0.000001) {
+            right.set(1,0,0);
+        }
+        let up = new THREE.Vector3().crossVectors(forward, right).normalize();
+    
+        const rotationMatrix = new THREE.Matrix4();
+        rotationMatrix.makeBasis(right, up, forward);
+    
+        let desiredQuaternion = new THREE.Quaternion().setFromRotationMatrix(rotationMatrix);
+        this.currentQuaternion.slerp(desiredQuaternion, this.parameters.smoothingFactor);
+    
+        // Roll
+        let deltaForward = forward.clone().sub(this.previousForward).normalize();
+        let turnAngle = Math.asin(deltaForward.length() / 2);
+        const maxRollRad = THREE.MathUtils.degToRad(this.parameters.maxRoll);
+        let rollAngle = THREE.MathUtils.clamp(
+            turnAngle * this.parameters.rollMultiplier,
+            -maxRollRad,
+            maxRollRad
+        );
+        let qRoll = new THREE.Quaternion().setFromAxisAngle(forward, rollAngle);
+        this.currentQuaternion.multiply(qRoll);
+    
+        this.previousForward.copy(forward);
+    
+        // ------------------------------------------------------
+        // 10) Update instance matrix
+        // ------------------------------------------------------
+        const mat = new THREE.Matrix4();
+        mat.compose(this.position3D, this.currentQuaternion, new THREE.Vector3(1,1,1));
+        this.meshRef.setMatrixAt(this.instanceIndex, mat);
+        this.meshRef.instanceMatrix.needsUpdate = true;
+    
+        // ------------------------------------------------------
+        // 11) Regenerate energy
+        // ------------------------------------------------------
+        const hungerFactor = (1 - this.hunger);
+        const regen = hungerFactor * this.parameters.energyRegenRate;
+        this.energy = Math.min(this.parameters.maxEnergy, this.energy + regen);
+    
+        // ---------------------------------------------------------
+        // DEBUG LOG (print once every 60 frames, only for ID=0)
+        // ---------------------------------------------------------
+/*         debugFrameCount++;
+        if (this.ID === 0 && debugFrameCount % 60 === 0) {
+            console.log(`%c[Mara #0] Frame: ${debugFrameCount}`, "color: purple; font-weight: bold;");
+            console.log({
+                forces: {
+                    drag: dragForce.length().toFixed(8),
+                    gravity: gravityForce.length().toFixed(8),
+                    lift: dotUp > 0 ? (liftVector.length().toFixed(8)) : "N/A",
+                    alignment: this.alignment.length().toFixed(8),
+                    cohesion: this.cohesion.length().toFixed(8),
+                    separation: this.separation.length().toFixed(8),
+                    hunt: this.hunt.length().toFixed(8),
+                    avoidance: this.avoidance.length().toFixed(8),
+                },
+                speed: this.velocity3D.length().toFixed(5),
+                accel: this.acceleration3D.length().toFixed(5),
+                isDiving: diving,
+            });
+            console.log("----------------------------------------");
+        } */
     }
 
     calculateWander() {
@@ -521,76 +883,6 @@ export class Gutt {
         }
     }
 
-    calculateAlignment(octtree) {
-        let perception = (this.species == "gutt") ? this.parameters.gutt_alignment_perception_distance : this.parameters.mara_alignment_perception_distance
-        this.alignment.set(0,0,0)
-        let neighbors = octtree.rangeSearch({x:this.position3D.x,y:this.position3D.y,z:this.position3D.z}, perception)
-        neighbors = this.filterByVisionCone(neighbors);
-        let counter = 0
-        for (let agent of neighbors) {
-            if (agent!==this) {
-                this.alignment.add(agent.velocity3D)
-                counter++;
-            }
-        }
-        if (counter > 0) {
-            this.alignment.divideScalar(counter)
-            this.alignment.sub(this.velocity3D)
-            const maxF = (this.species == "gutt") ? this.parameters.gutt_max_force : this.parameters.mara_max_force
-            const alignStr = (this.species == "gutt") ? this.parameters.gutt_alignment : this.parameters.mara_alignment
-            this.alignment.clampLength(-maxF, maxF)
-            this.alignment.multiplyScalar(alignStr)
-        }
-    }
-
-    calculateCohesion(octtree) {
-        let perception = (this.species == "gutt") ? this.parameters.gutt_cohesion_perception_distance : this.parameters.mara_cohesion_perception_distance
-        this.cohesion.set(0,0,0)
-        let neighbors = octtree.rangeSearch({x:this.position3D.x,y:this.position3D.y,z:this.position3D.z}, perception)
-        neighbors = this.filterByVisionCone(neighbors);
-        let counter = 0
-        for (let agent of neighbors) {
-            if (agent!==this) {
-                this.cohesion.add(agent.position3D)
-                counter++;
-            }
-        }
-        if (counter > 0) {
-            this.cohesion.divideScalar(counter)
-            this.cohesion.sub(this.position3D)
-            const maxF = (this.species == "gutt") ? this.parameters.gutt_max_force : this.parameters.mara_max_force
-            const cohStr = (this.species == "gutt") ? this.parameters.gutt_cohesion : this.parameters.mara_cohesion
-            this.cohesion.clampLength(-maxF, maxF)
-            this.cohesion.multiplyScalar(cohStr)
-        }
-    }
-
-    calculateSeparation(octtree) {
-        let perception = (this.species == "gutt") ? this.parameters.gutt_separation_perception_distance : this.parameters.mara_separation_perception_distance
-        this.separation.set(0,0,0)
-        let neighbors = octtree.rangeSearch({x:this.position3D.x,y:this.position3D.y,z:this.position3D.z}, perception)
-        neighbors = this.filterByVisionCone(neighbors);
-        let counter = 0
-        for (let agent of neighbors) {
-            if (agent!==this) {
-                let d = this.position3D.distanceTo(agent.position3D)
-                if (d < perception && d > 0) {
-                    let diff = this.position3D.clone().sub(agent.position3D)
-                    diff.divideScalar(d)
-                    this.separation.add(diff)
-                    counter++;
-                }
-            }
-        }
-        if (counter > 0) {
-            this.separation.divideScalar(counter)
-            const maxF = (this.species == "gutt") ? this.parameters.gutt_max_force : this.parameters.mara_max_force
-            const sepStr = (this.species == "gutt") ? this.parameters.gutt_separation : this.parameters.mara_separation
-            this.separation.clampLength(-maxF, maxF)
-            this.separation.multiplyScalar(sepStr)
-        }
-    }
-
     calculateHunting(guttaStats, octtree) {
         if (this.species !== "mara") return guttaStats;
         let perception = this.parameters.mara_hunt_perception_distance
@@ -602,7 +894,7 @@ export class Gutt {
             if (prey!==this) {
                 let d = this.position3D.distanceTo(prey.position3D)
                 if (d < perception) {
-                    if (d < 0.04 && this.hunger > 0.2) {
+                    if (d < 0.04 && this.hunger > 0.5) {
                         guttaStats.kills += 1
                         guttaStats.totalHungerAtKill += this.hunger
                         this.hunger = 0
@@ -624,55 +916,125 @@ export class Gutt {
 
     calculateFleeing(octtree) {
         if (this.species !== "gutt") return;
-        let perception = this.parameters.gutt_flee_perception_distance
-        this.flee.set(0,0,0)
-        let neighbors = octtree.rangeSearch({x:this.position3D.x,y:this.position3D.y,z:this.position3D.z}, perception)
-        let counter = 0
+    
+        let perception = this.parameters.gutt_flee_perception_distance;
+        this.flee.set(0,0,0);
+    
+        let neighbors = octtree.rangeSearch({
+            x: this.position3D.x, 
+            y: this.position3D.y, 
+            z: this.position3D.z
+        }, perception);
+    
+        let counter = 0;
+        let startled = false;
+    
         for (let predator of neighbors) {
-            if (predator!==this) {
-                let d = this.position3D.distanceTo(predator.position3D)
+            if (predator.species === "mara") {
+                // It's a Mara
+                let d = this.position3D.distanceTo(predator.position3D);
                 if (d < perception) {
-                    let diff = this.position3D.clone().sub(predator.position3D)
-                    diff.divideScalar(d)
-                    this.flee.add(diff)
+                    // Flee vector
+                    let diff = this.position3D.clone().sub(predator.position3D);
+                    diff.divideScalar(d);
+                    this.flee.add(diff);
+                    startled = true;
                     counter++;
                 }
             }
         }
+    
         if (counter > 0) {
-            this.flee.divideScalar(counter)
-            this.flee.clampLength(-this.parameters.gutt_max_force, this.parameters.gutt_max_force)
-            this.flee.multiplyScalar(this.parameters.gutt_flee)
+            this.flee.divideScalar(counter);
+            this.flee.clampLength(0, this.parameters.gutt_max_force);
+            this.flee.multiplyScalar(this.parameters.gutt_flee);
+    
+            // If we are feeding or landing, break out
+            if (this.mode === "Feeding" || this.mode === "Landing") {
+                // Decrease attractiveness if we had a targetNugget
+                if (this.targetNugget) {
+                    this.targetNugget.attractiveness = Math.max(0, this.targetNugget.attractiveness - 0.1);
+                    this.targetNugget.visits += 1;
+                }
+                this.targetNugget = null;
+            }
+
+            this.mode = "Fleeing";
+
+        } else if (this.mode === "Fleeing") {
+            // If no predators, revert to exploring or foraging based on hunger
+            if (this.hunger > 0.7) {
+                this.mode = "Foraging";
+            } else {
+                this.mode = "Exploring";
+            }
         }
     }
 
-    calculateFeeding(guttaStats, jaranius, nuggets) {
-        let perception = this.parameters.gutt_feed_perception_distance
-        this.feed.set(0,0,0)
-        let counter = 0
-        for (let i=0; i<nuggets.length; i++) {
-            let nuggetPos = nuggets[i].nugget.position.clone()
-            nuggetPos.applyMatrix4(jaranius.matrixWorld);
-            let d = this.position3D.distanceTo(nuggetPos)
+    calculateFeeding(nuggets) {
+        this.feed.set(0,0,0);  // Clear the feed force
+        let perception = this.parameters.gutt_feed_perception_distance;
+    
+        // 1) Loop through visible nuggets
+        for (let nug of nuggets) {
+            // Transform nugget position to world space
+            let nugPos = nug.nugget.position.clone();
+            //nugPos.applyMatrix4(jaranius.matrixWorld);
+    
+            // If within feed perception
+            let d = this.position3D.distanceTo(nugPos);
             if (d < perception) {
-                if (d < 0.05 && this.hunger > 0.05) {
-                    guttaStats.munch += 1
-                    guttaStats.totalHungerAtMunch += this.hunger
-                    this.hunger -= 0.05
-                    this.munches += 1
+                // Add or update memory
+                let mem = this.addOrUpdateNuggetMemory(nugPos);
+                // If fairly close, refine lat/lng in memory
+                if (d < 0.2) {
+                    const { lat: nugLat, lng: nugLng } = convertCartesiantoLatLng(
+                        nugPos.x, nugPos.y, nugPos.z
+                    );
+                    mem.lat = THREE.MathUtils.lerp(mem.lat, nugLat, 0.1);
+                    mem.lng = THREE.MathUtils.lerp(mem.lng, nugLng, 0.1);
                 }
-                let nugVec = nuggetPos.clone().sub(this.position3D)
-                this.feed.add(nugVec)
-                counter++;
             }
         }
-        if (counter>0) {
-            this.feed.divideScalar(counter)
-            const hungerF = this.hunger 
-            this.feed.clampLength(-this.parameters.gutt_max_force * hungerF, this.parameters.gutt_max_force * hungerF)
-            this.feed.multiplyScalar(this.parameters.gutt_feed)
+    
+        // 2) Steering force if "Foraging"
+        if (this.mode === "Foraging") {
+            let bestNug = null;
+            let bestScore = -Infinity;
+    
+            // Pick best from memory
+            for (let mem of this.nuggetMemories) {
+                const memPos = convertLatLngtoCartesian(mem.lat, mem.lng, 5.0);
+                const dist = this.position3D.distanceTo(memPos);
+                const score = mem.attractiveness / Math.max(0.001, dist);
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestNug = mem;
+                }
+            }
+    
+            if (bestNug) {
+                // Steer toward bestNug
+                const { lat, lng } = bestNug;
+                const bestNugPos = convertLatLngtoCartesian(lat, lng, 5.0);
+                const bestNugPosVec = new THREE.Vector3(
+                    bestNugPos.x,
+                    bestNugPos.y,
+                    bestNugPos.z
+                );
+                let desired = bestNugPosVec.clone().sub(this.position3D);
+                desired.clampLength(0, this.parameters.gutt_max_force);
+                this.feed.copy(desired).multiplyScalar(this.parameters.gutt_feed);
+    
+                // Check if close enough to land
+                const dist = this.position3D.distanceTo(bestNugPosVec);
+                if (dist < 0.1) {
+                    this.mode = "Landing";
+                    this.targetNugget = bestNug;  // The memory object
+                }
+            }
         }
-        return guttaStats
+
     }
 
     calculateAvoidance() {
@@ -684,6 +1046,7 @@ export class Gutt {
         let boundaryForce = this.parameters.boundaryForceStrength;
         const lookaheadFactor = this.parameters.lookaheadFactor || 2.0;
         const buffer = this.parameters.altitudeBuffer || 0.2;
+        const upperBuffer = this.parameters.altitudeBuffer * 3 || 20.0;
         const anticipatoryMultiplier = this.parameters.anticipatoryMultiplier || 2.0;
     
         // Compute future position to anticipate boundary violations
@@ -709,10 +1072,10 @@ export class Gutt {
         }
 
         // Anticipatory avoidance for approaching upper altitude boundary
-        if (futureRadius > (upperLimit - buffer)) {
-            const penetration = futureRadius - (upperLimit - buffer);
+        if (futureRadius > (upperLimit - upperBuffer)) {
+            const penetration = futureRadius - (upperLimit - upperBuffer);
             const steeringForceDir = futurePosition.clone().normalize().multiplyScalar(-1); // direction inward
-            this.avoidance.add(steeringForceDir.multiplyScalar(penetration * boundaryForce * 10 * anticipatoryMultiplier));
+            this.avoidance.add(steeringForceDir.multiplyScalar(penetration * boundaryForce * anticipatoryMultiplier));
         }
 
         // Anticipatory avoidance for approaching lower altitude boundary
@@ -726,7 +1089,7 @@ export class Gutt {
         if (currentRadius < lowerLimit) {
             const penetration = lowerLimit - currentRadius;
             const forceDir = this.position3D.clone().normalize();
-            this.avoidance.add(forceDir.multiplyScalar(penetration * boundaryForce * 100));
+            this.avoidance.add(forceDir.multiplyScalar(penetration * boundaryForce * 1000));
         }
     
         // --- Latitude Avoidance ---
@@ -790,6 +1153,42 @@ export class Gutt {
             const angle = forward.angleTo(dir);
             return angle < halfAngle;
         });
+    }
+
+    addOrUpdateNuggetMemory(newPos) {
+        // Convert XYZ to lat/lng
+        const { lat, lng } = convertCartesiantoLatLng(newPos.x, newPos.y, newPos.z);
+    
+        const threshold = 0.3; // how close in deg lat/lng to consider it the same nugget
+                               // you can tweak this: 0.3 degrees is ~33km at equator, or pick smaller
+    
+        let found = null;
+    
+        for (let mem of this.nuggetMemories) {
+            // measure approximate distance in lat/lng
+            const dLat = mem.lat - lat;
+            const dLng = mem.lng - lng;
+            const distDeg = Math.sqrt(dLat * dLat + dLng * dLng);
+            if (distDeg < threshold) {
+                found = mem;
+                break;
+            }
+        }
+    
+        if (!found) {
+            // Create new memory
+            const newMem = {
+                lat: lat,
+                lng: lng,
+                attractiveness: 1.0,
+                visits: 0
+            };
+            this.nuggetMemories.push(newMem);
+            return newMem;
+        } else {
+            // We won't refine lat/lng here yet; we'll do so after feeding or on repeated sightings
+            return found;
+        }
     }
 }
 
@@ -872,6 +1271,28 @@ function refreshStats(guttaState, guttaStats) {
         const guttLatLng = convertCartesiantoLatLng(exampleGutt.position3D.x, exampleGutt.position3D.y, exampleGutt.position3D.z);
         const guttAltitude = ((exampleGutt.position3D.length() - 5.0)*1000).toFixed(1); 
 
+
+        // Show all items in the memory
+        let memorySize = exampleGutt.nuggetMemories.length;
+        let memoryListHtml = "";
+
+        if (memorySize === 0) {
+            // If no memories, show 'None'
+            memoryListHtml = "None";
+        } else {
+            // Build a small HTML snippet for each memory
+            for (let i = 0; i < memorySize; i++) {
+                const mem = exampleGutt.nuggetMemories[i];
+                memoryListHtml += `
+                    Nugget Memory #${i+1}: 
+                    (${mem.lat.toFixed(2)}°, ${mem.lng.toFixed(2)}°)
+                    visits: ${mem.visits}, 
+                    attractiveness: ${mem.attractiveness.toFixed(2)}
+                    <br>
+                `;
+            }
+        }
+
         // Find closest node in planetTagData
         let closestNodeGutt = null;
         let minDistanceGutt = Infinity;
@@ -898,12 +1319,16 @@ function refreshStats(guttaState, guttaStats) {
         statsDisplay.innerHTML += `
             <b>Example Gutt Stats:</b><br>
             Name: ${exampleGutt.name}<br>
+            Active Mode: ${exampleGutt.mode}<br>
             Position: (${guttLatLng.lat.toFixed(1)}°, ${guttLatLng.lng.toFixed(1)}°)<br>
             Closest Node: ${closestNodeGutt ? closestNodeGutt.text : 'None'}<br>
             Velocity: ${(exampleGutt.velocity3D.length()*1000).toFixed(2)} m/s<br>
+            Acceleration: ${(exampleGutt.acceleration3D.length()*1000).toFixed(2)} m/s²<br>
             Altitude: ${guttAltitude}m<br>
-            Hunger: ${exampleGutt.hunger.toFixed(3)}<br>
+            Energy: ${(exampleGutt.energy * 100).toFixed(1)}%<br>
+            Hunger: <b>${(exampleGutt.hunger * 100).toFixed(1)}%</b><br>
             Munches: ${exampleGutt.munches || 0}<br>
+            ${memoryListHtml}
             Closest Mara Distance: ${closestMaraDistance.toFixed(1)}m<br>
             Closest Call: ${(exampleGutt.closestCall || Infinity).toFixed(2)}m<br><br>
         `;
@@ -946,8 +1371,10 @@ function refreshStats(guttaState, guttaStats) {
             Position: (${maraLatLng.lat.toFixed(1)}°, ${maraLatLng.lng.toFixed(1)}°)<br>
             Closest Node: ${closestNodeMara ? closestNodeMara.text : 'None'}<br>
             Velocity: ${(exampleMara.velocity3D.length()*1000).toFixed(4)} m/s<br>
+            Acceleration: ${(exampleMara.acceleration3D.length()*1000).toFixed(4)} m/s²<br>
             Altitude: ${maraAltitude}m<br>
-            Hunger: ${exampleMara.hunger.toFixed(3)}<br>
+            Energy: ${(exampleMara.energy * 100).toFixed(1)}%<br>
+            Hunger: <b>${(exampleMara.hunger * 100).toFixed(1)}%</b><br>
             Kills: ${exampleMara.kills || 0}<br>
             Closest Gutt Distance: ${closestGuttDistance.toFixed(1)}m<br>
             Nearest Miss: ${(exampleMara.nearestMiss || Infinity).toFixed(2)}m<br><br>
@@ -1019,6 +1446,7 @@ function createExtrudeGeometry(shape, scale, version) {
 export function createGutta(numberOfGutta, numberOfMara, version, guttaState, destination) {
     
     guttaState.init = true
+    initBreadcrumbMeshes(destination)
 
     const gui = new GUI()
     let parameters = {
@@ -1038,7 +1466,8 @@ export function createGutta(numberOfGutta, numberOfMara, version, guttaState, de
         gutt_wander_jitter: 0.005,
         gutt_wander_altitude: 0.08,
         gutt_max_force: 0.005,
-        gutt_max_speed: 0.005,
+        gutt_thrust_speed: 0.005,   // The max speed under their own wing-power in level flight
+        gutt_dive_speed: 0.007,    // A higher cap that they could reach when diving
         gutt_max_acceleration: 0.02,
 
         mara_alignment: 0.1,
@@ -1055,7 +1484,8 @@ export function createGutta(numberOfGutta, numberOfMara, version, guttaState, de
         mara_wander_jitter: 0.02,
         mara_wander_altitude: 0.2,
         mara_max_force: 0.009,
-        mara_max_speed: 0.0075,
+        mara_thrust_speed: 0.0075,   // The max speed under their own wing-power in level flight
+        mara_dive_speed: 0.0125,    // A higher cap that they could reach when diving
         mara_max_acceleration: 0.01,
         mara_vision_angle: 45, 
 
@@ -1066,7 +1496,7 @@ export function createGutta(numberOfGutta, numberOfMara, version, guttaState, de
         latitudeUpperLimit: 83,
         boundaryForceStrength: 0.001,
 
-        lookaheadFactor: 1.0,            // Determines how far ahead to predict based on speed
+        lookaheadFactor: 5.0,            // Determines how far ahead to predict based on speed //1.0
         altitudeBuffer: 0.05,             // Buffer before lower altitude limit to start avoiding
         anticipatoryMultiplier: 2.0,     // Multiplier to adjust steering force intensity
 
@@ -1074,8 +1504,12 @@ export function createGutta(numberOfGutta, numberOfMara, version, guttaState, de
         maxRoll: 45,           // Maximum roll angle in degrees
         rollMultiplier: 0.5,    // Multiplier to adjust roll intensity based on turn
 
-        dragCoefficient: 0.004,
-        //gravityStrength: 0.0001,
+        dragCoefficient: 0.4,
+        gravityStrength: 0.0003,     // Acceleration towards planet center
+        liftCoefficient: 0.0005,      // How strongly agents can push “up” if pitching upwards
+        liftCost: 0.5,              // How much energy is consumed per unit of lift
+        energyRegenRate: 0.00001,      // How quickly energy replenishes
+        maxEnergy: 1.0,              // Cap for the energy
     }
 
     // Make font smaller
@@ -1100,7 +1534,8 @@ export function createGutta(numberOfGutta, numberOfMara, version, guttaState, de
     guttaParameters.add(parameters, 'gutt_wander_jitter', 0.001, 0.1, 0.001).name('Wander Jitter');
     guttaParameters.add(parameters, 'gutt_wander_altitude', 0, 0.3, 0.001).name('Wander Altitude');
     guttaParameters.add(parameters, 'gutt_max_force',0,0.5,0.001).name('Max Force');
-    guttaParameters.add(parameters, 'gutt_max_speed',0,0.01,0.0001).name('Max Speed');
+    guttaParameters.add(parameters, 'gutt_thrust_speed',0,0.01,0.0001).name('Max Speed');
+    guttaParameters.add(parameters, 'gutt_dive_speed',0,0.1,0.0001).name('Dive Speed');
     guttaParameters.add(parameters, 'gutt_max_acceleration',0,0.1,0.0001).name('Max Acceleration');
     guttaParameters.close()
 
@@ -1119,7 +1554,8 @@ export function createGutta(numberOfGutta, numberOfMara, version, guttaState, de
     maraParameters.add(parameters, 'mara_wander_jitter', 0.001, 0.1, 0.001).name('Wander Jitter');
     maraParameters.add(parameters, 'mara_wander_altitude', 0, 0.5, 0.001).name('Wander Altitude');
     maraParameters.add(parameters, 'mara_max_force',0,0.001,0.00001).name('Max Force');
-    maraParameters.add(parameters, 'mara_max_speed',0,0.01,0.0001).name('Max Speed');
+    maraParameters.add(parameters, 'mara_thrust_speed',0,0.01,0.0001).name('Max Speed');
+    maraParameters.add(parameters, 'mara_dive_speed',0,0.1,0.0001).name('Dive Speed');
     maraParameters.add(parameters, 'mara_max_acceleration',0,0.1,0.0001).name('Max Acceleration');
     maraParameters.add(parameters, 'mara_vision_angle', 10, 120, 1).name('Vision Angle');
     maraParameters.close()
@@ -1140,7 +1576,11 @@ export function createGutta(numberOfGutta, numberOfMara, version, guttaState, de
     flightParameters.add(parameters, 'rollMultiplier', 0, 5, 0.1).name('Roll Multiplier');
 
     flightParameters.add(parameters, 'dragCoefficient', 0, 1, 0.001).name('Drag Coefficient');
-    //flightParameters.add(parameters, 'gravityStrength', 0, 0.1, 0.0001).name('Gravity Strength');
+    flightParameters.add(parameters, 'gravityStrength', 0, 0.01, 0.0001).name('Gravity Strength');
+    flightParameters.add(parameters, 'liftCoefficient', 0, 0.01, 0.0001).name('Lift Coefficient');
+    flightParameters.add(parameters, 'liftCost', 0, 0.5, 0.01).name('Lift Cost');
+    flightParameters.add(parameters, 'energyRegenRate', 0, 0.0001, 0.000001).name('Energy Regen Rate');
+    flightParameters.add(parameters, 'maxEnergy', 0, 1, 0.001).name('Max Energy');
     flightParameters.close()
     if (version !== 0) gui.hide()
     
@@ -1199,6 +1639,15 @@ export function createGutta(numberOfGutta, numberOfMara, version, guttaState, de
         maraInstancedMeshes.lightMara
     );
 
+    guttaInstancedMeshes.testBird.frustumCulled = false;
+    guttaInstancedMeshes.redBird.frustumCulled = false;
+    guttaInstancedMeshes.greyBird.frustumCulled = false;
+    guttaInstancedMeshes.darkBird.frustumCulled = false;
+    maraInstancedMeshes.testMara.frustumCulled = false;
+    maraInstancedMeshes.darkMara.frustumCulled = false;
+    maraInstancedMeshes.plainMara.frustumCulled = false;
+    maraInstancedMeshes.lightMara.frustumCulled = false;
+
     // We'll keep counters to assign instance indices
     let testIndex = 0, redIndex = 0, greyIndex = 0, darkIndex = 0;
     let testMaraIndex = 0, darkMaraIndex = 0, plainMaraIndex = 0, lightMaraIndex = 0;
@@ -1256,29 +1705,84 @@ export function updateGutta(guttaState, guttaStats, jaranius, nuggets, developer
 
     for (let i=0; i<guttaState.gutta.length; i++) {
         let g = guttaState.gutta[i]
+        g.updateMode();
         g.calculateWander();
-        /* g.calculateAlignment(guttTree);
-        g.calculateCohesion(guttTree);
-        g.calculateSeparation(guttTree); */
         g.calculateSteeringForces(guttTree)
         g.calculateFleeing(maraTree);
-        guttaStats = g.calculateFeeding(guttaStats, jaranius, nuggets);
+        g.calculateFeeding(nuggets);
         g.calculateAvoidance();
-        g.move();
+        g.move(guttaStats);
     }
 
     for (let i=0; i<guttaState.mara.length; i++) {
         let m = guttaState.mara[i]
         m.calculateWander();
-        /* m.calculateAlignment(maraTree);
-        m.calculateCohesion(maraTree);
-        m.calculateSeparation(maraTree); */
         m.calculateSteeringForces(maraTree)
-        guttaStats = m.calculateHunting(guttaStats, guttTree);
+        m.calculateHunting(guttaStats, guttTree);
         m.calculateAvoidance();
-        m.move();
+        m.glide();
+    }
+
+    // ============================
+    // Drop a crumb for the example Gutt
+    // ============================
+    frameCount++;
+    if (frameCount % 10 === 0) {
+        if (guttaState.gutta.length > 0) {
+            const exampleGutt = guttaState.gutta[0];
+            dropBreadcrumbInstanced(exampleGutt, guttCrumbMesh, 'gutt');
+        }
+        if (guttaState.mara.length > 0) {
+            const exampleMara = guttaState.mara[0];
+            dropBreadcrumbInstanced(exampleMara, maraCrumbMesh, 'mara');
+        }
     }
 
     // Refresh stats here after updates
     refreshStats(guttaState, guttaStats);
+}
+
+function dropBreadcrumbInstanced(agent, crumbMesh, species) {
+    // We'll build a small transform matrix at the agent's position.
+    // The crumb size is determined by crumbMesh's geometry, so just position.
+    const dummyMatrix = new THREE.Matrix4();
+    dummyMatrix.setPosition(agent.position3D);
+
+    // Decide which ring buffer index to use: gutt or mara
+    let index;
+    if (species === 'gutt') {
+        index = guttCrumbIndex;
+        guttCrumbIndex = (guttCrumbIndex + 1) % MAX_CRUMBS;
+    } else {
+        index = maraCrumbIndex;
+        maraCrumbIndex = (maraCrumbIndex + 1) % MAX_CRUMBS;
+    }
+
+    // Place the crumb in the InstancedMesh
+    crumbMesh.setMatrixAt(index, dummyMatrix);
+    crumbMesh.instanceMatrix.needsUpdate = true;
+}
+
+function initBreadcrumbMeshes(jaranius) {
+    const crumbGeometry = new THREE.SphereGeometry(0.001, 8, 8);
+
+    // You can vary materials to color the Gutt vs. Mara crumbs differently
+    const guttCrumbMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    const maraCrumbMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+
+    // Create InstancedMesh for Gutt
+    guttCrumbMesh = new THREE.InstancedMesh(crumbGeometry, guttCrumbMaterial, MAX_CRUMBS);
+    guttCrumbMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage); 
+    guttCrumbMesh.frustumCulled = false;
+    guttCrumbMesh.visible = false;
+
+    // Create InstancedMesh for Mara
+    maraCrumbMesh = new THREE.InstancedMesh(crumbGeometry, maraCrumbMaterial, MAX_CRUMBS);
+    maraCrumbMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+    maraCrumbMesh.frustumCulled = false;
+    maraCrumbMesh.visible = false;
+
+    // Add them to jaranius (so they rotate with the planet, if jaranius is rotating)
+    jaranius.add(guttCrumbMesh);
+    jaranius.add(maraCrumbMesh);
 }

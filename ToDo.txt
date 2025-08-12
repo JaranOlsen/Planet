@@ -1,6 +1,16 @@
 GUTTA
+v    gutt camera drifting
+v    nugget pos drifting
+v    gutt bellydown correct?
+v    memory stats
+    memory accurate from beginning
+v    velocity clamping, drag
+
     modes (exploring, mating, foraging, feeding)
-    memory (remember two, when having filled up at one, give preference to the other to encourage migration)
+v    memory (remember two, when having filled up at one, give preference to the other to encourage migration)
+v    add gravity and lift?
+    mating and genes
+
 v    improve wander mechanic - the wandering circle should actually be around the gutt in the horizontal plane - or have it's centre in the horizontal plane not to far from the ground, because that's how they would search for food, not up and down. This will reduce bounce
  v   make sure they yaw, pitch, and roll correctly (preference for belly-down?)
  v   make sure the force arrows orient correctly, add a sum arrow (should then always be facing in the direction of travel)
@@ -10,8 +20,6 @@ v    improve wander mechanic - the wandering circle should actually be around th
  v   add cone width to DAT.gui
  v   detail stats for 1 gutt and 1 mara
  v  balance acceleration/max force/max velocity/add steering force? drag
-    add gravity and lift?
-    mating and genes
  v   growing force arrows
  v   instance mesh
  v   octtree
@@ -22,29 +30,9 @@ OTHER
  v   normalise lat (-90 to +90) and lng
     fix blinking between slides (very visible with image slides like convential truth)
     use displacement map when close to surface?
-    remap keycodes (latlng markers at i)
-    js loaded not unloaded? Identifier 'wordList' has already been declared (at 1j.js:1:1)
+ v   remap keycodes (latlng markers at i)
+ v   js loaded not unloaded? Identifier 'wordList' has already been declared (at 1j.js:1:1)
     tidy up slide templates
-
-
-gutt 
- wander:      0.00074993   (avg:  0.00093502 )
- alignment:   0.00001266   (avg:  0.00008721 )
- cohesion:    0.00075000   (avg:  0.00074950 )
- separation:  0.00000000   (avg:  0.00150000 )
- flee:        0.00000000   (avg:  0.00750000 )
- feed:        0.00000000   (avg:  0.00113468 )
- hunt:        0.00000000   (avg:  0.00000000 )
- avoidance:   0.00000000   (avg:  0.00000000 )
-mara 
- wander:      0.00270000   (avg:  0.00270000 )
- alignment:   0.00000000   (avg:  0.00083444 )
- cohesion:    0.00000000   (avg:  0.00090000 )
- separation:  0.00000000   (avg:  0.00360000 )
- flee:        0.00000000   (avg:  0.00000000 )
- feed:        0.00000000   (avg:  0.00000000 )
- hunt:        0.00000000   (avg:  0.00241125 )
- avoidance:   0.00000000   (avg:  0.00000000 )
 
 
 IN PROGRESS
@@ -52,6 +40,27 @@ IN PROGRESS
     CSS slides
         𝇈 title moving in from top..? feature or bug? not a feature
         𝇈 cutout overlays
+
+
+Here are what i think are the most important files:
+index.html
+/src/js/content.js
+/src/js/creation.js
+/src/js/gutta.js
+/src/js/main.js
+/src/js/mathScripts.js
+/src/js/mindmap.js
+/src/js/slides.js
+/src/js/versions.js
+/src/js/data/contentData.js
+/src/js/data/materials.js
+/src/js/data/palette.js
+/src/js/data/planetData.js
+/src/js/data/planetNuggetData.js
+/src/css/slides.css
+/src/css/style.css
+
+I would like to add a kind of fog of war. I want the fog of war to cover the entire planet except the south pole and the three nodes that are there. And then i want the fog of war to lift around the nodes as the user click on them. Is that clear? I want the fog to look realistic, and cover the surface of the planet and the nodes and the connections between the nodes. Is that clear?
 
 SHORT-TERM
 
@@ -66,10 +75,6 @@ SHORT-TERM
             - Practice for building a solid foundation, and for integration/stabilisation of insights.
 
     Major influences
-
-INITIATIVES
-
-    apply for a pimp
 
 CONTENT
     Restraint

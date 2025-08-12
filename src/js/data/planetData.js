@@ -273,7 +273,7 @@ export const planetTagData = [
     {id: "DC5F27E6-E594-4651-A151-4F70145EDFD5", text: "What am I?", lat: 5.9, lng: -114.6, color: 35, size: 40, slides: undefined},
     {id: "092BED79-8510-4E20-9040-0BF73C433EB0", text: "Ontology - \nWhat is reality?", lat: 33.5, lng: -92, color: 37, size: 40, slides: undefined},
     {id: "F1D5FF04-CA73-47D3-87C6-41C6BA8F6708", text: "God?", lat: 28, lng: -87, color: 35, size: 40, slides: 198},
-    {id: "ACF82BBE-F34C-4E20-B18E-08F28B3ABA12", text: "Consciousness?", lat: 30.3, lng: -84.1, color: 35, size: 40, slides: undefined},
+    {id: "ACF82BBE-F34C-4E20-B18E-08F28B3ABA12", text: "Consciousness?", lat: 30.3, lng: -84.1, color: 35, size: 40, slides: 45},
     {id: "B6246F44-0855-4817-9D0D-D397E9DB7442", text: "Space?", lat: 38, lng: -86, color: 35, size: 40, slides: undefined},
     {id: "050CF590-16D7-48A8-9656-E58FD0B6E8BF", text: "Time?", lat: 36, lng: -83, color: 35, size: 40, slides: undefined},
     {id: "1EE48F2F-650A-413A-8F77-720A641BA416", text: "Matter?", lat: 33, lng: -82.3, color: 35, size: 40, slides: undefined},

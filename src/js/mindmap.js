@@ -83,7 +83,7 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
                 const radiusModifier = Math.cos(t); // creates a cosine wave from -1 to 1
                 const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
                 const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
-                latLng = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.061);
+                latLng = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.062);
             }
 
             const rotationVector = new THREE.Vector3(latLng.x, latLng.y, latLng.z);
@@ -445,3 +445,98 @@ export function hoverPins(intersects) {
         }
     }
 }
+
+
+
+
+/**
+ * Creates a smooth, “snaking” trail hugging the planet’s surface.
+ * It interpolates *all* waypoints at once, avoiding sharp corners.
+ *
+ * @param {Array} route - Array of objects: [{lat, lng}, ...].
+ * @param {Number} altitude - Slight offset above planet radius.
+ * @param {Number} tension - Catmull-Rom tension parameter (0 to ~1).
+ * @returns {THREE.Mesh} - The red “snaky” route mesh (Tube).
+ */
+export function createRoute(route, altitude = 5.1, tension = 0.3) {
+  if (!route || route.length < 2) return null;
+
+  // 1. Convert each waypoint to a normalized 3D vector
+  const rawPoints = route.map(({ lat, lng }) => {
+    const { x, y, z } = convertLatLngtoCartesian(lat, lng, altitude);
+    // normalized so the interpolation is on the unit sphere
+    return new THREE.Vector3(x, y, z).normalize();
+  });
+
+  // 2. Create a Catmull-Rom spline from these normalized points
+  //    Note: "centripetal" or "chordal" can sometimes reduce weird loops.
+  //    The default type is 'catmullrom'. We’ll pass in tension as the 4th arg.
+  //    (Tension ~0.3 is often a good starting point).
+  const baseSpline = new THREE.CatmullRomCurve3(rawPoints, false, 'catmullrom', tension);
+
+  // 3. Sample that curve at many points (say 200) so we can reproject them onto the planet
+  const sampleCount = 200;
+  const sampledPositions = baseSpline.getPoints(sampleCount);
+
+  // 4. “Reproject” each sample point back onto the planet’s surface at `altitude`.
+  //    This ensures no dip below or big arcs above.
+  const projectedPositions = sampledPositions.map((pos) => {
+    return pos.clone().normalize().multiplyScalar(altitude);
+  });
+
+  // 5. Create a *second* Catmull-Rom from these final reprojected points.
+  //    This final curve is guaranteed to hug the planet.
+  const finalSpline = new THREE.CatmullRomCurve3(projectedPositions, false);
+
+  // 6. Build a TubeGeometry along this final spline
+  const tubularSegments = 300;  // more segments => smoother tube
+  const tubeRadius      = 0.03; // thickness
+  const radialSegments  = 8;
+  const closed          = false;
+  const geometry = new THREE.TubeGeometry(finalSpline, tubularSegments, tubeRadius, radialSegments, closed);
+
+  // 7. Solid red material, partially transparent, as requested
+  const material = new THREE.MeshStandardMaterial({
+    color: 0xff0000,
+    emissive: 0xff0000,
+    emissiveIntensity: 0.2,
+    transparent: true,
+    opacity: 0.5,
+  });
+
+  // 8. Create the mesh
+  const routeMesh = new THREE.Mesh(geometry, material);
+  routeMesh.renderOrder = 10;
+  routeMesh.castShadow = true;
+  routeMesh.receiveShadow = true;
+
+  return routeMesh;
+}
+
+/**
+ * Spherical linear interpolation between two normalized vectors
+ * @param {THREE.Vector3} start - normalized vector
+ * @param {THREE.Vector3} end   - normalized vector
+ * @param {number} alpha        - interpolation factor [0..1]
+ * @returns {THREE.Vector3} new slerped, normalized vector
+ */
+function slerpVectors(start, end, alpha) {
+    // Dot product clamped between -1 and +1
+    const dot = THREE.MathUtils.clamp(start.dot(end), -1, 1);
+  
+    // Omega is the angle between start and end
+    const omega = Math.acos(dot);
+    const sinOmega = Math.sin(omega);
+  
+    // If angle too small, fallback to simple linear interpolation
+    if (sinOmega < 1e-6) {
+      // basically the same direction
+      return start.clone().lerp(end, alpha).normalize();
+    }
+  
+    const scaleStart = Math.sin((1 - alpha) * omega) / sinOmega;
+    const scaleEnd   = Math.sin(alpha * omega) / sinOmega;
+  
+    // Weighted sum of the two directions
+    return start.clone().multiplyScalar(scaleStart).add(end.clone().multiplyScalar(scaleEnd));
+  }

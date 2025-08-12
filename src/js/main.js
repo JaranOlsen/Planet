@@ -11,12 +11,12 @@ window.WordCloud = WordCloud;
 
 
 //  IMPORT SCRIPTS
-import { createImages, createTags, hoveredPins, intersectObjectsArray, createConnections, hoverPins, instantiateNugget } from './mindmap.js'
+import { createImages, createTags, hoveredPins, intersectObjectsArray, createConnections, hoverPins, instantiateNugget, createRoute } from './mindmap.js'
 import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng, easeInOutQuad } from './mathScripts.js'
 import { pushContent, handleCarouselButton } from './content.js'
 import { initialiseVersion } from './versions.js'
 import { creation } from './creation.js'
-import { updateGutta } from './gutta.js'
+import { updateGutta, guttCrumbMesh, maraCrumbMesh } from './gutta.js'
 import { createField } from './podcast.js'
 import { createFieldLines } from './flux.js'
 
@@ -134,6 +134,8 @@ flyControls.autoForward = false;
 flyControls.dragToLook = false;
 flyControls.enabled = false;
 flyControls.minDistance = 5.15;
+
+let followMode = "manual"; // can be "manual", "gutt", or "mara"
 
 // Add momentum and roll variables
 let velocity = new THREE.Vector3(0, 0, 0); // Movement velocity
@@ -823,6 +825,31 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
             console.log( 'An error happened' );
         }
     );
+
+    //create route
+    const route = new THREE.Object3D();
+    planetContent.add(route);
+    const myRoute = [
+    { lat: -90, lng: 0 },
+    { lat: -64, lng:  120},
+    { lat: -37, lng:  104},
+    { lat: -28, lng:  96},
+    { lat: -20.2, lng:  103},
+    { lat: -20, lng: 111},
+    { lat: -35, lng:  121},
+    { lat: -41, lng:  136},
+    { lat: -31, lng: 155 },
+    { lat: -22, lng:  165},
+    { lat: -10, lng:  164},
+    { lat: 5, lng:  140},
+    { lat: 24, lng:  141},
+    { lat: 40, lng:  130},
+    ];
+    const routeMesh = createRoute(myRoute, 5.01, 0.3, route);
+    //planetContent.add(routeMesh);
+
+
+    return jaranius;
 }
 
 export function createMindmap() {
@@ -871,6 +898,8 @@ export function createMindmap() {
     //createConnections(enneagramTagData, enneagramConnections, 0.0002, curveRadiusSegments, 0.1, 8.01, context4, false, false, false)
     createConnections(enneagramTagData, enneagramTunnelConnections, 0.0002, curveRadiusSegments, 0.1, 8.01, context4, false, false, true)
 }
+
+
 
 //PODCAST FIELDS TEST
 /* createField(field1, new THREE.Vector3(1.0, 0, 0), scene)
@@ -1235,11 +1264,6 @@ export function createContexts(version) {
 const guttaStatScreen = document.querySelector('#guttaStatScreen');
 const statsDisplay = document.createElement('div');
 
-/* function refreshStats() {
-    statsDisplay.innerHTML = "Number of munches: " + guttaStats.munch + "<br>Average hunger: " + Math.round(guttaStats.totalHungerAtMunch/guttaStats.munch * 100) / 100 + "<br><br>Number of kills: " + guttaStats.kills + "<br>Average hunger: " + Math.round(guttaStats.totalHungerAtKill/guttaStats.kills * 100) / 100
-    guttaStatScreen.appendChild(statsDisplay)
-} */
-
 //CREATE FPS COUNTER
 const times = [];
 let fps;
@@ -1290,16 +1314,39 @@ function onDocumentKeyUp(event) {
                 orbitControls.enabled = true;
                 flyControls.enabled = false;
                 document.body.style.cursor = 'default';
+                // **Reset the camera's up vector to default**
+                camera.up.set(0, 1, 0);
+
+                // **Ensure OrbitControls are updated with the new up vector**
+                orbitControls.update();
             }
         }
-        if (keyCode == 188) { //,
-            if (window.appStatus === "flight") {
-                flyControls.dragToLook = !flyControls.dragToLook
-                console.log(flyControls.dragToLook)
+        // Only do this when in flight-mode:
+        if (window.appStatus === "flight") {
+            if (keyCode == 71) { // 'G'
+                followMode = "gutt";
+                console.log("Camera now follows the exampleGutt");
+                // Optionally disable user flight controls so user can't move camera manually
+                flyControls.enabled = false;
+            }
+            if (keyCode == 77) { // 'M'
+                followMode = "mara";
+                console.log("Camera now follows the exampleMara");
+                flyControls.enabled = false;
+            }
+            if (keyCode == 70) { // 'F'
+                followMode = "manual";
+                console.log("Camera back to manual flight");
+                flyControls.enabled = true; // re-enable
+            }
+            if (keyCode == 188) { //,
+                    flyControls.dragToLook = !flyControls.dragToLook
+                    console.log("dragToLook: " + flyControls.dragToLook)
             }
         }
+
     }
-    if (focusElement !== "tagInput" && !flyControls.enabled) {
+    if (focusElement !== "tagInput" && window.appStatus !== "flight") {
         //Slide control
         if (slideshowStatus.activeSlideshow !== undefined && (keyCode === 37 || keyCode === 116)) { // left arrow or play button on USB remote
             const leftButton = document.querySelector("[data-carousel-button='left']");
@@ -1340,10 +1387,12 @@ function onDocumentKeyUp(event) {
         if (keyCode == 71) { //G
             if (guttaStatScreen.style.display == "block") {
                 guttaStatScreen.style.display = "none"
-                if (developer == true) togglePerceptionCircles(guttaState)
+                guttCrumbMesh.visible = false;
+                maraCrumbMesh.visible = false;
             } else {
                 guttaStatScreen.style.display = "block" 
-                if (developer == true) togglePerceptionCircles(guttaState)
+                guttCrumbMesh.visible = true;
+                maraCrumbMesh.visible = true;
             }
         }
         if (keyCode == 74) { //J
@@ -2107,6 +2156,55 @@ if (planetTagData.length !== planetTunnelConnections.length) {
 let octreeHelperRoot = new THREE.Object3D();
 scene.add(octreeHelperRoot);
 
+function followAgent(agent) {
+    // Disable manual flight controls
+    flyControls.enabled = false;
+
+    // Ensure jaraniusCenter's world matrix is up-to-date
+    jaraniusCenter.updateMatrixWorld(true);
+
+    // Clone the agent's local position
+    const agentLocalPos = agent.position3D.clone();
+
+    // Calculate the agent's world position by applying jaraniusCenter's world matrix
+    const agentWorldPos = jaraniusCenter.localToWorld(agentLocalPos);
+
+    // Compute the planet normal assuming the planet center is at (0,0,0)
+    const planetNormal = agentWorldPos.clone().normalize();
+
+    // Get the agent's forward direction (velocity)
+    const forward = agent.velocity3D.clone();
+    if (forward.lengthSq() < 0.00001) {
+        // If velocity is negligible, set a default forward direction
+        forward.set(0, 0, 1);
+    } else {
+        forward.normalize();
+    }
+
+    // Define an offset relative to the agent's forward and up vectors
+    const offsetLocal = new THREE.Vector3(0, 0.05, -0.3);  
+
+    // Compute the right and up vectors
+    const right = new THREE.Vector3().crossVectors(planetNormal, forward).normalize();
+    const up = new THREE.Vector3().crossVectors(forward, right).normalize();
+
+    // Calculate the desired camera position in world space
+    const cameraDesiredPos = agentWorldPos.clone()
+        .add(right.multiplyScalar(offsetLocal.x))
+        .add(up.multiplyScalar(offsetLocal.y))
+        .add(forward.multiplyScalar(offsetLocal.z));
+
+    // Smoothly interpolate the camera's position towards the desired position
+    camera.position.lerp(cameraDesiredPos, 0.08);  // Adjust the lerp factor as needed
+
+    // Optionally, adjust the camera's up vector for aesthetic purposes
+    // Be cautious with frequent or large adjustments to prevent instability
+    camera.up.lerp(planetNormal, 0.05);
+
+    // Make the camera look at the agent's position
+    camera.lookAt(agentWorldPos);
+}
+
 //ANIMATIONLOOP
 
 function animate() {
@@ -2224,6 +2322,26 @@ function render() {
     if (orbitControls.enabled) {
         orbitControls.update();
     }
+
+    if (window.appStatus === "flight") {
+        // If we're in flight mode, check followMode
+        if (followMode === "gutt") {
+          const exampleGutt = guttaState.gutta[0];
+          if (exampleGutt) {
+            followAgent(exampleGutt);
+          }
+        }
+        else if (followMode === "mara") {
+          const exampleMara = guttaState.mara[0];
+          if (exampleMara) {
+            followAgent(exampleMara);
+          }
+        }
+        else {
+          // followMode === "manual" => normal fly controls
+          flyControls.enabled = true;
+        }
+      }
 
     if (resizeRendererToDisplaySize(renderer)) {
         const canvas = renderer.domElement;
