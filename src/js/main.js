@@ -21,8 +21,9 @@ import { createField } from './podcast.js'
 import { createFieldLines } from './flux.js'
 
 //IMPORT DATA
-import { planetTagData, planetConnections, planetArrowedConnections, planetDashedConnections, planetTunnelConnections } from './data/planetData.js'
-import { planetImageData } from './data/planetImageData.js'
+// Default / initial mindmap dataset (index 0). Additional datasets loaded dynamically.
+import { planetTagData as planetTagData_initial, planetConnections as planetConnections_initial, planetArrowedConnections as planetArrowedConnections_initial, planetDashedConnections as planetDashedConnections_initial, planetTunnelConnections as planetTunnelConnections_initial } from './data/planetData.js'
+import { planetImageData as planetImageData_initial } from './data/planetImageData.js'
 import { planetNuggetData } from './data/planetNuggetData.js'
 import { spiralTagData, spiralConnections, spiralArrowedConnections, spiralDashedConnections } from './data/spiralData.js'
 import { spiralImageData } from './data/spiralImageData.js'
@@ -91,7 +92,7 @@ function resizeRendererToDisplaySize(renderer) {
 
 const fov = 50;
 const aspect = 2;  // the canvas default
-const near = 0.01;
+const near = 0.1; // raise near plane for better depth precision and fewer distant flickers
 const far = 2000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
@@ -543,11 +544,15 @@ function createGalaxy() {
         map: galaxyDiffuseTexture,
         transparent: false,
         opacity: 1,
-        side: THREE.BackSide
+        side: THREE.BackSide,
+        // Don't write depth for the background sky to avoid interfering with flares/transparent sorting
+        depthWrite: false
     });
 
     const milkyWay = new THREE.Mesh(geometry, material);
     milkyWay.rotation.set(-Math.PI / 3, 0.1, Math.PI / 2)
+    // Ensure the sky renders first
+    milkyWay.renderOrder = -1000;
 
     return milkyWay
 }
@@ -570,7 +575,9 @@ function createStarMaterial(texture) {
         size: 5,
         map: textureLoader.load(texture),
         transparent: true,
-        fog: false
+        fog: false,
+        // Stars shouldn't affect depth to avoid interacting with flares and distant objects
+        depthWrite: false
     })
     return material
 }
@@ -852,54 +859,171 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     return jaranius;
 }
 
-export function createMindmap() {
-    //create pictures
-    jaranius.add(planetContent)
+// Active planet image set (swapped alongside mindmap dataset)
+let activePlanetImages = planetImageData_initial;
 
-    for (let i = 0; i < planetImageData.length; i++) {
-        createImages(planetImageData[i].src, planetImageData[i].lat, planetImageData[i].lng, planetImageData[i].size / 500, planetImageData[i].radius, planetContent);
+function clearPlanetImages() {
+    if (!planetContent) return;
+    const removals = [];
+    planetContent.traverse(child => {
+        if (child.isMesh && child.material && child.material.map) {
+            removals.push(child);
+        }
+    });
+    removals.forEach(mesh => {
+        planetContent.remove(mesh);
+        if (mesh.geometry) mesh.geometry.dispose();
+        if (Array.isArray(mesh.material)) {
+            mesh.material.forEach(m => m && m.map && m.map.dispose && m.map.dispose());
+            mesh.material.forEach(m => m && m.dispose && m.dispose());
+        } else if (mesh.material) {
+            mesh.material.map && mesh.material.map.dispose && mesh.material.map.dispose();
+            mesh.material.dispose && mesh.material.dispose();
+        }
+    });
+}
+
+export function createMindmap() {
+    // Pictures (dataset-dependent)
+    if (!planetContent.parent) jaranius.add(planetContent)
+    for (let i = 0; i < activePlanetImages.length; i++) {
+        const img = activePlanetImages[i];
+        createImages(img.src, img.lat, img.lng, img.size / 500, img.radius, planetContent);
     }
+    // Spiral images (currently static)
     for (let i = 0; i < spiralImageData.length; i++) {
         createImages(spiralImageData[i].src, spiralImageData[i].lat, spiralImageData[i].lng, spiralImageData[i].size / 500, spiralImageData[i].radius, spiral);
     }
 
-    //create tags
-    const indexMod = 0
+    const indexMod = 0;
+    // Planet dataset (contexts[0])
+    createTags(contexts[0].tagData, contexts[0].tagDestination, contexts[0].radius, 0, indexMod);
+    // Spiral (contexts[1])
+    createTags(contexts[1].tagData, contexts[1].tagDestination, contexts[1].radius, 1, indexMod);
+    // Enneagram (contexts[3])
+    createTags(contexts[3].tagData, contexts[3].tagDestination, contexts[3].radius, 3, indexMod);
 
-    createTags(contexts[0].tagData, contexts[0].tagDestination, contexts[0].radius, 0, indexMod)
-
-    createTags(contexts[1].tagData, contexts[1].tagDestination, contexts[1].radius, 1, indexMod)
-
-    createTags(contexts[3].tagData, contexts[3].tagDestination, contexts[3].radius, 3, indexMod)
-
-    //create nuggets
-    for (let i = 0; i < planetNuggetData.length; i++) { 
+    // Nuggets (static dataset for now)
+    for (let i = 0; i < planetNuggetData.length; i++) {
         let nugget = instantiateNugget(i, planetNuggetData[i].lat, planetNuggetData[i].lng, planetNuggetData[i].color, planetNuggetData[i].size / 100000, planetNuggetData[i].slides, jaranius, 2);
-        nuggets.push(nugget)
+        nuggets.push(nugget);
     }
 
-    //create connections
-    const curveThickness = 0.0001
-    const curveRadiusSegments = 3
-    const curveMaxAltitude = 0.03
-    const curveMinAltitude = 5.02
-    jaranius.add(jaraniusConnections)
-    let context = jaraniusConnections
-    createConnections(planetTagData, planetConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, false)
-    createConnections(planetTagData, planetDashedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, true, false)
-    createConnections(planetTagData, planetArrowedConnections, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, context, false, true)
+    // Connections for planet (contexts[0])
+    const curveThickness = 0.0001;
+    const curveRadiusSegments = 3;
+    const curveMaxAltitude = 0.02;
+    const curveMinAltitude = contexts[0].radius + 0.02;
+    if (!jaraniusConnections.parent) jaranius.add(jaraniusConnections);
+    const planetCtx = contexts[0];
+    createConnections(planetCtx.tagData, planetCtx.connectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, false, false);
+    createConnections(planetCtx.tagData, planetCtx.dashedConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, true, false);
+    createConnections(planetCtx.tagData, planetCtx.arrowConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, false, true);
+    if (planetCtx.tunnelConnectionData) {
+        createConnections(planetCtx.tagData, planetCtx.tunnelConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, false, false, true);
+    }
 
-    spiral.add(spiralDynamicsConnections)
-    let context2 = spiralDynamicsConnections
-    createConnections(spiralTagData, spiralConnections, 0.0002, curveRadiusSegments, 0.1, 7.01, context2, false, false)
+    // Spiral
+    if (!spiralDynamicsConnections.parent) spiral.add(spiralDynamicsConnections);
+    createConnections(contexts[1].tagData, contexts[1].connectionData, 0.0002, curveRadiusSegments, 0.1, contexts[1].radius + 0.01, spiralDynamicsConnections, false, false);
 
-    enneagram.add(enneaConnections)
-    let context4 = enneaConnections
-    //createConnections(enneagramTagData, enneagramConnections, 0.0002, curveRadiusSegments, 0.1, 8.01, context4, false, false, false)
-    createConnections(enneagramTagData, enneagramTunnelConnections, 0.0002, curveRadiusSegments, 0.1, 8.01, context4, false, false, true)
+    // Enneagram (tunnel only for now)
+    if (!enneaConnections.parent) enneagram.add(enneaConnections);
+    createConnections(contexts[3].tagData, contexts[3].tunnelConnectionData, 0.0002, curveRadiusSegments, 0.1, contexts[3].radius + 0.01, enneaConnections, false, false, true);
 }
 
+// (Mindmap switching implementation located earlier in file)
 
+// Mindmap registry (Shift+1 => index 0, etc.)
+const mindmapRegistry = [
+    { name: 'Full', module: './data/planetData.js', images: './data/planetImageData.js' },
+    { name: 'Simple', module: './data/planetSimpleData.js', images: './data/planetSimpleImageData.js' },
+    // Add more: { name: 'Custom3', module: './data/planetCustom3.js', images: './data/planetCustomImageData.js' }
+];
+
+let activeMindmapIndex = 0;
+let mindmapSwitchInProgress = false;
+
+async function switchMindmap(index) {
+    if (index === activeMindmapIndex) return; // already active
+    if (index < 0 || index >= mindmapRegistry.length) return;
+    if (mindmapSwitchInProgress) return;
+    mindmapSwitchInProgress = true;
+    const entry = mindmapRegistry[index];
+    console.log(`Switching mindmap -> ${entry.name}`);
+    try {
+        const cacheBust = `?t=${Date.now()}`;
+        const [mod, imgMod] = await Promise.all([
+            import(/* @vite-ignore */ `${entry.module}${cacheBust}`),
+            import(/* @vite-ignore */ `${entry.images}${cacheBust}`)
+        ]);
+
+        const required = ['planetTagData', 'planetConnections', 'planetArrowedConnections', 'planetDashedConnections', 'planetTunnelConnections'];
+        const missing = required.filter(k => !mod[k]);
+        if (missing.length) console.warn('Mindmap dataset missing exports:', missing.join(', '));
+
+        // Clear existing visuals
+        clearPlanetMindmapVisuals();
+        clearPlanetImages();
+
+        // Update context 0 data
+        const planetCtx = contexts[0];
+        planetCtx.name = entry.name;
+        planetCtx.tagData = mod.planetTagData || [];
+        planetCtx.connectionData = mod.planetConnections || [];
+        planetCtx.arrowConnectionData = mod.planetArrowedConnections || [];
+        planetCtx.dashedConnectionData = mod.planetDashedConnections || [];
+        planetCtx.tunnelConnectionData = mod.planetTunnelConnections || [];
+        planetCtx.pins = [];
+        planetCtx.tags = [];
+        planetCtx.boxes = [];
+
+        // Swap images
+        activePlanetImages = imgMod.planetImageData || [];
+
+        // Rebuild full mindmap (planet + spiral + ennea + nuggets + connections)
+        createMindmap();
+        activeMindmapIndex = index;
+        console.log(`Mindmap switched to ${entry.name}`);
+    } catch (err) {
+        console.error('Mindmap switch failed:', err);
+    } finally {
+        mindmapSwitchInProgress = false;
+    }
+}
+
+function disposeMeshRecursive(obj) {
+    obj.traverse(child => {
+        if (child.isMesh) {
+            child.geometry && child.geometry.dispose();
+            if (Array.isArray(child.material)) {
+                child.material.forEach(m => m && m.dispose && m.dispose());
+            } else if (child.material) child.material.dispose && child.material.dispose();
+        }
+    });
+}
+
+function clearPlanetMindmapVisuals() {
+    const planetCtx = contexts[0];
+    // Remove pins from raycast list and scene
+    planetCtx.pins.forEach(pin => {
+        const idx = intersectObjectsArray.indexOf(pin);
+        if (idx > -1) intersectObjectsArray.splice(idx, 1);
+        if (pin.parent) pin.parent.remove(pin);
+    });
+    planetCtx.boxes.forEach(box => { if (box.parent) box.parent.remove(box); });
+    planetCtx.tags.forEach(tag => { if (tag.parent) tag.parent.remove(tag); });
+    planetCtx.pins.length = 0;
+    planetCtx.boxes.length = 0;
+    planetCtx.tags.length = 0;
+    // Clear connection meshes
+    if (jaraniusConnections) {
+        jaraniusConnections.children.slice().forEach(child => {
+            disposeMeshRecursive(child);
+            jaraniusConnections.remove(child);
+        });
+    }
+}
 
 //PODCAST FIELDS TEST
 /* createField(field1, new THREE.Vector3(1.0, 0, 0), scene)
@@ -961,6 +1085,8 @@ const sunRadiance = new THREE.Mesh(sunRadianceGeo, sunMat)
 sunRadiance.position.set(0, 0, 490)
 pivot4.add(sunRadiance)
 sunRadiance.castShadow = false
+// Draw the sun disc late to stabilize ordering vs. other transparents
+sunRadiance.renderOrder = 9000;
 
 const sunLight = new THREE.DirectionalLight(0xffffff, 1.2) //1.2
 sunLight.position.set(sunRadiance.position.x, sunRadiance.position.y, sunRadiance.position.z - sunRadius * 1.5)
@@ -984,6 +1110,8 @@ lensflare.addElement( new LensflareElement( textureFlare3, 60, 0.6 ) );
 lensflare.addElement( new LensflareElement( textureFlare3, 70, 0.7 ) );
 lensflare.addElement( new LensflareElement( textureFlare3, 120, 0.9 ) );
 lensflare.addElement( new LensflareElement( textureFlare3, 70, 1 ) );
+// Ensure flare renders last and isn't impacted by transparent sorting
+lensflare.renderOrder = 10000;
 
 sunLight.add( lensflare );
 
@@ -1099,7 +1227,8 @@ function createSpiral() {
         const material2 = new THREE.MeshBasicMaterial({
             color: palette[40 + i],
             transparent: true,
-            opacity: 0.6
+            opacity: 0.6,
+            depthWrite: true
         })
         const spiralSection2 = new THREE.Mesh(geometry2, material2);
         spiral.add(spiralSection2)
@@ -1157,6 +1286,7 @@ function createSpiral() {
         color: 0xffffff,
         metalness: 1,
         roughness: 0.7,
+        depthWrite: true
     })
     const tierRing = new THREE.Mesh(tierGeo, tierMat)
     tierRing.rotation.x = Math.PI / 2
@@ -1203,12 +1333,12 @@ const updateLightIntensity = () => {
 //CREATE CONTEXTS
 export function createContexts(version) {
     contexts.push({
-        tagData: planetTagData, 
+    tagData: planetTagData_initial, 
         tagDestination: planetContent, 
-        connectionData: planetConnections, 
-        arrowConnectionData: planetArrowedConnections,
-        dashedConnectionData: planetDashedConnections,
-        tunnelConnectionData: planetTunnelConnections,
+    connectionData: planetConnections_initial, 
+    arrowConnectionData: planetArrowedConnections_initial,
+    dashedConnectionData: planetDashedConnections_initial,
+    tunnelConnectionData: planetTunnelConnections_initial,
         connectionDestination: jaraniusConnections, 
         radius: 5, 
         pins: [], 
@@ -1365,23 +1495,30 @@ function onDocumentKeyUp(event) {
             slideshowStatus = handleCarouselButton(downButton, slideshowStatus);
         }
 
-        //Light control
-        if (keyCode >= 49 && keyCode <= 53) {
+                //Light control (numbers 1-5 when NOT holding shift)
+                //Light control (numbers 1-5 when NOT holding shift)
+                if (!event.shiftKey && keyCode >= 49 && keyCode <= 53) {
             const intensities = [0, 0.5, 0.75, 1, 1.5];
             targetIntensities.spotlight = intensities[keyCode - 49];
             lightTransitionStart = clock.getElapsedTime();
           }
-        
-          if (keyCode >= 54 && keyCode <= 57) {
+                // Ambient control (6-9 when NOT holding shift)
+                if (!event.shiftKey && keyCode >= 54 && keyCode <= 57) {
             const intensities = [0, 0.05, 0.15, 0.25];
             targetIntensities.ambient = intensities[keyCode - 54];
             lightTransitionStart = clock.getElapsedTime();
           }
-        
-          if (keyCode == 48) {
+                // Zero key resets ambient (NOT shift)
+                if (!event.shiftKey && keyCode == 48) {
             targetIntensities.ambient = 0.5;
             lightTransitionStart = clock.getElapsedTime();
           }
+                // Mindmap switching: Shift+1..9 (prevent light adjustments earlier)
+                if (event.shiftKey && keyCode >= 49 && keyCode <= 57) { // '1'..'9'
+                    const index = keyCode - 49; // 0-based
+                    switchMindmap(index);
+                    return; // stop further number key side-effects
+                }
 
         //Stats display
         if (keyCode == 71) { //G
@@ -2042,15 +2179,39 @@ document.getElementById("tagInput").addEventListener("keydown", function (event)
 
 //EVENTS MOUSE
 let initialTouchPosition = { x: null, y: null };
-const tapMoveThreshold = 50; // Adjust this value to set the allowed movement threshold for taps
+const tapMoveThreshold = 30; // px movement allowed to still count as a tap/click
+let orbitDragging = false; // suppress slide clicks while orbiting
+
+// Guard: track OrbitControls drag state to avoid accidental clicks triggering slides
+if (typeof orbitControls !== 'undefined' && orbitControls && orbitControls.addEventListener) {
+    orbitControls.addEventListener('start', () => { orbitDragging = true; });
+    orbitControls.addEventListener('end',   () => { orbitDragging = false; });
+}
 
 function onPointerMove(event) {
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    // Support touch and mouse
+    const isTouch = !!event.changedTouches;
+    const cx = isTouch ? event.changedTouches[0].clientX : event.clientX;
+    const cy = isTouch ? event.changedTouches[0].clientY : event.clientY;
+
+    pointer.x = (cx / window.innerWidth) * 2 - 1;
+    pointer.y = -(cy / window.innerHeight) * 2 + 1;
+
+    // If we've moved too far since pointerdown, cancel click intent
+    if (initialTouchPosition.x !== null && initialTouchPosition.y !== null) {
+        const dx = cx - initialTouchPosition.x;
+        const dy = cy - initialTouchPosition.y;
+        if ((dx*dx + dy*dy) > (tapMoveThreshold * tapMoveThreshold)) {
+            selectState = false;
+        }
+    }
 }
 
 function onPointerClick(event) {
     event.preventDefault();
+
+    // Only respond to primary mouse button (or touch)
+    if (event.button !== undefined && event.button !== 0) return;
 
     let x, y;
   
@@ -2077,7 +2238,7 @@ function onPointerClick(event) {
         if (contexts !== 2) selectedBox = contexts[selectedContext].boxes[selectedNode]
         if (contexts !== 2) selectedTag = contexts[selectedContext].tags[selectedNode]
 
-        if (camera.position.distanceTo(selectedPin.position) < 10 && contexts[selectedContext].tagData[selectedNode].slides !== undefined && slideshowStatus.activeSlideshow == undefined) {
+    if (camera.position.distanceTo(selectedPin.position) < 10 && contexts[selectedContext].tagData[selectedNode].slides !== undefined && slideshowStatus.activeSlideshow == undefined) {
             slideshowStatus.activeSlideshow = contexts[selectedContext].tagData[selectedNode].slides
             slideshowStatus.activeSlideshowLength = contentData[slideshowStatus.activeSlideshow].length
             if (Array.isArray(contentData[slideshowStatus.activeSlideshow][0])) {
@@ -2105,53 +2266,60 @@ function onPointerClick(event) {
 
 let selectState = false
 function processPointerUpEvent(event) {
-    if (selectState) {
+    // Suppress click if we were orbit-dragging (OrbitControls active)
+    if (selectState && !orbitDragging) {
       onPointerClick(event);
     }
     selectState = false;
+        // reset initial position for next interaction
+        initialTouchPosition.x = null;
+        initialTouchPosition.y = null;
   }
   
   window.addEventListener('pointermove', onPointerMove);
-  window.addEventListener('pointerdown', (event) => {
-    selectState = true;
-  });
+    window.addEventListener('pointerdown', (event) => {
+        selectState = true;
+        // record initial position for click-vs-drag detection
+        if (event.changedTouches) {
+            initialTouchPosition.x = event.changedTouches[0].clientX;
+            initialTouchPosition.y = event.changedTouches[0].clientY;
+        } else {
+            initialTouchPosition.x = event.clientX;
+            initialTouchPosition.y = event.clientY;
+        }
+    });
   window.addEventListener('pointerup', processPointerUpEvent);
 
-//TESTS
-if (planetTagData.length !== planetConnections.length) {
-    console.log("ERROR: planetTagData.length !== planetConnections.length", planetTagData.length, planetConnections.length)
-    for (let i = 0; i < planetConnections.length; i++) {
-        if (planetTagData[i].id !== planetConnections[i][0]) {
-            console.log(i, planetTagData[i].id)
-        }
-    }
-    
-}
-if (planetTagData.length !== planetArrowedConnections.length) {
-    console.log("ERROR: planetTagData.length !== planetArrowedConnections.length", planetTagData.length, planetArrowedConnections.length)
-    for (let i = 0; i < planetArrowedConnections.length; i++) {
-        if (planetConnections[i][0] !== planetArrowedConnections[i][0]) {
-            console.log(i, planetConnections[i][0])
-        }
-    }
-}
-if (planetTagData.length !== planetDashedConnections.length) {
-    console.log("ERROR: planetTagData.length !== planetDashedConnections.length", planetTagData.length, planetDashedConnections.length)
-    for (let i = 0; i < planetDashedConnections.length; i++) {
-        if (planetConnections[i][0] !== planetDashedConnections[i][0]) {
-            console.log(i, planetConnections[i][0])
-        }
-    }
-}
+// DATA CONSISTENCY CHECK (updated for dynamic switching)
+(() => {
+    const planetCtx = contexts && contexts[0];
+    if (!planetCtx || !planetCtx.tagData) return;
+    const tagData = planetCtx.tagData || [];
+    const conn = planetCtx.connectionData || [];
+    const arrow = planetCtx.arrowConnectionData || [];
+    const dashed = planetCtx.dashedConnectionData || [];
+    const tunnel = planetCtx.tunnelConnectionData || [];
 
-if (planetTagData.length !== planetTunnelConnections.length) {
-    console.log("ERROR: planetTagData.length !== planetTunnelConnections.length", planetTagData.length, planetTunnelConnections.length)
-    for (let i = 0; i < planetTunnelConnections.length; i++) {
-        if (planetConnections[i][0] !== planetTunnelConnections[i][0]) {
-            console.log(i, planetConnections[i][0])
+    const label = name => `[DATA TEST:${planetCtx.name || 'planet'}:${name}]`;
+
+    if (tagData.length !== conn.length) {
+        console.log(label('connections length mismatch'), tagData.length, conn.length);
+        for (let i = 0; i < Math.min(tagData.length, conn.length); i++) {
+            if (tagData[i].id !== conn[i][0]) {
+                console.log(label('id mismatch'), i, tagData[i].id, '!=', conn[i][0]);
+            }
         }
     }
-}
+    if (tagData.length !== arrow.length) {
+        console.log(label('arrow length mismatch'), tagData.length, arrow.length);
+    }
+    if (tagData.length !== dashed.length) {
+        console.log(label('dashed length mismatch'), tagData.length, dashed.length);
+    }
+    if (tagData.length !== tunnel.length) {
+        console.log(label('tunnel length mismatch'), tagData.length, tunnel.length);
+    }
+})();
 
 let octreeHelperRoot = new THREE.Object3D();
 scene.add(octreeHelperRoot);

@@ -4,7 +4,7 @@ import { getRandomBell, getRandomInt, getRandomNum, convertLatLngtoCartesian, co
 import { generateRandomSanskritName } from './miscScripts.js'
 import { DoubleSide, ExtrudeGeometry } from 'three'
 import { GUI } from 'dat.gui'
-import { planetTagData } from './data/planetData.js';
+import { planetTagData } from './data/planetSimpleData.js';
 
 // Global or outside function scope
 let guttaInstancedMeshes = {};

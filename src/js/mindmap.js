@@ -31,181 +31,389 @@ export const intersectObjectsArray = []
 export const hoveredPins = []
 
 export function createTags(dataSource, destination, radius, context, indexMod) {
-    const loader = new FontLoader();
-    loader.load(tagFont, function (font) {
+  const loader = new FontLoader();
 
-        function instantiateTag(index, txt, lat, lng, color, size) {
+  // walk north by an arc length (world units) on a sphere of radius R
+  const latAfterNorthArc = (latDeg, arcLen, R) =>
+    THREE.MathUtils.clamp(latDeg + THREE.MathUtils.radToDeg(arcLen / Math.max(R, 1e-6)), -90, 90);
 
-            function calculateTextWidth(txt, font, size) {
-                const shapes = font.generateShapes(txt, size);
-                const geometry = new THREE.ShapeGeometry(shapes);
-                geometry.computeBoundingBox();
-            
-                // The actual width of the text
-                const width = geometry.boundingBox.max.x - geometry.boundingBox.min.x;
-            
-                return width;
-            }
-            
-            function centerText(txt, font, size) {
-                const lines = txt.split('\n');
-                const lineWidths = lines.map(line => calculateTextWidth(line, font, size));
-                const longest = Math.max(...lineWidths);
-            
-                // Calculate width of a single space character
-                let spaceWidth = calculateTextWidth(' ', font, size);
-            
-                // If space width isn't finite, use width of 'M' as a rough estimation
-                if (!isFinite(spaceWidth)) {
-                    spaceWidth = calculateTextWidth('M', font, size);
-                }
-            
-                const centeredText = lines.map((line, i) => {
-                    const spaceFactor = 1.38 //lower to add fewer spaces
-                    const spacesNeeded = Math.floor((longest - lineWidths[i]) / spaceWidth * spaceFactor); 
-                    return ' '.repeat(spacesNeeded) + line;
-                });
-            
-                return centeredText.join('\n');
-            }
-            txt = centerText(txt, font, size);
+  // build an orthonormal basis from bottom & top points on the sphere
+  function orientedGroupAt(bottomVec, topVec) {
+    const mid = bottomVec.clone().add(topVec).multiplyScalar(0.5);   // center point (world)
+    const z = mid.clone().normalize();                                // outward normal at center
+    const y = topVec.clone().sub(bottomVec).normalize();              // north along tag
+    const x = new THREE.Vector3().crossVectors(y, z).normalize();     // east
+    // re-orthogonalize y to ensure perfect right-handed basis
+    y.copy(new THREE.Vector3().crossVectors(z, x)).normalize();
 
-            // create text
-            const txtGeo = new THREE.ShapeGeometry(font.generateShapes(txt, 100));
-            txtGeo.computeBoundingBox();
-            txtGeo.translate(-0.5 * (txtGeo.boundingBox.max.x - txtGeo.boundingBox.min.x), (txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y), 0);
+    const m = new THREE.Matrix4().makeBasis(x, y, z);
+    const g = new THREE.Group();
+    g.position.copy(mid);
+    g.quaternion.setFromRotationMatrix(m);
+    return g;
+  }
 
-            const tag = new THREE.Mesh(txtGeo, textMaterial);
-            let latLng = convertLatLngtoCartesian(lat, lng, radius + 0.061);
-
-            if (dataSource == enneagramTagData) {
-                const t = lat * Math.PI / 180; // convert to radians
-                const radiusModifier = Math.cos(t); // creates a cosine wave from -1 to 1
-                const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
-                const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
-                latLng = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.062);
-            }
-
-            const rotationVector = new THREE.Vector3(latLng.x, latLng.y, latLng.z);
-            tag.lookAt(rotationVector);
-            tag.position.copy(rotationVector);
-            tag.scale.set(size, size, size);
-
-            // create box
-            const xPadding = 200, yPadding = 0;
-            const roundingFactor = size * 125;
-            const width = (Math.abs(txtGeo.boundingBox.min.x) + Math.abs(txtGeo.boundingBox.max.x) + xPadding) * size;
-            const height = (Math.abs(txtGeo.boundingBox.min.y) + Math.abs(txtGeo.boundingBox.max.y) + yPadding) * size;
-
-            const shape = new THREE.Shape()
-                .moveTo(0, roundingFactor)
-                .lineTo(0, height - roundingFactor)
-                .quadraticCurveTo(0, height, roundingFactor, height)
-                .lineTo(width - roundingFactor, height)
-                .quadraticCurveTo(width, height, width, height - roundingFactor)
-                .lineTo(width, roundingFactor)
-                .quadraticCurveTo(width, 0, width - roundingFactor, 0)
-                .lineTo(roundingFactor, 0)
-                .quadraticCurveTo(0, 0, 0, roundingFactor);
-
-            const boxGeo = new THREE.ShapeGeometry(shape);
-            const uvAttribute = boxGeo.attributes.uv;
-            let min = Infinity, max = 0;
-
-            // find min max
-            for (let i = 0; i < uvAttribute.count; i++) {
-                const u = uvAttribute.getX(i);
-                const v = uvAttribute.getY(i);
-                min = Math.min(min, u, v);
-                max = Math.max(max, u, v);
-            }
-
-            // map min map to 1 to 1 range
-            for (let i = 0; i < uvAttribute.count; i++) {
-                const u = uvAttribute.getX(i);
-                const v = uvAttribute.getY(i);
-                uvAttribute.setXY(i, THREE.MathUtils.mapLinear(u, min, max, 0, 1), THREE.MathUtils.mapLinear(v, min, max, 0, 1));
-            }
-
-            boxGeo.computeBoundingBox();
-            boxGeo.translate(-0.5 * (boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x), 0, 0);
-
-            const box = new THREE.Mesh(boxGeo, boxMaterials[color]);
-            let boxLatLng = convertLatLngtoCartesian(lat, lng, radius + 0.06);
-
-            if (dataSource == enneagramTagData) {
-                const t = lat * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
-                const radiusModifier = Math.cos(t); // creates a cosine wave from -1 to 1
-                const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
-                const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
-                boxLatLng = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.06);
-            }
-            
-            const boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
-            box.lookAt(boxRotationVector);
-            box.position.copy(boxRotationVector);
-
-            box.renderOrder = 10;
-            tag.renderOrder = 11;
-
-            box.castShadow = true;
-
-            box.source = dataSource;
-            box.context = context;
-            box.index = index + indexMod;
-            tag.source = dataSource;
-            tag.context = context;
-            tag.index = index + indexMod;
-    
-            destination.add(box);
-            destination.add(tag);
-
-            contexts[context].boxes.push(box)
-            contexts[context].tags.push(tag)
-        }
-    
-        dataSource.forEach((item, index) => {
-            instantiateTag(index, item.text, item.lat, item.lng, item.color, item.size / 100000);
-        });
-    });
-    
-    function instantiatePin(index, lat, lng, color, size, slides, destination) {
-        const segments = slides ? 10 : 6;
-        const material = slides ? pinMaterials[color] : pinWireframeMaterials[color];
-        const wireframe = slides === undefined;
-    
-        const pin = new THREE.Mesh(
-            new THREE.SphereGeometry(size / 1333, segments, segments),
-            material,
-        );
-        pin.source = dataSource;
-        pin.context = context;
-        pin.index = index + indexMod;
-        pin.originalSize = size
-    
-        let pos = convertLatLngtoCartesian(lat, lng, radius + 0.01);
-
-        if (dataSource == enneagramTagData) {
-            const t = lat * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
-            const radiusModifier = Math.cos(t); // creates a cosine wave from -1 to 1
-            const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
-            const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
-            pos = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor);
-        }
-        
-        pin.position.set(pos.x, pos.y, pos.z);
-
-        pin.castShadow = true;
-    
-        destination.add(pin);
-        intersectObjectsArray.push(pin);
-        contexts[context].pins.push(pin)
+  loader.load(tagFont, function (font) {
+    function calculateTextWidth(txt, font, size) {
+      const shapes = font.generateShapes(txt, size);
+      const geometry = new THREE.ShapeGeometry(shapes);
+      geometry.computeBoundingBox();
+      return geometry.boundingBox.max.x - geometry.boundingBox.min.x;
     }
-    
+
+    function centerText(txt, font, size) {
+      const lines = txt.split('\n');
+      const lineWidths = lines.map(l => calculateTextWidth(l, font, size));
+      const longest = Math.max(...lineWidths);
+      let spaceWidth = calculateTextWidth(' ', font, size);
+      if (!isFinite(spaceWidth)) spaceWidth = calculateTextWidth('M', font, size);
+      const spaceFactor = 1.38;
+      return lines.map((line, i) =>
+        ' '.repeat(Math.floor((longest - lineWidths[i]) / spaceWidth * spaceFactor)) + line
+      ).join('\n');
+    }
+
+    function instantiateTag(index, txt, lat, lng, color, size) {
+      txt = centerText(txt, font, size);
+
+      // --- TEXT (unchanged geometry; bottom-origin) ---
+      const txtGeo = new THREE.ShapeGeometry(font.generateShapes(txt, 100));
+      txtGeo.computeBoundingBox();
+      txtGeo.translate(
+        -0.5 * (txtGeo.boundingBox.max.x - txtGeo.boundingBox.min.x), // center X
+        (txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y),        // bottom-origin
+        0
+      );
+      const tag = new THREE.Mesh(txtGeo, textMaterial);
+      tag.scale.set(size, size, size);
+
+      // world height used for orientation
+      const textHeightWorld = (txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y) * size;
+      const halfText = 0.5 * textHeightWorld;
+
+      // original bottom position (unchanged)
+      let textBottom = convertLatLngtoCartesian(lat, lng, radius + 0.061);
+      if (dataSource == enneagramTagData) {
+        const t = (lat * Math.PI) / 180;
+        const radiusModifier = Math.cos(t);
+        const scaleFactor = 3;
+        const constrictFactor = 2.4;
+        textBottom = convertLatLngtoCartesian(
+          lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.062
+        );
+      }
+      const textBottomVec = new THREE.Vector3(textBottom.x, textBottom.y, textBottom.z);
+      const Rtag = textBottomVec.length();
+
+      // compute top & oriented parent group (center tangent)
+      const latTopText = latAfterNorthArc(lat, textHeightWorld, Rtag);
+      const textTopDir = convertLatLngtoCartesian(latTopText, lng, Rtag);
+      const textTopVec = new THREE.Vector3(textTopDir.x, textTopDir.y, textTopDir.z);
+
+      const tagGroup = orientedGroupAt(textBottomVec, textTopVec);
+      // place the mesh so its bottom lands on the original bottom point
+      tag.position.set(0, -halfText, 0);
+
+      // --- BOX (unchanged geometry/UV; bottom-origin) ---
+      const xPadding = 200, yPadding = 0;
+      const roundingFactor = size * 125;
+      const width  = (Math.abs(txtGeo.boundingBox.min.x) + Math.abs(txtGeo.boundingBox.max.x) + xPadding) * size;
+      const height = (Math.abs(txtGeo.boundingBox.min.y) + Math.abs(txtGeo.boundingBox.max.y) + yPadding) * size;
+
+      const shape = new THREE.Shape()
+        .moveTo(0, roundingFactor)
+        .lineTo(0, height - roundingFactor)
+        .quadraticCurveTo(0, height, roundingFactor, height)
+        .lineTo(width - roundingFactor, height)
+        .quadraticCurveTo(width, height, width, height - roundingFactor)
+        .lineTo(width, roundingFactor)
+        .quadraticCurveTo(width, 0, width - roundingFactor, 0)
+        .lineTo(roundingFactor, 0)
+        .quadraticCurveTo(0, 0, 0, roundingFactor);
+
+      const boxGeo = new THREE.ShapeGeometry(shape);
+      const uv = boxGeo.attributes.uv;
+      let min = Infinity, max = 0;
+      for (let i = 0; i < uv.count; i++) {
+        const u = uv.getX(i), v = uv.getY(i);
+        min = Math.min(min, u, v);
+        max = Math.max(max, u, v);
+      }
+      for (let i = 0; i < uv.count; i++) {
+        const u = uv.getX(i), v = uv.getY(i);
+        uv.setXY(i,
+          THREE.MathUtils.mapLinear(u, min, max, 0, 1),
+          THREE.MathUtils.mapLinear(v, min, max, 0, 1)
+        );
+      }
+      boxGeo.computeBoundingBox();
+      boxGeo.translate(
+        -0.5 * (boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x), // center X
+        0,                                                            // bottom-origin
+        0
+      );
+
+      const box = new THREE.Mesh(boxGeo, boxMaterials[color]);
+      box.castShadow = true;
+
+      // original bottom position (unchanged)
+      let boxBottom = convertLatLngtoCartesian(lat, lng, radius + 0.06);
+      if (dataSource == enneagramTagData) {
+        const t = (lat * Math.PI) / 180;
+        const radiusModifier = Math.cos(t);
+        const scaleFactor = 3;
+        const constrictFactor = 2.4;
+        boxBottom = convertLatLngtoCartesian(
+          lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.06
+        );
+      }
+      const boxBottomVec = new THREE.Vector3(boxBottom.x, boxBottom.y, boxBottom.z);
+      const Rbox = boxBottomVec.length();
+
+      const latTopBox = latAfterNorthArc(lat, height, Rbox);
+      const boxTopDir = convertLatLngtoCartesian(latTopBox, lng, Rbox);
+      const boxTopVec = new THREE.Vector3(boxTopDir.x, boxTopDir.y, boxTopDir.z);
+
+      const boxGroup = orientedGroupAt(boxBottomVec, boxTopVec);
+      const halfBox = 0.5 * height;
+      box.position.set(0, -halfBox, 0);
+
+      // render order / metadata (unchanged)
+      box.renderOrder = 10;
+      tag.renderOrder = 11;
+
+      box.source = dataSource; box.context = context; box.index = index + indexMod;
+      tag.source = dataSource; tag.context = context; tag.index = index + indexMod;
+
+      // add children to their oriented parents
+      tagGroup.add(tag);
+      boxGroup.add(box);
+
+      // add to scene
+      destination.add(boxGroup);
+      destination.add(tagGroup);
+
+      contexts[context].boxes.push(box);
+      contexts[context].tags.push(tag);
+    }
+
     dataSource.forEach((item, index) => {
-        instantiatePin(index, item.lat, item.lng, item.color, item.size, item.slides, destination);
+      instantiateTag(index, item.text, item.lat, item.lng, item.color, item.size / 100000);
     });
-}    
+  });
+
+  // Pins: unchanged
+  function instantiatePin(index, lat, lng, color, size, slides, destination) {
+    const segments = slides ? 10 : 6;
+    const material = slides ? pinMaterials[color] : pinWireframeMaterials[color];
+
+    const pin = new THREE.Mesh(
+      new THREE.SphereGeometry(size / 1333, segments, segments),
+      material,
+    );
+    pin.source = dataSource;
+    pin.context = context;
+    pin.index = index + indexMod;
+    pin.originalSize = size;
+
+    let pos = convertLatLngtoCartesian(lat, lng, radius + 0.01);
+    if (dataSource == enneagramTagData) {
+      const t = (lat * Math.PI) / 180;
+      const radiusModifier = Math.cos(t);
+      const scaleFactor = 3;
+      const constrictFactor = 2.4;
+      pos = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor);
+    }
+
+    pin.position.set(pos.x, pos.y, pos.z);
+    pin.castShadow = true;
+
+    destination.add(pin);
+    intersectObjectsArray.push(pin);
+    contexts[context].pins.push(pin);
+  }
+
+  dataSource.forEach((item, index) => {
+    instantiatePin(index, item.lat, item.lng, item.color, item.size, item.slides, destination);
+  });
+}
+
+// export function createTags(dataSource, destination, radius, context, indexMod) {
+//     const loader = new FontLoader();
+//     loader.load(tagFont, function (font) {
+
+//         function instantiateTag(index, txt, lat, lng, color, size) {
+
+//             function calculateTextWidth(txt, font, size) {
+//                 const shapes = font.generateShapes(txt, size);
+//                 const geometry = new THREE.ShapeGeometry(shapes);
+//                 geometry.computeBoundingBox();
+            
+//                 // The actual width of the text
+//                 const width = geometry.boundingBox.max.x - geometry.boundingBox.min.x;
+            
+//                 return width;
+//             }
+            
+//             function centerText(txt, font, size) {
+//                 const lines = txt.split('\n');
+//                 const lineWidths = lines.map(line => calculateTextWidth(line, font, size));
+//                 const longest = Math.max(...lineWidths);
+            
+//                 // Calculate width of a single space character
+//                 let spaceWidth = calculateTextWidth(' ', font, size);
+            
+//                 // If space width isn't finite, use width of 'M' as a rough estimation
+//                 if (!isFinite(spaceWidth)) {
+//                     spaceWidth = calculateTextWidth('M', font, size);
+//                 }
+            
+//                 const centeredText = lines.map((line, i) => {
+//                     const spaceFactor = 1.38 //lower to add fewer spaces
+//                     const spacesNeeded = Math.floor((longest - lineWidths[i]) / spaceWidth * spaceFactor); 
+//                     return ' '.repeat(spacesNeeded) + line;
+//                 });
+            
+//                 return centeredText.join('\n');
+//             }
+//             txt = centerText(txt, font, size);
+
+//             // create text
+//             const txtGeo = new THREE.ShapeGeometry(font.generateShapes(txt, 100));
+//             txtGeo.computeBoundingBox();
+//             txtGeo.translate(-0.5 * (txtGeo.boundingBox.max.x - txtGeo.boundingBox.min.x), (txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y), 0);
+
+//             const tag = new THREE.Mesh(txtGeo, textMaterial);
+//             let latLng = convertLatLngtoCartesian(lat, lng, radius + 0.061);
+
+//             if (dataSource == enneagramTagData) {
+//                 const t = lat * Math.PI / 180; // convert to radians
+//                 const radiusModifier = Math.cos(t); // creates a cosine wave from -1 to 1
+//                 const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
+//                 const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
+//                 latLng = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.062);
+//             }
+
+//             const rotationVector = new THREE.Vector3(latLng.x, latLng.y, latLng.z);
+//             tag.lookAt(rotationVector);
+//             tag.position.copy(rotationVector);
+//             tag.scale.set(size, size, size);
+
+//             // create box
+//             const xPadding = 200, yPadding = 0;
+//             const roundingFactor = size * 125;
+//             const width = (Math.abs(txtGeo.boundingBox.min.x) + Math.abs(txtGeo.boundingBox.max.x) + xPadding) * size;
+//             const height = (Math.abs(txtGeo.boundingBox.min.y) + Math.abs(txtGeo.boundingBox.max.y) + yPadding) * size;
+
+//             const shape = new THREE.Shape()
+//                 .moveTo(0, roundingFactor)
+//                 .lineTo(0, height - roundingFactor)
+//                 .quadraticCurveTo(0, height, roundingFactor, height)
+//                 .lineTo(width - roundingFactor, height)
+//                 .quadraticCurveTo(width, height, width, height - roundingFactor)
+//                 .lineTo(width, roundingFactor)
+//                 .quadraticCurveTo(width, 0, width - roundingFactor, 0)
+//                 .lineTo(roundingFactor, 0)
+//                 .quadraticCurveTo(0, 0, 0, roundingFactor);
+
+//             const boxGeo = new THREE.ShapeGeometry(shape);
+//             const uvAttribute = boxGeo.attributes.uv;
+//             let min = Infinity, max = 0;
+
+//             // find min max
+//             for (let i = 0; i < uvAttribute.count; i++) {
+//                 const u = uvAttribute.getX(i);
+//                 const v = uvAttribute.getY(i);
+//                 min = Math.min(min, u, v);
+//                 max = Math.max(max, u, v);
+//             }
+
+//             // map min map to 1 to 1 range
+//             for (let i = 0; i < uvAttribute.count; i++) {
+//                 const u = uvAttribute.getX(i);
+//                 const v = uvAttribute.getY(i);
+//                 uvAttribute.setXY(i, THREE.MathUtils.mapLinear(u, min, max, 0, 1), THREE.MathUtils.mapLinear(v, min, max, 0, 1));
+//             }
+
+//             boxGeo.computeBoundingBox();
+//             boxGeo.translate(-0.5 * (boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x), 0, 0);
+
+//             const box = new THREE.Mesh(boxGeo, boxMaterials[color]);
+//             let boxLatLng = convertLatLngtoCartesian(lat, lng, radius + 0.06);
+
+//             if (dataSource == enneagramTagData) {
+//                 const t = lat * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
+//                 const radiusModifier = Math.cos(t); // creates a cosine wave from -1 to 1
+//                 const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
+//                 const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
+//                 boxLatLng = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.06);
+//             }
+            
+//             const boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
+//             box.lookAt(boxRotationVector);
+//             box.position.copy(boxRotationVector);
+
+//             box.renderOrder = 10;
+//             tag.renderOrder = 11;
+
+//             box.castShadow = true;
+
+//             box.source = dataSource;
+//             box.context = context;
+//             box.index = index + indexMod;
+//             tag.source = dataSource;
+//             tag.context = context;
+//             tag.index = index + indexMod;
+    
+//             destination.add(box);
+//             destination.add(tag);
+
+//             contexts[context].boxes.push(box)
+//             contexts[context].tags.push(tag)
+//         }
+    
+//         dataSource.forEach((item, index) => {
+//             instantiateTag(index, item.text, item.lat, item.lng, item.color, item.size / 100000);
+//         });
+//     });
+    
+//     function instantiatePin(index, lat, lng, color, size, slides, destination) {
+//         const segments = slides ? 10 : 6;
+//         const material = slides ? pinMaterials[color] : pinWireframeMaterials[color];
+//         const wireframe = slides === undefined;
+    
+//         const pin = new THREE.Mesh(
+//             new THREE.SphereGeometry(size / 1333, segments, segments),
+//             material,
+//         );
+//         pin.source = dataSource;
+//         pin.context = context;
+//         pin.index = index + indexMod;
+//         pin.originalSize = size
+    
+//         let pos = convertLatLngtoCartesian(lat, lng, radius + 0.01);
+
+//         if (dataSource == enneagramTagData) {
+//             const t = lat * Math.PI / 180; // offset latitude by 90 degrees and convert to radians
+//             const radiusModifier = Math.cos(t); // creates a cosine wave from -1 to 1
+//             const scaleFactor = 3; // adjust this value to scale the curve to match your flux-tube shape
+//             const constrictFactor = 2.4 // adjust this value to shrink the curve to match your flux-tube shape
+//             pos = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor);
+//         }
+        
+//         pin.position.set(pos.x, pos.y, pos.z);
+
+//         pin.castShadow = true;
+    
+//         destination.add(pin);
+//         intersectObjectsArray.push(pin);
+//         contexts[context].pins.push(pin)
+//     }
+    
+//     dataSource.forEach((item, index) => {
+//         instantiatePin(index, item.lat, item.lng, item.color, item.size, item.slides, destination);
+//     });
+// }    
 
 export function createConnections(tagSource, connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, destination, dashed, arrowed, tunnel) {
     tagSource.forEach((sourceItem, i) => {
@@ -363,60 +571,146 @@ export function instantiateNugget(index, lat, lng, color, size, slides, destinat
 }
 
 export function createImages(textureSrc, lat, lng, size, radius, destination) {
-    const img = textureLoader.load(textureSrc);
-    img.colorSpace = THREE.SRGBColorSpace;
-    const boxMat = new THREE.MeshStandardMaterial({
-        map: img,
-        transparent: true,
-        side: DoubleSide,
-    });
-    boxMat.alphaTest = 0.5;
+  const roundingFactor = 0.01;
 
-    const roundingFactor = 0.01;
-    const shape = new THREE.Shape()
-        .moveTo(0, roundingFactor)
-        .lineTo(0, size - roundingFactor)
-        .quadraticCurveTo(0, size, roundingFactor, size)
-        .lineTo(size - roundingFactor, size)
-        .quadraticCurveTo(size, size, size, size - roundingFactor)
-        .lineTo(size, roundingFactor)
-        .quadraticCurveTo(size, 0, size - roundingFactor, 0)
-        .lineTo(roundingFactor, 0)
-        .quadraticCurveTo(0, 0, 0, roundingFactor);
+  // 1) Make the square base shape
+  const shape = new THREE.Shape()
+    .moveTo(0, roundingFactor)
+    .lineTo(0, size - roundingFactor)
+    .quadraticCurveTo(0, size, roundingFactor, size)
+    .lineTo(size - roundingFactor, size)
+    .quadraticCurveTo(size, size, size, size - roundingFactor)
+    .lineTo(size, roundingFactor)
+    .quadraticCurveTo(size, 0, size - roundingFactor, 0)
+    .lineTo(roundingFactor, 0)
+    .quadraticCurveTo(0, 0, 0, roundingFactor);
 
-    const boxGeo = new THREE.ShapeGeometry(shape);
-    const uvAttribute = boxGeo.attributes.uv;
-    let min = Infinity, max = 0;
+  const geo = new THREE.ShapeGeometry(shape);
 
-    for (let i = 0; i < uvAttribute.count; i++) {
-        const u = uvAttribute.getX(i);
-        const v = uvAttribute.getY(i);
-        min = Math.min(min, u, v);
-        max = Math.max(max, u, v);
+  // 2) Center it
+  geo.computeBoundingBox();
+  const bb = geo.boundingBox;
+  const w = bb.max.x - bb.min.x;
+  const h = bb.max.y - bb.min.y;
+  geo.translate(-0.5 * w, -0.5 * h, 0);
+
+  // 3) Recompute UVs explicitly so they span [0,1] exactly
+  //    (after centering, bounds are symmetric around 0)
+  const pos = geo.attributes.position;
+  const uvs = new Float32Array((pos.count) * 2);
+  let minX = +Infinity, maxX = -Infinity, minY = +Infinity, maxY = -Infinity;
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i), y = pos.getY(i);
+    if (x < minX) minX = x; if (x > maxX) maxX = x;
+    if (y < minY) minY = y; if (y > maxY) maxY = y;
+  }
+  const spanX = maxX - minX || 1, spanY = maxY - minY || 1;
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i), y = pos.getY(i);
+    uvs[2*i + 0] = (x - minX) / spanX; // U
+    uvs[2*i + 1] = (y - minY) / spanY; // V
+  }
+  geo.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
+
+  const mat = new THREE.MeshStandardMaterial({
+    transparent: true,
+    side: THREE.DoubleSide,
+    // If your images are fully opaque PNG/JPG, consider removing alphaTest:
+    // alphaTest: 0.0,
+  });
+  // If you DO need to clip transparent halos, keep it low:
+  mat.alphaTest = 0.1;
+
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.castShadow = true;
+
+  // 4) Place on globe facing outward, and nudge off the surface slightly
+  const p = convertLatLngtoCartesian(lat, lng, radius);
+  const normal = new THREE.Vector3(p.x, p.y, p.z).normalize();
+  mesh.position.copy(normal).multiplyScalar(radius + 0.001 * size); // tiny offset
+  // Face outward (default -Z faces the look target; use a point "past" the surface)
+  mesh.lookAt(normal.clone().multiplyScalar(radius + 10 * size));
+
+  destination.add(mesh);
+
+  // 5) Load texture and scale by aspect
+  textureLoader.load(textureSrc, (tex) => {
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.wrapS = THREE.ClampToEdgeWrapping;
+    tex.wrapT = THREE.ClampToEdgeWrapping;
+    // Optional: avoid mipmap artifacts on NPOT textures (Three usually handles this)
+    // tex.generateMipmaps = false;
+    // tex.minFilter = THREE.LinearFilter;
+
+    mat.map = tex;
+    mat.needsUpdate = true;
+
+    const img = tex.image;
+    if (img && img.width && img.height) {
+      const aspect = img.width / img.height; // e.g., 1620 / 900 = 1.8
+      // keep height = `size`, widen X by aspect:
+      mesh.scale.set(aspect, 1, 1);
     }
+  });
 
-    for (let i = 0; i < uvAttribute.count; i++) {
-        const u = uvAttribute.getX(i);
-        const v = uvAttribute.getY(i);
-        uvAttribute.setXY(i, THREE.MathUtils.mapLinear(u, min, max, 0, 1), THREE.MathUtils.mapLinear(v, min, max, 0, 1));
-    }
-
-    boxGeo.computeBoundingBox();
-    boxGeo.translate(-0.5 * (boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x), -0.5 * (boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y), 0);
-
-    const box = new THREE.Mesh(boxGeo, boxMat);
-    // Enable shadow casting for the mesh
-    box.castShadow = true;
-
-    const boxLatLng = convertLatLngtoCartesian(lat, lng, radius);
-    const boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
-
-    box.lookAt(boxRotationVector);
-    box.position.copy(boxRotationVector);
-    destination.add(box);
-
-    return { box };
+  return { box: mesh };
 }
+
+// export function createImages(textureSrc, lat, lng, size, radius, destination) {
+//     const img = textureLoader.load(textureSrc);
+//     img.colorSpace = THREE.SRGBColorSpace;
+//     const boxMat = new THREE.MeshStandardMaterial({
+//         map: img,
+//         transparent: true,
+//         side: DoubleSide,
+//     });
+//     boxMat.alphaTest = 0.5;
+
+//     const roundingFactor = 0.01;
+//     const shape = new THREE.Shape()
+//         .moveTo(0, roundingFactor)
+//         .lineTo(0, size - roundingFactor)
+//         .quadraticCurveTo(0, size, roundingFactor, size)
+//         .lineTo(size - roundingFactor, size)
+//         .quadraticCurveTo(size, size, size, size - roundingFactor)
+//         .lineTo(size, roundingFactor)
+//         .quadraticCurveTo(size, 0, size - roundingFactor, 0)
+//         .lineTo(roundingFactor, 0)
+//         .quadraticCurveTo(0, 0, 0, roundingFactor);
+
+//     const boxGeo = new THREE.ShapeGeometry(shape);
+//     const uvAttribute = boxGeo.attributes.uv;
+//     let min = Infinity, max = 0;
+
+//     for (let i = 0; i < uvAttribute.count; i++) {
+//         const u = uvAttribute.getX(i);
+//         const v = uvAttribute.getY(i);
+//         min = Math.min(min, u, v);
+//         max = Math.max(max, u, v);
+//     }
+
+//     for (let i = 0; i < uvAttribute.count; i++) {
+//         const u = uvAttribute.getX(i);
+//         const v = uvAttribute.getY(i);
+//         uvAttribute.setXY(i, THREE.MathUtils.mapLinear(u, min, max, 0, 1), THREE.MathUtils.mapLinear(v, min, max, 0, 1));
+//     }
+
+//     boxGeo.computeBoundingBox();
+//     boxGeo.translate(-0.5 * (boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x), -0.5 * (boxGeo.boundingBox.max.y - boxGeo.boundingBox.min.y), 0);
+
+//     const box = new THREE.Mesh(boxGeo, boxMat);
+//     // Enable shadow casting for the mesh
+//     box.castShadow = true;
+
+//     const boxLatLng = convertLatLngtoCartesian(lat, lng, radius);
+//     const boxRotationVector = new THREE.Vector3(boxLatLng.x, boxLatLng.y, boxLatLng.z);
+
+//     box.lookAt(boxRotationVector);
+//     box.position.copy(boxRotationVector);
+//     destination.add(box);
+
+//     return { box };
+
 
 export function hoverPins(intersects) {
     // Unhover

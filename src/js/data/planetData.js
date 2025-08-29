@@ -5,7 +5,7 @@ export const planetTagData = [
     {id: "66F19982-732D-4744-AF06-F1F8A68D898B", text: "Rewiring the gut", lat: 72, lng: 120, color: 15, size: 40, slides: undefined},
     {id: "287B1377-9E86-42B2-99F1-EBBEA971AB08", text: "Rewiring the heart", lat: 72, lng: 0, color: 26, size: 40, slides: undefined},
     {id: "B5027C8B-D476-49B0-A713-ACC447159AE1", text: "Rewiring the head", lat: 72, lng: -121, color: 35, size: 40, slides: undefined},
-    {id: "4A481D1E-5DB6-4ABB-B9D0-8164F41393F9", text: "Unconditional \nPeace", lat: 69, lng: 120, color: 15, size: 50, slides: undefined},
+    {id: "4A481D1E-5DB6-4ABB-B9D0-8164F41393F9", text: "Unshakeable \nPeace", lat: 69, lng: 120, color: 15, size: 50, slides: undefined},
     {id: "876BC8AC-4013-448E-9ACA-A82DA031E09C", text: "Transcendence", lat: 55, lng: 122, color: 35, size: 40, slides: 107},
     {id: "008ADA1B-1D52-4F68-AB43-97D070D7774C", text: "Existential exploration / \nInsight meditation", lat: 37.8, lng: 129.7, color: 26, size: 40, slides: 109},
     {id: "3C87D468-FC43-4E9C-9CEE-0EFA0B63EA7A", text: "Deep states of calm", lat: 23.9, lng: 141.2, color: 26, size: 40, slides: 108},
@@ -16,7 +16,7 @@ export const planetTagData = [
     {id: "2A36743D-9E95-4B9D-A8EB-6B4B11F20AB5", text: "salvation", lat: 66.9, lng: -146.7, color: 33, size: 5, slides: undefined},
     {id: "963CA1BA-9539-4089-96AB-EB0E78602390", text: "true wisdom", lat: 66.4, lng: -152.4, color: 33, size: 5, slides: undefined},
     {id: "EEA100C2-4D71-40C8-B70B-FE6A6D01D33B", text: "why important?", lat: 67.5, lng: -135.7, color: 35, size: 30, slides: 199},
-    {id: "982A6AFF-D536-4504-B63A-EC42A2712432", text: "Unconditional \nTruth", lat: 67.5, lng: -121, color: 39, size: 50, slides: 2},
+    {id: "982A6AFF-D536-4504-B63A-EC42A2712432", text: "Transcendent \nTruth", lat: 67.5, lng: -121, color: 39, size: 50, slides: 2},
     {id: "F1EB56D4-15AE-4837-A070-40550E1262C7", text: "must be reduced to", lat: 61, lng: -115, color: 37, size: 40, slides: undefined},
     {id: "506E723E-071E-4694-80AD-06BBD0681E26", text: "Conventional \ntruth", lat: 55, lng: -121, color: 39, size: 50, slides: 2},
     {id: "0DA43E60-8DB6-4401-A1B1-F3BC1B5EA856", text: "must transcend", lat: 50, lng: -127, color: 37, size: 40, slides: undefined},
@@ -236,7 +236,7 @@ export const planetTagData = [
     {id: "E8C9F6D8-E4E3-4764-9449-4AC760B4EAA0", text: "Communal \nwell-being", lat: -72, lng: -25, color: 26, size: 30, slides: undefined},
     {id: "4C0B70B2-C4EC-4716-A08C-220E856D5B4A", text: "Growth potential: \nCan be trained", lat: -72, lng: 13.3, color: 26, size: 35, slides: undefined},
     {id: "A870BA4E-6243-4C93-B823-BDF69104A69A", text: "Spiritual interest: \nAfter/next life", lat: -72, lng: 27.7, color: 26, size: 30, slides: undefined},
-    {id: "9BFCB2C3-78B9-4982-8501-2BFF113D4207", text: "What matters to \nyour gut / genitals", lat: -81, lng: 120, color: 15, size: 50, slides: undefined},
+    {id: "9BFCB2C3-78B9-4982-8501-2BFF113D4207", text: "What matters to \nyour gut", lat: -81, lng: 120, color: 15, size: 50, slides: undefined},
     {id: "2C1FEC64-B01F-4D90-93AF-4F17977F3E05", text: "The Beast - \nAppetite", lat: -75, lng: 120, color: 15, size: 40, slides: 113},
     {id: "27D920A3-4748-497F-92C3-0CEAE399325B", text: "Existential problem: \nWhat do I need \nto function?", lat: -63.6, lng: 120, color: 15, size: 40, slides: undefined},
     {id: "3DB4BB32-A030-449C-B131-424A2FD3A651", text: "Path of the Gut", lat: -54, lng: 109.5, color: 0, size: 100, slides: 142},
@@ -306,10 +306,10 @@ export const planetTagData = [
     {id: "3041389D-AD21-46F6-9721-2DD4E9FC1F65", text: "Consciousness", lat: 68, lng: -94, color: 33, size: 20, slides: undefined},
     {id: "CC97CAEF-3828-466E-B55A-BA85783CE034", text: "Acceptance and agency", lat: 0.7, lng: 101.6, color: 5, size: 40, slides: undefined},
     {id: "0F8B3461-7B9D-4E1D-A392-A6DE782AE537", text: "Motivation split", lat: 8.6, lng: 154.7, color: 18, size: 40, slides: undefined},
-    {id: "DEADD385-73FB-4EA3-AACC-13C6B453E9E6", text: "Transcendence \nneeds", lat: 5.4, lng: 140.2, color: 15, size: 55, slides: 87},
-    {id: "CDC69285-DE4B-40DE-BDFB-73C750FA8CB4", text: "Fulfilment \nneeds", lat: -5.7, lng: 150.3, color: 15, size: 55, slides: undefined},
-    {id: "EEF6AD45-1ABB-4D2E-BCA0-A3BE592FCE95", text: "Psychological \nneeds", lat: -19, lng: 150.1, color: 15, size: 55, slides: undefined},
-    {id: "662B5EE1-6533-44B3-BC7A-2DF7708F1658", text: "Basic \nneeds", lat: -27.3, lng: 137.8, color: 15, size: 55, slides: undefined},
+    {id: "DEADD385-73FB-4EA3-AACC-13C6B453E9E6", text: "Self-\nTranscendence \nneeds", lat: 5.4, lng: 140.2, color: 15, size: 55, slides: 87},
+    {id: "CDC69285-DE4B-40DE-BDFB-73C750FA8CB4", text: "Self-\nActualisation \nneeds", lat: -3.6, lng: 148.2, color: 15, size: 55, slides: undefined},
+    {id: "EEF6AD45-1ABB-4D2E-BCA0-A3BE592FCE95", text: "Love and \nEsteem \nneeds", lat: -14.4, lng: 150.6, color: 15, size: 55, slides: undefined},
+    {id: "662B5EE1-6533-44B3-BC7A-2DF7708F1658", text: "Physiological \nneeds", lat: -26.1, lng: 137.8, color: 15, size: 55, slides: undefined},
     {id: "973015FD-576A-40F3-A86C-2E8EDA196B5F", text: "Assertive anger /\nself-compassion", lat: -5.2, lng: 95.2, color: 5, size: 40, slides: undefined},
     {id: "29155A2F-FCBB-4347-90DE-E8D3F86A3FFA", text: "Grief / hurt", lat: -5.2, lng: 106.6, color: 5, size: 40, slides: undefined},
     {id: "E400970C-2383-40ED-90F4-793AFAD87E45", text: "Rejecting anger", lat: -17.4, lng: 87.2, color: 3, size: 40, slides: undefined},
@@ -542,10 +542,10 @@ export const planetTagData = [
     {id: "d3ded962-4f7f-48eb-bf01-d789d30e5f0b", text: "ego-based \nvulnerability", lat: 10.8, lng: 116.8, color: 13, size: 21, slides: undefined},
     {id: "299ed736-3b6e-42c7-953b-7f3bd1ffaf14", text: "existential \nvulnerability", lat: 17.7, lng: 114.1, color: 25, size: 21, slides: undefined},
     {id: "13cfa65a-2290-4317-80de-b62df0529942", text: "ego-transcendent \nvulnerabilities", lat: 24.9, lng: 118.7, color: 32, size: 21, slides: undefined},
-    {id: "d7bbbade-d1b8-4124-850a-7b99dc846fd3", text: "Emotion-Focused \nMindfulness", lat: -39.0, lng: 130.4, color: 13, size: 35, slides: undefined},
+    {id: "d7bbbade-d1b8-4124-850a-7b99dc846fd3", text: "Emotion-Focused \nMindfulness", lat: -39, lng: 130.4, color: 13, size: 35, slides: undefined},
     {id: "027d3b7c-45c2-4877-9175-9283a42f7826", text: "Method", lat: -37.3, lng: 137.4, color: 13, size: 35, slides: 205},
-
-]
+    {id: "5d6f6103-a295-4260-94f7-97c9bb13e377", text: "Safety \nneeds", lat: -22.3, lng: 147.1, color: 15, size: 55, slides: undefined},
+];
 
 // ā ī ū ṅ ñ ṇ ṭ ṭh ḍ ḍh ṇ ḷ ṃ ṁ ŋ 
 
@@ -1097,6 +1097,7 @@ export const planetConnections = [
 ["13cfa65a-2290-4317-80de-b62df0529942", ],
 ["d7bbbade-d1b8-4124-850a-7b99dc846fd3", "027d3b7c-45c2-4877-9175-9283a42f7826", ],
 ["027d3b7c-45c2-4877-9175-9283a42f7826", "F095128A-1A37-4D3C-98C5-FAE6E3F9E808", ],
+["5d6f6103-a295-4260-94f7-97c9bb13e377", ],
 
 ]
 
@@ -1411,7 +1412,7 @@ export const planetArrowedConnections = [
 ["DEADD385-73FB-4EA3-AACC-13C6B453E9E6", ],
 ["CDC69285-DE4B-40DE-BDFB-73C750FA8CB4", "DEADD385-73FB-4EA3-AACC-13C6B453E9E6", ],
 ["EEF6AD45-1ABB-4D2E-BCA0-A3BE592FCE95", "CDC69285-DE4B-40DE-BDFB-73C750FA8CB4", ],
-["662B5EE1-6533-44B3-BC7A-2DF7708F1658", "EEF6AD45-1ABB-4D2E-BCA0-A3BE592FCE95", ],
+["662B5EE1-6533-44B3-BC7A-2DF7708F1658", "5d6f6103-a295-4260-94f7-97c9bb13e377", ],
 ["973015FD-576A-40F3-A86C-2E8EDA196B5F", "4F5D4105-E8C7-4F54-97E6-F9549BC75D4F", ],
 ["29155A2F-FCBB-4347-90DE-E8D3F86A3FFA", "4F5D4105-E8C7-4F54-97E6-F9549BC75D4F", ],
 ["E400970C-2383-40ED-90F4-793AFAD87E45", "973015FD-576A-40F3-A86C-2E8EDA196B5F", ],
@@ -1646,6 +1647,7 @@ export const planetArrowedConnections = [
 ["13cfa65a-2290-4317-80de-b62df0529942", ],
 ["d7bbbade-d1b8-4124-850a-7b99dc846fd3", ],
 ["027d3b7c-45c2-4877-9175-9283a42f7826", ],
+["5d6f6103-a295-4260-94f7-97c9bb13e377", "EEF6AD45-1ABB-4D2E-BCA0-A3BE592FCE95", ],
 
 ]
 
@@ -2195,6 +2197,7 @@ export const planetDashedConnections = [
 ["13cfa65a-2290-4317-80de-b62df0529942", ],
 ["d7bbbade-d1b8-4124-850a-7b99dc846fd3", ],
 ["027d3b7c-45c2-4877-9175-9283a42f7826", ],
+["5d6f6103-a295-4260-94f7-97c9bb13e377", ],
 
 ]
 
@@ -2744,5 +2747,6 @@ export const planetTunnelConnections = [
 ["13cfa65a-2290-4317-80de-b62df0529942", ],
 ["d7bbbade-d1b8-4124-850a-7b99dc846fd3", ],
 ["027d3b7c-45c2-4877-9175-9283a42f7826", ],
+["5d6f6103-a295-4260-94f7-97c9bb13e377", ],
 
 ]

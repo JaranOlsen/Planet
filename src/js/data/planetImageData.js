@@ -1,4 +1,4 @@
-import gutLogo from "/assets/images/features/gutLogo.webp"
+import gutLogo from "/assets/images/features/maslow.webp"
 import heartLogo from "/assets/images/features/heartLogo.webp"
 import headLogo from "/assets/images/features/headLogo.webp"
 import idealism from "/assets/images/features/idealism.webp"
