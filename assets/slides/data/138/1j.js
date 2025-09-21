@@ -42,7 +42,7 @@
         gridSize: 8,
         weightFactor: 16,
         fontFamily: 'Helvetica, sans-serif',
-        color: 'random-light',
+        color: forest,
         rotateRatio: 0.1,
         minRotation: -0.75,
         maxRotation: 0.75,
@@ -51,4 +51,16 @@
       });
     }
   }
+
+  // Deterministic tiny hash
+  const hash = (s) => [...s].reduce((h,ch)=>((h<<5)-h+ch.charCodeAt(0))|0,0);
+
+  const forest = (word, weight) => {
+    const h = Math.abs(hash(word));
+    const hue = 100 + (h % 50); // 100–150
+    const sat = 24 + ((h >> 3) % 16); // 24–40%
+    const baseL = 44 + ((h >> 5) % 18); // 44–62%
+    const light = Math.max(28, Math.min(70, baseL - Math.min(weight, 10)));
+    return `hsl(${hue}deg ${sat}% ${light}%)`;
+  };
 })();
