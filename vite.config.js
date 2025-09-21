@@ -6,11 +6,13 @@ export default defineConfig({
   assetsInclude: ['src/models/*.glb'],
   base: '/Planet/',
   root: "./",
+  publicDir: 'Public',
   plugins: [
     vitePluginString(), //changed from vitePluginString.default()
   ],
   build: {
     sourcemap: true,
+    chunkSizeWarningLimit: 1500,
     rollupOptions: {
       input: {
         index: resolve('index.html'),

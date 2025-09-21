@@ -49,7 +49,7 @@
         gridSize: 8,
         weightFactor: 16,
         fontFamily: 'Helvetica, sans-serif',
-        color: 'random-light',
+        color: organicEarthy,
         rotateRatio: 0.1,
         minRotation: -0.75,
         maxRotation: 0.75,
@@ -58,4 +58,17 @@
       });
     }
   }
+
+  // Deterministic tiny hash
+  const hash = (s) => [...s].reduce((h,ch)=>((h<<5)-h+ch.charCodeAt(0))|0,0);
+
+  // Earthy, muted range (ochre → moss → sage → teal)
+  const organicEarthy = (word, weight) => {
+    const hues = [25, 35, 45, 95, 120, 160]; // ochre, sand, olive, moss, sage, teal
+    const hue = hues[Math.abs(hash(word)) % hues.length];
+    const sat = 28 + (Math.abs(hash(word + 's')) % 12); // 28–40% (muted)
+    const baseL = 52 + (Math.abs(hash(word + 'l')) % 10); // 52–62%
+    const light = Math.max(32, baseL - Math.min(weight * 2, 16)); // darker for heavier
+    return `hsl(${hue}deg ${sat}% ${light}%)`;
+  };
 })();

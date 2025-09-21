@@ -6,6 +6,17 @@ import panpsychism from "/assets/images/features/panpsychism.webp"
 import physicalism from "/assets/images/features/physicalism.webp"
 import dualism from "/assets/images/features/dualism.webp"
 
+import distress from "/assets/images/emotion/distress.webp"
+import rejecting from "/assets/images/emotion/rejecting.webp"
+import shame from "/assets/images/emotion/shame.webp"
+import negative from "/assets/images/emotion/negative.webp"
+import need from "/assets/images/emotion/need.webp"
+import need2 from "/assets/images/emotion/need2.webp"
+import assertion from "/assets/images/emotion/assertion.webp"
+import selfcompassion from "/assets/images/emotion/self-compassion.webp"
+import grief from "/assets/images/emotion/grief.webp"
+import integration from "/assets/images/emotion/integration.webp"
+
 import roadToHere1 from "/assets/images/roadToHere/1.webp"
 import roadToHere2 from "/assets/images/roadToHere/2.webp"
 import roadToHere3 from "/assets/images/roadToHere/3.webp"
@@ -57,6 +68,17 @@ export const planetImageData = [ //ID, SRC, LATITUDE, LONGITUDE, SIZE, RADIUS, C
 {id: "E0BA43A5-DD1E-499B-B987-89ABC147185F", src: gutLogo, lat: -13, lng: 138, size: 550, radius: 5.06, context: "jaranius"},
 {id: "6E82624B-7964-4EE1-9FB2-678E2F4B6B4B", src: heartLogo, lat: 10, lng: 4, size: 600, radius: 5.06, context: "jaranius"},
 {id: "42AE95EF-168F-4C9A-BD26-4C2E5B4A615C", src: headLogo, lat: 45, lng: -102, size: 400, radius: 5.06, context: "jaranius"},
+
+{id: "BA3679BD-A9D6-4132-B6D1-4832D2622C8E", src: distress, lat: -20.8, lng: 92.2, size: 100, radius: 5.06, context: "jaranius"},
+{id: "77D99BE0-C7C5-4A45-A800-0BF9954B4ADD", src: rejecting, lat: -14.8, lng: 87.2, size: 100, radius: 5.06, context: "jaranius"},
+{id: "F213FE08-1A36-4814-BF2C-8C22082E89FF", src: shame, lat: -14.8, lng: 98, size: 100, radius: 5.06, context: "jaranius"},
+{id: "3209097A-18F7-4D11-A1B4-45E0F963F348", src: negative, lat: -7.7, lng: 103.1, size: 100, radius: 5.06, context: "jaranius"},
+{id: "CEBE83C3-07EA-44C4-84DF-FF96719137E9", src: need, lat: -8.6, lng: 94.3, size: 100, radius: 5.06, context: "jaranius"},
+{id: "769E1942-6AAE-4CB2-9E69-77171DED44A3", src: need2, lat: -9.85, lng: 98.1, size: 50, radius: 5.06, context: "jaranius"},
+{id: "3A677D93-95E2-4453-8C98-5ADB4A823B9C", src: assertion, lat: -1.7, lng: 96.0, size: 100, radius: 5.06, context: "jaranius"},
+{id: "C9C4C05D-A545-4A1E-B4FD-6C2860CF490E", src: selfcompassion, lat: -1.7, lng: 94.4, size: 100, radius: 5.06, context: "jaranius"},
+{id: "05DF5E61-E0B8-4F73-A417-F83416925403", src: grief, lat: -2.6, lng: 106.6, size: 100, radius: 5.06, context: "jaranius"},
+{id: "EDF50EDA-F520-4533-B5A4-285925725C52", src: integration, lat: 3.3, lng: 101.6, size: 100, radius: 5.06, context: "jaranius"},
 
 {id: "FE59E331-95B1-4241-B475-16D8DEA12F38", src: roadToHere1, lat: -84, lng: -180, size: 50, radius: 5.06, context: "jaranius"},
 {id: "82154EC5-0D20-4F50-BF03-5EEEFF52F09D", src: roadToHere2, lat: -80, lng: 179, size: 50, radius: 5.06, context: "jaranius"},

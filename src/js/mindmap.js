@@ -7,7 +7,7 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { convertLatLngtoCartesian } from './mathScripts.js'
 
 //  IMPORT DATA
-import { contexts } from './main.js'
+import { contexts } from './core/datasets.js'
 
 //  IMPORT TEXTURES
 import dash from '/assets/textures/dash.webp'
@@ -30,212 +30,349 @@ export const intersectObjectsArray = []
 
 export const hoveredPins = []
 
-export function createTags(dataSource, destination, radius, context, indexMod) {
-  const loader = new FontLoader();
+let cachedTagFont = null;
+let tagFontPromise = null;
 
-  // walk north by an arc length (world units) on a sphere of radius R
-  const latAfterNorthArc = (latDeg, arcLen, R) =>
-    THREE.MathUtils.clamp(latDeg + THREE.MathUtils.radToDeg(arcLen / Math.max(R, 1e-6)), -90, 90);
+function loadTagFont() {
+  if (cachedTagFont) return Promise.resolve(cachedTagFont);
+  if (!tagFontPromise) {
+    const loader = new FontLoader();
+    tagFontPromise = new Promise((resolve, reject) => {
+      loader.load(tagFont, (font) => {
+        cachedTagFont = font;
+        resolve(font);
+      }, undefined, reject);
+    });
+  }
+  return tagFontPromise;
+}
 
-  // build an orthonormal basis from bottom & top points on the sphere
-  function orientedGroupAt(bottomVec, topVec) {
-    const mid = bottomVec.clone().add(topVec).multiplyScalar(0.5);   // center point (world)
-    const z = mid.clone().normalize();                                // outward normal at center
-    const y = topVec.clone().sub(bottomVec).normalize();              // north along tag
-    const x = new THREE.Vector3().crossVectors(y, z).normalize();     // east
-    // re-orthogonalize y to ensure perfect right-handed basis
-    y.copy(new THREE.Vector3().crossVectors(z, x)).normalize();
+function latAfterNorthArc(latDeg, arcLen, R) {
+  return THREE.MathUtils.clamp(latDeg + THREE.MathUtils.radToDeg(arcLen / Math.max(R, 1e-6)), -90, 90);
+}
 
-    const m = new THREE.Matrix4().makeBasis(x, y, z);
-    const g = new THREE.Group();
-    g.position.copy(mid);
-    g.quaternion.setFromRotationMatrix(m);
-    return g;
+function orientedGroupAt(bottomVec, topVec) {
+  const mid = bottomVec.clone().add(topVec).multiplyScalar(0.5);
+  const z = mid.clone().normalize();
+  const y = topVec.clone().sub(bottomVec).normalize();
+  const x = new THREE.Vector3().crossVectors(y, z).normalize();
+  y.copy(new THREE.Vector3().crossVectors(z, x)).normalize();
+
+  const m = new THREE.Matrix4().makeBasis(x, y, z);
+  const g = new THREE.Group();
+  g.position.copy(mid);
+  g.quaternion.setFromRotationMatrix(m);
+  return g;
+}
+
+function calculateTextWidth(font, txt, size) {
+  const shapes = font.generateShapes(txt, size);
+  const geometry = new THREE.ShapeGeometry(shapes);
+  geometry.computeBoundingBox();
+  return geometry.boundingBox.max.x - geometry.boundingBox.min.x;
+}
+
+function centerText(font, txt, size) {
+  const lines = txt.split('\n');
+  const lineWidths = lines.map((line) => calculateTextWidth(font, line, size));
+  const longest = Math.max(...lineWidths);
+  let spaceWidth = calculateTextWidth(font, ' ', size);
+  if (!isFinite(spaceWidth)) spaceWidth = calculateTextWidth(font, 'M', size);
+  const spaceFactor = 1.38;
+  return lines
+    .map((line, i) => ' '.repeat(Math.floor((longest - lineWidths[i]) / spaceWidth * spaceFactor)) + line)
+    .join('\n');
+}
+
+function instantiateTag(font, item, radius, context, globalIndex, destination) {
+  const dataSourceRef = contexts[context].tagData;
+  const lat = Number(item.lat);
+  const lng = Number(item.lng);
+  const color = item.color;
+  const sizeScalar = item.size / 100000;
+
+  const text = centerText(font, item.text, sizeScalar);
+
+  const txtGeo = new THREE.ShapeGeometry(font.generateShapes(text, 100));
+  txtGeo.computeBoundingBox();
+  txtGeo.translate(
+    -0.5 * (txtGeo.boundingBox.max.x - txtGeo.boundingBox.min.x),
+    (txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y),
+    0
+  );
+  const tag = new THREE.Mesh(txtGeo, textMaterial);
+  tag.scale.set(sizeScalar, sizeScalar, sizeScalar);
+  tag.userData = tag.userData || {};
+  tag.userData.baseScale = sizeScalar;
+  tag.userData.textHeightFactor = txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y;
+
+  let textBottom = convertLatLngtoCartesian(lat, lng, radius + 0.061);
+  if (dataSourceRef === enneagramTagData) {
+    const t = (lat * Math.PI) / 180;
+    const radiusModifier = Math.cos(t);
+    const scaleFactor = 3;
+    const constrictFactor = 2.4;
+    textBottom = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.062);
+  }
+  const textBottomVec = new THREE.Vector3(textBottom.x, textBottom.y, textBottom.z);
+  const Rtag = textBottomVec.length();
+  const textHeightWorld = (txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y) * sizeScalar;
+  const halfText = 0.5 * textHeightWorld;
+
+  const latTopText = latAfterNorthArc(lat, textHeightWorld, Rtag);
+  const textTopDir = convertLatLngtoCartesian(latTopText, lng, Rtag);
+  const textTopVec = new THREE.Vector3(textTopDir.x, textTopDir.y, textTopDir.z);
+
+  const tagGroup = orientedGroupAt(textBottomVec, textTopVec);
+  tag.position.set(0, -halfText, 0);
+
+  const xPadding = 200;
+  const yPadding = 0;
+  const roundingFactor = sizeScalar * 125;
+  const width = (Math.abs(txtGeo.boundingBox.min.x) + Math.abs(txtGeo.boundingBox.max.x) + xPadding) * sizeScalar;
+  const height = (Math.abs(txtGeo.boundingBox.min.y) + Math.abs(txtGeo.boundingBox.max.y) + yPadding) * sizeScalar;
+
+  const shape = new THREE.Shape()
+    .moveTo(0, roundingFactor)
+    .lineTo(0, height - roundingFactor)
+    .quadraticCurveTo(0, height, roundingFactor, height)
+    .lineTo(width - roundingFactor, height)
+    .quadraticCurveTo(width, height, width, height - roundingFactor)
+    .lineTo(width, roundingFactor)
+    .quadraticCurveTo(width, 0, width - roundingFactor, 0)
+    .lineTo(roundingFactor, 0)
+    .quadraticCurveTo(0, 0, 0, roundingFactor);
+
+  const boxGeo = new THREE.ShapeGeometry(shape);
+  const uv = boxGeo.attributes.uv;
+  let min = Infinity;
+  let max = 0;
+  for (let i = 0; i < uv.count; i++) {
+    const u = uv.getX(i);
+    const v = uv.getY(i);
+    min = Math.min(min, u, v);
+    max = Math.max(max, u, v);
+  }
+  for (let i = 0; i < uv.count; i++) {
+    const u = uv.getX(i);
+    const v = uv.getY(i);
+    uv.setXY(i, THREE.MathUtils.mapLinear(u, min, max, 0, 1), THREE.MathUtils.mapLinear(v, min, max, 0, 1));
+  }
+  boxGeo.computeBoundingBox();
+  boxGeo.translate(
+    -0.5 * (boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x),
+    0,
+    0
+  );
+
+  const box = new THREE.Mesh(boxGeo, boxMaterials[color]);
+  box.castShadow = true;
+  box.userData = box.userData || {};
+  box.userData.baseScale = 1;
+  box.userData.heightFactor = height;
+
+  let boxBottom = convertLatLngtoCartesian(lat, lng, radius + 0.06);
+  if (dataSourceRef === enneagramTagData) {
+    const t = (lat * Math.PI) / 180;
+    const radiusModifier = Math.cos(t);
+    const scaleFactor = 3;
+    const constrictFactor = 2.4;
+    boxBottom = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.06);
+  }
+  const boxBottomVec = new THREE.Vector3(boxBottom.x, boxBottom.y, boxBottom.z);
+  const Rbox = boxBottomVec.length();
+  const latTopBox = latAfterNorthArc(lat, height, Rbox);
+  const boxTopDir = convertLatLngtoCartesian(latTopBox, lng, Rbox);
+  const boxTopVec = new THREE.Vector3(boxTopDir.x, boxTopDir.y, boxTopDir.z);
+
+  const boxGroup = orientedGroupAt(boxBottomVec, boxTopVec);
+  const halfBox = 0.5 * height;
+  box.position.set(0, -halfBox, 0);
+
+  box.renderOrder = 10;
+  tag.renderOrder = 11;
+
+  box.source = dataSourceRef;
+  tag.source = dataSourceRef;
+  box.context = context;
+  tag.context = context;
+  box.index = globalIndex;
+  tag.index = globalIndex;
+
+  tagGroup.add(tag);
+  boxGroup.add(box);
+
+  tag.userData.group = tagGroup;
+  box.userData.group = boxGroup;
+
+  destination.add(boxGroup);
+  destination.add(tagGroup);
+
+  contexts[context].boxes.push(box);
+  contexts[context].tags.push(tag);
+}
+
+function instantiatePin(item, radius, context, globalIndex, destination) {
+  const dataSourceRef = contexts[context].tagData;
+  const lat = Number(item.lat);
+  const lng = Number(item.lng);
+  const color = item.color;
+  const size = item.size;
+  const slides = item.slides;
+
+  const segments = slides ? 10 : 6;
+  const material = slides ? pinMaterials[color] : pinWireframeMaterials[color];
+
+  const pin = new THREE.Mesh(new THREE.SphereGeometry(size / 1333, segments, segments), material);
+  pin.userData = pin.userData || {};
+  pin.userData.baseScale = pin.scale.x;
+  pin.source = dataSourceRef;
+  pin.context = context;
+  pin.index = globalIndex;
+  pin.originalSize = size;
+
+  let pos = convertLatLngtoCartesian(lat, lng, radius + 0.01);
+  if (dataSourceRef === enneagramTagData) {
+    const t = (lat * Math.PI) / 180;
+    const radiusModifier = Math.cos(t);
+    const scaleFactor = 3;
+    const constrictFactor = 2.4;
+    pos = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor);
   }
 
-  loader.load(tagFont, function (font) {
-    function calculateTextWidth(txt, font, size) {
-      const shapes = font.generateShapes(txt, size);
-      const geometry = new THREE.ShapeGeometry(shapes);
-      geometry.computeBoundingBox();
-      return geometry.boundingBox.max.x - geometry.boundingBox.min.x;
-    }
+  pin.position.set(pos.x, pos.y, pos.z);
+  pin.castShadow = true;
 
-    function centerText(txt, font, size) {
-      const lines = txt.split('\n');
-      const lineWidths = lines.map(l => calculateTextWidth(l, font, size));
-      const longest = Math.max(...lineWidths);
-      let spaceWidth = calculateTextWidth(' ', font, size);
-      if (!isFinite(spaceWidth)) spaceWidth = calculateTextWidth('M', font, size);
-      const spaceFactor = 1.38;
-      return lines.map((line, i) =>
-        ' '.repeat(Math.floor((longest - lineWidths[i]) / spaceWidth * spaceFactor)) + line
-      ).join('\n');
-    }
+  destination.add(pin);
+  intersectObjectsArray.push(pin);
+  contexts[context].pins.push(pin);
+}
 
-    function instantiateTag(index, txt, lat, lng, color, size) {
-      txt = centerText(txt, font, size);
-
-      // --- TEXT (unchanged geometry; bottom-origin) ---
-      const txtGeo = new THREE.ShapeGeometry(font.generateShapes(txt, 100));
-      txtGeo.computeBoundingBox();
-      txtGeo.translate(
-        -0.5 * (txtGeo.boundingBox.max.x - txtGeo.boundingBox.min.x), // center X
-        (txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y),        // bottom-origin
-        0
-      );
-      const tag = new THREE.Mesh(txtGeo, textMaterial);
-      tag.scale.set(size, size, size);
-
-      // world height used for orientation
-      const textHeightWorld = (txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y) * size;
-      const halfText = 0.5 * textHeightWorld;
-
-      // original bottom position (unchanged)
-      let textBottom = convertLatLngtoCartesian(lat, lng, radius + 0.061);
-      if (dataSource == enneagramTagData) {
-        const t = (lat * Math.PI) / 180;
-        const radiusModifier = Math.cos(t);
-        const scaleFactor = 3;
-        const constrictFactor = 2.4;
-        textBottom = convertLatLngtoCartesian(
-          lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.062
-        );
-      }
-      const textBottomVec = new THREE.Vector3(textBottom.x, textBottom.y, textBottom.z);
-      const Rtag = textBottomVec.length();
-
-      // compute top & oriented parent group (center tangent)
-      const latTopText = latAfterNorthArc(lat, textHeightWorld, Rtag);
-      const textTopDir = convertLatLngtoCartesian(latTopText, lng, Rtag);
-      const textTopVec = new THREE.Vector3(textTopDir.x, textTopDir.y, textTopDir.z);
-
-      const tagGroup = orientedGroupAt(textBottomVec, textTopVec);
-      // place the mesh so its bottom lands on the original bottom point
-      tag.position.set(0, -halfText, 0);
-
-      // --- BOX (unchanged geometry/UV; bottom-origin) ---
-      const xPadding = 200, yPadding = 0;
-      const roundingFactor = size * 125;
-      const width  = (Math.abs(txtGeo.boundingBox.min.x) + Math.abs(txtGeo.boundingBox.max.x) + xPadding) * size;
-      const height = (Math.abs(txtGeo.boundingBox.min.y) + Math.abs(txtGeo.boundingBox.max.y) + yPadding) * size;
-
-      const shape = new THREE.Shape()
-        .moveTo(0, roundingFactor)
-        .lineTo(0, height - roundingFactor)
-        .quadraticCurveTo(0, height, roundingFactor, height)
-        .lineTo(width - roundingFactor, height)
-        .quadraticCurveTo(width, height, width, height - roundingFactor)
-        .lineTo(width, roundingFactor)
-        .quadraticCurveTo(width, 0, width - roundingFactor, 0)
-        .lineTo(roundingFactor, 0)
-        .quadraticCurveTo(0, 0, 0, roundingFactor);
-
-      const boxGeo = new THREE.ShapeGeometry(shape);
-      const uv = boxGeo.attributes.uv;
-      let min = Infinity, max = 0;
-      for (let i = 0; i < uv.count; i++) {
-        const u = uv.getX(i), v = uv.getY(i);
-        min = Math.min(min, u, v);
-        max = Math.max(max, u, v);
-      }
-      for (let i = 0; i < uv.count; i++) {
-        const u = uv.getX(i), v = uv.getY(i);
-        uv.setXY(i,
-          THREE.MathUtils.mapLinear(u, min, max, 0, 1),
-          THREE.MathUtils.mapLinear(v, min, max, 0, 1)
-        );
-      }
-      boxGeo.computeBoundingBox();
-      boxGeo.translate(
-        -0.5 * (boxGeo.boundingBox.max.x - boxGeo.boundingBox.min.x), // center X
-        0,                                                            // bottom-origin
-        0
-      );
-
-      const box = new THREE.Mesh(boxGeo, boxMaterials[color]);
-      box.castShadow = true;
-
-      // original bottom position (unchanged)
-      let boxBottom = convertLatLngtoCartesian(lat, lng, radius + 0.06);
-      if (dataSource == enneagramTagData) {
-        const t = (lat * Math.PI) / 180;
-        const radiusModifier = Math.cos(t);
-        const scaleFactor = 3;
-        const constrictFactor = 2.4;
-        boxBottom = convertLatLngtoCartesian(
-          lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.06
-        );
-      }
-      const boxBottomVec = new THREE.Vector3(boxBottom.x, boxBottom.y, boxBottom.z);
-      const Rbox = boxBottomVec.length();
-
-      const latTopBox = latAfterNorthArc(lat, height, Rbox);
-      const boxTopDir = convertLatLngtoCartesian(latTopBox, lng, Rbox);
-      const boxTopVec = new THREE.Vector3(boxTopDir.x, boxTopDir.y, boxTopDir.z);
-
-      const boxGroup = orientedGroupAt(boxBottomVec, boxTopVec);
-      const halfBox = 0.5 * height;
-      box.position.set(0, -halfBox, 0);
-
-      // render order / metadata (unchanged)
-      box.renderOrder = 10;
-      tag.renderOrder = 11;
-
-      box.source = dataSource; box.context = context; box.index = index + indexMod;
-      tag.source = dataSource; tag.context = context; tag.index = index + indexMod;
-
-      // add children to their oriented parents
-      tagGroup.add(tag);
-      boxGroup.add(box);
-
-      // add to scene
-      destination.add(boxGroup);
-      destination.add(tagGroup);
-
-      contexts[context].boxes.push(box);
-      contexts[context].tags.push(tag);
-    }
-
+export function createTags(dataSource, destination, radius, context, indexMod) {
+  const fontPromise = loadTagFont().then((font) => {
     dataSource.forEach((item, index) => {
-      instantiateTag(index, item.text, item.lat, item.lng, item.color, item.size / 100000);
+      const globalIndex = index + indexMod;
+      instantiateTag(font, item, radius, context, globalIndex, destination);
     });
   });
 
-  // Pins: unchanged
-  function instantiatePin(index, lat, lng, color, size, slides, destination) {
-    const segments = slides ? 10 : 6;
-    const material = slides ? pinMaterials[color] : pinWireframeMaterials[color];
+  dataSource.forEach((item, index) => {
+    const globalIndex = index + indexMod;
+    instantiatePin(item, radius, context, globalIndex, destination);
+  });
 
-    const pin = new THREE.Mesh(
-      new THREE.SphereGeometry(size / 1333, segments, segments),
-      material,
-    );
-    pin.source = dataSource;
-    pin.context = context;
-    pin.index = index + indexMod;
-    pin.originalSize = size;
+  return fontPromise;
+}
 
-    let pos = convertLatLngtoCartesian(lat, lng, radius + 0.01);
-    if (dataSource == enneagramTagData) {
-      const t = (lat * Math.PI) / 180;
-      const radiusModifier = Math.cos(t);
-      const scaleFactor = 3;
-      const constrictFactor = 2.4;
-      pos = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor);
-    }
+function updatePinTransform(pin) {
+  if (!pin || !pin.source) return;
+  const contextIndex = pin.context;
+  const data = pin.source[pin.index];
+  if (!data) return;
+  const radius = contexts[contextIndex].radius;
+  const lat = Number(data.lat);
+  const lng = Number(data.lng);
+  let pos = convertLatLngtoCartesian(lat, lng, radius + 0.01);
+  if (pin.source === enneagramTagData) {
+    const t = (lat * Math.PI) / 180;
+    const radiusModifier = Math.cos(t);
+    const scaleFactor = 3;
+    const constrictFactor = 2.4;
+    pos = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor);
+  }
+  pin.position.set(pos.x, pos.y, pos.z);
+}
 
-    pin.position.set(pos.x, pos.y, pos.z);
-    pin.castShadow = true;
+function updateBoxTransform(box) {
+  if (!box || !box.source) return;
+  const contextIndex = box.context;
+  const data = box.source[box.index];
+  if (!data) return;
+  const radius = contexts[contextIndex].radius;
+  const lat = Number(data.lat);
+  const lng = Number(data.lng);
+  let boxBottom = convertLatLngtoCartesian(lat, lng, radius + 0.06);
+  if (box.source === enneagramTagData) {
+    const t = (lat * Math.PI) / 180;
+    const radiusModifier = Math.cos(t);
+    const scaleFactor = 3;
+    const constrictFactor = 2.4;
+    boxBottom = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.06);
+  }
+  const boxBottomVec = new THREE.Vector3(boxBottom.x, boxBottom.y, boxBottom.z);
+  const Rbox = boxBottomVec.length();
+  const heightFactor = box.userData.heightFactor || 0;
+  const heightWorld = heightFactor * box.scale.y;
+  const latTopBox = latAfterNorthArc(lat, heightWorld, Rbox);
+  const boxTopDir = convertLatLngtoCartesian(latTopBox, lng, Rbox);
+  const boxTopVec = new THREE.Vector3(boxTopDir.x, boxTopDir.y, boxTopDir.z);
 
-    destination.add(pin);
-    intersectObjectsArray.push(pin);
-    contexts[context].pins.push(pin);
+  const mid = boxBottomVec.clone().add(boxTopVec).multiplyScalar(0.5);
+  const z = mid.clone().normalize();
+  const y = boxTopVec.clone().sub(boxBottomVec).normalize();
+  const x = new THREE.Vector3().crossVectors(y, z).normalize();
+  y.copy(new THREE.Vector3().crossVectors(z, x)).normalize();
+
+  const matrix = new THREE.Matrix4().makeBasis(x, y, z);
+  const boxGroup = box.userData.group;
+  if (boxGroup) {
+    boxGroup.position.copy(mid);
+    boxGroup.quaternion.setFromRotationMatrix(matrix);
+    boxGroup.updateMatrixWorld();
   }
 
-  dataSource.forEach((item, index) => {
-    instantiatePin(index, item.lat, item.lng, item.color, item.size, item.slides, destination);
-  });
+  const halfBox = 0.5 * heightWorld;
+  box.position.set(0, -halfBox, 0);
+}
+
+function updateTagTransform(tag) {
+  if (!tag || !tag.source) return;
+  const contextIndex = tag.context;
+  const data = tag.source[tag.index];
+  if (!data) return;
+  const radius = contexts[contextIndex].radius;
+  const lat = Number(data.lat);
+  const lng = Number(data.lng);
+  let textBottom = convertLatLngtoCartesian(lat, lng, radius + 0.061);
+  if (tag.source === enneagramTagData) {
+    const t = (lat * Math.PI) / 180;
+    const radiusModifier = Math.cos(t);
+    const scaleFactor = 3;
+    const constrictFactor = 2.4;
+    textBottom = convertLatLngtoCartesian(lat, lng, radius + radiusModifier * scaleFactor - constrictFactor + 0.062);
+  }
+  const textBottomVec = new THREE.Vector3(textBottom.x, textBottom.y, textBottom.z);
+  const Rtag = textBottomVec.length();
+  const textHeightFactor = tag.userData.textHeightFactor || 0;
+  const textHeightWorld = textHeightFactor * tag.scale.y;
+  const latTopText = latAfterNorthArc(lat, textHeightWorld, Rtag);
+  const textTopDir = convertLatLngtoCartesian(latTopText, lng, Rtag);
+  const textTopVec = new THREE.Vector3(textTopDir.x, textTopDir.y, textTopDir.z);
+
+  const mid = textBottomVec.clone().add(textTopVec).multiplyScalar(0.5);
+  const z = mid.clone().normalize();
+  const y = textTopVec.clone().sub(textBottomVec).normalize();
+  const x = new THREE.Vector3().crossVectors(y, z).normalize();
+  y.copy(new THREE.Vector3().crossVectors(z, x)).normalize();
+
+  const matrix = new THREE.Matrix4().makeBasis(x, y, z);
+  const tagGroup = tag.userData.group;
+  if (tagGroup) {
+    tagGroup.position.copy(mid);
+    tagGroup.quaternion.setFromRotationMatrix(matrix);
+    tagGroup.updateMatrixWorld();
+  }
+
+  const halfText = 0.5 * textHeightWorld;
+  tag.position.set(0, -halfText, 0);
+}
+
+export function refreshNode(contextIndex, nodeIndex) {
+  const ctx = contexts[contextIndex];
+  if (!ctx) return;
+  updatePinTransform(ctx.pins[nodeIndex]);
+  updateBoxTransform(ctx.boxes[nodeIndex]);
+  updateTagTransform(ctx.tags[nodeIndex]);
 }
 
 // export function createTags(dataSource, destination, radius, context, indexMod) {
@@ -717,14 +854,15 @@ export function hoverPins(intersects) {
     if (intersects.length === 0 && hoveredPins.length > 0) {
         for (const hoveredPin of hoveredPins) {
             if (hoveredPin.source !== planetNuggetData) {
-                hoveredPin.material = hoveredPin.material.wireframe ? pinWireframeMaterials[1] : pinMaterials[1];
-                if (hoveredPin.scale.x === 1) hoveredPin.scale.multiplyScalar(1.2);
+            hoveredPin.material = hoveredPin.material.wireframe ? pinWireframeMaterials[1] : pinMaterials[1];
+            if (hoveredPin.scale.x === 1) hoveredPin.scale.multiplyScalar(1.2);
             }
 
             const source = contexts[hoveredPin.context].tagData[hoveredPin.index]
             hoveredPin.material = source.slides ? pinMaterials[source.color] : pinWireframeMaterials[source.color];
 
-            hoveredPin.scale.set(1, 1, 1);
+            const baseScale = hoveredPin.userData.baseScale || 1;
+            hoveredPin.scale.set(baseScale, baseScale, baseScale);
         }
         hoveredPins.length = 0;
     }
@@ -734,8 +872,9 @@ export function hoverPins(intersects) {
         if (!hoveredPins.includes(intersect.object)) hoveredPins.push(intersect.object);
 
         if (intersect.object.source !== planetNuggetData) {
+            const baseScale = intersect.object.userData.baseScale || 1;
             intersect.object.material = intersect.object.material.wireframe ? pinWireframeMaterials[1] : pinMaterials[1];
-            if (intersect.object.scale.x === 1) intersect.object.scale.multiplyScalar(1.2);
+            intersect.object.scale.set(baseScale * 1.2, baseScale * 1.2, baseScale * 1.2);
         }
     }
 }

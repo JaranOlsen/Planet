@@ -1,8 +1,6 @@
 //  IMPORT DEPENDENCIES
 import * as THREE from 'three'
 import { Float32BufferAttribute, FrontSide, DoubleSide, Vector2 } from 'three'
-import { OrbitControls } from "three/addons/controls/OrbitControls.js"
-import { FlyControls } from 'three/addons/controls/FlyControls.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'
 import { generateUUID } from 'three/src/math/MathUtils.js'
@@ -11,7 +9,20 @@ window.WordCloud = WordCloud;
 
 
 //  IMPORT SCRIPTS
-import { createImages, createTags, hoveredPins, intersectObjectsArray, createConnections, hoverPins, instantiateNugget, createRoute } from './mindmap.js'
+import { renderer, camera, clock, orbitControls, flyControls, resizeRendererToDisplaySize, updateFlightSpeedByDistance, getFollowMode, setFollowMode } from './core/camera.js'
+import { setupLighting } from './core/lighting.js'
+import { createImages, createTags, hoveredPins, intersectObjectsArray, createConnections, hoverPins, instantiateNugget, createRoute, refreshNode } from './mindmap.js'
+import {
+    configureDatasets,
+    contexts,
+    nuggets,
+    createContexts as datasetsCreateContexts,
+    createMindmap as datasetsCreateMindmap,
+    clearPlanetMindmapVisuals as datasetsClearPlanetMindmapVisuals,
+    clearPlanetImages as datasetsClearPlanetImages,
+    switchMindmap as datasetsSwitchMindmap,
+    isDeveloperMode,
+} from './core/datasets.js'
 import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng, easeInOutQuad } from './mathScripts.js'
 import { pushContent, handleCarouselButton } from './content.js'
 import { initialiseVersion } from './versions.js'
@@ -19,15 +30,11 @@ import { creation } from './creation.js'
 import { updateGutta, guttCrumbMesh, maraCrumbMesh } from './gutta.js'
 import { createField } from './podcast.js'
 import { createFieldLines } from './flux.js'
+import { setupIntro, introState, fadeOutAudio, animateLetterSpacing } from './core/intro.js'
+import { DeveloperHud } from './core/developerHud.js'
 
 //IMPORT DATA
 // Default / initial mindmap dataset (index 0). Additional datasets loaded dynamically.
-import { planetTagData as planetTagData_initial, planetConnections as planetConnections_initial, planetArrowedConnections as planetArrowedConnections_initial, planetDashedConnections as planetDashedConnections_initial, planetTunnelConnections as planetTunnelConnections_initial } from './data/planetData.js'
-import { planetImageData as planetImageData_initial } from './data/planetImageData.js'
-import { planetNuggetData } from './data/planetNuggetData.js'
-import { spiralTagData, spiralConnections, spiralArrowedConnections, spiralDashedConnections } from './data/spiralData.js'
-import { spiralImageData } from './data/spiralImageData.js'
-import { enneagramTagData, enneagramConnections, enneagramArrowedConnections, enneagramDashedConnections, enneagramTunnelConnections } from './data/enneagramData.js'
 import { contentData } from './data/contentData.js'
 import { palette } from './data/palette.js'
 import { pinMaterials, pinWireframeMaterials, boxMaterials } from './data/materials.js'
@@ -67,139 +74,6 @@ import field4 from '/src/models/field4.glb'
 
 window.appStatus = "initialising";
 
-const canvas = document.querySelector('#canvas');
-const renderer = new THREE.WebGLRenderer(
-    {
-        canvas,
-        antialias: true,
-    });
-renderer.setPixelRatio(window.devicePixelRatio)
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-renderer.logarithmicDepthBuffer = false; //turn on if z-fighting
-renderer.frustumCulled = true;
-
-function resizeRendererToDisplaySize(renderer) {
-    const canvas = renderer.domElement;
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
-    const needResize = canvas.width !== width || canvas.height !== height;
-    if (needResize) {
-        renderer.setSize(width, height, false);
-    }
-    return needResize;
-}
-
-const fov = 50;
-const aspect = 2;  // the canvas default
-const near = 0.1; // raise near plane for better depth precision and fewer distant flickers
-const far = 2000;
-const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-
-camera.position.z = 500
-
-const clock = new THREE.Clock();
-
-// -- TRANSITION VARIABLES --
-let transitioningToOrbit = false;
-let transitionStartTime = 0;
-let transitionDuration = 1.5; // in seconds, tweak as desired
-
-// We'll store the camera position/orientation at the moment of switching out of flight mode
-let flightCamPos = new THREE.Vector3();
-let flightCamQuat = new THREE.Quaternion();
-
-// And the orbit "destination" position/orientation we'll end up at
-let orbitCamPos = new THREE.Vector3(0, 0, 500);
-let orbitCamQuat = new THREE.Quaternion();
-
-const orbitControls = new OrbitControls(camera, canvas);
-orbitControls.enablePan = false
-orbitControls.maxDistance = 1000
-orbitControls.minDistance = 5.2
-orbitControls.zoomSpeed = 0.3
-orbitControls.rotateSpeed = 0.3
-orbitControls.target.set(0, 0, 0);
-orbitControls.update();
-orbitControls.enabled = false;
-
-const baseMovementSpeed = 0.1;
-let baseMovementSpeedModifier = 1;
-const baseRollSpeed = Math.PI / 48;
-let baseRollSpeedModifier = 1;
-const flyControls = new FlyControls(camera, renderer.domElement);
-flyControls.domElement = renderer.domElement;
-flyControls.movementSpeed = baseMovementSpeed * baseMovementSpeedModifier;
-flyControls.rollSpeed = baseRollSpeed * baseRollSpeedModifier;
-flyControls.autoForward = false;
-flyControls.dragToLook = false;
-flyControls.enabled = false;
-flyControls.minDistance = 5.15;
-
-let followMode = "manual"; // can be "manual", "gutt", or "mara"
-
-// Add momentum and roll variables
-let velocity = new THREE.Vector3(0, 0, 0); // Movement velocity
-let rollVelocity = 0; // Roll velocity
-const damping = 0.999; // Damping factor for momentum
-const rollDamping = 0.999; // Damping factor for roll
-
-// Override the FlyControls update method
-const originalUpdate = flyControls.update.bind(flyControls);
-flyControls.update = function (delta) {
-    // Use the original update for basic control handling
-    originalUpdate(delta);
-
-    // Transform velocity into the camera's local space
-    const localVelocity = velocity.clone().applyQuaternion(camera.quaternion);
-
-    // Apply damping for inertia
-    velocity.multiplyScalar(damping);
-    rollVelocity *= rollDamping;
-
-    // Update position and rotation based on momentum
-    camera.position.add(localVelocity);
-    camera.rotateZ(rollVelocity);
-};
-
-// Listen for keypresses to control movement and roll
-document.addEventListener('keydown', (event) => {
-    const speed = 0.001; // Adjust speed for movement
-    const rollSpeed = 0.000001; // Adjust speed for rolling
-    switch (event.code) {
-        case 'KeyW': // Move forward
-            velocity.z -= speed;
-            break;
-        case 'KeyS': // Move backward
-            velocity.z += speed;
-            break;
-        case 'KeyA': // Move left
-            velocity.x -= speed;
-            break;
-        case 'KeyD': // Move right
-            velocity.x += speed;
-            break;
-        case 'Space': // Move up
-            velocity.y += speed;
-            break;
-        case 'ShiftLeft': // Move down
-            velocity.y -= speed;
-            break;
-        case 'KeyQ': // Roll counterclockwise
-            rollVelocity += rollSpeed;
-            break;
-        case 'KeyE': // Roll clockwise
-            rollVelocity -= rollSpeed;
-            break;
-    }
-});
-
-
-
-
-
-
-
 
 const scene = new THREE.Scene();
 
@@ -208,16 +82,62 @@ const raycaster = new THREE.Raycaster();
 
 let developer = false;
 
-export let contexts = []
 let selectedContext = 0;
 let selectedPin = null;
 let selectedBox = null;
 let selectedTag = null;
 let selectedNode = null;
 let selectedNodes = []
-let nuggets = []
 let showContent = true;
 let fastMove = false;
+const developerHud = new DeveloperHud();
+
+function updateDeveloperHud() {
+    developerHud.update({ developer, contexts, selectedContext });
+}
+
+function createContexts(version) {
+    const devMode = datasetsCreateContexts(version);
+    developer = devMode;
+    if (!developer) {
+        developerHud.hide();
+    } else {
+        updateDeveloperHud();
+    }
+    return devMode;
+}
+
+function createMindmap() {
+    const result = datasetsCreateMindmap();
+    updateDeveloperHud();
+    return result;
+}
+
+function clearPlanetMindmapVisuals() {
+    const result = datasetsClearPlanetMindmapVisuals();
+    updateDeveloperHud();
+    return result;
+}
+
+function clearPlanetImages() {
+    const result = datasetsClearPlanetImages();
+    updateDeveloperHud();
+    return result;
+}
+
+function switchMindmap(index) {
+    const result = datasetsSwitchMindmap(index);
+    if (result && typeof result.then === 'function') {
+        return result.then((value) => {
+            updateDeveloperHud();
+            return value;
+        });
+    }
+    updateDeveloperHud();
+    return result;
+}
+
+export { createContexts, createMindmap, clearPlanetMindmapVisuals, clearPlanetImages, switchMindmap };
 
 export let slideshowStatus = {
     activeSlideshow: undefined,
@@ -263,9 +183,6 @@ let guttaStats = {
 const postLoadingManager = new THREE.LoadingManager();
 const textureLoader2 = new THREE.TextureLoader(postLoadingManager)
 
-const playButton = document.getElementById("playbutton")
-const credits = document.getElementById("credits")
-const skipButton = document.getElementById("skipbutton")
 initialiseVersion(creation, postLoadingManager, guttaState, scene)
 window.appStatus = "version-menu"
 
@@ -298,226 +215,7 @@ export function initialiseLoadingManager(loadingManager) {
     };
 }
 
-//SILENCE SCREEN
-function animateLetterSpacing() {
-    const element = document.getElementById('silence');
-    let start = null;
-    const initialSpacing = 4; // Starting letter-spacing in rem
-    const maxSpacing = 8; // Maximum letter-spacing in rem
-    const duration = 50000; // Duration in milliseconds
-
-    function step(timestamp) {
-        if (!start) start = timestamp;
-        const progress = (timestamp - start) / duration;
-        const easing = 1 - Math.pow(1 - progress, 3); // Cubic easing out: 1 - (1 - t)^3
-        const currentSpacing = Math.min(initialSpacing + easing * (maxSpacing - initialSpacing), maxSpacing);
-
-        element.style.letterSpacing = `${currentSpacing}rem`;
-        // Adjust margin-right to be the negative value of currentSpacing
-        element.style.marginRight = `-${currentSpacing}rem`;
-
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        } else {
-            element.style.letterSpacing = `${maxSpacing}rem`; // Ensure it ends at maxSpacing
-            element.style.marginRight = `-${maxSpacing}rem`; // Ensure margin-right matches the final letter-spacing
-        }
-    }
-
-    window.requestAnimationFrame(step);
-}
-function fadeOutAudio(audioElement, fadeDuration = 3000) {
-    const originalVolume = audioElement.volume;
-    const intervalSpeed = 50; // How quickly the volume decreases
-    const decrementAmount = (originalVolume / fadeDuration) * intervalSpeed; // Calculate decrement amount
-  
-    const fadeOut = setInterval(() => {
-      if (audioElement.volume > decrementAmount) {
-        audioElement.volume -= decrementAmount;
-      } else {
-        audioElement.volume = 0;
-        audioElement.pause(); // Stop the audio
-        audioElement.currentTime = 0; // Reset the audio to the start
-        clearInterval(fadeOut);
-      }
-    }, intervalSpeed);
-  }
-
-//INTRO
-function updateIntro() {
-    const selection = document.getElementById('intro-select').value;
-    const credits = document.getElementById('credits');
-    const subtitleContainer = document.getElementById('subtitle-container');
-    const audioElement = document.getElementById('introTune');
-    const sourceElement = audioElement.getElementsByTagName('source')[0];
-  
-    switch(selection) {
-      case 'desiderata':
-        credits.textContent = 'Desiderata - Max Ehrmann. RedFrost Motivation';
-        subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/Planet/assets/audio/desiderata.mp3';
-        break;
-      case 'astronomer':
-        credits.textContent = "When I Heard the Learn'd Astronomer - Walt Whitman. RedFrost Motivation";
-        subtitleContainer.dataset.subtitleFile = 'astronomer';
-        sourceElement.src = '/Planet//assets/audio/astronomer.mp3';
-        break;
-      case 'carlrogers':
-        credits.textContent = "Carl Rogers speaking about listening and presence. Music: First Step - Hans Zimmer";
-        subtitleContainer.dataset.subtitleFile = 'carlrogers';
-        sourceElement.src = '/Planet/assets/audio/carlrogers.mp3';
-        break;
-      case 'carlrogers2':
-        credits.textContent = "Carl Rogers speaking about listening and presence. Music: This Is Me - Jaran de los Santos Olsen";
-        subtitleContainer.dataset.subtitleFile = 'carlrogers2';
-        sourceElement.src = '/Planet/assets/audio/carlrogers2.mp3';
-        break;
-      case 'alanwatts':
-        credits.textContent = "Alan Watts on Swimming With the Stream. Music: Agarb - Bilro & Barbosa and Passion - Sappheiros";
-        subtitleContainer.dataset.subtitleFile = 'alanwatts';
-        sourceElement.src = '/Planet/assets/audio/alanwatts.mp3';
-        break;
-      case 'alanwatts2':
-        credits.textContent = "Alan Watts on Letting Go. Music: Kevin MacLeod - Meditation Impromptu 1";
-        subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/Planet/assets/audio/alanwatts2.mp3';
-        break;
-      case 'ajahnchah':
-        credits.textContent = "Ajahn Chah from the BBC documentary 'The Mindful Way' & Jack Kornfield speaking about Ajahn Chah and loving awareness. Music: Jaran Olsen - This is me";
-        subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/Planet/assets/audio/ajahnchah.mp3';
-        break;
-      case 'honestIntro':
-        credits.textContent = "An Honest Meditation";
-        subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/Planet/assets/audio/honestIntro.mp3';
-        break;
-      case 'guesthouse':
-        credits.textContent = "The Guesthouse - Rumi. Read by Helena Bonham Carter";
-        subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/Planet/assets/audio/guesthouse.mp3';
-        break;
-      case 'ramanamaharsi':
-        credits.textContent = "Jack Kornfield reads about Ramana Maharsi";
-        subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/Planet/assets/audio/ramanamaharsi.mp3';
-        break;
-      case 'krishnamurti':
-        credits.textContent = "Krishnamurti on Meditation and Love";
-        subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/Planet/assets/audio/krishnamurti.mp3';
-        break;
-      case 'rupertspira':
-        credits.textContent = "I am Always I - Rupert Spira";
-        subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/Planet/assets/audio/rupertspira.mp3';
-        break;
-      case 'rupertspira2':
-        credits.textContent = "I am That - Rupert Spira";
-        subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/Planet/assets/audio/rupertspira2.mp3';
-        break;
-      case 'portianelson':
-        credits.textContent = "Autobiography in five chapters - Portia Nelson";
-        subtitleContainer.dataset.subtitleFile = 'null';
-        sourceElement.src = '/Planet/assets/audio/portianelson.mp3';
-        break;
-    }
-    audioElement.load();
-    audioElement.addEventListener("loadedmetadata", function() {
-        introTuneLength = audioElement.duration;
-    });
-    loadSubtitles(subtitleContainer.dataset.subtitleFile)
-}
-document.getElementById('intro-select').addEventListener('change', updateIntro);
-
-const subtitleContainer = document.getElementById('subtitle-container');
-const subtitleFile = subtitleContainer.getAttribute('data-subtitle-file');
-let subtitles = null;
-let elapsedTime = 0;
-let currentSubtitle = null;
-
-async function loadSubtitles(subtitleFileName) {
-    if (subtitleFileName && subtitleFileName !== 'false' && subtitleFileName !== 'null') {
-        try {
-            const module = await import(`./data/subtitles/${subtitleFileName}.js`);
-            subtitles = module.default;
-        } catch (error) {
-            console.error(`Failed to load subtitles: ${error}`);
-        }
-    }
-}
-
-function updateSubtitles() {
-    if (!subtitles) return;
-    
-    const newSubtitle = subtitles.find(({ start, end }) => elapsedTime >= start && elapsedTime <= end);
-    if (newSubtitle && newSubtitle !== currentSubtitle) {
-        currentSubtitle = newSubtitle;
-        subtitleContainer.textContent = currentSubtitle.text;
-    } else if (!newSubtitle) {
-        subtitleContainer.textContent = ''; // Clear subtitles if there's no match
-    }
-}
-
-loadSubtitles(subtitleFile).then(() => {
-    introTune.addEventListener('timeupdate', updateSubtitles);
-});
-
-let introStarted = false
-let introTuneLength
-let introTune
-initialiseIntro()
-function initialiseIntro() {
-    introTune = document.getElementById("introTune");
-    introTune.preload = "auto";
-    introTune.currentTime = 0;
-    introTune.volume = 1;
-    
-    if (introTune.readyState > 0) {
-        introTuneLength = introTune.duration;
-    } else {
-        introTune.addEventListener("loadedmetadata", function() {
-            introTuneLength = introTune.duration;
-        });
-    }
-
-    const handlePlayButtonClick = () => {
-        introTune.play();
-        introStarted = true;
-        window.appStatus = "orbit"
-        playButton.style.display = "none";
-        skipButton.style.display = "none";
-        credits.style.display = "none";
-        subtitleContainer.style.display = "block";
-        orbitControls.enabled = true
-        document.body.style.cursor = 'none';
-    };
-    
-    const handleSkipButtonClick = () => {
-        window.appStatus = "orbit"
-        playButton.style.display = "none";
-        skipButton.style.display = "none";
-        credits.style.display = "none";
-        camera.position.z = 15;
-        orbitControls.enabled = true
-        const titleMesh = scene.getObjectByName('title')
-        scene.remove(titleMesh)
-    };
-    
-    playButton.addEventListener("click", handlePlayButtonClick);
-    playButton.addEventListener("touchend", (event) => {
-        event.preventDefault(); // Prevent mouse event from firing after touch event
-        handlePlayButtonClick();
-    });
-    
-    skipButton.addEventListener("click", handleSkipButtonClick);
-    skipButton.addEventListener("touchend", (event) => {
-        event.preventDefault(); // Prevent mouse event from firing after touch event
-        handleSkipButtonClick();
-    });
-}
-
+setupIntro({ orbitControls, camera, scene });
 
 //SLIDE CAROUSEL
 const buttons = document.querySelectorAll("[data-carousel-button]");
@@ -799,13 +497,13 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     atmosphere.position.set(0, 0, 0)
     atmosphere.scale.set(1.2, 1.2, 1.2)
     jaranius.add(atmosphere);
-    
+
     //create jaranius light
     const jaraniusLight = new THREE.PointLight(0xffffff, 0); //0.01
     jaraniusLight.position.set(0, 0, 0);
     jaranius.add(jaraniusLight);
 
-    
+
     //create sign
     sign = new THREE.Object3D()
     planetContent.add(sign)
@@ -856,191 +554,29 @@ export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, 
     //planetContent.add(routeMesh);
 
 
+    configureDatasets({ jaranius });
+
     return jaranius;
 }
 
-// Active planet image set (swapped alongside mindmap dataset)
-let activePlanetImages = planetImageData_initial;
-
-function clearPlanetImages() {
-    if (!planetContent) return;
-    const removals = [];
-    planetContent.traverse(child => {
-        if (child.isMesh && child.material && child.material.map) {
-            removals.push(child);
-        }
-    });
-    removals.forEach(mesh => {
-        planetContent.remove(mesh);
-        if (mesh.geometry) mesh.geometry.dispose();
-        if (Array.isArray(mesh.material)) {
-            mesh.material.forEach(m => m && m.map && m.map.dispose && m.map.dispose());
-            mesh.material.forEach(m => m && m.dispose && m.dispose());
-        } else if (mesh.material) {
-            mesh.material.map && mesh.material.map.dispose && mesh.material.map.dispose();
-            mesh.material.dispose && mesh.material.dispose();
-        }
-    });
-}
-
-export function createMindmap() {
-    // Pictures (dataset-dependent)
-    if (!planetContent.parent) jaranius.add(planetContent)
-    for (let i = 0; i < activePlanetImages.length; i++) {
-        const img = activePlanetImages[i];
-        createImages(img.src, img.lat, img.lng, img.size / 500, img.radius, planetContent);
-    }
-    // Spiral images (currently static)
-    for (let i = 0; i < spiralImageData.length; i++) {
-        createImages(spiralImageData[i].src, spiralImageData[i].lat, spiralImageData[i].lng, spiralImageData[i].size / 500, spiralImageData[i].radius, spiral);
-    }
-
-    const indexMod = 0;
-    // Planet dataset (contexts[0])
-    createTags(contexts[0].tagData, contexts[0].tagDestination, contexts[0].radius, 0, indexMod);
-    // Spiral (contexts[1])
-    createTags(contexts[1].tagData, contexts[1].tagDestination, contexts[1].radius, 1, indexMod);
-    // Enneagram (contexts[3])
-    createTags(contexts[3].tagData, contexts[3].tagDestination, contexts[3].radius, 3, indexMod);
-
-    // Nuggets (static dataset for now)
-    for (let i = 0; i < planetNuggetData.length; i++) {
-        let nugget = instantiateNugget(i, planetNuggetData[i].lat, planetNuggetData[i].lng, planetNuggetData[i].color, planetNuggetData[i].size / 100000, planetNuggetData[i].slides, jaranius, 2);
-        nuggets.push(nugget);
-    }
-
-    // Connections for planet (contexts[0])
-    const curveThickness = 0.0001;
-    const curveRadiusSegments = 3;
-    const curveMaxAltitude = 0.02;
-    const curveMinAltitude = contexts[0].radius + 0.02;
-    if (!jaraniusConnections.parent) jaranius.add(jaraniusConnections);
-    const planetCtx = contexts[0];
-    createConnections(planetCtx.tagData, planetCtx.connectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, false, false);
-    createConnections(planetCtx.tagData, planetCtx.dashedConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, true, false);
-    createConnections(planetCtx.tagData, planetCtx.arrowConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, false, true);
-    if (planetCtx.tunnelConnectionData) {
-        createConnections(planetCtx.tagData, planetCtx.tunnelConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, false, false, true);
-    }
-
-    // Spiral
-    if (!spiralDynamicsConnections.parent) spiral.add(spiralDynamicsConnections);
-    createConnections(contexts[1].tagData, contexts[1].connectionData, 0.0002, curveRadiusSegments, 0.1, contexts[1].radius + 0.01, spiralDynamicsConnections, false, false);
-
-    // Enneagram (tunnel only for now)
-    if (!enneaConnections.parent) enneagram.add(enneaConnections);
-    createConnections(contexts[3].tagData, contexts[3].tunnelConnectionData, 0.0002, curveRadiusSegments, 0.1, contexts[3].radius + 0.01, enneaConnections, false, false, true);
-}
-
-// (Mindmap switching implementation located earlier in file)
-
-// Mindmap registry (Shift+1 => index 0, etc.)
-const mindmapRegistry = [
-    { name: 'Full', module: './data/planetData.js', images: './data/planetImageData.js' },
-    { name: 'Simple', module: './data/planetSimpleData.js', images: './data/planetSimpleImageData.js' },
-    // Add more: { name: 'Custom3', module: './data/planetCustom3.js', images: './data/planetCustomImageData.js' }
-];
-
-let activeMindmapIndex = 0;
-let mindmapSwitchInProgress = false;
-
-async function switchMindmap(index) {
-    if (index === activeMindmapIndex) return; // already active
-    if (index < 0 || index >= mindmapRegistry.length) return;
-    if (mindmapSwitchInProgress) return;
-    mindmapSwitchInProgress = true;
-    const entry = mindmapRegistry[index];
-    console.log(`Switching mindmap -> ${entry.name}`);
-    try {
-        const cacheBust = `?t=${Date.now()}`;
-        const [mod, imgMod] = await Promise.all([
-            import(/* @vite-ignore */ `${entry.module}${cacheBust}`),
-            import(/* @vite-ignore */ `${entry.images}${cacheBust}`)
-        ]);
-
-        const required = ['planetTagData', 'planetConnections', 'planetArrowedConnections', 'planetDashedConnections', 'planetTunnelConnections'];
-        const missing = required.filter(k => !mod[k]);
-        if (missing.length) console.warn('Mindmap dataset missing exports:', missing.join(', '));
-
-        // Clear existing visuals
-        clearPlanetMindmapVisuals();
-        clearPlanetImages();
-
-        // Update context 0 data
-        const planetCtx = contexts[0];
-        planetCtx.name = entry.name;
-        planetCtx.tagData = mod.planetTagData || [];
-        planetCtx.connectionData = mod.planetConnections || [];
-        planetCtx.arrowConnectionData = mod.planetArrowedConnections || [];
-        planetCtx.dashedConnectionData = mod.planetDashedConnections || [];
-        planetCtx.tunnelConnectionData = mod.planetTunnelConnections || [];
-        planetCtx.pins = [];
-        planetCtx.tags = [];
-        planetCtx.boxes = [];
-
-        // Swap images
-        activePlanetImages = imgMod.planetImageData || [];
-
-        // Rebuild full mindmap (planet + spiral + ennea + nuggets + connections)
-        createMindmap();
-        activeMindmapIndex = index;
-        console.log(`Mindmap switched to ${entry.name}`);
-    } catch (err) {
-        console.error('Mindmap switch failed:', err);
-    } finally {
-        mindmapSwitchInProgress = false;
-    }
-}
-
-function disposeMeshRecursive(obj) {
-    obj.traverse(child => {
-        if (child.isMesh) {
-            child.geometry && child.geometry.dispose();
-            if (Array.isArray(child.material)) {
-                child.material.forEach(m => m && m.dispose && m.dispose());
-            } else if (child.material) child.material.dispose && child.material.dispose();
-        }
-    });
-}
-
-function clearPlanetMindmapVisuals() {
-    const planetCtx = contexts[0];
-    // Remove pins from raycast list and scene
-    planetCtx.pins.forEach(pin => {
-        const idx = intersectObjectsArray.indexOf(pin);
-        if (idx > -1) intersectObjectsArray.splice(idx, 1);
-        if (pin.parent) pin.parent.remove(pin);
-    });
-    planetCtx.boxes.forEach(box => { if (box.parent) box.parent.remove(box); });
-    planetCtx.tags.forEach(tag => { if (tag.parent) tag.parent.remove(tag); });
-    planetCtx.pins.length = 0;
-    planetCtx.boxes.length = 0;
-    planetCtx.tags.length = 0;
-    // Clear connection meshes
-    if (jaraniusConnections) {
-        jaraniusConnections.children.slice().forEach(child => {
-            disposeMeshRecursive(child);
-            jaraniusConnections.remove(child);
-        });
-    }
-}
-
-//PODCAST FIELDS TEST
-/* createField(field1, new THREE.Vector3(1.0, 0, 0), scene)
-createField(field2, new THREE.Vector3(0, 1.0, 0), scene)
-createField(field3, new THREE.Vector3(0, 0, 1.0), scene)
-createField(field4, new THREE.Vector3(0, 1.0, 1.0), scene) */
-// How to make fields in Blender
-// 1. Add Bezier curve. Edit mode. Use draw tool, make sure surface is selected. Draw on planet. Delete original bezier vertices
-// 2. Object mode. Object - convert to - Mesh
-// 3. Edit mode. Select all vertices. Press F to create face. Select face, right click face, Triangulate faces.
-// 4. Select a face. Go to transform orientations and select Normal. press Shift + NumPad 7. This will align the view to the normal of the selected face. Make a new transform orientation.
-// 5. Object mode. Choose the newly made transform orientation and move the objects the desired distance out from the planet
-// 6. Export object.
 
 //CREATE ENNEAGRAM FLUX LINES
 const enneagram = new THREE.Object3D
 const enneagramConnectionsObj = new THREE.Object3D
+
+configureDatasets({
+    planetContent,
+    spiral,
+    jaraniusConnections,
+    spiralDynamicsConnections,
+    enneagram,
+    enneagramConnectionsObj,
+    instantiateNugget,
+    createImages,
+    createTags,
+    createConnections,
+    intersectObjectsArray,
+});
 let enneagramActivated = false
 function createEnneagram(enneagram) {
     enneaCenter.add(enneagram)
@@ -1295,101 +831,9 @@ function createSpiral() {
 }
 
 //CREATE LIGHTS
-const ambient = new THREE.AmbientLight(0xffffff, 0.01);
-scene.add(ambient);
-
-const spotlight = new THREE.SpotLight(0xefebd8, 0);
-spotlight.penumbra = 0.8
-spotlight.angle = Math.PI / 4
-spotlight.decay = 0.5
-scene.add(spotlight);
-
-const targetIntensities = {
-    spotlight: spotlight.intensity,
-    ambient: ambient.intensity
-  };
-
-let lightTransitionStart = null;
-let lightTransitionDuration = 5;
-
-const updateLightIntensity = () => {
-    if (lightTransitionStart === null) {
-      return;
-    }
-  
-    const elapsed = clock.getElapsedTime() - lightTransitionStart;
-  
-    if (elapsed >= lightTransitionDuration) {
-      spotlight.intensity = targetIntensities.spotlight;
-      ambient.intensity = targetIntensities.ambient;
-      lightTransitionStart = null;
-    } else {
-      const t = elapsed / lightTransitionDuration;
-      spotlight.intensity = THREE.MathUtils.lerp(spotlight.intensity, targetIntensities.spotlight, t);
-      ambient.intensity = THREE.MathUtils.lerp(ambient.intensity, targetIntensities.ambient, t);
-    }
-  };
+const { ambient, spotlight, updateLightIntensity, queueSpotlightIntensity, queueAmbientIntensity } = setupLighting(scene);
 
 //CREATE CONTEXTS
-export function createContexts(version) {
-    contexts.push({
-    tagData: planetTagData_initial, 
-        tagDestination: planetContent, 
-    connectionData: planetConnections_initial, 
-    arrowConnectionData: planetArrowedConnections_initial,
-    dashedConnectionData: planetDashedConnections_initial,
-    tunnelConnectionData: planetTunnelConnections_initial,
-        connectionDestination: jaraniusConnections, 
-        radius: 5, 
-        pins: [], 
-        boxes: [], 
-        tags: []
-    })
-
-    contexts.push({
-        tagData: spiralTagData, 
-        tagDestination: spiral, 
-        connectionData: spiralConnections, 
-        arrowConnectionData: spiralArrowedConnections,
-        dashedConnectionData: spiralDashedConnections,
-        connectionDestination: spiralDynamicsConnections, 
-        radius: 7, 
-        pins: [], 
-        boxes: [], 
-        tags: []
-    })
-
-    contexts.push({
-        tagData: planetNuggetData, 
-        tagDestination: planetContent, 
-        connectionData: undefined, 
-        arrowConnectionData: undefined,
-        dashedConnectionData: undefined,
-        connectionDestination: undefined, 
-        radius: 5, 
-        pins: [], 
-        boxes: [], 
-        tags: []
-    })
-
-    contexts.push({
-        tagData: enneagramTagData, 
-        tagDestination: enneagram, 
-        connectionData: enneagramConnections, 
-        arrowConnectionData: enneagramArrowedConnections,
-        dashedConnectionData: enneagramDashedConnections,
-        tunnelConnectionData: enneagramTunnelConnections,
-        connectionDestination: enneagramConnectionsObj, 
-        radius: 8.5, 
-        pins: [], 
-        boxes: [], 
-        tags: []
-    })
-
-    if (version == 3) developer = true
-
-}
-
 //CREATE GUTTA STATS
 const guttaStatScreen = document.querySelector('#guttaStatScreen');
 const statsDisplay = document.createElement('div');
@@ -1454,18 +898,18 @@ function onDocumentKeyUp(event) {
         // Only do this when in flight-mode:
         if (window.appStatus === "flight") {
             if (keyCode == 71) { // 'G'
-                followMode = "gutt";
+                setFollowMode("gutt");
                 console.log("Camera now follows the exampleGutt");
                 // Optionally disable user flight controls so user can't move camera manually
                 flyControls.enabled = false;
             }
             if (keyCode == 77) { // 'M'
-                followMode = "mara";
+                setFollowMode("mara");
                 console.log("Camera now follows the exampleMara");
                 flyControls.enabled = false;
             }
             if (keyCode == 70) { // 'F'
-                followMode = "manual";
+                setFollowMode("manual");
                 console.log("Camera back to manual flight");
                 flyControls.enabled = true; // re-enable
             }
@@ -1499,19 +943,15 @@ function onDocumentKeyUp(event) {
                 //Light control (numbers 1-5 when NOT holding shift)
                 if (!event.shiftKey && keyCode >= 49 && keyCode <= 53) {
             const intensities = [0, 0.5, 0.75, 1, 1.5];
-            targetIntensities.spotlight = intensities[keyCode - 49];
-            lightTransitionStart = clock.getElapsedTime();
+            queueSpotlightIntensity(intensities[keyCode - 49], clock);
           }
                 // Ambient control (6-9 when NOT holding shift)
                 if (!event.shiftKey && keyCode >= 54 && keyCode <= 57) {
             const intensities = [0, 0.05, 0.15, 0.25];
-            targetIntensities.ambient = intensities[keyCode - 54];
-            lightTransitionStart = clock.getElapsedTime();
+            queueAmbientIntensity(intensities[keyCode - 54], clock);
           }
-                // Zero key resets ambient (NOT shift)
                 if (!event.shiftKey && keyCode == 48) {
-            targetIntensities.ambient = 0.5;
-            lightTransitionStart = clock.getElapsedTime();
+            queueAmbientIntensity(0.5, clock);
           }
                 // Mindmap switching: Shift+1..9 (prevent light adjustments earlier)
                 if (event.shiftKey && keyCode >= 49 && keyCode <= 57) { // '1'..'9'
@@ -1770,6 +1210,7 @@ function onDocumentKeyUp(event) {
                 selectedPin = null
                 selectedBox = null
                 selectedTag = null
+                updateDeveloperHud();
             }           
         }
         if (keyCode == 82 && developer == true) { //R - create new connections
@@ -1997,8 +1438,24 @@ function onDocumentKeyUp(event) {
                     contexts[selectedContext].tagData[node].size += 5
 
                     size = contexts[selectedContext].tagData[node].size
-                    contexts[selectedContext].pins[node].scale.set(size / originalSize, size / originalSize, size / originalSize)
-                    contexts[selectedContext].boxes[node].scale.set(size / originalSize, size / originalSize, size / originalSize)
+                    const ratio = size / originalSize
+                    const tagScale = size / 100000
+                    const pin = contexts[selectedContext].pins[node]
+                    const box = contexts[selectedContext].boxes[node]
+                    const tag = contexts[selectedContext].tags[node]
+                    if (pin) {
+                        pin.scale.set(ratio, ratio, ratio)
+                        pin.userData.baseScale = pin.scale.x
+                    }
+                    if (box) {
+                        box.scale.set(ratio, ratio, ratio)
+                        box.userData.baseScale = box.scale.x
+                    }
+                    if (tag) {
+                        tag.scale.set(tagScale, tagScale, tagScale)
+                        tag.userData.baseScale = tag.scale.x
+                    }
+                    refreshNode(selectedContext, node)
                 })
 
             }else if (selectedNode) {
@@ -2006,8 +1463,19 @@ function onDocumentKeyUp(event) {
                 contexts[selectedContext].tagData[selectedNode].size += 5
 
                 size = contexts[selectedContext].tagData[selectedNode].size
-                selectedPin.scale.set(size / originalSize, size / originalSize, size / originalSize)
-                selectedBox.scale.set(size / originalSize, size / originalSize, size / originalSize)
+                const ratio = size / originalSize
+                const tagScale = size / 100000
+                selectedPin.scale.set(ratio, ratio, ratio)
+                selectedPin.userData.baseScale = selectedPin.scale.x
+                if (selectedBox) {
+                    selectedBox.scale.set(ratio, ratio, ratio)
+                    selectedBox.userData.baseScale = selectedBox.scale.x
+                }
+                if (selectedTag) {
+                    selectedTag.scale.set(tagScale, tagScale, tagScale)
+                    selectedTag.userData.baseScale = selectedTag.scale.x
+                }
+                refreshNode(selectedContext, selectedNode)
             }
         }
         if (keyCode == 189 && developer == true) { //-
@@ -2020,8 +1488,24 @@ function onDocumentKeyUp(event) {
                     contexts[selectedContext].tagData[node].size -= 5
 
                     size = contexts[selectedContext].tagData[node].size
-                    contexts[selectedContext].pins[node].scale.set(size / originalSize, size / originalSize, size / originalSize)
-                    contexts[selectedContext].boxes[node].scale.set(size / originalSize, size / originalSize, size / originalSize)
+                    const ratio = size / originalSize
+                    const tagScale = size / 100000
+                    const pin = contexts[selectedContext].pins[node]
+                    const box = contexts[selectedContext].boxes[node]
+                    const tag = contexts[selectedContext].tags[node]
+                    if (pin) {
+                        pin.scale.set(ratio, ratio, ratio)
+                        pin.userData.baseScale = pin.scale.x
+                    }
+                    if (box) {
+                        box.scale.set(ratio, ratio, ratio)
+                        box.userData.baseScale = box.scale.x
+                    }
+                    if (tag) {
+                        tag.scale.set(tagScale, tagScale, tagScale)
+                        tag.userData.baseScale = tag.scale.x
+                    }
+                    refreshNode(selectedContext, node)
                 })
 
             }else if (selectedNode) {
@@ -2029,8 +1513,19 @@ function onDocumentKeyUp(event) {
                 contexts[selectedContext].tagData[selectedNode].size -= 5
 
                 size = contexts[selectedContext].tagData[selectedNode].size
-                selectedPin.scale.set(size / originalSize, size / originalSize, size / originalSize)
-                selectedBox.scale.set(size / originalSize, size / originalSize, size / originalSize)
+                const ratio = size / originalSize
+                const tagScale = size / 100000
+                selectedPin.scale.set(ratio, ratio, ratio)
+                selectedPin.userData.baseScale = selectedPin.scale.x
+                if (selectedBox) {
+                    selectedBox.scale.set(ratio, ratio, ratio)
+                    selectedBox.userData.baseScale = selectedBox.scale.x
+                }
+                if (selectedTag) {
+                    selectedTag.scale.set(tagScale, tagScale, tagScale)
+                    selectedTag.userData.baseScale = selectedTag.scale.x
+                }
+                refreshNode(selectedContext, selectedNode)
             }
         }
     }
@@ -2044,46 +1539,28 @@ function onDocumentKeyDown(event) {
         for (let node = 0; node < selectedNodes.length; node++) {
             if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
                 let posLatLng = convertCartesiantoLatLng(contexts[selectedContext].pins[selectedNodes[node]].position.x, contexts[selectedContext].pins[selectedNodes[node]].position.y, contexts[selectedContext].pins[selectedNodes[node]].position.z);
-                // up
                 if (keyCode == 38) {
                     if (fastMove) posLatLng.lat += .4;
                     posLatLng.lat += .1;
-                    
                 }
-                // down
                 if (keyCode == 40) {
                     if (fastMove)posLatLng.lat -= .4;
                     posLatLng.lat -= .1;
-                    
                 }
-                // left
                 if (keyCode == 37) {
                     if (fastMove)posLatLng.lng += .4;
                     posLatLng.lng += .1;
-                    
                 }
-                // right
                 if (keyCode == 39) {
                     if (fastMove)posLatLng.lng -= .4;
                     posLatLng.lng -= .1;
                 }
 
-                const pinSphereRadius = contexts[selectedContext].radius
-                const boxSphereRadius = pinSphereRadius + 0.04
-                const tagSphereRadius = pinSphereRadius + 0.05
-                
-                const pinPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, pinSphereRadius);
-                const boxPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, boxSphereRadius);
-                const tagPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, tagSphereRadius);
-
-                contexts[selectedContext].pins[selectedNodes[node]].position.set(pinPos.x, pinPos.y, pinPos.z);
-                contexts[selectedContext].boxes[selectedNodes[node]].position.set(boxPos.x, boxPos.y, boxPos.z);
-                contexts[selectedContext].tags[selectedNodes[node]].position.set(tagPos.x, tagPos.y, tagPos.z);
-
                 posLatLng = constrainLatLng(posLatLng.lat, posLatLng.lng)
 
                 contexts[selectedContext].tagData[selectedNodes[node]].lat = posLatLng.lat.toFixed(1)
                 contexts[selectedContext].tagData[selectedNodes[node]].lng = posLatLng.lng.toFixed(1)
+                refreshNode(selectedContext, selectedNodes[node])
             }
         }
     } else if (selectedPin != null && developer == true  && slideshowStatus.activeSlideshow == undefined && focusElement !== "tagInput" && !flyControls.enabled) {
@@ -2091,43 +1568,27 @@ function onDocumentKeyDown(event) {
         if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
             let posLatLng = convertCartesiantoLatLng(selectedPin.position.x, selectedPin.position.y, selectedPin.position.z);
             console.log(posLatLng)
-            // up
             if (keyCode == 38) {
                 if (fastMove) posLatLng.lat += .4;
                 posLatLng.lat += .1;                
             }
-            // down
             if (keyCode == 40) {
                 if (fastMove) posLatLng.lat -= .4;
                 posLatLng.lat -= .1;
             }
-            // left
             if (keyCode == 37) {
                 if (fastMove) posLatLng.lng += .4;
                 posLatLng.lng += .1;  
             }
-            // right
             if (keyCode == 39) {
                 if (fastMove) posLatLng.lng -= .4;
                 posLatLng.lng -= .1;
             }
 
-            const pinSphereRadius = contexts[selectedContext].radius
-            const boxSphereRadius = pinSphereRadius + 0.04
-            const tagSphereRadius = pinSphereRadius + 0.05
-            
-            const pinPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, pinSphereRadius);
-            const boxPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, boxSphereRadius);
-            const tagPos = convertLatLngtoCartesian(posLatLng.lat, posLatLng.lng, tagSphereRadius);
-
-            selectedPin.position.set(pinPos.x, pinPos.y, pinPos.z);
-            selectedBox.position.set(boxPos.x, boxPos.y, boxPos.z);
-            selectedTag.position.set(tagPos.x, tagPos.y, tagPos.z);
-
             posLatLng = constrainLatLng(posLatLng.lat, posLatLng.lng)
-
             contexts[selectedContext].tagData[selectedNode].lat = posLatLng.lat.toFixed(1)
             contexts[selectedContext].tagData[selectedNode].lng = posLatLng.lng.toFixed(1)
+            refreshNode(selectedContext, selectedNode)
         }
     }     
 };
@@ -2152,7 +1613,7 @@ document.getElementById("tagInput").addEventListener("keydown", function (event)
                 lat: latLng.lat.toFixed(1),
                 lng: latLng.lng.toFixed(1),
                 color: 22,
-                size: 6,
+                size: 40,
                 slides: undefined
             };
             const newTagDestination = contexts[selectedContext].tagData
@@ -2167,9 +1628,20 @@ document.getElementById("tagInput").addEventListener("keydown", function (event)
             if (newDashedConnectionsDestination !== undefined) newDashedConnectionsDestination.push([id])
             if (newTunnelConnectionsDestination !== undefined) newTunnelConnectionsDestination.push([id])
 
-            const indexMod = contexts[selectedContext].tagData.length - 1
-
-            createTags([newItem], contexts[selectedContext].tagDestination, contexts[selectedContext].radius, selectedContext, indexMod);
+            const globalIndex = newTagDestination.length - 1
+            updateDeveloperHud();
+            const creationPromise = createTags([newItem], contexts[selectedContext].tagDestination, contexts[selectedContext].radius, selectedContext, globalIndex)
+            selectedNode = globalIndex
+            selectedPin = contexts[selectedContext].pins[globalIndex]
+            if (selectedPin) selectedPin.userData.baseScale = selectedPin.scale.x
+            creationPromise.then(() => {
+                selectedBox = contexts[selectedContext].boxes[globalIndex]
+                if (selectedBox) selectedBox.userData.baseScale = selectedBox.scale.x
+                selectedTag = contexts[selectedContext].tags[globalIndex]
+                if (selectedTag) selectedTag.userData.baseScale = selectedTag.scale.x
+                refreshNode(selectedContext, globalIndex)
+                updateDeveloperHud();
+            })
 
             this.style.display = "none";
             focusElement = undefined
@@ -2233,10 +1705,11 @@ function onPointerClick(event) {
     if (intersects.length > 0) {
         selectedPin = intersects[0].object;
 
-        selectedContext = intersects[0].object.context
-        selectedNode = intersects[0].object.index
-        if (contexts !== 2) selectedBox = contexts[selectedContext].boxes[selectedNode]
-        if (contexts !== 2) selectedTag = contexts[selectedContext].tags[selectedNode]
+        selectedContext = intersects[0].object.context;
+        selectedNode = intersects[0].object.index;
+        selectedBox = contexts[selectedContext]?.boxes[selectedNode] || null;
+        selectedTag = contexts[selectedContext]?.tags[selectedNode] || null;
+        updateDeveloperHud();
 
     if (camera.position.distanceTo(selectedPin.position) < 10 && contexts[selectedContext].tagData[selectedNode].slides !== undefined && slideshowStatus.activeSlideshow == undefined) {
             slideshowStatus.activeSlideshow = contexts[selectedContext].tagData[selectedNode].slides
@@ -2405,8 +1878,8 @@ function render() {
             curveData.texture.offset.x += 0.001;
         });
 
-        if (camera.position.z > -15 && camera.position.z < 15 && introStarted == true) {
-            introStarted = false
+        if (camera.position.z > -15 && camera.position.z < 15 && introState.started === true) {
+            introState.started = false
             const titleMesh = scene.getObjectByName('title')
             scene.remove(titleMesh)
             document.body.style.cursor = 'default';
@@ -2433,23 +1906,26 @@ function render() {
 
         scanPins();
 
-        updateLightIntensity();
+        updateLightIntensity(clock);
 
     }
 
-    if (introTuneLength) {
-        if (camera.position.z > 15 && introStarted == true) {
-            camera.position.z -= 0.0213 * Math.pow(camera.position.z - 10, 1.35) / introTuneLength
+    if (introState.tuneLength) {
+        if (camera.position.z > 15 && introState.started === true) {
+            camera.position.z -= 0.0213 * Math.pow(camera.position.z - 10, 1.35) / introState.tuneLength
         }
-        if (camera.position.z < -15 && introStarted == true) {
-            camera.position.z += 0.213 * Math.pow(Math.abs(camera.position.z) - 10, 1.35) / introTuneLength
+        if (camera.position.z < -15 && introState.started === true) {
+            camera.position.z += 0.213 * Math.pow(Math.abs(camera.position.z) - 10, 1.35) / introState.tuneLength
         }
-        if (introStarted == true) {
-            camera.position.x += 0.4 / introTuneLength
-            camera.position.y += 0.2 / introTuneLength
+        if (introState.started === true) {
+            camera.position.x += 0.4 / introState.tuneLength
+            camera.position.y += 0.2 / introState.tuneLength
         }
-
-        elapsedTime = introTune.currentTime;
+        if (introState.audio) {
+            // keep subtitle timing in sync
+            // (timeupdate listener handles text updates; this mirrors timing for any external consumers)
+            introState.elapsedTime = introState.audio.currentTime;
+        }
     }
 
     const delta = clock.getDelta();
@@ -2466,15 +1942,7 @@ function render() {
             camera.position.copy(direction.multiplyScalar(flyControls.minDistance));
         }
 
-        const brakePoint = 7
-        const fullStopPoint = 5
-        const fullRollStopPoint = 3
-        if (distance < brakePoint) {
-            baseMovementSpeedModifier = 1 * ((distance - fullStopPoint)/(brakePoint-fullStopPoint))
-            baseRollSpeedModifier = 1 / ((distance - fullRollStopPoint)/(brakePoint-fullRollStopPoint))
-            flyControls.movementSpeed = baseMovementSpeed * baseMovementSpeedModifier;
-            flyControls.rollSpeed = baseRollSpeed * baseRollSpeedModifier;
-        }
+        updateFlightSpeedByDistance(distance);
 
 
         let toSun = new THREE.Vector3().subVectors(sunObjectWorldPosition, middleOfPlanet);
@@ -2492,26 +1960,26 @@ function render() {
     }
 
     if (window.appStatus === "flight") {
-        // If we're in flight mode, check followMode
-        if (followMode === "gutt") {
+        const currentFollowMode = getFollowMode();
+        if (currentFollowMode === "gutt") {
           const exampleGutt = guttaState.gutta[0];
           if (exampleGutt) {
             followAgent(exampleGutt);
           }
         }
-        else if (followMode === "mara") {
+        else if (currentFollowMode === "mara") {
           const exampleMara = guttaState.mara[0];
           if (exampleMara) {
             followAgent(exampleMara);
           }
         }
         else {
-          // followMode === "manual" => normal fly controls
+          // Manual flight mode => normal fly controls
           flyControls.enabled = true;
         }
       }
 
-    if (resizeRendererToDisplaySize(renderer)) {
+    if (resizeRendererToDisplaySize()) {
         const canvas = renderer.domElement;
         camera.aspect = canvas.clientWidth / canvas.clientHeight;
         camera.updateProjectionMatrix();

@@ -91,7 +91,7 @@
     overflow-wrap: break-word;
     color: white;
     text-align: center;
-    background-image: url("/Planet/assets/images/background/bagan.webp");
+    background-image: url("/assets/images/background/bagan.webp");
     background-size: cover;
 }
 .quote, .instructions {
@@ -175,7 +175,7 @@
     align-items: center;
     justify-content: flex-end;
     background-color: black;
-    background-image: url("/Planet/assets/images/background/bagan.webp");
+    background-image: url("/assets/images/background/bagan.webp");
     background-size: cover;
     user-select: none;
 }

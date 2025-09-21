@@ -83,7 +83,7 @@
       .attr("x", chartWidth - 10)
       .attr("y", chartHeight / 2 - 15)
       .attr("fill", "#fff")
-      .style("font-size", "18px")
+      .style("font-size", "24px")
       .text("Wide Attention");
   
     chartGroup
@@ -92,7 +92,7 @@
       .attr("x", 10)
       .attr("y", chartHeight / 2 - 15)
       .attr("fill", "#fff")
-      .style("font-size", "18px")
+      .style("font-size", "24px")
       .text("Narrow Attention");
   
     // Y-Axis Labels
@@ -104,7 +104,7 @@
       .attr("y", chartHeight / 4)
       .attr("transform", `rotate(-90, ${-margin.left / 2}, ${chartHeight / 4})`)
       .attr("fill", "#fff")
-      .style("font-size", "18px")
+      .style("font-size", "24px")
       .text("Deep Concentration");
   
     // Shallow Concentration Label (Bottom)
@@ -115,7 +115,7 @@
       .attr("y", (3 * chartHeight) / 4)
       .attr("transform", `rotate(-90, ${-margin.left / 2}, ${(3 * chartHeight) / 4})`)
       .attr("fill", "#fff")
-      .style("font-size", "18px")
+      .style("font-size", "24px")
       .text("Shallow Concentration");
   
     // Define the labels for each quadrant
@@ -123,7 +123,7 @@
       {
         x: xScale(-0.5),
         y: yScale(0.5),
-        text: "Samadhi\n(Deep & Narrow)",
+        text: "Samādhi\n(Deep & Narrow)",
       },
       {
         x: xScale(0.5),
@@ -153,7 +153,7 @@
       .attr("y", d => d.y)
       .attr("text-anchor", "middle")
       .attr("fill", "#fff")
-      .style("font-size", "20px")
+      .style("font-size", "30px")
       .text(d => d.text)
       .call(wrap, quadWidth - 20);
   
