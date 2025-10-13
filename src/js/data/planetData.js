@@ -1,6 +1,6 @@
 export const planetTagData = [
-    {id: "8BD3708E-8E3D-44B8-9E92-1050FA7987E5", text: "the essence of \nlove / meaning", lat: 75.5, lng: 0, color: 26, size: 40, slides: undefined},
-    {id: "D4724AD1-EECD-4975-920C-CDAD71AA53C3", text: "the essence of \nwisdom / will", lat: 75.5, lng: -120, color: 35, size: 40, slides: undefined},
+    {id: "8BD3708E-8E3D-44B8-9E92-1050FA7987E5", text: "the essence of \nlove / meaning", lat: 75.5, lng: 0, color: 26, size: 40, slides: 209},
+    {id: "D4724AD1-EECD-4975-920C-CDAD71AA53C3", text: "the essence of \nwisdom / will", lat: 75.5, lng: -120, color: 35, size: 40, slides: 210},
     {id: "0027E01B-C40A-49F0-9833-30244700C39E", text: "the essence of \nsalvation / peace", lat: 75.5, lng: 120, color: 15, size: 40, slides: 133},
     {id: "66F19982-732D-4744-AF06-F1F8A68D898B", text: "Rewiring the gut", lat: 72, lng: 120, color: 15, size: 40, slides: undefined},
     {id: "287B1377-9E86-42B2-99F1-EBBEA971AB08", text: "Rewiring the heart", lat: 72, lng: 0, color: 26, size: 40, slides: undefined},

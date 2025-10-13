@@ -13,11 +13,11 @@ export async function pushContent(slideshowStatus) {
   const destination = document.getElementById("slideContainer");
 
   // Prepare current slide for removal
-  const currentSlide = document.querySelector("#slide")
-  if(currentSlide) {
+  const currentSlide = document.querySelector("#slide");
+  if (currentSlide) {
     currentSlide.removeAttribute("data-active");
-    currentSlide.classList.add("fade-out") 
-    currentSlide.classList.add("old-slide") 
+    currentSlide.classList.remove('fade-out');
+    currentSlide.classList.remove('old-slide');
   }
 
   // Remove old scripts
@@ -98,6 +98,14 @@ export async function pushContent(slideshowStatus) {
     // Set the ID to new content and remove fade-out if it's there
     content.id = 'slide';
     content.classList.remove('fade-out');
+
+    if (currentSlide) {
+      currentSlide.classList.add('old-slide');
+      // Allow layout to update before fading out so the new slide is visible first
+      requestAnimationFrame(() => {
+        currentSlide.classList.add('fade-out');
+      });
+    }
 
     updateSlide();
     removeOldSlides();

@@ -334,52 +334,10 @@ export class Gutt {
             this.acceleration3D.add(this.avoidance);
         }
     
-        // ------------------------------------------------------
-        // 5) Limit acceleration
-        // ------------------------------------------------------
-        const maxAcceleration = this.parameters.gutt_max_acceleration;
-        if (this.acceleration3D.length() > maxAcceleration) {
-            this.acceleration3D.setLength(maxAcceleration);
-        }
-    
-        // ------------------------------------------------------
-        // 6) Apply drag
-        // ------------------------------------------------------
-        const speed = this.velocity3D.length();
-        const dragMagnitude = this.parameters.dragCoefficient * speed * speed;
-        const dragDirection = this.velocity3D.clone().normalize().multiplyScalar(-1);
-        const dragForce = dragDirection.multiplyScalar(dragMagnitude);
-        this.acceleration3D.add(dragForce);
-    
-        // ------------------------------------------------------
-        // 7) Gravity
-        // ------------------------------------------------------
-        let planetNormal = this.position3D.clone().normalize();
-        const gravityForce = planetNormal.clone().multiplyScalar(-this.parameters.gravityStrength);
-        this.acceleration3D.add(gravityForce);
+        const flightContext = this._applyAerodynamics({
+            maxAcceleration: this.parameters.gutt_max_acceleration
+        });
 
-        // ------------------------------------------------------
-        // 8) Lift
-        // ------------------------------------------------------
-        let forward = this.velocity3D.clone();
-        let liftVector = new THREE.Vector3(0,0,0);
-        if (forward.lengthSq() < 0.000001) {
-            forward.set(0,0,1);
-        } else {
-            forward.normalize();
-        }
-        const dotUp = forward.dot(planetNormal);
-        if (dotUp > 0 && this.energy > 0) {
-            const climbForce = dotUp * this.parameters.liftCoefficient;
-            const actualLift = climbForce * this.energy;
-            liftVector = planetNormal.clone().multiplyScalar(actualLift);
-            this.acceleration3D.add(liftVector);
-    
-            // Deplete energy
-            const energyUsed = actualLift * this.parameters.liftCost;
-            this.energy = Math.max(0, this.energy - energyUsed);
-        }
-    
         // ------------------------------------------------------
         // 8) Handle "Landing" mode
         // ------------------------------------------------------
@@ -443,105 +401,21 @@ export class Gutt {
             m.compose(this.position3D, this.currentQuaternion, new THREE.Vector3(1,1,1));
             this.meshRef.setMatrixAt(this.instanceIndex, m);
             this.meshRef.instanceMatrix.needsUpdate = true;
-    
+
             return; // end early
         }
 
-        // ------------------------------------------------------
-        // 10) Add final acceleration to velocity
-        // ------------------------------------------------------  
-        this.velocity3D.add(this.acceleration3D);
-    
-        // ------------------------------------------------------
-        // 10) Normal motion if not feeding
-        // ------------------------------------------------------
-    
-        // (B) Adjust speed using thrustSpeed vs. diveSpeed
-        const thrustSpeed = this.parameters.gutt_thrust_speed;
-        const diveSpeed   = this.parameters.gutt_dive_speed;
-        const diving      = (dotUp < 0);  // dotUp < 0 => forward vector angled inward => diving
-    
-        if (!diving) {
-            if (speed > thrustSpeed) {
-                const clampStrength = 0.1; // Adjust between 0 (no clamp) and 1 (immediate clamp)
-                const newSpeed = THREE.MathUtils.lerp(speed, thrustSpeed, clampStrength);
-                this.velocity3D.setLength(newSpeed);
-            }
-        } else {
-            if (speed > diveSpeed) {
-                const clampStrength = 0.01; // Adjust between 0 (no clamp) and 1 (immediate clamp)
-                const newSpeed = THREE.MathUtils.lerp(speed, diveSpeed, clampStrength);
-                this.velocity3D.setLength(newSpeed);
-            }
+        this._finalizeFlight({
+            speed: flightContext.speed,
+            dotUp: flightContext.dotUp,
+            thrustSpeed: this.parameters.gutt_thrust_speed,
+            diveSpeed: this.parameters.gutt_dive_speed
+        });
+
+        if (this.mode === "Landing" && this.velocity3D.length() < 0.0001) {
+            this.mode = "Feeding";
         }
-    
-        // Update position
-        this.position3D.add(this.velocity3D);
-    
-        // If still in "Landing," check if we can switch to feeding
-        if (this.mode === "Landing") {
-            if (this.velocity3D.length() < 0.0001) {
-                this.mode = "Feeding";
-            }
-        }
-    
-        // ------------------------------------------------------
-        // 11) Orientation & Rolling
-        // ------------------------------------------------------
-        forward = this.velocity3D.clone();
-        if (forward.lengthSq() < 0.000001) {
-            forward.set(0,0,1);
-        } else {
-            forward.normalize();
-        }
-    
-        // Planet normal might be re-defined if needed
-        planetNormal = this.position3D.clone().normalize();
-    
-        // Right & Up vectors
-        let right = new THREE.Vector3().crossVectors(planetNormal, forward).normalize();
-        if (right.lengthSq() < 0.000001) {
-            right.set(1,0,0);
-        }
-        let up = new THREE.Vector3().crossVectors(forward, right).normalize();
-    
-        // Build the rotation basis
-        const rotationMatrix = new THREE.Matrix4();
-        rotationMatrix.makeBasis(right, up, forward);
-    
-        // Slerp current quaternion
-        let desiredQuaternion = new THREE.Quaternion().setFromRotationMatrix(rotationMatrix);
-        this.currentQuaternion.slerp(desiredQuaternion, this.parameters.smoothingFactor);
-    
-        // Roll (bank) around forward axis
-        let deltaForward = forward.clone().sub(this.previousForward).normalize();
-        let turnAngle = Math.asin(deltaForward.length() / 2);
-        const maxRollRad = THREE.MathUtils.degToRad(this.parameters.maxRoll);
-        let rollAngle = THREE.MathUtils.clamp(
-            turnAngle * this.parameters.rollMultiplier,
-            -maxRollRad,
-            maxRollRad
-        );
-        let qRoll = new THREE.Quaternion().setFromAxisAngle(forward, rollAngle);
-        this.currentQuaternion.multiply(qRoll);
-    
-        this.previousForward.copy(forward);
-    
-        // ------------------------------------------------------
-        // 12) Update instance matrix
-        // ------------------------------------------------------
-        const mat = new THREE.Matrix4();
-        mat.compose(this.position3D, this.currentQuaternion, new THREE.Vector3(1,1,1));
-        this.meshRef.setMatrixAt(this.instanceIndex, mat);
-        this.meshRef.instanceMatrix.needsUpdate = true;
-    
-        // ------------------------------------------------------
-        // 13) Regenerate energy
-        // ------------------------------------------------------
-        const hungerFactor = (1 - this.hunger); 
-        const regen = hungerFactor * this.parameters.energyRegenRate;
-        this.energy = Math.min(this.parameters.maxEnergy, this.energy + regen);
-    
+
         // ---------------------------------------------------------
         // DEBUG LOG (print once every 60 frames, only for ID=0)
         // ---------------------------------------------------------
@@ -550,9 +424,9 @@ export class Gutt {
             console.log(`%c[Gutta #0] Frame: ${debugFrameCount}`, "color: orange; font-weight: bold;");
             console.log({
                 forces: {
-                    drag: dragForce.length().toFixed(8),
-                    gravity: gravityForce.length().toFixed(8),
-                    lift: dotUp > 0 ? (liftVector.length().toFixed(8)) : "N/A",
+                    drag: flightContext.debug.drag.toFixed(8),
+                    gravity: flightContext.debug.gravity.toFixed(8),
+                    lift: flightContext.debug.lift.toFixed(8),
                     alignment: this.alignment.length().toFixed(8),
                     cohesion: this.cohesion.length().toFixed(8),
                     separation: this.separation.length().toFixed(8),
@@ -562,7 +436,7 @@ export class Gutt {
                 },
                 speed: this.velocity3D.length().toFixed(5),
                 accel: this.acceleration3D.length().toFixed(5),
-                isDiving: diving,
+                isDiving: flightContext.dotUp < 0,
             });
             console.log("----------------------------------------");
         } */
@@ -591,131 +465,16 @@ export class Gutt {
         this.acceleration3D.add(this.hunt);
         this.acceleration3D.add(this.avoidance);
     
-        // ------------------------------------------------------
-        // 4) Limit acceleration
-        // ------------------------------------------------------
-        const maxAcceleration = this.parameters.mara_max_acceleration;
-        if (this.acceleration3D.length() > maxAcceleration) {
-            this.acceleration3D.setLength(maxAcceleration);
-        }
-    
-        // ------------------------------------------------------
-        // 5) Apply drag
-        // ------------------------------------------------------
-        const speed = this.velocity3D.length();
-        const dragMagnitude = this.parameters.dragCoefficient * speed * speed;
-        const dragDirection = this.velocity3D.clone().normalize().multiplyScalar(-1);
-        const dragForce = dragDirection.multiplyScalar(dragMagnitude);
-        this.acceleration3D.add(dragForce);
-    
-        // ------------------------------------------------------
-        // 6) Gravity
-        // ------------------------------------------------------
-        let planetNormal = this.position3D.clone().normalize();
-        const gravityForce = planetNormal.clone().multiplyScalar(-this.parameters.gravityStrength);
-        this.acceleration3D.add(gravityForce);
+        const flightContext = this._applyAerodynamics({
+            maxAcceleration: this.parameters.mara_max_acceleration
+        });
 
-        // ------------------------------------------------------
-        // 7) Lift
-        // ------------------------------------------------------
-        let forward = this.velocity3D.clone();
-        let liftVector = new THREE.Vector3(0,0,0);
-        if (forward.lengthSq() < 0.000001) {
-            forward.set(0,0,1);
-        } else {
-            forward.normalize();
-        }
-        const dotUp = forward.dot(planetNormal);
-        if (dotUp > 0 && this.energy > 0) {
-            const climbForce = dotUp * this.parameters.liftCoefficient;
-            const actualLift = climbForce * this.energy;
-            liftVector = planetNormal.clone().multiplyScalar(actualLift);
-            this.acceleration3D.add(liftVector);
-    
-            // Deplete energy
-            const energyUsed = actualLift * this.parameters.liftCost;
-            this.energy = Math.max(0, this.energy - energyUsed);
-        }
-    
-        // ------------------------------------------------------
-        // 8) Update velocity
-        // ------------------------------------------------------
-        this.velocity3D.add(this.acceleration3D);
-    
-        const thrustSpeed = this.parameters.mara_thrust_speed;
-        const diveSpeed   = this.parameters.mara_dive_speed;
-        const diving      = (dotUp < 0);  // dotUp < 0 => forward vector angled inward => diving
-    
-        if (!diving) {
-            if (speed > thrustSpeed) {
-                const clampStrength = 0.1; // Adjust between 0 (no clamp) and 1 (immediate clamp)
-                const newSpeed = THREE.MathUtils.lerp(speed, thrustSpeed, clampStrength);
-                this.velocity3D.setLength(newSpeed);
-            }
-        } else {
-            if (speed > diveSpeed) {
-                const clampStrength = 0.01; // Adjust between 0 (no clamp) and 1 (immediate clamp)
-                const newSpeed = THREE.MathUtils.lerp(speed, diveSpeed, clampStrength);
-                this.velocity3D.setLength(newSpeed);
-            }
-        }
-    
-        // ------------------------------------------------------
-        // 8) Update position
-        // ------------------------------------------------------
-        this.position3D.add(this.velocity3D);
-    
-        // ------------------------------------------------------
-        // 9) Orientation & Rolling
-        // ------------------------------------------------------
-        forward = this.velocity3D.clone();
-        if (forward.lengthSq() < 0.000001) {
-            forward.set(0,0,1);
-        } else {
-            forward.normalize();
-        }
-    
-        planetNormal = this.position3D.clone().normalize();
-        let right = new THREE.Vector3().crossVectors(planetNormal, forward).normalize();
-        if (right.lengthSq() < 0.000001) {
-            right.set(1,0,0);
-        }
-        let up = new THREE.Vector3().crossVectors(forward, right).normalize();
-    
-        const rotationMatrix = new THREE.Matrix4();
-        rotationMatrix.makeBasis(right, up, forward);
-    
-        let desiredQuaternion = new THREE.Quaternion().setFromRotationMatrix(rotationMatrix);
-        this.currentQuaternion.slerp(desiredQuaternion, this.parameters.smoothingFactor);
-    
-        // Roll
-        let deltaForward = forward.clone().sub(this.previousForward).normalize();
-        let turnAngle = Math.asin(deltaForward.length() / 2);
-        const maxRollRad = THREE.MathUtils.degToRad(this.parameters.maxRoll);
-        let rollAngle = THREE.MathUtils.clamp(
-            turnAngle * this.parameters.rollMultiplier,
-            -maxRollRad,
-            maxRollRad
-        );
-        let qRoll = new THREE.Quaternion().setFromAxisAngle(forward, rollAngle);
-        this.currentQuaternion.multiply(qRoll);
-    
-        this.previousForward.copy(forward);
-    
-        // ------------------------------------------------------
-        // 10) Update instance matrix
-        // ------------------------------------------------------
-        const mat = new THREE.Matrix4();
-        mat.compose(this.position3D, this.currentQuaternion, new THREE.Vector3(1,1,1));
-        this.meshRef.setMatrixAt(this.instanceIndex, mat);
-        this.meshRef.instanceMatrix.needsUpdate = true;
-    
-        // ------------------------------------------------------
-        // 11) Regenerate energy
-        // ------------------------------------------------------
-        const hungerFactor = (1 - this.hunger);
-        const regen = hungerFactor * this.parameters.energyRegenRate;
-        this.energy = Math.min(this.parameters.maxEnergy, this.energy + regen);
+        this._finalizeFlight({
+            speed: flightContext.speed,
+            dotUp: flightContext.dotUp,
+            thrustSpeed: this.parameters.mara_thrust_speed,
+            diveSpeed: this.parameters.mara_dive_speed
+        });
     
         // ---------------------------------------------------------
         // DEBUG LOG (print once every 60 frames, only for ID=0)
@@ -725,9 +484,9 @@ export class Gutt {
             console.log(`%c[Mara #0] Frame: ${debugFrameCount}`, "color: purple; font-weight: bold;");
             console.log({
                 forces: {
-                    drag: dragForce.length().toFixed(8),
-                    gravity: gravityForce.length().toFixed(8),
-                    lift: dotUp > 0 ? (liftVector.length().toFixed(8)) : "N/A",
+                    drag: flightContext.debug.drag.toFixed(8),
+                    gravity: flightContext.debug.gravity.toFixed(8),
+                    lift: flightContext.debug.lift.toFixed(8),
                     alignment: this.alignment.length().toFixed(8),
                     cohesion: this.cohesion.length().toFixed(8),
                     separation: this.separation.length().toFixed(8),
@@ -736,7 +495,7 @@ export class Gutt {
                 },
                 speed: this.velocity3D.length().toFixed(5),
                 accel: this.acceleration3D.length().toFixed(5),
-                isDiving: diving,
+                isDiving: flightContext.dotUp < 0,
             });
             console.log("----------------------------------------");
         } */
@@ -791,62 +550,61 @@ export class Gutt {
     }
 
     calculateSteeringForces(octtree) {
+        const isGutt = this.species === "gutt";
+        const prefix = isGutt ? "gutt" : "mara";
+
+        const alignDist = this.parameters[`${prefix}_alignment_perception_distance`] ?? 0;
+        const coheDist = this.parameters[`${prefix}_cohesion_perception_distance`] ?? 0;
+        const sepaDist = this.parameters[`${prefix}_separation_perception_distance`] ?? 0;
+
         // Determine the maximum perception distance among alignment, cohesion, separation
-        let maxPerception = Math.max(
-            this.parameters.gutt_alignment_perception_distance,
-            this.parameters.gutt_cohesion_perception_distance,
-            this.parameters.gutt_separation_perception_distance
-        );
-    
+        const maxPerception = Math.max(alignDist, coheDist, sepaDist);
+
         // Single neighbor search
         let neighbors = octtree.rangeSearch({x:this.position3D.x, y:this.position3D.y, z:this.position3D.z}, maxPerception);
-    
+
         // Filter once
         neighbors = this.filterByVisionCone(neighbors);
-    
+
         // Initialize forces to zero
         this.alignment.set(0,0,0);
         this.cohesion.set(0,0,0);
         this.separation.set(0,0,0);
-    
+
         // Counters to track how many neighbors contributed to each force
         let alignmentCount = 0;
         let cohesionCount = 0;
         let separationCount = 0;
-    
-        const alignDist = this.parameters.gutt_alignment_perception_distance;
-        const coheDist = this.parameters.gutt_cohesion_perception_distance;
-        const sepaDist = this.parameters.gutt_separation_perception_distance;
-    
+
         // Precompute squared distances
         const alignDistSq = alignDist * alignDist;
         const coheDistSq = coheDist * coheDist;
         const sepaDistSq = sepaDist * sepaDist;
-    
+
         // Temporary vector to avoid allocations in loop
         const diff = new THREE.Vector3();
-    
+
         for (let agent of neighbors) {
             if (agent === this) continue;
-    
+
             // Calculate squared distance
             let dx = agent.position3D.x - this.position3D.x;
             let dy = agent.position3D.y - this.position3D.y;
             let dz = agent.position3D.z - this.position3D.z;
             let distSq = dx*dx + dy*dy + dz*dz;
-    
+
             // Alignment
             if (distSq < alignDistSq) {
                 this.alignment.add(agent.velocity3D);
                 alignmentCount++;
             }
-    
+
             // Cohesion
             if (distSq < coheDistSq) {
                 this.cohesion.add(agent.position3D);
                 cohesionCount++;
             }
-    
+
             // Separation
             if (distSq < sepaDistSq && distSq > 0) {
                 diff.set(dx, dy, dz);
@@ -856,30 +614,34 @@ export class Gutt {
                 separationCount++;
             }
         }
-    
-        const maxF = this.parameters.gutt_max_force;
-    
+
+        const maxF = this.parameters[`${prefix}_max_force`] ?? 0;
+
+        const alignmentWeight = this.parameters[`${prefix}_alignment`] ?? 0;
+        const cohesionWeight = this.parameters[`${prefix}_cohesion`] ?? 0;
+        const separationWeight = this.parameters[`${prefix}_separation`] ?? 0;
+
         // Finalize Alignment
         if (alignmentCount > 0) {
             this.alignment.divideScalar(alignmentCount);
             this.alignment.sub(this.velocity3D);
             this.alignment.clampLength(-maxF, maxF);
-            this.alignment.multiplyScalar(this.parameters.gutt_alignment);
+            this.alignment.multiplyScalar(alignmentWeight);
         }
-    
+
         // Finalize Cohesion
         if (cohesionCount > 0) {
             this.cohesion.divideScalar(cohesionCount);
             this.cohesion.sub(this.position3D);
             this.cohesion.clampLength(-maxF, maxF);
-            this.cohesion.multiplyScalar(this.parameters.gutt_cohesion);
+            this.cohesion.multiplyScalar(cohesionWeight);
         }
-    
+
         // Finalize Separation
         if (separationCount > 0) {
             this.separation.divideScalar(separationCount);
             this.separation.clampLength(-maxF, maxF);
-            this.separation.multiplyScalar(this.parameters.gutt_separation);
+            this.separation.multiplyScalar(separationWeight);
         }
     }
 
@@ -1039,15 +801,16 @@ export class Gutt {
 
     calculateAvoidance() {
         this.avoidance.set(0,0,0);
-    
+
         const currentRadius = this.position3D.length();
         const lowerLimit = this.parameters.altitudeLowerLimit;
         const upperLimit = this.parameters.altitudeUpperLimit;
         let boundaryForce = this.parameters.boundaryForceStrength;
-        const lookaheadFactor = this.parameters.lookaheadFactor || 2.0;
-        const buffer = this.parameters.altitudeBuffer || 0.2;
-        const upperBuffer = this.parameters.altitudeBuffer * 3 || 20.0;
-        const anticipatoryMultiplier = this.parameters.anticipatoryMultiplier || 2.0;
+        const lookaheadFactor = this.parameters.lookaheadFactor ?? 2.0;
+        const altitudeBuffer = this.parameters.altitudeBuffer ?? 0.2;
+        const buffer = altitudeBuffer;
+        const upperBuffer = this.parameters.altitudeBuffer !== undefined ? altitudeBuffer * 3 : 20.0;
+        const anticipatoryMultiplier = this.parameters.anticipatoryMultiplier ?? 2.0;
     
         // Compute future position to anticipate boundary violations
         const velocityNormalized = this.velocity3D.clone().normalize();
@@ -1130,6 +893,121 @@ export class Gutt {
         }
     }
 
+    _applyAerodynamics({ maxAcceleration }) {
+        if (this.acceleration3D.length() > maxAcceleration) {
+            this.acceleration3D.setLength(maxAcceleration);
+        }
+
+        const speed = this.velocity3D.length();
+
+        const dragForce = new THREE.Vector3();
+        if (speed > 0) {
+            dragForce.copy(this.velocity3D).normalize().multiplyScalar(-1);
+        }
+        const dragMagnitude = this.parameters.dragCoefficient * speed * speed;
+        dragForce.multiplyScalar(dragMagnitude);
+        this.acceleration3D.add(dragForce);
+
+        const planetNormal = this.position3D.clone().normalize();
+        const gravityForce = planetNormal.clone().multiplyScalar(-this.parameters.gravityStrength);
+        this.acceleration3D.add(gravityForce);
+
+        let forward = this.velocity3D.clone();
+        if (forward.lengthSq() < 0.000001) {
+            forward.set(0,0,1);
+        } else {
+            forward.normalize();
+        }
+
+        const dotUp = forward.dot(planetNormal);
+
+        const liftVector = new THREE.Vector3();
+        if (dotUp > 0 && this.energy > 0) {
+            const climbForce = dotUp * this.parameters.liftCoefficient;
+            const actualLift = climbForce * this.energy;
+            liftVector.copy(planetNormal).multiplyScalar(actualLift);
+            this.acceleration3D.add(liftVector);
+
+            const energyUsed = actualLift * this.parameters.liftCost;
+            this.energy = Math.max(0, this.energy - energyUsed);
+        }
+
+        return {
+            speed,
+            dotUp,
+            debug: {
+                drag: dragForce.length(),
+                gravity: gravityForce.length(),
+                lift: liftVector.length()
+            }
+        };
+    }
+
+    _finalizeFlight({ speed, dotUp, thrustSpeed, diveSpeed }) {
+        this.velocity3D.add(this.acceleration3D);
+
+        const diving = dotUp < 0;
+
+        if (!diving) {
+            if (speed > thrustSpeed) {
+                const clampStrength = 0.1;
+                const newSpeed = THREE.MathUtils.lerp(speed, thrustSpeed, clampStrength);
+                this.velocity3D.setLength(newSpeed);
+            }
+        } else {
+            if (speed > diveSpeed) {
+                const clampStrength = 0.01;
+                const newSpeed = THREE.MathUtils.lerp(speed, diveSpeed, clampStrength);
+                this.velocity3D.setLength(newSpeed);
+            }
+        }
+
+        this.position3D.add(this.velocity3D);
+
+        let forward = this.velocity3D.clone();
+        if (forward.lengthSq() < 0.000001) {
+            forward.set(0,0,1);
+        } else {
+            forward.normalize();
+        }
+
+        let planetNormal = this.position3D.clone().normalize();
+
+        let right = new THREE.Vector3().crossVectors(planetNormal, forward).normalize();
+        if (right.lengthSq() < 0.000001) {
+            right.set(1,0,0);
+        }
+        let up = new THREE.Vector3().crossVectors(forward, right).normalize();
+
+        const rotationMatrix = new THREE.Matrix4();
+        rotationMatrix.makeBasis(right, up, forward);
+
+        let desiredQuaternion = new THREE.Quaternion().setFromRotationMatrix(rotationMatrix);
+        this.currentQuaternion.slerp(desiredQuaternion, this.parameters.smoothingFactor);
+
+        const deltaForward = forward.clone().sub(this.previousForward).normalize();
+        let turnAngle = Math.asin(Math.min(1, deltaForward.length() / 2));
+        const maxRollRad = THREE.MathUtils.degToRad(this.parameters.maxRoll);
+        let rollAngle = THREE.MathUtils.clamp(
+            turnAngle * this.parameters.rollMultiplier,
+            -maxRollRad,
+            maxRollRad
+        );
+        let qRoll = new THREE.Quaternion().setFromAxisAngle(forward, rollAngle);
+        this.currentQuaternion.multiply(qRoll);
+
+        this.previousForward.copy(forward);
+
+        const mat = new THREE.Matrix4();
+        mat.compose(this.position3D, this.currentQuaternion, new THREE.Vector3(1,1,1));
+        this.meshRef.setMatrixAt(this.instanceIndex, mat);
+        this.meshRef.instanceMatrix.needsUpdate = true;
+
+        const hungerFactor = (1 - this.hunger);
+        const regen = hungerFactor * this.parameters.energyRegenRate;
+        this.energy = Math.min(this.parameters.maxEnergy, this.energy + regen);
+    }
+
     updateInstanceMatrix() {
         // Compute a matrix from position and orientation
         const m = new THREE.Matrix4();
@@ -1146,7 +1024,7 @@ export class Gutt {
     filterByVisionCone(neighbors) {
         if (this.species !== "mara") return neighbors;
         const forward = this.velocity3D.clone().normalize();
-        const halfAngle = (this.parameters.mara_vision_angle || 45) * Math.PI/180;
+        const halfAngle = ((this.parameters.mara_vision_angle ?? 45) * Math.PI/180);
         return neighbors.filter(agent => {
             if (agent === this) return false;
             const dir = agent.position3D.clone().sub(this.position3D).normalize();

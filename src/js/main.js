@@ -1,8 +1,5 @@
 //  IMPORT DEPENDENCIES
 import * as THREE from 'three'
-import { Float32BufferAttribute, FrontSide, DoubleSide, Vector2 } from 'three'
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js'
 import { generateUUID } from 'three/src/math/MathUtils.js'
 import WordCloud from 'wordcloud';
 window.WordCloud = WordCloud;
@@ -11,7 +8,7 @@ window.WordCloud = WordCloud;
 //  IMPORT SCRIPTS
 import { renderer, camera, clock, orbitControls, flyControls, resizeRendererToDisplaySize, updateFlightSpeedByDistance, getFollowMode, setFollowMode } from './core/camera.js'
 import { setupLighting } from './core/lighting.js'
-import { createImages, createTags, hoveredPins, intersectObjectsArray, createConnections, hoverPins, instantiateNugget, createRoute, refreshNode } from './mindmap.js'
+import { createImages, createTags, hoveredPins, intersectObjectsArray, createConnections, hoverPins, instantiateNugget, refreshNode } from './mindmap.js'
 import {
     configureDatasets,
     contexts,
@@ -28,49 +25,15 @@ import { pushContent, handleCarouselButton } from './content.js'
 import { initialiseVersion } from './versions.js'
 import { creation } from './creation.js'
 import { updateGutta, guttCrumbMesh, maraCrumbMesh } from './gutta.js'
-import { createField } from './podcast.js'
-import { createFieldLines } from './flux.js'
 import { setupIntro, introState, fadeOutAudio, animateLetterSpacing } from './core/intro.js'
 import { DeveloperHud } from './core/developerHud.js'
+import { PlanetEnvironment } from './core/planetEnvironment.js'
 
 //IMPORT DATA
 // Default / initial mindmap dataset (index 0). Additional datasets loaded dynamically.
 import { contentData } from './data/contentData.js'
 import { palette } from './data/palette.js'
 import { pinMaterials, pinWireframeMaterials, boxMaterials } from './data/materials.js'
-
-//  IMPORT SHADERS
-import atmosphericLightVertexShader from '../shaders/atmosphericLightVertex.glsl'
-import atmosphericLightFragmentShader from '../shaders/atmosphericLightFragment.glsl'
-import atmosphereVertexShader from '../shaders/atmosphereVertex.glsl'
-import atmosphereFragmentShader from '../shaders/atmosphereFragment.glsl'
-import spiralVertexShader from '../shaders/spiralVertex.glsl'
-import spriralFragmentShader from '../shaders/spiralFragment.glsl'
-
-//  IMPORT TEXTURES
-import milkyway from "/assets/textures/milkyway4.webp"
-import starW from "/assets/textures/starW.webp"
-import starR5 from "/assets/textures/starR5.webp"
-import starR10 from "/assets/textures/starR10.webp"
-import starR15 from "/assets/textures/starR15.webp"
-import starR20 from "/assets/textures/starR20.webp"
-import starB5 from "/assets/textures/starB5.webp"
-import starB10 from "/assets/textures/starB10.webp"
-import starB15 from "/assets/textures/starB15.webp"
-import starB20 from "/assets/textures/starB20.webp"
-import sunTexture from "/assets/textures/sun1k.webp"
-import moonTexture from "/assets/textures/moon1k.webp"
-import redmoonTexture from "/assets/textures/moonRed1k.webp"
-import icemoonTexture from "/assets/textures/moonIce1k.webp"
-import dash from '/assets/textures/dash.webp'
-import tier from '/assets/textures/tier.webp'
-
-// IMPORT MODELS
-import signModel from "../models/sign.glb"
-import field1 from '/src/models/field.glb'
-import field2 from '/src/models/field2.glb'
-import field3 from '/src/models/field3.glb'
-import field4 from '/src/models/field4.glb'
 
 window.appStatus = "initialising";
 
@@ -159,10 +122,6 @@ window.onload = function() {
   };
   
 
-let signRotationVector = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z)
-
-const middleOfPlanet = new THREE.Vector3(0, 0, 0);
-const spiral = new THREE.Object3D()
 
 let guttaState = {
     gutta: [],
@@ -178,21 +137,60 @@ let guttaStats = {
     totalHungerAtMunch: 0
 }
 
-//VERSION MANAGER
-
+// Loaders used across the environment and dataset initialisation
 const postLoadingManager = new THREE.LoadingManager();
-const textureLoader2 = new THREE.TextureLoader(postLoadingManager)
+const textureLoader2 = new THREE.TextureLoader(postLoadingManager);
 
-initialiseVersion(creation, postLoadingManager, guttaState, scene)
-window.appStatus = "version-menu"
-
-let jaraniusInitialized = false
-
-//LOADING MANAGER
 const initialLoadingManager = new THREE.LoadingManager();
-const textureLoader = new THREE.TextureLoader(initialLoadingManager)
+const textureLoader = new THREE.TextureLoader(initialLoadingManager);
 
-initialiseLoadingManager(initialLoadingManager)
+const planetEnvironment = new PlanetEnvironment({
+    scene,
+    camera,
+    renderer,
+    postLoadingManager,
+    textureLoader,
+    textureLoader2,
+});
+
+const {
+    planetContent,
+    spiral,
+    jaraniusConnections,
+    spiralDynamicsConnections,
+    enneagram,
+    enneagramConnectionsObj,
+} = planetEnvironment.getDatasetNodes();
+
+const jaraniusCenter = planetEnvironment.getJaraniusCenter();
+const middleOfPlanet = planetEnvironment.getMiddleOfPlanet();
+let jaranius = planetEnvironment.getJaranius();
+
+configureDatasets({
+    planetContent,
+    spiral,
+    jaraniusConnections,
+    spiralDynamicsConnections,
+    enneagram,
+    enneagramConnectionsObj,
+    instantiateNugget,
+    createImages,
+    createTags,
+    createConnections,
+    intersectObjectsArray,
+});
+
+initialiseLoadingManager(initialLoadingManager);
+
+initialiseVersion(creation, postLoadingManager, guttaState, scene);
+window.appStatus = "version-menu";
+
+export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture, cloudsNormal, version) {
+    const jaraniusMesh = planetEnvironment.createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture, cloudsNormal, version);
+    jaranius = jaraniusMesh;
+    configureDatasets({ jaranius: jaraniusMesh });
+    return jaraniusMesh;
+}
 
 export function initialiseLoadingManager(loadingManager) {
     loadingManager.onStart = function () {
@@ -231,605 +229,6 @@ buttons.forEach(button => {
     });
 });
   
-//CREATE OUTER SPACE
-function createGalaxy() {
-    const radius = 1000;
-    const segments = 50;
-    const geometry = new THREE.SphereGeometry(radius, segments, segments);
-    const galaxyDiffuseTexture = textureLoader.load(milkyway)
-    galaxyDiffuseTexture.colorSpace = THREE.SRGBColorSpace
-    const material = new THREE.MeshBasicMaterial({
-        map: galaxyDiffuseTexture,
-        transparent: false,
-        opacity: 1,
-        side: THREE.BackSide,
-        // Don't write depth for the background sky to avoid interfering with flares/transparent sorting
-        depthWrite: false
-    });
-
-    const milkyWay = new THREE.Mesh(geometry, material);
-    milkyWay.rotation.set(-Math.PI / 3, 0.1, Math.PI / 2)
-    // Ensure the sky renders first
-    milkyWay.renderOrder = -1000;
-
-    return milkyWay
-}
-const galaxy = createGalaxy()
-scene.add(galaxy);
-
-//CREATE STARS
-const starGeometry = new THREE.BufferGeometry()
-const starGeoR5 = new THREE.BufferGeometry()
-const starGeoR10 = new THREE.BufferGeometry()
-const starGeoR15 = new THREE.BufferGeometry()
-const starGeoR20 = new THREE.BufferGeometry()
-const starGeoB5 = new THREE.BufferGeometry()
-const starGeoB10 = new THREE.BufferGeometry()
-const starGeoB15 = new THREE.BufferGeometry()
-const starGeoB20 = new THREE.BufferGeometry()
-
-function createStarMaterial(texture) {
-    const material = new THREE.PointsMaterial({
-        size: 5,
-        map: textureLoader.load(texture),
-        transparent: true,
-        fog: false,
-        // Stars shouldn't affect depth to avoid interacting with flares and distant objects
-        depthWrite: false
-    })
-    return material
-}
-const starMaterial = createStarMaterial(starW)
-const starMatR5 = createStarMaterial(starR5)
-const starMatR10 = createStarMaterial(starR10)
-const starMatR15 = createStarMaterial(starR15)
-const starMatR20 = createStarMaterial(starR20)
-const starMatB5 = createStarMaterial(starB5)
-const starMatB10 = createStarMaterial(starB10)
-const starMatB15 = createStarMaterial(starB15)
-const starMatB20 = createStarMaterial(starB20)
-starMaterial.colorSpace = THREE.SRGBColorSpace
-starMatR5.colorSpace = THREE.SRGBColorSpace
-starMatR10.colorSpace = THREE.SRGBColorSpace
-starMatR15.colorSpace = THREE.SRGBColorSpace
-starMatR20.colorSpace = THREE.SRGBColorSpace
-starMatB5.colorSpace = THREE.SRGBColorSpace
-starMatB10.colorSpace = THREE.SRGBColorSpace
-starMatB15.colorSpace = THREE.SRGBColorSpace
-starMatB20.colorSpace = THREE.SRGBColorSpace
-
-function createStarVertices(source, number) {
-    for (let i = 0; i < number; i++) {
-        const x = (Math.random() - 0.5) * 2000
-        const y = (Math.random() - 0.5) * 2000
-        const z = (Math.random() - 0.5) * 2000
-        const star = new THREE.Vector3(x, y, z)
-        if (middleOfPlanet.distanceTo(star) > 500) {
-            source.push(x, y, z)
-        }
-    }
-}
-const starVertices = []
-createStarVertices(starVertices, 5000)
-const starVertR5 = []
-createStarVertices(starVertR5, 1000)
-const starVertR10 = []
-createStarVertices(starVertR10, 500)
-const starVertR15 = []
-createStarVertices(starVertR15, 100)
-const starVertR20 = []
-createStarVertices(starVertR20, 25)
-const starVertB5 = []
-createStarVertices(starVertB5, 1000)
-const starVertB10 = []
-createStarVertices(starVertB10, 500)
-const starVertB15 = []
-createStarVertices(starVertB15, 100)
-const starVertB20 = []
-createStarVertices(starVertB20, 25)
-
-starGeometry.setAttribute('position', new Float32BufferAttribute(starVertices, 3))
-starGeoR5.setAttribute('position', new Float32BufferAttribute(starVertR5, 3))
-starGeoR10.setAttribute('position', new Float32BufferAttribute(starVertR10, 3))
-starGeoR15.setAttribute('position', new Float32BufferAttribute(starVertR15, 3))
-starGeoR20.setAttribute('position', new Float32BufferAttribute(starVertR20, 3))
-starGeoB5.setAttribute('position', new Float32BufferAttribute(starVertB5, 3))
-starGeoB10.setAttribute('position', new Float32BufferAttribute(starVertB10, 3))
-starGeoB15.setAttribute('position', new Float32BufferAttribute(starVertB15, 3))
-starGeoB20.setAttribute('position', new Float32BufferAttribute(starVertB20, 3))
-
-const stars = new THREE.Points(starGeometry, starMaterial)
-const starsR5 = new THREE.Points(starGeoR5, starMatR5)
-const starsR10 = new THREE.Points(starGeoR10, starMatR10)
-const starsR15 = new THREE.Points(starGeoR15, starMatR15)
-const starsR20 = new THREE.Points(starGeoR20, starMatR20)
-const starsB5 = new THREE.Points(starGeoB5, starMatB5)
-const starsB10 = new THREE.Points(starGeoB10, starMatB10)
-const starsB15 = new THREE.Points(starGeoB15, starMatB15)
-const starsB20 = new THREE.Points(starGeoB20, starMatB20)
-scene.add(stars, starsR5, starsR10, starsR15, starsR20, starsB5, starsB10, starsB15, starsB20)
-
-//CREATE SOLAR SYSTEM
-const center = new THREE.Object3D();
-scene.add(center);
-const jaraniusCenter = new THREE.Object3D();
-center.add(jaraniusCenter);
-const spiralCenter = new THREE.Object3D();
-const enneaCenter = new THREE.Object3D();
-center.add(spiralCenter);
-center.add(enneaCenter);
-
-const pivot1 = new THREE.Object3D();
-const pivot2 = new THREE.Object3D();
-const pivot3 = new THREE.Object3D();
-const pivot4 = new THREE.Object3D();
-
-pivot1.rotation.y = Math.PI / 2.5;//- Math.PI / 2.5;
-pivot1.rotation.x = 0.15
-pivot2.rotation.y = 2 * Math.PI / 16;
-pivot2.rotation.x = 0.22
-pivot3.rotation.y = 2 * Math.PI / 2;
-pivot3.rotation.x = 0.31
-pivot4.rotation.y = 9 * Math.PI / 6;
-pivot4.rotation.x = -0.41;
-
-center.add(pivot1);
-center.add(pivot2);
-center.add(pivot3);
-center.add(pivot4);
-
-// CREATE JARANIUS
-let jaranius
-let jaraniusConnections = new THREE.Object3D()
-let spiralDynamicsConnections = new THREE.Object3D()
-let enneaConnections = new THREE.Object3D()
-let clouds
-let atmosphere
-let atmosphericLight
-let sign
-const planetContent = new THREE.Object3D()
-export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture, cloudsNormal, version) {
-    jaraniusInitialized = true
-    if (version == "2") renderer.shadowMap.enabled = false
-    const jaraniusSegments = 200
-    
-    const jaraniusGeometry = new THREE.SphereGeometry(5, jaraniusSegments, jaraniusSegments);
-    jaraniusGeometry.computeBoundingSphere();
-
-    const diffuse = textureLoader2.load(diffuseTexture)
-    diffuse.colorSpace = THREE.SRGBColorSpace;
-
-    const jaraniusMaterial = new THREE.MeshStandardMaterial({ 
-        map: diffuse,
-        normalMap: textureLoader2.load(normalTexture),
-        roughnessMap: textureLoader2.load(roughnessTexture),  //works well
-        normalScale: new THREE.Vector2(5, 5),  //works well
-        metalness: 0,  //works well
-        flatShading: false,
-        side: FrontSide,
-    })
-    jaranius = new THREE.Mesh(
-        jaraniusGeometry,
-        jaraniusMaterial 
-    )
-    jaranius.name = "jaranius"
-    jaraniusCenter.add(jaranius)
-    jaranius.receiveShadow = true;
-    jaranius.castShadow = true;
-
-    //create cloud layer
-    const cloudsDiffuseTexture = textureLoader2.load(cloudsTexture)
-    cloudsDiffuseTexture.colorSpace = THREE.SRGBColorSpace;
-    const cloudsMaterial = new THREE.MeshLambertMaterial({
-        map: cloudsDiffuseTexture,
-        normalMap: textureLoader2.load(cloudsNormal),
-        normalScale: new THREE.Vector2(0.5, 0.5), 
-        transparent: true,
-        side: DoubleSide,
-        opacity: 0.8,
-        depthWrite: false,
-    })
-    clouds = new THREE.Mesh(
-        new THREE.SphereGeometry(5.04, jaraniusSegments, jaraniusSegments),
-        cloudsMaterial
-    )
-
-    clouds.receiveShadow = true;
-    clouds.castShadow = false;
-    jaranius.add(clouds)
-    
-    //create atmosphericLight  
-    atmosphericLight = new THREE.Mesh(
-        new THREE.SphereGeometry(5.01, jaraniusSegments, jaraniusSegments),
-        new THREE.ShaderMaterial({
-            vertexShader: atmosphericLightVertexShader,
-            fragmentShader: atmosphericLightFragmentShader,
-            blending: THREE.AdditiveBlending,
-            uniforms: {
-                baseIntensity: { value: 0.9 },
-                atmosphereStrength: { value: 2.5 },
-                uniformCameraPosition: { value: camera.position },
-                planetPosition: { value: new THREE.Vector3(0, 0, 0) },
-                lightPosition: { value: sunObjectWorldPosition },
-                closeDistanceThreshold: { value: 7 },
-                standardColor: { value: new THREE.Vector3(0.3, 0.6, 1.0) },
-                sunsetColor: { value: new THREE.Vector3(1.0, 0.4, 0.1) }, //(0.8, 0.4, 0.2) },
-                nightColor: { value: new THREE.Vector3(0.0, 0.0, 0.0) },
-                sunsetMinAngleThreshold: { value: 75 },
-                sunsetMaxAngleThreshold: { value: 102 },
-                nightMaxAngleThreshold: { value: 130 },
-            },
-        })
-    );
-    
-    atmosphericLight.position.set(0, 0, 0)
-    jaranius.add(atmosphericLight);
-
-    //create atmosphere
-    atmosphere = new THREE.Mesh(
-        new THREE.SphereGeometry(5.3, 100, 100),
-        new THREE.ShaderMaterial({
-            vertexShader: atmosphereVertexShader,
-            fragmentShader: atmosphereFragmentShader,
-            uniforms: {
-                baseIntensity: { value: 0.1 },
-                intensityPower: { value: 1.1 },
-                lightPosition: { value: sunObjectWorldPosition },
-                uniformCameraPosition: { value: camera.position },
-                planetPosition: { value: new THREE.Vector3(0, 0, 0) },
-                minDistance: { value: 5.0 },
-                maxDistance: { value: 5000.0 },
-                closeDistanceThreshold: { value: 7 },
-                standardColor: { value: new THREE.Vector3(0.3, 0.6, 1.0) }, // Standard atmosphere color
-                sunsetColor: { value: new THREE.Vector3(1.0, 0.4, 0.1) }, // Sunset color
-                nightColor: { value: new THREE.Vector3(0.0, 0.0, 0.0) }, // Night color
-                sunsetMinAngleThreshold: { value: 75 },
-                sunsetMaxAngleThreshold: { value: 102 },
-                nightMaxAngleThreshold: { value: 130 },
-            },
-            blending: THREE.AdditiveBlending,
-            side: THREE.BackSide,
-            transparent: true,
-            depthWrite: false,
-        })
-    );
-    
-    atmosphere.position.set(0, 0, 0)
-    atmosphere.scale.set(1.2, 1.2, 1.2)
-    jaranius.add(atmosphere);
-
-    //create jaranius light
-    const jaraniusLight = new THREE.PointLight(0xffffff, 0); //0.01
-    jaraniusLight.position.set(0, 0, 0);
-    jaranius.add(jaraniusLight);
-
-
-    //create sign
-    sign = new THREE.Object3D()
-    planetContent.add(sign)
-    sign.position.set(0, -5.05, 0)
-    const loader = new GLTFLoader(postLoadingManager);
-    loader.load(signModel,
-        function ( glb ) {
-            const model = glb.scene
-            sign.add( model );
-            model.scale.set(5, 5, 5)
-            model.rotation.y += Math.PI / 2;
-            model.rotation.x += Math.PI / 3;
-            // Enable shadow casting for each mesh in the model
-            model.traverse(function (object) {
-                if (object.isMesh) {
-                    object.castShadow = true;
-                }
-            });
-        },
-        function ( xhr ) {
-            //console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-        },
-        function ( error ) {
-            console.log( 'An error happened' );
-        }
-    );
-
-    //create route
-    const route = new THREE.Object3D();
-    planetContent.add(route);
-    const myRoute = [
-    { lat: -90, lng: 0 },
-    { lat: -64, lng:  120},
-    { lat: -37, lng:  104},
-    { lat: -28, lng:  96},
-    { lat: -20.2, lng:  103},
-    { lat: -20, lng: 111},
-    { lat: -35, lng:  121},
-    { lat: -41, lng:  136},
-    { lat: -31, lng: 155 },
-    { lat: -22, lng:  165},
-    { lat: -10, lng:  164},
-    { lat: 5, lng:  140},
-    { lat: 24, lng:  141},
-    { lat: 40, lng:  130},
-    ];
-    const routeMesh = createRoute(myRoute, 5.01, 0.3, route);
-    //planetContent.add(routeMesh);
-
-
-    configureDatasets({ jaranius });
-
-    return jaranius;
-}
-
-
-//CREATE ENNEAGRAM FLUX LINES
-const enneagram = new THREE.Object3D
-const enneagramConnectionsObj = new THREE.Object3D
-
-configureDatasets({
-    planetContent,
-    spiral,
-    jaraniusConnections,
-    spiralDynamicsConnections,
-    enneagram,
-    enneagramConnectionsObj,
-    instantiateNugget,
-    createImages,
-    createTags,
-    createConnections,
-    intersectObjectsArray,
-});
-let enneagramActivated = false
-function createEnneagram(enneagram) {
-    enneaCenter.add(enneagram)
-    enneagram.add(enneagramConnectionsObj)
-    enneagramActivated = true
-    
-    //main flux lines
-    createFieldLines(enneagram, 9, 2, 200, true, 0.5, 5.761, 0.5)
-    //wing flux lines
-    createFieldLines(enneagram, 9, 2, 200, true, 0.35, 5.561, 0.35)
-    createFieldLines(enneagram, 9, 2, 200, true, 0.35, 5.961, 0.35)
-    //thin flux lines
-    createFieldLines(enneagram, 10, 1.2, 200, false, undefined, 0.02)
-    createFieldLines(enneagram, 15, 1.225, 200, false, undefined, 0.01)
-    createFieldLines(enneagram, 20, 1.25, 200, false, undefined, 0)
-    createFieldLines(enneagram, 25, 1.375, 200, false, undefined, 0.01)
-    createFieldLines(enneagram, 30, 1.5, 200, false, undefined, 0.02)
-    createFieldLines(enneagram, 40, 1.675, 200, false, undefined, 0.03)
-    createFieldLines(enneagram, 50, 1.75, 200, false, undefined, 0.04)
-    createFieldLines(enneagram, 70, 1.875, 200, false, undefined, 0.05)
-    createFieldLines(enneagram, 90, 2, 200, false, undefined, 0.06)
-    createFieldLines(enneagram, 70, 2.125, 200, false, undefined, 0.07)
-    createFieldLines(enneagram, 50, 2.25, 200, false, undefined, 0.08)
-    createFieldLines(enneagram, 40, 2.375, 200, false, undefined, 0.09)
-    createFieldLines(enneagram, 30, 2.5, 200, false, undefined, 0.1)
-    createFieldLines(enneagram, 25, 2.675, 200, false, undefined, 0.11)
-    createFieldLines(enneagram, 20, 2.75, 200, false, undefined, 0.12)
-    createFieldLines(enneagram, 15, 2.875, 200, false, undefined, 0.13)
-    createFieldLines(enneagram, 10, 3, 200, false, undefined, 0.14)
-}
-
-//CREATE SUN
-const sunRadius = 5
-const sunRadianceGeo = new THREE.SphereGeometry(sunRadius, 25, 25)
-
-const sunDiffuseTexture = textureLoader.load(sunTexture)
-sunDiffuseTexture.colorSpace = THREE.SRGBColorSpace
-const sunMat = new THREE.MeshBasicMaterial({
-    map: sunDiffuseTexture
-})
-const sunRadiance = new THREE.Mesh(sunRadianceGeo, sunMat)
-sunRadiance.position.set(0, 0, 490)
-pivot4.add(sunRadiance)
-sunRadiance.castShadow = false
-// Draw the sun disc late to stabilize ordering vs. other transparents
-sunRadiance.renderOrder = 9000;
-
-const sunLight = new THREE.DirectionalLight(0xffffff, 1.2) //1.2
-sunLight.position.set(sunRadiance.position.x, sunRadiance.position.y, sunRadiance.position.z - sunRadius * 1.5)
-sunLight.castShadow = true;
-sunLight.shadow.camera.near = 475;
-sunLight.shadow.camera.far = 700;
-sunLight.shadow.mapSize.width = 8192;
-sunLight.shadow.mapSize.height = 8192;
-sunLight.shadow.bias = 0.0001;
-sunLight.shadow.radius = 1;
-pivot4.add(sunLight)
-
-let sunObjectWorldPosition = new THREE.Vector3();
-
-const textureFlare0 = textureLoader.load("/Planet/assets/textures/sunflare.webp");
-const textureFlare3 = textureLoader.load("/Planet/assets/textures/lensflare.webp");
-const lensflare = new Lensflare();
-lensflare.position.set( 0, 0, 0 );
-lensflare.addElement( new LensflareElement( textureFlare0, 2560, 0 ) );
-lensflare.addElement( new LensflareElement( textureFlare3, 60, 0.6 ) );
-lensflare.addElement( new LensflareElement( textureFlare3, 70, 0.7 ) );
-lensflare.addElement( new LensflareElement( textureFlare3, 120, 0.9 ) );
-lensflare.addElement( new LensflareElement( textureFlare3, 70, 1 ) );
-// Ensure flare renders last and isn't impacted by transparent sorting
-lensflare.renderOrder = 10000;
-
-sunLight.add( lensflare );
-
-//CREATE MOONS
-class Moon {
-    constructor(radius, texture, z, rotation, pivot, intensity) {
-        this.radius = radius;
-        this.texture = texture;
-        this.z = z;
-        this.rotation = rotation;
-        this.pivot = pivot;
-        this.intensity = intensity;
-    }
-}
-
-let moon1 = new Moon(1.5, moonTexture, 110, -0.0005, pivot1, 0.1);
-let moon2 = new Moon(2.5, redmoonTexture, 190, -0.0003, pivot2, 0.05);
-let moon3 = new Moon(1, icemoonTexture, 250, -0.0001, pivot3, 0.005);
-let moons = [moon1,moon2,moon3];
-
-for (let i = 0; i < moons.length; i++) {
-    const moonDiffuseTexture = textureLoader.load(moons[i].texture)
-    moonDiffuseTexture.colorSpace = THREE.SRGBColorSpace
-    const mesh = new THREE.Mesh(
-        new THREE.SphereGeometry(moons[i].radius, 25, 25),
-        new THREE.MeshStandardMaterial({
-            map: moonDiffuseTexture,
-            metalness: 0,
-            flatShading: false,
-            side: FrontSide,
-        })
-    )
-
-    mesh.position.set(moons[i].z, 0, 0)
-    moons[i].pivot.add(mesh);
-    mesh.castShadow = true
-    mesh.receiveShadow = true
-
-    const moonlight = new THREE.PointLight(0xffffff, moons[i].intensity);
-    moonlight.position.set(moons[i].z, 0, 0);
-    mesh.add(moonlight);
-}
-
-//CREATE SPIRAL
-let spiralActivated = false
-function createSpiral() {
-    spiralActivated = true
-    spiralCenter.add(spiral)
-    let helixMaxRadius = 7;
-    let helixRevolutions = 9;
-    let helixPoints = []
-    let jointPoints = []
-
-    for (let i = 0; i < helixRevolutions; i++) {
-        helixPoints[i] = []
-        jointPoints[i] = []
-        for (let t = (2 * Math.PI) * i; t <= (2 * Math.PI) * (i + 1.0000001); t += Math.PI / 128) {
-            let radiusModifier = Math.sin(t / (helixRevolutions * 2))
-            let helixX = radiusModifier * helixMaxRadius * Math.cos(t);
-            let helixZ = radiusModifier * helixMaxRadius * Math.sin(t)
-            let helixY = (helixMaxRadius / (helixRevolutions * Math.PI)) * t
-
-            helixPoints[i].push(new THREE.Vector3(helixX, helixY - helixMaxRadius, helixZ));
-
-            if (i == 0) {
-                if (t > (2 * Math.PI) * i + (((2 * Math.PI) * (i + 1.0000001) - (2 * Math.PI) * i) * 0.98)) {
-                    jointPoints[i].push(new THREE.Vector3(helixX, helixY - helixMaxRadius, helixZ));
-                }
-            }
-            else if (i < helixRevolutions) {
-                if (t < (2 * Math.PI) * i + (((2 * Math.PI) * (i + 1.0000001) - (2 * Math.PI) * i) * 0.02)) {
-                    jointPoints[i - 1].push(new THREE.Vector3(helixX, helixY - helixMaxRadius, helixZ));
-                }
-                if (t > (2 * Math.PI) * i + (((2 * Math.PI) * (i + 1.0000001) - (2 * Math.PI) * i) * 0.98)) {
-                    jointPoints[i].push(new THREE.Vector3(helixX, helixY - helixMaxRadius, helixZ));
-                }
-            }
-            else {
-                if (t < (2 * Math.PI) * i + (((2 * Math.PI) * (i + 1.0000001) - (2 * Math.PI) * i) * 0.02)) {
-                    jointPoints[i - 1].push(new THREE.Vector3(helixX, helixY - helixMaxRadius, helixZ));
-                }
-            }
-        }
-
-        //core
-        let helixCurve = new THREE.CatmullRomCurve3(helixPoints[i]);
-
-        const geometry = new THREE.TubeGeometry(helixCurve, 64, 0.01, 10, false);
-        geometry.computeBoundingBox();
-        const material = new THREE.ShaderMaterial({
-            uniforms: {
-                color1: {
-                value: new THREE.Color(palette[40 + i])
-                },
-                color2: {
-                value: new THREE.Color(palette[40 + i + 1])
-                },
-                bboxMin: {
-                value: geometry.boundingBox.min
-                },
-                bboxMax: {
-                value: geometry.boundingBox.max
-                }
-            },
-            vertexShader: spiralVertexShader,
-            fragmentShader: spriralFragmentShader,
-        })
-        const spiralSection = new THREE.Mesh(geometry, material);
-        spiral.add(spiralSection)
-
-        //skin
-        const geometry2 = new THREE.TubeGeometry(helixCurve, 64, 0.12 - i / 70, 10, false);
-        const material2 = new THREE.MeshBasicMaterial({
-            color: palette[40 + i],
-            transparent: true,
-            opacity: 0.6,
-            depthWrite: true
-        })
-        const spiralSection2 = new THREE.Mesh(geometry2, material2);
-        spiral.add(spiralSection2)
-        spiral.rotation.set(0, 0, 0)
-        
-        //joints
-        if (i !== 0){    
-            let jointCurve = new THREE.CatmullRomCurve3(jointPoints[i - 1]);
-
-            const jointGeometry = new THREE.TubeGeometry(jointCurve, 64, 0.15 - i / 70, 10, false);
-            jointGeometry.computeBoundingBox();
-            const jointMaterial = new THREE.ShaderMaterial({
-                uniforms: {
-                    color1: {
-                    value: new THREE.Color(palette[40 + i - 1])
-                    },
-                    color2: {
-                    value: new THREE.Color(palette[40 + i])
-                    },
-                    bboxMin: {
-                    value: jointGeometry.boundingBox.min
-                    },
-                    bboxMax: {
-                    value: jointGeometry.boundingBox.max
-                    }
-                },
-                vertexShader: spiralVertexShader,
-                fragmentShader: spriralFragmentShader,
-            })
-            const jointSection = new THREE.Mesh(jointGeometry, jointMaterial);
-            spiral.add(jointSection)
-        }
-    }
-
-    //tier2ring
-    const dashAlphaTexture = textureLoader.load(dash)
-        dashAlphaTexture.repeat.set(0, 100)
-        dashAlphaTexture.wrapT = THREE.RepeatWrapping;
-        dashAlphaTexture.rotation = Math.PI / 2
-    const dashTexture = textureLoader.load(tier)
-        dashTexture.repeat.set(1, 100)
-        dashTexture.wrapS = THREE.RepeatWrapping;
-        dashTexture.wrapT = THREE.RepeatWrapping;
-        dashTexture.rotation = Math.PI / 2
-        dashTexture.offset.set(0.5, 0)
-    const tierGeo = new THREE.TorusGeometry(6.05, 0.05, 50, 100)
-    const tierMat = new THREE.MeshStandardMaterial({
-        alphaMap: dashAlphaTexture,
-        transparent: true,
-        alphaTest: 0.5,
-        map: dashTexture,
-        emissive: 0xffffff,
-        emissiveMap: dashTexture,
-        emissiveIntensity: 0.05,
-        color: 0xffffff,
-        metalness: 1,
-        roughness: 0.7,
-        depthWrite: true
-    })
-    const tierRing = new THREE.Mesh(tierGeo, tierMat)
-    tierRing.rotation.x = Math.PI / 2
-    tierRing.position.y = 2.34
-    spiral.add(tierRing)
-}
-
 //CREATE LIGHTS
 const { ambient, spotlight, updateLightIntensity, queueSpotlightIntensity, queueAmbientIntensity } = setupLighting(scene);
 
@@ -1051,22 +450,12 @@ function onDocumentKeyUp(event) {
                 fadeOutAudio(silenceAudio, 5000)
             }
             if (window.appStatus == "orbit") {
-                if (spiralActivated == false) {
-                    createSpiral()
-                } else {
-                    spiralActivated = false
-                    spiralCenter.remove(spiral)
-                }
+                planetEnvironment.toggleSpiral();
             }
             
         }
         if (keyCode == 89) { //Y
-            if (enneagramActivated == false) {
-                createEnneagram(enneagram)
-            } else {
-                enneagramActivated = false
-                enneaCenter.remove(enneagram)
-            }
+            planetEnvironment.toggleEnneagram();
         }
 
         const hotKeys = document.querySelector('#hotKeys')
@@ -1861,53 +1250,20 @@ function render() {
     spotlight.position.set(camPos.x, camPos.y, camPos.z);
     spotlight.rotation.set(camRot.x, camRot.y, camRot.z);
     
-    
-    if (jaraniusInitialized == true) {
-
-        if (window.appStatus !== "initialising" && window.appStatus !== "version-menu" && window.appStatus !== "intro-menu"&& window.appStatus !== "silence") {
-            center.rotation.y += -0.00001;
-            pivot1.rotation.y += -0.0003;
-            pivot2.rotation.y += -0.00003;
-            pivot3.rotation.y += -0.000009;
-            pivot4.rotation.y += -0.0001;
-            clouds.rotation.y += 0.00001;
-        }
+    if (planetEnvironment.isJaraniusInitialized()) {
+        planetEnvironment.update({
+            appStatus: window.appStatus,
+            orbitControls,
+            introState,
+        });
 
         window.curveMeshes.forEach(curveData => {
             curveData.texture.offset.y += 0.004;
             curveData.texture.offset.x += 0.001;
         });
 
-        if (camera.position.z > -15 && camera.position.z < 15 && introState.started === true) {
-            introState.started = false
-            const titleMesh = scene.getObjectByName('title')
-            scene.remove(titleMesh)
-            document.body.style.cursor = 'default';
-        }
-    
-        orbitControls.rotateSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet);
-        orbitControls.zoomSpeed = (camera.position.distanceTo(middleOfPlanet) - 5) / camera.position.distanceTo(middleOfPlanet) / 3;
-
-        if (sign) {
-            signRotationVector.set(camera.position.x, camera.position.y, camera.position.z)
-            signRotationVector.normalize()
-            sign.lookAt(signRotationVector.x, signRotationVector.y, signRotationVector.z ) 
-        }
-
-        //ATMOSPHERE
-        let distance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) - 8;
-        let scaleFactor = Math.max(1.2, 1 + 0.75 * Math.exp(-0.1 * distance));
-        atmosphere.scale.set(scaleFactor, scaleFactor, scaleFactor);
-
-        sunObjectWorldPosition = sunRadiance.getWorldPosition(sunObjectWorldPosition);
-
-        atmosphere.material.uniforms.lightPosition.value.copy(sunObjectWorldPosition);
-        atmosphericLight.material.uniforms.lightPosition.value.copy(sunObjectWorldPosition);
-
         scanPins();
-
         updateLightIntensity(clock);
-
     }
 
     if (introState.tuneLength) {
@@ -1933,26 +1289,13 @@ function render() {
     if (flyControls.enabled) {  
         flyControls.update(delta);
 
-        const distance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0));
+        const distance = camera.position.distanceTo(middleOfPlanet);
         if (distance < flyControls.minDistance) {
-            // Calculate the vector pointing from the planet center to the camera
-            const direction = camera.position.clone().sub(new THREE.Vector3(0, 0, 0)).normalize();
-
-            // Move the camera to the minimum distance in the same direction
+            const direction = camera.position.clone().sub(middleOfPlanet).normalize();
             camera.position.copy(direction.multiplyScalar(flyControls.minDistance));
         }
 
         updateFlightSpeedByDistance(distance);
-
-
-        let toSun = new THREE.Vector3().subVectors(sunObjectWorldPosition, middleOfPlanet);
-        let toCamera = new THREE.Vector3().subVectors(camera.position, middleOfPlanet);
-
-        toSun.normalize();
-        toCamera.normalize();
-
-        let angle = Math.acos(toSun.dot(toCamera)) * 180.0 / Math.PI;
-
     }
 
     if (orbitControls.enabled) {
