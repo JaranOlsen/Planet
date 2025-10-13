@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deliberate Practice Lab</title>
+    <link rel="stylesheet" href="./src/css/style.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1 id="app-title">Deliberate Practice Lab</h1>
+      <p class="app-tagline" id="app-tagline">
+        Build precision with focused skills, tailored cases, and adaptive difficulty.
+      </p>
+    </header>
+    <main class="app-main" aria-live="polite">
+      <section id="language-selection" class="panel">
+        <h2 class="panel-title" id="language-panel-title">Choose a Language</h2>
+        <p class="panel-subtitle" id="language-panel-description">
+          Select the language you want to practice in.
+        </p>
+        <div
+          class="grid-list"
+          id="language-list"
+          role="listbox"
+          aria-label="Language Options"
+        ></div>
+      </section>
+
+      <section id="skill-selection" class="panel is-hidden" hidden>
+        <div class="panel-header">
+          <button
+            class="back-button"
+            id="back-to-language"
+            data-nav-target="language"
+            aria-label="Back to language"
+          >
+            ← Language
+          </button>
+          <h2 class="panel-title" id="skill-panel-title">Choose a Skill</h2>
+        </div>
+        <p class="panel-subtitle" id="skill-panel-description">
+          Pick the focus area you want to strengthen today.
+        </p>
+        <div
+          class="grid-list"
+          id="skill-list"
+          role="listbox"
+          aria-label="Skill Options"
+        ></div>
+      </section>
+
+      <section id="case-selection" class="panel is-hidden" hidden>
+        <div class="panel-header">
+          <button
+            class="back-button"
+            id="back-to-skills"
+            data-nav-target="skill"
+            aria-label="Back to skills"
+          >
+            ← Skills
+          </button>
+          <h2 class="panel-title" id="case-panel-title">Pick a Case</h2>
+        </div>
+        <p class="panel-subtitle" id="case-panel-description">
+          Explore curated cases that mirror real-world dynamics.
+        </p>
+        <div
+          id="case-list"
+          class="grid-list"
+          role="listbox"
+          aria-label="Case Options"
+        ></div>
+      </section>
+
+      <section id="practice-area" class="panel is-hidden" hidden>
+        <div class="panel-header">
+          <button
+            class="back-button"
+            id="back-to-cases"
+            data-nav-target="case"
+            aria-label="Back to cases"
+          >
+            ← Cases
+          </button>
+          <h2 class="panel-title" id="practice-skill"></h2>
+        </div>
+
+        <article class="case-intro">
+          <h3 class="case-title" id="case-name"></h3>
+          <dl class="case-details">
+            <div class="case-detail">
+              <dt id="case-history-label">History</dt>
+              <dd id="case-history"></dd>
+            </div>
+            <div class="case-detail">
+              <dt id="case-schema-label">Core Pain</dt>
+              <dd id="case-schema"></dd>
+            </div>
+            <div class="case-detail">
+              <dt id="case-style-label">Style</dt>
+              <dd id="case-style"></dd>
+            </div>
+          </dl>
+        </article>
+
+        <section class="practice-controls" aria-label="Practice Controls">
+          <div
+            class="difficulty-group"
+            role="group"
+            id="difficulty-group"
+            aria-label="Difficulty level"
+          >
+            <button class="chip chip-active" data-difficulty="foundational">
+              Foundational
+            </button>
+            <button class="chip" data-difficulty="stretch">Stretch</button>
+            <button class="chip" data-difficulty="mastery">Mastery</button>
+          </div>
+          <button
+            class="shuffle-button"
+            id="shuffle-order"
+            aria-label="Shuffle statement order"
+          >
+            Shuffle Statements
+          </button>
+        </section>
+
+        <section class="statement-panel" aria-live="polite">
+          <p id="statement-text" class="statement-text"></p>
+          <div class="panel-footer">
+            <span id="statement-counter" class="statement-counter"></span>
+            <button id="next-statement" class="primary-button">Next Statement</button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="app-footer" id="app-footer">
+      <small id="footer-note">
+        Crafted for focused skill rehearsal. Use headphones or quiet space for best results.
+      </small>
+    </footer>
+
+    <script type="module" src="./src/js/main.js"></script>
+  </body>
+</html>
