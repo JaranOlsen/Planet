@@ -1,6 +1,6 @@
 "use strict";
 
-export const DIFFICULTIES = ["foundational", "stretch", "mastery"];
+export const DIFFICULTIES = ["basic", "intermediate", "mastery"];
 export const SKILL_ORDER = [
   "empathic-validation",
   "empathic-conjecture",
@@ -60,14 +60,14 @@ export const BASE_PRACTICE = {
         style:
           "Speaks quickly, smiles to mask pain, minimizes her needs, and apologizes often when she gets emotional.",
         statements: {
-          foundational: withIds("ev_leah_found", [
+          basic: withIds("ev_leah_basic", [
             "I know I look tired, but honestly I should be doing more for my dad.",
             "Everyone at school depends on me. If I take a day off, they'll think I'm lazy.",
             "I hate that I'm frustrated. My dad is sick, so I shouldn't feel annoyed with him.",
             "If I slow down, it feels like I'm letting everyone down at once.",
             "People keep telling me to rest, but that just makes me feel guilty."
           ]),
-          stretch: withIds("ev_leah_stretch", [
+          intermediate: withIds("ev_leah_intermediate", [
             "Whenever I think about asking for help, I hear this voice telling me I'm weak.",
             "My sister sends supportive texts, and all I can think is that she's secretly judging me.",
             "The moment I lie down to relax, my mind races with everything I didn't do.",
@@ -94,14 +94,14 @@ export const BASE_PRACTICE = {
         style:
           "Tight smile, intellectualizes feelings, maintains calm tone until he suddenly withdraws.",
         statements: {
-          foundational: withIds("ev_malik_found", [
+          basic: withIds("ev_malik_basic", [
             "When investors pull back, I tell everyone it's fine, but inside I'm spiraling.",
             "I keep conversations light because deeper stuff seems like a turnoff.",
             "People say I'm composed, yet it just means I'm hiding the panic.",
             "If I admit I'm scared, I worry the team will lose confidence in me.",
             "Dating is exhausting—I end things before they can reject me."
           ]),
-          stretch: withIds("ev_malik_stretch", [
+          intermediate: withIds("ev_malik_intermediate", [
             "There's this constant scan in my head: do they still like me, or am I slipping?",
             "When someone compliments me, I immediately wonder what they actually want.",
             "I replay meetings at night, obsessing over whether I sounded insecure.",
@@ -128,14 +128,14 @@ export const BASE_PRACTICE = {
         style:
           "Measured voice, keeps conversation orderly, jokes wryly, eyes well up when caught off guard.",
         statements: {
-          foundational: withIds("ev_carmen_found", [
+          basic: withIds("ev_carmen_basic", [
             "I don't cry because I need to keep everyone else from falling apart.",
             "Patients need me sharp; emotions just slow me down.",
             "My family keeps asking how I'm doing, and I shrug it off.",
             "It's easier to talk about logistics than how much I miss him.",
             "If I get angry at him, it feels like I'm betraying his memory."
           ]),
-          stretch: withIds("ev_carmen_stretch", [
+          intermediate: withIds("ev_carmen_intermediate", [
             "Every shift I see someone like my brother, and I lock everything tight inside.",
             "When coworkers check on me, I change the subject to avoid breaking.",
             "Part of me is furious he left me to clean up, and that thought terrifies me.",
@@ -167,14 +167,14 @@ export const BASE_PRACTICE = {
         style:
           "Warm but guarded, asks for reassurance indirectly, expresses gratitude while downplaying struggles.",
         statements: {
-          foundational: withIds("ec_sahana_found", [
+          basic: withIds("ec_sahana_basic", [
             "My supervisor said I did well, but I keep thinking she was just being kind.",
             "I redo my notes three times because mistakes feel catastrophic.",
             "When clients thank me, I worry they're overestimating what I can do.",
             "I'm terrified that one tough session will expose me as incompetent.",
             "I replay sessions to find what I missed, then wonder if I'm just obsessive."
           ]),
-          stretch: withIds("ec_sahana_stretch", [
+          intermediate: withIds("ec_sahana_intermediate", [
             "Part of me thinks I'm only useful when I'm impressive.",
             "If someone pauses before giving feedback, I brace for bad news.",
             "It's like I need proof that I'm not a disappointment before I can breathe.",
@@ -201,14 +201,14 @@ export const BASE_PRACTICE = {
         style:
           "Self-deprecating humor, fidgets, tone alternates between upbeat and flat when tired.",
         statements: {
-          foundational: withIds("ec_tomas_found", [
+          basic: withIds("ec_tomas_basic", [
             "I love my son, yet sometimes I just want silence and that's hard to admit.",
             "My partner handles so much; I feel guilty when I'm exhausted.",
             "When I'm on night shifts, I miss milestones and feel replaceable.",
             "I thought parenting would feel more natural than this.",
             "Even when I ask for a break, I feel like I'm letting them down."
           ]),
-          stretch: withIds("ec_tomas_stretch", [
+          intermediate: withIds("ec_tomas_intermediate", [
             "There's a part of me that resents how life revolves around schedules now.",
             "I keep stuffing down frustration because I'm scared it'll turn into anger.",
             "My dad bailed when things got tough, and I'm paranoid I'm repeating him.",
@@ -234,14 +234,14 @@ export const BASE_PRACTICE = {
         style:
           "Direct in business contexts, softer at home, shifts between confident and tentative speech.",
         statements: {
-          foundational: withIds("ec_mei_found", [
+          basic: withIds("ec_mei_basic", [
             "My mom says she's fine, yet I can see the disappointment when I travel for work.",
             "I promised my team a launch date and I'm terrified of missing it.",
             "Sometimes I lie about working late so I can sit in the car alone for ten minutes.",
             "I feel torn between being a good daughter and a strong leader.",
             "I keep thinking if I were stronger, I wouldn't feel so split."
           ]),
-          stretch: withIds("ec_mei_stretch", [
+          intermediate: withIds("ec_mei_intermediate", [
             "I wish I could tell my mom that I'm scared I'm failing her.",
             "At work I sound decisive, but lately I'm second-guessing every call.",
             "There's no room to talk about my own needs without feeling selfish.",
@@ -275,14 +275,14 @@ export const BASE_PRACTICE = {
         style:
           "Alert posture, eyes dart often, speaks in strategic bullet points, rarely references his own body signals.",
         statements: {
-          foundational: withIds("er_amir_found", [
+          basic: withIds("er_amir_basic", [
             "I sit down to eat and suddenly remember three people waiting on me, so I just keep going.",
             "Everyone calls me the calm center, but lately I feel like static electricity.",
             "I don't even notice I'm thirsty until I get a migraine.",
             "Rest feels like falling behind—it takes longer to catch up than to just keep pushing.",
             "If I don't monitor every thread, I worry the whole weave will snap."
           ]),
-          stretch: withIds("er_amir_stretch", [
+          intermediate: withIds("er_amir_intermediate", [
             "When I try to breathe slow, my chest tightens like I'm wasting critical time.",
             "I used to jog to clear my head, now the idea of being unreachable makes me panic.",
             "People thank me for the coordination, but I can't remember the last moment I felt grounded.",
@@ -309,14 +309,14 @@ export const BASE_PRACTICE = {
         style:
           "Carefully chosen words, long pauses, rubs her wrists when stuck, oscillates between intense focus and blank stares.",
         statements: {
-          foundational: withIds("er_elise_found", [
+          basic: withIds("er_elise_basic", [
             "I keep redrawing the same layout, and each revision feels flatter than the last.",
             "My team asks what the priorities are, and my mind just empties.",
             "I know I should take a break, but stepping away feels like negligence.",
             "I'm forgetting why I loved concepting in the first place.",
             "Every idea looks derivative the moment I put it on paper."
           ]),
-          stretch: withIds("er_elise_stretch", [
+          intermediate: withIds("er_elise_intermediate", [
             "I can feel the energy in my hands, but it doesn't translate onto the canvas.",
             "When someone says, 'Trust your instincts,' I realize I can't access them.",
             "I leave critiques drained, replaying every note as proof I'm slipping.",
@@ -343,14 +343,14 @@ export const BASE_PRACTICE = {
         style:
           "Measured tone, cracks dry jokes about aging, taps his foot constantly, avoids mentioning fear unless specifically asked.",
         statements: {
-          foundational: withIds("er_victor_found", [
+          basic: withIds("er_victor_basic", [
             "The doctor keeps saying 'pace yourself,' and I nod while planning extra reps.",
             "My team offered to share the load, and I felt equal parts grateful and insulted.",
             "I used to start my day with a run; now the walk to the mailbox winds me.",
             "I know the metrics that matter, but my body won't cooperate with the timeline.",
             "There's this stack of books on recovery, and I can't bring myself to open them."
           ]),
-          stretch: withIds("er_victor_stretch", [
+          intermediate: withIds("er_victor_intermediate", [
             "When I slow down, I hear this whisper that I'm failing the people who count on me.",
             "I replay the moment in the hospital like a glitch I should have prevented.",
             "My heart rate spikes when I picture delegating the hard problems.",
@@ -367,10 +367,7 @@ export const BASE_PRACTICE = {
         }
       }
     }
-  },
-  he: {},
-  ar: {},
-  ru: {}
+  }
 };
 
 export const LANGUAGE_METADATA = {
@@ -407,8 +404,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "Core Pain",
     styleLabel: "Style",
     difficultyLabels: {
-      foundational: "Foundational",
-      stretch: "Stretch",
+      basic: "Basic",
+      intermediate: "Intermediate",
       mastery: "Mastery"
     },
     difficultyGroupAria: "Difficulty level",
@@ -431,7 +428,7 @@ export const LANGUAGE_UI = {
     statementPanelAria: "Client statements to practice with"
   },
   de: {
-    appTitle: "Labor für Deliberate Practice",
+    appTitle: "Labor für gezieltes Üben",
     tagline:
       "Schärfe deine Präzision mit fokussierten Fähigkeiten, passenden Fallbeispielen und variabler Schwierigkeit.",
     languageHeading: "Wähle eine Sprache",
@@ -447,8 +444,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "Kernschmerz",
     styleLabel: "Stil",
     difficultyLabels: {
-      foundational: "Grundlage",
-      stretch: "Wachstum",
+      basic: "Grundlage",
+      intermediate: "Wachstum",
       mastery: "Meisterschaft"
     },
     difficultyGroupAria: "Schwierigkeitsgrad",
@@ -471,7 +468,7 @@ export const LANGUAGE_UI = {
     statementPanelAria: "Klientenaussagen zum Üben"
   },
   no: {
-    appTitle: "Labor for Deliberate Practice",
+    appTitle: "Laboratorium for målrettet øving",
     tagline:
       "Bygg presisjon med målrettede ferdigheter, utvalgte case og justerbar vanskelighetsgrad.",
     languageHeading: "Velg språk",
@@ -487,8 +484,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "Kjernesmerte",
     styleLabel: "Stil",
     difficultyLabels: {
-      foundational: "Grunnleggende",
-      stretch: "Utfordrende",
+      basic: "Grunnleggende",
+      intermediate: "Utfordrende",
       mastery: "Mesternivå"
     },
     difficultyGroupAria: "Vanskelighetsnivå",
@@ -527,8 +524,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "Kärnsmärta",
     styleLabel: "Stil",
     difficultyLabels: {
-      foundational: "Grundnivå",
-      stretch: "Utmaning",
+      basic: "Grundnivå",
+      intermediate: "Utmaning",
       mastery: "Mästarfördjupning"
     },
     difficultyGroupAria: "Svårighetsgrad",
@@ -567,8 +564,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "Dor central",
     styleLabel: "Estilo",
     difficultyLabels: {
-      foundational: "Fundamental",
-      stretch: "Desafio",
+      basic: "Fundamental",
+      intermediate: "Desafio",
       mastery: "Maestria"
     },
     difficultyGroupAria: "Nível de dificuldade",
@@ -607,8 +604,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "Kernpijn",
     styleLabel: "Stijl",
     difficultyLabels: {
-      foundational: "Basis",
-      stretch: "Uitdaging",
+      basic: "Basis",
+      intermediate: "Uitdaging",
       mastery: "Beheersing"
     },
     difficultyGroupAria: "Moeilijkheidsgraad",
@@ -647,8 +644,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "Βασικός πόνος",
     styleLabel: "Ύφος",
     difficultyLabels: {
-      foundational: "Βασικό",
-      stretch: "Πρόκληση",
+      basic: "Βασικό",
+      intermediate: "Πρόκληση",
       mastery: "Δεξιοτεχνία"
     },
     difficultyGroupAria: "Επίπεδο δυσκολίας",
@@ -686,8 +683,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "核心痛点",
     styleLabel: "风格",
     difficultyLabels: {
-      foundational: "基础",
-      stretch: "进阶",
+      basic: "基础",
+      intermediate: "进阶",
       mastery: "精通"
     },
     difficultyGroupAria: "难度等级",
@@ -725,8 +722,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "Douleur centrale",
     styleLabel: "Style",
     difficultyLabels: {
-      foundational: "Fondations",
-      stretch: "Challenge",
+      basic: "Fondations",
+      intermediate: "Challenge",
       mastery: "Maîtrise"
     },
     difficultyGroupAria: "Niveau de difficulté",
@@ -765,8 +762,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "Kernesmærte",
     styleLabel: "Stil",
     difficultyLabels: {
-      foundational: "Grundniveau",
-      stretch: "Udfordring",
+      basic: "Grundniveau",
+      intermediate: "Udfordring",
       mastery: "Mesterskab"
     },
     difficultyGroupAria: "Sværhedsgrad",
@@ -805,8 +802,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "Dolor central",
     styleLabel: "Estilo",
     difficultyLabels: {
-      foundational: "Base",
-      stretch: "Desafío",
+      basic: "Base",
+      intermediate: "Desafío",
       mastery: "Maestría"
     },
     difficultyGroupAria: "Nivel de dificultad",
@@ -844,8 +841,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "כאב ליבה",
     styleLabel: "סגנון",
     difficultyLabels: {
-      foundational: "בסיס",
-      stretch: "אתגר",
+      basic: "בסיס",
+      intermediate: "אתגר",
       mastery: "שליטה"
     },
     difficultyGroupAria: "רמת קושי",
@@ -883,8 +880,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "مركز الألم",
     styleLabel: "الأسلوب",
     difficultyLabels: {
-      foundational: "أساسي",
-      stretch: "تطور",
+      basic: "أساسي",
+      intermediate: "تطور",
       mastery: "إتقان"
     },
     difficultyGroupAria: "مستوى الصعوبة",
@@ -922,8 +919,8 @@ export const LANGUAGE_UI = {
     schemaLabel: "Ключевая боль",
     styleLabel: "Стиль",
     difficultyLabels: {
-      foundational: "База",
-      stretch: "Рост",
+      basic: "База",
+      intermediate: "Рост",
       mastery: "Мастерство"
     },
     difficultyGroupAria: "Уровень сложности",
@@ -1022,6 +1019,46 @@ export const LANGUAGE_OVERRIDES = {
             "Im Business direkt, zuhause sanfter, wechselt zwischen selbstsicherem und zögerlichem Ton."
         }
       }
+    },
+    "empathic-refocusing": {
+      name: "Empathic Refocusing",
+      description:
+        "Help clients reconnect with values, regulation anchors, and workable next steps without dismissing their pain.",
+      cases: {
+        "case-1": {
+          id: "case-1",
+          label: "Case 1 · Amir",
+          teaser: "Community organizer overwhelmed by relentless crises.",
+          history:
+            "Amir (33) coordinates community response efforts and feels consumed by nonstop emergencies. He struggles to shift from vigilance to restoration.",
+          schema:
+            "If I pause, I abandon the people who depend on me and everything will unravel.",
+          style:
+            "Alert posture, eyes dart often, speaks in strategic bullet points, rarely references his own body signals."
+        },
+        "case-2": {
+          id: "case-2",
+          label: "Case 2 · Elise",
+          teaser: "Designer losing creative spark under perfection pressure.",
+          history:
+            "Elise (41) leads a design team and is known for meticulous standards. Lately she freezes when she intuits that a project may miss the mark.",
+          schema:
+            "If I let something imperfect leave my hands, my credibility and identity evaporate.",
+          style:
+            "Carefully chosen words, long pauses, rubs her wrists when stuck, oscillates between intense focus and blank stares."
+        },
+        "case-3": {
+          id: "case-3",
+          label: "Case 3 · Victor",
+          teaser: "Engineer stuck between medical recovery and identity as high performer.",
+          history:
+            "Victor (46) recently returned to work after cardiac rehab. He battles shame about reduced stamina and keeps slipping into overdrive against medical advice.",
+          schema:
+            "If I accept limits, I'll disappear from the life I've built and become irrelevant.",
+          style:
+            "Measured tone, cracks dry jokes about aging, taps his foot constantly, avoids mentioning fear unless specifically asked."
+        }
+      }
     }
   },
   no: {
@@ -1098,6 +1135,46 @@ export const LANGUAGE_OVERRIDES = {
             "Direkte i jobbsammenheng, mykere hjemme, pendler mellom trygg og nølende tone."
         }
       }
+    },
+    "empathic-refocusing": {
+      name: "Empathic Refocusing",
+      description:
+        "Help clients reconnect with values, regulation anchors, and workable next steps without dismissing their pain.",
+      cases: {
+        "case-1": {
+          id: "case-1",
+          label: "Case 1 · Amir",
+          teaser: "Community organizer overwhelmed by relentless crises.",
+          history:
+            "Amir (33) coordinates community response efforts and feels consumed by nonstop emergencies. He struggles to shift from vigilance to restoration.",
+          schema:
+            "If I pause, I abandon the people who depend on me and everything will unravel.",
+          style:
+            "Alert posture, eyes dart often, speaks in strategic bullet points, rarely references his own body signals."
+        },
+        "case-2": {
+          id: "case-2",
+          label: "Case 2 · Elise",
+          teaser: "Designer losing creative spark under perfection pressure.",
+          history:
+            "Elise (41) leads a design team and is known for meticulous standards. Lately she freezes when she intuits that a project may miss the mark.",
+          schema:
+            "If I let something imperfect leave my hands, my credibility and identity evaporate.",
+          style:
+            "Carefully chosen words, long pauses, rubs her wrists when stuck, oscillates between intense focus and blank stares."
+        },
+        "case-3": {
+          id: "case-3",
+          label: "Case 3 · Victor",
+          teaser: "Engineer stuck between medical recovery and identity as high performer.",
+          history:
+            "Victor (46) recently returned to work after cardiac rehab. He battles shame about reduced stamina and keeps slipping into overdrive against medical advice.",
+          schema:
+            "If I accept limits, I'll disappear from the life I've built and become irrelevant.",
+          style:
+            "Measured tone, cracks dry jokes about aging, taps his foot constantly, avoids mentioning fear unless specifically asked."
+        }
+      }
     }
   },
   sv: {
@@ -1172,6 +1249,46 @@ export const LANGUAGE_OVERRIDES = {
             "Om jag prioriterar mina behov sviker jag familjen och tappar min plats i båda världar.",
           style:
             "Direkt i arbetssammanhang, mjukare hemma, pendlar mellan säker och tveksam ton."
+        }
+      }
+    },
+    "empathic-refocusing": {
+      name: "Empathic Refocusing",
+      description:
+        "Help clients reconnect with values, regulation anchors, and workable next steps without dismissing their pain.",
+      cases: {
+        "case-1": {
+          id: "case-1",
+          label: "Case 1 · Amir",
+          teaser: "Community organizer overwhelmed by relentless crises.",
+          history:
+            "Amir (33) coordinates community response efforts and feels consumed by nonstop emergencies. He struggles to shift from vigilance to restoration.",
+          schema:
+            "If I pause, I abandon the people who depend on me and everything will unravel.",
+          style:
+            "Alert posture, eyes dart often, speaks in strategic bullet points, rarely references his own body signals."
+        },
+        "case-2": {
+          id: "case-2",
+          label: "Case 2 · Elise",
+          teaser: "Designer losing creative spark under perfection pressure.",
+          history:
+            "Elise (41) leads a design team and is known for meticulous standards. Lately she freezes when she intuits that a project may miss the mark.",
+          schema:
+            "If I let something imperfect leave my hands, my credibility and identity evaporate.",
+          style:
+            "Carefully chosen words, long pauses, rubs her wrists when stuck, oscillates between intense focus and blank stares."
+        },
+        "case-3": {
+          id: "case-3",
+          label: "Case 3 · Victor",
+          teaser: "Engineer stuck between medical recovery and identity as high performer.",
+          history:
+            "Victor (46) recently returned to work after cardiac rehab. He battles shame about reduced stamina and keeps slipping into overdrive against medical advice.",
+          schema:
+            "If I accept limits, I'll disappear from the life I've built and become irrelevant.",
+          style:
+            "Measured tone, cracks dry jokes about aging, taps his foot constantly, avoids mentioning fear unless specifically asked."
         }
       }
     }
@@ -1707,19 +1824,358 @@ export const LANGUAGE_OVERRIDES = {
         }
       }
     }
+  },
+  he: {
+    "empathic-validation": {
+      name: "וולידציה אמפתית",
+      description:
+        "שקפו במדויק את הנוף הרגשי של המטופל כדי לבנות תחושת ביטחון מורגשת.",
+      cases: {
+        "case-1": {
+          label: "מקרה 1 · לאה",
+          teaser: "מורה על סף שחיקה אחרי שנים של טיפול בבני משפחה.",
+          history:
+            "לאה (38) היא מורת תיכון והייתה המטפלת העיקרית של אביה החולה כרונית במשך שנים. היא גאה להיות אמינה, אך מרגישה מרוקנת תמיד.",
+          schema:
+            "אם אפסיק לדחוף את עצמי, הכל יתפרק ויחשבו שאני אגואיסטית.",
+          style:
+            "מדברת במהירות, מחייכת כדי לכסות על הכאב, ממעיטה בצרכים שלה ומתנצלת כשהרגשות מציפים."
+        },
+        "case-2": {
+          label: "מקרה 2 · מאליק",
+          teaser: "יזם סטארט-אפ שחי בפחד מדחייה.",
+          history:
+            "מאליק (29) מנהל סטארט-אפ קטן וגדל במעברים תכופים. קשרים מרגישים לו מסוכנים; הוא מצפה לאכזבה כשאנשים מתקרבים מדי.",
+          schema:
+            "אם יראו את מי שאני באמת, הם יעזבו. אני חייב להרשים כדי שיהיה שווה להישאר איתי.",
+          style:
+            "חיוך מתוח, מנתח את רגשותיו בצורה שכלית, שומר על טון רגוע עד שהוא נסוג בפתאומיות."
+        },
+        "case-3": {
+          label: "מקרה 3 · כרמן",
+          teaser: "רופאת חירום שמנסה להכיל אבל וכעס.",
+          history:
+            "כרמן (46) היא רופאת חירום שאחיה הצעיר נפטר לאחרונה ממנת יתר. היא מרגישה מחויבת להישאר מאופקת בשביל המשפחה.",
+          schema:
+            "אם אתן לעצב או לכעס להופיע, אאבד שליטה ואכביד על כולם סביבי.",
+          style:
+            "דיבור מדוד, שומרת על שיחה מסודרת, הומור יבש, ועיניה מתמלאות דמעות כשהיא נלקחת בהפתעה."
+        }
+      }
+    },
+    "empathic-conjecture": {
+      name: "השערה אמפתית",
+      description:
+        "הציעו השערות עדינות שמזמינות להעמיק ולגלות יחד.",
+      cases: {
+        "case-1": {
+          label: "מקרה 1 · סהאנה",
+          teaser: "סטודנטית לפסיכולוגיה שחוששת לאכזב את המדריכות שלה.",
+          history:
+            "סהאנה (27) מסיימת את הסטאז' הקליני ופוחדת לאכזב את המדריכות שלה. היא מיטלטלת בין הכנה יתרה לקיפאון.",
+          schema:
+            "אם לא אהיה יוצאת דופן, אנשים יתחרטו שהשקיעו בי ואשאר לבד.",
+          style:
+            "חמה אך זהירה, מבקשת אישור בעקיפין, מודה הרבה ומקטינה את הקשיים."
+        },
+        "case-2": {
+          label: "מקרה 2 · תומאס",
+          teaser: "אב טרי שנע בין מסירות לתחושות מרירות.",
+          history:
+            "תומאס (34) הפך לאב לאחרונה, חולק את הטיפול עם בן זוגו ועובד במשמרות. הוא מתבייש ברגעים של טינה.",
+          schema:
+            "אם לא אצליח לענות על הצרכים של כולם באיפוק, זה אומר שנכשלתי כבן זוג וכאב.",
+          style:
+            "הומור עצמי, משחק בידיים, והקול נע בין נמרץ לעייף."
+        },
+        "case-3": {
+          label: "מקרה 3 · מיי",
+          teaser: "מנהלת שנמתחת בין ציפיות תרבותיות לשאיפות אישיות.",
+          history:
+            "מיי (41) מובילה צוות מוצר ובמקביל מטפלת באמה. היא מרגישה נקרעת בין ציפיות המשפחה לבין המטרות שלה.",
+          schema:
+            "אם אתן עדיפות לצרכים שלי, אבגוד במשפחה ואאבד את מקומי בשני העולמות.",
+          style:
+            "ישירה בעבודה, רכה יותר בבית, מחליפה בין טון בטוח להססני."
+        }
+      }
+    },
+    "empathic-refocusing": {
+      name: "מיקוד-מחדש אמפתי",
+      description:
+        "עזרו למטופלים להתחבר מחדש לערכים, לעוגני ויסות ולצעדים אפשריים מבלי לבטל את הכאב שלהם.",
+      cases: {
+        "case-1": {
+          label: "מקרה 1 · אמיר",
+          teaser: "מארגן קהילתי שמוצף ממשברים בלתי פוסקים.",
+          history:
+            "אמיר (33) מתאם מאמצי תגובה קהילתיים ומרגיש שנבלע על ידי חירומים ללא הפסקה. קשה לו לעבור ממצב של דריכות להתחדשות.",
+          schema:
+            "אם אעצור לרגע, אאכזב את מי שתלויים בי והכל יתפורר.",
+          style:
+            "יציבה דרוכה, העיניים סורקות, מדבר בנקודות אסטרטגיות וכמעט שלא מתייחס לאותות הגוף שלו."
+        },
+        "case-2": {
+          label: "מקרה 2 · אליס",
+          teaser: "מעצבת שמאבדת את הניצוץ היצירתי תחת לחץ לשלמות.",
+          history:
+            "אליס (41) מובילה צוות עיצוב ומפורסמת בסטנדרטים מוקפדים. לאחרונה היא קופאת כשהיא חוששת שהפרויקט לא יעמוד בציפיות.",
+          schema:
+            "אם אשחרר משהו שאינו מושלם, האמינות והזהות שלי יתמוססו.",
+          style:
+            "מילים מדודות והפסקות ארוכות, משפשפת את פרקי הידיים כשהיא נתקעת, נעה בין ריכוז עז למבט ריק."
+        },
+        "case-3": {
+          label: "מקרה 3 · ויקטור",
+          teaser: "מהנדס שנאבק בין החלמה רפואית לזהות של מצטיין.",
+          history:
+            "ויקטור (46) חזר לאחרונה לעבודה אחרי שיקום לבבי. הוא נלחם בבושה סביב ירידה בסיבולת וממשיך להיכנס למצב אוברדרייב בניגוד להמלצות הרופאים.",
+          schema:
+            "אם אקבל גבולות, איעלם מהחיים שבניתי ואהפוך ללא רלוונטי.",
+          style:
+            "טון מדוד, בדיחות יבשות על הזדקנות, מקיש ברגל כל הזמן ונמנע מלדבר על פחד עד ששואלים אותו בפירוש."
+        }
+      }
+    }
+  },
+  ar: {
+    "empathic-validation": {
+      name: "التحقق المتعاطف",
+      description:
+        "عاكس بدقة المشهد العاطفي للعميل لبناء شعور ملموس بالأمان.",
+      cases: {
+        "case-1": {
+          label: "الحالة 1 · ليا",
+          teaser: "معلمة على حافة الاحتراق بعد سنوات من الرعاية.",
+          history:
+            "ليا (38) معلمة ثانوي وكانت مقدمة الرعاية الأساسية لوالدها المصاب بمرض مزمن لسنوات. تفخر بكونها موثوقة لكنها تشعر بأنها مستنزفة باستمرار.",
+          schema:
+            "إذا توقفت عن دفع نفسي، سينهار كل شيء وسيعتقد الآخرون أنني أنانية.",
+          style:
+            "تتحدث بسرعة، تبتسم لإخفاء الألم، تقلل من احتياجاتها وتعتذر بمجرد أن تطفو المشاعر."
+        },
+        "case-2": {
+          label: "الحالة 2 · مالك",
+          teaser: "مؤسس شركة ناشئة يطارده الخوف من الرفض.",
+          history:
+            "مالك (29) يدير شركة ناشئة صغيرة وكبر متنقلًا كثيرًا. العلاقات تبدو له محفوفة بالمخاطر؛ يتوقع الخيبة عندما يقترب الناس أكثر من اللازم.",
+          schema:
+            "إذا رأى الناس حقيقتي فسيرحلون. عليّ أن أكون مبهرًا لأستحق أن يبقوا.",
+          style:
+            "ابتسامة مشدودة، يعقلن مشاعره، ويحافظ على نبرة هادئة إلى أن ينسحب فجأة."
+        },
+        "case-3": {
+          label: "الحالة 3 · كارمن",
+          teaser: "طبيبة تحاول احتواء الحزن والغضب.",
+          history:
+            "كارمن (46) طبيبة طوارئ توفي شقيقها الأصغر مؤخرًا بسبب جرعة زائدة. تشعر بأنها مضطرة للبقاء متماسكة من أجل العائلة.",
+          schema:
+            "إذا أظهرت الحزن أو الغضب، سأفقد السيطرة وأشكل عبئًا على من حولي.",
+          style:
+            "صوت متزن، تُبقي الحوار منظمًا، تستخدم دعابة جافة وتتبلل عيناها بسرعة عندما تُفاجأ."
+        }
+      }
+    },
+    "empathic-conjecture": {
+      name: "الافتراض المتعاطف",
+      description:
+        "قدّم فرضيات لطيفة تدعو إلى تعمق واستكشاف مشترك.",
+      cases: {
+        "case-1": {
+          label: "الحالة 1 · ساهانا",
+          teaser: "طالبة علم نفس تخشى أن تخيب آمال المشرفات عليها.",
+          history:
+            "ساهانا (27) تُنهي تدريبها السريري وتخشى أن تُخيب آمال المشرفات. تتأرجح بين الإفراط في التحضير والتجمد.",
+          schema:
+            "إذا لم أكن استثنائية، سيندم الناس على استثمارهم فيّ وسأبقى وحيدة.",
+          style:
+            "ودودة لكنها حذرة، تطلب الطمأنة بشكل غير مباشر، ممتنة وتقلل من صعوبة ما تمر به."
+        },
+        "case-2": {
+          label: "الحالة 2 · توماس",
+          teaser: "أب جديد يتأرجح بين الرعاية ونوبات الضيق.",
+          history:
+            "توماس (34) أصبح أبًا حديثًا، يتقاسم الرعاية مع شريكه بينما يعمل بنظام المناوبات. يشعر بالخجل من لحظات الاستياء التي تظهر.",
+          schema:
+            "إذا لم ألبِّ احتياجات الجميع بهدوء، فهذا يعني أنني أفشل كشريك وأب.",
+          style:
+            "دعابة ساخرة من الذات، يحرك يديه بلا توقف، ويتأرجح صوته بين الحيوية والإرهاق."
+        },
+        "case-3": {
+          label: "الحالة 3 · مي",
+          teaser: "قائدة ممزقة بين توقعات ثقافية وطموحات شخصية.",
+          history:
+            "مي (41) تقود فريق منتج وتعتني بوالدتها في الوقت نفسه. تشعر بأنها ممزقة بين توقعات العائلة وأهدافها الخاصة.",
+          schema:
+            "إذا أعطيت الأولوية لاحتياجاتي، سأخون عائلتي وسأفقد مكاني في كلا العالمين.",
+          style:
+            "حازمة في العمل، ألين في المنزل، وتتنقل بين نبرة واثقة وأخرى مترددة."
+        }
+      }
+    },
+    "empathic-refocusing": {
+      name: "إعادة التوجيه المتعاطفة",
+      description:
+        "ساعد العملاء على إعادة الاتصال بالقيم ومرتكزات التنظيم وخطوات قابلة للتطبيق دون إنكار ألمهم.",
+      cases: {
+        "case-1": {
+          label: "الحالة 1 · أمير",
+          teaser: "منظم مجتمعي مُنهك من أزمات متواصلة بلا توقف.",
+          history:
+            "أمير (33) ينسق جهود الاستجابة المجتمعية ويشعر بأنه مستهلك بفعل الطوارئ المتتالية. يجد صعوبة في الانتقال من حالة التأهب إلى التعافي.",
+          schema:
+            "إذا توقفت للحظة، سأخذل من يعتمدون عليّ وكل شيء سينهار.",
+          style:
+            "وضعية متحفزة، عيناه تتحركان باستمرار، يتحدث بنقاط استراتيجية ونادرًا ما يشير إلى إشارات جسده."
+        },
+        "case-2": {
+          label: "الحالة 2 · إليز",
+          teaser: "مصممة تفقد شرارة الإبداع تحت ضغط الكمال.",
+          history:
+            "إليز (41) تقود فريق تصميم ومعروفة بمعايير دقيقة. في الآونة الأخيرة تتجمد عندما تشعر أن مشروعًا ما قد لا يرقى للمستوى.",
+          schema:
+            "إذا سمحت لشيء غير مثالي أن يخرج من يديّ، ستتلاشى مصداقيتي وهويتي.",
+          style:
+            "كلمات منتقاة بعناية، توقفات طويلة، تفرك معصميها عند التعثر وتتأرجح بين تركيز مكثف ونظرات شاردة."
+        },
+        "case-3": {
+          label: "الحالة 3 · فيكتور",
+          teaser: "مهندس عالق بين التعافي الطبي وهوية الأداء العالي.",
+          history:
+            "فيكتور (46) عاد مؤخرًا إلى العمل بعد إعادة تأهيل قلبي. يصارع شعورًا بالعار من انخفاض قدرته على التحمل ويستمر بدفع نفسه فوق الحد خلافًا لنصائح الأطباء.",
+          schema:
+            "إذا تقبلت الحدود، سأختفي من الحياة التي بنيتها وسأصبح بلا أهمية.",
+          style:
+            "نبرة متزنة، يطلق دعابات جافة عن التقدم في العمر، يهز قدمه باستمرار ويتجنب ذكر الخوف ما لم يُسأل صراحة."
+        }
+      }
+    }
+  },
+  ru: {
+    "empathic-validation": {
+      name: "Эмпатическая валидация",
+      description:
+        "Точно отражайте эмоциональный мир клиента, чтобы сформировать ощущение безопасности.",
+      cases: {
+        "case-1": {
+          label: "Кейс 1 · Лия",
+          teaser: "Учительница на грани выгорания после многих лет ухода.",
+          history:
+            "Лия (38) преподаёт в старшей школе и много лет была основным опекуном отца с хроническим заболеванием. Она гордится своей надёжностью, но чувствует постоянное истощение.",
+          schema:
+            "Если я перестану подгонять себя, всё развалится, и меня сочтут эгоисткой.",
+          style:
+            "Говорит быстро, улыбается, чтобы скрыть боль, умаляет свои потребности и сразу извиняется, когда эмоции прорываются."
+        },
+        "case-2": {
+          label: "Кейс 2 · Малик",
+          teaser: "Основатель стартапа, которого преследует страх отказа.",
+          history:
+            "Малик (29) руководит небольшим стартапом и в детстве часто переезжал. Отношения кажутся ему рискованными: он ждёт разочарования, как только люди подходят слишком близко.",
+          schema:
+            "Если люди увидят меня настоящего, они уйдут. Мне нужно впечатлять, чтобы заслужить их присутствие.",
+          style:
+            "Натянутая улыбка, рационализирует чувства, сохраняет спокойный тон, пока внезапно не отстраняется."
+        },
+        "case-3": {
+          label: "Кейс 3 · Кармен",
+          teaser: "Врач, пытающаяся справиться с горем и гневом.",
+          history:
+            "Кармен (46) работает врачом неотложной помощи. Её младший брат недавно умер от передозировки, и она чувствует обязанность держаться ради семьи.",
+          schema:
+            "Если я покажу горе или гнев, потеряю контроль и стану обузой для окружающих.",
+          style:
+            "Спокойный голос, удерживает разговор структурированным, шутит сухо, глаза быстро наполняются слезами, если её застать врасплох."
+        }
+      }
+    },
+    "empathic-conjecture": {
+      name: "Эмпатическая гипотеза",
+      description:
+        "Предлагайте деликатные гипотезы, приглашающие к более глубокому размышлению и совместному поиску.",
+      cases: {
+        "case-1": {
+          label: "Кейс 1 · Сахана",
+          teaser: "Студентка-психолог боится разочаровать наставниц.",
+          history:
+            "Сахана (27) завершает клиническую практику и опасается разочаровать своих наставниц. Она мечется между чрезмерной подготовкой и ступором.",
+          schema:
+            "Если я не буду исключительной, люди пожалеют, что вложились в меня, и я останусь одна.",
+          style:
+            "Тёплая, но настороженная, просит подтверждения обходными путями, благодарит и одновременно приуменьшает трудности."
+        },
+        "case-2": {
+          label: "Кейс 2 · Томас",
+          teaser: "Молодой отец, балансирующий между заботой и раздражением.",
+          history:
+            "Томасу (34) недавно пришлось стать отцом; он делит заботу с партнёром и работает посменно. Ему стыдно за вспышки раздражения.",
+          schema:
+            "Если я не удовлетворяю потребности всех спокойно, значит, я проваливаюсь как партнёр и отец.",
+          style:
+            "Самоироничный юмор, беспокойные руки, голос колеблется между энергичным и вымотанным."
+        },
+        "case-3": {
+          label: "Кейс 3 · Мэй",
+          teaser: "Руководительница, зажатая между культурными ожиданиями и личными целями.",
+          history:
+            "Мэй (41) возглавляет продуктовую команду и одновременно ухаживает за матерью. Она чувствует раздвоенность между семейными ожиданиями и собственными стремлениями.",
+          schema:
+            "Если я поставлю свои потребности на первое место, опозорю семью и потеряю место в обоих мирах.",
+          style:
+            "Прямая в работе, мягче дома, чередует уверенный и колеблющийся тон."
+        }
+      }
+    },
+    "empathic-refocusing": {
+      name: "Эмпатическое переориентирование",
+      description:
+        "Помогайте клиентам заново соединяться с ценностями, опорами саморегуляции и реальными шагами, не обесценивая их боль.",
+      cases: {
+        "case-1": {
+          label: "Кейс 1 · Амир",
+          teaser: "Координатор сообщества, подавленный бесконечными кризисами.",
+          history:
+            "Амир (33) координирует ответные действия сообщества и чувствует, что непрерывные чрезвычайные ситуации поглощают его. Ему трудно переключаться с бдительности на восстановление.",
+          schema:
+            "Если я приторможу, подведу тех, кто зависит от меня, и всё распадётся.",
+          style:
+            "Настороженная осанка, беглый взгляд, говорит стратегическими пунктами и почти не упоминает сигналы собственного тела."
+        },
+        "case-2": {
+          label: "Кейс 2 · Элиз",
+          teaser: "Дизайнер теряет творческую искру под давлением перфекционизма.",
+          history:
+            "Элиз (41) руководит дизайнерской командой и известна педантичностью. В последнее время она замирает, заподозрив, что проект может не достигнуть планки.",
+          schema:
+            "Если выпущу что-то неидеальное, моя репутация и идентичность растворятся.",
+          style:
+            "Подбирает слова тщательно, делает длинные паузы, трёт запястья, когда застревает, колеблется между глубокой сосредоточенностью и пустым взглядом."
+        },
+        "case-3": {
+          label: "Кейс 3 · Виктор",
+          teaser: "Инженер между медицинским восстановлением и образом сверхэффективного специалиста.",
+          history:
+            "Виктору (46) недавно разрешили вернуться к работе после кардиореабилитации. Он испытывает стыд из-за сниженной выносливости и снова входит в режим перегрузки вопреки рекомендациям врачей.",
+          schema:
+            "Если приму ограничения, исчезну из построенной жизни и стану незначительным.",
+          style:
+            "Спокойный тон, шутит сухо про возраст, постоянно подёргивает ногой и избегает говорить о страхе, пока его прямо не спросят."
+        }
+      }
+    }
   }
 };
 
 export const STATEMENT_TRANSLATIONS = {
   de: mapWithIds({
-    ev_leah_found: [
+    ev_leah_basic: [
       "Ich weiß, dass ich müde aussehe, aber eigentlich müsste ich noch mehr für meinen Vater tun.",
       "Alle an der Schule verlassen sich auf mich. Wenn ich einen Tag frei mache, denken sie, ich sei faul.",
       "Ich hasse es, dass ich frustriert bin. Mein Vater ist krank, also dürfte ich mich nicht über ihn ärgern.",
       "Wenn ich langsamer mache, fühlt es sich an, als würde ich alle gleichzeitig enttäuschen.",
       "Alle sagen mir, ich soll mich ausruhen, aber das macht mir nur ein schlechtes Gewissen."
     ],
-    ev_leah_stretch: [
+    ev_leah_intermediate: [
       "Immer wenn ich an Hilfe denke, höre ich diese Stimme, die sagt, ich sei schwach.",
       "Meine Schwester schreibt unterstützende Nachrichten, und ich denke sofort, dass sie mich heimlich verurteilt.",
       "Sobald ich mich hinlege, rast mein Kopf mit allem, was ich nicht geschafft habe.",
@@ -1733,14 +2189,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Ich weiß gar nicht mehr, was ich brauche—nur, dass dieses Tempo nicht tragbar ist.",
       "Manchmal fantasiere ich davon, einfach für ein Wochenende zu verschwinden, und bekomme Panik, dass mir niemand verzeihen würde."
     ],
-    ev_malik_found: [
+    ev_malik_basic: [
       "Wenn Investor*innen abspringen, tue ich so, als wäre alles gut, aber innerlich gerate ich in eine Spirale.",
       "Ich halte Gespräche leicht, weil Tiefgang wie ein Abturner wirkt.",
       "Alle sagen, ich sei gefasst, dabei verstecke ich nur die Panik.",
       "Wenn ich zugebe, dass ich Angst habe, fürchte ich, dass das Team das Vertrauen verliert.",
       "Dating ist anstrengend—ich beende Dinge, bevor sie mich ablehnen können."
     ],
-    ev_malik_stretch: [
+    ev_malik_intermediate: [
       "In meinem Kopf läuft ständig ein Scan: Mögen sie mich noch oder bin ich schon am Abrutschen?",
       "Wenn mich jemand lobt, frage ich mich sofort, was er eigentlich will.",
       "Abends spiele ich Meetings durch und frage mich, ob ich unsicher klang.",
@@ -1754,14 +2210,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Selbst wenn ich gefeiert werde, sehe ich innerlich schon, wie man mich gegen ein besseres Modell austauscht.",
       "Manchmal wünsche ich mir, einfach durchschnittlich zu sein, damit der Einsatz nicht so hoch ist."
     ],
-    ev_carmen_found: [
+    ev_carmen_basic: [
       "Ich weine nicht, weil ich die anderen zusammenhalten muss.",
       "Patient*innen brauchen mich klar; Gefühle bremsen mich nur.",
       "Meine Familie fragt ständig, wie es mir geht, und ich winke es ab.",
       "Es ist leichter, über Logistik zu reden als darüber, wie sehr ich ihn vermisse.",
       "Wenn ich wütend auf ihn werde, fühlt es sich an, als würde ich sein Andenken verraten."
     ],
-    ev_carmen_stretch: [
+    ev_carmen_intermediate: [
       "Jede Schicht sehe ich jemanden wie meinen Bruder und sperre sofort alles in mir ein.",
       "Wenn Kolleg*innen nach mir sehen, wechsle ich das Thema, um nicht zusammenzubrechen.",
       "Ein Teil von mir ist wütend, dass er mich mit dem Chaos zurückgelassen hat, und dieser Gedanke macht mir Angst.",
@@ -1775,14 +2231,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Wenn ich endlich tief atme, spüre ich eine Flutwelle hinter einer dünnen Wand.",
       "Ich frage mich, ob ich ihn erst loslassen kann, wenn ich mir erlaube, richtig wütend zu werden."
     ],
-    ec_sahana_found: [
+    ec_sahana_basic: [
       "Meine Supervisorin sagte, ich hätte es gut gemacht, aber ich denke ständig, sie war nur höflich.",
       "Ich schreibe meine Notizen dreimal neu, weil Fehler sich katastrophal anfühlen.",
       "Wenn Klient*innen sich bedanken, fürchte ich, sie überschätzen, was ich leisten kann.",
       "Ich habe panische Angst, dass eine schwierige Sitzung mich als inkompetent entlarvt.",
       "Ich spule Sitzungen zurück, um zu finden, was ich verpasst habe, und frage mich dann, ob ich einfach zwanghaft bin."
     ],
-    ec_sahana_stretch: [
+    ec_sahana_intermediate: [
       "Ein Teil von mir glaubt, ich bin nur nützlich, wenn ich beeindrucke.",
       "Wenn jemand vor Feedback zögert, stelle ich mich auf schlechte Nachrichten ein.",
       "Es ist, als bräuchte ich erst den Beweis, dass ich keine Enttäuschung bin, bevor ich aufatmen kann.",
@@ -1796,14 +2252,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Ich habe Angst, dass ich aus den Köpfen der Menschen verschwinde, wenn ich aufhöre zu ackern.",
       "Ich glaube, in mir gibt es eine leise Wut darüber, ständig Anerkennung hinterherzulaufen."
     ],
-    ec_tomas_found: [
+    ec_tomas_basic: [
       "Ich liebe meinen Sohn, und doch möchte ich manchmal einfach nur Stille, und das zuzugeben ist schwer.",
       "Mein Partner stemmt so viel; ich bekomme Schuldgefühle, wenn ich erschöpft bin.",
       "Wenn ich Nachtschichten habe, verpasse ich Meilensteine und fühle mich austauschbar.",
       "Ich dachte, Elternsein würde sich natürlicher anfühlen als das.",
       "Selbst wenn ich um eine Pause bitte, habe ich das Gefühl, ich lasse sie im Stich."
     ],
-    ec_tomas_stretch: [
+    ec_tomas_intermediate: [
       "Ein Teil von mir grollt darüber, dass sich das Leben jetzt nur noch um Pläne dreht.",
       "Ich schlucke Frust herunter, weil ich Angst habe, dass er in Wut umschlägt.",
       "Mein Vater ist abgehauen, als es schwierig wurde, und ich habe panische Angst, dass ich ihn wiederhole.",
@@ -1817,14 +2273,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Ich vermute, der Groll verdeckt eine tiefere Trauer darüber, Teile von mir zu verlieren.",
       "Wenn ich zugebe, wie überfordert ich bin, habe ich Angst, dass ich zusammenfalle und nicht wieder aufstehe."
     ],
-    ec_mei_found: [
+    ec_mei_basic: [
       "Meine Mutter sagt, es ginge ihr gut, aber ich sehe die Enttäuschung, wenn ich für die Arbeit reise.",
       "Ich habe meinem Team einen Launch-Termin versprochen und habe panische Angst, ihn zu verpassen.",
       "Manchmal behaupte ich, länger zu arbeiten, nur um zehn Minuten allein im Auto zu sitzen.",
       "Ich fühle mich zerrissen zwischen guter Tochter und starker Führungskraft.",
       "Ich denke ständig, wäre ich stärker, würde ich mich nicht so gespalten fühlen."
     ],
-    ec_mei_stretch: [
+    ec_mei_intermediate: [
       "Ich wünschte, ich könnte meiner Mutter sagen, dass ich Angst habe, sie zu enttäuschen.",
       "Im Job klinge ich entschlossen, aber in letzter Zeit hinterfrage ich jede Entscheidung.",
       "Es gibt keinen Raum, über meine Bedürfnisse zu sprechen, ohne mich egoistisch zu fühlen.",
@@ -1837,17 +2293,80 @@ export const STATEMENT_TRANSLATIONS = {
       "Ich trage eine leise Wut darüber in mir, mich für alle übersetzen zu müssen.",
       "Ich vermute, das ständige Überfunktionieren versteckt eine tiefe Angst, Zugehörigkeit zu verlieren.",
       "Ich frage mich, wer ich wäre, wenn ich aufhörte, für beide Welten zu performen."
+    ],
+    er_amir_basic: [
+      "Ich setze mich zum Essen hin und erinnere mich plötzlich an drei Menschen, die auf mich warten, also mache ich einfach weiter.",
+      "Alle nennen mich den ruhigen Mittelpunkt, aber in letzter Zeit fühle ich mich wie knisternde statische Elektrizität.",
+      "Ich merke nicht einmal, dass ich Durst habe, bis ich eine Migräne bekomme.",
+      "Ausruhen fühlt sich wie Rückschritt an—es dauert länger aufzuholen, als einfach weiterzupowern.",
+      "Wenn ich nicht jeden einzelnen Faden überwache, fürchte ich, dass das ganze Gewebe zerreißt."
+    ],
+    er_amir_intermediate: [
+      "Wenn ich versuche, langsam zu atmen, zieht sich meine Brust zusammen, als würde ich kostbare Zeit vergeuden.",
+      "Früher bin ich joggen gegangen, um den Kopf freizubekommen; jetzt gerät allein der Gedanke, nicht erreichbar zu sein, in Panik.",
+      "Die Leute danken mir für die Koordination, aber ich kann mich nicht erinnern, wann ich mich zuletzt geerdet gefühlt habe.",
+      "Ich wache auf und spiele Worst-Case-Szenarien durch, noch bevor meine Füße den Boden berühren.",
+      "Der einzige Moment, in dem ich abschalte, ist, wenn mein Körper zusammenbricht—und dann bin ich wütend, dass er mich stoppt."
+    ],
+    er_amir_mastery: [
+      "Da ist dieses leise Ziehen, das sich fragt, wer ich wäre, wenn ich nicht für alle das Sicherheitsnetz wäre.",
+      "Manchmal stelle ich mir vor, den Staffelstab weiterzugeben, und es fühlt sich an, als würde ich ihn mitten im Lauf fallen lassen.",
+      "Mein Nervensystem wirkt, als hätte es vergessen, was 'genug' bedeutet.",
+      "Ich vermisse es, kleine Freuden wahrzunehmen, aber nach Gefahren zu scannen fühlt sich wie die einzige verantwortliche Linse an.",
+      "Ich habe Angst, dass selbst ein Nachmittag der Entspannung es unmöglich machen würde, wieder hochzufahren."
+    ],
+    er_elise_basic: [
+      "Ich zeichne immer wieder dasselbe Layout neu, und jede Überarbeitung wirkt platter als die vorige.",
+      "Mein Team fragt nach Prioritäten, und mein Kopf wird einfach leer.",
+      "Ich weiß, dass ich Pause machen sollte, aber wegzugehen fühlt sich wie Fahrlässigkeit an.",
+      "Ich vergesse, warum ich mich überhaupt in Konzepte verliebt habe.",
+      "Jede Idee wirkt in dem Moment, in dem ich sie aufs Papier bringe, wie eine Kopie."
+    ],
+    er_elise_intermediate: [
+      "Ich spüre die Energie in meinen Händen, aber sie landet nicht auf der Leinwand.",
+      "Wenn jemand sagt: 'Vertrau deinen Instinkten', merke ich, dass ich keinen Zugang zu ihnen habe.",
+      "Nach Kritikrunden bin ich erschöpft und spiele jede Anmerkung als Beweis dafür ab, dass ich nachlasse.",
+      "Ein Teil von mir will wild experimentieren; ein anderer bremst mich ab, bevor ich überhaupt anfange.",
+      "Ich erwische mich dabei, doom-zuscrollen durch fremde Arbeiten, statt meine eigenen anzufassen."
+    ],
+    er_elise_mastery: [
+      "In mir steckt eine Trauer um die Person, die ich war, bevor sich alles so hochriskant anfühlte.",
+      "Ich sehne mich danach, etwas Unordentliches, Lebendiges zu schaffen, und höre dann diese Stimme, die verlangt, dass es makellos sein muss.",
+      "Manchmal starre ich auf Farbpaletten und fühle nichts—als wäre die Verbindung über Nacht gekappt.",
+      "Wenn ich mir erlaubte, ein Werk herauszugeben, das einfach 'gut genug' ist, fürchte ich, nie wieder stolz sein zu können.",
+      "Ich frage mich, ob meine Vorstellungskraft noch da ist, nur begraben unter dem Rauschen der Erwartungen."
+    ],
+    er_victor_basic: [
+      "Der Arzt sagt immer wieder 'nimm Tempo raus', und ich nicke, während ich heimlich zusätzliche Runden plane.",
+      "Mein Team bot an, die Last zu teilen, und ich fühlte mich gleichzeitig dankbar und beleidigt.",
+      "Früher begann ich den Tag mit einem Lauf; jetzt bringt mich der Weg zum Briefkasten außer Atem.",
+      "Ich kenne die Kennzahlen, die zählen, aber mein Körper will dem Zeitplan nicht folgen.",
+      "Der Stapel an Büchern zur Genesung liegt da, und ich bringe es nicht übers Herz, sie aufzuschlagen."
+    ],
+    er_victor_intermediate: [
+      "Wenn ich Tempo rausnehme, höre ich eine Stimme flüstern, dass ich die Menschen enttäusche, die auf mich bauen.",
+      "Ich spule den Moment im Krankenhaus ab wie einen Fehler, den ich hätte verhindern müssen.",
+      "Meine Herzfrequenz schießt hoch, wenn ich mir vorstelle, die schwierigen Probleme zu delegieren.",
+      "Freunde sagen, der Schreck könnte ein Neustart sein, aber ich fühle mich eher orientierungslos als erneuert.",
+      "Ich vermisse es, meinem Körper zu vertrauen; jetzt wirkt jede Empfindung verdächtig."
+    ],
+    er_victor_mastery: [
+      "Manchmal frage ich mich, wer ich ohne Leistung bin, und die Stille ist ohrenbetäubend.",
+      "Ich fantasiere von einem Tag, den Neugier bestimmt, und gerate dann in Panik, bequem zu werden.",
+      "Ich fühle Schuld dafür, dass ich überlebt habe—und Schuld, dass ich nicht schneller zurück bin.",
+      "Beim Meditieren stoße ich auf eine Wand aus Unruhe, die mich zu verschlingen droht.",
+      "Ich höre das Wort 'Heilung' und übersetze es sofort in 'streng dich mehr an', obwohl ich weiß, dass das der alte Modus ist."
     ]
   }),
   no: mapWithIds({
-    ev_leah_found: [
+    ev_leah_basic: [
       "Jeg vet at jeg ser sliten ut, men egentlig burde jeg gjøre mer for pappa.",
       "Alle på skolen er avhengige av meg. Hvis jeg tar en fridag, tror de jeg er lat.",
       "Jeg misliker at jeg er frustrert. Pappa er syk, så jeg burde ikke bli irritert på ham.",
       "Hvis jeg roer ned tempoet, føles det som om jeg svikter alle samtidig.",
       "Folk sier jeg må hvile, men det fyller meg bare med dårlig samvittighet."
     ],
-    ev_leah_stretch: [
+    ev_leah_intermediate: [
       "Hver gang jeg vurderer å be om hjelp, hører jeg en stemme som sier at jeg er svak.",
       "Søsteren min sender støttende meldinger, og jeg tenker med én gang at hun egentlig dømmer meg.",
       "Med en gang jeg legger meg for å slappe av, kverner hodet over alt jeg ikke fikk gjort.",
@@ -1861,14 +2380,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Jeg vet knapt hva jeg trenger lenger—bare at dette tempoet ikke er bærekraftig.",
       "Noen ganger fantaserer jeg om å forsvinne en helg, og får panikk for at ingen vil tilgi meg."
     ],
-    ev_malik_found: [
+    ev_malik_basic: [
       "Når investorer trekker seg, sier jeg at det går bra, men inni spinner jeg.",
       "Jeg holder samtaler lette fordi det dypere virker som et turn-off.",
       "Folk sier jeg er samlet, men det betyr bare at jeg skjuler panikken.",
       "Hvis jeg innrømmer at jeg er redd, frykter jeg at teamet mister troen.",
       "Dating er slitsomt—jeg avslutter ting før de kan avvise meg."
     ],
-    ev_malik_stretch: [
+    ev_malik_intermediate: [
       "Det er som en konstant skanning i hodet: liker de meg fortsatt, eller glipper jeg?",
       "Når noen gir meg ros, lurer jeg med en gang på hva de egentlig vil ha.",
       "Jeg spiller møter om igjen om kvelden og grubler på om jeg hørtes usikker ut.",
@@ -1882,14 +2401,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Selv når jeg blir feiret, ser jeg for meg at de bytter meg ut med en bedre versjon.",
       "Jeg skulle noen ganger ønske jeg bare var gjennomsnittlig, så innsatsen ikke var så høy."
     ],
-    ev_carmen_found: [
+    ev_carmen_basic: [
       "Jeg gråter ikke fordi jeg må holde alle andre oppe.",
       "Pasientene trenger meg skjerpet; følelser bare sinker meg.",
       "Familien spør stadig hvordan jeg har det, og jeg feier det unna.",
       "Det er enklere å snakke om logistikk enn om hvor mye jeg savner ham.",
       "Hvis jeg blir sint på ham, føles det som et svik mot minnet hans."
     ],
-    ev_carmen_stretch: [
+    ev_carmen_intermediate: [
       "På hver vakt ser jeg noen som minner om broren min, og jeg låser alt inni meg.",
       "Når kolleger sjekker inn med meg, skifter jeg tema for ikke å bryte sammen.",
       "En del av meg er rasende fordi han etterlot alt rotet, og den tanken skremmer meg.",
@@ -1903,14 +2422,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Når jeg endelig puster ordentlig, kjenner jeg en bølge bak en tynn vegg.",
       "Jeg lurer på om jeg kunne ta farvel hvis jeg lot sinnet få slippe til."
     ],
-    ec_sahana_found: [
+    ec_sahana_basic: [
       "Veilederen min sa jeg gjorde det bra, men jeg tenker hele tiden at hun bare var snill.",
       "Jeg skriver om notatene tre ganger fordi feil føles katastrofale.",
       "Når klienter takker, frykter jeg at de overvurderer hva jeg kan.",
       "Jeg er redd for at én vanskelig time avslører meg som inkompetent.",
       "Jeg spiller gjennom timene for å finne det jeg overså, og lurer på om jeg bare er tvangspreget."
     ],
-    ec_sahana_stretch: [
+    ec_sahana_intermediate: [
       "En del av meg tror jeg bare er nyttig når jeg imponerer.",
       "Hvis noen nøler før de gir tilbakemelding, forbereder jeg meg på dårlige nyheter.",
       "Det er som om jeg trenger bevis på at jeg ikke er en skuffelse før jeg kan puste.",
@@ -1924,14 +2443,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Jeg er redd for at hvis jeg slutter å jobbe knallhardt, forsvinner jeg fra folks bevissthet.",
       "Jeg tror det finnes et stille raseri i meg over alltid å jage etter godkjenning."
     ],
-    ec_tomas_found: [
+    ec_tomas_basic: [
       "Jeg elsker sønnen min, men noen ganger vil jeg bare ha stillhet, og det er vanskelig å si høyt.",
       "Partneren min gjør så mye; jeg får dårlig samvittighet når jeg er utslitt.",
       "Når jeg går nattevakter, går jeg glipp av milepæler og føler meg erstattelig.",
       "Jeg trodde foreldrerollen skulle føles mer naturlig enn dette.",
       "Selv når jeg ber om en pause, føles det som jeg svikter dem."
     ],
-    ec_tomas_stretch: [
+    ec_tomas_intermediate: [
       "En del av meg er bitter for at livet nå går rundt timeplaner.",
       "Jeg skyver frustrasjon ned fordi jeg er redd det blir til sinne.",
       "Pappa stakk da det ble tøft, og jeg er paranoid for å gjenta ham.",
@@ -1945,14 +2464,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Jeg mistenker at bitterheten skjuler en dypere sorg over å miste deler av meg selv.",
       "Hvis jeg innrømmer hvor overveldet jeg er, er jeg redd jeg bryter sammen og ikke klarer å reise meg."
     ],
-    ec_mei_found: [
+    ec_mei_basic: [
       "Mamma sier hun har det bra, men jeg ser skuffelsen når jeg reiser for jobb.",
       "Jeg lovet teamet en lanseringsdato og er livredd for å misse den.",
       "Noen ganger sier jeg at jeg jobber sent bare for å sitte ti minutter alene i bilen.",
       "Jeg føler meg dratt mellom å være en god datter og en sterk leder.",
       "Jeg tenker stadig at hvis jeg var sterkere, ville jeg ikke føle meg så splittet."
     ],
-    ec_mei_stretch: [
+    ec_mei_intermediate: [
       "Jeg skulle ønske jeg kunne si til mamma at jeg er redd for å svikte henne.",
       "På jobb høres jeg bestemt ut, men i det siste tviler jeg på hver beslutning.",
       "Det finnes ingen plass for å snakke om mine behov uten å føle meg egoistisk.",
@@ -1968,14 +2487,14 @@ export const STATEMENT_TRANSLATIONS = {
     ]
   }),
   sv: mapWithIds({
-    ev_leah_found: [
+    ev_leah_basic: [
       "Jag vet att jag ser trött ut, men egentligen borde jag göra mer för pappa.",
       "Alla på skolan är beroende av mig. Om jag tar ledigt en dag tror de att jag är lat.",
       "Jag ogillar att jag är frustrerad. Pappa är sjuk, så jag borde inte irritera mig på honom.",
       "Om jag sänker tempot känns det som att jag sviker alla på en gång.",
       "Folk säger åt mig att vila, men det fyller mig bara med dåligt samvete."
     ],
-    ev_leah_stretch: [
+    ev_leah_intermediate: [
       "Varje gång jag överväger att be om hjälp hör jag en röst som säger att jag är svag.",
       "Min syster skickar stöttande sms och jag tänker direkt att hon egentligen dömer mig.",
       "Så fort jag lägger mig för att koppla av snurrar huvudet över allt jag inte hann med.",
@@ -1989,14 +2508,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Jag vet knappt vad jag behöver längre—bara att det här tempot inte håller.",
       "Ibland fantiserar jag om att försvinna en helg och får panik över att ingen skulle förlåta mig."
     ],
-    ev_malik_found: [
+    ev_malik_basic: [
       "När investerare drar sig ur säger jag att det är lugnt, men inuti snurrar det.",
       "Jag håller samtal lätta för att det djupare känns som ett avskräckande moment.",
       "Folk säger att jag är samlad, men det betyder bara att jag gömmer paniken.",
       "Om jag erkänner att jag är rädd oroar jag mig för att teamet tappar förtroendet.",
       "Dejting är utmattande—jag avslutar innan de hinner avvisa mig."
     ],
-    ev_malik_stretch: [
+    ev_malik_intermediate: [
       "Det är som en ständig scanning i huvudet: gillar de mig fortfarande eller tappar jag greppet?",
       "När någon ger mig beröm undrar jag direkt vad de egentligen vill.",
       "Jag spelar upp möten på kvällarna och grubblar över om jag lät osäker.",
@@ -2010,14 +2529,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Även när jag firas ser jag framför mig att de byter ut mig mot en bättre modell.",
       "Ibland önskar jag att jag bara var genomsnittlig så att insatsen inte var så hög."
     ],
-    ev_carmen_found: [
+    ev_carmen_basic: [
       "Jag gråter inte för att jag måste hålla ihop de andra.",
       "Patienterna behöver mig skärpt; känslor saktar bara ned mig.",
       "Familjen frågar ständigt hur jag mår och jag viftar bort det.",
       "Det är lättare att prata om logistik än om hur mycket jag saknar honom.",
       "Om jag blir arg på honom känns det som att jag förråder hans minne."
     ],
-    ev_carmen_stretch: [
+    ev_carmen_intermediate: [
       "Varje pass ser jag någon som påminner om min bror och jag låser allt inom mig.",
       "När kollegor kollar hur jag har det byter jag ämne så jag inte bryter ihop.",
       "En del av mig är rasande över att han lämnade mig med röran, och den tanken skrämmer mig.",
@@ -2031,14 +2550,14 @@ export const STATEMENT_TRANSLATIONS = {
       "När jag äntligen tar ett djupt andetag känns en våg bakom en tunn vägg.",
       "Jag undrar om jag först kan släppa taget när jag låter ilskan få komma fram."
     ],
-    ec_sahana_found: [
+    ec_sahana_basic: [
       "Min handledare sa att jag gjorde det bra, men jag tänker hela tiden att hon bara var snäll.",
       "Jag skriver om mina anteckningar tre gånger eftersom misstag känns katastrofala.",
       "När klienter tackar oroar jag mig för att de överskattar vad jag kan.",
       "Jag är livrädd att en tuff session avslöjar mig som inkompetent.",
       "Jag spelar upp sessionerna för att hitta det jag missade och undrar om jag bara är tvångsmässig."
     ],
-    ec_sahana_stretch: [
+    ec_sahana_intermediate: [
       "En del av mig tror att jag bara är till nytta när jag imponerar.",
       "Om någon tvekar innan feedback förbereder jag mig på dåliga nyheter.",
       "Det är som att jag behöver bevis på att jag inte är en besvikelse innan jag kan andas ut.",
@@ -2052,14 +2571,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Jag är rädd att jag försvinner ur folks medvetande om jag slutar kämpa så hårt.",
       "Jag tror det finns ett stilla raseri i mig över att alltid jaga erkännande."
     ],
-    ec_tomas_found: [
+    ec_tomas_basic: [
       "Jag älskar min son men ibland vill jag bara ha tystnad och det är svårt att säga högt.",
       "Min partner tar hand om så mycket; jag får dåligt samvete när jag är helt slut.",
       "När jag går nattpass missar jag milstolpar och känner mig utbytbar.",
       "Jag trodde föräldraskapet skulle kännas naturligare än så här.",
       "Även när jag ber om en paus känns det som att jag sviker dem."
     ],
-    ec_tomas_stretch: [
+    ec_tomas_intermediate: [
       "En del av mig är bitter över att livet numera kretsar kring scheman.",
       "Jag trycker ned frustrationen för att jag är rädd att den ska bli till ilska.",
       "Min pappa stack när det blev tufft och jag är paranoid att jag gör samma sak.",
@@ -2073,14 +2592,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Jag misstänker att bitterheten döljer en djupare sorg över att förlora delar av mig själv.",
       "Om jag erkänner hur överväldigad jag är är jag rädd att jag faller samman och inte tar mig upp."
     ],
-    ec_mei_found: [
+    ec_mei_basic: [
       "Mamma säger att hon mår bra men jag ser besvikelsen när jag reser för jobbet.",
       "Jag lovade teamet ett lanseringsdatum och är livrädd att missa det.",
       "Ibland säger jag att jag jobbar sent bara för att sitta tio minuter ensam i bilen.",
       "Jag känner mig sliten mellan att vara en bra dotter och en stark ledare.",
       "Jag tänker ständigt att om jag vore starkare skulle jag inte känna mig så splittrad."
     ],
-    ec_mei_stretch: [
+    ec_mei_intermediate: [
       "Jag önskar att jag kunde säga till mamma att jag är rädd för att svika henne.",
       "På jobbet låter jag beslutsam men på sistone tvivlar jag på varje beslut.",
       "Det finns inget utrymme att prata om mina behov utan att känna mig självisk.",
@@ -2096,14 +2615,14 @@ export const STATEMENT_TRANSLATIONS = {
     ]
   }),
   pt: mapWithIds({
-    ev_leah_found: [
+    ev_leah_basic: [
       "Eu sei que pareço cansada, mas sinceramente deveria fazer mais pelo meu pai.",
       "Todo mundo na escola depende de mim. Se eu tirar um dia de folga, vão achar que sou preguiçosa.",
       "Detesto estar frustrada. Meu pai está doente, então eu não deveria me irritar com ele.",
       "Quando desacelero, parece que decepciono todo mundo de uma vez.",
       "As pessoas dizem para eu descansar, mas isso só me deixa culpada."
     ],
-    ev_leah_stretch: [
+    ev_leah_intermediate: [
       "Sempre que penso em pedir ajuda, ouço uma voz dizendo que sou fraca.",
       "Minha irmã manda mensagens de apoio e eu imediatamente penso que ela está me julgando em segredo.",
       "Assim que deito para relaxar, minha mente dispara com tudo o que não fiz.",
@@ -2117,14 +2636,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Já nem sei do que preciso—só que esse ritmo é insustentável.",
       "Às vezes fantasio em desaparecer um fim de semana e entro em pânico achando que ninguém vai me perdoar."
     ],
-    ev_malik_found: [
+    ev_malik_basic: [
       "Quando investidores recuam, digo que está tudo bem, mas por dentro entro em espiral.",
       "Mantenho as conversas leves porque assuntos profundos parecem afastar as pessoas.",
       "Dizem que sou composto, mas isso só significa que escondo o pânico.",
       "Se admito que estou com medo, temo que o time perca a confiança em mim.",
       "Namorar é exaustivo—eu termino as coisas antes que possam me rejeitar."
     ],
-    ev_malik_stretch: [
+    ev_malik_intermediate: [
       "Existe um scanner constante na minha cabeça: ainda gostam de mim ou estou escorregando?",
       "Quando alguém me elogia, imediatamente penso no que essa pessoa realmente quer.",
       "Repasso as reuniões à noite, obcecado se soei inseguro.",
@@ -2138,14 +2657,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Mesmo quando sou celebrado, imagino que vão me trocar por um modelo melhor.",
       "Às vezes queria ser só mediano, para que as apostas não fossem tão altas."
     ],
-    ev_carmen_found: [
+    ev_carmen_basic: [
       "Eu não choro porque preciso manter todo mundo firme.",
       "Os pacientes precisam de mim alerta; emoção só me atrasa.",
       "Minha família pergunta o tempo todo como estou e eu desconverso.",
       "É mais fácil falar de logística do que do quanto sinto falta dele.",
       "Se eu fico com raiva dele, parece que estou traindo a memória dele."
     ],
-    ev_carmen_stretch: [
+    ev_carmen_intermediate: [
       "Em todo plantão vejo alguém como meu irmão e tranco tudo dentro de mim.",
       "Quando colegas perguntam de mim, mudo de assunto para não desabar.",
       "Parte de mim está furiosa por ele ter me deixado com a bagunça, e esse pensamento me assusta.",
@@ -2159,14 +2678,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Quando finalmente respiro fundo, percebo uma onda gigante atrás de uma parede fina.",
       "Pergunto-me se só vou conseguir deixá-lo ir quando permitir que a raiva apareça."
     ],
-    ec_sahana_found: [
+    ec_sahana_basic: [
       "Minha supervisora disse que fui bem, mas fico pensando que ela só estava sendo gentil.",
       "Reescrevo minhas notas três vezes porque erros parecem catastróficos.",
       "Quando clientes me agradecem, temo que estejam superestimando o que posso fazer.",
       "Tenho pavor de que uma sessão difícil me exponha como incompetente.",
       "Repasso as sessões para encontrar o que perdi e me pergunto se só estou sendo obsessiva."
     ],
-    ec_sahana_stretch: [
+    ec_sahana_intermediate: [
       "Parte de mim acha que só sirvo para alguma coisa quando impressiono.",
       "Se alguém pausa antes de dar feedback, já me preparo para notícias ruins.",
       "É como se eu precisasse de prova de que não sou uma decepção antes de respirar.",
@@ -2180,14 +2699,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Tenho medo de desaparecer da memória das pessoas se parar de me esforçar ao máximo.",
       "Acho que existe uma raiva silenciosa em mim por sempre correr atrás de aprovação."
     ],
-    ec_tomas_found: [
+    ec_tomas_basic: [
       "Eu amo meu filho, mas às vezes só quero silêncio, e admitir isso é difícil.",
       "Meu parceiro dá conta de tanta coisa; fico culpado quando estou esgotado.",
       "Quando estou de plantão noturno, perco momentos importantes e me sinto substituível.",
       "Achei que ser pai fosse se sentir mais natural do que isso.",
       "Mesmo quando peço uma pausa, sinto que estou decepcionando os dois."
     ],
-    ec_tomas_stretch: [
+    ec_tomas_intermediate: [
       "Há uma parte de mim que se ressente por a vida girar em torno de horários agora.",
       "Engulo a frustração porque tenho medo de que vire raiva.",
       "Meu pai sumiu quando as coisas ficaram difíceis e tenho pavor de repetir isso.",
@@ -2201,14 +2720,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Suspeito que o ressentimento encobre um luto mais profundo por perder partes de mim.",
       "Se eu admitir o quanto estou sobrecarregado, tenho medo de desmoronar e não me recompor."
     ],
-    ec_mei_found: [
+    ec_mei_basic: [
       "Minha mãe diz que está bem, mas vejo a decepção quando viajo a trabalho.",
       "Prometi ao time uma data de lançamento e morro de medo de não cumprir.",
       "Às vezes minto que vou trabalhar até tarde só para ficar dez minutos sozinha no carro.",
       "Sinto-me dividida entre ser uma boa filha e uma líder forte.",
       "Fico pensando que, se fosse mais forte, não me sentiria tão partida."
     ],
-    ec_mei_stretch: [
+    ec_mei_intermediate: [
       "Queria poder dizer para minha mãe que tenho medo de decepcioná-la.",
       "No trabalho pareço decidida, mas ultimamente questiono cada decisão.",
       "Não há espaço para falar das minhas necessidades sem me sentir egoísta.",
@@ -2224,14 +2743,14 @@ export const STATEMENT_TRANSLATIONS = {
     ]
   }),
   nl: mapWithIds({
-    ev_leah_found: [
+    ev_leah_basic: [
       "Ik weet dat ik er moe uitzie, maar eerlijk gezegd zou ik meer voor mijn vader moeten doen.",
       "Iedereen op school rekent op me. Als ik een dag vrij neem, denken ze dat ik lui ben.",
       "Ik haat het dat ik gefrustreerd ben. Mijn vader is ziek, dus ik zou me niet aan hem moeten ergeren.",
       "Als ik vertraag, voelt het alsof ik iedereen tegelijk teleurstel.",
       "Mensen zeggen dat ik moet uitrusten, maar dat geeft me alleen schuldgevoel."
     ],
-    ev_leah_stretch: [
+    ev_leah_intermediate: [
       "Telkens wanneer ik overweeg om om hulp te vragen, hoor ik een stem die zegt dat ik zwak ben.",
       "Mijn zus stuurt steunende berichten en ik denk meteen dat ze me stiekem veroordeelt.",
       "Zodra ik ga liggen om te ontspannen, raast mijn hoofd langs alles wat ik niet heb gedaan.",
@@ -2245,14 +2764,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Ik weet niet eens meer wat ik nodig heb—alleen dat dit tempo onhoudbaar is.",
       "Soms fantaseer ik erover een weekend te verdwijnen en raak in paniek dat niemand me zou vergeven."
     ],
-    ev_malik_found: [
+    ev_malik_basic: [
       "Als investeerders afhaken, zeg ik dat het goed gaat, maar van binnen raak ik in een spiraal.",
       "Ik houd gesprekken luchtig omdat diepgang mensen lijkt af te schrikken.",
       "Mensen zeggen dat ik kalm ben, maar het betekent alleen dat ik de paniek verberg.",
       "Als ik toegeef dat ik bang ben, ben ik bang dat het team het vertrouwen verliest.",
       "Dating is vermoeiend—ik beëindig dingen voordat ze mij kunnen afwijzen."
     ],
-    ev_malik_stretch: [
+    ev_malik_intermediate: [
       "Er loopt constant een scan in mijn hoofd: vinden ze me nog leuk of glijd ik weg?",
       "Als iemand me complimenteert, vraag ik me meteen af wat hij eigenlijk wil.",
       "Ik speel vergaderingen 's avonds af en pieker of ik onzeker klonk.",
@@ -2266,14 +2785,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Zelfs wanneer ik gevierd word, zie ik voor me hoe ze me vervangen door een beter model.",
       "Soms zou ik willen dat ik gewoon gemiddeld was, zodat de inzet lager was."
     ],
-    ev_carmen_found: [
+    ev_carmen_basic: [
       "Ik huil niet omdat ik de anderen bij elkaar moet houden.",
       "Patiënten hebben me scherp nodig; emoties vertragen me alleen maar.",
       "Mijn familie vraagt voortdurend hoe het met me gaat en ik wuif het weg.",
       "Het is makkelijker om over logistiek te praten dan over hoeveel ik hem mis.",
       "Als ik boos op hem word, voelt het alsof ik zijn nagedachtenis verraad."
     ],
-    ev_carmen_stretch: [
+    ev_carmen_intermediate: [
       "Elke dienst zie ik iemand zoals mijn broer en sluit ik alles in mezelf op.",
       "Wanneer collega's naar me informeren, verander ik van onderwerp om niet te breken.",
       "Een deel van me is woedend dat hij me met de troep liet zitten, en die gedachte jaagt me angst aan.",
@@ -2287,14 +2806,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Wanneer ik eindelijk ademhaal, voel ik een vloedgolf achter een dunne muur.",
       "Ik vraag me af of ik hem pas kan loslaten als ik mezelf toestaan echt boos te worden."
     ],
-    ec_sahana_found: [
+    ec_sahana_basic: [
       "Mijn supervisor zei dat ik het goed deed, maar ik blijf denken dat ze gewoon vriendelijk was.",
       "Ik schrijf mijn notities drie keer over omdat fouten catastrofaal aanvoelen.",
       "Wanneer cliënten me bedanken, ben ik bang dat ze overschatten wat ik kan.",
       "Ik ben doodsbang dat één lastige sessie me als incompetent ontmaskert.",
       "Ik speel sessies terug om te zoeken wat ik heb gemist en vraag me af of ik gewoon obsessief ben."
     ],
-    ec_sahana_stretch: [
+    ec_sahana_intermediate: [
       "Een deel van mij denkt dat ik alleen nuttig ben wanneer ik indruk maak.",
       "Als iemand pauzeert voor feedback, bereid ik me voor op slecht nieuws.",
       "Het is alsof ik bewijs nodig heb dat ik geen teleurstelling ben voordat ik kan ademhalen.",
@@ -2308,14 +2827,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Ik ben bang dat ik uit ieders gedachten verdwijn als ik ophoud met rennen.",
       "Ik denk dat er een stille woede in mij zit omdat ik steeds op zoek ben naar bevestiging."
     ],
-    ec_tomas_found: [
+    ec_tomas_basic: [
       "Ik hou van mijn zoon, maar soms wil ik gewoon stilte en dat is moeilijk toe te geven.",
       "Mijn partner doet zoveel; ik voel me schuldig wanneer ik uitgeput ben.",
       "Als ik nachtdiensten draai, mis ik mijlpalen en voel ik me vervangbaar.",
       "Ik dacht dat ouderschap natuurlijker zou voelen dan dit.",
       "Zelfs als ik om een pauze vraag, voelt het alsof ik hen teleurstel."
     ],
-    ec_tomas_stretch: [
+    ec_tomas_intermediate: [
       "Een deel van mij ergert zich eraan dat het leven nu om schema's draait.",
       "Ik slik frustratie in omdat ik bang ben dat het in boosheid verandert.",
       "Mijn vader vertrok toen het moeilijk werd en ik ben bang dat ik hem kopieer.",
@@ -2329,14 +2848,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Ik vermoed dat de wrevel een dieper verdriet verbergt over het verliezen van delen van mezelf.",
       "Als ik toegeef hoe overweldigd ik ben, ben ik bang dat ik instort en niet terugkom."
     ],
-    ec_mei_found: [
+    ec_mei_basic: [
       "Mijn moeder zegt dat het goed gaat, maar ik zie de teleurstelling wanneer ik voor werk weg ben.",
       "Ik beloofde mijn team een lanceringsdatum en ben doodsbang om die te missen.",
       "Soms zeg ik dat ik laat moet werken zodat ik tien minuten alleen in de auto kan zitten.",
       "Ik voel me verscheurd tussen een goede dochter en een sterke leider zijn.",
       "Ik blijf denken dat ik me niet zo gespleten zou voelen als ik sterker was."
     ],
-    ec_mei_stretch: [
+    ec_mei_intermediate: [
       "Ik zou mijn moeder willen vertellen dat ik bang ben haar teleur te stellen.",
       "Op het werk klink ik resoluut, maar de laatste tijd twijfel ik aan elke beslissing.",
       "Er is geen ruimte om over mijn behoeften te praten zonder me egoïstisch te voelen.",
@@ -2352,14 +2871,14 @@ export const STATEMENT_TRANSLATIONS = {
     ]
   }),
   el: mapWithIds({
-    ev_leah_found: [
+    ev_leah_basic: [
       "Ξέρω ότι φαίνομαι κουρασμένη, αλλά ειλικρινά πρέπει να κάνω περισσότερα για τον πατέρα μου.",
       "Όλοι στο σχολείο βασίζονται σε μένα. Αν πάρω μια μέρα άδεια, θα νομίσουν ότι είμαι τεμπέλα.",
       "Μισώ που είμαι απογοητευμένη. Ο πατέρας μου είναι άρρωστος, δεν θα έπρεπε να θυμώνω μαζί του.",
       "Αν χαλαρώσω, νιώθω ότι απογοητεύω τους πάντες ταυτόχρονα.",
       "Οι άνθρωποι μου λένε να ξεκουραστώ, αλλά αυτό μόνο με γεμίζει ενοχές."
     ],
-    ev_leah_stretch: [
+    ev_leah_intermediate: [
       "Κάθε φορά που σκέφτομαι να ζητήσω βοήθεια, ακούω μια φωνή που λέει ότι είμαι αδύναμη.",
       "Η αδερφή μου στέλνει υποστηρικτικά μηνύματα και αμέσως σκέφτομαι ότι κρυφά με κρίνει.",
       "Μόλις ξαπλώσω για να χαλαρώσω, το μυαλό μου τρέχει σε όλα όσα δεν έκανα.",
@@ -2373,14 +2892,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Δεν ξέρω καν τι χρειάζομαι πια—μόνο ότι αυτός ο ρυθμός δεν είναι βιώσιμος.",
       "Μερικές φορές φαντάζομαι να εξαφανιστώ για ένα σαββατοκύριακο και πανικοβάλλομαι ότι κανείς δεν θα με συγχωρήσει."
     ],
-    ev_malik_found: [
+    ev_malik_basic: [
       "Όταν οι επενδυτές κάνουν πίσω, λέω ότι όλα είναι καλά, αλλά μέσα μου μπαίνω σε σπείρα.",
       "Κρατώ τις συζητήσεις ανάλαφρες γιατί τα βαθιά θέματα μοιάζουν αποθαρρυντικά.",
       "Οι άνθρωποι λένε ότι είμαι ψύχραιμος, αλλά αυτό σημαίνει ότι κρύβω τον πανικό.",
       "Αν παραδεχτώ ότι φοβάμαι, φοβάμαι πως η ομάδα θα χάσει την εμπιστοσύνη της σε μένα.",
       "Το να βγαίνω ραντεβού είναι εξαντλητικό—τελειώνω τα πράγματα πριν προλάβουν να με απορρίψουν."
     ],
-    ev_malik_stretch: [
+    ev_malik_intermediate: [
       "Υπάρχει συνεχώς ένας έλεγχος στο μυαλό μου: με συμπαθούν ακόμη ή γλιστράω;",
       "Όταν κάποιος με επαινεί, αμέσως αναρωτιέμαι τι θέλει στην πραγματικότητα.",
       "Αναπαράγω τις συναντήσεις το βράδυ και αναρωτιέμαι αν ακούστηκα ανασφαλής.",
@@ -2394,14 +2913,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Ακόμη κι όταν με γιορτάζουν, βλέπω μπροστά μου ότι θα με αντικαταστήσουν με καλύτερο μοντέλο.",
       "Μερικές φορές εύχομαι να ήμουν απλώς μέσος ώστε το διακύβευμα να μην ήταν τόσο μεγάλο."
     ],
-    ev_carmen_found: [
+    ev_carmen_basic: [
       "Δεν κλαίω γιατί πρέπει να κρατήσω τους υπόλοιπους όρθιους.",
       "Οι ασθενείς χρειάζονται να είμαι σε εγρήγορση· τα συναισθήματα μόνο με επιβραδύνουν.",
       "Η οικογένειά μου ρωτά διαρκώς πώς είμαι κι εγώ το προσπερνώ.",
       "Είναι πιο εύκολο να μιλάω για πρακτικά ζητήματα παρά για το πόσο μου λείπει.",
       "Αν θυμώσω μαζί του, νιώθω ότι προδίδω τη μνήμη του."
     ],
-    ev_carmen_stretch: [
+    ev_carmen_intermediate: [
       "Κάθε βάρδια βλέπω κάποιον σαν τον αδερφό μου και κλειδώνω τα πάντα μέσα μου.",
       "Όταν οι συνάδελφοι ρωτούν για μένα, αλλάζω θέμα για να μη λυγίσω.",
       "Ένα κομμάτι μου είναι εξοργισμένο που με άφησε με το χάος, και αυτή η σκέψη με τρομάζει.",
@@ -2415,14 +2934,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Όταν επιτέλους ανασαίνω, αισθάνομαι ένα κύμα πίσω από λεπτό τοίχο.",
       "Αναρωτιέμαι αν θα τον αφήσω να φύγει μόνο όταν επιτρέψω στον θυμό να βγει."
     ],
-    ec_sahana_found: [
+    ec_sahana_basic: [
       "Η επόπτριά μου είπε ότι τα πήγα καλά, αλλά σκέφτομαι συνεχώς ότι απλώς ήταν ευγενική.",
       "Ξαναγράφω τις σημειώσεις μου τρεις φορές γιατί τα λάθη μοιάζουν καταστροφικά.",
       "Όταν οι πελάτες με ευχαριστούν, φοβάμαι ότι υπερεκτιμούν όσα μπορώ να κάνω.",
       "Τρομάζω στη σκέψη ότι μια δύσκολη συνεδρία θα με ξεσκεπάσει ως ανίκανη.",
       "Αναπαράγω τις συνεδρίες για να βρω τι έχασα και αναρωτιέμαι αν είμαι απλώς εμμονική."
     ],
-    ec_sahana_stretch: [
+    ec_sahana_intermediate: [
       "Ένα μέρος μου πιστεύει ότι είμαι χρήσιμη μόνο όταν εντυπωσιάζω.",
       "Αν κάποιος διστάσει πριν δώσει ανατροφοδότηση, προετοιμάζομαι για άσχημα νέα.",
       "Είναι σαν να χρειάζομαι απόδειξη ότι δεν είμαι απογοήτευση πριν μπορέσω να αναπνεύσω.",
@@ -2436,14 +2955,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Φοβάμαι ότι θα εξαφανιστώ από τη μνήμη των ανθρώπων αν σταματήσω να τρέχω.",
       "Νομίζω ότι υπάρχει μέσα μου μια σιωπηλή οργή για το κυνήγι της αποδοχής."
     ],
-    ec_tomas_found: [
+    ec_tomas_basic: [
       "Αγαπώ τον γιο μου, αλλά μερικές φορές θέλω απλώς σιωπή και είναι δύσκολο να το παραδεχτώ.",
       "Ο σύντροφός μου σηκώνει τόσα πολλά· νιώθω ενοχές όταν είμαι εξαντλημένος.",
       "Όταν δουλεύω νύχτες, χάνω σημαντικές στιγμές και νιώθω αναλώσιμος.",
       "Νόμιζα ότι η πατρότητα θα ένιωθε πιο φυσική από αυτό.",
       "Ακόμα κι όταν ζητάω ένα διάλειμμα, αισθάνομαι ότι τους απογοητεύω."
     ],
-    ec_tomas_stretch: [
+    ec_tomas_intermediate: [
       "Ένα μέρος μου αγανακτεί που η ζωή τώρα γυρίζει γύρω από προγράμματα.",
       "Καταπνίγω τη δυσφορία γιατί φοβάμαι ότι θα γίνει θυμός.",
       "Ο πατέρας μου έφυγε όταν δυσκόλεψαν τα πράγματα και φοβάμαι ότι τον επαναλαμβάνω.",
@@ -2457,14 +2976,14 @@ export const STATEMENT_TRANSLATIONS = {
       "Υποψιάζομαι ότι η αγανάκτηση κρύβει ένα βαθύτερο πένθος για τα κομμάτια του εαυτού μου που χάνονται.",
       "Αν παραδεχτώ πόσο καταπονημένος είμαι, φοβάμαι ότι θα καταρρεύσω και δεν θα επανέλθω."
     ],
-    ec_mei_found: [
+    ec_mei_basic: [
       "Η μητέρα μου λέει ότι είναι καλά, αλλά βλέπω την απογοήτευση όταν ταξιδεύω για δουλειά.",
       "Υποσχέθηκα στην ομάδα ημερομηνία λανσαρίσματος και τρέμω μήπως την χάσω.",
       "Μερικές φορές λέω ότι δουλεύω μέχρι αργά μόνο για να κάτσω δέκα λεπτά μόνη στο αυτοκίνητο.",
       "Νιώθω διχασμένη ανάμεσα στο να είμαι καλή κόρη και δυνατή ηγέτιδα.",
       "Σκέφτομαι συνεχώς ότι αν ήμουν πιο δυνατή δεν θα ένιωθα τόσο μοιρασμένη."
     ],
-    ec_mei_stretch: [
+    ec_mei_intermediate: [
       "Θα ήθελα να πω στη μητέρα μου ότι φοβάμαι μήπως την απογοητεύσω.",
       "Στη δουλειά ακούγομαι αποφασιστική, αλλά τελευταία αμφιβάλλω για κάθε απόφαση.",
       "Δεν υπάρχει χώρος να μιλήσω για τις ανάγκες μου χωρίς να νιώσω εγωίστρια.",
@@ -2480,14 +2999,14 @@ export const STATEMENT_TRANSLATIONS = {
     ]
   }),
   zh: mapWithIds({
-    ev_leah_found: [
+    ev_leah_basic: [
       "我知道自己看起来很累，但其实我该为爸爸做更多。",
       "学校里所有人都依靠我。如果我请一天假，他们会觉得我懒惰。",
       "我讨厌自己会挫败。爸爸生病了，我不该对他不耐烦。",
       "只要我放慢脚步，就好像同时辜负了所有人。",
       "大家都叫我休息，但那只会让我充满愧疚。"
     ],
-    ev_leah_stretch: [
+    ev_leah_intermediate: [
       "每次想开口求助，我脑子里就有个声音说我很软弱。",
       "妹妹发来鼓励的信息，我却立刻觉得她暗地里在评价我。",
       "一躺下来想放松，脑子就开始翻腾那些没完成的事。",
@@ -2501,14 +3020,14 @@ export const STATEMENT_TRANSLATIONS = {
       "我已经说不清自己需要什么——只知道这样的节奏撑不下去。",
       "有时我幻想消失一个周末，又马上慌张，怕没人原谅我。"
     ],
-    ev_malik_found: [
+    ev_malik_basic: [
       "投资人抽身时，我嘴上说没事，可内心已经失控。",
       "我总把谈话弄得很浅，因为深入的话题好像会把人吓跑。",
       "大家都说我很镇定，但其实只是我把恐慌藏起来了。",
       "如果承认自己害怕，我就怕团队会对我失去信心。",
       "约会太累了——我总是先结束，免得被别人甩。"
     ],
-    ev_malik_stretch: [
+    ev_malik_intermediate: [
       "脑子里像开着扫描仪：他们还喜欢我吗？是不是已经不行了？",
       "有人称赞我，我立刻怀疑对方到底想要什么。",
       "晚上我会反复回放会议，担心自己听起来很没底气。",
@@ -2522,14 +3041,14 @@ export const STATEMENT_TRANSLATIONS = {
       "即便大家在庆祝我，我脑子里仍在想他们会换个更好的人。",
       "有时我真想就做个普通人，这样压力就不会这么大。"
     ],
-    ev_carmen_found: [
+    ev_carmen_basic: [
       "我不哭，因为我得让其他人撑住。",
       "病人需要我头脑清醒；情绪只会拖慢我。",
       "家人总问我过得怎样，我总是敷衍带过。",
       "谈物流安排比说我多么想念他要容易得多。",
       "如果我对他生气，就像是在背叛他的记忆。"
     ],
-    ev_carmen_stretch: [
+    ev_carmen_intermediate: [
       "每个班都能见到像弟弟的人影，我只好把所有感觉封起来。",
       "同事来关心我时，我立刻换话题，免得崩溃。",
       "有一部分对他丢下烂摊子很愤怒，而这个念头把我吓坏了。",
@@ -2543,14 +3062,14 @@ export const STATEMENT_TRANSLATIONS = {
       "终于喘口气时，仿佛有巨浪隔着薄墙要冲出来。",
       "我想，或许只有允许自己真正生气，才能真的放他走。"
     ],
-    ec_sahana_found: [
+    ec_sahana_basic: [
       "导师说我表现得很好，但我总觉得她只是在客套。",
       "我把笔记重写三遍，因为犯错像是灾难。",
       "当来访者感谢我，我担心他们高估了我的能力。",
       "我很怕一场棘手的会谈就会让我被看穿是个冒牌货。",
       "我反复回顾每次会谈，找自己漏掉什么，然后怀疑自己是不是太强迫。"
     ],
-    ec_sahana_stretch: [
+    ec_sahana_intermediate: [
       "有个声音说，只有当我让人惊艳时才有价值。",
       "别人回馈前稍微停顿，我就做好听坏消息的准备。",
       "好像需要证据证明我不是个失望，才能安心呼吸。",
@@ -2564,14 +3083,14 @@ export const STATEMENT_TRANSLATIONS = {
       "我担心如果不再努力奔跑，就会从所有人记忆里消失。",
       "我想，内心藏着一团总是追求认可的默默怒火。"
     ],
-    ec_tomas_found: [
+    ec_tomas_basic: [
       "我爱儿子，但有时只想要安静，这话很难说出口。",
       "伴侣承担了那么多；我一累就觉得愧疚。",
       "夜班让我错过成长瞬间，也让我觉得自己可被替换。",
       "我以为当父亲会比这自然得多。",
       "哪怕我开口要休息，也像是在让他们失望。"
     ],
-    ec_tomas_stretch: [
+    ec_tomas_intermediate: [
       "有个部分讨厌生活如今完全围着日程转。",
       "我压下挫败感，因为怕它变成愤怒。",
       "我爸当年遇到难处就逃了，我偏执地担心自己会重蹈覆辙。",
@@ -2585,14 +3104,14 @@ export const STATEMENT_TRANSLATIONS = {
       "我怀疑怨气底下藏着对失去自我部分的深层悲伤。",
       "如果承认自己有多崩溃，我怕一旦倒下就再也起不来。"
     ],
-    ec_mei_found: [
+    ec_mei_basic: [
       "妈妈说她没事，但我一出差就能看到她眼里的失望。",
       "我跟团队保证了上线日期，担心自己完不成。",
       "有时我谎称加班，只为了在车里待十分钟。",
       "我觉得自己被撕扯在好女儿和强领导之间。",
       "我不停想，如果我更坚强，就不会这么撕裂。"
     ],
-    ec_mei_stretch: [
+    ec_mei_intermediate: [
       "真希望能告诉妈妈，我怕自己让她失望。",
       "在公司我听起来很果断，但最近每个决定都再三怀疑。",
       "完全没有空间谈自己的需求，否则就觉得自私。",

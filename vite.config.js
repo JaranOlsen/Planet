@@ -15,7 +15,8 @@ export default defineConfig({
     chunkSizeWarningLimit: 1500,
     rollupOptions: {
       input: {
-        index: resolve('index.html'),
+        index: resolve(__dirname, 'index.html'),
+        deliberatepractice: resolve(__dirname, 'deliberatepractice/index.html'),
       },
     },
   },
