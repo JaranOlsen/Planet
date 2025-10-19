@@ -49,7 +49,10 @@ const elements = {
   skillsBackButton: document.getElementById("back-to-skills"),
   casesBackButton: document.getElementById("back-to-cases"),
   footerNote: document.getElementById("footer-note"),
-  statementPanel: document.querySelector(".statement-panel")
+  statementPanel: document.querySelector(".statement-panel"),
+  suggestionPanel: document.querySelector(".suggestion-panel"),
+  suggestionToggle: document.getElementById("toggle-suggestion"),
+  suggestionText: document.getElementById("suggestion-text")
 };
 
 const difficultyButtons = Array.from(document.querySelectorAll(".chip"));
@@ -60,7 +63,8 @@ const state = {
   caseId: null,
   difficulty: DIFFICULTIES[0],
   order: {},
-  index: 0
+  index: 0,
+  suggestionVisible: false
 };
 
 const languageButtonMap = new Map();
@@ -128,7 +132,10 @@ function localizeStatements(languageId, baseStatements) {
   const translationMap = getStatementTranslations(languageId);
 
   return DIFFICULTIES.reduce((acc, level) => {
-    acc[level] = baseStatements[level].map((entry) => translationMap[entry.id] ?? entry.text);
+    acc[level] = baseStatements[level].map((entry) => ({
+      ...entry,
+      text: translationMap[entry.id] ?? entry.text
+    }));
     return acc;
   }, {});
 }
@@ -204,6 +211,14 @@ function applyLanguageStrings(languageId) {
   elements.nextButton.textContent = strings.next;
   elements.nextButton.setAttribute("aria-label", strings.nextAria ?? strings.next);
 
+  if (elements.suggestionToggle) {
+    elements.suggestionToggle.textContent = strings.showSuggestion;
+    elements.suggestionToggle.setAttribute(
+      "aria-label",
+      strings.suggestionHiddenLabel ?? strings.showSuggestion
+    );
+  }
+
   elements.languageBackButton.textContent = `← ${strings.backToLanguage}`;
   elements.languageBackButton.setAttribute(
     "aria-label",
@@ -226,6 +241,8 @@ function applyLanguageStrings(languageId) {
   if (elements.statementPanel) {
     elements.statementPanel.setAttribute("aria-label", strings.statementPanelAria ?? "");
   }
+
+  updateSuggestionUI();
 }
 
 function renderLanguageOptions() {
@@ -345,6 +362,10 @@ function hydratePracticeView() {
     elements.caseStyle.textContent = "";
     elements.statementText.textContent = strings.emptyPrompt;
     elements.statementCounter.textContent = "";
+    if (elements.suggestionText) {
+      elements.suggestionText.textContent = "";
+    }
+    resetSuggestionVisibility();
     return;
   }
 
@@ -360,16 +381,24 @@ function hydratePracticeView() {
 
 function renderActiveStatement() {
   const strings = getUIStrings();
-  const statements = state.order[state.difficulty] ?? [];
+  const statements = getActiveStatements();
   if (!statements.length) {
     elements.statementText.textContent = strings.statementFallback;
     elements.statementCounter.textContent = "";
+    if (elements.suggestionText) {
+      elements.suggestionText.textContent = "";
+    }
+    resetSuggestionVisibility();
     return;
   }
 
-  const currentText = statements[state.index];
-  elements.statementText.textContent = currentText;
+  const currentEntry = getActiveStatement();
+  elements.statementText.textContent = currentEntry?.text ?? strings.statementFallback;
   elements.statementCounter.textContent = formatCounter(state.index + 1, statements.length);
+  if (elements.suggestionText) {
+    elements.suggestionText.textContent = currentEntry?.suggestion ?? "";
+  }
+  resetSuggestionVisibility();
 }
 
 function formatCounter(current, total) {
@@ -379,6 +408,48 @@ function formatCounter(current, total) {
     .replace("{current}", String(current))
     .replace("{total}", String(total))
     .replace("{difficulty}", difficultyLabel);
+}
+
+function getActiveStatements() {
+  return Array.isArray(state.order[state.difficulty]) ? state.order[state.difficulty] : [];
+}
+
+function getActiveStatement() {
+  const statements = getActiveStatements();
+  return statements[state.index] ?? null;
+}
+
+function updateSuggestionUI() {
+  if (!elements.suggestionPanel || !elements.suggestionToggle || !elements.suggestionText) return;
+  const strings = getUIStrings();
+  const suggestion = (elements.suggestionText.textContent ?? "").trim();
+  const hasSuggestion = suggestion.length > 0;
+
+  elements.suggestionPanel.hidden = !hasSuggestion;
+  elements.suggestionToggle.disabled = !hasSuggestion;
+
+  if (!hasSuggestion) {
+    elements.suggestionToggle.textContent = strings.showSuggestion;
+    elements.suggestionToggle.setAttribute(
+      "aria-label",
+      strings.suggestionHiddenLabel ?? strings.showSuggestion
+    );
+    elements.suggestionText.hidden = true;
+    return;
+  }
+
+  const visible = state.suggestionVisible;
+  elements.suggestionToggle.textContent = visible ? strings.hideSuggestion : strings.showSuggestion;
+  elements.suggestionToggle.setAttribute(
+    "aria-label",
+    visible ? strings.suggestionShownLabel ?? strings.hideSuggestion : strings.suggestionHiddenLabel ?? strings.showSuggestion
+  );
+  elements.suggestionText.hidden = !visible;
+}
+
+function resetSuggestionVisibility() {
+  state.suggestionVisible = false;
+  updateSuggestionUI();
 }
 
 function activateDifficulty(difficulty) {
@@ -444,6 +515,10 @@ function handleLanguageSelection(languageId) {
   renderSkillOptions();
   elements.statementText.textContent = getUIStrings(languageId).emptyPrompt;
   elements.statementCounter.textContent = "";
+  if (elements.suggestionText) {
+    elements.suggestionText.textContent = "";
+  }
+  resetSuggestionVisibility();
   showSection("skill");
 }
 
@@ -459,6 +534,10 @@ function handleSkillSelection(skillId) {
   renderCaseOptions();
   elements.statementText.textContent = getUIStrings().emptyPrompt;
   elements.statementCounter.textContent = "";
+  if (elements.suggestionText) {
+    elements.suggestionText.textContent = "";
+  }
+  resetSuggestionVisibility();
   showSection("case");
 }
 
@@ -484,6 +563,10 @@ function handleBackNavigation(targetKey) {
     activateDifficulty(state.difficulty);
     elements.statementText.textContent = getUIStrings().emptyPrompt;
     elements.statementCounter.textContent = "";
+    if (elements.suggestionText) {
+      elements.suggestionText.textContent = "";
+    }
+    resetSuggestionVisibility();
     highlightSkillSelection(null);
     highlightCaseSelection(null);
     showSection("language");
@@ -496,6 +579,10 @@ function handleBackNavigation(targetKey) {
     state.index = 0;
     highlightCaseSelection(null);
     renderCaseOptions();
+    if (elements.suggestionText) {
+      elements.suggestionText.textContent = "";
+    }
+    resetSuggestionVisibility();
     showSection("skill");
     return;
   }
@@ -505,6 +592,10 @@ function handleBackNavigation(targetKey) {
     state.index = 0;
     highlightCaseSelection(state.caseId);
     renderCaseOptions();
+    if (elements.suggestionText) {
+      elements.suggestionText.textContent = "";
+    }
+    resetSuggestionVisibility();
     showSection("case");
   }
 }
@@ -546,6 +637,14 @@ function registerEventListeners() {
         showPreviousStatement();
       }
       touchStartX = null;
+    });
+  }
+
+  if (elements.suggestionToggle) {
+    elements.suggestionToggle.addEventListener("click", () => {
+      if (elements.suggestionToggle.disabled) return;
+      state.suggestionVisible = !state.suggestionVisible;
+      updateSuggestionUI();
     });
   }
 }
