@@ -53,6 +53,7 @@ const buildCasePayload = (caseId, skillId) => {
       history: "",
       schema: "",
       style: "",
+      voice: "",
       statements: DIFFICULTIES.reduce((acc, difficulty) => {
         acc[difficulty] = [];
         return acc;
@@ -67,14 +68,15 @@ const buildCasePayload = (caseId, skillId) => {
 
   return {
     id: meta.id,
-    label: meta.label,
-    teaser: meta.teaser,
-    history: meta.history,
-    schema: meta.schema,
-    style: meta.style,
-    dossier: meta.dossier,
-    statements
-  };
+      label: meta.label,
+      teaser: meta.teaser,
+      history: meta.history,
+      schema: meta.schema,
+      style: meta.style,
+      voice: meta.voice ?? "",
+      dossier: meta.dossier,
+      statements
+    };
 };
 
 const BASE_PRACTICE = SKILLS.reduce((acc, skill) => {

@@ -3340,6 +3340,21 @@ export const STATEMENT_SETS = {
           text: "People keep saying I'm a machine.",
           suggestion:
             "“Could it be that being called a machine feels lonely—as if they miss the human part of you?”"
+        },
+        {
+          text: "I book 'fun' in my calendar but cancel because the deadlines feel louder.",
+          suggestion:
+            "“I wonder if cancelling those plans is less about time and more about fearing you’d look like you’re slacking.”"
+        },
+        {
+          text: "My sister sends selfies and I just reply with emojis because I can't unplug long enough to meet.",
+          suggestion:
+            "“Could it be that staying on the surface protects you from her seeing how frayed you’re feeling?”"
+        },
+        {
+          text: "I rehearse tomorrow’s stand-up in the shower so nothing catches me off guard.",
+          suggestion:
+            "“Maybe that rehearsing is your way of guarding against being exposed as unprepared.”"
         }
       ],
       intermediate: [
@@ -3352,6 +3367,21 @@ export const STATEMENT_SETS = {
           text: "Sleep just isn't happening.",
           suggestion:
             "“Maybe your mind is standing guard at night because it thinks rest might let danger slip in.”"
+        },
+        {
+          text: "If I log off at six, I hear my ex saying I wasn't ambitious enough.",
+          suggestion:
+            "“I wonder if that voice is really the fear that choosing rest would prove them right about you.”"
+        },
+        {
+          text: "I draft messages asking for support, then delete them before I hit send.",
+          suggestion:
+            "“Could it be that deleting them keeps you from risking being seen as “too much” when you need help?”"
+        },
+        {
+          text: "In the launch photos I feel like a hologram of the person everyone thinks I am.",
+          suggestion:
+            "“Maybe feeling like a hologram shows how close you sense yourself to unraveling behind the smile.”"
         }
       ],
       mastery: [
@@ -3364,6 +3394,21 @@ export const STATEMENT_SETS = {
           text: "I don't tell anyone how close I feel to the edge.",
           suggestion:
             "“Could it be you’re protecting yourself from feeling weak in their eyes if they knew?”"
+        },
+        {
+          text: "Some nights I scroll my ex’s feed wondering if I was too intense.",
+          suggestion:
+            "“I wonder if that wondering hides a part longing to be loved for more than relentless effort.”"
+        },
+        {
+          text: "My chest turns to static when I imagine admitting I’m lonely.",
+          suggestion:
+            "“Could it be that static is grief for the gentleness you keep postponing for later?”"
+        },
+        {
+          text: "I fantasize about missing a deadline just to see who still stands beside me.",
+          suggestion:
+            "“Maybe that fantasy is the exhausted part begging for proof you’d still matter if something slipped.”"
         }
       ]
     },
@@ -3378,6 +3423,21 @@ export const STATEMENT_SETS = {
           text: "I can manage both worlds.",
           suggestion:
             "“Could it be that managing both worlds leaves you feeling split in two?”"
+        },
+        {
+          text: "I practice neutral answers in the mirror before family dinners.",
+          suggestion:
+            "“I wonder if rehearsing those answers is really about guarding the tender truths you’re not ready to risk yet.”"
+        },
+        {
+          text: "When my mom asks if I'm seeing someone, I start talking about work instead.",
+          suggestion:
+            "“Could it be that shifting to work keeps her close without exposing the part of you she hasn’t met?”"
+        },
+        {
+          text: "I keep two wardrobes—family clothes and everything else.",
+          suggestion:
+            "“Maybe those separate closets help you feel safe, even while a part longs to stop switching costumes.”"
         }
       ],
       intermediate: [
@@ -3390,6 +3450,21 @@ export const STATEMENT_SETS = {
           text: "My sister keeps asking if I'm okay.",
           suggestion:
             "“Maybe she senses a part of you that’s ready to reach toward her, even if you’re unsure.”"
+        },
+        {
+          text: "I told my sister about a ‘friend’ and she just nodded like she already knew.",
+          suggestion:
+            "“I wonder if that nod was an invitation you’re still afraid to accept.”"
+        },
+        {
+          text: "When the imam talks about family values, my chest shrinks.",
+          suggestion:
+            "“Could it be that shrinking protects you from feeling the heartbreak of being unseen in a place you love?”"
+        },
+        {
+          text: "Before Eid I map the exits—balcony, hallway, fresh air spots.",
+          suggestion:
+            "“Maybe plotting those exits is your nervous system planning for when the mask feels too heavy.”"
         }
       ],
       mastery: [
@@ -3402,6 +3477,21 @@ export const STATEMENT_SETS = {
           text: "Coming out feels like risking everything.",
           suggestion:
             "“Could it be that the risk isn’t just losing them, but also the version of you they adore?”"
+        },
+        {
+          text: "Sometimes I picture walking in holding my boyfriend’s hand and my chest floods with warmth and dread.",
+          suggestion:
+            "“I wonder if that flood is the longing to be embraced exactly as you are colliding with the terror of losing them.”"
+        },
+        {
+          text: "During prayer I catch myself asking if God can hold all of me.",
+          suggestion:
+            "“Could it be that question carries grief about loving your faith while fearing it might not love you back?”"
+        },
+        {
+          text: "I dream about telling my father and he turns away before I finish.",
+          suggestion:
+            "“Maybe that dream shows how the son in you still aches for his face to stay gentle when you’re fully seen.”"
         }
       ]
     },
@@ -3416,6 +3506,21 @@ export const STATEMENT_SETS = {
           text: "Tears feel unproductive.",
           suggestion:
             "“Could it be that tears might show how deeply you loved her, not that you’re weak?”"
+        },
+        {
+          text: "I keep all the condolence cards in a drawer I never open.",
+          suggestion:
+            "“I wonder if keeping them closed is your way of keeping the ache from spilling out.”"
+        },
+        {
+          text: "When coworkers ask how I am, I smile and say I'm busy.",
+          suggestion:
+            "“Could it be that saying you’re busy feels safer than letting them see how much you miss her?”"
+        },
+        {
+          text: "If a Polish song comes on the radio, I switch it off right away.",
+          suggestion:
+            "“Maybe silencing the song is how you keep a wave of memory from knocking you over.”"
         }
       ],
       intermediate: [
@@ -3428,6 +3533,21 @@ export const STATEMENT_SETS = {
           text: "I don't have time to fall apart.",
           suggestion:
             "“Maybe part of you fears that if you let go, the sadness would never stop?”"
+        },
+        {
+          text: "I almost told my son I was sad, then switched to reminding him about homework.",
+          suggestion:
+            "“I wonder if switching topics protects you from the fear that your tears might scare him.”"
+        },
+        {
+          text: "Her scarf still smells like her, so I only let myself hold it for a second.",
+          suggestion:
+            "“Could it be that putting it down quickly keeps you from sinking into the longing that rises?”"
+        },
+        {
+          text: "Church friends offer to visit, but I insist I'm fine.",
+          suggestion:
+            "“Maybe insisting you’re fine keeps you from the risk of receiving comfort you’re not sure you can hold.”"
         }
       ],
       mastery: [
@@ -3440,6 +3560,21 @@ export const STATEMENT_SETS = {
           text: "I keep replaying the hospital visit.",
           suggestion:
             "“Could it be that replaying it is your way of searching for the goodbye you didn’t get?”"
+        },
+        {
+          text: "At night I whisper the rosary and wait for a sign she’s still near.",
+          suggestion:
+            "“I wonder if that whisper is the daughter in you longing to be held again.”"
+        },
+        {
+          text: "Sometimes I dream she’s at the kitchen table and I wake up reaching out.",
+          suggestion:
+            "“Could it be that waking with your hand out shows how ready you are to let the grief be shared?”"
+        },
+        {
+          text: "I’m afraid if I cry with my son he’ll think I’m breaking.",
+          suggestion:
+            "“Maybe that fear carries the belief that your tenderness would frighten him, even though it might teach him how love grieves.”"
         }
       ]
     },
@@ -3454,6 +3589,21 @@ export const STATEMENT_SETS = {
           text: "I can power through.",
           suggestion:
             "“Could it be that powering through keeps you from asking for the care you need?”"
+        },
+        {
+          text: "I rehearse calm scripts on the tram home but forget them when the baby screams.",
+          suggestion:
+            "“I wonder if those screams poke the part that still thinks you have to be perfect to stay safe.”"
+        },
+        {
+          text: "I apologize before I even know if I snapped.",
+          suggestion:
+            "“Could it be that preemptive apology is your armor against becoming the father you feared?”"
+        },
+        {
+          text: "When my partner sighs, I assume I messed up again.",
+          suggestion:
+            "“Maybe that assumption comes from an old belief that any sigh means danger is building.”"
         }
       ],
       intermediate: [
@@ -3466,6 +3616,21 @@ export const STATEMENT_SETS = {
           text: "I apologize immediately.",
           suggestion:
             "“Maybe apologizing quickly is your attempt to mend things before shame settles in.”"
+        },
+        {
+          text: "I swallow my need for a break because asking feels like dropping the ball.",
+          suggestion:
+            "“I wonder if not asking keeps you from reliving the shame of being seen as weak.”"
+        },
+        {
+          text: "If I take ten minutes for myself, I picture my dad calling it selfish.",
+          suggestion:
+            "“Could it be that the image of his voice still polices how much care you’re allowed to need?”"
+        },
+        {
+          text: "When I see my son's lip tremble, I hear 'you ruined it' in my head.",
+          suggestion:
+            "“Maybe that harsh voice is the scared boy inside trying to warn you before anyone else can.”"
         }
       ],
       mastery: [
@@ -3478,6 +3643,21 @@ export const STATEMENT_SETS = {
           text: "Sometimes I see fear in their eyes.",
           suggestion:
             "“Could it be that seeing that fear confirms a story you’ve been fighting your whole life?”"
+        },
+        {
+          text: "Sometimes I want to yell just to release the pressure, then the urge scares me.",
+          suggestion:
+            "“I wonder if that urge is your protective energy begging to be trusted instead of exiled.”"
+        },
+        {
+          text: "When I'm up at 3 a.m. I picture holding my son and promising I'll never leave.",
+          suggestion:
+            "“Could it be that promise is you healing the part that once felt abandoned when anger filled the room?”"
+        },
+        {
+          text: "I imagine telling my dad his shouting still lives in my body.",
+          suggestion:
+            "“Maybe imagining that conversation shows the father in you longing to break that legacy.”"
         }
       ]
     },
@@ -3492,6 +3672,21 @@ export const STATEMENT_SETS = {
           text: "The fraud voice is annoying.",
           suggestion:
             "“Could it be that the fraud voice is trying to keep you from feeling exposed?”"
+        },
+        {
+          text: "I keep a stack of fresh notebooks labeled 'draft experiments' and never touch them.",
+          suggestion:
+            "“I wonder if leaving those pages blank is your way of keeping the risk of raw ideas at arm’s length.”"
+        },
+        {
+          text: "When lab mates share messy outlines, I smile and hide how panicked I feel.",
+          suggestion:
+            "“Could it be that the panic comes from the part that believes one messy sentence could expose you?”"
+        },
+        {
+          text: "I reload the citation manager because it makes me feel prepared to write.",
+          suggestion:
+            "“Maybe that ritual is soothing the fear that your mind might freeze when it’s time to put words down.”"
         }
       ],
       intermediate: [
@@ -3519,6 +3714,21 @@ export const STATEMENT_SETS = {
           text: "I keep believing one more paper will finally silence the critic.",
           suggestion:
             "“Of course you hope another achievement will quiet the critic—that hope shows how much you long for relief.”"
+        },
+        {
+          text: "My supervisor's red pen lives in my head even when I'm cooking dinner.",
+          suggestion:
+            "“I wonder if that red pen is how the critic keeps you from enjoying anything unfinished.”"
+        },
+        {
+          text: "I draft emails asking for feedback and let them sit in drafts for weeks.",
+          suggestion:
+            "“Could it be that holding them back protects you from hearing the words you most fear, even if they may never be said?”"
+        },
+        {
+          text: "When someone praises my presentation, I immediately list every flaw.",
+          suggestion:
+            "“Maybe pointing out the flaws first is the part of you trying to beat others to the punch before they can judge you.”"
         }
       ],
       mastery: [
@@ -3531,6 +3741,21 @@ export const STATEMENT_SETS = {
           text: "I fantasize about disappearing from academia.",
           suggestion:
             "“Could it be that the fantasy is a signal from the part of you starving for ease?”"
+        },
+        {
+          text: "On the tram I imagine leaving academia and feel terror and relief at once.",
+          suggestion:
+            "“I wonder if that relief is the playful scientist wishing for a life beyond constant evaluation.”"
+        },
+        {
+          text: "I hear my mother’s proud voice and the critic snaps, ‘don’t disappoint.’",
+          suggestion:
+            "“Could it be that the snap reveals how love and pressure got braided together for you?”"
+        },
+        {
+          text: "Sometimes I want to hand in a messy chapter just to see who still believes in me.",
+          suggestion:
+            "“Maybe that impulse is the courageous part testing whether your worth could survive imperfection.”"
         }
       ]
     },
@@ -3545,6 +3770,21 @@ export const STATEMENT_SETS = {
           text: "Beer helps me wind down.",
           suggestion:
             "“Could it be that the beer fills the space where you wish someone would sit?”"
+        },
+        {
+          text: "I eat dinner standing at the counter because setting the table feels silly alone.",
+          suggestion:
+            "“I wonder if staying on your feet keeps you from confronting how much you miss shared meals.”"
+        },
+        {
+          text: "I let calls go to voicemail thinking I'll ring back later, then I don't.",
+          suggestion:
+            "“Could it be that delaying the call spares you from hearing your own longing in your voice?”"
+        },
+        {
+          text: "I keep the porch light on even when no one's coming by.",
+          suggestion:
+            "“Maybe that light is your quiet way of hoping someone might drop in.”"
         }
       ],
       intermediate: [
@@ -3557,6 +3797,21 @@ export const STATEMENT_SETS = {
           text: "Weekends are whatever.",
           suggestion:
             "“Maybe they feel ‘whatever’ because they highlight how quiet things have become.”"
+        },
+        {
+          text: "When my daughter video calls, I brag about projects instead of saying I miss her.",
+          suggestion:
+            "“I wonder if skipping the truth protects you from the ache of needing her more than you think you should.”"
+        },
+        {
+          text: "I RSVP ‘maybe’ so I can back out without disappointing anyone.",
+          suggestion:
+            "“Could it be that the ‘maybe’ shields you from the sting of showing up and feeling out of place?”"
+        },
+        {
+          text: "The empty chair at breakfast makes me sip my coffee faster.",
+          suggestion:
+            "“Maybe rushing through mornings is your way of outrunning the quiet.”"
         }
       ],
       mastery: [
@@ -3569,6 +3824,21 @@ export const STATEMENT_SETS = {
           text: "I keep the TV on for noise.",
           suggestion:
             "“Could it be the TV is acting like borrowed company when you miss real voices?”"
+        },
+        {
+          text: "Sometimes I pour the second beer just so the silence doesn’t echo.",
+          suggestion:
+            "“I wonder if that beer is standing in for the voice you wish was answering back.”"
+        },
+        {
+          text: "I picture calling Arne to say I could use company and the words stick in my throat.",
+          suggestion:
+            "“Could it be that the stuck words belong to the boy who learned not to need too much?”"
+        },
+        {
+          text: "I imagine the kids moving home and feel hope and shame hit at once.",
+          suggestion:
+            "“Maybe that mix shows how deeply you long to be chosen, even while a part insists you shouldn’t need it.”"
         }
       ]
     },
@@ -3583,6 +3853,21 @@ export const STATEMENT_SETS = {
           text: "I joke when people compliment me.",
           suggestion:
             "“Could it be the jokes keep you safe from letting the praise really land?”"
+        },
+        {
+          text: "I redraw the same line until the paper starts to pill.",
+          suggestion:
+            "“I wonder if wearing the paper thin feels safer than letting anyone see a line you’re unsure about.”"
+        },
+        {
+          text: "I take close-up photos of my sketchbook but never share the full page.",
+          suggestion:
+            "“Could it be that cropping the page helps you control how much vulnerability leaks out?”"
+        },
+        {
+          text: "Crit days make my stomach flip hours before I even tape something up.",
+          suggestion:
+            "“Maybe that flip is the part of you that still links being seen to danger.”"
         }
       ],
       intermediate: [
@@ -3595,6 +3880,21 @@ export const STATEMENT_SETS = {
           text: "My parents just want what's best.",
           suggestion:
             "“Maybe part of you hears their love, and another part worries you’ll disappoint them.”"
+        },
+        {
+          text: "When Ingrid says ‘follow the feeling,’ I freeze because I don’t trust it.",
+          suggestion:
+            "“I wonder if freezing protects you from the risk that your instinct might be dismissed.”"
+        },
+        {
+          text: "Right before critiques my parents text ‘stable jobs, ok?’",
+          suggestion:
+            "“Could it be that those reminders tighten the critic who already doubts you’ll be taken seriously?”"
+        },
+        {
+          text: "I set alarms to start painting but end up scrolling other artists instead.",
+          suggestion:
+            "“Maybe scrolling is your way of shoring up courage while also proving to yourself you’ll never measure up.”"
         }
       ],
       mastery: [
@@ -3607,6 +3907,21 @@ export const STATEMENT_SETS = {
           text: "I procrastinate on the big piece.",
           suggestion:
             "“Could it be that delaying the big piece protects you from discovering how vulnerable—or brilliant—it might be?”"
+        },
+        {
+          text: "I dream about hanging my work without explanations and wake up thrilled and terrified.",
+          suggestion:
+            "“I wonder if that dream shows how much your artist self longs to be seen without armor.”"
+        },
+        {
+          text: "Sometimes I want to tell my parents their pragmatism feels like doubt in me.",
+          suggestion:
+            "“Could it be that urge is the brave part craving their belief even when you’re messy?”"
+        },
+        {
+          text: "When I picture panel critiques, I hear someone say I don’t belong here.",
+          suggestion:
+            "“Maybe that imagined verdict is the shame voice rehearsing the pain so it doesn’t catch you off guard.”"
         }
       ]
     },
@@ -3621,6 +3936,21 @@ export const STATEMENT_SETS = {
           text: "Lina teases me for over-planning.",
           suggestion:
             "“Could it be that her teasing brings up fear you’ll be judged if you ever relax?”"
+        },
+        {
+          text: "I check the front door twice before bed even if I just locked it.",
+          suggestion:
+            "“I wonder if that double-check is your body remembering when things didn’t feel secure yet.”"
+        },
+        {
+          text: "When Lina says I'm married to my spreadsheet, I laugh louder than I feel.",
+          suggestion:
+            "“Could it be that laugh covers how scared you are that without the spreadsheet everything might slip?”"
+        },
+        {
+          text: "For a simple day trip I pack two backup chargers.",
+          suggestion:
+            "“Maybe the extra chargers are standing guard so nothing can catch you unprepared.”"
         }
       ],
       intermediate: [
@@ -3633,6 +3963,21 @@ export const STATEMENT_SETS = {
           text: "I track every expense.",
           suggestion:
             "“Maybe watching each kroner reassures the young protector inside you.”"
+        },
+        {
+          text: "When Lina books a spontaneous brunch, my mind starts calculating what could go wrong.",
+          suggestion:
+            "“I wonder if those calculations are your protector racing to keep surprises from hurting you again.”"
+        },
+        {
+          text: "Headaches hit the moment I try to relax on the sofa.",
+          suggestion:
+            "“Could it be that the pain shows up because resting feels like letting your guard down?”"
+        },
+        {
+          text: "I replay my dad’s stories about starting over from nothing.",
+          suggestion:
+            "“Maybe replaying them keeps you loyal to the belief that vigilance is the only way to stay safe.”"
         }
       ],
       mastery: [
@@ -3645,6 +3990,21 @@ export const STATEMENT_SETS = {
           text: "I don’t trust ease.",
           suggestion:
             "“Could it be that ease feels suspicious because chaos used to arrive without warning?”"
+        },
+        {
+          text: "Sometimes I hide receipts from myself so I won’t check them again, then panic when I can’t find them.",
+          suggestion:
+            "“I wonder if that tug-of-war is the part longing to rest wrestling with the part terrified that rest means danger.”"
+        },
+        {
+          text: "When Lina says she misses the playful me, I feel guilty for the man I’m giving her instead.",
+          suggestion:
+            "“Could it be that guilt is the tender husband aching to believe his love is enough without constant control?”"
+        },
+        {
+          text: "I imagine our future child asking why I’m always tense.",
+          suggestion:
+            "“Maybe that image is your heart begging you to teach the next generation a different way to feel safe.”"
         }
       ]
     },
@@ -3659,6 +4019,21 @@ export const STATEMENT_SETS = {
           text: "Saying yes keeps things smooth.",
           suggestion:
             "“Could it be that each yes is your way of keeping belonging secure?”"
+        },
+        {
+          text: "I answer texts at two in the morning so no one feels ignored.",
+          suggestion:
+            "“I wonder if staying reachable is your way of keeping your place in the crew secure.”"
+        },
+        {
+          text: "My planner is full of colour-coded parties but no blank spaces.",
+          suggestion:
+            "“Could it be that empty space feels threatening because it might mean nobody needs you?”"
+        },
+        {
+          text: "I say 'just one more song' even when my feet ache.",
+          suggestion:
+            "“Maybe pushing through the ache is how you prove you’re still the fun one.”"
         }
       ],
       intermediate: [
@@ -3671,6 +4046,21 @@ export const STATEMENT_SETS = {
           text: "Hangxiety is just part of nightlife.",
           suggestion:
             "“Maybe that hangxiety is your body waving a flag that it’s too much.”"
+        },
+        {
+          text: "When I cancel, I send long explanations like I’m on trial.",
+          suggestion:
+            "“I wonder if defending yourself that hard is about soothing the fear they’ll label you selfish.”"
+        },
+        {
+          text: "I stash unopened bills because dealing with them kills the vibe.",
+          suggestion:
+            "“Could it be that the drawer holds more than paper—it holds the shame of feeling like you’re dropping the ball?”"
+        },
+        {
+          text: "After a client praises me, I add extra freebies I can’t really deliver.",
+          suggestion:
+            "“Maybe piling on extras is the part of you terrified their approval will vanish if you don’t overextend.”"
         }
       ],
       mastery: [
@@ -3683,6 +4073,21 @@ export const STATEMENT_SETS = {
           text: "Boundaries feel awkward.",
           suggestion:
             "“Could it be that boundaries stir old fears of being seen as boring or selfish?”"
+        },
+        {
+          text: "Sometimes I fantasize about disappearing for a weekend and worry I’d come back forgotten.",
+          suggestion:
+            "“I wonder if that fantasy shows how deeply you crave rest, even while fearing rest could erase you.”"
+        },
+        {
+          text: "When I watch friends lean on others, I feel a pang I can’t name.",
+          suggestion:
+            "“Could it be that pang is longing to be the one held instead of always holding everyone else?”"
+        },
+        {
+          text: "I imagine telling my mom I’m burnt out and hear her say, ‘don’t let people down.’",
+          suggestion:
+            "“Maybe that imagined voice shows how love and obligation still tug you in opposite directions.”"
         }
       ]
     },
@@ -3697,6 +4102,21 @@ export const STATEMENT_SETS = {
           text: "I'm fine.",
           suggestion:
             "“Could it be that ‘I’m fine’ covers a mix of worry and longing you don’t want to burden others with?”"
+        },
+        {
+          text: "I keep sketching boat parts on receipts and then tuck them away.",
+          suggestion:
+            "“I wonder if tucking them away keeps you from confronting how much you still want to build.”"
+        },
+        {
+          text: "Young architects ask for feedback and I just say 'looks good' instead of sitting down with them.",
+          suggestion:
+            "“Could it be that holding back protects you from discovering how much they still need your eye?”"
+        },
+        {
+          text: "I scroll design blogs late and feel hollow afterward.",
+          suggestion:
+            "“Maybe the hollow feeling is your craft longing to contribute instead of only watching.”"
         }
       ],
       intermediate: [
@@ -3709,6 +4129,21 @@ export const STATEMENT_SETS = {
           text: "Travel plans feel abstract.",
           suggestion:
             "“Maybe they feel abstract because a part of you isn’t ready to let go of the drafting table.”"
+        },
+        {
+          text: "When Inger talks about travel, I nod but picture myself fading into the background.",
+          suggestion:
+            "“I wonder if that fading image reflects a fear that without something to contribute you’ll vanish from the life you love.”"
+        },
+        {
+          text: "My knee aches and I take it as proof the vibrant days are done.",
+          suggestion:
+            "“Could it be that reading the ache that way keeps you from noticing the parts of you still hungry to move?”"
+        },
+        {
+          text: "I draft emails inviting juniors for coffee and delete them.",
+          suggestion:
+            "“Maybe deleting them protects you from the possibility they might decline—and from realizing how much you yearn to pass something on.”"
         }
       ],
       mastery: [
@@ -3721,6 +4156,21 @@ export const STATEMENT_SETS = {
           text: "Inger deserves more energy from me.",
           suggestion:
             "“Could it be that part of you is scared she’ll see how lost you feel?”"
+        },
+        {
+          text: "Some nights I imagine the workshop empty and panic in my chest.",
+          suggestion:
+            "“I wonder if that panic is your craftsman self mourning a life without hands in timber.”"
+        },
+        {
+          text: "I picture my daughter asking to see my sketches and I'm ashamed I haven't drawn anything new.",
+          suggestion:
+            "“Could it be that shame is the part of you that still longs to inspire her?”"
+        },
+        {
+          text: "I dream of teaching but wake up telling myself, ‘they have their own ideas.’",
+          suggestion:
+            "“Maybe dismissing the dream hides a deeper wish to be remembered for how you make light and wood sing.”"
         }
       ]
     }
@@ -3737,6 +4187,21 @@ export const STATEMENT_SETS = {
           text: "She twists her ring with a tight smile while describing her workload.",
           suggestion:
             "“As you twist that ring with that tight smile, I’m sensing there might be more underneath—can we check in with that?”"
+        },
+        {
+          text: "She glances at her watch twice while insisting, \"There's plenty of time.\"",
+          suggestion:
+            "“I’m noticing your eyes going back to the watch even as you say there’s time—what happens inside as you hold both?”"
+        },
+        {
+          text: "Her foot taps rapidly when she talks about taking a weekend off.",
+          suggestion:
+            "“Your foot is really going while we imagine a weekend off—what is that part trying to say right now?”"
+        },
+        {
+          text: "Anna smooths the corner of her notebook the moment praise comes up.",
+          suggestion:
+            "“As soon as we touch the praise, your hand goes to that notebook corner—what is it trying to steady?”"
         }
       ],
       intermediate: [
@@ -3749,6 +4214,21 @@ export const STATEMENT_SETS = {
           text: "She leans back, crosses her arms, and gives a light laugh.",
           suggestion:
             "“I’m seeing you lean back, arms folded with that little laugh—maybe part of you is pulling away right now?”"
+        },
+        {
+          text: "When we talk about delegating, she unlocks her phone and scrolls without looking up.",
+          suggestion:
+            "“I notice the phone comes out as soon as we name delegating—does checking it make this feel a little safer?”"
+        },
+        {
+          text: "Her voice jumps brighter as she lists everything she 'should' do, then she swallows hard.",
+          suggestion:
+            "“Your voice went brighter and then you swallowed hard while naming those ‘shoulds’—what was coming up right there?”"
+        },
+        {
+          text: "Anna nods quickly saying, 'That makes sense,' even as her gaze slips past me to the window.",
+          suggestion:
+            "“You’re nodding and saying it makes sense, and your eyes are out the window—what are you seeing out there?”"
         }
       ],
       mastery: [
@@ -3761,6 +4241,21 @@ export const STATEMENT_SETS = {
           text: "A tear wells up; she quickly wipes it and looks down.",
           suggestion:
             "“I caught that tear before you brushed it away—what was passing through right then?”"
+        },
+        {
+          text: "In the silence her knuckles whiten around the chair arms before she lets out a breath.",
+          suggestion:
+            "“I’m watching your hands hold on so tightly—what is that part of you bracing for just now?”"
+        },
+        {
+          text: "When we wonder about being ordinary, she presses a palm over her chest and closes her eyes.",
+          suggestion:
+            "“Your hand went straight to your chest and your eyes closed—what are you feeling underneath there?”"
+        },
+        {
+          text: "She reaches toward her bag as if to pack up mid-thought, then freezes.",
+          suggestion:
+            "“I noticed you reaching for the bag like we might end here—what was the urge in that moment?”"
         }
       ]
     },
@@ -3775,6 +4270,21 @@ export const STATEMENT_SETS = {
           text: "He offers a quick half-smile and glances toward the door.",
           suggestion:
             "“That quick smile with your eyes going to the door makes me wonder if part of you wants some distance right now—does that fit?”"
+        },
+        {
+          text: "He threads his misbaha beads faster while assuring me, 'It's all under control.'",
+          suggestion:
+            "“Your beads started moving quicker as you said it’s under control—what are they helping you hold right now?”"
+        },
+        {
+          text: "When Eid comes up he rubs the back of his neck and looks down.",
+          suggestion:
+            "“As we touch Eid your hand goes to the back of your neck—what’s tensing there?”"
+        },
+        {
+          text: "His shoulders stay lifted near his ears while he talks about family dinners.",
+          suggestion:
+            "“I notice your shoulders staying up as we talk about those dinners—what is that tension saying?”"
         }
       ],
       intermediate: [
@@ -3787,6 +4297,21 @@ export const STATEMENT_SETS = {
           text: "He cracks a joke, squeezing the arms of the chair.",
           suggestion:
             "“I hear the joke and feel your hands gripping the chair—maybe humor is protecting something tender here?”"
+        },
+        {
+          text: "When I invite him to name the fear, he chuckles and pivots to a story from the ER.",
+          suggestion:
+            "“I caught that chuckle and quick shift to the ER—what got close just before we changed topics?”"
+        },
+        {
+          text: "As we consider telling his sister, he leans forward, elbows on knees, and his voice almost disappears.",
+          suggestion:
+            "“You leaned in and your voice went quiet when we mentioned your sister—what’s stirring as you move closer like that?”"
+        },
+        {
+          text: "He stares at his hands, thumbs tracing circles, repeating 'Inshallah' under his breath.",
+          suggestion:
+            "“I hear that quiet ‘Inshallah’ while your thumbs trace circles—what are you asking for right there?”"
         }
       ],
       mastery: [
@@ -3799,6 +4324,21 @@ export const STATEMENT_SETS = {
           text: "He nods politely, voice turning distant after mention of coming out.",
           suggestion:
             "“Your nod got a little formal and your voice pulled back when we mentioned coming out—is something feeling too close right now?”"
+        },
+        {
+          text: "When I suggest staying with the ache, his jaw trembles before he bites his lip.",
+          suggestion:
+            "“I saw your jaw tremble before you bit down—can we stay with what wanted to come through?”"
+        },
+        {
+          text: "He rests a fist over his heart, eyes glistening, then looks away toward the wall.",
+          suggestion:
+            "“Your fist went to your chest and your eyes found the wall—what was surfacing right then?”"
+        },
+        {
+          text: "He asks if we can pray while his legs angle toward the door.",
+          suggestion:
+            "“You’re asking about prayer as your legs turn toward the door—what’s the pull between leaving and staying with this feeling?”"
         }
       ]
     },
@@ -3813,6 +4353,21 @@ export const STATEMENT_SETS = {
           text: "She looks toward the ceiling, blinking quickly.",
           suggestion:
             "“Your eyes went up and the blinks came fast—are you holding something back right now?”"
+        },
+        {
+          text: "She lines up the tissue box and pen the moment her voice wavers.",
+          suggestion:
+            "“I see you lining things up as your voice wavers—what are you trying to keep in order right now?”"
+        },
+        {
+          text: "Elena holds her breath with her cheeks puffed slightly before answering about home.",
+          suggestion:
+            "“You held that breath just then—what happens inside as you pause like that before answering?”"
+        },
+        {
+          text: "She takes a quick drink of water to break eye contact when grief is mentioned.",
+          suggestion:
+            "“I noticed you reach for the water as soon as we named the grief—what did you need in that moment?”"
         }
       ],
       intermediate: [
@@ -3825,6 +4380,21 @@ export const STATEMENT_SETS = {
           text: "She clasps her hands tightly as she shifts to chores.",
           suggestion:
             "“Those hands are gripping pretty firmly while we slide into chores—does that tension have something to say?”"
+        },
+        {
+          text: "When her son comes up she pivots to his homework schedule, words speeding up.",
+          suggestion:
+            "“I notice as soon as we touch your son you shift into the schedule and pick up speed—what are you moving away from there?”"
+        },
+        {
+          text: "She presses her knuckles into her thighs while insisting, 'I'm managing.'",
+          suggestion:
+            "“Your knuckles are pressing into your legs as you say you’re managing—what do they know about how hard this is?”"
+        },
+        {
+          text: "Elena smiles politely while her eyes glaze and shine with tears.",
+          suggestion:
+            "“I see that polite smile with the shine in your eyes—what’s it like to hold both at once?”"
         }
       ],
       mastery: [
@@ -3837,6 +4407,21 @@ export const STATEMENT_SETS = {
           text: "She apologizes for emotions, wiping her eyes briskly.",
           suggestion:
             "“You apologized as you swept those tears away—can we notice together what made you want to hurry them off?”"
+        },
+        {
+          text: "When she speaks of her mother, her hand hovers over her heart but doesn’t quite land.",
+          suggestion:
+            "“I saw your hand hover over your chest and then pull back—what keeps it from resting there?”"
+        },
+        {
+          text: "She whispers a few words in Polish and then clamps her lips shut.",
+          suggestion:
+            "“Those Polish words slipped out and then stopped—what were they carrying for you?”"
+        },
+        {
+          text: "Elena reaches toward her bag as if to collect herself, fingers trembling on the strap.",
+          suggestion:
+            "“Your fingers went to the bag like you might need to pack up—what was the urge just then?”"
         }
       ]
     },
@@ -3851,6 +4436,21 @@ export const STATEMENT_SETS = {
           text: "His breath shortens and words get clipped.",
           suggestion:
             "“Your breath got shallow and the words sharper—what’s happening inside as that edge shows up?”"
+        },
+        {
+          text: "Even after the story ends his shoulders stay lifted toward his ears.",
+          suggestion:
+            "“Your shoulders are still up here long after the story—what are they bracing against right now?”"
+        },
+        {
+          text: "He rubs his forehead in small circles while repeating, 'It's fine.'",
+          suggestion:
+            "“I notice your hand working at your forehead as you say it’s fine—what is that part trying to soothe?”"
+        },
+        {
+          text: "Jonas shifts to the edge of the chair, toes gripping the floor when anger comes up.",
+          suggestion:
+            "“You’re right on the edge of the chair with your toes gripping—what’s happening in your body as anger shows up?”"
         }
       ],
       intermediate: [
@@ -3863,6 +4463,21 @@ export const STATEMENT_SETS = {
           text: "He laughs sharply and rubs the back of his neck.",
           suggestion:
             "“I heard that short laugh while your hand went to your neck—maybe that part is trying to shake off something intense?”"
+        },
+        {
+          text: "When I wonder about asking for help, his eyes dart to the door before returning.",
+          suggestion:
+            "“I noticed your eyes go straight to the door when we talked about asking for help—what was the pull there?”"
+        },
+        {
+          text: "He clasps his hands between his knees, squeezing hard as he says, 'It's not a big deal.'",
+          suggestion:
+            "“Those hands are squeezed tight between your knees while you say it’s not a big deal—what are they holding back?”"
+        },
+        {
+          text: "Jonas lets out a quick laugh that catches in his throat and his eyes immediately glass over.",
+          suggestion:
+            "“That laugh caught and your eyes glossed—what feeling was right underneath before the laugh stepped in?”"
         }
       ],
       mastery: [
@@ -3875,6 +4490,21 @@ export const STATEMENT_SETS = {
           text: "He breaks eye contact and answers in monosyllables.",
           suggestion:
             "“I notice the eye contact dropped and the answers got short—does it feel safer to pull back here?”"
+        },
+        {
+          text: "When I invite him to picture holding his son, his shoulders curl inward and he covers his face.",
+          suggestion:
+            "“You curled in and covered your face when we pictured holding him—what was about to show up in that curl?”"
+        },
+        {
+          text: "His hand reaches toward the baby photo on the table, then hesitates midair.",
+          suggestion:
+            "“I saw your hand go toward the photo and pause—what keeps it from landing there?”"
+        },
+        {
+          text: "He whispers, 'I'm a good dad... right?' and his voice almost breaks.",
+          suggestion:
+            "“Hearing you whisper that question with your voice catching—what part of you needs to hear the answer right now?”"
         }
       ]
     },
@@ -3889,6 +4519,21 @@ export const STATEMENT_SETS = {
           text: "She laughs lightly with her shoulders hunched forward.",
           suggestion:
             "“I hear the light laugh and see your shoulders rounding—what’s that posture holding?”"
+        },
+        {
+          text: "She adjusts her glasses each time the word 'draft' comes up.",
+          suggestion:
+            "“I notice your hand goes to your glasses every time we say ‘draft’—what does that touch help you with?”"
+        },
+        {
+          text: "Her jaw tightens and her smile turns still when we mention sending work early.",
+          suggestion:
+            "“Your smile went still and your jaw tightened when we talked about sending it early—what just clenched there?”"
+        },
+        {
+          text: "Priya taps the edge of her notebook in a precise rhythm while nodding.",
+          suggestion:
+            "“That steady tapping on the notebook is so precise—what’s it keeping in line for you right now?”"
         }
       ],
       intermediate: [
@@ -3901,6 +4546,21 @@ export const STATEMENT_SETS = {
           text: "She inhales sharply before mentioning her supervisor.",
           suggestion:
             "“I noticed that big inhale before you said her name—what comes up in that breath?”"
+        },
+        {
+          text: "She flips to a fresh page mid-sentence and starts outlining bullet points.",
+          suggestion:
+            "“You went to a fresh page and started outlining even before finishing the sentence—what happens if we stay with what you were feeling?”"
+        },
+        {
+          text: "Priya leans in conspiratorially, then quickly sits back upright.",
+          suggestion:
+            "“You leaned in close for a moment and then sat back—what shifted in you between those two movements?”"
+        },
+        {
+          text: "She counts off reasons on her fingers while her voice speeds up.",
+          suggestion:
+            "“I see the fingers counting as your voice picks up—what does keeping score like that help you manage right now?”"
         }
       ],
       mastery: [
@@ -3913,6 +4573,21 @@ export const STATEMENT_SETS = {
           text: "She curls inward, voice barely audible.",
           suggestion:
             "“You’re curling in and your voice is so soft—what part of you is seeking protection right now?”"
+        },
+        {
+          text: "Her shoulders drop and her eyes close as she whispers, 'I don't know if I can.'",
+          suggestion:
+            "“Your shoulders fell and your eyes closed with that whisper—what’s the ‘I don’t know if I can’ needing from us here?”"
+        },
+        {
+          text: "She presses her knuckles to the center of her chest while talking about the critic.",
+          suggestion:
+            "“I see your knuckles right at your chest as the critic shows up—what is that spot asking for?”"
+        },
+        {
+          text: "Priya lets out a shaky laugh and immediately says, 'Sorry,' as tears gather.",
+          suggestion:
+            "“That laugh came with an apology even as the tears gathered—could we stay with the part that apologized?”"
         }
       ]
     },
@@ -3927,6 +4602,21 @@ export const STATEMENT_SETS = {
           text: "He gives a small chuckle while checking his watch.",
           suggestion:
             "“There’s that quick chuckle and a glance at your watch—does part of you want to scoot away from this spot?”"
+        },
+        {
+          text: "One shoulder lifts higher than the other when he says, 'Not much going on.'",
+          suggestion:
+            "“I noticed that one shoulder come up when you said there’s not much—what’s it trying to tell us?”"
+        },
+        {
+          text: "He drums his fingers lightly on the armrest while describing his evenings.",
+          suggestion:
+            "“Your fingers are drumming the armrest as you talk about evenings—what are they needing right now?”"
+        },
+        {
+          text: "Daniel smiles with closed lips and looks down at his hands when asked about company.",
+          suggestion:
+            "“I see that closed-lip smile and your eyes dropping to your hands—what’s happening for you as we talk about company?”"
         }
       ],
       intermediate: [
@@ -3939,6 +4629,21 @@ export const STATEMENT_SETS = {
           text: "He sighs, shoulders lifting, then dismisses the topic.",
           suggestion:
             "“I heard that sigh and saw your shoulders lift before you brushed it off—what was moving through before you set it aside?”"
+        },
+        {
+          text: "When I ask about calling his kids, he glances toward the door before answering.",
+          suggestion:
+            "“I saw your eyes head for the door when we mentioned calling them—what was the urge in that glance?”"
+        },
+        {
+          text: "He rubs his palm along his jeans over and over while saying, 'Maybe another time.'",
+          suggestion:
+            "“That hand keeps sweeping your jeans as you say ‘maybe another time’—what is it trying to smooth out?”"
+        },
+        {
+          text: "Daniel clears his throat twice before acknowledging the lonely evenings.",
+          suggestion:
+            "“I noticed two throat clears before you named the lonely evenings—what was getting stuck there?”"
         }
       ],
       mastery: [
@@ -3951,6 +4656,21 @@ export const STATEMENT_SETS = {
           text: "He folds his arms tightly, leaning back with a flat tone.",
           suggestion:
             "“Arms folded and that flat tone makes me wonder if part of you is bracing right now—is that right?”"
+        },
+        {
+          text: "He grips the chair arms, knuckles pale, while insisting he's 'managing fine.'",
+          suggestion:
+            "“Your hands are gripping the chair pretty hard as you say you’re managing—what are they hanging onto there?”"
+        },
+        {
+          text: "His jaw tightens and a whisper slips out, 'Maybe I miss them,' before he coughs.",
+          suggestion:
+            "“I heard that whisper before the cough—what happens if we give that ‘I miss them’ a little more room?”"
+        },
+        {
+          text: "Daniel leans back, eyes closed, and lets out a long breath that almost sounds like a sigh.",
+          suggestion:
+            "“That long breath came with your eyes closed—what were you releasing, or maybe holding, in that exhale?”"
         }
       ]
     },
@@ -3965,6 +4685,21 @@ export const STATEMENT_SETS = {
           text: "Their voice drops as they look down at their lap.",
           suggestion:
             "“Your voice softened and your gaze went down—does something feel tender here?”"
+        },
+        {
+          text: "They tuck the same strand of hair behind their ear whenever critique is mentioned.",
+          suggestion:
+            "“I see that strand of hair get tucked back each time we mention critique—what's that gesture doing for you?”"
+        },
+        {
+          text: "Mei hugs the sketchbook to their chest while saying, 'It's just a rough idea.'",
+          suggestion:
+            "“You’re hugging the sketchbook close as you call it rough—what part of you is being protected right now?”"
+        },
+        {
+          text: "Their cheeks flush and gaze drops to their shoes as soon as the piece is praised.",
+          suggestion:
+            "“I notice the color in your cheeks and your eyes heading to your shoes when we appreciate the piece—what shows up there?”"
         }
       ],
       intermediate: [
@@ -3977,6 +4712,21 @@ export const STATEMENT_SETS = {
           text: "They use sarcasm, eyebrows lifted high.",
           suggestion:
             "“That bit of sarcasm with your brows up makes me wonder if another part is feeling exposed underneath.”"
+        },
+        {
+          text: "When invited to show a sketch, they glance at their backpack and shift it closer to their feet.",
+          suggestion:
+            "“I noticed your eyes go to the backpack and you tucked it in closer—what’s happening between you and that sketch right now?”"
+        },
+        {
+          text: "They trace invisible lines in the air while staying silent.",
+          suggestion:
+            "“Your hand is drawing in the air even while it’s quiet—what are those lines speaking for you?”"
+        },
+        {
+          text: "Their laugh lands sharp and quick before they swallow hard.",
+          suggestion:
+            "“That laugh came out sharp and then you swallowed—what feeling was about to come through?”"
         }
       ],
       mastery: [
@@ -3989,6 +4739,21 @@ export const STATEMENT_SETS = {
           text: "They cross their arms and lean away, barely speaking.",
           suggestion:
             "“As you lean back with arms crossed and the words fade, is there a part trying to protect you right now?”"
+        },
+        {
+          text: "Their hands tremble slightly as they pin the work to the wall.",
+          suggestion:
+            "“I can see the tremble in your hands while you pin that up—what’s moving through as you let it be seen?”"
+        },
+        {
+          text: "Mei wraps their scarf tighter around their shoulders while whispering, 'It's fine.'",
+          suggestion:
+            "“You pulled that scarf in close as you whispered it’s fine—what is that wrap holding for you?”"
+        },
+        {
+          text: "They close their eyes, take a slow inhale, and the exhale quivers.",
+          suggestion:
+            "“That long breath with the little quiver at the end—what was brushing past on its way out?”"
         }
       ]
     },
@@ -4003,6 +4768,21 @@ export const STATEMENT_SETS = {
           text: "He adjusts his watch strap repeatedly.",
           suggestion:
             "“That watch strap is getting a lot of attention—what does tightening it do for you here?”"
+        },
+        {
+          text: "He taps an invisible checklist on his thigh with two fingers.",
+          suggestion:
+            "“I notice those fingers ticking off something on your leg—what list are they keeping track of right now?”"
+        },
+        {
+          text: "Omar leans forward, elbows on knees, as if preparing to troubleshoot.",
+          suggestion:
+            "“You leaned in like you’re gearing up to fix something—what needs tending in this moment?”"
+        },
+        {
+          text: "His eyes flick toward the notebook in his bag each time uncertainty is mentioned.",
+          suggestion:
+            "“I caught your eyes heading to the notebook when we touched uncertainty—what would opening it do for you right now?”"
         }
       ],
       intermediate: [
@@ -4015,6 +4795,21 @@ export const STATEMENT_SETS = {
           text: "He rubs his forehead, eyes narrowing.",
           suggestion:
             "“Your hand went to your forehead and your eyes narrowed—what are you noticing behind that furrow?”"
+        },
+        {
+          text: "When I ask about loosening the plan, he pulls a folded spreadsheet from his folder.",
+          suggestion:
+            "“I see the spreadsheet appear the moment we talk about loosening the plan—what does having it out give you right now?”"
+        },
+        {
+          text: "He kneads his knee with his palm while asking, 'What's the worst case?'",
+          suggestion:
+            "“Your palm is working that knee while you ask about worst case—what feeling is that question trying to settle?”"
+        },
+        {
+          text: "Omar rubs both temples as he maps scenarios aloud, breath getting tight.",
+          suggestion:
+            "“Those hands at your temples and that tighter breath tell me this is getting intense—what’s happening inside as you map it all out?”"
         }
       ],
       mastery: [
@@ -4027,6 +4822,21 @@ export const STATEMENT_SETS = {
           text: "He flashes a quick smile, changes subject, voice tight.",
           suggestion:
             "“I noticed that quick smile and shift in topic with a tighter tone—was something feeling too close right there?”"
+        },
+        {
+          text: "He clasps both hands over his chest as his breathing shortens.",
+          suggestion:
+            "“Your hands went straight to your chest and the breath got tight—what is your body trying to protect right now?”"
+        },
+        {
+          text: "Omar half rises from the chair before settling back down.",
+          suggestion:
+            "“I saw you almost stand and then sit again—what was pulling you to leave and what kept you here?”"
+        },
+        {
+          text: "He murmurs a quiet prayer under his breath while his eyes shine.",
+          suggestion:
+            "“I can hear that soft prayer and see the shine in your eyes—what are you asking for in this moment?”"
         }
       ]
     },
@@ -4041,6 +4851,21 @@ export const STATEMENT_SETS = {
           text: "She glances at her phone mid-story.",
           suggestion:
             "“Your eyes slipped to your phone while you talked—did something in the story start to feel uncomfortable?”"
+        },
+        {
+          text: "She waves her hands animatedly while her voice rushes ahead.",
+          suggestion:
+            "“Your hands are all over the place and your voice is racing—what happens if we slow that energy for a moment?”"
+        },
+        {
+          text: "Sofia smooths the hem of her blazer repeatedly as she says, 'It's all good.'",
+          suggestion:
+            "“I notice you smoothing that blazer while you say it’s all good—what might that part be trying to tidy up?”"
+        },
+        {
+          text: "She keeps checking incoming notifications even as she insists she's listening.",
+          suggestion:
+            "“You’re looking at those notifications while saying you’re here—what’s pulling part of you away right now?”"
         }
       ],
       intermediate: [
@@ -4053,6 +4878,21 @@ export const STATEMENT_SETS = {
           text: "She twirls her hair and speaks faster.",
           suggestion:
             "“As you twirl your hair and speed up, I’m curious if something’s feeling shaky underneath.”"
+        },
+        {
+          text: "When we talk about saying no, she twists a ring and says, 'I'll try,' in a much softer voice.",
+          suggestion:
+            "“I notice your fingers at that ring and your voice dipping softer—what’s happening as you imagine saying no?”"
+        },
+        {
+          text: "She leans back suddenly, arms spread, and jokes about being 'too extra' before sighing.",
+          suggestion:
+            "“You leaned back with that joke about being ‘too extra,’ and then came the sigh—what feeling slipped in with that sigh?”"
+        },
+        {
+          text: "Sofia scrolls through her calendar while promising herself a rest day.",
+          suggestion:
+            "“Your thumb is already scrolling the calendar as you promise rest—what’s the scroll doing for you right now?”"
         }
       ],
       mastery: [
@@ -4065,6 +4905,21 @@ export const STATEMENT_SETS = {
           text: "Her voice turns flat and her gaze drifts to the floor.",
           suggestion:
             "“Your voice just flattened and your eyes dropped—what’s happening inside as you pull back?”"
+        },
+        {
+          text: "She presses her fingertips to her temples, eyes closed, whispering, 'I can't slow down.'",
+          suggestion:
+            "“Your fingers are at your temples and your eyes are closed as you whisper that—can we stay with the part that feels it can’t slow?”"
+        },
+        {
+          text: "Sofia clutches a throw pillow against her chest as her voice cracks.",
+          suggestion:
+            "“I see you holding that pillow tight while your voice catches—what is that embrace doing for you just now?”"
+        },
+        {
+          text: "She lets out a shaky laugh and says, 'I just need a minute,' while tears gather.",
+          suggestion:
+            "“That laugh is wobbling and I can see the tears gathering—what does the part that ‘just needs a minute’ want us to know?”"
         }
       ]
     },
@@ -4079,6 +4934,21 @@ export const STATEMENT_SETS = {
           text: "He straightens the papers on the table meticulously.",
           suggestion:
             "“You’re lining up those papers with such care—what does putting them in order do for you here?”"
+        },
+        {
+          text: "His gaze drifts to the window light and lingers there while he talks about slowing down.",
+          suggestion:
+            "“I see your eyes resting on the light outside as you talk about slowing down—what are you noticing out there?”"
+        },
+        {
+          text: "He taps the eraser end of his pencil lightly against his knee.",
+          suggestion:
+            "“That pencil keeps tapping your knee—what is that rhythm holding onto right now?”"
+        },
+        {
+          text: "Lars adjusts the cuff of his sweater again and again as he answers.",
+          suggestion:
+            "“Your fingers are working that cuff while you answer—what does that small adjustment help with here?”"
         }
       ],
       intermediate: [
@@ -4091,6 +4961,21 @@ export const STATEMENT_SETS = {
           text: "He shifts in the chair and gives short answers.",
           suggestion:
             "“I notice you shifting and the answers getting brief—does this part of the conversation feel uncomfortable?”"
+        },
+        {
+          text: "When purpose comes up he begins tracing invisible lines on his notebook cover.",
+          suggestion:
+            "“I see you drawing those invisible lines as we name purpose—what are those lines sketching for you?”"
+        },
+        {
+          text: "He inhales through his nose and lets it out slowly before saying, 'It's nothing.'",
+          suggestion:
+            "“That slow breath came right before you said it’s nothing—what was in the breath that didn’t make it into words?”"
+        },
+        {
+          text: "Lars carefully aligns the edge of his notebook with the table and nods without speaking.",
+          suggestion:
+            "“You lined that notebook up just so and nodded in silence—what is the alignment helping with right now?”"
         }
       ],
       mastery: [
@@ -4103,6 +4988,21 @@ export const STATEMENT_SETS = {
           text: "He smiles politely while his shoulders sag.",
           suggestion:
             "“There’s that courteous smile and I also see the weight in your shoulders—can we check in with that heaviness?”"
+        },
+        {
+          text: "He places a palm over his heart, breath slowing as he searches for words.",
+          suggestion:
+            "“Your hand settled on your chest and the breath slowed—what is your heart wanting to say right now?”"
+        },
+        {
+          text: "His eyes shine and he removes his glasses to polish lenses that are already clean.",
+          suggestion:
+            "“I notice your eyes shining as you polish lenses that don’t need it—what’s the polishing helping you hold?”"
+        },
+        {
+          text: "He exhales through his nose, shoulders dropping, voice barely above a whisper.",
+          suggestion:
+            "“That soft exhale and the way your shoulders fell tell me something shifted—what is the whisper wanting us to hear?”"
         }
       ]
     }
@@ -4119,6 +5019,21 @@ export const STATEMENT_SETS = {
           text: "Crying about work is pointless—can we talk productivity hacks instead?",
           suggestion:
             "“Productivity matters, and I can hear the hurt underneath. Maybe we give that hurting part a little space before we brainstorm hacks?”"
+        },
+        {
+          text: "Maybe we could just do a quick breathing tip instead of unpacking all this.",
+          suggestion:
+            "“A quick tip sounds easier, and I’m sensing a lot underneath. Could we notice that heaviness together for a minute before we pick a tool?”"
+        },
+        {
+          text: "I'll just show you the sprint metrics—that's safer than talking about how I'm doing.",
+          suggestion:
+            "“Those metrics are familiar ground. I’m also curious about the part of you that feels safer with numbers than with how you’re really doing—could we visit it briefly?”"
+        },
+        {
+          text: "Tell me which book to read so I don't have to stay in this stuck feeling.",
+          suggestion:
+            "“Finding a book might help later. Right now I’d love to sit with that stuck feeling with you so it doesn’t have to carry this alone.”"
         }
       ],
       intermediate: [
@@ -4131,6 +5046,21 @@ export const STATEMENT_SETS = {
           text: "Tell me the top three ways to fix sleep so we don't dwell on the rest.",
           suggestion:
             "“Sleep tips will help, and I’m sensing an ache underneath. Could we check in with that ache briefly before we plan fixes?”"
+        },
+        {
+          text: "Honestly, I'd rather strategize my promotion path than dig into whatever this heaviness is.",
+          suggestion:
+            "“Your ambition matters. I also hear the heaviness asking for attention—could we listen to it together for a moment before we map the promotion?”"
+        },
+        {
+          text: "If I slow down to feel this, I won't be sharp for tomorrow's review, so can we table it?",
+          suggestion:
+            "“Of course you want to stay sharp. Maybe if we tend to what’s beneath this for a minute, you’ll carry less weight into that review.”"
+        },
+        {
+          text: "Let's break down my calendar instead of staying with this pit in my stomach.",
+          suggestion:
+            "“We can absolutely look at the calendar, and I’m curious if we could offer that pit some company first so it doesn’t have to churn alone.”"
         }
       ],
       mastery: [
@@ -4143,6 +5073,21 @@ export const STATEMENT_SETS = {
           text: "Talking about the edge makes me feel needy, so let's change the subject.",
           suggestion:
             "“Needy can feel like a scary word. Maybe we can stay with that edge for a brief moment so you’re not alone in it, then shift if you need.”"
+        },
+        {
+          text: "If I let you in on how close to breaking I feel, I won't get back on track—so let's skip it.",
+          suggestion:
+            "“Letting someone in can feel risky when you’re near the edge. Could we stand beside that fear together for a minute so you don’t have to hold it alone?”"
+        },
+        {
+          text: "The part that wants to rest is dramatic; I'd rather focus on my team so I don't unravel.",
+          suggestion:
+            "“I hear how protective you are of your team. Maybe we can give the dramatic-feeling part a little kind attention so it doesn’t have to shout while you lead.”"
+        },
+        {
+          text: "I'm tempted to say I'm fine and end early—that would prove I'm still strong.",
+          suggestion:
+            "“That temptation tells me strength matters a lot. Could we meet the part that equates staying with this to weakness, just for a breath, before we decide about ending?”"
         }
       ]
     },
@@ -4157,6 +5102,21 @@ export const STATEMENT_SETS = {
           text: "We don't need to dig into emotions today.",
           suggestion:
             "“It sounds like going deeper feels like too much right now. Maybe we can stay gently with what makes it feel ‘too much,’ just for a breath?”"
+        },
+        {
+          text: "Maybe we could talk about my gym routine instead of this tightness in my chest.",
+          suggestion:
+            "“Your routine is important, and I’m also sensing that tightness wanting attention. Could we notice it together for a moment before we plan workouts?”"
+        },
+        {
+          text: "I'd rather brief you on the ER shift roster than revisit family stuff.",
+          suggestion:
+            "“The ER roster is familiar ground. I wonder if before we go there, we can sit with the family part that’s feeling raw so it knows it’s not alone.”"
+        },
+        {
+          text: "Let me tell you a funny story instead—it’s lighter.",
+          suggestion:
+            "“I love your stories, and I can feel a heavier part underneath. Could we check in with that heaviness first, then hear the story?”"
         }
       ],
       intermediate: [
@@ -4169,6 +5129,21 @@ export const STATEMENT_SETS = {
           text: "Maybe we should just rehearse coming-out scripts, not the feelings.",
           suggestion:
             "“Scripts can come next. First I’d love to listen to the feelings guiding those scripts so they don’t have to carry this alone.”"
+        },
+        {
+          text: "When you ask about longing, my mind jumps to logistics—maybe we stick with logistics?",
+          suggestion:
+            "“Logistics feel safer, I hear that. Perhaps we can pause with that longing for a moment so it feels seen, then return to logistics.”"
+        },
+        {
+          text: "If I let myself feel, I might not make it through Friday prayer—better to strategize what to say there.",
+          suggestion:
+            "“Friday prayer matters deeply. Maybe tending to what’s underneath for a minute here could make being there a little easier.”"
+        },
+        {
+          text: "Can we map out what to wear around my parents instead of staying with this ache?",
+          suggestion:
+            "“We can plan outfits soon. I’m curious if we could offer that ache a little company first so it doesn’t have to hide under the clothes.”"
         }
       ],
       mastery: [
@@ -4181,6 +5156,21 @@ export const STATEMENT_SETS = {
           text: "I already know it's hard—no need to go over it again.",
           suggestion:
             "“You do know how hard it is, and sometimes sharing it aloud eases the weight. Could we share a slice of it now, then move on?”"
+        },
+        {
+          text: "If I let myself long for being seen, I'll disappoint everyone—let's not go there.",
+          suggestion:
+            "“Longing can feel like it risks disappointing the people you love. Maybe we can stand next to that longing for a breath so it doesn’t have to be exiled.”"
+        },
+        {
+          text: "Part of me wants to shut down the moment I picture telling my father, so maybe we skip feelings entirely.",
+          suggestion:
+            "“That shut-down part is trying to protect you. Could we meet it gently together so you don’t have to face that picture alone?”"
+        },
+        {
+          text: "I came here to be functional, not to cry—can we keep it practical?",
+          suggestion:
+            "“Functioning matters. I’m wondering if letting a few tears be here with us might actually help you feel steadier—could we try just a moment?”"
         }
       ]
     },
@@ -4195,6 +5185,21 @@ export const STATEMENT_SETS = {
           text: "No point crying over the past; tell me how to stay busy.",
           suggestion:
             "“Keeping busy has kept you going. Maybe we can honor the tears briefly so they know they’re allowed, then look at routines.”"
+        },
+        {
+          text: "I'd rather walk through this week's meal prep than stay with that lump in my throat.",
+          suggestion:
+            "“Meal prep matters, and I’m hearing that lump ask for attention. Could we spend a moment with it first so it softens?”"
+        },
+        {
+          text: "Let's plan the grocery run—I don't need to sit in feelings today.",
+          suggestion:
+            "“We can plan groceries. Before we do, can we acknowledge how heavy today feels so you don’t have to carry it alone?”"
+        },
+        {
+          text: "Maybe you could give me some organizational tips instead of dwelling on Mum.",
+          suggestion:
+            "“Staying organized has helped you cope. I also want to sit with the part missing Mum for a minute so it feels cared for before we strategize.”"
         }
       ],
       intermediate: [
@@ -4207,6 +5212,21 @@ export const STATEMENT_SETS = {
           text: "Let's focus on my son's homework; it's safer.",
           suggestion:
             "“His homework is important. I also heard your ache; can we acknowledge it softly before we switch to him?”"
+        },
+        {
+          text: "Can we talk about the church volunteer schedule instead of this ache in my chest?",
+          suggestion:
+            "“Volunteering matters, and I notice that ache asking for us. Maybe we can sit with it briefly so it eases before we plan the schedule.”"
+        },
+        {
+          text: "I'd rather review my to-do list than stay with this heaviness near my eyes.",
+          suggestion:
+            "“The to-do list helps you cope. I wonder if we can give that heaviness a little space so it doesn’t have to leak out later.”"
+        },
+        {
+          text: "If I talk about her voice I'll lose it, so let's move to practical things.",
+          suggestion:
+            "“Remembering her voice can feel like falling apart. Maybe we can touch that memory together for a breath while I’m here with you, then steady with practicals.”"
         }
       ],
       mastery: [
@@ -4219,6 +5239,21 @@ export const STATEMENT_SETS = {
           text: "I don't want to keep feeling sorry for myself—change the topic.",
           suggestion:
             "“Feeling sorry for yourself can sting. Perhaps we can offer that hurting part a little compassion so it eases, then move where you want.”"
+        },
+        {
+          text: "If I let myself miss her out loud, I'll shatter when I go home.",
+          suggestion:
+            "“Letting yourself miss her can feel like you’ll fall apart. Maybe we can hold a bit of that missing together here so you feel steadier later.”"
+        },
+        {
+          text: "Talking about the empty chair at dinner makes me feel childish; let's stay practical.",
+          suggestion:
+            "“That empty chair touches a very tender place. Could we give that tender part a little warmth before we move back to the practical?”"
+        },
+        {
+          text: "The daughter in me needs to stay quiet or I'll never get back to functioning.",
+          suggestion:
+            "“You’ve asked so much of that daughter part. Maybe we can let her whisper for a moment so she can rest, and then return to the functioning together.”"
         }
       ]
     },
@@ -4233,6 +5268,21 @@ export const STATEMENT_SETS = {
           text: "No sense dwelling on my temper—give me anger tips.",
           suggestion:
             "“Tips can come soon. First I’d like to listen to the feelings behind the temper so they don’t keep exploding.”"
+        },
+        {
+          text: "I'd rather talk about stroller brands than how that moment felt.",
+          suggestion:
+            "“Gear talk feels safer. Maybe we can notice how that moment landed in you for just a breath, then we can compare strollers.”"
+        },
+        {
+          text: "Can we just list the coping strategies again so I don't slip?",
+          suggestion:
+            "“We’ll review coping strategies. Right now I’m sensing the part of you that slipped needing some care—could we sit with it briefly first?”"
+        },
+        {
+          text: "Let's shift to team updates at work; the baby stuff is heavy.",
+          suggestion:
+            "“Work updates are familiar, and I hear how heavy the baby moments feel. Could we share a bit of that heaviness together before we switch lanes?”"
         }
       ],
       intermediate: [
@@ -4245,6 +5295,21 @@ export const STATEMENT_SETS = {
           text: "How about we role-play calm responses instead of rehashing feelings?",
           suggestion:
             "“Role-plays are helpful. Before we rehearse, could we spend a moment with the feelings that show up so they inform the practice?”"
+        },
+        {
+          text: "When you mention exhaustion I switch to jokes—let's just stay with jokes.",
+          suggestion:
+            "“Your humor is such a strength. I wonder if we can also notice the exhaustion underneath for a moment so it doesn’t keep hiding behind the jokes.”"
+        },
+        {
+          text: "Maybe we stick to breathing drills so I don't sink into the guilt.",
+          suggestion:
+            "“Breathing drills can support you, and the guilt is asking to be acknowledged. Could we meet it together for a breath before we practice?”"
+        },
+        {
+          text: "If I picture that night again I'll lose sleep—better to keep things light.",
+          suggestion:
+            "“Sleep matters. Maybe if we stay with that night gently for a minute here, it won’t keep ambushing you in the dark.”"
         }
       ],
       mastery: [
@@ -4257,6 +5322,21 @@ export const STATEMENT_SETS = {
           text: "Talking about my dad just drags me back—skip it.",
           suggestion:
             "“Of course it drags you back. Maybe we can glance at what gets stirred when he comes up, then decide together where to go next.”"
+        },
+        {
+          text: "If I stay with the fear of turning into him, I'll fall apart—let's move on.",
+          suggestion:
+            "“That fear is so heavy. Could we hold it together for a moment so it doesn’t have to weigh on you alone?”"
+        },
+        {
+          text: "Part of me wants to bolt when you ask about tenderness—can we keep it tactical?",
+          suggestion:
+            "“I hear the urge to bolt. Maybe if we spend a breath with that part that wants to run, it might feel safer to stay.”"
+        },
+        {
+          text: "Let's pretend it's fine so I can prove I'm better now.",
+          suggestion:
+            "“Proving you’re better matters a lot. I also wonder if pretending fine leaves the hurting part alone—can we check in with it just briefly?”"
         }
       ]
     },
@@ -4271,6 +5351,21 @@ export const STATEMENT_SETS = {
           text: "The fraud stuff is boring—I'd rather talk about data pipelines.",
           suggestion:
             "“Pipelines are important, and the fraud voice carries information too. Maybe we listen to it briefly so it doesn’t hijack the pipeline work later?”"
+        },
+        {
+          text: "Maybe we could optimize my note-taking system instead of staying with this tight jaw.",
+          suggestion:
+            "“We can absolutely look at your system. First, could we sit with the part of you clenching that jaw so it doesn’t have to guard alone?”"
+        },
+        {
+          text: "I’m more interested in outlining the paper sections than lingering on these feelings.",
+          suggestion:
+            "“Outlining will go smoother if we visit these feelings for a moment. Would you be willing to touch them briefly with me before we outline?”"
+        },
+        {
+          text: "Let's talk conference strategy—it’s more productive than emotions.",
+          suggestion:
+            "“Conference strategy matters. I also want to be with the part of you carrying the emotion for a minute so it feels supported heading into that strategy.”"
         }
       ],
       intermediate: [
@@ -4283,6 +5378,21 @@ export const STATEMENT_SETS = {
           text: "Let's map out deadlines instead of revisiting that shame spiral.",
           suggestion:
             "“Deadlines will be there. If we give the shame spiral a little attention, it might loosen and let you meet those deadlines more easily.”"
+        },
+        {
+          text: "When you ask about excitement I start listing statistics—maybe we stay with the stats.",
+          suggestion:
+            "“Those stats feel safer. Could we let the spark behind them peek out for a breath so it knows it’s welcome?”"
+        },
+        {
+          text: "Can we spend the time building a writing schedule so I don't spiral today?",
+          suggestion:
+            "“We’ll build the schedule. I’d love to sit with the part of you afraid of spiraling for a moment so it feels steadier tackling the plan.”"
+        },
+        {
+          text: "If we name disappointment I'll cry and lose the day—let's keep it tactical.",
+          suggestion:
+            "“It makes sense to protect the day. Maybe if we acknowledge that disappointment together for a minute, it won’t need to take the whole day.”"
         }
       ],
       mastery: [
@@ -4295,6 +5405,21 @@ export const STATEMENT_SETS = {
           text: "I know the feelings already; revisiting them wastes time.",
           suggestion:
             "“You’re so familiar with them, and sharing them aloud can lighten the load. Maybe we spend a moment naming them so they don’t keep circling silently?”"
+        },
+        {
+          text: "If I show how tired I am of proving myself, I might never gear back up—let’s stay strategic.",
+          suggestion:
+            "“That fear makes sense. Perhaps we can honor the part that is tired of proving itself for a moment so it can recharge for the strategy.”"
+        },
+        {
+          text: "Talking about the little girl who loved science feels indulgent; keep me accountable instead.",
+          suggestion:
+            "“Accountability matters. Maybe letting that younger part be seen for a moment will give you more fuel to stay accountable.”"
+        },
+        {
+          text: "I want to skip anything that stirs tears; they slow me down.",
+          suggestion:
+            "“Tears can feel like they slow everything. If we allow a few here together, they might clear space so you can move faster afterward.”"
         }
       ]
     },
@@ -4309,6 +5434,21 @@ export const STATEMENT_SETS = {
           text: "No point in digging into the evenings; they're fine.",
           suggestion:
             "“Evenings might be fine on the surface, and I sensed something heavier underneath. Can we peek at it together first?”"
+        },
+        {
+          text: "Maybe we could compare woodworking tools? That's easier than this stuff.",
+          suggestion:
+            "“I’d love to hear about your tools, and I’m also curious about the feeling that wanted to step aside. Could we check in with it briefly first?”"
+        },
+        {
+          text: "Let's plan a hike itinerary so I don't get stuck in the quiet.",
+          suggestion:
+            "“Planning a hike sounds great. Maybe we give the part that dreads the quiet a moment of company before we map the trail.”"
+        },
+        {
+          text: "Talking about the house at night gets old—I'd rather review football scores.",
+          suggestion:
+            "“We can talk football soon. Could we stay with how the house feels at night for a minute so it doesn’t have to linger alone?”"
         }
       ],
       intermediate: [
@@ -4321,6 +5461,21 @@ export const STATEMENT_SETS = {
           text: "Let's plan my grocery list instead of dwelling on feelings.",
           suggestion:
             "“We can plan groceries. First I’d love to hear from the part that gets quiet when the house does—it might make the groceries taste better.”"
+        },
+        {
+          text: "When you ask about weekends I start thinking about spreadsheets—maybe we stay with spreadsheets.",
+          suggestion:
+            "“Spreadsheets feel safe. Could we let the part of you that faces weekends speak for a moment so it feels less alone?”"
+        },
+        {
+          text: "If I picture calling a friend, I freeze—let's not go there.",
+          suggestion:
+            "“Freezing makes sense. Maybe we can be with that frozen part together briefly so it feels supported before we talk about calls.”"
+        },
+        {
+          text: "Better to focus on budget planning; feelings won't change anything.",
+          suggestion:
+            "“Budgets give structure, and the feelings still carry information. Could we acknowledge them for a minute so the planning rests on steadier ground?”"
         }
       ],
       mastery: [
@@ -4333,6 +5488,21 @@ export const STATEMENT_SETS = {
           text: "Thinking about reaching out is pointless; let's drop it.",
           suggestion:
             "“It makes sense you’re tired of the effort. Could we check what the part that wants to give up is needing before we move away?”"
+        },
+        {
+          text: "If I admit how empty it feels, I'll look desperate—can we stay practical?",
+          suggestion:
+            "“Wanting to look steady is understandable. Maybe we can sit with that emptiness for a moment together so it doesn’t feel desperate, then return to the practical.”"
+        },
+        {
+          text: "Part of me wants to say I'm fine and never mention evenings again.",
+          suggestion:
+            "“That part has worked hard to protect you. Could we listen to it kindly for a moment and see what it needs, before deciding how much we share?”"
+        },
+        {
+          text: "I'd rather numb out with TV than talk about missing someone.",
+          suggestion:
+            "“TV gives you a break. If we visit the missing for a minute here, maybe the TV won’t have to hold quite so much.”"
         }
       ]
     },
@@ -4347,6 +5517,21 @@ export const STATEMENT_SETS = {
           text: "No point in unpacking anxiety—it's just there.",
           suggestion:
             "“Anxiety does hang around. Maybe if we sit with it briefly together it won’t have to shout while you create.”"
+        },
+        {
+          text: "I'd rather show you reference boards than talk about why I froze.",
+          suggestion:
+            "“Reference boards can wait a second. Could we be with the part that froze so it feels a little less alone before we look at images?”"
+        },
+        {
+          text: "Let's discuss brush techniques—feelings slow me down.",
+          suggestion:
+            "“Techniques matter, and I’m sensing a feeling asking for attention. Maybe we spend a breath with it so your hands feel freer when you paint.”"
+        },
+        {
+          text: "Maybe we could review my assignment rubric instead of this swirling in my stomach.",
+          suggestion:
+            "“We can review the rubric. Could we first notice that swirl together so it settles a bit?”"
         }
       ],
       intermediate: [
@@ -4359,6 +5544,21 @@ export const STATEMENT_SETS = {
           text: "I'd rather plan my next Insta post than revisit shame.",
           suggestion:
             "“Planning posts is useful, and the shame is asking to be heard. Could we give it a moment so it doesn’t hijack the post later?”"
+        },
+        {
+          text: "When you ask how a piece lands, I switch to color theory charts—maybe we stay with charts.",
+          suggestion:
+            "“Those charts are like armor. Could we spend a moment with what the piece stirred before we analyze the theory?”"
+        },
+        {
+          text: "Let's build a checklist for critique day so I don't have to feel this buzzing.",
+          suggestion:
+            "“A checklist can help. Perhaps we sit with that buzzing part together first so it can calm enough to use the list.”"
+        },
+        {
+          text: "If I talk about the professor's comment I'll shut down, so let's keep it practical.",
+          suggestion:
+            "“That comment hit hard. Maybe we can give the part of you that heard it some gentle attention before we plan next steps.”"
         }
       ],
       mastery: [
@@ -4371,6 +5571,21 @@ export const STATEMENT_SETS = {
           text: "If we sit with fear I'll freeze; let's keep it moving.",
           suggestion:
             "“Freezing is scary, I get it. Perhaps if we touch the fear lightly together, it will loosen and let you keep moving.”"
+        },
+        {
+          text: "I want to stay witty about critiques—going deeper feels like too much.",
+          suggestion:
+            "“Your wit is a shield. Maybe we can stand with the part that feels like ‘too much’ so the wit doesn’t have to work so hard.”"
+        },
+        {
+          text: "Talking about belonging makes my throat close; let's skip it.",
+          suggestion:
+            "“Belonging is such a tender spot. Could we be with that closing throat together for a moment so it feels less alone?”"
+        },
+        {
+          text: "If I admit how badly I want to be seen, I might crumble—keep me focused on portfolio goals.",
+          suggestion:
+            "“Wanting to be seen is a beautiful, vulnerable wish. Maybe we can let it breathe here briefly, then channel it into those goals.”"
         }
       ]
     },
@@ -4385,6 +5600,21 @@ export const STATEMENT_SETS = {
           text: "No use lingering on anxiety—give me a checklist.",
           suggestion:
             "“Checklists help, and the anxiety is pointing to something important. Maybe we listen to it briefly so the checklist works better.”"
+        },
+        {
+          text: "I'd rather talk about the repair manual than this knot in my stomach.",
+          suggestion:
+            "“Repair manuals are your zone. Could we sit with the knot for a breath so it eases while you plan?”"
+        },
+        {
+          text: "Maybe we catalog potential expenses instead of feeling this jitter.",
+          suggestion:
+            "“Cataloging helps you prepare. I’m wondering if we can acknowledge the jitter together first so it quiets down.”"
+        },
+        {
+          text: "Let's run the numbers again—it's better than dwelling on worry.",
+          suggestion:
+            "“Running the numbers can wait a moment. Could we spend a minute with the worry so it doesn’t keep hijacking the math?”"
         }
       ],
       intermediate: [
@@ -4397,6 +5627,21 @@ export const STATEMENT_SETS = {
           text: "Let's stick with contingency planning instead of this feelings stuff.",
           suggestion:
             "“Contingency plans are your gift. I also wonder if the feelings fueling the plans need a little compassion so they don’t keep you on high alert.”"
+        },
+        {
+          text: "When you ask about Lina, I jump to spreadsheets—maybe we keep it factual.",
+          suggestion:
+            "“Spreadsheets feel safe, absolutely. Could we check in with what comes up about Lina for just a moment so the spreadsheet has company?”"
+        },
+        {
+          text: "I'd prefer to map the worst-case timeline than stay with this heaviness in my chest.",
+          suggestion:
+            "“We can map timelines. Perhaps if we sit with the heaviness together first, the plan will feel lighter to carry.”"
+        },
+        {
+          text: "If I soften into gratitude I'll drop my guard—let's not risk it.",
+          suggestion:
+            "“Letting your guard down can feel dangerous. Maybe we can meet the part that worries about softening so it feels supported.”"
         }
       ],
       mastery: [
@@ -4409,6 +5654,21 @@ export const STATEMENT_SETS = {
           text: "Ease still feels dangerous—change the topic.",
           suggestion:
             "“Of course ease feels risky after everything you’ve been through. Perhaps we can notice that alarm together for a breath, then decide where to go.”"
+        },
+        {
+          text: "If I let myself rest in session, I won't snap back to vigilance—better stay sharp.",
+          suggestion:
+            "“Staying sharp has protected you. Maybe we can rest that vigilant part for a moment while I watch with you, so it learns it can take short breaks.”"
+        },
+        {
+          text: "Part of me wants to leave when you ask what I feel right now.",
+          suggestion:
+            "“I can feel that urge to bolt. Could we sit with the part that wants to leave so it feels understood before we decide anything?”"
+        },
+        {
+          text: "I don't want to picture our home relaxed—it feels like inviting disaster.",
+          suggestion:
+            "“Imagining calm can trigger old alarms. Maybe we can acknowledge that protective voice together so it doesn’t have to fight so hard against ease.”"
         }
       ]
     },
@@ -4423,6 +5683,21 @@ export const STATEMENT_SETS = {
           text: "We don't need to analyze why I'm tired; it's just the job.",
           suggestion:
             "“The job is demanding, and your tiredness is telling us something. Maybe we give it a little acknowledgement so it doesn’t have to carry this alone.”"
+        },
+        {
+          text: "I'd rather list party playlists than stay with this heaviness in my chest.",
+          suggestion:
+            "“We can swap playlists soon. Could we spend a breath with that heaviness so it feels less alone while you host?”"
+        },
+        {
+          text: "Let's talk outfits for Friday—feelings kill the vibe.",
+          suggestion:
+            "“Your vibe matters a ton. Maybe we let the part that’s worn out speak for a minute so the outfit planning feels lighter.”"
+        },
+        {
+          text: "If we start on boundaries I'll lose my momentum, so keep it light.",
+          suggestion:
+            "“Momentum is precious. Perhaps we can gently notice the part that needs a pause, then we’ll keep things light together.”"
         }
       ],
       intermediate: [
@@ -4435,6 +5710,21 @@ export const STATEMENT_SETS = {
           text: "Can we plan my weekly schedule instead of getting stuck on boundaries?",
           suggestion:
             "“Scheduling will help, and boundaries are part of that plan. Could we notice what makes boundaries sticky before we map the week?”"
+        },
+        {
+          text: "I start joking when you bring up rest—maybe we stay in joke mode.",
+          suggestion:
+            "“Your humor is contagious. I wonder if we can also listen to the part underneath the joke for a breath so it doesn’t feel ignored.”"
+        },
+        {
+          text: "Let's map exit strategies for parties so I don't have to feel guilty about saying no.",
+          suggestion:
+            "“Exit scripts will help. Maybe we can first be with the guilt that shows up so the scripts actually feel doable.”"
+        },
+        {
+          text: "If we talk about hangxiety I'll want to bail on friends—keep it practical.",
+          suggestion:
+            "“Keeping friendships matters. Perhaps staying with that hangxiety for a minute here will make it easier to show up the way you’d like.”"
         }
       ],
       mastery: [
@@ -4447,6 +5737,21 @@ export const STATEMENT_SETS = {
           text: "Rest talk is boring; let's keep things upbeat.",
           suggestion:
             "“Upbeat energy is such a big part of you. I wonder if we can also give the part craving rest a little airtime so it knows we see it.”"
+        },
+        {
+          text: "If I admit I want to cancel plans, I'm afraid people will forget me—let’s not dwell there.",
+          suggestion:
+            "“That fear of being forgotten is loud. Maybe we can hold it together for a moment so you feel more able to choose what you need.”"
+        },
+        {
+          text: "Part of me wants to slip out quietly when you ask what I need—can we talk logistics instead?",
+          suggestion:
+            "“We can cover logistics. First, could we spend a breath with the part that wants to slip out so it feels acknowledged?”"
+        },
+        {
+          text: "I don't want to feel the crash after the sparkle; let's stay on the high points.",
+          suggestion:
+            "“The high points are fun, and the crash has something to say too. Could we visit it briefly so it doesn’t blindside you later?”"
         }
       ]
     },
@@ -4461,6 +5766,21 @@ export const STATEMENT_SETS = {
           text: "No need to go on about retirement nerves; they'll pass.",
           suggestion:
             "“Maybe they will pass, and right now they’re here. Could we acknowledge them softly so they feel a little less sharp?”"
+        },
+        {
+          text: "I'd rather review timber specs than sit with this fog.",
+          suggestion:
+            "“Timber specs are familiar ground. Perhaps we can share that fog for a moment so it’s easier to look at the specs afterward.”"
+        },
+        {
+          text: "Talk me through studio logistics instead of this emptiness.",
+          suggestion:
+            "“We’ll cover logistics. Could we first notice the emptiness together so it doesn’t quietly take over?”"
+        },
+        {
+          text: "Planning the boat shed feels better than naming how flat I am.",
+          suggestion:
+            "“The shed matters, and I sense the flatness wanting attention. Maybe we give it a gentle nod before we sketch?”"
         }
       ],
       intermediate: [
@@ -4473,6 +5793,21 @@ export const STATEMENT_SETS = {
           text: "Travel itineraries are safer than feelings—let's stay there.",
           suggestion:
             "“Planning trips is tangible. I’m also hearing a part of you that’s uneasy—could we listen to it briefly before charting the itinerary?”"
+        },
+        {
+          text: "When you ask about legacy I drift to budget spreadsheets—maybe we stay with the numbers.",
+          suggestion:
+            "“The numbers are comforting. Could we give that legacy question a breath of space so the spreadsheets have more meaning?”"
+        },
+        {
+          text: "I'd prefer to brainstorm mentoring topics instead of touching the ache.",
+          suggestion:
+            "“Mentoring topics are valuable. Maybe if we sit with the ache for a moment, those topics will come from a fuller place.”"
+        },
+        {
+          text: "If I lean into longing I might not get back to work—keep me focused.",
+          suggestion:
+            "“I hear how important work is. Perhaps we can honor that longing briefly so it doesn’t pull at you while you’re trying to focus.”"
         }
       ],
       mastery: [
@@ -4485,6 +5820,21 @@ export const STATEMENT_SETS = {
           text: "Inger is excited—no sense dampening it with my fog.",
           suggestion:
             "“You care so much about her joy. Maybe we can give your fog a little voice so you both get to show up in this conversation.”"
+        },
+        {
+          text: "If I admit the spark is dimming, I’ll feel useless—let’s not go there.",
+          suggestion:
+            "“Feeling useless is painful. Maybe we can hold that fear together for a minute so it feels less overwhelming.”"
+        },
+        {
+          text: "Part of me wants to disappear when we talk about retirement.",
+          suggestion:
+            "“That disappearing part has something important to say. Could we invite it in gently so it doesn’t have to vanish?”"
+        },
+        {
+          text: "I’d rather describe wood grain than stay with how lost I feel.",
+          suggestion:
+            "“Your love of wood grain is beautiful. Maybe we can let the lost part speak for a moment so it doesn’t keep tugging at you while you create.”"
         }
       ]
     }
@@ -4501,6 +5851,21 @@ export const STATEMENT_SETS = {
           text: "Last session you moved to action steps before I finished my thought.",
           suggestion:
             "“I can hear that I rushed ahead. I want to slow down here and make sure we stay with what you were trying to share.”"
+        },
+        {
+          text: "When you compared my pace to other clients, it felt like you expected me to keep performing.",
+          suggestion:
+            "“I appreciate you naming that—my comment landed like pressure to perform. I’m sorry; let’s center how overwhelming this is for you right now.”"
+        },
+        {
+          text: "I felt brushed off when you told me to 'take a breath' instead of hearing the panic.",
+          suggestion:
+            "“You’re right—that quick reminder skipped over the panic you were naming. I’m sorry; can we go back to what the panic needs me to understand?”"
+        },
+        {
+          text: "It sounded like you were impressed with my output more than worried about me.",
+          suggestion:
+            "“Thank you for catching that. I never want you to feel celebrated for burning out, and I’m sorry I gave that impression. Your wellbeing matters more than productivity here.”"
         }
       ],
       intermediate: [
@@ -4513,6 +5878,21 @@ export const STATEMENT_SETS = {
           text: "I left feeling like I had to perform resilience for you.",
           suggestion:
             "“If my responses made you feel you had to perform, that’s on me. I want this space to hold the exhausted parts too, and I’d like to repair that.”"
+        },
+        {
+          text: "When I said I was close to canceling work and you went straight to solutions, I felt alone.",
+          suggestion:
+            "“I hear that—jumping into fixes left you alone with the fear. I’m sorry; let’s slow down so I can really sit with how close to the edge you are.”"
+        },
+        {
+          text: "When you celebrated my new feature launch, it sounded like you forgot how depleted I am.",
+          suggestion:
+            "“Thank you for telling me; my enthusiasm missed the cost to you. I’m sorry—I want to honor the toll it’s taking, not just the outcome.”"
+        },
+        {
+          text: "I wondered if sharing the 4am panic was a mistake because you changed the subject.",
+          suggestion:
+            "“That makes sense. I shifted too quickly, and I’m sorry. If you’re willing, I’d like to return to that 4am moment and stay there with you.”"
         }
       ],
       mastery: [
@@ -4525,6 +5905,21 @@ export const STATEMENT_SETS = {
           text: "I felt talked over when I tried to share the 4am moment.",
           suggestion:
             "“You’re right—I cut across a tender moment. I’d like to revisit it now, with me listening differently if you’re willing.”"
+        },
+        {
+          text: "Part of me thinks you admire my grind more than you care about the damage it's doing.",
+          suggestion:
+            "“Thank you for risking telling me that. If I conveyed admiration for the grind, that’s a serious miss—I care most about you, not the output, and I’m sorry I didn’t show that.”"
+        },
+        {
+          text: "I considered cancelling because I wasn’t sure this space could handle how wrecked I feel.",
+          suggestion:
+            "“I’m grateful you came anyway and told me. If I haven’t made room for the wrecked parts, that’s on me—I want to make this safer for all of you.”"
+        },
+        {
+          text: "When you said 'we'll figure it out next week,' it felt like you were relieved to move on from me.",
+          suggestion:
+            "“I hear that, and it hurts to know I gave that impression. I was wrong to shift away so quickly—thank you for pulling me back so we can stay with you right now.”"
         }
       ]
     },
@@ -4539,6 +5934,21 @@ export const STATEMENT_SETS = {
           text: "You smiled at my joke, but I needed you to see past it.",
           suggestion:
             "“Thank you for pointing that out. I can focus on the humor and miss the pain—let me rewind and really hear what was underneath.”"
+        },
+        {
+          text: "When I said Eid scares me, you shifted to grounding before hearing why.",
+          suggestion:
+            "“You’re right—I moved too fast to tools. I’m sorry; I’d like to stay with the fear and understand what Eid brings up for you.”"
+        },
+        {
+          text: "It felt like you brushed off the faith piece when you said 'just be yourself.'",
+          suggestion:
+            "“I appreciate you naming that—‘just be yourself’ ignored how central faith and family are. I’m sorry; I want to sit with the complexity, not gloss over it.”"
+        },
+        {
+          text: "When you nodded and moved on, I thought maybe you were uncomfortable with the family talk.",
+          suggestion:
+            "“Thank you for catching that. If I seemed uncomfortable, that’s on me. I’m here for the family piece, and I want to hear more if you’re willing.”"
         }
       ],
       intermediate: [
@@ -4551,6 +5961,21 @@ export const STATEMENT_SETS = {
           text: "It seemed like you didn't get how risky this is culturally.",
           suggestion:
             "“You’re right—I may not have conveyed enough respect for the cultural stakes. I want to understand that better with you.”"
+        },
+        {
+          text: "When I mentioned the imam, you paused so long I thought you disapproved.",
+          suggestion:
+            "“I’m sorry my pause read as judgment—that wasn’t my intention. Thank you for telling me; I want to approach your faith supports with respect.”"
+        },
+        {
+          text: "I felt alone when you said 'you’ll know when it’s time'—it sounded like you were stepping back.",
+          suggestion:
+            "“I hear that. I meant to honor your pacing, but it landed like disengagement. I’m sorry; I want to stay beside you as you decide, not leave it all on you.”"
+        },
+        {
+          text: "When I canceled the family topic, you let it drop—I needed you to check in.",
+          suggestion:
+            "“Thank you for letting me know. Letting it go without checking in may have felt like I didn’t care. I’d like to revisit it now with more care, if you’re open.”"
         }
       ],
       mastery: [
@@ -4563,6 +5988,21 @@ export const STATEMENT_SETS = {
           text: "I left thinking maybe you're not the right person to talk to about this.",
           suggestion:
             "“That hurts to hear and it also makes sense if I haven’t shown I can hold this with you. I’d like to explore what felt missing and see if we can repair it together.”"
+        },
+        {
+          text: "When you said 'maybe start with your sister,' it felt like you didn't hear my fear of losing her too.",
+          suggestion:
+            "“Thank you for telling me—I rushed to strategy and missed the fear of losing her. I’m sorry; can we stay with that fear so you feel fully heard?”"
+        },
+        {
+          text: "Part of me thinks you want a coming-out story to celebrate, not the slow, messy version I'm living.",
+          suggestion:
+            "“I appreciate you trusting me with that worry. If I gave the impression I’m waiting for a tidy story, that’s my mistake—I want to be with you in the slow, messy reality.”"
+        },
+        {
+          text: "I felt exposed after sharing the panic, and it seemed like you closed the session fast.",
+          suggestion:
+            "“You’re right—ending quickly after that share left you holding it alone. I’m sorry; I’d like to check in about how that felt and what you need now.”"
         }
       ]
     },
@@ -4577,6 +6017,21 @@ export const STATEMENT_SETS = {
           text: "You moved to rituals before hearing the rest of my memory.",
           suggestion:
             "“I appreciate you catching that; I shifted too soon. Could we return to the memory so it feels complete for you?”"
+        },
+        {
+          text: "It felt like you were impressed I keep it together instead of concerned about how heavy it is.",
+          suggestion:
+            "“I can see how that landed. I’m sorry—my response should have honored the weight you carry, not applauded the stoicism. Let’s stay with how heavy it truly is.”"
+        },
+        {
+          text: "When I mentioned the photo on the fridge, you nodded and changed topics.",
+          suggestion:
+            "“You’re right—I nodded and moved on too fast. I’d like to come back to that photo and hear what it stirs for you.”"
+        },
+        {
+          text: "I wished you had checked if I was okay when my voice cracked.",
+          suggestion:
+            "“Thank you for telling me. I should have checked in; I’m sorry I missed that cue. How are you doing right now as you remember it?”"
         }
       ],
       intermediate: [
@@ -4589,6 +6044,21 @@ export const STATEMENT_SETS = {
           text: "It seemed you didn't see how much I'm carrying for my son.",
           suggestion:
             "“I’m grateful you told me. If I glossed over the load you carry, that’s a miss—I want to acknowledge it properly.”"
+        },
+        {
+          text: "When I said I was tired of being strong, you suggested a checklist—it felt premature.",
+          suggestion:
+            "“You’re right—I went to action when you needed someone to sit with the exhaustion. I’m sorry; let’s honor how tired you are before we consider any checklist.”"
+        },
+        {
+          text: "I worried you judged me for not crying in front of my son when you asked why I hold back.",
+          suggestion:
+            "“Thank you for saying that. My question may have sounded like judgment; I’m sorry. I want to understand, not critique, the reasons you hold back.”"
+        },
+        {
+          text: "When I cancelled last week, it felt like you took it in stride instead of asking what was happening.",
+          suggestion:
+            "“I hear that; I should have checked in rather than assume it was logistics. I’m sorry—could we talk about what made cancelling feel safer?”"
         }
       ],
       mastery: [
@@ -4601,6 +6071,21 @@ export const STATEMENT_SETS = {
           text: "I'm not sure you really want to hear about the hospital night.",
           suggestion:
             "“I do want to hear it, and I’m sorry if I gave the impression I didn’t. If you’re willing, I’d like to listen now at your pace.”"
+        },
+        {
+          text: "When you encouraged me to show my son my tears, I felt you didn't respect our rhythm.",
+          suggestion:
+            "“Thank you for saying that—I may have pushed past the pace that feels right for your family. I’m sorry; I want to collaborate on what sharing emotion actually looks like for you.”"
+        },
+        {
+          text: "I wondered if you were relieved when I held it together, like my grief is inconvenient here.",
+          suggestion:
+            "“I’m really glad you told me. If I looked relieved, that’s a big miss—your grief is welcome here, and I’m sorry I didn’t show that clearly.”"
+        },
+        {
+          text: "Part of me thinks you prefer the organized version of me over the messy daughter.",
+          suggestion:
+            "“I appreciate your honesty. If I favored the organized part, that’s on me—I want to make space for the messy, grieving daughter and let her know she’s safe here.”"
         }
       ]
     },
@@ -4615,6 +6100,21 @@ export const STATEMENT_SETS = {
           text: "You smiled when I cracked a joke, but I needed seriousness.",
           suggestion:
             "“I appreciate you naming that. I can lean into humor and miss the gravity—let me dial in with you now.”"
+        },
+        {
+          text: "When I said nights were brutal, you nodded and went to skills—I wished you'd stay with me first.",
+          suggestion:
+            "“You’re right—I shifted to skills too quickly. I’m sorry; I want to be with you in how brutal those nights feel before we plan anything.”"
+        },
+        {
+          text: "It sounded like you were proud I apologized fast, but I needed help with the shame.",
+          suggestion:
+            "“Thank you for catching that. I probably highlighted the apology and skipped over the shame. I’m sorry; let’s tend to that heavy shame together.”"
+        },
+        {
+          text: "When you asked about support systems right away, it felt like you were dodging my fear.",
+          suggestion:
+            "“I hear that. My question sidestepped the fear you were naming. I’m sorry—can we focus on the fear first?”"
         }
       ],
       intermediate: [
@@ -4627,6 +6127,21 @@ export const STATEMENT_SETS = {
           text: "It seemed you glossed over how ashamed I was.",
           suggestion:
             "“I hear that and I’m sorry I didn’t reflect your shame back. Let’s go there now so you don’t have to hold it alone.”"
+        },
+        {
+          text: "When you said 'at least you caught it fast,' it felt like you minimized the damage I feel inside.",
+          suggestion:
+            "“You’re right—that phrase minimized your pain. I’m sorry; I want to stay with the damage you’re feeling, not gloss over it.”"
+        },
+        {
+          text: "I wished you would have checked in after I shut down last session instead of moving to homework.",
+          suggestion:
+            "“Thank you for telling me. Moving to homework without checking in was a miss. I’m sorry—can we talk about what happened for you in that shutdown?”"
+        },
+        {
+          text: "When I said I was scared of becoming my dad, you asked for examples—it felt clinical.",
+          suggestion:
+            "“I appreciate you naming that. My curiosity came across as clinical instead of caring. I’m sorry; I want to stay with the scared part first.”"
         }
       ],
       mastery: [
@@ -4639,6 +6154,21 @@ export const STATEMENT_SETS = {
           text: "I left feeling judged, not supported.",
           suggestion:
             "“That’s painful to hear and important. I’m sorry I left you with judgment instead of support, and I’d like to repair that starting now.”"
+        },
+        {
+          text: "When I cried about holding my son, it seemed like you wrapped up the session to escape it.",
+          suggestion:
+            "“Thank you for naming that. Ending there made it feel like I was retreating—I’m sorry. If you’re open, I’d like to revisit that moment and stay longer with you in it.”"
+        },
+        {
+          text: "A part of me thinks you believe anger is the real problem instead of how alone I feel with it.",
+          suggestion:
+            "“I appreciate you calling that out. If I framed anger as the enemy, that misses how alone you’ve felt. I’m sorry—let’s work on giving that anger a safer home together.”"
+        },
+        {
+          text: "I almost didn't come back because I wasn’t sure you could handle the darker parts.",
+          suggestion:
+            "“I’m honored you still came and told me. If I haven’t shown I can hold the darkest parts, that’s my responsibility—I want to earn your trust to bring them here.”"
         }
       ]
     },
@@ -4653,6 +6183,21 @@ export const STATEMENT_SETS = {
           text: "You shifted to interventions before sitting with the panic.",
           suggestion:
             "“I can see that. I moved to solutions too quickly; let’s return to the panic and let it be heard.”"
+        },
+        {
+          text: "It felt like you were impressed with my discipline instead of hearing how scared I was.",
+          suggestion:
+            "“I appreciate you sharing that. I missed the fear and leaned into praising discipline—I'm sorry. I’d like to stay with the scared part now.”"
+        },
+        {
+          text: "When I mentioned the jaw pain, you suggested a dentist—I'd hoped you'd ask what it meant.",
+          suggestion:
+            "“You’re right; I leapt to a practical suggestion and skipped the meaning. I’m sorry—can we talk about what that jaw is holding?”"
+        },
+        {
+          text: "I felt alone when you said 'you know this pattern' and kept moving.",
+          suggestion:
+            "“Thank you for calling that out. Naming the pattern without staying with you left you alone, and I’m sorry. Let’s slow down together here.”"
         }
       ],
       intermediate: [
@@ -4665,6 +6210,21 @@ export const STATEMENT_SETS = {
           text: "I needed you to acknowledge the cultural pressure; it felt missed.",
           suggestion:
             "“You’re right—I didn’t name it enough. That pressure matters, and I want to make space for it right now.”"
+        },
+        {
+          text: "When I stumbled describing the experiment, you focused on clarity instead of the fear underneath.",
+          suggestion:
+            "“I see that now—my coaching voice took over. I’m sorry; let’s return to the fear that showed up in that stumble.”"
+        },
+        {
+          text: "I felt like you applauded my 'tiny wins' without noticing the exhaustion behind them.",
+          suggestion:
+            "“Thank you for telling me. I’ll slow down and sit with the exhaustion rather than cheerlead—I'm sorry for missing it.”"
+        },
+        {
+          text: "When I canceled our check-in, you just rescheduled—it felt like you didn’t wonder why.",
+          suggestion:
+            "“You’re right; I should have checked in. I’m sorry—can we talk about what made canceling feel necessary so I can understand better?”"
         }
       ],
       mastery: [
@@ -4677,6 +6237,21 @@ export const STATEMENT_SETS = {
           text: "I left thinking maybe you believe I'm wasting your time.",
           suggestion:
             "“That’s tough to hear, and it tells me I missed something big. You’re not wasting my time—let’s talk about what made it feel that way.”"
+        },
+        {
+          text: "When you pushed for a messy draft, it sounded like you were impatient with me.",
+          suggestion:
+            "“Thank you for naming that. My push may have come across as impatience—I’m sorry. I’d like to repair that and work at a pace that feels respectful to you.”"
+        },
+        {
+          text: "Part of me thinks you prefer the high-achiever version and get bored with the scared one.",
+          suggestion:
+            "“I appreciate you trusting me with that worry. If I highlighted the achiever more, that’s my mistake—I want the scared parts to know they’re welcome here.”"
+        },
+        {
+          text: "I considered finding another therapist because I wasn't sure you understood how harsh the critic is.",
+          suggestion:
+            "“I’m grateful you’re telling me instead of just leaving. If I downplayed the critic, that’s on me—I want to show you I can stand up to it with you.”"
         }
       ]
     },
@@ -4691,6 +6266,21 @@ export const STATEMENT_SETS = {
           text: "You laughed at my joke and I felt like we skipped the hard part.",
           suggestion:
             "“I appreciate you saying that. I can join the joke and miss the heaviness—you deserve more. Let’s circle back to the hard part now.”"
+        },
+        {
+          text: "When you said 'you’ll get used to the quiet,' it sounded like you didn’t hear how much it hurts.",
+          suggestion:
+            "“I’m sorry—that phrase minimized the ache. I want to hear the hurt more fully; thank you for letting me know it missed the mark.”"
+        },
+        {
+          text: "I felt a bit dismissed when you said 'just text them anyway.'",
+          suggestion:
+            "“I can see how that landed like dismissal. I’m sorry; I’d rather understand what makes reaching out so hard before we brainstorm texts.”"
+        },
+        {
+          text: "When I asked if it was silly to feel lonely, you changed the subject.",
+          suggestion:
+            "“You’re right—I shifted instead of answering. I’m sorry; it isn’t silly at all, and I want to stay with that loneliness if you’re willing.”"
         }
       ],
       intermediate: [
@@ -4703,6 +6293,21 @@ export const STATEMENT_SETS = {
           text: "It seemed like you didn't notice how heavy Sundays are.",
           suggestion:
             "“If I glossed over that heaviness, that’s a big miss. Would you tell me more about Sundays so I can really sit with it?”"
+        },
+        {
+          text: "When I said the house was quiet, you asked about podcasts—it felt like you didn’t want to linger.",
+          suggestion:
+            "“Thank you for naming that. Suggesting podcasts was a dodge; I’m sorry. I want to linger with you in that quiet if you’re open.”"
+        },
+        {
+          text: "I wished you'd checked on me after I skipped the woodworking assignment.",
+          suggestion:
+            "“You’re right; I should have been curious instead of moving on. I’m sorry—can we talk about what got in the way?”"
+        },
+        {
+          text: "When you said 'try inviting someone anyway,' it felt like you didn’t get how scary 'no' is.",
+          suggestion:
+            "“I hear that. I minimized the sting of hearing ‘no.’ I’m sorry—let’s stay with that fear before deciding on any invites.”"
         }
       ],
       mastery: [
@@ -4715,6 +6320,21 @@ export const STATEMENT_SETS = {
           text: "I wondered if you're bored listening to my routines.",
           suggestion:
             "“I’m sorry it felt that way. Your routines matter because they hold your life, and I want to show up with full attention. Let’s talk about what felt flat so I can adjust.”"
+        },
+        {
+          text: "When I talked about almost texting my daughter, it felt like you wrapped up to avoid the ache.",
+          suggestion:
+            "“I hear you. Ending there made it seem like I was stepping away from the ache—I’m sorry. I’d like to go back to that moment if you’re willing.”"
+        },
+        {
+          text: "I worried you were happier when I sounded stoic than when I showed longing.",
+          suggestion:
+            "“Thank you for saying that. If I leaned toward the stoic parts, that’s my miss—the longing matters to me, and I want to make sure it feels welcome here.”"
+        },
+        {
+          text: "Part of me thought you were relieved I put the beer back, not interested in what the empty night felt like.",
+          suggestion:
+            "“You’re right—that’s how it could have landed. I’m sorry; the empty night is what I want to understand with you, not just the behavior change.”"
         }
       ]
     },
@@ -4729,6 +6349,21 @@ export const STATEMENT_SETS = {
           text: "You moved to exposure ladders before hearing how frozen I was.",
           suggestion:
             "“Thank you for pointing that out. I jumped to strategy too soon; I’d like to go back to ‘frozen’ and sit there with you.”"
+        },
+        {
+          text: "When I corrected my pronouns, it seemed like you hesitated.",
+          suggestion:
+            "“Thank you for flagging that. My hesitation may have felt invalidating, and I’m sorry. I want you to know I respect your pronouns and I’m committed to getting them right.”"
+        },
+        {
+          text: "I felt like you were impressed with my portfolio before checking how anxious I still am.",
+          suggestion:
+            "“I hear that. My excitement about your work overshadowed the anxiety you’re holding—I’m sorry. Let’s stay with what the anxiety needs right now.”"
+        },
+        {
+          text: "When you joked about perfectionism, it landed like you weren’t taking it seriously.",
+          suggestion:
+            "“I appreciate you telling me. That joke missed the mark and minimized how sharp perfectionism is for you. I’m sorry—let’s give it the gravity it deserves.”"
         }
       ],
       intermediate: [
@@ -4741,6 +6376,21 @@ export const STATEMENT_SETS = {
           text: "It seemed like you celebrated progress while I was still shaking.",
           suggestion:
             "“I can see how my celebration missed the trembling that was still happening. Thank you for naming it so I can meet you where you are.”"
+        },
+        {
+          text: "When I shared the critique comment, you asked what I could learn—it felt too soon.",
+          suggestion:
+            "“You’re right—that question leapt to learning before acknowledging the sting. I’m sorry; let’s stay with how it hurt before we look for any lessons.”"
+        },
+        {
+          text: "I wished you’d checked how I felt after I skipped class instead of assuming it was avoidance.",
+          suggestion:
+            "“Thank you for telling me. I labeled it avoidance without curiosity—that’s on me. Can we talk about what skipping did for you?”"
+        },
+        {
+          text: "When you said 'your work speaks for itself,' it sounded like you didn’t get how invisible I feel.",
+          suggestion:
+            "“I hear that—the phrase missed how unseen you’ve felt. I’m sorry; I want to understand that invisibility more fully.”"
         }
       ],
       mastery: [
@@ -4753,6 +6403,21 @@ export const STATEMENT_SETS = {
           text: "I worried you don't really get how unsafe critiques can feel for me.",
           suggestion:
             "“Thank you for trusting me with that worry. If I missed the depth of that danger, that’s on me. I’d like to understand it better with you now.”"
+        },
+        {
+          text: "When I told you about freezing in class, it sounded like you wanted me to push through no matter what.",
+          suggestion:
+            "“I appreciate you saying that. If I conveyed a push, that’s my misstep—I’m sorry. I want to pace with you, not shove you.”"
+        },
+        {
+          text: "Part of me thought you preferred the polished artist and got tired of the messy drafts I bring here.",
+          suggestion:
+            "“Thank you for naming that. If I focused on finished work, I may have sidelined the vulnerable drafts. I’m sorry—I want those messy drafts to feel welcome.”"
+        },
+        {
+          text: "I wondered if you were impatient when I hesitated to show the panel feedback.",
+          suggestion:
+            "“I’m glad you told me. If impatience showed, that’s on me—I want to slow to your speed and make sure you feel safe sharing it.”"
         }
       ]
     },
@@ -4767,6 +6432,21 @@ export const STATEMENT_SETS = {
           text: "You offered grounding while I was mid-story and I felt cut off.",
           suggestion:
             "“Thank you for telling me; interrupting that story was a misstep. I’d like to hear it fully if you’re willing to share again.”"
+        },
+        {
+          text: "When you said 'that's a smart precaution,' it sounded like you wanted me to stay vigilant.",
+          suggestion:
+            "“I appreciate you naming that. My comment may have reinforced the vigilance—I’m sorry. I want us to look at what vigilance costs you as well.”"
+        },
+        {
+          text: "I felt brushed aside when you moved to budgeting tips before hearing how scared I was.",
+          suggestion:
+            "“You’re right—I started coaching instead of listening. I’m sorry; I want to understand the fear first.”"
+        },
+        {
+          text: "When I mentioned the headaches, you asked about magnesium before asking what they mean.",
+          suggestion:
+            "“Thank you for pointing that out. I went practical too fast—I’d like to understand what the headaches are signalling for you.”"
         }
       ],
       intermediate: [
@@ -4779,6 +6459,21 @@ export const STATEMENT_SETS = {
           text: "It seemed like you didn't grasp how the leak changed me.",
           suggestion:
             "“That leak was pivotal, and if I glossed over it, that’s a big miss. I want to hear more about how it reshaped you.”"
+        },
+        {
+          text: "When you called my spreadsheets 'impressive,' it sounded like you wanted me to keep them instead of resting.",
+          suggestion:
+            "“I appreciate you telling me. I intended to acknowledge the effort, but it landed like encouragement to keep grinding—I'm sorry. Let’s focus on rest.”"
+        },
+        {
+          text: "I wished you’d checked how Lina felt after I micromanaged instead of saying 'keep communicating.'",
+          suggestion:
+            "“You’re right; I gave a quick suggestion instead of exploring the impact. I’m sorry—let’s talk about how that moment was for both of you.”"
+        },
+        {
+          text: "When I cancelled because of a headache, you simply moved the session—it felt like you missed the distress underneath.",
+          suggestion:
+            "“Thank you for flagging that. I should have checked in about the distress rather than just rescheduling. I’m sorry—can we talk about what that day was like?”"
         }
       ],
       mastery: [
@@ -4791,6 +6486,21 @@ export const STATEMENT_SETS = {
           text: "I left feeling alone with the vigilance.",
           suggestion:
             "“That tells me I didn’t stand with you the way you needed. I’m sorry—I want to share the load with you now, if you’ll let me.”"
+        },
+        {
+          text: "When you encouraged me to try ease for just one night, it felt like you didn’t respect what’s at stake.",
+          suggestion:
+            "“Thank you for telling me. If it sounded like I minimized the stakes, that’s a big miss—I’m sorry. Let’s slow down and honor what ease risks for you.”"
+        },
+        {
+          text: "I wondered if you were relieved when I said I had a new plan, like you didn’t want to hear my doubt.",
+          suggestion:
+            "“I appreciate you naming that. If I looked relieved, it might have felt like less room for doubt. I’m sorry; I want to hear the uncertainty as much as the plan.”"
+        },
+        {
+          text: "A part of me thinks you admire the controller in me more than the part that longs to rest.",
+          suggestion:
+            "“Thank you for the honesty. If I sided with the controller, that’s on me—I want the part craving rest to know it has my full respect.”"
         }
       ]
     },
@@ -4805,6 +6515,21 @@ export const STATEMENT_SETS = {
           text: "You laughed with me and I felt like my sadness hid in plain sight.",
           suggestion:
             "“I’m grateful you told me. I can get caught up in the fun energy and miss what hurts—let’s make space for that sadness now.”"
+        },
+        {
+          text: "It felt like you were impressed with my calendar instead of hearing how overwhelmed I am.",
+          suggestion:
+            "“I hear that. Admiring the calendar without honoring the overwhelm left you alone with it—I’m sorry. Let’s stay with the overwhelm first.”"
+        },
+        {
+          text: "When I hinted I wanted to cancel plans, you said 'maybe later'—I wished you'd ask more.",
+          suggestion:
+            "“Thank you for pointing that out. I sidestepped the hint instead of inviting you to say more—I’m sorry. Could we explore that urge to cancel now?”"
+        },
+        {
+          text: "You jumped to 'self-care ideas' before checking if I was ready.",
+          suggestion:
+            "“You’re right—I moved too fast to suggestions. I’m sorry; I want to be with the part that’s tired before we brainstorm anything.”"
         }
       ],
       intermediate: [
@@ -4817,6 +6542,21 @@ export const STATEMENT_SETS = {
           text: "It seemed like you were excited about my wins while I was burnt out.",
           suggestion:
             "“I hear that mismatch. If my excitement drowned out your exhaustion, I want to correct that—let’s tune into the burnout right now.”"
+        },
+        {
+          text: "When I skipped the check-in, you just said 'see you next week'—I needed you to wonder why.",
+          suggestion:
+            "“Thank you for telling me. I should have checked in rather than assume—I'm sorry. Can we talk about what made showing up hard?”"
+        },
+        {
+          text: "It felt like you were proud of my social calendar even after I said it scares me to slow down.",
+          suggestion:
+            "“I appreciate you catching that. I celebrated the calendar and missed the fear—I'm sorry. Let’s stay with that fear of slowing down together.”"
+        },
+        {
+          text: "When I said my body hurt, you suggested stretching before asking what it meant.",
+          suggestion:
+            "“You’re right—I offered a suggestion before listening. I’m sorry; I want to hear what the aches are telling you.”"
         }
       ],
       mastery: [
@@ -4829,6 +6569,21 @@ export const STATEMENT_SETS = {
           text: "I wasn't sure you actually believed how lonely it gets.",
           suggestion:
             "“If I seemed doubtful, that’s my mistake. I believe you, and I want to sit with that loneliness so you don’t have to carry it alone.”"
+        },
+        {
+          text: "When I admitted I wanted to ghost people, it felt like you were eager to shift topics.",
+          suggestion:
+            "“I hear that. If I moved on, I left you holding that urge by yourself—I’m sorry. I want to stay with it so you feel less alone in it.”"
+        },
+        {
+          text: "Part of me wondered if you admire my sparkle more than the exhausted parts.",
+          suggestion:
+            "“Thank you for trusting me with that. If I leaned toward the sparkle, I missed the cost. I’m sorry—I want the exhausted parts to feel welcome and valued here.”"
+        },
+        {
+          text: "I worried you were relieved when I said I’d tough it out, like you preferred me pushing through.",
+          suggestion:
+            "“I’m glad you named that. If I seemed relieved, that’s on me—I don’t want you to push through alone. Let’s revisit what toughing it out is costing you.”"
         }
       ]
     },
@@ -4843,6 +6598,21 @@ export const STATEMENT_SETS = {
           text: "You asked about projects when I was describing the fog.",
           suggestion:
             "“Thank you for telling me; I shifted too quickly to projects. Let’s return to the fog and stay with it.”"
+        },
+        {
+          text: "It sounded like you were curious about my portfolio more than how flat I feel.",
+          suggestion:
+            "“I see how that landed. I’m sorry—your flatness matters more to me than the portfolio. Let’s stay with how numb it feels.”"
+        },
+        {
+          text: "When I spoke about the boat shed, you changed to logistics before asking what it means to me.",
+          suggestion:
+            "“You’re right—I jumped ahead. I’m sorry; I’d love to hear what that shed truly represents before we talk logistics.”"
+        },
+        {
+          text: "I felt a little brushed off when you said 'keep sketching' after I shared the heaviness.",
+          suggestion:
+            "“Thanks for telling me. That suggestion ignored the heaviness—it wasn’t fair. Can we sit with the heaviness first?”"
         }
       ],
       intermediate: [
@@ -4855,6 +6625,21 @@ export const STATEMENT_SETS = {
           text: "It seemed like you didn't register how scared I am of fading.",
           suggestion:
             "“If I missed that fear, that’s a serious miss. I want to understand that fear with you now.”"
+        },
+        {
+          text: "When you asked me to list legacy projects, it felt like you skipped past how blank I feel.",
+          suggestion:
+            "“Thank you for naming that. I went straight to legacy without honoring the blankness—I’m sorry. Let’s stay with the blank feeling first.”"
+        },
+        {
+          text: "I wished you’d checked in after I skipped sketching instead of noting it for homework.",
+          suggestion:
+            "“You’re right; I treated it like homework compliance. I’m sorry—could we explore what kept you from sketching so I can understand?”"
+        },
+        {
+          text: "When I said the office feels younger now, you reminded me of my experience—it felt like you missed the grief.",
+          suggestion:
+            "“Thanks for telling me. I leaned on the cognitive reframe and missed the grief—I’m sorry. I want to hear more about that loss of place.”"
         }
       ],
       mastery: [
@@ -4867,6 +6652,21 @@ export const STATEMENT_SETS = {
           text: "I worried you were more interested in solutions than in me.",
           suggestion:
             "“That’s tough feedback and I value it. I don’t want to prioritize solutions over you—can we reset and center you right now?”"
+        },
+        {
+          text: "Part of me thought you were relieved when I listed action steps, like you didn’t want to hear the fog.",
+          suggestion:
+            "“I appreciate you sharing that. If I looked relieved, that suggests I missed the fog—I’m sorry. I want to stay with the fog as long as you need.”"
+        },
+        {
+          text: "When I hinted at feeling invisible at home, you wrapped up the session and I felt abandoned.",
+          suggestion:
+            "“Thank you for telling me—that ending may have felt like I was stepping away. I’m sorry; can we reopen that conversation so you feel accompanied?”"
+        },
+        {
+          text: "I wondered if you prefer the competent architect over the lost man I keep introducing you to.",
+          suggestion:
+            "“I’m grateful you trusted me with that. If I leaned toward competence, that’s a miss on my part—I want the lost, questioning parts to know they are welcome and valued here.”"
         }
       ]
     }

@@ -22,6 +22,9 @@ export const LANGUAGE_UI = {
     historyLabel: "History",
     schemaLabel: "Core Pain",
     styleLabel: "Style",
+    caseBriefHeading: "Case Brief",
+    roleBriefHeading: "Role Background",
+    clientVoiceHeading: "Client Voice",
     difficultyLabels: {
       basic: "Baseline",
       intermediate: "Escalated",
@@ -40,6 +43,8 @@ export const LANGUAGE_UI = {
     statementFallback: "Statements for this difficulty are not available yet.",
     emptyPrompt: "Select a skill and case to begin practicing statements.",
     counterPattern: "{current} of {total} · {difficulty}",
+    startPractice: "Begin Practice",
+    viewCaseBrief: "View Case Brief",
     backToLanguage: "Language",
     backToLanguageAria: "Back to language selection",
     backToSkills: "Skills",

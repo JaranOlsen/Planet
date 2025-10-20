@@ -99,6 +99,10 @@ button {
   display: none;
 }
 
+.is-hidden {
+  display: none !important;
+}
+
 .panel-title {
   margin: 0;
   font-size: 1.15rem;
@@ -171,15 +175,6 @@ button {
   line-height: 1.4;
 }
 
-.case-intro {
-  background-color: hsl(216 100% 97%);
-  border-radius: 18px;
-  border: 1px solid hsl(216 90% 90%);
-  padding: 1rem 1.1rem;
-  display: grid;
-  gap: 0.9rem;
-}
-
 .case-title {
   margin: 0;
   font-size: 1.05rem;
@@ -187,25 +182,58 @@ button {
   color: #1e3a8a;
 }
 
-.case-details {
+.case-brief-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: hsl(216 100% 97%);
+  border-radius: 18px;
+  border: 1px solid hsl(216 90% 90%);
+  padding: 1.2rem 1.25rem 1.5rem;
+}
+
+.case-section-title {
   margin: 0;
-  display: grid;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+}
+
+.case-brief-section,
+.case-voice-section {
+  display: flex;
+  flex-direction: column;
   gap: 0.75rem;
 }
 
-.case-detail dt {
-  font-size: 0.85rem;
+.case-role-list {
+  margin: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.case-role-item dt {
+  font-size: 0.82rem;
   font-weight: 600;
   text-transform: uppercase;
   color: var(--color-muted);
   letter-spacing: 0.05em;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.3rem;
 }
 
-.case-detail dd {
+.case-role-item dd {
   margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.45;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.case-voice-section p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
 }
 
 .practice-controls {
@@ -236,6 +264,19 @@ button {
 .chip-active {
   background-color: var(--color-accent);
   color: #f9fafb;
+}
+
+.statement-workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.workspace-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
 }
 
 .shuffle-button {
@@ -348,7 +389,7 @@ button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .case-intro {
+  .case-role-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
