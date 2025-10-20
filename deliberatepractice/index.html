@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Deliberate Practice Lab</title>
-    <script type="module" crossorigin src="/Planet/assets/deliberatepractice-n8XV-PDx.js"></script>
+    <script type="module" crossorigin src="/Planet/assets/deliberatepractice-7P5Xg4t6.js"></script>
     <link rel="modulepreload" crossorigin href="/Planet/assets/modulepreload-polyfill-B5Qt9EMX.js">
-    <link rel="stylesheet" crossorigin href="/Planet/assets/deliberatepractice-CcVqHrx8.css">
+    <link rel="stylesheet" crossorigin href="/Planet/assets/deliberatepractice-DOviV17M.css">
   </head>
   <body>
     <header class="app-header">
@@ -88,55 +88,65 @@
           <h2 class="panel-title" id="practice-skill"></h2>
         </div>
 
-        <article class="case-intro">
+        <section class="case-brief-screen" id="case-brief-screen">
           <h3 class="case-title" id="case-name"></h3>
-          <dl class="case-details">
-            <div class="case-detail">
-              <dt id="case-history-label">History</dt>
-              <dd id="case-history"></dd>
-            </div>
-            <div class="case-detail">
-              <dt id="case-schema-label">Core Pain</dt>
-              <dd id="case-schema"></dd>
-            </div>
-            <div class="case-detail">
-              <dt id="case-style-label">Style</dt>
-              <dd id="case-style"></dd>
-            </div>
-          </dl>
-        </article>
-
-        <section class="practice-controls" aria-label="Practice Controls">
-          <div
-            class="difficulty-group"
-            role="group"
-            id="difficulty-group"
-            aria-label="Difficulty level"
-          >
-            <button class="chip chip-active" data-difficulty="basic">Basic</button>
-            <button class="chip" data-difficulty="intermediate">Intermediate</button>
-            <button class="chip" data-difficulty="mastery">Mastery</button>
+          <div class="case-brief-section">
+            <h4 class="case-section-title" id="case-brief-heading"></h4>
+            <dl class="case-role-list">
+              <div class="case-role-item">
+                <dt id="case-schema-label">Core Pain</dt>
+                <dd id="case-schema"></dd>
+              </div>
+              <div class="case-role-item">
+                <dt id="case-style-label">Style</dt>
+                <dd id="case-style"></dd>
+              </div>
+            </dl>
           </div>
-          <button
-            class="shuffle-button"
-            id="shuffle-order"
-            aria-label="Shuffle statement order"
-          >
-            Shuffle Statements
-          </button>
+          <div class="case-voice-section">
+            <h4 class="case-section-title" id="case-voice-heading"></h4>
+            <p id="case-voice"></p>
+          </div>
+          <button id="start-practice" class="primary-button">Begin Practice</button>
         </section>
 
-        <section class="statement-panel" aria-live="polite">
-          <p id="statement-text" class="statement-text"></p>
-          <div class="panel-footer">
-            <span id="statement-counter" class="statement-counter"></span>
-            <button id="next-statement" class="primary-button">Next Statement</button>
+        <section class="statement-workspace is-hidden" id="statement-workspace" hidden>
+          <div class="workspace-header">
+            <h3 class="case-title" id="statement-case-name"></h3>
+            <button id="view-case-brief" class="ghost-button">View Case Brief</button>
           </div>
-        </section>
+          <section class="practice-controls" aria-label="Practice Controls">
+            <div
+              class="difficulty-group"
+              role="group"
+              id="difficulty-group"
+              aria-label="Difficulty level"
+            >
+              <button class="chip chip-active" data-difficulty="basic">Baseline</button>
+              <button class="chip" data-difficulty="intermediate">Escalated</button>
+              <button class="chip" data-difficulty="mastery">Intense</button>
+            </div>
+            <button
+              class="shuffle-button"
+              id="shuffle-order"
+              aria-label="Shuffle statement order"
+            >
+              Shuffle Statements
+            </button>
+          </section>
 
-        <section class="suggestion-panel">
-          <button id="toggle-suggestion" class="ghost-button">Show Suggested Response</button>
-          <p id="suggestion-text" class="suggestion-text" hidden></p>
+          <section class="statement-panel" aria-live="polite">
+            <p id="statement-text" class="statement-text"></p>
+            <div class="panel-footer">
+              <span id="statement-counter" class="statement-counter"></span>
+              <button id="next-statement" class="primary-button">Next Statement</button>
+            </div>
+          </section>
+
+          <section class="suggestion-panel">
+            <button id="toggle-suggestion" class="ghost-button">Show Suggested Response</button>
+            <p id="suggestion-text" class="suggestion-text" hidden></p>
+          </section>
         </section>
       </section>
     </main>
