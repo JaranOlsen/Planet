@@ -34,7 +34,9 @@ const elements = {
   caseName: document.getElementById("case-name"),
   caseSchema: document.getElementById("case-schema"),
   caseStyle: document.getElementById("case-style"),
-  caseDifficulty: document.getElementById("case-difficulty"),
+  caseSkillContext: document.getElementById("case-skill-context"),
+  caseSkillName: document.getElementById("case-skill-name"),
+  caseSkillDescription: document.getElementById("case-skill-description"),
   caseBriefHeading: document.getElementById("case-brief-heading"),
   caseVoiceHeading: document.getElementById("case-voice-heading"),
   caseVoice: document.getElementById("case-voice"),
@@ -129,6 +131,7 @@ function localizeSkill(languageId, skillId) {
     id: skillId,
     name: overrides.name ?? baseSkill.name,
     description: overrides.description ?? baseSkill.description,
+    summary: overrides.summary ?? baseSkill.summary,
     cases
   };
 }
@@ -254,6 +257,7 @@ function applyLanguageStrings(languageId) {
     elements.statementPanel.setAttribute("aria-label", strings.statementPanelAria ?? "");
   }
 
+  updateCaseSkillContext(getCurrentSkill());
   updateSuggestionUI();
 }
 
@@ -321,6 +325,7 @@ function renderCaseOptions() {
   caseButtonMap.clear();
 
   const skill = getCurrentSkill();
+  updateCaseSkillContext(skill);
   if (!skill) return;
 
   skill.cases.forEach((caseItem) => {
@@ -344,6 +349,26 @@ function highlightCaseSelection(caseId) {
   caseButtonMap.forEach((button, id) => {
     button.setAttribute("aria-selected", id === caseId ? "true" : "false");
   });
+}
+
+function updateCaseSkillContext(skill) {
+  if (!elements.caseSkillContext || !elements.caseSkillName || !elements.caseSkillDescription) {
+    return;
+  }
+
+  if (!skill) {
+    elements.caseSkillContext.hidden = true;
+    elements.caseSkillContext.classList.add("is-hidden");
+    elements.caseSkillName.textContent = "";
+    elements.caseSkillDescription.textContent = "";
+    return;
+  }
+
+  elements.caseSkillContext.hidden = false;
+  elements.caseSkillContext.classList.remove("is-hidden");
+  elements.caseSkillName.textContent = skill.name ?? "";
+  const summaryText = skill.summary ?? skill.description ?? "";
+  elements.caseSkillDescription.textContent = summaryText;
 }
 
 function ensureOrderForCase() {
@@ -401,10 +426,6 @@ function hydratePracticeView() {
     }
     elements.caseSchema.textContent = "";
     elements.caseStyle.textContent = "";
-    if (elements.caseDifficulty) {
-      elements.caseDifficulty.textContent = "";
-      elements.caseDifficulty.hidden = true;
-    }
     if (elements.caseVoice) {
       elements.caseVoice.textContent = "";
     }
@@ -425,17 +446,6 @@ function hydratePracticeView() {
   }
   elements.caseSchema.textContent = caseData.schema ?? "";
   elements.caseStyle.textContent = caseData.style ?? "";
-  if (elements.caseDifficulty) {
-    const difficultyText = caseData.difficultyLabel ?? caseData.difficulty ?? "";
-    if (difficultyText.length > 0) {
-      const badgeTemplate = strings.difficultyBadgePattern ?? "{level}";
-      elements.caseDifficulty.textContent = badgeTemplate.replace("{level}", difficultyText);
-      elements.caseDifficulty.hidden = false;
-    } else {
-      elements.caseDifficulty.textContent = "";
-      elements.caseDifficulty.hidden = true;
-    }
-  }
   if (elements.caseVoice) {
     elements.caseVoice.textContent = (caseData.voice ?? caseData.history ?? "").trim();
   }
@@ -565,6 +575,7 @@ function handleLanguageSelection(languageId) {
   applyLanguageStrings(languageId);
   highlightLanguageSelection(languageId);
   renderSkillOptions();
+  updateCaseSkillContext(null);
   elements.statementText.textContent = getUIStrings(languageId).emptyPrompt;
   elements.statementCounter.textContent = "";
   if (elements.suggestionText) {
@@ -618,6 +629,7 @@ function handleBackNavigation(targetKey) {
     resetSuggestionVisibility();
     highlightSkillSelection(null);
     highlightCaseSelection(null);
+    updateCaseSkillContext(null);
     showSection("language");
     return;
   }
@@ -633,6 +645,7 @@ function handleBackNavigation(targetKey) {
     }
     resetSuggestionVisibility();
     state.view = "brief";
+    updateCaseSkillContext(getCurrentSkill());
     showSection("skill");
     return;
   }
@@ -647,6 +660,7 @@ function handleBackNavigation(targetKey) {
     }
     resetSuggestionVisibility();
     state.view = "brief";
+    updateCaseSkillContext(getCurrentSkill());
     showSection("case");
   }
 }

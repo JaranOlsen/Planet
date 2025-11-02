@@ -82,6 +82,7 @@ const BASE_PRACTICE = SKILLS.reduce((acc, skill) => {
   acc[skill.id] = {
     name: skill.name,
     description: skill.description,
+    summary: skill.summary,
     cases
   };
   return acc;
