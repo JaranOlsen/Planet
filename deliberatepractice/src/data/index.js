@@ -1,6 +1,5 @@
 "use strict";
 
-import { DIFFICULTIES } from "./constants.js";
 import { SKILLS } from "./skills.js";
 import { CASES } from "./cases.js";
 import { STATEMENT_SETS } from "./statements.js";
@@ -27,17 +26,14 @@ const CASE_ORDER = skillOrder.reduce((acc, skillId) => {
 
 const toSlug = (value) => value.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "").toLowerCase();
 
-const buildStatementEntries = (skillId, caseId, difficulty) => {
-  const statements =
-    STATEMENT_SETS?.[skillId]?.[caseId]?.[difficulty] ??
-    STATEMENT_SETS?.[skillId]?.[caseId]?.default ??
-    [];
+const buildStatementEntries = (skillId, caseId) => {
+  const statements = STATEMENT_SETS?.[skillId]?.[caseId] ?? [];
 
   const skillSlug = toSlug(skillId);
   const caseSlug = toSlug(caseId);
 
   return statements.map((entry, index) => ({
-    id: `dp_${skillSlug}_${caseSlug}_${difficulty}_${String(index + 1).padStart(2, "0")}`,
+    id: `dp_${skillSlug}_${caseSlug}_${String(index + 1).padStart(2, "0")}`,
     text: entry.text,
     suggestion: entry.suggestion ?? ""
   }));
@@ -49,34 +45,32 @@ const buildCasePayload = (caseId, skillId) => {
     return {
       id: caseId,
       label: caseId,
+      difficulty: "unknown",
+      difficultyLabel: "",
       teaser: "",
       history: "",
       schema: "",
       style: "",
       voice: "",
-      statements: DIFFICULTIES.reduce((acc, difficulty) => {
-        acc[difficulty] = [];
-        return acc;
-      }, {})
+      statements: []
     };
   }
 
-  const statements = DIFFICULTIES.reduce((acc, difficulty) => {
-    acc[difficulty] = buildStatementEntries(skillId, caseId, difficulty);
-    return acc;
-  }, {});
+  const statements = buildStatementEntries(skillId, caseId);
 
   return {
     id: meta.id,
-      label: meta.label,
-      teaser: meta.teaser,
-      history: meta.history,
-      schema: meta.schema,
-      style: meta.style,
-      voice: meta.voice ?? "",
-      dossier: meta.dossier,
-      statements
-    };
+    label: meta.label,
+    difficulty: meta.difficulty ?? "unknown",
+    difficultyLabel: meta.difficultyLabel ?? meta.difficulty ?? "",
+    teaser: meta.teaser ?? "",
+    history: meta.history ?? "",
+    schema: meta.schema ?? "",
+    style: meta.style ?? "",
+    voice: meta.voice ?? "",
+    dossier: meta.dossier,
+    statements
+  };
 };
 
 const BASE_PRACTICE = SKILLS.reduce((acc, skill) => {
@@ -94,7 +88,6 @@ const BASE_PRACTICE = SKILLS.reduce((acc, skill) => {
 }, {});
 
 export {
-  DIFFICULTIES,
   skillOrder as SKILL_ORDER,
   CASE_ORDER,
   BASE_PRACTICE,

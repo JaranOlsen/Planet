@@ -1,7 +1,6 @@
 "use strict";
 
 import {
-  DIFFICULTIES,
   SKILL_ORDER,
   CASE_ORDER,
   LANGUAGE_ORDER,
@@ -35,6 +34,7 @@ const elements = {
   caseName: document.getElementById("case-name"),
   caseSchema: document.getElementById("case-schema"),
   caseStyle: document.getElementById("case-style"),
+  caseDifficulty: document.getElementById("case-difficulty"),
   caseBriefHeading: document.getElementById("case-brief-heading"),
   caseVoiceHeading: document.getElementById("case-voice-heading"),
   caseVoice: document.getElementById("case-voice"),
@@ -49,7 +49,6 @@ const elements = {
   statementCounter: document.getElementById("statement-counter"),
   shuffleButton: document.getElementById("shuffle-order"),
   nextButton: document.getElementById("next-statement"),
-  difficultyGroup: document.getElementById("difficulty-group"),
   practiceControls: document.querySelector(".practice-controls"),
   languageBackButton: document.getElementById("back-to-language"),
   skillsBackButton: document.getElementById("back-to-skills"),
@@ -61,14 +60,11 @@ const elements = {
   suggestionText: document.getElementById("suggestion-text")
 };
 
-const difficultyButtons = Array.from(document.querySelectorAll(".chip"));
-
 const state = {
   languageId: null,
   skillId: null,
   caseId: null,
-  difficulty: DIFFICULTIES[0],
-  order: {},
+  order: [],
   index: 0,
   suggestionVisible: false,
   view: "brief"
@@ -92,11 +88,7 @@ function getUIStrings(languageId = state.languageId ?? "en") {
   const target = LANGUAGE_UI[languageId] ?? {};
   return {
     ...base,
-    ...target,
-    difficultyLabels: {
-      ...base.difficultyLabels,
-      ...(target.difficultyLabels ?? {})
-    }
+    ...target
   };
 }
 
@@ -115,18 +107,23 @@ function localizeSkill(languageId, skillId) {
   const overrides = getOverrides(languageId)[skillId] ?? {};
   const cases = CASE_ORDER[skillId].map((caseId) => {
     const baseCase = baseSkill.cases[caseId];
+    if (!baseCase) return null;
     const caseOverride = overrides.cases?.[caseId] ?? {};
     return {
       id: caseId,
       label: caseOverride.label ?? baseCase.label,
+      difficulty: caseOverride.difficulty ?? baseCase.difficulty ?? "",
+      difficultyLabel:
+        caseOverride.difficultyLabel ?? baseCase.difficultyLabel ?? baseCase.difficulty ?? "",
       teaser: caseOverride.teaser ?? baseCase.teaser,
       history: caseOverride.history ?? baseCase.history,
       schema: caseOverride.schema ?? baseCase.schema,
       style: caseOverride.style ?? baseCase.style,
       voice: caseOverride.voice ?? baseCase.voice,
+      dossier: caseOverride.dossier ?? baseCase.dossier ?? "",
       statements: localizeStatements(languageId, baseCase.statements)
     };
-  });
+  }).filter(Boolean);
 
   return {
     id: skillId,
@@ -139,13 +136,20 @@ function localizeSkill(languageId, skillId) {
 function localizeStatements(languageId, baseStatements) {
   const translationMap = getStatementTranslations(languageId);
 
-  return DIFFICULTIES.reduce((acc, level) => {
-    acc[level] = baseStatements[level].map((entry) => ({
-      ...entry,
-      text: translationMap[entry.id] ?? entry.text
-    }));
-    return acc;
-  }, {});
+  return (baseStatements ?? []).map((entry) => {
+    const t = translationMap[entry.id];
+    if (typeof t === "string") {
+      return { ...entry, text: t };
+    }
+    if (t && typeof t === "object") {
+      return {
+        ...entry,
+        text: typeof t.text === "string" ? t.text : entry.text,
+        suggestion: typeof t.suggestion === "string" ? t.suggestion : entry.suggestion
+      };
+    }
+    return entry;
+  });
 }
 
 function getCurrentSkill() {
@@ -213,18 +217,6 @@ function applyLanguageStrings(languageId) {
       strings.practiceControlsAria ?? ""
     );
   }
-  if (elements.difficultyGroup) {
-    elements.difficultyGroup.setAttribute(
-      "aria-label",
-      strings.difficultyGroupAria ?? ""
-    );
-  }
-
-  difficultyButtons.forEach((button) => {
-    const diff = button.dataset.difficulty;
-    button.textContent = strings.difficultyLabels?.[diff] ?? diff;
-  });
-
   elements.shuffleButton.textContent = strings.shuffle;
   elements.shuffleButton.setAttribute("aria-label", strings.shuffleAria ?? strings.shuffle);
 
@@ -354,17 +346,17 @@ function highlightCaseSelection(caseId) {
   });
 }
 
-function ensureOrderForDifficulty(difficulty) {
+function ensureOrderForCase() {
   const caseData = getCurrentCase();
   if (!caseData) {
-    state.order[difficulty] = [];
+    state.order = [];
     return;
   }
 
-  const statements = caseData.statements[difficulty] ?? [];
-  const existing = state.order[difficulty];
+  const statements = caseData.statements ?? [];
+  const existing = state.order;
   if (!Array.isArray(existing) || existing.length !== statements.length) {
-    state.order[difficulty] = shuffleArray(statements);
+    state.order = shuffleArray(statements);
     state.index = 0;
   }
 }
@@ -392,7 +384,7 @@ function showStatements() {
     elements.statementWorkspace.classList.remove("is-hidden");
     elements.statementWorkspace.hidden = false;
   }
-  ensureOrderForDifficulty(state.difficulty);
+  ensureOrderForCase();
   renderActiveStatement();
 }
 
@@ -409,6 +401,10 @@ function hydratePracticeView() {
     }
     elements.caseSchema.textContent = "";
     elements.caseStyle.textContent = "";
+    if (elements.caseDifficulty) {
+      elements.caseDifficulty.textContent = "";
+      elements.caseDifficulty.hidden = true;
+    }
     if (elements.caseVoice) {
       elements.caseVoice.textContent = "";
     }
@@ -429,11 +425,22 @@ function hydratePracticeView() {
   }
   elements.caseSchema.textContent = caseData.schema ?? "";
   elements.caseStyle.textContent = caseData.style ?? "";
+  if (elements.caseDifficulty) {
+    const difficultyText = caseData.difficultyLabel ?? caseData.difficulty ?? "";
+    if (difficultyText.length > 0) {
+      const badgeTemplate = strings.difficultyBadgePattern ?? "{level}";
+      elements.caseDifficulty.textContent = badgeTemplate.replace("{level}", difficultyText);
+      elements.caseDifficulty.hidden = false;
+    } else {
+      elements.caseDifficulty.textContent = "";
+      elements.caseDifficulty.hidden = true;
+    }
+  }
   if (elements.caseVoice) {
     elements.caseVoice.textContent = (caseData.voice ?? caseData.history ?? "").trim();
   }
 
-  ensureOrderForDifficulty(state.difficulty);
+  ensureOrderForCase();
   renderActiveStatement();
 
   if (state.view === "statements") {
@@ -467,15 +474,13 @@ function renderActiveStatement() {
 
 function formatCounter(current, total) {
   const strings = getUIStrings();
-  const difficultyLabel = strings.difficultyLabels?.[state.difficulty] ?? state.difficulty;
-  return (strings.counterPattern ?? "{current}/{total}")
+  return (strings.counterPattern ?? "{current} of {total}")
     .replace("{current}", String(current))
-    .replace("{total}", String(total))
-    .replace("{difficulty}", difficultyLabel);
+    .replace("{total}", String(total));
 }
 
 function getActiveStatements() {
-  return Array.isArray(state.order[state.difficulty]) ? state.order[state.difficulty] : [];
+  return Array.isArray(state.order) ? state.order : [];
 }
 
 function getActiveStatement() {
@@ -516,22 +521,6 @@ function resetSuggestionVisibility() {
   updateSuggestionUI();
 }
 
-function activateDifficulty(difficulty) {
-  difficultyButtons.forEach((button) => {
-    const isActive = button.dataset.difficulty === difficulty;
-    button.classList.toggle("chip-active", isActive);
-  });
-}
-
-function refreshForDifficultyChange(newDifficulty) {
-  if (state.difficulty === newDifficulty) return;
-  state.difficulty = newDifficulty;
-  activateDifficulty(newDifficulty);
-  ensureOrderForDifficulty(newDifficulty);
-  state.index = 0;
-  renderActiveStatement();
-}
-
 function shuffleArray(source) {
   const array = [...source];
   for (let i = array.length - 1; i > 0; i -= 1) {
@@ -544,22 +533,22 @@ function shuffleArray(source) {
 function shuffleCurrentStatements() {
   const caseData = getCurrentCase();
   if (!caseData) return;
-  const statements = caseData.statements[state.difficulty] ?? [];
+  const statements = caseData.statements ?? [];
   if (!statements.length) return;
-  state.order[state.difficulty] = shuffleArray(statements);
+  state.order = shuffleArray(statements);
   state.index = 0;
   renderActiveStatement();
 }
 
 function showNextStatement() {
-  const statements = state.order[state.difficulty] ?? [];
+  const statements = getActiveStatements();
   if (!statements.length) return;
   state.index = (state.index + 1) % statements.length;
   renderActiveStatement();
 }
 
 function showPreviousStatement() {
-  const statements = state.order[state.difficulty] ?? [];
+  const statements = getActiveStatements();
   if (!statements.length) return;
   state.index = (state.index - 1 + statements.length) % statements.length;
   renderActiveStatement();
@@ -569,10 +558,9 @@ function handleLanguageSelection(languageId) {
   state.languageId = languageId;
   state.skillId = null;
   state.caseId = null;
-  state.order = {};
+  state.order = [];
   state.index = 0;
-  state.difficulty = DIFFICULTIES[0];
-  activateDifficulty(state.difficulty);
+  state.view = "brief";
 
   applyLanguageStrings(languageId);
   highlightLanguageSelection(languageId);
@@ -589,10 +577,9 @@ function handleLanguageSelection(languageId) {
 function handleSkillSelection(skillId) {
   state.skillId = skillId;
   state.caseId = null;
-  state.order = {};
+  state.order = [];
   state.index = 0;
-  state.difficulty = DIFFICULTIES[0];
-  activateDifficulty(state.difficulty);
+  state.view = "brief";
 
   highlightSkillSelection(skillId);
   renderCaseOptions();
@@ -607,10 +594,8 @@ function handleSkillSelection(skillId) {
 
 function handleCaseSelection(caseId) {
   state.caseId = caseId;
-  state.order = {};
+  state.order = [];
   state.index = 0;
-  state.difficulty = DIFFICULTIES[0];
-  activateDifficulty(state.difficulty);
   state.view = "brief";
 
   highlightCaseSelection(caseId);
@@ -622,10 +607,8 @@ function handleBackNavigation(targetKey) {
   if (targetKey === "language") {
     state.skillId = null;
     state.caseId = null;
-    state.order = {};
+    state.order = [];
     state.index = 0;
-    state.difficulty = DIFFICULTIES[0];
-    activateDifficulty(state.difficulty);
     state.view = "brief";
     elements.statementText.textContent = getUIStrings().emptyPrompt;
     elements.statementCounter.textContent = "";
@@ -641,7 +624,7 @@ function handleBackNavigation(targetKey) {
 
   if (targetKey === "skill") {
     state.caseId = null;
-    state.order = {};
+    state.order = [];
     state.index = 0;
     highlightCaseSelection(null);
     renderCaseOptions();
@@ -655,7 +638,7 @@ function handleBackNavigation(targetKey) {
   }
 
   if (targetKey === "case") {
-    state.order = {};
+    state.order = [];
     state.index = 0;
     highlightCaseSelection(state.caseId);
     renderCaseOptions();
@@ -677,20 +660,22 @@ function registerEventListeners() {
     elements.viewCaseBriefButton.addEventListener("click", showCaseBrief);
   }
 
-  difficultyButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const { difficulty } = button.dataset;
-      if (!difficulty) return;
-      refreshForDifficultyChange(difficulty);
-    });
-  });
+  if (elements.nextButton) {
+    elements.nextButton.addEventListener("click", showNextStatement);
+  }
+  if (elements.shuffleButton) {
+    elements.shuffleButton.addEventListener("click", shuffleCurrentStatements);
+  }
 
-  elements.nextButton.addEventListener("click", showNextStatement);
-  elements.shuffleButton.addEventListener("click", shuffleCurrentStatements);
-
-  elements.languageBackButton.addEventListener("click", () => handleBackNavigation("language"));
-  elements.skillsBackButton.addEventListener("click", () => handleBackNavigation("skill"));
-  elements.casesBackButton.addEventListener("click", () => handleBackNavigation("case"));
+  if (elements.languageBackButton) {
+    elements.languageBackButton.addEventListener("click", () => handleBackNavigation("language"));
+  }
+  if (elements.skillsBackButton) {
+    elements.skillsBackButton.addEventListener("click", () => handleBackNavigation("skill"));
+  }
+  if (elements.casesBackButton) {
+    elements.casesBackButton.addEventListener("click", () => handleBackNavigation("case"));
+  }
 
   if (elements.statementPanel) {
     let touchStartX = null;
@@ -730,7 +715,7 @@ function initialize() {
   renderLanguageOptions();
   elements.statementText.textContent = getUIStrings("en").emptyPrompt;
   elements.statementCounter.textContent = "";
-  activateDifficulty(state.difficulty);
+  resetSuggestionVisibility();
   registerEventListeners();
   showSection("language");
 }

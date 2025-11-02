@@ -4,71 +4,66 @@ export const SKILLS = [
   {
     id: "therapist-self-awareness",
     name: "Therapist Self-Awareness",
-    description: "Monitor and regulate your own reactions so you stay grounded, receptive, and attuned."
+    description: "Monitor your inner state so you remain grounded, receptive, and able to choose the most helpful response."
   },
   {
-    id: "empathic-reflection",
-    name: "Empathic Reflection",
-    description: "Mirror the client's felt experience with accurate, attuned language to convey understanding."
+    id: "empathic-understanding",
+    name: "Empathic Understanding",
+    description: "Mirror the client's experience with feeling-rich language to convey understanding and invite elaboration."
   },
   {
-    id: "empathic-validation",
-    name: "Empathic Validation",
-    description: "Normalize and affirm the client's emotions so they feel legitimate and welcome in the room."
+    id: "empathic-affirmation-validation",
+    name: "Empathic Affirmation and Validation",
+    description: "Legitimize the client's feelings in context so shame eases and safety to feel grows."
   },
   {
     id: "exploratory-questions",
     name: "Exploratory Questions",
-    description: "Invite clients inward with open, experiential questions that help implicit feelings take form."
-  },
-  {
-    id: "empathic-exploration",
-    name: "Empathic Exploration",
-    description: "Follow and gently deepen the leading edge of experience so clients can stay with what is unfolding."
-  },
-  {
-    id: "empathic-evocation",
-    name: "Empathic Evocation",
-    description: "Use vivid, sensory language to help clients contact and deepen the emotion that is present."
-  },
-  {
-    id: "empathic-conjecture",
-    name: "Empathic Conjecture",
-    description: "Offer tentative hypotheses about underlying feelings to help implicit experience take form."
-  },
-  {
-    id: "process-empathy",
-    name: "Process Empathy",
-    description: "Name in-the-moment shifts and nonverbal signals to keep the therapeutic process transparent and safe."
-  },
-  {
-    id: "empathic-refocusing",
-    name: "Empathic Refocusing",
-    description: "Gently return attention to tender places clients are skirting while honoring how hard it is to stay there."
+    description: "Ask open, experiential questions that turn clients inward and unfold the leading edge of experience."
   },
   {
     id: "providing-treatment-rationale",
-    name: "Providing Treatment Rationale (EFT)",
-    description: "Offer concise, empathic explanations of EFT so clients feel safer and aligned with the work."
+    name: "Providing Treatment Rationale for EFT",
+    description: "Offer a concise, empathic explanation of why emotion work helps and how you will guide it when clarity or reassurance is needed."
   },
   {
-    id: "staying-with-intense-affect",
-    name: "Staying with Intense Affect",
-    description: "Co-regulate and titrate powerful emotion so clients stay connected without becoming overwhelmed."
+    id: "empathic-explorations",
+    name: "Empathic Explorations",
+    description: "Follow and gently expand what is already present so the client can stay with and elaborate their experience."
+  },
+  {
+    id: "empathic-evocations",
+    name: "Empathic Evocations",
+    description: "Use vivid, sensory language or metaphor to bring experience to life and heighten emotional contact."
+  },
+  {
+    id: "empathic-conjectures",
+    name: "Empathic Conjectures",
+    description: "Offer tentative empathic guesses about near-surface feelings to help unspoken experience take form."
+  },
+  {
+    id: "staying-in-contact-intense-affect",
+    name: "Staying in Contact with Intense Affect",
+    description: "Help clients stay safely with powerful emotion so it can be processed without overwhelm."
   },
   {
     id: "self-disclosure",
     name: "Self-Disclosure",
-    description: "Share brief, relevant therapist experience in service of validation, deepening, or repair."
+    description: "Share brief, relevant inner experience in service of the client to validate, deepen, or repair."
   },
   {
     id: "marker-recognition-chairwork",
-    name: "Marker Recognition & Chair-Work Setup",
-    description: "Spot task markers and collaborate on two-chair or empty-chair setups to unlock transformational emotion."
+    name: "Marker Recognition & Chair-Work Task Setup",
+    description: "Spot task markers and collaboratively set up focused chair work to activate transformational emotion."
   },
   {
     id: "alliance-repair",
     name: "Alliance Repair",
-    description: "Address rupture cues directly with empathy, ownership, and collaboration to restore trust."
+    description: "Receive rupture cues with empathy, own the impact, and collaborate on next steps to restore trust."
+  },
+  {
+    id: "empathic-refocusing",
+    name: "Empathic Refocusing",
+    description: "Name the protection and invite a gentle return when the client moves away from tender experience."
   }
 ];

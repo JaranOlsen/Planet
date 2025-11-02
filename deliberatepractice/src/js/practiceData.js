@@ -1,7 +1,6 @@
 "use strict";
 
 export {
-  DIFFICULTIES,
   SKILL_ORDER,
   CASE_ORDER,
   BASE_PRACTICE,
@@ -11,4 +10,3 @@ export {
   LANGUAGE_OVERRIDES,
   STATEMENT_TRANSLATIONS
 } from "../data/index.js";
-

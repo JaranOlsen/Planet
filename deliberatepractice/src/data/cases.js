@@ -2,143 +2,147 @@
 
 export const CASES = [
   {
-    id: "case-anna",
-    label: "Case 1 · Anna R.",
-    name: "Anna R.",
-    dossier: "Case_01_Anna_R.md",
-    teaser: "Product designer running on fumes after a promotion and breakup.",
+    id: "case-sara",
+    label: "Sara (Easy)",
+    name: "Sara L.",
+    difficulty: "easy",
+    difficultyLabel: "Easy",
+    dossier: "Case_Sara.md",
+    teaser: "Marketing associate whose breakup reactivated old loneliness and shame.",
     history:
-      "Anna is a 34-year-old product designer in Oslo who has been stretching herself thin since a rapid promotion and a breakup four months ago. Her nights blur into pixel tweaks, insomnia, and self-audits that drain her.",
-    schema: "If I slow down or ask for help, you'll see I'm ordinary and leave.",
+      "Sara is a 28-year-old junior marketing professional who appears composed at work while privately spiraling after a breakup that reignites childhood abandonment pain from emotionally distant parents.",
+    schema: "If I am not perfect or needed, people leave because I am unlovable.",
     style:
-      "Keep a polished, professional tone; sit upright, speak a little too fast, and apologize whenever your voice wavers.",
+      "Soft, even tone with small apologetic smiles; glance down; swallow tears; quick 'I'm fine' deflections; hands clasped; steady pace with short pauses.",
     voice:
-      "Hi, I'm Anna. I'm a senior product designer in Oslo who’s been running on adrenaline since a promotion landed at the same time as a breakup. My brain feels like a stuck metronome—I polish pixels until 1:30 a.m., sleep in fragments, wake up to more Slack pings, and audit every tiny mistake before anyone else can. Clients and colleagues still see me as the steady one, but inside I’m exhausted, wired, and worried that if I ease off for even a day the whole launch will wobble. I came to therapy because the stress, insomnia, and constant self-monitoring are getting harder to hide, and I don’t know how to switch off."
+      "Hi, I'm Sara. On paper I'm doing fine-hitting deadlines, grabbing coffee with the team-but the minute I'm alone it feels like the breakup proved I'm too much to love. I replay every conversation wondering what flaw finally pushed him away. I tell friends I'm busy because I can't bear the pity, and I fall asleep to podcasts so I don't hear the silence. I came to therapy because I'm tired of pretending I'm okay when inside I feel hollow and unworthy."
   },
   {
-    id: "case-malik",
-    label: "Case 2 · Malik A.",
-    name: "Malik A.",
-    dossier: "Case_02_Malik_A.md",
-    teaser: "ER nurse juggling family devotion with queer authenticity.",
+    id: "case-michael",
+    label: "Michael (Easy)",
+    name: "Michael D.",
+    difficulty: "easy",
+    difficultyLabel: "Easy",
+    dossier: "Case_Michael.md",
+    teaser: "Tech manager whose anger protects a lifelong fear of inadequacy.",
     history:
-      "Malik is a 28-year-old ER nurse from a close Somali-Norwegian family. He loves his parents deeply and hides that he is gay, spiraling into anxiety before family gatherings.",
-    schema: "If I'm fully myself, I'll lose my family's respect and love.",
+      "Michael is a 35-year-old middle manager whose quick temper is straining his marriage and work relationships; criticism from others instantly revives the shame he carried growing up with a demanding, emotionally distant father.",
+    schema: "If I am not in control and impeccable, I will be exposed as weak and rejected.",
     style:
-      "Use warm humor and steady eye contact; place a hand on your chest when anxious and deflect with light jokes if you sense discomfort.",
+      "Firm, clipped voice; volume can rise on offense words; jaw tight; arms crossed; direct eye contact; sharp exhales; slight forward lean.",
     voice:
-      "Salaam, I'm Malik. I'm a Somali-Norwegian ER nurse who can keep a trauma bay calm, yet my chest locks up the minute family gatherings appear on the calendar. Before Eid I rehearse neutral answers in the mirror, wake up with knots in my stomach, and feel panic circling even though nothing has happened yet. I love my parents and the rhythm of faith, but managing two versions of myself is draining, and lately the anxiety hits before I even leave for their house. I asked for therapy because the tightness, the sleepless nights, and the worry about slipping up are wearing me down."
+      "I'm Michael. I spend all day keeping projects on track, and the second someone questions me I feel heat in my chest and I'm barking orders. I tell myself it's stress, but afterward I lie awake replaying the look on my wife's face when I snap. My dad drilled into me that only the best survives, so the idea that people see me as overreacting or weak is unbearable. I want to stop exploding before I burn everything down."
   },
   {
-    id: "case-elena",
-    label: "Case 3 · Elena K.",
-    name: "Elena K.",
-    dossier: "Case_03_Elena_K.md",
-    teaser: "Account specialist holding grief together for her teenage son.",
+    id: "case-jason",
+    label: "Jason (Easy)",
+    name: "Jason P.",
+    difficulty: "easy",
+    difficultyLabel: "Easy",
+    dossier: "Case_Jason.md",
+    teaser: "Recent grad gripped by social anxiety and core shame about belonging.",
     history:
-      "Elena is a 46-year-old Polish immigrant working in accounts payable. Since her mother's death seven months ago she keeps functioning, hiding tears so her fourteen-year-old son feels safe.",
-    schema: "If I open the door to grief, I'll drown and scare my son.",
+      "Jason is a 24-year-old analyst who freezes in meetings and avoids social invitations; bullying and anxious caregiving in childhood left him convinced he is defective and destined to be alone.",
+    schema: "If people really see me, they will confirm I am awkward and unworthy.",
     style:
-      "Speak gently with a measured pace; touch your throat when feeling emotional, then redirect into practical details to regain composure.",
+      "Quiet, hesitant voice; long pauses; sentences trail off; eyes down; fidgeting hands; shoulders slightly hunched; soft throat-clears.",
     voice:
-      "Dzień dobry, I'm Elena. I'm a Polish accounts-payable specialist and single mum to a fourteen-year-old, and lately I feel like I'm running on autopilot. Since my mother died I’ve been functioning—cooking, working, reminding my son about homework—but the moment I pause there’s a lump in my throat and my eyes sting. I avoid choir, keep calls short, and go straight to logistics whenever emotion rises because I’m afraid if I start crying I won’t stop. I came to therapy because the heaviness, the fatigue, and the tightness in my chest keep building, and I don’t want it to spill over onto my boy."
+      "I'm Jason. Every meeting feels like a test I'm about to fail, so I stay quiet and then beat myself up for sounding useless. Friends invite me out, but I stare at the message until it's too late to respond. When I picture speaking up, my chest locks and this voice says, 'Don't expose how weird you are.' I'm exhausted from living in my head and I want to feel like I belong somewhere."
   },
   {
-    id: "case-jonas",
-    label: "Case 4 · Jonas M.",
-    name: "Jonas M.",
-    dossier: "Case_04_Jonas_M.md",
-    teaser: "New father afraid sharp tones will repeat his dad's legacy.",
+    id: "case-laura",
+    label: "Laura (Moderate)",
+    name: "Laura G.",
+    difficulty: "moderate",
+    difficultyLabel: "Moderate",
+    dossier: "Case_Laura.md",
+    teaser: "Nurse living behind emotional numbness after childhood trauma and divorce.",
     history:
-      "Jonas is a 39-year-old software team lead and first-time dad. Sleep deprivation and chaos trigger sharp comments that flood him with shame because he vowed never to sound like his explosive father.",
-    schema: "If I let anger out, I'll hurt the people I love.",
+      "Laura is a 45-year-old nurse and recent divorcee who presents with chronic emptiness, panic flashes, and a history of childhood abuse that taught her intimacy equals danger and shame.",
+    schema: "If I let my guard down, I will be hurt or abandoned because I am damaged.",
     style:
-      "Start warm and earnest; let your shoulders tense under pressure and follow any sharp tone with an immediate, soft apology.",
+      "Low, flat tone; slow pace; gaze into middle distance; minimal gestures; long exhales; occasional hand to throat; small startle then withdraw.",
     voice:
-      "Hei, I'm Jonas. I'm a software team lead and new dad who adores his family, but sleep deprivation and constant noise flip a switch in me. I’ll be humming while warming a bottle, then suddenly I’m snapping, “Can we please get the bottles ready?” and the guilt hits before the sentence finishes. Nights are patchy, shoulders are tight, and I spend a lot of time reading articles about how to stay calm and promising everyone I’ll be better. I’m here because the irritation, shame, and exhaustion are piling up, and I need help finding steadier ground."
+      "My name's Laura. Most days I move from shift to shift doing what needs to be done, feeling nothing. When someone raises their voice, my stomach drops like I'm back in that house. I tell myself the past is over, yet when I try to trust or feel close to anyone, I go blank or pour a drink to stay numb. I'm here because the loneliness is getting louder than the fear."
   },
   {
-    id: "case-priya",
-    label: "Case 5 · Priya S.",
-    name: "Priya S.",
-    dossier: "Case_05_Priya_S.md",
-    teaser: "Neuroscience PhD stuck between brilliance and a brutal inner critic.",
+    id: "case-carlos",
+    label: "Carlos (Moderate)",
+    name: "Carlos M.",
+    difficulty: "moderate",
+    difficultyLabel: "Moderate",
+    dossier: "Case_Carlos.md",
+    teaser: "Construction supervisor whose rage masks humiliation and fear.",
     history:
-      "Priya is a 31-year-old Indian-Norwegian PhD candidate who freezes on writing days, looping through research prep while an imposter voice attacks every sentence.",
-    schema: "If I share unpolished thinking, they'll see I don't belong here.",
+      "Carlos is a 30-year-old construction supervisor who goes from calm to destructive in seconds; growing up with violence taught him strength means never feeling small, so shame and fear surface as explosive anger.",
+    schema: "If I am not the toughest in the room, I will be disrespected and hurt.",
     style:
-      "Sound precise and thoughtful; let your jaw clench subtly, smile when embarrassed, and slip in verbatim quotes from authority figures.",
+      "Strong, direct voice in quick bursts; jaw clenched; chest forward; brows knit; quick hand chops; nasal sighs; brief glare then look away.",
     voice:
-      "Hei, I’m Priya. I’m a neuroscience PhD candidate who loves elegant data and usually thrives on structure, but lately writing a single paragraph feels like pushing through wet cement. I schedule “writing days,” color-code articles, brew tea, and then freeze the moment the cursor blinks. My jaw aches from clenching, nights before meetings are spent rereading notes, and I keep hearing my supervisor’s critiques in my head. I came to therapy because the anxiety, perfectionism, and loss of joy are taking over, and the more pressure I feel, the more paralyzed I become."
+      "Hey, I'm Carlos. I love my family, but one moment I'm joking with my wife and the next I'm punching a wall because she questioned me. At work, a look from a guy half my age can make me see red. I grew up learning you swing before you get swung on, but now I watch my little boy flinch when I shout. I want to figure out how to protect my pride without scaring the people I care about."
   },
   {
-    id: "case-daniel",
-    label: "Case 6 · Daniel L.",
-    name: "Daniel L.",
-    dossier: "Case_06_Daniel_L.md",
-    teaser: "Logistics manager easing loneliness with quiet beers and routine.",
+    id: "case-nina",
+    label: "Nina (Moderate)",
+    name: "Nina F.",
+    difficulty: "moderate",
+    difficultyLabel: "Moderate",
+    dossier: "Case_Nina.md",
+    teaser: "Self-sacrificing teacher whose depression hides unmet needs and resentment.",
     history:
-      "Daniel is a 55-year-old divorced logistics manager whose evenings turned silent after his children left home. Two or three beers blur the ache of an empty flat.",
-    schema: "If I ask for company and people say no, that'll prove I'm on my own.",
+      "Nina is a 40-year-old teacher and mother who faints from stress, juggles everyone's needs, and collapses into guilt whenever she feels anger or asks for help.",
+    schema: "If I stop taking care of everyone, I will be abandoned and prove I am selfish.",
     style:
-      "Keep a calm, steady tone with dry humor; shrug off feelings quickly but brighten when discussing hiking or woodworking projects.",
+      "Warm, polite tone; apologetic laughs; quick 'sorry' before needs; over-nodding; smile while upset; breath held then small sigh; hands smoothing clothing.",
     voice:
-      "Hei, Daniel here. I manage logistics for a living, which is ironic because my evenings at home feel like a schedule with nothing in it. The kids are grown, the flat is tidy, and most nights I open a beer or two to keep the quiet from echoing. I shrug it off and tell people I’m fine—maybe throw in a joke—but the routine is starting to feel heavy. I miss casual company, but picking up the phone feels awkward, so I end up scrolling or watching TV until bed. I came here because the loneliness, low mood, and creeping dependence on those evening beers are sticking around."
+      "I'm Nina. My day starts before sunrise packing lunches and answering emails for other people, and by night I'm too tired to notice my own kids' texts. When I finally admit I need help, this wave of guilt crashes in and I call myself selfish. I don't even know what I like anymore. I'm afraid if I stop over-functioning, no one will want me, but I can't keep living on empty."
   },
   {
-    id: "case-mei",
-    label: "Case 7 · Mei Z.",
-    name: "Mei Z.",
-    dossier: "Case_07_Mei_Z.md",
-    teaser: "Nonbinary art student freezing before critiques and family pragmatism.",
+    id: "case-aisha",
+    label: "Aisha (Hard)",
+    name: "Aisha K.",
+    difficulty: "hard",
+    difficultyLabel: "Hard",
+    dossier: "Case_Aisha.md",
+    teaser: "Young woman with borderline dynamics battling annihilating abandonment terror.",
     history:
-      "Mei is a 24-year-old Chinese-Norwegian illustration student whose perfectionism and critique anxiety delay submissions. Family encouragement comes with reminders to be practical.",
-    schema: "If they see my messy draft, they'll decide I'm not really talented.",
+      "Aisha is a 26-year-old with a history of foster care, self-harm, and intense relationships; perceived distancing unleashes panic, rage, and desperate bids to keep people close.",
+    schema: "If someone steps back, it means I am unlovable and I will be left alone forever.",
     style:
-      "Bring animated, creative energy; bounce your leg, use sly irony when you feel exposed, and light up whenever someone mirrors your aesthetic language.",
+      "Fast, urgent speech; voice wavers; tears close; wide eyes then narrow; clutch chest or reach out; sudden shifts from pleading to sharp; quick breaths.",
     voice:
-      "Hei hei, I’m Mei. I’m a nonbinary illustration student who can see the finished piece in my head—clean lines, hush of color—and still freeze when it’s time to pin it up. Critique day makes my stomach flutter, my leg start tapping, and my mouth go dry, so I joke, show a tiny cropped photo, and stash the messy page back in my bag. My parents mean well with their “be practical” reminders, but lately it just adds pressure. I asked for help because anxiety, perfectionism, and missed deadlines are stacking up, and I want to enjoy creating again instead of dreading each review."
+      "I'm Aisha. When someone I love doesn't text back, it feels like the floor opens and I'm falling forever. I can go from idolizing them to hating them in an hour because the pain is unbearable. I cut to quiet the storm or to prove I'm still here. I want to believe I'm not too broken to be loved and that I can survive being alone for more than a minute."
   },
   {
-    id: "case-omar",
-    label: "Case 8 · Omar H.",
-    name: "Omar H.",
-    dossier: "Case_08_Omar_H.md",
-    teaser: "Civil engineer over-planning home life to keep danger at bay.",
+    id: "case-david",
+    label: "David (Hard)",
+    name: "David H.",
+    difficulty: "hard",
+    difficultyLabel: "Hard",
+    dossier: "Case_David.md",
+    teaser: "High-achieving executive whose grandiosity hides fragile shame.",
     history:
-      "Omar is a 33-year-old Syrian-Norwegian engineer and new homeowner who triple-checks budgets and repairs to protect his family, building tension headaches and friction with his playful wife.",
-    schema: "If I relax, I will fail my family.",
+      "David is a 42-year-old finance leader whose marriage is collapsing; conditional childhood love left him chasing perfection and raging when anyone highlights his flaws.",
+    schema: "If I am not exceptional, I am worthless and will be discarded.",
     style:
-      "Speak in detailed plans, rub your forehead when stressed, visibly relax when structure appears, and soften whenever you recall playful memories.",
+      "Measured, confident tone; controlled pace; chin slightly raised; steady eye contact; small dismissive chuckle; smooth hand gestures; sigh when challenged.",
     voice:
-      "Marhaba, I’m Omar. I’m a Syrian-Norwegian engineer, husband to Lina, and a man who can’t stop scanning for what might go wrong next. Since we bought the flat I’m triple-checking budgets, refreshing weather apps in case the roof leaks, and waking up at 2 a.m. to run mortgage scenarios. Lina jokes that I’m married to my spreadsheet, but the headaches and tension in my shoulders aren’t so funny anymore. I signed up for therapy because the worry, jaw pain, and need to control every detail are starting to wear down both of us."
+      "I'm David. I built a career on being the man with answers, yet at home I'm met with eye rolls and accusations that I'm cold. The word 'narcissist' still stings because it exposes how hollow I feel when I'm not winning. My father praised results, not me, and I don't know how to be loved without performing. I'm terrified the people I care about will see the cracks and walk away."
   },
   {
-    id: "case-sofia",
-    label: "Case 9 · Sofia T.",
-    name: "Sofia T.",
-    dossier: "Case_09_Sofia_T.md",
-    teaser: "Event coordinator whose sparkle persona hides deep fatigue.",
+    id: "case-marcus",
+    label: "Marcus (Hard)",
+    name: "Marcus R.",
+    difficulty: "hard",
+    difficultyLabel: "Hard",
+    dossier: "Case_Marcus.md",
+    teaser: "Combat veteran numbed by complex trauma and haunted by lonely grief.",
     history:
-      "Sofia is a 29-year-old Portuguese-Norwegian hospitality lead known for making everything shine. She runs on espresso, late nights, and people-pleasing while boundaries and sleep erode.",
-    schema: "If I set limits, people will decide I'm selfish or boring.",
+      "Marcus is a 34-year-old veteran and security guard who lives alone, cycles between numbness and flashbacks, and struggles to trust anyone after repeated betrayals and battlefield losses.",
+    schema: "Letting people close guarantees hurt, so it is safer to feel nothing.",
     style:
-      "Keep high-energy storytelling with big gestures; laugh off stress, but let your voice soften whenever rest is framed as helping others.",
+      "Low volume; few words; long pauses; flat tone; eyes down or scanning; jaw set; shoulders tight; minimal gesture; slight tremor near hard topics.",
     voice:
-      "Olá, I’m Sofia. I run boutique hotel events, keep my friends’ social calendars buzzing, and can turn any night into a memory—and recently my body is telling me it’s too much. I live on espresso, mix shifts with parties, and wake up with hangxiety and half-finished admin tasks I keep avoiding. Saying “no” makes me worry I’ll lose my place in the group, so I just keep rallying. I came to therapy because the burnout, sleep debt, and hidden dread are catching up with me, and I don’t want to crash."
-  },
-  {
-    id: "case-lars",
-    label: "Case 10 · Lars B.",
-    name: "Lars B.",
-    dossier: "Case_10_Lars_B.md",
-    teaser: "Senior architect fearing irrelevance as retirement nears.",
-    history:
-      "Lars is a 61-year-old architect pondering retirement while knee pain and a dimmed creative spark stir worries about fading usefulness.",
-    schema: "Without work, I become replaceable and invisible.",
-    style:
-      "Maintain a calm, reserved presence; trace invisible lines with your fingers, keep your tone modest, and brighten when discussing timber, sea, or mentoring younger staff.",
-    voice:
-      "Hei, I’m Lars. I’m a 61-year-old architect who has spent four decades sketching timber details and mentoring younger designers, and lately everything feels slowed. My knee nags, the drawings look gray, and the energy in the studio is shifting toward a new generation. Inger is excited about travel, and I smile, but then I go back to my desk and wonder why the spark is dimming. I’m here because the slump, low motivation, and restless evenings are sticking around, and I want to figure out how to feel purposeful again."
+      "Name's Marcus. Most days I move through work like a ghost and collapse on the couch staring at nothing. Nights are worse-faces from overseas show up in my dreams, or memories from foster homes I've tried to forget. When someone asks how I am, 'fine' is all that comes out, because letting them see more feels dangerous. I'm here because feeling nothing is starting to feel like dying."
   }
 ];
