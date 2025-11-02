@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Deliberate Practice Lab</title>
-    <script type="module" crossorigin src="/Planet/assets/deliberatepractice-EKqgaILQ.js"></script>
+    <script type="module" crossorigin src="/Planet/assets/deliberatepractice-BF9Z44cP.js"></script>
     <link rel="modulepreload" crossorigin href="/Planet/assets/modulepreload-polyfill-B5Qt9EMX.js">
-    <link rel="stylesheet" crossorigin href="/Planet/assets/deliberatepractice-BOnQBMZk.css">
+    <link rel="stylesheet" crossorigin href="/Planet/assets/deliberatepractice-B7vhniQT.css">
   </head>
   <body>
     <header class="app-header">
@@ -67,6 +67,10 @@
         <p class="panel-subtitle" id="case-panel-description">
           Explore curated cases that mirror real-world dynamics.
         </p>
+        <div class="skill-context is-hidden" id="case-skill-context" hidden>
+          <h3 class="skill-context-title" id="case-skill-name"></h3>
+          <p class="skill-context-description" id="case-skill-description"></p>
+        </div>
         <div
           id="case-list"
           class="grid-list"
@@ -116,7 +120,6 @@
             <button id="view-case-brief" class="ghost-button">View Case Brief</button>
           </div>
           <section class="practice-controls" aria-label="Practice Controls">
-            <span class="chip" id="case-difficulty" hidden></span>
             <button
               class="shuffle-button"
               id="shuffle-order"
