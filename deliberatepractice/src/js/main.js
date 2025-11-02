@@ -173,6 +173,7 @@ function showSection(sectionKey) {
     el.classList.toggle("is-hidden", !shouldShow);
     el.hidden = !shouldShow;
   });
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 }
 
 function applyLanguageStrings(languageId) {
