@@ -36,7 +36,12 @@ const elements = {
   caseStyle: document.getElementById("case-style"),
   caseSkillContext: document.getElementById("case-skill-context"),
   caseSkillName: document.getElementById("case-skill-name"),
-  caseSkillDescription: document.getElementById("case-skill-description"),
+  caseSkillMarkerLabel: document.getElementById("case-skill-marker-label"),
+  caseSkillMarker: document.getElementById("case-skill-marker"),
+  caseSkillSummaryLabel: document.getElementById("case-skill-summary-label"),
+  caseSkillSummary: document.getElementById("case-skill-summary"),
+  caseSkillAimLabel: document.getElementById("case-skill-aim-label"),
+  caseSkillAim: document.getElementById("case-skill-aim"),
   caseBriefHeading: document.getElementById("case-brief-heading"),
   caseVoiceHeading: document.getElementById("case-voice-heading"),
   caseVoice: document.getElementById("case-voice"),
@@ -132,6 +137,8 @@ function localizeSkill(languageId, skillId) {
     name: overrides.name ?? baseSkill.name,
     description: overrides.description ?? baseSkill.description,
     summary: overrides.summary ?? baseSkill.summary,
+    marker: overrides.marker ?? baseSkill.marker,
+    aim: overrides.aim ?? baseSkill.aim,
     cases
   };
 }
@@ -198,6 +205,16 @@ function applyLanguageStrings(languageId) {
   elements.casePanelTitle.textContent = strings.caseHeading;
   elements.casePanelDescription.textContent = strings.caseDescription;
   elements.caseList.setAttribute("aria-label", strings.caseListAria);
+
+  if (elements.caseSkillMarkerLabel) {
+    elements.caseSkillMarkerLabel.textContent = strings.skillMarkerLabel ?? "Markers";
+  }
+  if (elements.caseSkillSummaryLabel) {
+    elements.caseSkillSummaryLabel.textContent = strings.skillSummaryLabel ?? "How to Work";
+  }
+  if (elements.caseSkillAimLabel) {
+    elements.caseSkillAimLabel.textContent = strings.skillAimLabel ?? "Aim";
+  }
 
   elements.caseBriefHeading.textContent =
     strings.roleBriefHeading ?? strings.caseBriefHeading ?? "Role Background";
@@ -353,7 +370,13 @@ function highlightCaseSelection(caseId) {
 }
 
 function updateCaseSkillContext(skill) {
-  if (!elements.caseSkillContext || !elements.caseSkillName || !elements.caseSkillDescription) {
+  if (
+    !elements.caseSkillContext ||
+    !elements.caseSkillName ||
+    !elements.caseSkillMarker ||
+    !elements.caseSkillSummary ||
+    !elements.caseSkillAim
+  ) {
     return;
   }
 
@@ -361,15 +384,19 @@ function updateCaseSkillContext(skill) {
     elements.caseSkillContext.hidden = true;
     elements.caseSkillContext.classList.add("is-hidden");
     elements.caseSkillName.textContent = "";
-    elements.caseSkillDescription.textContent = "";
+    elements.caseSkillMarker.textContent = "";
+    elements.caseSkillSummary.textContent = "";
+    elements.caseSkillAim.textContent = "";
     return;
   }
 
   elements.caseSkillContext.hidden = false;
   elements.caseSkillContext.classList.remove("is-hidden");
   elements.caseSkillName.textContent = skill.name ?? "";
+  elements.caseSkillMarker.textContent = skill.marker ?? "";
   const summaryText = skill.summary ?? skill.description ?? "";
-  elements.caseSkillDescription.textContent = summaryText;
+  elements.caseSkillSummary.textContent = summaryText;
+  elements.caseSkillAim.textContent = skill.aim ?? "";
 }
 
 function ensureOrderForCase() {

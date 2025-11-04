@@ -19,6 +19,9 @@ const ENGLISH_UI = {
   caseHeading: "Pick a Case",
   caseDescription: "Explore curated scenarios with built-in difficulty levels.",
   caseListAria: "Case options",
+  skillMarkerLabel: "Markers",
+  skillSummaryLabel: "How to Work",
+  skillAimLabel: "Aim",
   historyLabel: "History",
   schemaLabel: "Core Pain",
   styleLabel: "Style",
@@ -60,6 +63,9 @@ const LANGUAGE_UI_NO = {...ENGLISH_UI,
   caseHeading: "Velg en case",
   caseDescription: "Utforsk nøye utvalgte caser av forskjellig vanskelighetsgrad.",
   caseListAria: "Casevalg",
+  skillMarkerLabel: "Markører",
+  skillSummaryLabel: "Hvordan jobbe",
+  skillAimLabel: "Mål",
   historyLabel: "Bakgrunn",
   schemaLabel: "Kjernesmerte",
   styleLabel: "Stil",
@@ -202,78 +208,104 @@ const NO_SKILL_OVERRIDES = {
     name: "Terapeutens selvbevissthet",
     description: "Observer din indre tilstand slik at du forblir til stede og mottakelig, og kan velge den mest hjelpsomme responsen.",
     summary: "Følg kontinuerlig med på egen kropp, følelser og impulser slik at du kan regulere deg og holde innstillingen mot klienten. Når du kjenner spenning, hastverk eller forsvar, senk tempoet, mykne og finn ro før du velger neste steg som tjener klienten.",
+    marker: "Du merker spenning, fiksetrang, forsvar, nummenhet eller sterke trekk mot eller vekk fra klienten.",
+    aim: "Reguler deg selv slik at du forblir jordet, empatisk og i stand til å velge den mest hjelpsomme responsen.",
     cases: NO_CASE_OVERRIDES
   },
   "empathic-understanding": {
     name: "Empatisk forståelse",
     description: "Speil klientens opplevelse med følelsesnært språk for å formidle forståelse og invitere til utdyping.",
     summary: "Gi korte, følelsesmettede gjentakelser som speiler klientens indre verden slik at de kjenner seg dypt forstått. Match tone og tempo, hold deg i nåtid, og inviter til utdyping uten å legge til råd eller teori.",
+    marker: "Følelser er til stede, klienten trenger å bli hørt, eller fortellingen er uklar og søkende.",
+    aim: "Formidle presis forståelse for å bygge tillit og invitere til mer uttrykk.",
     cases: NO_CASE_OVERRIDES
   },
   "empathic-affirmation-validation": {
     name: "Empatisk bekreftelse og validering",
     description: "Legitimer klientens følelser i kontekst slik at skam og selvkritikk dempes.",
     summary: "Sett ord på hvorfor følelsen er forståelig i klientens situasjon slik at skam slipper og trygghet bygges. Gi varm tillatelse til at følelsen får være der, samtidig som dere beholder rom til å snakke om handlinger ved behov.",
+    marker: "Skam, selvkritikk, unnskyldninger for å føle, eller utsagn som 'jeg burde ikke føle dette' dukker opp.",
+    aim: "Legitimere følelsen slik at selvangrepet avtar og tryggheten til å føle og utforske øker.",
     cases: NO_CASE_OVERRIDES
   },
   "exploratory-questions": {
     name: "Utforskende spørsmål",
     description: "Still åpne, erfaringsnære spørsmål som vender oppmerksomheten innover og utfolder det som er i ferd med å komme.",
     summary: "Spør enkelt og åpent på en måte som vender oppmerksomheten mot kroppen og øyeblikkets sansninger. Slik får vage eller blandede opplevelser form, og dypere følelser kan komme frem i et tempo som tåles.",
+    marker: "Opplevelsen kjennes vag, blandet, uferdig eller bare sanset uten ord.",
+    aim: "Hjelpe den implisitte opplevelsen å ta form ved å vende oppmerksomheten innover.",
     cases: NO_CASE_OVERRIDES
   },
   "providing-treatment-rationale": {
     name: "Behandlingsrasjonale for EFT",
     description: "Gi en kort, empatisk forklaring på hvorfor følelsesarbeid hjelper, og hvordan vi gjør det.",
     summary: "Etter at du har møtt klienten empatisk, forklar med hverdagslig språk hvorfor følelsesarbeid gir lettelse og endring, og hvordan du skal lede det trygt. Bruk forklaringen til å roe tvil, redusere frykt og skape felles retning før nye steg eller oppgaver.",
+    marker: "Klienten spør hvordan terapien virker, uttrykker skepsis eller frykt, eller nøler før en oppgave.",
+    aim: "Gi en kort, erfaringsnær forklaring som roer uro og skaper felles retning for arbeidet.",
     cases: NO_CASE_OVERRIDES
   },
   "empathic-explorations": {
     name: "Empatiske utforskninger",
     description: "Følg og utvid forsiktig det som allerede er til stede, slik at klienten kan bli i og utdype opplevelsen.",
     summary: "Hold deg ved klientens ledende kant – reflekter litt av det som er der, og inviter dem til å dvele og legge merke til mer. Den forsiktige rytmen gjør at kontakten fordypes uten at du går foran deres egen prosess.",
+    marker: "Følelsen er på vei frem men virker skjør; det finnes en levende kant som vil utdypes.",
+    aim: "Holde og utdype kontakten ved å følge og forsiktig utvide det som er i ferd med å komme.",
     cases: NO_CASE_OVERRIDES
   },
   "empathic-evocations": {
     name: "Evokativ empati",
     description: "Bruk levende språk og metafor for å gjøre opplevelsen tydeligere og øke kontakten med følelsen.",
     summary: "Når følelsen er nær men dempet, tilby et kort, konkret bilde eller sanselig språk som fanger opplevelsen. Et treffende uttrykk hjelper klienten å kjenne følelsen tydeligere uten å overdøve dem.",
+    marker: "Klienten snakker om følelser på en flat, fjern eller vanskelig beskrivbar måte.",
+    aim: "Forsterke kontakten ved å tilby levende språk som hjelper følelsen frem.",
     cases: NO_CASE_OVERRIDES
   },
   "empathic-conjectures": {
     name: "Empatiske antakelser",
     description: "Tilby forsiktige gjetninger om opplevelser som ligger nær overflaten, for å hjelpe det usagte frem.",
     summary: "Gjør en myk, tentativ gjetning om den smerten, frykten eller lengselen du aner rett under overflaten. Marker at du kan ta feil, og la klienten bekrefte eller korrigere slik at opplevelsen får sitt eget språk.",
+    marker: "Hint om dypere følelser viser seg gjennom unngåelse, tonebrudd eller uavsluttede fortellinger.",
+    aim: "Sette ord på det som ligger nær overflaten slik at klienten kan bekrefte, avkrefte eller ta eierskap.",
     cases: NO_CASE_OVERRIDES
   },
   "staying-in-contact-intense-affect": {
     name: "Være i kontakt med intens affekt",
     description: "Hjelp klienten å være trygt med sterk affekt uten å bli overveldet, gjennom jording og passelig tempo.",
     summary: "Senk tempoet, hjelp klienten å jorde seg, og doser hvor mye av følelsen som kontaktes slik at store bølger av sorg, raseri, panikk eller skam kan bevege seg uten kollaps. Du holder deg nær, validerer styrken og lar mening komme i tålelige porsjoner.",
+    marker: "Affekten skyter i været med gråt, skjelving, raseri, panikk, skamkollaps eller bønn om å stoppe.",
+    aim: "Gi ramme og nærvær slik at sterk følelse kan bearbeides uten overveldelse.",
     cases: NO_CASE_OVERRIDES
   },
   "self-disclosure": {
     name: "Selvavsløring",
     description: "Del kort, relevant indre erfaring i klientens tjeneste for validering, fordypning eller reparasjon.",
     summary: "Del en kort, ekte bit av din umiddelbare erfaring bare når det tydelig støtter klienten – for eksempel for å vise at du er berørt, bekrefte påvirkningen deres eller reparere et brudd. Hold det konsist, uten forsvar, og vend raskt tilbake til klientens prosess.",
+    marker: "Alliansen trenger validering eller reparasjon, eller et genuint terapeutisk svar vil fordype arbeidet.",
+    aim: "Bruke kort, relevant åpenhet til å styrke båndet eller modellere resonans mens fokuset forblir hos klienten.",
     cases: NO_CASE_OVERRIDES
   },
   "marker-recognition-chairwork": {
     name: "Gjenkjenne markører og sette opp stolarbeid",
     description: "Se etter markører og sett trygt opp to-stol eller tom stol når forholdene ligger til rette.",
     summary: "Lytt etter markører som hard selvkritikk eller uoppgjort relasjon, og tilby en kort begrunnelse for to-stols- eller tom-stol-arbeid. Gi tydelige, trygge instruksjoner og følg aktiveringen slik at den emosjonelle prosessen kan forløse seg innenfor toleransevinduet.",
+    marker: "Tydelige oppgavemarkører som hard selvkritikk, indre splitt eller uoppgjort forhold dukker opp.",
+    aim: "Sette opp en erfaringsdialog som aktiverer udekkede behov og transformerende følelser.",
     cases: NO_CASE_OVERRIDES
   },
   "alliance-repair": {
     name: "Reparasjon av alliansen",
     description: "Ta imot reaksjoner uten forsvar, ta radikalt ansvar, og lag en plan sammen for å gå videre.",
     summary: "Inviter og ta imot misnøye uten å forsvare deg, valider hva klienten kjente, og anerkjenn din del der det trengs. Lag deretter en felles plan for hva som vil hjelpe nå, slik at trygghet, tillit og fremdrift gjenopprettes.",
+    marker: "Tilbaketrekning, irritasjon mot deg, 'du forstår meg ikke', uteblitte timer eller plutselig kjølighet viser seg.",
+    aim: "Gjenopprette tillit og samarbeid ved å ta imot bruddet, ta ansvar og planlegge neste steg sammen.",
     cases: NO_CASE_OVERRIDES
   },
   "empathic-refocusing": {
     name: "Empatisk refokusering",
     description: "Navngi beskyttelsen og inviter mildt tilbake når klienten beveger seg bort fra det som er sårt.",
     summary: "Legg merke til når klienten går over i analyser, spøk eller digresjoner for å slippe unna det ømme punktet. Anerkjenn beskyttelsen og inviter varsomt tilbake slik at arbeidet forblir forankret i følelsen som trenger oppmerksomhet.",
+    marker: "Klienten går over i spøk, analyse, digresjoner eller bagatellisering når følelsen nærmer seg.",
+    aim: "Anerkjenne beskyttelsen og invitere varsomt tilbake til den meningsfulle følelsen.",
     cases: NO_CASE_OVERRIDES
   }
 };
