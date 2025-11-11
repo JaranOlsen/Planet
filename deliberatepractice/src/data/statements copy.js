@@ -261,380 +261,128 @@ export const STATEMENT_SETS = {
   "empathic-affirmation-validation": {
     "case-sara": [
       {
-        text: "I keep checking his social media even though it wrecks me.",
-        suggestion: "Of course you keep looking; after a loss like this, anyone would keep reaching even if it hurts."
+        text: "Nights feel endless since the breakup. I keep thinking this proves I was not worth staying for.",
+        suggestion: "Given how much this mattered and what you have carried, it makes sense the nights hurt and those thoughts show up."
       },
       {
-        text: "I keep saying 'I'm fine' even when my eyes are wet.",
-        suggestion: "It makes sense you try to hold it together; you have carried so much on your own."
+        text: "I feel silly crying here. I should be stronger by now.",
+        suggestion: "Of course tears come here; after a loss like this, anyone would feel tender."
       },
       {
-        text: "If I had been more fun or easier, maybe he'd have stayed.",
-        suggestion: "No wonder you search for what you could have done; self‑blame tries to make sense of the pain."
-      },
-      {
-        text: "Nights are the hardest—when it gets quiet I feel unwanted.",
-        suggestion: "The quiet can amplify the hurt; it makes sense it feels like being unwanted."
-      },
-      {
-        text: "I started to text him and deleted it a dozen times.",
-        suggestion: "It makes sense a part of you wants contact and another protects you from more hurt."
-      },
-      {
-        text: "When I wake up, I forget for a second and then it slams me.",
-        suggestion: "Anyone would feel that crash on waking; it makes sense it hits so hard."
-      },
-      {
-        text: "I apologize for taking up space with this sadness.",
-        suggestion: "Of course you worry about taking space; your sadness belongs here and makes sense."
-      },
-      {
-        text: "Food doesn't taste like anything and my stomach drops a lot.",
-        suggestion: "That hollow, dropped‑stomach feeling fits how deeply this landed."
-      },
-      {
-        text: "Friends invite me out and I make excuses because I don't want to cry in public.",
-        suggestion: "It makes sense you protect yourself from more hurt even when you want connection."
-      },
-      {
-        text: "Part of me thinks love just isn't for me.",
-        suggestion: "Given what you've been through, it makes sense that belief shows up; I hear how lonely this feels."
+        text: "I hate needing help. It makes me feel weak.",
+        suggestion: "It makes sense needing help feels risky when you learned you had to hold it together."
       }
     ],
     "case-michael": [
       {
-        text: "When traffic is bad and someone cuts me off, my face goes hot and I explode.",
-        suggestion: "It makes sense your body surges to defend when you feel disrespected or boxed in."
+        text: "Getting corrected in front of my team felt humiliating. I blew up, and now I feel ashamed.",
+        suggestion: "Anyone in that spot would feel stung and ashamed; it makes sense anger rushed in to protect you, even if it did not help."
       },
       {
-        text: "If I don't have the answer, I feel exposed and I bluff.",
-        suggestion: "Given how you were judged, of course not knowing can feel like being exposed."
+        text: "When people say I am too intense, it feels like they are calling me weak.",
+        suggestion: "Given how you were judged growing up, it makes sense comments land like attacks on your worth."
       },
       {
-        text: "Apologizing makes me feel small, like I'm giving up ground.",
-        suggestion: "It makes sense an apology can feel like losing status when standing tall has meant safety."
-      },
-      {
-        text: "At home, a sigh or eye roll sets me off before I think.",
-        suggestion: "No wonder those small cues sting; they can land like disrespect and light up old hurt."
-      },
-      {
-        text: "I keep score in my head so no one has leverage on me.",
-        suggestion: "It makes sense you track everything to guard against feeling one‑down."
-      },
-      {
-        text: "When my kid asks why I'm angry, I feel ashamed and stuck.",
-        suggestion: "Of course shame hits there; it shows how much you care about being the dad you want to be."
-      },
-      {
-        text: "I slam doors because it feels better than feeling small.",
-        suggestion: "It makes sense anger steps in to cover that small, stung feeling."
-      },
-      {
-        text: "If someone challenges me in public, I double down even if I'm wrong.",
-        suggestion: "Given how threatening it feels to be one‑down, it makes sense you dig in to protect yourself."
-      },
-      {
-        text: "I resent needing therapy; it feels like weakness.",
-        suggestion: "Of course it feels risky; coming here also shows how much you want things to be different."
-      },
-      {
-        text: "After the blowups, I lie awake hating myself.",
-        suggestion: "Anyone would feel awful after those moments; it makes sense shame keeps you up."
+        text: "I push myself to be perfect so no one can take me down.",
+        suggestion: "It makes sense you strive so hard to stay safe from criticism."
       }
     ],
     "case-jason": [
       {
-        text: "My heart pounds just hearing my name in a meeting.",
-        suggestion: "Of course your heart races when being seen feels risky."
+        text: "When it is my turn to talk, panic clamps my throat and I say nothing.",
+        suggestion: "Of course your body freezes when it feels so risky to be seen; anyone would struggle in that moment."
       },
       {
-        text: "I avoid eye contact so people won't notice me.",
-        suggestion: "It makes sense you try to stay invisible when attention feels dangerous."
+        text: "I want to go out, but I keep backing out at the last minute.",
+        suggestion: "It makes sense you pull back when fear and self doubt spike."
       },
       {
-        text: "I pretend to text on my phone to escape small talk.",
-        suggestion: "Of course you look for cover when you feel exposed; anyone would."
-      },
-      {
-        text: "I worry I'm boring and people are just being polite.",
-        suggestion: "It makes sense that harsh inner voice makes you doubt yourself around others."
-      },
-      {
-        text: "Compliments bounce off; I don't believe them.",
-        suggestion: "Given how loud the self‑criticism is, of course praise is hard to take in."
-      },
-      {
-        text: "After I talk, I replay every sentence and cringe.",
-        suggestion: "It makes sense you replay it all when you care so much about belonging."
-      },
-      {
-        text: "Crowded rooms make my chest tight and I look for the door.",
-        suggestion: "Of course your body scans for exits when social spaces feel threatening."
-      },
-      {
-        text: "I compare myself to everyone and always come up short.",
-        suggestion: "It makes sense comparison steals your worth when shame is nearby."
-      },
-      {
-        text: "My voice trembles when I introduce myself.",
-        suggestion: "A trembling voice makes sense when your body is bracing for judgment."
-      },
-      {
-        text: "Some nights I'm sure I'll always be alone.",
-        suggestion: "It makes sense the nights bring that heavy loneliness; I hear how painful it is."
+        text: "I feel pathetic for being this lonely.",
+        suggestion: "Loneliness hurts deeply; it makes sense you feel this low given what you have been through."
       }
     ],
     "case-laura": [
       {
-        text: "Most days feel flat, like I'm behind glass watching life happen.",
-        suggestion: "It makes sense things feel muted after what you've lived through."
+        text: "Most days I feel numb. I know I should feel more, but I cannot.",
+        suggestion: "After what you have lived, it makes sense numbness shows up to protect you."
       },
       {
-        text: "If voices rise, my stomach drops and I go somewhere else in my head.",
-        suggestion: "Of course your body checks out around raised voices; it learned that to stay safe."
+        text: "Raised voices make my stomach drop and I need to leave.",
+        suggestion: "Of course your body reacts; with your history, anyone would want to get safe fast."
       },
       {
-        text: "When someone is kind to me, I feel numb or suspicious.",
-        suggestion: "Kindness can feel confusing when safety has been uncertain; that makes sense."
-      },
-      {
-        text: "I take long showers just to feel something warm.",
-        suggestion: "It makes sense you reach for small, safe sensations when emotions feel far away."
-      },
-      {
-        text: "Nice days still feel gray to me.",
-        suggestion: "Of course joy feels dulled when your system has been carrying so much."
-      },
-      {
-        text: "Being touched, even kindly, startles me.",
-        suggestion: "It makes sense your body startles; it learned to protect you."
-      },
-      {
-        text: "When sadness breaks through, it scares me and I shut it down.",
-        suggestion: "Of course the feelings are scary; shutting them down has been a way to cope."
-      },
-      {
-        text: "I apologize for needing comfort.",
-        suggestion: "It makes sense you feel hesitant to need; your needs matter here."
-      },
-      {
-        text: "I forget what I even like to do.",
-        suggestion: "After so much bracing, it makes sense your interests feel far away right now."
-      },
-      {
-        text: "My body never fully relaxes, even in bed.",
-        suggestion: "Of course your body stays on alert; it learned to survive that way."
+        text: "Sometimes I drink to fall asleep because my mind will not stop.",
+        suggestion: "It makes sense you reach for something to quiet the system when it will not settle, even if it brings other costs."
       }
     ],
     "case-carlos": [
       {
-        text: "A sideways look and my jaw locks before I know it.",
-        suggestion: "It makes sense your body gears up fast when you sense disrespect."
+        text: "I hate that I punched the wall. I felt cornered and disrespected.",
+        suggestion: "Feeling cornered and disrespected hurts; it makes sense that a lot rose up fast, even though the outburst did not help."
       },
       {
-        text: "If I don't come in strong, people will walk all over me.",
-        suggestion: "Given where you came from, of course standing firm has felt like safety."
+        text: "A look or tone can set me off like I am nothing.",
+        suggestion: "Given what you survived, it makes sense even small cues hit like a threat."
       },
       {
-        text: "At my kid's game I yelled at the ref and felt sick later.",
-        suggestion: "Anyone would ache about that; it makes sense it matters so much to you."
-      },
-      {
-        text: "When I'm questioned, I feel small and puff up fast.",
-        suggestion: "It makes sense a challenge can shrink you inside and anger steps in to protect."
-      },
-      {
-        text: "I clench my fists and pace; it feels like a fight is coming.",
-        suggestion: "Of course your body readies for a fight; it learned that was how to stay safe."
-      },
-      {
-        text: "I break things and then regret it.",
-        suggestion: "It makes sense the heat takes over fast and regret follows when you cool."
-      },
-      {
-        text: "Coworkers steer clear and I feel ashamed.",
-        suggestion: "Of course that stings; it makes sense you feel both protective and ashamed."
-      },
-      {
-        text: "I leave the room so I don't explode, then feel weak for walking away.",
-        suggestion: "It makes sense walking away feels weak when strength has meant standing your ground."
-      },
-      {
-        text: "I don't trust calm—like it means I'm being walked over.",
-        suggestion: "Given your history, it makes sense calm can feel dangerous instead of safe."
-      },
-      {
-        text: "I want my family to feel safe with me.",
-        suggestion: "Wanting safety for them makes sense and shows your heart and commitment."
+        text: "I am scared I am turning into my father.",
+        suggestion: "Of course that fear is strong; it makes sense you want something different for your family."
       }
     ],
     "case-nina": [
       {
-        text: "If I rest, I feel like I'm doing something wrong.",
-        suggestion: "It makes sense rest feels wrong when you were taught to earn your place by doing."
+        text: "When I ask for help, guilt slams me and I apologize.",
+        suggestion: "It makes sense guilt shows up right away when you were taught to take care of everyone else first."
       },
       {
-        text: "Saying no makes me anxious all day.",
-        suggestion: "Of course a 'no' stirs anxiety given those old rules."
+        text: "I do everything, then I feel resentful and bad for being resentful.",
+        suggestion: "Anyone carrying that load would feel worn and resentful; it makes sense both show up."
       },
       {
-        text: "I do everything and still feel invisible.",
-        suggestion: "Anyone carrying that much would feel unseen; it makes sense you long to be noticed."
-      },
-      {
-        text: "When I get angry, I immediately feel guilty.",
-        suggestion: "It makes sense guilt follows anger when you learned your needs were less important."
-      },
-      {
-        text: "Asking for help makes me feel like a burden.",
-        suggestion: "Asking for help feeling like a burden makes sense after years of being the helper."
-      },
-      {
-        text: "If the house is messy, I feel like a bad person.",
-        suggestion: "Of course mess links to shame when worth got tied to performance."
-      },
-      {
-        text: "I tell myself others have it worse so I shouldn't feel this way.",
-        suggestion: "It makes sense you minimize your pain; you've had to for a long time."
-      },
-      {
-        text: "When I'm sick, I still push through and then crash.",
-        suggestion: "Of course you push through; your body is showing how much this has cost."
-      },
-      {
-        text: "I feel panic when someone seems disappointed in me.",
-        suggestion: "It makes sense disappointment feels scary when love has felt conditional."
-      },
-      {
-        text: "Part of me believes I'm lovable only when I'm useful.",
-        suggestion: "Given your history, it makes sense love has felt tied to doing rather than being."
+        text: "I feel selfish if I rest, even when I am exhausted.",
+        suggestion: "Given those old rules, it makes sense rest feels selfish even when your body is done."
       }
     ],
     "case-aisha": [
       {
-        text: "I watched the door most of session to make sure you won't leave.",
-        suggestion: "Of course you keep an eye on the door after so many goodbyes; I hear how much safety matters."
+        text: "When someone does not text back, it feels unbearable, like I am being dropped.",
+        suggestion: "With so many losses, it makes sense silence feels like being dropped all over again."
       },
       {
-        text: "I ripped up photos after the breakup and felt both powerful and empty.",
-        suggestion: "It makes sense you reached for anything to get relief; the emptiness afterward is understandable."
+        text: "I scared myself last night; I wanted to hurt myself just to make the pain stop.",
+        suggestion: "The pain you are in is enormous; it makes sense you wanted relief, even though hurting yourself cannot give you what you need."
       },
       {
-        text: "Sometimes I want to crawl out of my skin.",
-        suggestion: "That urge makes sense when the pain and panic feel unbearable; I'm glad you said it here."
-      },
-      {
-        text: "When you take notes, I think you hate me and I want to bolt.",
-        suggestion: "Given how often you've been misunderstood, it makes sense you read danger and want out fast."
-      },
-      {
-        text: "I text someone twenty times and then block them.",
-        suggestion: "It makes sense you reach hard for closeness and then protect yourself when fear spikes."
-      },
-      {
-        text: "I feel dirty because of what was done to me.",
-        suggestion: "Feeling contaminated makes heartbreaking sense after what you endured; I'm so sorry that happened to you."
-      },
-      {
-        text: "Kind words make me sob and also want to run.",
-        suggestion: "Of course being seen lands big—soothing and scary at the same time."
-      },
-      {
-        text: "When you look away, I think I'm boring and I get furious.",
-        suggestion: "It makes sense a glance away feels like rejection and lights up anger to protect you."
-      },
-      {
-        text: "I hear a voice saying I'm trash and unlovable.",
-        suggestion: "Given the betrayals you've survived, it makes sense that cruel voice shows up and feels true."
-      },
-      {
-        text: "I stare at the clock to make sure you won't end early.",
-        suggestion: "Of course you watch the time; endings have been painful, so it makes sense you brace for them."
+        text: "Part of me thinks no one can really love me for long.",
+        suggestion: "Given what you went through, it makes sense that belief shows up and feels true."
       }
     ],
     "case-david": [
       {
-        text: "When my wife brings up feelings, I feel cornered and want to argue the facts.",
-        suggestion: "It makes sense you feel exposed there; facts can feel safer when emotions sting like criticism."
+        text: "At home I feel picked apart, and I get defensive fast.",
+        suggestion: "It makes sense to feel exposed and defensive when it sounds like criticism at home."
       },
       {
-        text: "I want credit for everything I do; when I don't get it, I feel rage.",
-        suggestion: "Of course being unseen hits hard; shame and anger often travel together in that spot."
+        text: "If I am not impressive, I feel like nothing.",
+        suggestion: "Given how love was linked to achievement, it makes sense your worth feels tied to being impressive."
       },
       {
-        text: "I compare myself to other dads and feel like a fraud.",
-        suggestion: "It makes sense comparison stirs shame when worth has felt tied to performance."
-      },
-      {
-        text: "Apologies feel humiliating to me.",
-        suggestion: "It makes sense apologizing can feel small when you learned vulnerability cost you."
-      },
-      {
-        text: "I plan perfect vacations so we look good from the outside.",
-        suggestion: "Of course you strive to look put‑together; it makes sense image has felt like protection."
-      },
-      {
-        text: "I dread being ordinary; it feels like failing.",
-        suggestion: "It makes sense 'ordinary' feels threatening when being exceptional has equaled worth."
-      },
-      {
-        text: "I say I'm fine while feeling empty.",
-        suggestion: "Of course you cover the emptiness; it makes sense to hide what feels tender."
-      },
-      {
-        text: "I brag to get respect and then feel hollow afterward.",
-        suggestion: "It makes sense you reach for admiration to fill a hurt place and feel hollow after."
-      },
-      {
-        text: "I feel like a disappointment to my father even now.",
-        suggestion: "Of course that old wound still stings; anyone would ache there."
-      },
-      {
-        text: "When my team outshines me, I feel threatened instead of proud.",
-        suggestion: "It makes sense success around you pricks that fear of being less than."
+        text: "Since the affair, there is a heaviness I cannot shake.",
+        suggestion: "Of course there is heaviness and shame here; anyone in your shoes would feel weighed down."
       }
     ],
     "case-marcus": [
       {
-        text: "Most days I feel like a ghost moving through routines.",
-        suggestion: "It makes sense you feel detached after so much trauma; numbness has helped you survive."
+        text: "Most days I feel nothing, then suddenly I am flooded by memories.",
+        suggestion: "With what you have lived, it makes sense your system goes numb and then gets flooded."
       },
       {
-        text: "I keep the TV on to drown out my thoughts.",
-        suggestion: "Of course you look for ways to quiet what feels overwhelming inside."
+        text: "The nightmares leave me wrung out and I just keep my head down.",
+        suggestion: "Anyone dealing with those nightmares would feel wrung out and go quiet to get through."
       },
       {
-        text: "I sit in the car before going inside because I can't face the quiet.",
-        suggestion: "It makes sense the quiet is hard; it can bring the weight back all at once."
-      },
-      {
-        text: "Loud bangs make me jump and then I get angry at myself for reacting.",
-        suggestion: "Of course your body startles; getting angry at yourself afterward makes sense when you wish it were different."
-      },
-      {
-        text: "Holidays feel hollow; I don't feel anything I'm supposed to feel.",
-        suggestion: "It makes sense holidays land flat when your system has been so shut down for safety."
-      },
-      {
-        text: "I avoid reminders of my service because they open the floodgates.",
-        suggestion: "Avoiding reminders makes sense when the waves can feel too big to bear."
-      },
-      {
-        text: "I keep my apartment dark and don't invite people over.",
-        suggestion: "Of course keeping things small and dark can feel safer right now."
-      },
-      {
-        text: "I don't remember the last time I really laughed.",
-        suggestion: "It makes sense joy feels far away when you've carried so much pain."
-      },
-      {
-        text: "I don't want to need anyone.",
-        suggestion: "Given what you've lived, it makes sense needing others feels dangerous."
-      },
-      {
-        text: "Sometimes I think I'm better off alone forever.",
-        suggestion: "It makes sense alone feels safer, even though it's lonely; I'm glad you're saying it here."
+        text: "Being alone feels safer, but it also feels like giving up.",
+        suggestion: "It makes sense you choose safety, and it also makes sense the quiet can feel like giving up on being known."
       }
     ]
   },
