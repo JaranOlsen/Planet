@@ -199,6 +199,17 @@ button {
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.card-header .card-title {
+  flex: 1;
+}
+
 .card-button[aria-selected="true"] {
   border-color: rgba(37, 99, 235, 0.6);
   background-color: var(--color-accent-soft);
@@ -229,6 +240,28 @@ button {
   color: var(--color-muted);
   font-size: 0.95rem;
   line-height: 1.4;
+}
+
+.skill-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+  font-weight: 600;
+  background-color: rgba(15, 23, 42, 0.08);
+  color: rgba(15, 23, 42, 0.8);
+  white-space: nowrap;
+}
+
+.skill-tag--alpha {
+  background-color: rgba(37, 99, 235, 0.12);
+  color: #1e3a8a;
+}
+
+.skill-tag--beta {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #047857;
 }
 
 .case-title {

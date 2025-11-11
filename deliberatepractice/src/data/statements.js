@@ -133,128 +133,380 @@ export const STATEMENT_SETS = {
   "empathic-understanding": {
     "case-sara": [
       {
-        text: "Evenings are the hardest; the quiet makes me feel like I was never enough to be chosen.",
-        suggestion: "In the quiet it feels like not being enough settles over you."
+        text: "Evenings make the apartment feel huge and I feel so alone.",
+        suggestion: "Evenings bring a heavy loneliness that fills the space."
       },
       {
-        text: "When I start to cry, I quickly say I am fine so I do not make it awkward.",
-        suggestion: "Tears rise and right away you try to make it easier for everyone."
+        text: "I keep telling friends I'm fine, but I'm exhausted from pretending.",
+        suggestion: "Keeping up the mask is tiring, and underneath you feel worn and sad."
       },
       {
-        text: "If I keep achieving, maybe I will not have to feel this loneliness.",
-        suggestion: "Achieving feels like a way to hold loneliness at bay for a bit."
+        text: "When I see his name anywhere, my stomach drops.",
+        suggestion: "Seeing his name punches your stomach and the loss rushes back."
+      },
+      {
+        text: "I hate that I still check my phone hoping it's him.",
+        suggestion: "There is a tender hope that still reaches, even while it hurts."
+      },
+      {
+        text: "Waking up is the worst—those first seconds before I remember.",
+        suggestion: "Mornings hit hard as the memory crashes in after a brief lightness."
+      },
+      {
+        text: "I feel embarrassed that I'm not over it yet.",
+        suggestion: "Embarrassment sits on top of a grief that hasn't finished."
+      },
+      {
+        text: "I keep busy so I don't think, and then I crash at night.",
+        suggestion: "Busyness numbs it by day and the sadness floods back at night."
+      },
+      {
+        text: "I don't want to burden anyone with this.",
+        suggestion: "You are worried about burdening people while carrying a lot alone."
+      },
+      {
+        text: "Seeing couples makes me feel like I'm not wanted.",
+        suggestion: "Couples stir that not‑wanted feeling and sting your heart."
+      },
+      {
+        text: "Part of me wonders if I'm just not lovable.",
+        suggestion: "A painful doubt shows up that questions your worth."
       }
     ],
     "case-michael": [
       {
-        text: "When someone corrects me, my chest tightens and I snap before I know it.",
-        suggestion: "A correction lands like a blow in your chest and anger surges to protect you."
+        text: "When someone points out a mistake, I feel humiliated and I snap.",
+        suggestion: "A correction lands like humiliation and anger surges to cover it."
       },
       {
-        text: "After I yell, I hate myself for it, but in the moment it feels necessary.",
-        suggestion: "In the moment it feels necessary, and afterward the shame hits hard."
+        text: "I can't stand being told to calm down.",
+        suggestion: "\"Calm down\" feels dismissive and lights up the heat in you."
       },
       {
-        text: "Respect matters so much that even a small eye roll feels like an attack.",
-        suggestion: "Even small signs can sting like disrespect and light up that old hurt."
+        text: "After I yell, I feel sick with shame.",
+        suggestion: "After the flare, shame settles in and you feel sick about it."
+      },
+      {
+        text: "I scan for disrespect everywhere.",
+        suggestion: "You stay on guard for signs of disrespect, braced to defend."
+      },
+      {
+        text: "If I don't know an answer, I feel small.",
+        suggestion: "Not knowing makes you feel small and exposed."
+      },
+      {
+        text: "I overprepare so no one can catch me.",
+        suggestion: "Preparation is your way to protect against being called out."
+      },
+      {
+        text: "My wife's tone can set me off before I think.",
+        suggestion: "A tone lands like a put‑down and your anger jumps in fast."
+      },
+      {
+        text: "I hate apologizing; it makes me feel weak.",
+        suggestion: "Apologizing feels like losing ground and being weak."
+      },
+      {
+        text: "I tell myself I'm just holding standards.",
+        suggestion: "You frame it as standards while inside it hurts to feel judged."
+      },
+      {
+        text: "I lie awake replaying what I said.",
+        suggestion: "Nights bring the replay and the heavy regret."
       }
     ],
     "case-jason": [
       {
-        text: "In meetings my mind goes blank and I hear a voice saying do not expose how awkward you are.",
-        suggestion: "Blankness and a harsh inner voice make speaking feel dangerous."
+        text: "When it's my turn, my mind goes blank and my throat tightens.",
+        suggestion: "Being in the spotlight blanks your mind and tightens your throat."
       },
       {
-        text: "When friends invite me, I want to go but I freeze and answer too late.",
-        suggestion: "You long to go, and freezing keeps you on the outside again."
+        text: "I worry people think I'm awkward.",
+        suggestion: "You fear being seen as awkward and judged."
       },
       {
-        text: "Sunday nights I lie there feeling like I will always be alone.",
-        suggestion: "Sunday night brings a heavy loneliness that says you will always be alone."
+        text: "I want to go to things and then I cancel.",
+        suggestion: "You long to join, and anxiety pulls you back at the last minute."
+      },
+      {
+        text: "Compliments don't stick; I don't believe them.",
+        suggestion: "Praise slides off because that inner critic is loud."
+      },
+      {
+        text: "I rehearse texts for ages and still don't send.",
+        suggestion: "You over‑check every word, afraid of getting it wrong."
+      },
+      {
+        text: "I eat lunch at my desk to avoid the break room.",
+        suggestion: "You keep to yourself to feel safe from scrutiny."
+      },
+      {
+        text: "After I talk, I cringe for hours.",
+        suggestion: "After speaking you replay and cringe, flooded with self‑doubt."
+      },
+      {
+        text: "I feel invisible in groups.",
+        suggestion: "In groups you feel unseen and outside the circle."
+      },
+      {
+        text: "My hands shake when I introduce myself.",
+        suggestion: "Introductions bring shakes and a rush of nerves."
+      },
+      {
+        text: "Sunday nights feel painfully lonely.",
+        suggestion: "Sunday nights carry a heavy loneliness and fear of being alone."
       }
     ],
     "case-laura": [
       {
-        text: "Most days feel muted, like I am moving through fog and nothing really reaches me.",
-        suggestion: "It is like a fog where feeling cannot quite reach you."
+        text: "Most days feel flat, like I'm behind glass.",
+        suggestion: "Life feels muted, as if you're behind glass and out of reach."
       },
       {
-        text: "Raised voices make my stomach drop and I want to leave the room.",
-        suggestion: "Raised voices drop your stomach and your body wants out right away."
+        text: "Raised voices make my body freeze.",
+        suggestion: "Loud voices drop your stomach and your body freezes for safety."
       },
       {
-        text: "I want closeness, but when someone gets near I go numb and disappear inside.",
-        suggestion: "You want closeness and then numbness comes in to keep you safe by pulling you away."
+        text: "Kindness makes me back away.",
+        suggestion: "Warmth comes close and a protector pulls you back."
+      },
+      {
+        text: "I drink at night to quiet my mind.",
+        suggestion: "The wine helps you switch off when your system won't settle."
+      },
+      {
+        text: "I want closeness and then go numb.",
+        suggestion: "You want closeness, and numbness steps in to keep you safe."
+      },
+      {
+        text: "I feel guilty for not feeling much.",
+        suggestion: "There is guilt about the numbness even as it helps you cope."
+      },
+      {
+        text: "I wake up already tense, like I'm on guard.",
+        suggestion: "Your body wakes on guard, braced for something to happen."
+      },
+      {
+        text: "I avoid movies with fighting.",
+        suggestion: "Conflict scenes yank your body into old fear, so you avoid them."
+      },
+      {
+        text: "Good news doesn't reach me.",
+        suggestion: "Good things land faintly, like they can't get through the fog."
+      },
+      {
+        text: "I forget what I even enjoy.",
+        suggestion: "It's hard to remember pleasure when everything feels distant."
       }
     ],
     "case-carlos": [
       {
-        text: "If someone looks at me sideways, I feel heat and my fists clench.",
-        suggestion: "A sideways look lights heat in you and your body readies to defend."
+        text: "A sideways look lights me up.",
+        suggestion: "A sideways look sparks heat and your body gears to defend."
       },
       {
-        text: "Seeing my kid flinch after I punched the wall guts me.",
-        suggestion: "Seeing his flinch cuts deep and shows you how much this matters to you."
+        text: "I hate that my kid saw me slam the door.",
+        suggestion: "Seeing his face hurts and shows how much this matters to you."
       },
       {
-        text: "I tell myself it is just stress, but part of me fears I am turning into my dad.",
-        suggestion: "Under the stress there is a real fear of becoming who hurt you."
+        text: "If I back down, I feel like nothing.",
+        suggestion: "Backing down feels like being small and walked over."
+      },
+      {
+        text: "I pace and clench when I'm angry.",
+        suggestion: "Anger tightens your jaw and drives you to pace off the charge."
+      },
+      {
+        text: "After I blow up, I feel ashamed.",
+        suggestion: "After the blast, shame comes in and weighs on you."
+      },
+      {
+        text: "I don't trust calm; it feels unsafe.",
+        suggestion: "Calm reads as unsafe, like letting your guard down invites harm."
+      },
+      {
+        text: "My father's voice calls me soft in my head.",
+        suggestion: "That old message about softness still stings and pushes you hard."
+      },
+      {
+        text: "I want respect more than anything.",
+        suggestion: "Respect means safety to you, so challenges land like threats."
+      },
+      {
+        text: "I punch walls instead of people.",
+        suggestion: "You turn the heat on objects to keep it off people, even as it scares you."
+      },
+      {
+        text: "I want my family to feel safe with me.",
+        suggestion: "You care deeply and want your home to feel safe around you."
       }
     ],
     "case-nina": [
       {
-        text: "When I ask for help, guilt floods in and I apologize for needing anything.",
-        suggestion: "The moment you reach for help, guilt rushes in and you pull back."
+        text: "Asking for help makes me feel guilty.",
+        suggestion: "The moment you ask, guilt floods in and you pull back."
       },
       {
-        text: "I get resentful doing everything, then I feel bad for feeling resentful.",
-        suggestion: "You carry so much that resentment rises, and then shame piles on top."
+        text: "I do everything and feel invisible.",
+        suggestion: "Carrying so much leaves you feeling unseen and alone."
       },
       {
-        text: "Sometimes I sit in the car before going inside just to gather myself.",
-        suggestion: "You pause in the car to gather pieces of yourself before going back in."
+        text: "Saying no makes my stomach knot.",
+        suggestion: "A simple no ties your stomach in anxious knots."
+      },
+      {
+        text: "I keep moving so I don't feel resentful.",
+        suggestion: "Staying busy pushes the resentment and sadness away."
+      },
+      {
+        text: "When I rest, I hear a voice call me lazy.",
+        suggestion: "Rest brings a harsh voice that shames you."
+      },
+      {
+        text: "I apologize for even small requests.",
+        suggestion: "Even small needs come with an apology and fear of burdening."
+      },
+      {
+        text: "I explode sometimes and then feel awful.",
+        suggestion: "After the snap, you feel awful and ashamed."
+      },
+      {
+        text: "I dream about someone taking care of me.",
+        suggestion: "There is a quiet longing to be cared for the way you care for others."
+      },
+      {
+        text: "I compare myself to other moms and feel like I fail.",
+        suggestion: "Comparison leaves you feeling not good enough and ashamed."
+      },
+      {
+        text: "I get headaches when I'm overwhelmed.",
+        suggestion: "The stress builds up in your body as pounding pain."
       }
     ],
     "case-aisha": [
       {
-        text: "When a text is not answered right away, it feels like I am falling into a hole.",
-        suggestion: "Those minutes of silence feel like a bottomless drop inside."
+        text: "If you look away, I panic.",
+        suggestion: "A glance away feels like abandonment and panic surges."
       },
       {
-        text: "I can adore someone and then, if I feel them pull back, I panic and push them away first.",
-        suggestion: "The moment you sense distance, panic flares and you push to avoid being left."
+        text: "When a text doesn't come, I can't breathe.",
+        suggestion: "The silence grabs your breath and feels like a drop."
       },
       {
-        text: "The emptiness in my chest can feel like it will swallow me.",
-        suggestion: "That emptiness feels huge, like it could swallow you whole."
+        text: "I say don't leave me and then I yell.",
+        suggestion: "You plead and then anger erupts when fear spikes."
+      },
+      {
+        text: "The emptiness feels like a hole in my chest.",
+        suggestion: "There is a deep, aching emptiness that hurts so much."
+      },
+      {
+        text: "I scratch at my skin to feel something.",
+        suggestion: "You reach for sensation when the numb and pain feel unbearable."
+      },
+      {
+        text: "If someone cancels, I want to quit.",
+        suggestion: "A cancel stings like being dropped and you want to protect yourself."
+      },
+      {
+        text: "I hate myself after I blow up.",
+        suggestion: "After the blow‑up, shame pounds hard and you turn on yourself."
+      },
+      {
+        text: "I test people to see if they care.",
+        suggestion: "Testing is a way you try to feel wanted and safe."
+      },
+      {
+        text: "Goodbyes make me dizzy.",
+        suggestion: "Partings make your world tilt with fear and sadness."
+      },
+      {
+        text: "I don't know who I am without someone.",
+        suggestion: "Without a person close, you feel empty and unsure of yourself."
       }
     ],
     "case-david": [
       {
-        text: "When my wife calls me cold, I feel exposed and then I get furious.",
-        suggestion: "Being called cold stings like exposure, and anger rushes in to cover it."
+        text: "Being called cold makes me bristle.",
+        suggestion: "That word stings and you harden fast to cover the hurt."
       },
       {
-        text: "If I am not impressive, I do not know who I am in a room.",
-        suggestion: "Without being impressive, it feels like your sense of self slips."
+        text: "If I'm not on top, I feel worthless.",
+        suggestion: "Not being on top feels like you are nothing."
       },
       {
-        text: "Since the affair came out, there is a dull emptiness I cannot shake even when things look fine.",
-        suggestion: "On the surface things look fine, and underneath a dull emptiness lingers."
+        text: "I list accomplishments when I feel attacked.",
+        suggestion: "You reach for achievements as armor when you feel judged."
+      },
+      {
+        text: "Praise feels good then it leaks out.",
+        suggestion: "Admiration lands and drains away, leaving you hollow."
+      },
+      {
+        text: "I hate admitting I'm wrong.",
+        suggestion: "Admitting wrong feels exposing and small."
+      },
+      {
+        text: "My kids' tears make me impatient.",
+        suggestion: "Their tears are hard to sit with and you feel lost there."
+      },
+      {
+        text: "Since the affair, the house feels cold.",
+        suggestion: "Things look fine and still there is a chill in your home."
+      },
+      {
+        text: "My father's standards still run me.",
+        suggestion: "Those high standards still drive you and sting when you fall short."
+      },
+      {
+        text: "I think therapy is a waste sometimes.",
+        suggestion: "Skepticism shows up, and underneath you still want things to change."
+      },
+      {
+        text: "I fear being ordinary.",
+        suggestion: "Ordinary feels like being unseen and unworthy."
       }
     ],
     "case-marcus": [
       {
-        text: "Most days I run on autopilot and feel nothing, then out of nowhere a wave hits me.",
-        suggestion: "You move through the day numb, and then a sudden wave can crash in."
+        text: "Most days I feel nothing.",
+        suggestion: "Numbness sits over you like a layer that keeps feeling out."
       },
       {
-        text: "Nightmares wake me soaked, and the next day I just go quiet and get through it.",
-        suggestion: "The nights flood you, and the next day you armor up in quiet to get through."
+        text: "Then out of nowhere, a wave hits me.",
+        suggestion: "Waves crash in suddenly and take you under."
       },
       {
-        text: "Being alone feels safer, but sometimes the silence feels like giving up.",
-        suggestion: "Alone feels safer, and the silence can also feel like giving up on being known."
+        text: "Nightmares leave me wired and empty.",
+        suggestion: "Nightmares jolt you awake—wired and hollow at once."
+      },
+      {
+        text: "I avoid people because it feels safer.",
+        suggestion: "Distance feels safer than the risk of being hurt again."
+      },
+      {
+        text: "I sit in the dark after work.",
+        suggestion: "The quiet, dark room matches the emptiness inside."
+      },
+      {
+        text: "Good moments feel unreal.",
+        suggestion: "Goodness feels far away, like you cannot touch it."
+      },
+      {
+        text: "Loud noises make me jump.",
+        suggestion: "Sudden sounds trigger your body into high alert."
+      },
+      {
+        text: "I don't pick up when family calls.",
+        suggestion: "You keep space to avoid getting pulled into feelings."
+      },
+      {
+        text: "I sometimes think it wouldn't matter if I disappeared.",
+        suggestion: "Hopelessness whispers that you do not matter."
+      },
+      {
+        text: "I want connection and can't tolerate it.",
+        suggestion: "You want closeness and your system shuts down when it gets near."
       }
     ]
   },
@@ -641,128 +893,380 @@ export const STATEMENT_SETS = {
   "exploratory-questions": {
     "case-sara": [
       {
-        text: "When I think about seeing my ex with someone else, my stomach twists and I want to get busy right away.",
-        suggestion: "As you picture that, where do you notice the twist most in your body right now?"
+        text: "When I see his name pop up anywhere, my stomach drops and I feel small.",
+        suggestion: "As you notice that drop right now, where do you feel it most and what is the quality—tight, heavy, hollow?"
       },
       {
-        text: "I tell myself to focus on work so the sadness does not catch me off guard.",
-        suggestion: "What happens inside as you say that to yourself-what lets you know the sadness is nearby?"
+        text: "I tell friends I am fine while my throat feels tight.",
+        suggestion: "Staying with the tight throat for a moment, what does it want you to know about what is hard to say?"
       },
       {
-        text: "If I slow down at night, the loneliness feels like a pressure in my chest.",
-        suggestion: "Can we stay with that pressure for a few breaths-what kind of pressure is it (tight, heavy, hot)?"
+        text: "Evenings feel endless and I clean to keep busy.",
+        suggestion: "As you picture tonight, where in your body do you notice the urge to keep busy, and what happens if we pause with it for two breaths?"
+      },
+      {
+        text: "I almost texted him sorry even though I did nothing wrong.",
+        suggestion: "If we stay with the part that wants to apologize, what is it hoping for, and what fear is it trying to soothe?"
+      },
+      {
+        text: "Sometimes I delete photos and then go looking for them again.",
+        suggestion: "There is a push and pull there; as we sit with both sides, what does each part want most for you right now?"
+      },
+      {
+        text: "When someone is kind to me, I look down.",
+        suggestion: "As your eyes drop, what feeling is underneath the kindness—and where do you sense it in your body?"
+      },
+      {
+        text: "I wake up and it hits me all over again.",
+        suggestion: "At the moment it returns, what signal tells you it is back, and where does that signal land first?"
+      },
+      {
+        text: "I feel embarrassed that I am still this sad.",
+        suggestion: "Where does embarrassment sit in you, and underneath it, what feeling wants attention right now?"
+      },
+      {
+        text: "Seeing couples makes my chest ache and I want to leave.",
+        suggestion: "Can we stay with that ache for a breath—what is it like, and what does it seem to long for?"
+      },
+      {
+        text: "I avoid places we used to go.",
+        suggestion: "As you picture one place, what body signal says 'not safe,' and what would help that part feel one percent safer?"
       }
     ],
     "case-michael": [
       {
-        text: "When a mistake is called out, something snaps and I have to shut it down fast.",
-        suggestion: "In the second before it snaps, what do you feel or sense in your chest or throat?"
+        text: "When someone corrects me, heat shoots up my neck.",
+        suggestion: "In the instant before the heat, what flicker do you notice in your chest or throat?"
       },
       {
-        text: "I cannot stand the look people give me when they think I messed up.",
-        suggestion: "What does that look seem to say to you-and where do you feel that message land in you?"
+        text: "A sigh from my wife makes me bristle.",
+        suggestion: "As you hear that sigh right now, what happens in your body, and what does it seem to protect?"
       },
       {
-        text: "After I calm down, there is a pit in my stomach I do not talk about.",
-        suggestion: "If that pit had a few words, what might it want you to know about what hurt there?"
+        text: "After I blow up, there is a pit in my stomach.",
+        suggestion: "If that pit had a size, shape, or a few words, what would it be like?"
+      },
+      {
+        text: "I scan rooms for disrespect without meaning to.",
+        suggestion: "As you imagine scanning, where tenses first, and what is that part guarding against most?"
+      },
+      {
+        text: "Apologizing makes me feel one‑down.",
+        suggestion: "Where in your body do you feel 'one‑down,' and what would help that place feel a little steadier?"
+      },
+      {
+        text: "When I am unsure of an answer, my chest tightens.",
+        suggestion: "What is that tightness like right now—hard, hot, cramped—and what does it hope to prevent?"
+      },
+      {
+        text: "I double‑check everything to avoid mistakes.",
+        suggestion: "As you picture double‑checking, what fear is nearby, and where do you sense it first?"
+      },
+      {
+        text: "I slam doors instead of saying I was hurt.",
+        suggestion: "In the heartbeat before the slam, what hurt shows up, and how do you feel it in your body?"
+      },
+      {
+        text: "Being told to calm down makes me explode.",
+        suggestion: "Hearing those words in your mind now, what bodily signal jumps first and where does it land?"
+      },
+      {
+        text: "I hate feeling weak.",
+        suggestion: "As you say 'weak' here, what image or sensation comes, and what would help that part feel a bit safer?"
       }
     ],
     "case-jason": [
       {
-        text: "In meetings I plan what to say, then my mind goes blank when it is my turn.",
-        suggestion: "As you imagine your turn coming, what starts happening in your body-tightness, heat, buzzing?"
+        text: "When it is my turn to speak, my throat tightens and my mind goes white.",
+        suggestion: "As we stay with the tight throat for two slow breaths, what starts to show up under the whiteout, even a hint?"
       },
       {
-        text: "I hear a voice saying do not expose how awkward you are.",
-        suggestion: "What does that voice sound like-tone, pace-and where do you feel it sit in you as it speaks?"
+        text: "My voice shakes when I introduce myself.",
+        suggestion: "Notice the shake right now—where do you feel it most, and what does it want you to do?"
       },
       {
-        text: "I want to answer texts right away, but I freeze and wait too long.",
-        suggestion: "In the moment of freezing, what is the scariest part-and if that fear could speak, what would it say?"
+        text: "I rehearse texts and then delete them.",
+        suggestion: "In the second before delete, what feeling is strongest—fear, shame—and where is it in your body?"
+      },
+      {
+        text: "If someone laughs, I assume it is about me.",
+        suggestion: "As you imagine that laugh, what happens in your stomach or chest right now?"
+      },
+      {
+        text: "I avoid eye contact so people will not notice me.",
+        suggestion: "As your eyes look down, what does your body say about being seen—what shows up first?"
+      },
+      {
+        text: "After meetings I cringe for hours.",
+        suggestion: "If we pick one cringe moment, what is the worst frame, and how do you sense it in your body?"
+      },
+      {
+        text: "Crowded rooms make me search for exits.",
+        suggestion: "Right now, what in your body tells you 'I need an exit,' and where do you feel it?"
+      },
+      {
+        text: "Compliments do not stick to me.",
+        suggestion: "As you try to let one kind word land, where does it bounce off, and what seems to block it?"
+      },
+      {
+        text: "I say I am busy to avoid small talk.",
+        suggestion: "As you picture small talk, what is scariest, and where do you feel that in your body?"
+      },
+      {
+        text: "Sunday nights feel heavy and lonely.",
+        suggestion: "Can we stay with that heaviness for two breaths—what is its texture, and what does it seem to need most?"
       }
     ],
     "case-laura": [
       {
         text: "Most days feel muted, like I am behind glass.",
-        suggestion: "As you notice that glass, what sensations tell you you are behind it-numbness, distance, something else?"
+        suggestion: "As you notice the glass now, where do you feel it, and what lets you know it is there—numbness, distance, coolness?"
       },
       {
-        text: "When voices rise, my stomach drops and I want out.",
-        suggestion: "What happens in your body in the few seconds before you want out-and what does that part need right then?"
+        text: "Raised voices make my stomach drop and my shoulders tense.",
+        suggestion: "Staying with the drop for one breath, how does it feel, and what is it warning you about?"
       },
       {
-        text: "When someone is kind to me, sometimes I go blank.",
-        suggestion: "If we linger with that blank for a moment, what begins to show up-image, sensation, a word?"
+        text: "When someone is kind, I go distant.",
+        suggestion: "As distance arrives, where does your attention go in your body, and what does that part want for you?"
+      },
+      {
+        text: "Gentle touch still startles me.",
+        suggestion: "Notice the startle—where does it spark first, and what happens next in your body?"
+      },
+      {
+        text: "I drink at night to turn off the noise.",
+        suggestion: "Before the first sip, what feeling is here, and where do you sense it most right now?"
+      },
+      {
+        text: "I wake tense, like I am on guard.",
+        suggestion: "Scan your body—what is most braced, and what would help that place soften one percent now?"
+      },
+      {
+        text: "Good news does not reach me much.",
+        suggestion: "When good news comes, what gets in the way inside, and what small sign tells you something positive is trying to get through?"
+      },
+      {
+        text: "Sometimes a song cracks something open for a minute.",
+        suggestion: "As you recall that song, what came through the crack, and how did your body feel it?"
+      },
+      {
+        text: "I apologize for needing comfort.",
+        suggestion: "Where does that apology live in you, and underneath it, what need wants naming right now?"
+      },
+      {
+        text: "I avoid movies with fighting because my body cannot handle it.",
+        suggestion: "As you picture a fight scene, what body signal says 'too much,' and what helps that signal settle?"
       }
     ],
     "case-carlos": [
       {
-        text: "A sideways comment makes my chest heat up and my jaw lock.",
-        suggestion: "Can you track that heat and jaw right now-what is the first signal your body gives you?"
+        text: "A certain tone lights me up inside.",
+        suggestion: "As you recall that tone now, what fires first—heat, clench—and where do you sense it?"
       },
       {
-        text: "Seeing my kid flinch still gets to me.",
-        suggestion: "As you remember his face, where do you feel that most-and what is the worst part about that moment for you?"
+        text: "I pace to burn it off.",
+        suggestion: "While you picture pacing, what is the worst part your body is trying to move through, and what would ease it one percent?"
       },
       {
-        text: "I tell myself I have to stay on top or I will get walked over.",
-        suggestion: "What does 'on top' feel like in your body, and what does the part that fears being walked over want for you?"
+        text: "If I back down, I feel like nothing.",
+        suggestion: "Let us sit with 'nothing' for a breath—what image comes with it, and where do you feel it most?"
+      },
+      {
+        text: "My boy’s flinch plays on repeat in my head.",
+        suggestion: "As you see his face now, what hurts most in your body, and what does that hurting place want you to do differently next time?"
+      },
+      {
+        text: "Calm feels dangerous, like letting my guard down.",
+        suggestion: "As we name 'danger,' where do you feel it, and what would calm need to include so it feels strong rather than weak?"
+      },
+      {
+        text: "I break things so I do not break people.",
+        suggestion: "In the heartbeat before you swing, what flashes through you, and what does that flash want to protect most?"
+      },
+      {
+        text: "I do not trust being soft.",
+        suggestion: "When 'soft' appears, what does it mean inside, and what boundary would help it feel safer to try?"
+      },
+      {
+        text: "Disrespect feels like a punch.",
+        suggestion: "Where does that punch land first, and what does the part that gets hit want known about you?"
+      },
+      {
+        text: "I grip the steering wheel until my knuckles go white.",
+        suggestion: "Right now, if your hands had words, what would they say they are holding onto?"
+      },
+      {
+        text: "I want my family to feel safe with me.",
+        suggestion: "As you hold that wish, what feeling rises now, and what is one small body signal that tells you safety is present?"
       }
     ],
     "case-nina": [
       {
-        text: "The second I ask for help, guilt floods me.",
-        suggestion: "Where does that guilt land first-chest, throat, stomach-and what does it accuse you of?"
+        text: "When I ask for help, guilt rushes in and I want to take it back.",
+        suggestion: "As we notice the rush, where does guilt land first—throat, chest—and what does it accuse you of?"
       },
       {
-        text: "I keep moving all day so I do not feel resentful or sad.",
-        suggestion: "If you paused for a breath right now, what feeling shows up first-and what does it want you to know?"
+        text: "I keep busy so I do not feel resentful or sad.",
+        suggestion: "If we pause the busyness for two breaths, what shows up underneath, and what does it need right now?"
       },
       {
-        text: "Resting makes me feel selfish even when I am exhausted.",
-        suggestion: "What happens inside as you imagine resting-what feeling or image lets you know it feels selfish?"
+        text: "Saying no makes my stomach knot.",
+        suggestion: "Stay with the knot—how big is it, and what fear does it hold about what happens if you say no?"
+      },
+      {
+        text: "When I rest, a voice calls me lazy.",
+        suggestion: "As that word lands, where do you feel it, and what would you want that shamed part to hear from you?"
+      },
+      {
+        text: "I apologize for even small requests.",
+        suggestion: "As you imagine asking, what young part fears being a burden, and where do you feel it?"
+      },
+      {
+        text: "I get headaches when I am overwhelmed.",
+        suggestion: "Right now, before a headache, what is the first body signal you notice, and what would easing one percent look like?"
+      },
+      {
+        text: "I compare myself to other moms and feel small.",
+        suggestion: "As 'small' shows up, where is it in your body, and what does that small part most need today?"
+      },
+      {
+        text: "I dream of being taken care of and then feel selfish for wanting it.",
+        suggestion: "Staying with the wish a moment, what feeling rises with it, and what is the 'selfish' part trying to protect?"
+      },
+      {
+        text: "I take on everything so no one is disappointed.",
+        suggestion: "As you hold that load, what is the heaviest piece right now, and what boundary would your body thank you for?"
+      },
+      {
+        text: "I crash at night after holding it together all day.",
+        suggestion: "As you picture the crash, what feeling finally comes through, and what would a kind end‑of‑day ritual look like for that part?"
       }
     ],
     "case-aisha": [
       {
-        text: "If a reply does not come fast, it feels like I am falling.",
-        suggestion: "As that falling starts, where in your body do you notice it first-and what is it like (drop, spin, emptiness)?"
+        text: "If a reply does not come, I feel like I am falling.",
+        suggestion: "As the falling starts, where do you notice it first, and what is it like—drop, spin, emptiness?"
       },
       {
-        text: "When I sense distance, I want to call nonstop or push them away first.",
-        suggestion: "In the instant you sense distance, what happens inside-and what does the most frightened part need from you right then?"
+        text: "I go from please do not leave to leave me alone in seconds.",
+        suggestion: "In the breath before the flip, what feeling flashes through—loss, rage—and where do you feel it?"
       },
       {
-        text: "Sometimes the emptiness in my chest feels huge.",
-        suggestion: "If we put gentle attention on that emptiness, what shape or texture does it have-and does any word come with it?"
+        text: "Sometimes the emptiness is so loud I want to do anything to stop it.",
+        suggestion: "Can we sit at the edge of the emptiness—what shape or temperature does it have, and what does it ask for?"
+      },
+      {
+        text: "When you look away, I feel dropped.",
+        suggestion: "As that drop happens, what age does it feel like, and what would that young part need right now?"
+      },
+      {
+        text: "I scratch to feel something real.",
+        suggestion: "As you name the urge, where in your body does the emptiness sit, and what helps that place feel held?"
+      },
+      {
+        text: "If you cancel, I do not want to come back.",
+        suggestion: "As you imagine a cancel, where do you feel the sting, and what would help it feel held enough to return?"
+      },
+      {
+        text: "Kindness makes me cry and want to run.",
+        suggestion: "In that tug of war, what part longs to stay and what part wants to bolt—what does each need from you?"
+      },
+      {
+        text: "I test people to see if they care.",
+        suggestion: "As you picture a test, what fear are you trying to answer, and what would it be like to ask for care directly—just a little?"
+      },
+      {
+        text: "I hate myself after I lash out.",
+        suggestion: "As you feel that hate, where does it land in your body, and what does the hurt part beneath it need most?"
+      },
+      {
+        text: "Goodbyes make me dizzy.",
+        suggestion: "As the dizziness comes, what helps your feet find the floor, and what feeling is underneath it?"
       }
     ],
     "case-david": [
       {
-        text: "Being called cold makes my face burn and I want to list everything I do.",
-        suggestion: "As your face burns, what is the most tender part under that heat-and what does it wish she knew about you?"
+        text: "When she calls me cold, my jaw turns to stone and my chest goes hard.",
+        suggestion: "Stay with the jaw and chest—what feeling is underneath the stone, and where do you sense it?"
       },
       {
-        text: "If I am not impressive, I feel lost.",
-        suggestion: "What is hardest about feeling lost-and where do you sense that loss in your body right now?"
+        text: "If I am not winning, I feel hollow.",
+        suggestion: "As you notice the hollow, what is its size or texture, and what does it seem to miss?"
       },
       {
-        text: "At night there is a flatness I cannot shake.",
-        suggestion: "As you notice that flatness, what do you become aware of first-weight, emptiness, pressure-and what does it seem to be about?"
+        text: "I smooth my shirt and list achievements when I feel judged.",
+        suggestion: "As you picture doing that, what feeling are you armoring against, and where does it show up first?"
+      },
+      {
+        text: "Praise leaks out fast.",
+        suggestion: "If we hold one compliment a second longer, where does it land, and what pushes it out?"
+      },
+      {
+        text: "Admitting I am wrong makes my face burn.",
+        suggestion: "Notice the burn—what does it fear being seen as, and where do you feel that fear?"
+      },
+      {
+        text: "I check my phone during hard talks.",
+        suggestion: "As your eyes drop to the phone, what feeling spikes, and what would help that part stay one breath longer?"
+      },
+      {
+        text: "If the kids push back, I lose it.",
+        suggestion: "In the breath before you snap, what shows up inside—sting, shame, fear—and how do you sense it?"
+      },
+      {
+        text: "Since the affair, nights feel flat and heavy.",
+        suggestion: "As you notice the flat heaviness, what faint feeling lives underneath, and what does it wish you could say?"
+      },
+      {
+        text: "I want credit for what I do.",
+        suggestion: "Holding that want, what feeling rises when credit does not come, and what does that feeling need most from them?"
+      },
+      {
+        text: "I hate being ordinary.",
+        suggestion: "As 'ordinary' shows up, what does it mean in your body, and what longing does it point to?"
       }
     ],
     "case-marcus": [
       {
-        text: "I get through the day on autopilot, then a wave hits out of nowhere.",
-        suggestion: "What tells you the wave is coming-any small signal in your body or images that show up first?"
+        text: "Most days I am numb and then a wave hits out of nowhere.",
+        suggestion: "As we stay near the edge before the wave, what signal tells you it is coming, and where do you feel it?"
       },
       {
-        text: "Nightmares leave me wired and empty the next day.",
-        suggestion: "Right now, as you mention them, what do you notice in your body-and if that feeling had a message, what would it say?"
+        text: "Nightmares yank me awake and I feel wired and empty.",
+        suggestion: "Right here with wired and empty, which is louder now, and how do you sense it in your body?"
       },
       {
-        text: "Being around people feels risky; being alone feels blank.",
-        suggestion: "As you imagine being with someone safe, what shifts inside-even a tiny one-and where do you feel it?"
+        text: "Crowds make me tense so I stay near the exits.",
+        suggestion: "As you imagine a crowd, where in your body is the tension highest, and what would one percent more safety feel like?"
+      },
+      {
+        text: "Silence in my place feels heavy.",
+        suggestion: "Where does the heaviness rest, and if it had a weight or color, what would it be like?"
+      },
+      {
+        text: "I sit in the car after work to avoid going upstairs.",
+        suggestion: "As you picture sitting there, what feeling are you not ready to face, and what would it need to take one small step?"
+      },
+      {
+        text: "I keep the lights low and ignore calls.",
+        suggestion: "While you notice the dim, what does your body say about contact right now, and where is there the smallest welcome for connection?"
+      },
+      {
+        text: "Good moments feel unreal, like they are behind glass.",
+        suggestion: "If we touch one good moment, where do you feel it, and what seems to block it from coming closer?"
+      },
+      {
+        text: "Sudden sounds make me jump.",
+        suggestion: "When you jump, what comes right after in your body, and what helps you settle quickest?"
+      },
+      {
+        text: "I do not remember the last time I really laughed.",
+        suggestion: "As you say that, what feeling shows up—empty, sad—and where does it land?"
+      },
+      {
+        text: "Part of me thinks I am better off alone.",
+        suggestion: "If we listen to that part, what is it protecting you from most, and what would it need to risk a tiny step toward closeness?"
       }
     ]
   },
@@ -897,384 +1401,1140 @@ export const STATEMENT_SETS = {
   "empathic-explorations": {
     "case-sara": [
       {
-        text: "When I hear he is dating again, a heavy feeling drops in my chest and I want to disappear into work.",
-        suggestion: "There is a heavy drop right there; as we stay with it a moment, what begins to take shape inside?"
+        text: "When I see his name pop up anywhere, my stomach drops and I feel small.",
+        suggestion: "As we stay with that drop for a breath, where do you feel it most and what does that smallness seem like inside?"
       },
       {
-        text: "I catch myself smiling and saying I am fine even when my eyes sting.",
-        suggestion: "Your eyes sting even as you smile; can we linger with that sting and see what it seems to be about?"
+        text: "I tell friends I'm fine while my throat feels tight.",
+        suggestion: "That tight throat is here now; if we linger a moment, what does it want you to know about what is hard to say?"
       },
       {
-        text: "At night the apartment feels too quiet and I scroll until I am numb.",
-        suggestion: "There is something in that quiet; if we linger just a little with the part that reaches for numbness, what do you notice?"
+        text: "Evenings feel endless and I clean to keep busy.",
+        suggestion: "As you imagine tonight, where in your body do you notice the urge to keep busy, and what happens if we pause with it for two breaths?"
+      },
+      {
+        text: "I almost texted him sorry, even though I did nothing wrong.",
+        suggestion: "If we stay with the part that wants to apologize, what is it hoping for and what fear is it trying to soothe?"
+      },
+      {
+        text: "Sometimes I delete photos, then go looking for them again.",
+        suggestion: "There is a push‑pull there; as we sit with both sides, what does each part want most for you right now?"
+      },
+      {
+        text: "When someone is kind to me, I look down.",
+        suggestion: "Staying with the moment of looking down, what feeling shows up underneath the kindness—even a faint one?"
+      },
+      {
+        text: "I wake up and it hits me all over again.",
+        suggestion: "Right at that morning hit, where does it land in your body, and if it had a texture or weight, what would it be like?"
+      },
+      {
+        text: "I feel embarrassed that I'm still sad.",
+        suggestion: "As we notice the embarrassment, what feeling sits underneath it, and what does that part wish could be understood?"
+      },
+      {
+        text: "Seeing couples makes my chest ache and I want to leave.",
+        suggestion: "Can we stay with that ache for a moment—what is the ache like, and what does it seem to long for?"
+      },
+      {
+        text: "I don't want to burden anyone with my feelings.",
+        suggestion: "If that 'burden' part had a voice, what would it say about what it fears will happen if you let someone in?"
       }
     ],
     "case-michael": [
       {
-        text: "Hearing I messed up hits like a punch and heat rushes up my neck.",
-        suggestion: "That punch and heat are here now; staying with the sting for a moment, what shows up just under it?"
+        text: "When someone corrects me, my ears ring and my jaw locks.",
+        suggestion: "As you notice the ring and the lock, what is the very first signal that shows up before the heat—where do you feel it?"
       },
       {
-        text: "After I calm down, there is this small ashamed feeling I do not like to look at.",
-        suggestion: "There is that small ashamed place; as we sit with it gently, what is it like from the inside?"
+        text: "I scan rooms for disrespect without meaning to.",
+        suggestion: "While you picture scanning, what happens in your chest or gut, and what is that part trying to guard against most?"
       },
       {
-        text: "Respect matters so much that even a sigh makes me bristle.",
-        suggestion: "Something bristles at even a sigh; if we stay with that edge, what does it seem to be protecting?"
+        text: "After I blow up, there is a pit in my stomach I avoid.",
+        suggestion: "Can we sit with that pit for a moment—what is its size, shape, or message if it had a few words?"
+      },
+      {
+        text: "Apologizing makes me feel one‑down.",
+        suggestion: "As we stay with the one‑down feeling, what does it remind you of, and what does the part that resists apology need right then?"
+      },
+      {
+        text: "A simple sigh from my wife sets me off.",
+        suggestion: "In the second before you react, what flicker shows up inside—sting, shame, fear—and where does it land?"
+      },
+      {
+        text: "If I don't know the answer, I tense up.",
+        suggestion: "Notice that tension right now; what muscles tighten first, and what does the tightness hope to prevent?"
+      },
+      {
+        text: "I double‑check everything to avoid being called out.",
+        suggestion: "As you imagine double‑checking, what feeling sits underneath the vigilance, and what would it be like to let it rest 1%?"
+      },
+      {
+        text: "I hate feeling weak.",
+        suggestion: "Staying with 'weak' for a breath, what image or memory comes with it, and what does the strong part want for you most?"
+      },
+      {
+        text: "Sometimes I lie awake replaying every word.",
+        suggestion: "If we replay one moment together, what body signal tells you 'this is the worst part,' and what does that signal ask for?"
+      },
+      {
+        text: "I don't want to be like my dad.",
+        suggestion: "As that wish shows up, what feeling in you is most afraid of becoming him, and how does it show itself right now?"
       }
     ],
     "case-jason": [
       {
-        text: "When attention turns to me, my mind blanks and my throat tightens.",
-        suggestion: "There is a blank and a tight throat; as we linger with that tightness, what begins to come into focus, if anything?"
+        text: "When it's my turn to speak, my throat tightens and my mind goes white.",
+        suggestion: "As we stay with the tight throat for two slow breaths, what starts to show up under the whiteout, even a hint?"
       },
       {
-        text: "I want to say yes to invites and then I freeze at the last second.",
-        suggestion: "The freeze is right there at the edge; can we stay close to it and notice what it is trying to spare you from?"
+        text: "I hover over send and then delete my texts.",
+        suggestion: "While you picture that moment, what feeling grips you most—fear, shame—and where do you sense it first in your body?"
       },
       {
-        text: "Sometimes I replay conversations and feel a small ache in my chest.",
-        suggestion: "That small ache is here; as we give it a bit of room, what is the ache like and what does it seem to care about?"
+        text: "Compliments don't stick; I shrug them off.",
+        suggestion: "If we let one compliment linger a second, what makes it hard to take in, and what does the skeptical part want to protect?"
+      },
+        {
+        text: "I avoid eye contact so people won't notice me.",
+        suggestion: "As your eyes drop, what happens in your chest or belly, and what does that part imagine would happen if you were seen?"
+      },
+      {
+        text: "After meetings, I cringe replaying small moments.",
+        suggestion: "Can we slow with one cringe—what is the worst frame, and what does the cringing part fear it proves about you?"
+      },
+      {
+        text: "Walking into a room, I look for the exit.",
+        suggestion: "As you notice the exit, what signal tells you you are unsafe, and what would 1% more safety feel like in your body?"
+      },
+      {
+        text: "My hands sweat before I introduce myself.",
+        suggestion: "Stay with the sweat for a breath—what is the message in it, and what does that part need from you right now?"
+      },
+      {
+        text: "I compare myself to everyone there.",
+        suggestion: "As comparison ramps up, what feeling sits underneath it, and what does that feeling most want for you in that moment?"
+      },
+      {
+        text: "Sometimes I pretend to text to avoid small talk.",
+        suggestion: "What is the scariest part of small talk for you, and where do you sense that fear in your body as we name it?"
+      },
+      {
+        text: "Sunday nights feel heavy and I stall replying to friends.",
+        suggestion: "If we stay with that heaviness, what does it seem to be about, and what tiny step would feel kind toward that part?"
       }
     ],
     "case-laura": [
       {
-        text: "Most of the time I feel flat, and then a hint of feeling flickers and I push it down.",
-        suggestion: "There is a flicker under the flatness; if we linger very gently with that flicker, what does it feel like from within?"
+        text: "Most days feel flat, and when feeling flickers I shut it down.",
+        suggestion: "As we touch just the edge of that flicker, what is its quality—warm, heavy, sharp—and how big is it right now?"
       },
       {
-        text: "A raised voice makes my stomach drop and my body wants out.",
-        suggestion: "We can stay with that drop for just a breath; what is the drop like, and what does it seem to be warning you about?"
+        text: "Raised voices make my stomach drop and my shoulders tense.",
+        suggestion: "Staying with the drop for one breath, what does your body warn you about, and what would help it feel 1% safer now?"
       },
       {
-        text: "When someone is kind, a part of me goes distant.",
-        suggestion: "There is a distance that arrives with kindness; as we sit with it softly, what begins to show itself there?"
+        text: "Kindness makes me feel far away inside.",
+        suggestion: "As distance arrives, where do you feel it, and if it had a purpose, what would it be trying to do for you?"
+      },
+      {
+        text: "I drink wine at night to quiet the noise.",
+        suggestion: "Before the first sip, what feeling or sensation pushes you toward the bottle, and what does that part ask for instead?"
+      },
+      {
+        text: "I wake already braced for the day.",
+        suggestion: "Scan your body right now—what is most braced, and what would that braced place need to soften a little?"
+      },
+      {
+        text: "Touch startles me even when it's gentle.",
+        suggestion: "As you recall a gentle touch, where does the startle fire first, and what does it fear will happen next?"
+      },
+      {
+        text: "Good news doesn't reach me much.",
+        suggestion: "When good news comes, what gets in the way inside, and what tiny sign tells you something positive is trying to get through?"
+      },
+      {
+        text: "Sometimes music cracks something open for a minute.",
+        suggestion: "As you remember a song that cracked it open, what came through that crack, and what did that part want?"
+      },
+      {
+        text: "I feel guilty for needing comfort.",
+        suggestion: "Let us notice the guilt first—what does it accuse you of, and beneath it, what does the needing part wish for?"
+      },
+      {
+        text: "I avoid movies with fighting because my body can't handle it.",
+        suggestion: "If we name one body signal that says 'too much,' what is it, and what helps that signal settle right now?"
       }
     ],
     "case-carlos": [
       {
-        text: "A sideways tone makes my chest heat and my jaw clamp.",
-        suggestion: "The heat and clamp are here now; if we stay close to them, what do they seem to be saying on your behalf?"
+        text: "A certain tone makes my chest heat and my fists clench.",
+        suggestion: "As we stay with the heat and clench, what is the first hint underneath—hurt, humiliation—and how do you sense it?"
       },
       {
-        text: "When I remember my boy flinching, something in me drops.",
-        suggestion: "There is that drop as you see his face; can we linger with it and notice what hurts most right there?"
+        text: "I pace the room to burn it off.",
+        suggestion: "While you picture pacing, what is the worst part your body is trying to move through, and what would it need to slow 1%?"
       },
       {
-        text: "I tell myself to be the toughest so I cannot be hurt.",
-        suggestion: "There is a part that needs to be toughest; staying with that part for a moment, what does it want for you when it gets tough?"
+        text: "If I back down, I feel like nothing.",
+        suggestion: "Let us sit with 'nothing' for a breath—what image comes with it, and what does the part that hates backing down want for you?"
+      },
+      {
+        text: "My boy's flinch plays on repeat in my head.",
+        suggestion: "As you see his face now, what hurts most in your body, and what does that hurting place want you to do differently?"
+      },
+      {
+        text: "Calm feels dangerous, like I'm letting my guard down.",
+        suggestion: "As we name 'danger,' where do you feel it, and what would calm need to include so it feels strong rather than weak?"
+      },
+      {
+        text: "I break things so I don't break people.",
+        suggestion: "In the second before you swing, what flashes through you, and what does that flash want you to protect most?"
+      },
+      {
+        text: "I don't trust being soft.",
+        suggestion: "As 'soft' shows up, what does it mean in your body, and what boundary would make softness feel safe enough to try?"
+      },
+      {
+        text: "Disrespect feels like a punch.",
+        suggestion: "If we pause with that 'punch,' where does it land first, and what does the part that gets hit wish someone knew about you?"
+      },
+      {
+        text: "I want my family to feel safe with me.",
+        suggestion: "As you hold that wish, what feeling rises in you now, and what is one small signal your body gives when safety is present?"
+      },
+      {
+        text: "I learned early never to be the small one.",
+        suggestion: "Staying with that learning, what age does it feel like, and what did that younger part need back then that it still needs now?"
       }
     ],
     "case-nina": [
       {
-        text: "As soon as I say I need help, guilt washes over me.",
-        suggestion: "That wash of guilt is here; if we sit with it softly, what does it seem to be protecting or preventing?"
+        text: "When I ask for help, guilt rushes in and I want to take it back.",
+        suggestion: "As we notice the rush, where does guilt land first—throat, chest—and what does it accuse you of?"
       },
       {
-        text: "I keep moving so I do not feel the resentment underneath.",
-        suggestion: "There is a layer under all that moving; as we linger for a breath, what begins to come into view there?"
+        text: "I keep busy so I don't feel resentful or sad.",
+        suggestion: "If we pause with the busyness for two breaths, what feeling peeks out from underneath, and what does it need right now?"
       },
       {
-        text: "Resting brings up a tight, selfish feeling in my chest.",
-        suggestion: "Let us stay with that tight feeling a little; what is its texture, and what does it want you to remember as you rest?"
+        text: "Saying no makes my stomach knot.",
+        suggestion: "Stay with the knot for a moment—how big is it, and what fear does it hold about what happens if you say no?"
+      },
+      {
+        text: "I apologise for even small requests.",
+        suggestion: "As you picture apologising, what young part of you worries about being a burden, and what would you want that part to hear from you now?"
+      },
+      {
+        text: "If the house is messy, I feel like I'm failing.",
+        suggestion: "As we sit with 'failing,' what does that word feel like in your body, and who taught you that rule?"
+      },
+      {
+        text: "I get headaches when I'm overwhelmed.",
+        suggestion: "Right now, as you think of overwhelm, where do you feel the first signal, and what would easing 1% look like for your body?"
+      },
+      {
+        text: "I dream of being taken care of and then feel selfish for wanting it.",
+        suggestion: "Staying with the wish for a moment, what feeling rises with it, and what does the 'selfish' part fear would happen?"
+      },
+      {
+        text: "I take on everything so no one can be disappointed in me.",
+        suggestion: "As you hold that load, what is the heaviest piece right now, and what boundary would your body thank you for setting?"
+      },
+      {
+        text: "I compare myself to other moms and feel small.",
+        suggestion: "When 'small' shows up, where do you notice it, and what does that small part most need from you today?"
+      },
+      {
+        text: "I crash at night after holding it together all day.",
+        suggestion: "As you picture the crash, what feeling finally gets through, and what would a kind end‑of‑day ritual look like for that part?"
       }
     ],
     "case-aisha": [
       {
-        text: "If someone pulls back, panic surges and I feel a hole open in my chest.",
-        suggestion: "There is a hole feeling as panic surges; staying with the very edge of it, what begins to show up about what it needs?"
+        text: "If a reply doesn't come, my chest feels like a hole opens and I can't breathe.",
+        suggestion: "As we stay with the very edge of that hole, where is the breath stuck, and what does that terrified part need from us right now?"
       },
       {
-        text: "I can go from loving to furious in minutes when I feel ignored.",
-        suggestion: "There is a sharp turn right there; as we linger with the moment before the fury, what is alive underneath?"
+        text: "I go from please don't leave to leave me alone in seconds.",
+        suggestion: "In the breath before the flip, what feeling flashes through—loss, rage—and what does it want you to do to feel safe?"
       },
       {
-        text: "Sometimes the emptiness is so loud I want to do anything to quiet it.",
-        suggestion: "The emptiness is loud; if we sit with a small, safe slice of it together, what does it seem to be asking for?"
+        text: "Sometimes I scratch to feel something real.",
+        suggestion: "As you name the urge, where in your body does the emptiness sit, and if it had a shape or temperature, what is it like?"
+      },
+      {
+        text: "When you look away, I feel dropped.",
+        suggestion: "Staying with the drop for one slow breath, what age does it feel like, and what did that young part need right then?"
+      },
+      {
+        text: "I test people to see if they care.",
+        suggestion: "As you imagine testing, what fear are you trying to answer, and what would it be like to ask for care directly, even a little?"
+      },
+      {
+        text: "Goodbye makes me dizzy.",
+        suggestion: "When the dizziness comes, where do your feet feel the floor, and what do you need to hear to know I am still with you?"
+      },
+      {
+        text: "Kindness makes me sob and want to run.",
+        suggestion: "As both show up, what part wants to soak in the kindness and what part wants to bolt—what does each need from you now?"
+      },
+      {
+        text: "I feel disgusting because of what was done to me.",
+        suggestion: "If we gently touch the part that feels contaminated, what words or image does it carry, and what would it want me to know most?"
+      },
+      {
+        text: "I stare at the door to make sure you won't end early.",
+        suggestion: "As your eyes hold the door, what does the watchful part fear would happen if it relaxed for one breath?"
+      },
+      {
+        text: "If you cancel, I don't want to come back.",
+        suggestion: "Let us stay with the sting of a cancel—where do you feel it, and what would help that part feel held enough to return?"
       }
     ],
     "case-david": [
       {
-        text: "Being called cold makes my face burn and I harden.",
-        suggestion: "There is a burn and a hardening; as we stay with the burn a moment, what begins to show under the hardness?"
+        text: "When she says I'm cold, my face burns and my chest goes hard.",
+        suggestion: "As we notice the burn and the hard chest, what is the hurt just beneath, and what does it ask for that is hard to show?"
       },
       {
-        text: "When I am not impressive, I feel a hollow spot inside.",
-        suggestion: "That hollow spot is noticeable; if we linger with it gently, what is it like and what does it seem to miss?"
+        text: "If I'm not the best, I feel hollow.",
+        suggestion: "Let us sit with the hollow—what is its size or texture, and what does it seem to be missing most?"
       },
       {
-        text: "At night there is a flatness I cannot shake.",
-        suggestion: "The flatness is here; staying with it for a few breaths, what faint signals start to rise beneath it, if any?"
+        text: "I smooth my shirt and list achievements when I feel judged.",
+        suggestion: "As you picture straightening up, what feeling are you armoring against, and what would it be like to let me see 1% of it?"
+      },
+      {
+        text: "Praise feels good then leaks out.",
+        suggestion: "While we hold one bit of praise for a second longer, where does it land, and what makes it hard to keep?"
+      },
+      {
+        text: "I check my phone in hard talks.",
+        suggestion: "In the instant your eyes drop, what feeling spikes, and what would help that part feel steady enough to stay?"
+      },
+      {
+        text: "My kids' tears make me impatient.",
+        suggestion: "As you imagine their tears, what shows up in your body, and what does the impatient part need so it can soften?"
+      },
+      {
+        text: "Admitting I'm wrong makes my face burn.",
+        suggestion: "Stay with the burn for one breath—what does it fear being seen as, and what would you want understood about you there?"
+      },
+      {
+        text: "Since the affair, nights feel flat and heavy.",
+        suggestion: "As you notice the flat, heavy nights, what faint feeling lives under them, and what does it wish you could say?"
+      },
+      {
+        text: "I want credit for what I do.",
+        suggestion: "Holding that want, what feeling rises when credit doesn't come, and what does that feeling need most from the people you love?"
+      },
+      {
+        text: "I hate being ordinary.",
+        suggestion: "As 'ordinary' shows up, what does it mean in your body, and what longing does it point to?"
       }
     ],
     "case-marcus": [
       {
-        text: "Most days I run on autopilot, then a wave comes out of nowhere.",
-        suggestion: "There is an edge before the wave; as we stay near that edge, what do you begin to notice in your body?"
+        text: "Most days I'm numb and then a wave hits out of nowhere.",
+        suggestion: "As we stay near the first sign of a wave, what body signal tells you it's coming, and what helps you ride 1% of it now?"
       },
       {
-        text: "Nightmares leave me empty and wired.",
-        suggestion: "Empty and wired are both here; lingering with whichever is strongest, what is it like from the inside right now?"
+        text: "Nightmares yank me awake and I feel wired and empty.",
+        suggestion: "Right here with wired and empty, which is stronger, and what does that part need from us in this moment?"
       },
       {
-        text: "Being with people feels risky, so I keep to myself.",
-        suggestion: "There is a risk your body knows; as we sit with that sense of risk for a moment, what does it seem to warn you about most?"
+        text: "Crowds make me tense so I keep to the edges.",
+        suggestion: "As you picture an edge, where in your body is tension highest, and what would safety feel like there for one breath?"
+      },
+      {
+        text: "Silence in my apartment feels heavy.",
+        suggestion: "When the heavy silence lands, where do you feel it most, and if it had a weight or color, what is it like?"
+      },
+      {
+        text: "I sit in the car after work to avoid going upstairs.",
+        suggestion: "As you sit there, what feeling are you not ready to face yet, and what would that feeling need to take one step toward the door?"
+      },
+      {
+        text: "I keep the lights low and avoid calls.",
+        suggestion: "While you picture dim lights, what does your body say about contact right now, and where is there the smallest welcome for connection?"
+      },
+      {
+        text: "Good moments feel unreal, like they're behind glass.",
+        suggestion: "Let us hold one small good thing—how does your body register it, and what blocks it from coming closer?"
+      },
+      {
+        text: "Sudden sounds make me jump.",
+        suggestion: "Stay with the jump for one breath—what else shows up right after it, and what settles you quickest in those moments?"
+      },
+      {
+        text: "I don't pick up when family calls because I don't want to feel.",
+        suggestion: "As you notice the avoidance, what feeling waits on the other side of the call, and what would support look like to touch 1% of it?"
+      },
+      {
+        text: "Part of me thinks I'm better off alone forever.",
+        suggestion: "If we sit with that part kindly, what is it protecting you from most, and what would it need to risk a tiny step toward closeness?"
       }
     ]
   },
   "empathic-evocations": {
     "case-sara": [
       {
-        text: "Evenings in the apartment feel so quiet it presses on my chest.",
-        suggestion: "The quiet settles on your chest like a heavy blanket of alone."
+        text: "Evenings stretch out and the apartment feels too big for just me.",
+        suggestion: "Nights stretch long and the rooms feel too big, echoing with alone."
       },
       {
-        text: "I smile and say I am fine, but inside it stings.",
-        suggestion: "That smile feels like a thin cover over a sharp sting inside."
+        text: "I keep that cheerful voice on, and underneath my chest feels hollow.",
+        suggestion: "A bright voice on top of a hollowed‑out chest, like a smile over an ache."
       },
       {
-        text: "Seeing his photo with someone new knocks the air out of me.",
-        suggestion: "It hits like a punch to the ribs, knocking the breath from you."
+        text: "Seeing his jacket in the closet hits me like a wave.",
+        suggestion: "It crashes in like a wave the moment your eyes catch that jacket."
+      },
+      {
+        text: "I wake up and for a second I forget, then it slams back.",
+        suggestion: "That second of light, then the weight slams back down like a door."
+      },
+      {
+        text: "When friends ask, I shrug it off, but my throat tightens.",
+        suggestion: "A casual shrug on the outside while your throat cinches tight inside."
+      },
+      {
+        text: "I scroll late at night until my eyes burn.",
+        suggestion: "Late‑night scrolling, eyes burning as you try to outrun the ache."
+      },
+      {
+        text: "Hearing our song in a store made my knees go weak.",
+        suggestion: "The first notes take your legs out from under you."
+      },
+      {
+        text: "I keep thinking maybe if I were different, I wouldn't be alone.",
+        suggestion: "It lands like a verdict on your worth, heavy and unforgiving."
+      },
+      {
+        text: "Sometimes I sit on the floor and hug my knees just to feel held.",
+        suggestion: "Curled around yourself, making a small circle of warmth in a cold room."
+      },
+      {
+        text: "When you're kind to me, I want to look away.",
+        suggestion: "Kindness feels bright, almost too bright, and you turn your eyes from the light."
       }
     ],
     "case-michael": [
       {
-        text: "When they point out a mistake, I feel heat rush up my neck.",
-        suggestion: "It is like a hot flare racing up your neck toward your face."
+        text: "A correction in front of the team makes my face burn.",
+        suggestion: "Your face burns hot, like all eyes are a spotlight on a flaw."
       },
       {
-        text: "I brace for disrespect the second I enter the room.",
-        suggestion: "You walk in wearing armor, scanning for the next hit."
+        text: "I walk in already braced for someone to mess up.",
+        suggestion: "You hit the doorway in armor, jaw set, scanning for the next hit."
       },
       {
-        text: "After I blow up, shame hangs over me all night.",
-        suggestion: "Shame hangs like a heavy fog that clings and will not lift."
+        text: "My jaw aches from clenching by the end of the day.",
+        suggestion: "That ache tells how hard you've been biting down on the hurt."
+      },
+      {
+        text: "I snap, and then the shame hangs like a weight.",
+        suggestion: "The shame settles on you like a heavy coat you can't take off."
+      },
+      {
+        text: "When my wife sighs, it feels like a slap.",
+        suggestion: "A small sigh landing like a stinging slap across your chest."
+      },
+      {
+        text: "I hear 'calm down' and it explodes something in me.",
+        suggestion: "Those words spark a flash fire that rushes up before you can catch it."
+      },
+      {
+        text: "If I don't know, my stomach drops.",
+        suggestion: "Not knowing drops your stomach like an elevator falling too fast."
+      },
+      {
+        text: "I slam doors because it feels better than feeling small.",
+        suggestion: "The slam is big and loud to cover the small sting inside."
+      },
+      {
+        text: "Apologizing tastes like rust in my mouth.",
+        suggestion: "An apology feels metallic and bitter on your tongue."
+      },
+      {
+        text: "At night, I replay it and I can't unclench.",
+        suggestion: "You lie there wound tight, replaying the scene like a loop you can't stop."
       }
     ],
     "case-jason": [
       {
-        text: "When all eyes turn to me, my throat tightens and my mind goes blank.",
-        suggestion: "The spotlight hits and your throat knots while the screen inside goes dark."
+        text: "When it's my turn, my name sounds far away and my lips go numb.",
+        suggestion: "As your name lands, your lips go numb and the room pulls back."
       },
       {
-        text: "I hear a voice calling me awkward and I shrink back.",
-        suggestion: "That inner voice is a cold whisper that makes you pull into yourself."
+        text: "My hands sweat so much I hide them under the table.",
+        suggestion: "Sweaty hands tucked away, like you're trying to make yourself smaller."
       },
       {
-        text: "Sunday nights feel endless and empty.",
-        suggestion: "They stretch out like a long, dim hallway with no doors."
+        text: "I practice in the mirror and still freeze.",
+        suggestion: "All that practice, and then the freeze locks you like ice."
+      },
+      {
+        text: "If someone laughs, my stomach jolts.",
+        suggestion: "A laugh nearby jolts your stomach like a quick electric shock."
+      },
+      {
+        text: "I shrink in my chair when the spotlight moves near me.",
+        suggestion: "You fold in on yourself as the light sweeps toward you."
+      },
+      {
+        text: "Compliments slide off; I can't grab them.",
+        suggestion: "Praise slides right off like rain on glass."
+      },
+      {
+        text: "Sunday nights, the room feels gray and too quiet.",
+        suggestion: "A gray quiet drifts in and settles over everything."
+      },
+      {
+        text: "When I text, I type and erase until my fingers ache.",
+        suggestion: "Typing and erasing, fingers aching, as the worry circles."
+      },
+      {
+        text: "My voice shakes at hello.",
+        suggestion: "Even 'hello' comes out on a shaky thread."
+      },
+      {
+        text: "I stare at the exit like a lifeline.",
+        suggestion: "The door feels like a lifeline your eyes keep holding onto."
       }
     ],
     "case-laura": [
       {
-        text: "Most days feel muted, like I am moving through fog.",
-        suggestion: "It is as if a gray fog mutes color and sound around you."
+        text: "Most mornings feel flat, like colors are washed out.",
+        suggestion: "It's all washed‑out tones, like the color's been drained."
       },
       {
-        text: "Raised voices make my stomach drop.",
-        suggestion: "The moment voices rise, your stomach drops like an elevator going too fast."
+        text: "A slammed door makes my skin go cold.",
+        suggestion: "That sound sends a cold ripple over your skin."
       },
       {
-        text: "Kindness makes me go distant.",
-        suggestion: "Warmth comes toward you and a part of you steps back behind glass."
+        text: "When someone sits close, I drift a few feet back inside.",
+        suggestion: "You float back behind a pane of glass inside yourself."
+      },
+      {
+        text: "I forget what happy feels like in my body.",
+        suggestion: "Happy feels like a far‑off memory your body can't quite reach."
+      },
+      {
+        text: "Wine helps me switch off the noise.",
+        suggestion: "The wine flips a switch and dims the whole room inside."
+      },
+      {
+        text: "I lie awake feeling like I'm on watch.",
+        suggestion: "On watch even in bed, body posted at the door."
+      },
+      {
+        text: "Sometimes a sad song cracks me open for a minute.",
+        suggestion: "One note slips in and a small crack opens in the numb."
+      },
+      {
+        text: "I walk the aisles just to avoid going home.",
+        suggestion: "Wandering aisles like floating through safe, neutral space."
+      },
+      {
+        text: "Kind words make my throat ache.",
+        suggestion: "Warmth brushes you and your throat aches with the touch."
+      },
+      {
+        text: "I keep a small bag packed just in case.",
+        suggestion: "A bag by the door, like your body never fully comes off alert."
       }
     ],
     "case-carlos": [
       {
-        text: "A sideways tone lights me up and my jaw locks.",
-        suggestion: "It is like a flash fire in your chest while a clamp closes on your jaw."
+        text: "A smirk across the table makes my hands buzz.",
+        suggestion: "That smirk sets your hands buzzing like live wires."
       },
       {
-        text: "Remembering my kid flinch guts me.",
-        suggestion: "His flinch is like a mirror that cuts straight through your center."
+        text: "My chest feels tight like a drum before I pop.",
+        suggestion: "Tight like a drumhead stretched to bursting."
       },
       {
-        text: "I tell myself I must stay on top or be crushed.",
-        suggestion: "It feels like a high, tense perch where any slip means a hard fall."
+        text: "I pace the kitchen to burn it off.",
+        suggestion: "You walk hard lines in the kitchen, trying to shake the heat out."
+      },
+      {
+        text: "My boy looking scared punched a hole in me.",
+        suggestion: "His scared face punched a hole straight through you."
+      },
+      {
+        text: "Calm people look soft to me.",
+        suggestion: "Calm reads as soft, like no armor—dangerous in your world."
+      },
+      {
+        text: "After I blow, the room feels smaller.",
+        suggestion: "After the blast, the house feels small and airless."
+      },
+      {
+        text: "I clench my teeth so hard my head throbs.",
+        suggestion: "Teeth locked so tight the pain drums at your temples."
+      },
+      {
+        text: "If I back down, I feel like I'm disappearing.",
+        suggestion: "Backing down feels like fading out, losing your outline."
+      },
+      {
+        text: "I grip the steering wheel until my knuckles whiten.",
+        suggestion: "White‑knuckled on the wheel, holding yourself together."
+      },
+      {
+        text: "I don't want my kid to remember me like this.",
+        suggestion: "You can feel the ache—like a bruise—wanting to be a safer man in his eyes."
       }
     ],
     "case-nina": [
       {
-        text: "As soon as I ask for help, guilt buzzes through me.",
-        suggestion: "Guilt buzzes like a harsh alarm telling you to stand down."
+        text: "Guilt zaps me the second I sit down.",
+        suggestion: "It zaps you like a buzzer the moment you rest."
       },
       {
-        text: "I keep carrying everything even when I am spent.",
-        suggestion: "It is like wearing a backpack of stones that never gets set down."
+        text: "It's like I'm carrying everyone's bags and mine too.",
+        suggestion: "Arms full of everyone's bags, shoulders burning."
       },
       {
-        text: "Sometimes I sit in the car to breathe before going inside.",
-        suggestion: "That pause is like a small island where you can catch your breath."
+        text: "My stomach twists when I ask for help.",
+        suggestion: "Asking turns your stomach in a tight twist."
+      },
+      {
+        text: "I smile through headaches and keep moving.",
+        suggestion: "A smile stretched over a pounding head as you keep going."
+      },
+      {
+        text: "By evening, my bones feel heavy.",
+        suggestion: "Bones heavy, like you're wading through wet concrete."
+      },
+      {
+        text: "When I say no, my heart pounds like I've done something wrong.",
+        suggestion: "A pounding heart like an alarm for just saying no."
+      },
+      {
+        text: "I clean the counter at midnight because I can't rest.",
+        suggestion: "Midnight wiping, as if a clean counter could quiet the noise."
+      },
+      {
+        text: "If the house is messy, shame crawls up my neck.",
+        suggestion: "Shame crawls warm up your neck just seeing a dish out."
+      },
+      {
+        text: "I cry quietly in the pantry so no one hears.",
+        suggestion: "Tears tucked in the pantry, muffled behind a door."
+      },
+      {
+        text: "Sometimes I dream of a day where I do nothing and don't feel bad.",
+        suggestion: "You imagine a soft day, no doing, and your body loosens at the thought."
       }
     ],
     "case-aisha": [
       {
-        text: "When a reply does not come, I feel like I am falling.",
-        suggestion: "Silence opens like a drop under you, and your stomach free-falls."
+        text: "When you look at the clock, my stomach drops.",
+        suggestion: "One glance at the clock and your stomach drops out."
       },
       {
-        text: "I can go from love to rage in minutes when I feel ignored.",
-        suggestion: "It swings like a door slamming from pleading to fire in a heartbeat."
+        text: "I go from 'please don't go' to 'leave me alone' in seconds.",
+        suggestion: "It flips like a switch—from pleading to fire in a blink."
       },
       {
-        text: "The emptiness in my chest can feel endless.",
-        suggestion: "The emptiness is a wide, dark hole that seems to go on and on."
+        text: "The emptiness burns like a hole in my chest.",
+        suggestion: "A burning hole in your chest that seems bottomless."
+      },
+      {
+        text: "I scratch at my skin so I can feel something real.",
+        suggestion: "Scratching to find something real through the numb and hurt."
+      },
+      {
+        text: "If a text bubbles then disappears, I can't breathe.",
+        suggestion: "Those three dots vanish and your breath locks up."
+      },
+      {
+        text: "Goodbye makes me dizzy.",
+        suggestion: "A goodbye makes the room tilt and spin."
+      },
+      {
+        text: "When you cancel, it feels like the floor opens.",
+        suggestion: "A cancel and the floor opens under your feet."
+      },
+      {
+        text: "I hear 'too much' in my head like a stamp.",
+        suggestion: "The words 'too much' stamped across your heart."
+      },
+      {
+        text: "Warmth makes tears spill out of nowhere.",
+        suggestion: "A bit of warmth and the tears spill like a sudden rain."
+      },
+      {
+        text: "I stare at the door to make sure you're still here.",
+        suggestion: "Eyes locked on the door, guarding against vanishing."
       }
     ],
     "case-david": [
       {
-        text: "Being called cold burns and I harden right away.",
-        suggestion: "The word burns like a brand, and you put on a hard shell to cover it."
+        text: "When she calls me cold, my jaw turns to stone.",
+        suggestion: "Jaw set like stone as the word 'cold' burns in."
       },
       {
-        text: "If I am not impressive, I feel hollow.",
-        suggestion: "Without the shine, there is a hollow room inside that echoes."
+        text: "If I'm not winning, my chest feels hollow.",
+        suggestion: "Without the win, your chest feels like an empty room."
       },
       {
-        text: "At home I feel picked apart.",
-        suggestion: "It is like standing under a bright lamp while every flaw gets circled."
+        text: "I puff up when I feel small.",
+        suggestion: "You puff up big to cover the small sting inside."
+      },
+      {
+        text: "I smooth my shirt and list my accomplishments when I'm cornered.",
+        suggestion: "Straightening the shirt, reciting the resume like armor plates."
+      },
+      {
+        text: "Praise feels good for a minute then leaks out.",
+        suggestion: "Admiration fills you for a moment and then leaks away like water through a sieve."
+      },
+      {
+        text: "I hate the look on my kids' faces when I snap.",
+        suggestion: "That look hits you like a punch you wish you could pull back."
+      },
+      {
+        text: "I check out of hard talks by looking at my phone.",
+        suggestion: "Eyes drop to the screen like a shield you hide behind."
+      },
+      {
+        text: "Saying 'I'm wrong' makes my face burn.",
+        suggestion: "The words make your face burn hot with exposed skin."
+      },
+      {
+        text: "I pace the house at night when I feel judged.",
+        suggestion: "Night pacing, trying to walk off the sting of judgment."
+      },
+      {
+        text: "After the affair, the house feels colder.",
+        suggestion: "The house feels colder, like the heat slipped out through a crack."
       }
     ],
     "case-marcus": [
       {
-        text: "Most days I run on autopilot and feel nothing.",
-        suggestion: "Autopilot feels like moving underwater, everything slowed and far away."
+        text: "I move through the day like a ghost.",
+        suggestion: "Ghosting through the day, barely leaving footprints."
       },
       {
-        text: "Out of nowhere a wave hits me.",
-        suggestion: "The wave is like a riptide that yanks you off your feet."
+        text: "Crowds make my shoulders rise to my ears.",
+        suggestion: "Shoulders climbing up to your ears, muscles on sentry duty."
       },
       {
-        text: "Silence at home feels heavy.",
-        suggestion: "The silence lays on you like a thick blanket that smothers feeling."
+        text: "I sit with my back to the wall.",
+        suggestion: "Back to the wall, eyes scanning exits."
+      },
+      {
+        text: "Nightmares yank me awake and leave me buzzing.",
+        suggestion: "Pulled out of sleep, buzzing like a live wire."
+      },
+      {
+        text: "Silence in my place feels like a weight on my chest.",
+        suggestion: "Silence pressing on your chest like a heavy plate."
+      },
+      {
+        text: "Good moments feel far away, like they're behind glass.",
+        suggestion: "Goodness behind glass, close and untouchable."
+      },
+      {
+        text: "I keep the lights low so I don't have to see much.",
+        suggestion: "Dim lights, keeping the world soft and far."
+      },
+      {
+        text: "If someone knocks, my heart hammers.",
+        suggestion: "A knock at the door sets your heart hammering hard."
+      },
+      {
+        text: "I hold my breath when I talk about it.",
+        suggestion: "Holding your breath as if air might let the pain in."
+      },
+      {
+        text: "Some nights I sit in the car so I don't have to go upstairs.",
+        suggestion: "Lingering in the car like a quiet bunker before the climb."
       }
     ]
   },
   "empathic-conjectures": {
     "case-sara": [
       {
-        text: "I keep telling myself to stop being dramatic and just get on with it.",
-        suggestion: "I wonder if under the push to get on with it there is a part that feels very alone and unworthy."
+        text: "I keep telling my friends I'm fine so they won't worry.",
+        suggestion: "You try to protect them; I wonder if a part also fears that needing them might mean you're too much or unworthy."
       },
       {
-        text: "I deleted our photos so I can be normal again.",
-        suggestion: "Could it be that a part of you still longs to feel chosen, and deleting is trying to protect that sore place?"
+        text: "I threw myself into work so I wouldn't think about him.",
+        suggestion: "You're staying busy to cope; maybe underneath is a fear that the quiet will confirm you weren't worth staying for."
       },
       {
-        text: "When I tear up here I apologize without thinking.",
-        suggestion: "Maybe alongside the sadness there is some shame about needing anyone at all."
+        text: "I feel stupid for still crying months later.",
+        suggestion: "You're frustrated with the tears; I guess there might also be shame about needing and being seen."
+      },
+      {
+        text: "When someone asks how I'm doing, I smile and change the subject.",
+        suggestion: "You move away quickly; could it be there's also a tender longing to be chosen that's hard to show."
+      },
+      {
+        text: "Seeing couples makes me roll my eyes and tell myself love is overrated.",
+        suggestion: "You push it away; I wonder if behind that eye roll is an ache for closeness."
+      },
+      {
+        text: "I unfollowed him and then checked from a friend's phone.",
+        suggestion: "You're trying to protect yourself and still reach; maybe there's a fight in you between self‑protection and hope."
+      },
+      {
+        text: "I tell myself other people have real problems, so I should be grateful.",
+        suggestion: "You minimize your pain; I guess there's a scared part that fears being dismissed if you let it show."
+      },
+      {
+        text: "I almost texted him 'I'm sorry' even though I didn't do anything wrong.",
+        suggestion: "You reach to repair; could it be you're trying to soothe a shame that says it must be your fault."
+      },
+      {
+        text: "Nights are the worst; I keep replaying what I did wrong.",
+        suggestion: "You replay to make sense; I wonder if underneath is a young part trying to earn being kept."
+      },
+      {
+        text: "When you're kind, I look down and want to change the topic.",
+        suggestion: "Kindness lands strong; maybe a part longs for it and another expects it to disappear."
       }
     ],
     "case-michael": [
       {
-        text: "If I do not push people, they slack and I look bad.",
-        suggestion: "I wonder if beneath the push there is a fear of being seen as small or not good enough."
+        text: "If someone questions me in a meeting, I bite back.",
+        suggestion: "You come in strong; I wonder if under the heat is a sting of being seen as not enough."
       },
       {
-        text: "When my coworker corrected me, I lost it.",
-        suggestion: "Could it be the anger rushed in to cover a quick stab of hurt or embarrassment right then?"
+        text: "I can't stand being corrected in front of others.",
+        suggestion: "That's brutal; maybe there's a flash of humiliation that anger covers."
       },
       {
-        text: "After I shout, I avoid eye contact at home.",
-        suggestion: "Maybe there is a quiet shame there that is hard to face with them."
+        text: "My wife says I'm harsh; I just call it honesty.",
+        suggestion: "You value straight talk; I guess there's also a fear of being seen as weak if you soften."
+      },
+      {
+        text: "I make sure nobody has leverage on me.",
+        suggestion: "You protect your position; could it be there's a worry of being one‑down like before."
+      },
+      {
+        text: "Apologizing feels like giving up ground.",
+        suggestion: "It feels risky; I wonder if it touches a small, ashamed place you'd rather not show."
+      },
+      {
+        text: "I hate feeling out of control.",
+        suggestion: "Control matters; maybe underneath is a fear that mistakes prove something bad about you."
+      },
+      {
+        text: "I double‑check everyone's work so I don't get blindsided.",
+        suggestion: "You anticipate threats; I guess there's a part expecting to be blamed."
+      },
+      {
+        text: "After I blow up, I avoid my kid's eyes.",
+        suggestion: "You feel the weight; could it be shame makes looking at him hard."
+      },
+      {
+        text: "Being told to calm down makes me see red.",
+        suggestion: "That hits hard; I wonder if it lands like being dismissed or belittled."
+      },
+      {
+        text: "I don't do feelings; I do solutions.",
+        suggestion: "You lean on fixing; maybe feelings feel like traps that could expose a hurt place."
       }
     ],
     "case-jason": [
       {
-        text: "When I speak, I hear a voice saying I sound stupid.",
-        suggestion: "I wonder if that voice is trying to protect a very tender fear of being exposed or rejected."
+        text: "I rehearse what I'll say and still go blank.",
+        suggestion: "You prepare hard; I wonder if the blank protects you from a feared shame."
       },
       {
-        text: "I skip lunch invites and say I am busy.",
-        suggestion: "Could it be a part expects to be overlooked again, and skipping is a way to avoid that sting?"
+        text: "I pretend I'm busy when I'm invited to things.",
+        suggestion: "You avoid; maybe there's a part that expects to be judged or ignored."
       },
       {
-        text: "Blanking out feels safer than saying the wrong thing.",
-        suggestion: "Maybe the blank is a protector that steps in when shame gets close."
+        text: "I hear a voice saying 'don't embarrass yourself'.",
+        suggestion: "You hear that critic; I guess it tries to keep you safe from feeling small."
+      },
+      {
+        text: "After I speak, I cringe for hours.",
+        suggestion: "You cringe; could it be a sadness about wanting to be accepted."
+      },
+      {
+        text: "Compliments feel fake to me.",
+        suggestion: "They bounce off; I wonder if it's hard to let in warmth because it doesn't fit the old picture."
+      },
+      {
+        text: "Seeing confident people makes me want to disappear.",
+        suggestion: "You shrink; maybe there's envy and grief about feeling on the outside."
+      },
+      {
+        text: "If someone laughs, I assume it's about me.",
+        suggestion: "You brace; I guess there's a raw spot that expects ridicule."
+      },
+      {
+        text: "I text and then delete before sending.",
+        suggestion: "You edit; could it be a fear of being seen that fights with a wish to connect."
+      },
+      {
+        text: "I drink before events to loosen up.",
+        suggestion: "You're seeking relief; I wonder if a softer, scared part needs protection."
+      },
+      {
+        text: "I stay quiet even when I have a good idea.",
+        suggestion: "You hold back; maybe there's a deeper belief that visibility equals danger."
       }
     ],
     "case-laura": [
       {
-        text: "When someone is kind, I feel distant, like it is not for me.",
-        suggestion: "I wonder if distance shows up to keep you safe from a very old hurt around trust and care."
+        text: "Kindness makes me suspicious.",
+        suggestion: "You distance there; I wonder if closeness stirs an old fear of betrayal."
       },
       {
-        text: "A door slam made me freeze for minutes.",
-        suggestion: "Could it be your body remembered danger and fear, even if your mind knew you were here now?"
+        text: "When voices rise, my body freezes.",
+        suggestion: "Your body remembers danger; maybe fear shows up before your mind can."
       },
       {
-        text: "I avoid choir because I might cry.",
-        suggestion: "Maybe there is grief just under the surface that feels too big to let out yet."
+        text: "I feel guilty for not feeling much.",
+        suggestion: "You judge the numbness; I guess it's a protector guarding a very sore grief."
+      },
+      {
+        text: "I avoid movies with family fights.",
+        suggestion: "You steer clear; could it be to avoid waking old terror and shame."
+      },
+      {
+        text: "Sometimes I stare at the wall and feel nothing.",
+        suggestion: "You go flat; I wonder if it's safer than feeling the ache of being alone."
+      },
+      {
+        text: "I tell myself 'don't need anyone'.",
+        suggestion: "You push needs away; maybe there's a part that longs to be held and fears it."
+      },
+      {
+        text: "When someone touches my shoulder, I flinch.",
+        suggestion: "Your body startles; I guess it learned touch could mean danger."
+      },
+      {
+        text: "I worry I'm broken.",
+        suggestion: "You fear that; could it be shame from what was done to you speaking."
+      },
+      {
+        text: "I keep my life very small.",
+        suggestion: "You keep it contained; I wonder if it's a way to control risk and avoid old pain."
+      },
+      {
+        text: "I apologize for crying; it feels weak.",
+        suggestion: "You apologize; maybe crying touches a belief that you'd be blamed for needing care."
       }
     ],
     "case-carlos": [
       {
-        text: "An eye roll sets me off like a switch.",
-        suggestion: "I wonder if under the heat there is a flash of humiliation that hurts fast."
+        text: "A disrespectful tone flips a switch in me.",
+        suggestion: "It flips you fast; I wonder if under the heat is a flash of humiliation."
       },
       {
-        text: "My kid flinching keeps replaying in my head.",
-        suggestion: "Could it be a part of you feels scared you are becoming who hurt you, and that cuts deep."
+        text: "If I back down, they'll think I'm weak.",
+        suggestion: "You guard your status; maybe there's a younger part that refuses to be small again."
       },
       {
-        text: "I hate apologizing because it feels weak.",
-        suggestion: "Maybe apologizing touches a raw place that worries you will be seen as less."
+        text: "I can't stand being told what to do.",
+        suggestion: "It grates; I guess it touches an old fear of being controlled."
+      },
+      {
+        text: "My son saw me slam a door; I felt sick after.",
+        suggestion: "You care deeply; could it be shame and fear of becoming your father."
+      },
+      {
+        text: "After a fight, I can't look at my wife.",
+        suggestion: "You avoid her eyes; I wonder if seeing her face touches regret and tenderness."
+      },
+      {
+        text: "I puff up when someone challenges me.",
+        suggestion: "You armor up; maybe it's to cover a moment of feeling less‑than."
+      },
+      {
+        text: "I break things so I don't hit people.",
+        suggestion: "You're trying to protect; I guess the anger takes over to block hurt."
+      },
+      {
+        text: "Calm guys seem like pushovers to me.",
+        suggestion: "You equate calm with weakness; could it be calm feels dangerous because it wasn't safe before."
+      },
+      {
+        text: "I replay disrespect for days.",
+        suggestion: "You ruminate; I wonder if it keeps the humiliation from settling in."
+      },
+      {
+        text: "I want to do better for my family.",
+        suggestion: "You want change; maybe there's a tender part longing to be safe to love."
       }
     ],
     "case-nina": [
       {
         text: "Resting makes me feel selfish.",
-        suggestion: "I wonder if a part learned long ago that asking or needing risks being rejected."
+        suggestion: "You feel selfish there; I wonder if a part learned love had to be earned."
       },
       {
-        text: "I get resentful and then instantly guilty.",
-        suggestion: "Could it be the guilt rushes in to cover anger that says you have been alone with too much for too long?"
+        text: "I say yes and then resent it.",
+        suggestion: "You say yes; maybe anger is telling you about unmet needs to be supported."
       },
       {
-        text: "I apologize even for small requests.",
-        suggestion: "Maybe there is a belief that your needs do not count unless you are giving."
+        text: "When I ask for help, I apologize.",
+        suggestion: "You apologize; I guess there's a fear you'll be rejected for needing."
+      },
+      {
+        text: "If the house is messy, I feel like a failure.",
+        suggestion: "You feel like a failure; could it be shame tied to being 'good' through doing."
+      },
+      {
+        text: "I get anxious if someone seems disappointed in me.",
+        suggestion: "You tense up; I wonder if it stirs an old fear of losing love."
+      },
+      {
+        text: "I swallow my anger because it's not nice.",
+        suggestion: "You swallow it; maybe a younger part believes your needs are wrong."
+      },
+      {
+        text: "I take care of everyone and then feel invisible.",
+        suggestion: "You feel invisible; I guess there's a longing to be cared for too."
+      },
+      {
+        text: "I can't say no without feeling sick.",
+        suggestion: "You feel sick; could it be a protector trying to keep attachment safe."
+      },
+      {
+        text: "I tell myself others have it worse.",
+        suggestion: "You minimize your pain; I wonder if it's a way to stay acceptable by pushing yours down."
+      },
+      {
+        text: "If I slow down, I feel a lump in my throat.",
+        suggestion: "You feel that lump; maybe grief is close and asking to be noticed."
       }
     ],
     "case-aisha": [
       {
-        text: "If you do not reply fast, I feel like I will disappear.",
-        suggestion: "I wonder if under that panic is a terror of being alone that started a long time ago."
+        text: "If you look at the clock, I feel abandoned.",
+        suggestion: "You feel that drop; I wonder if it stirs an old terror of being left alone."
       },
       {
-        text: "After I blow up, I hate myself.",
-        suggestion: "Could it be that the rage covers a deep hurt and shame that you are carrying about being lovable."
+        text: "When he didn't text back, I went from sad to furious.",
+        suggestion: "You swing fast; maybe the fury rushes in to protect a very raw hurt."
       },
       {
-        text: "Sometimes I push people away first.",
-        suggestion: "Maybe pushing first is a way to avoid the pain of being left again."
+        text: "Sometimes I want to scratch my arms to feel something.",
+        suggestion: "You want relief; I guess there's unbearable emptiness underneath."
+      },
+      {
+        text: "I beg people not to leave me and then explode at them.",
+        suggestion: "You plead then push away; could it be both the longing and fear are huge."
+      },
+      {
+        text: "If you cancel, I don't want to come back.",
+        suggestion: "That would sting; I wonder if it's safer to reject first than risk being dropped."
+      },
+      {
+        text: "I think I'm too much for anyone.",
+        suggestion: "You feel too much; maybe that's shame speaking from what was done to you."
+      },
+      {
+        text: "Kindness makes me sob and want to run.",
+        suggestion: "It lands big; I guess a part longs for it and another expects it to vanish."
+      },
+      {
+        text: "I test people to see if they care.",
+        suggestion: "You test; could it be you're trying to prove you matter before risking trust."
+      },
+      {
+        text: "I hate myself after I lash out.",
+        suggestion: "You hate yourself; I wonder if that harshness covers grief for how alone you feel."
+      },
+      {
+        text: "I panic when I say goodbye.",
+        suggestion: "Goodbyes spike panic; maybe it touches that old fear that no one comes back."
       }
     ],
     "case-david": [
       {
-        text: "When my wife calls me cold, I get hard and list her flaws.",
-        suggestion: "I wonder if under that hardness there is a quick sting of not being enough."
+        text: "When my wife says I'm cold, I get sarcastic.",
+        suggestion: "You get sharp; I wonder if under that edge is a sting of being seen as not enough."
       },
       {
-        text: "If I am not the best in the room, I feel empty.",
-        suggestion: "Could it be that the emptiness is about not feeling valued for who you are, not just what you achieve?"
+        text: "I don't like being told what to do.",
+        suggestion: "You resist; maybe direction lands like being small or controlled."
       },
       {
-        text: "I say the affair meant nothing, but I still feel off.",
-        suggestion: "Maybe there is a quiet hurt or guilt there that is hard to let yourself feel."
+        text: "If I can't be the best, why try.",
+        suggestion: "You aim high; I guess there's fear that ordinary equals unworthy."
+      },
+      {
+        text: "I plan big gestures and feel empty afterward.",
+        suggestion: "You plan; could it be admiration doesn't reach the part that longs to be seen for you."
+      },
+      {
+        text: "Apologizing makes me cringe.",
+        suggestion: "It feels humiliating; I wonder if it touches an old shame of being wrong."
+      },
+      {
+        text: "I check my phone during hard talks.",
+        suggestion: "You escape; maybe closeness feels dangerous when you expect judgment."
+      },
+      {
+        text: "I brag when I feel insecure.",
+        suggestion: "You pump yourself up; I guess it's a way to cover a fragile spot."
+      },
+      {
+        text: "If the kids don't respect me, I lose it.",
+        suggestion: "Respect matters; could it be their pushback pricks a fear of failing as a dad."
+      },
+      {
+        text: "I hate being misunderstood by my wife.",
+        suggestion: "You hate that; I wonder if there's a grief of not being known beneath the anger."
+      },
+      {
+        text: "I avoid therapy homework; it feels pointless.",
+        suggestion: "You avoid; maybe there's a part afraid of what you might find if you slow down."
       }
     ],
     "case-marcus": [
       {
-        text: "I pick up extra shifts so I do not have to think.",
-        suggestion: "I wonder if staying busy keeps a painful loneliness or grief from flooding in."
+        text: "I feel nothing most days.",
+        suggestion: "You feel flat; I wonder if numbness is protecting a lot of pain."
       },
       {
-        text: "I keep my place dark and quiet.",
-        suggestion: "Could it be the quiet is safer than risking being close and getting hurt."
+        text: "I sleep with the TV on.",
+        suggestion: "You drown out the quiet; maybe silence brings memories and grief close."
       },
       {
-        text: "I ignore invites because people do not stick around.",
-        suggestion: "Maybe there is a part that longs for closeness and another that protects you by keeping distance."
+        text: "I sit with my back to the wall.",
+        suggestion: "You seek safety; I guess your body is still bracing for danger."
+      },
+      {
+        text: "I don't answer when my sister calls.",
+        suggestion: "You avoid; could it be staying distant keeps feelings manageable."
+      },
+      {
+        text: "Loud noises make me jump and then I get angry at myself.",
+        suggestion: "You jump then judge; I wonder if the anger covers shame about being vulnerable."
+      },
+      {
+        text: "Good things feel unreal.",
+        suggestion: "They feel unreal; maybe letting in good also opens the door to loss."
+      },
+      {
+        text: "I drink to knock myself out sometimes.",
+        suggestion: "You knock out; I guess it's to keep nightmares and feelings at bay."
+      },
+      {
+        text: "I keep the lights low at home.",
+        suggestion: "You keep it dim; could it be brightness feels too exposing."
+      },
+      {
+        text: "I don't remember the last time I laughed.",
+        suggestion: "You can't recall; I wonder if joy feels risky when you've had so much loss."
+      },
+      {
+        text: "Part of me thinks I'm better off alone.",
+        suggestion: "That part protects; maybe it fears hurting or being hurt again."
       }
     ]
   },

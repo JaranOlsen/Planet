@@ -81,6 +81,22 @@ const languageButtonMap = new Map();
 const skillButtonMap = new Map();
 const caseButtonMap = new Map();
 
+const SKILL_PHASE_MAP = {
+  "therapist-self-awareness": "alpha",
+  "providing-treatment-rationale": "alpha",
+  "staying-in-contact-intense-affect": "alpha",
+  "self-disclosure": "alpha",
+  "marker-recognition-chairwork": "alpha",
+  "alliance-repair": "alpha",
+  "empathic-refocusing": "alpha",
+  "empathic-explorations": "beta"
+};
+
+const SKILL_PHASE_LABELS = {
+  alpha: "Alpha",
+  beta: "Beta"
+};
+
 function getLanguageDefinition(languageId) {
   const fallbackId = LANGUAGE_METADATA[languageId] ? languageId : "en";
   return {
@@ -322,8 +338,16 @@ function renderSkillOptions() {
     button.setAttribute("role", "option");
     const isSelected = state.skillId === skillId;
     button.setAttribute("aria-selected", isSelected ? "true" : "false");
+    const phase = SKILL_PHASE_MAP[skillId];
+    const phaseLabel = phase ? SKILL_PHASE_LABELS[phase] ?? phase : "";
+    const phaseTag = phaseLabel
+      ? `<span class="skill-tag skill-tag--${phase}" aria-label="${phaseLabel} exercise">${phaseLabel}</span>`
+      : "";
     button.innerHTML = `
-      <span class="card-title">${skill.name}</span>
+      <div class="card-header">
+        <span class="card-title">${skill.name}</span>
+        ${phaseTag}
+      </div>
       <span class="card-body">${skill.description}</span>
     `;
     button.addEventListener("click", () => handleSkillSelection(skillId));
