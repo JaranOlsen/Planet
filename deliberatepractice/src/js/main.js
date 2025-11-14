@@ -82,14 +82,14 @@ const skillButtonMap = new Map();
 const caseButtonMap = new Map();
 
 const SKILL_PHASE_MAP = {
-  "therapist-self-awareness": "alpha",
-  "providing-treatment-rationale": "alpha",
-  "staying-in-contact-intense-affect": "alpha",
-  "self-disclosure": "alpha",
+  "therapist-self-awareness": "beta",
+  "providing-treatment-rationale": "beta",
+  "staying-in-contact-intense-affect": "beta",
+  "self-disclosure": "beta",
   "marker-recognition-chairwork": "alpha",
   "alliance-repair": "alpha",
   "empathic-refocusing": "alpha",
-  "empathic-explorations": "beta"
+  "exploratory-questions": "beta"
 };
 
 const SKILL_PHASE_LABELS = {

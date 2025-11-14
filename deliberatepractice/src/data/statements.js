@@ -5,128 +5,380 @@ export const STATEMENT_SETS = {
     // Each suggestion invites the therapist to notice and regulate internal reactions before any brief meta-guidance.
     "case-sara": [
       {
-        text: "I'm sorry, I'm probably overreacting. Other people have it worse. I'm fine-let's just talk about work.",
-        suggestion: "[Internal] Soften shoulders, slow breath, notice rescuing urge. [Meta] I'd like to slow us down-I notice a pull to move away from your hurt, and I want to stay with it a little."
+        text: "I shouldn't still be this upset—can we just move on?",
+        suggestion: "[Internal] Lengthen exhale; soften chest; notice urge to redirect. [Meta] It makes sense this still hurts—let's slow for a moment and give that hurt a little room."
       },
       {
-        text: "When I tear up here I feel silly, like I should be more put together.",
-        suggestion: "[Internal] Ground feet; release jaw; bracket performance impulse. [Meta] Tears make sense here. Let's take a breath and give them a little room."
+        text: "Sorry, I'm probably taking up too much time with this.",
+        suggestion: "[Internal] Ground feet; release jaw; ease rescuing impulse. [Meta] You matter here—we can take time. Could we notice what shows up in you as you say that?"
       },
       {
-        text: "If I just keep busy I don't have to think about the breakup. Maybe that's better?",
-        suggestion: "[Internal] Notice fixing agenda; return to attunement. [Meta] A part of you wants relief by staying busy-let's check what happens inside as you say that."
+        text: "I keep smiling so it doesn't get awkward.",
+        suggestion: "[Internal] Sense face; soften eyes; slow pace. [Meta] The smile works hard—let's gently check what's underneath it right now."
+      },
+      {
+        text: "I'm probably being dramatic.",
+        suggestion: "[Internal] Note minimizing; re-center in warmth. [Meta] A part of you worries it's too much—let's stay with what feels most tender for a moment."
+      },
+      {
+        text: "I can power through; I don't need to feel all of this.",
+        suggestion: "[Internal] Notice fixing/efficiency pull; settle shoulders. [Meta] We can go at your pace—maybe we touch a small piece together and come back."
+      },
+      {
+        text: "Let's talk about work goals instead.",
+        suggestion: "[Internal] Track avoidance; keep tone warm. [Meta] We can be practical—and first, I want to be sure I’m with what’s hardest inside right now."
+      },
+      {
+        text: "I hate that I'm needy.",
+        suggestion: "[Internal] Feel feet; invite compassion; bracket urge to reassure. [Meta] Needing makes sense here—could we notice what that word 'needy' stirs in your body?"
+      },
+      {
+        text: "If I cry, it means I'm weak.",
+        suggestion: "[Internal] Soften voice; widen window; monitor arousal. [Meta] Tears can be strength here—let’s take one breath and see what the tears want you to know."
+      },
+      {
+        text: "I don't want to make you uncomfortable.",
+        suggestion: "[Internal] Notice people‑pleasing pull; re-attune. [Meta] I appreciate you caring about that—I want to be with you in what’s hard, even if it’s messy."
+      },
+      {
+        text: "I'll be fine—others have it worse.",
+        suggestion: "[Internal] Set down comparative mind; anchor. [Meta] Your pain matters too—could we pause with what’s hardest for just a moment together?"
       }
     ],
     "case-michael": [
       {
-        text: "People keep nitpicking. If someone questions me, I'm not going to sit there and take it.",
-        suggestion: "[Internal] Feel feet; slow breath; soften chest; notice defensiveness. [Meta] I hear how hot that gets-before we go further, let me stay with the sting underneath for a moment."
+        text: "If someone disrespects me, I'm done—I'm not letting it slide.",
+        suggestion: "[Internal] Feel feet; widen stance; soften chest; notice defensiveness. [Meta] I hear how fast that hits—before we solve it, can we slow with the sting underneath for a moment?"
       },
       {
-        text: "My wife says I'm too angry. Maybe I am-but honestly she provokes me.",
-        suggestion: "[Internal] Track urge to argue or educate; re-center. [Meta] I want to understand what it's like right in that moment before the anger-what shows up in you?"
+        text: "Don't start with feelings; give me tools.",
+        suggestion: "[Internal] Notice urge to justify approach; re-center. [Meta] We can be practical—and mapping what hits you first will make any tool work better."
       },
       {
-        text: "I didn't come here to talk about feelings. I need strategies.",
-        suggestion: "[Internal] Notice pressure to perform or prove; soften voice. [Meta] We can go at your pace-first I want to be sure I'm getting what's hardest right now."
+        text: "My wife exaggerates—I’m not that angry.",
+        suggestion: "[Internal] Track urge to argue; soften voice. [Meta] It sounds important to get this right—could we look together at what shows up in you right before it escalates?"
+      },
+      {
+        text: "When people correct me, I go off—that’s on them.",
+        suggestion: "[Internal] Note blame pull; ground. [Meta] That correction lands hard—let’s stay with what it touches in you for a moment."
+      },
+      {
+        text: "I won’t look weak by apologizing.",
+        suggestion: "[Internal] Sense jaw; release; slow pace. [Meta] It makes sense that feels risky—could we notice what ‘weak’ means in your body right then?"
+      },
+      {
+        text: "Are you trying to calm me down right now?",
+        suggestion: "[Internal] Welcome challenge; steady tone; reduce intensity. [Meta] I want to understand you first—let’s track what just spiked inside together."
+      },
+      {
+        text: "This is a waste if we aren't fixing things.",
+        suggestion: "[Internal] Set down perform/prove; re-attune. [Meta] I get wanting results—slowing for seconds here gives you control in the tough moments."
+      },
+      {
+        text: "Don't bring up my dad—irrelevant.",
+        suggestion: "[Internal] Notice urge to pursue; respect boundary; stay present. [Meta] Got it—we can stay here with what happens in you now when respect feels on the line."
+      },
+      {
+        text: "People need to toughen up.",
+        suggestion: "[Internal] Notice tightening; open posture. [Meta] Strength matters a lot to you—can we also notice what gets tender in you when things feel unfair?"
+      },
+      {
+        text: "If I let up, I’ll get walked over.",
+        suggestion: "[Internal] Soften shoulders; slow breath. [Meta] That makes sense—let’s look at the instant you feel one‑down so you can steer it."
       }
     ],
     "case-jason": [
       {
-        text: "I'm probably wasting your time. I never know what to say in here either.",
-        suggestion: "[Internal] Breathe low; ease urgency to reassure; attune to shame. [Meta] Part of you worries you're wasting time-can we pause and notice what happens in your body as you say that?"
+        text: "I think I'm wasting your time.",
+        suggestion: "[Internal] Low belly breath; soften gaze; resist quick reassurance. [Meta] Thanks for saying that—can we notice together what shows up in you as you say it?"
       },
       {
-        text: "My mind goes blank when you ask how I feel. I'm sorry.",
-        suggestion: "[Internal] Notice subtle impatience; soften pace; widen window. [Meta] It's okay to not have words yet-let's stay with the blank for a moment and see what it's like."
+        text: "I don't know what to say; my mind is blank.",
+        suggestion: "[Internal] Slow pace; widen window; accept silence. [Meta] Blank is okay—we can stay with the blank for a moment and just notice sensations."
       },
       {
-        text: "If I speak up at work everyone will think I'm stupid.",
-        suggestion: "[Internal] Track urge to advise; re-anchor in empathy. [Meta] That fear sounds really strong-let's slow down with it; where do you feel it right now?"
+        text: "Don't make me close my eyes—I feel silly.",
+        suggestion: "[Internal] Respect boundary; reduce intensity. [Meta] We can keep eyes open—let’s try a small step, maybe just feel feet on the floor together."
+      },
+      {
+        text: "Sorry for being awkward.",
+        suggestion: "[Internal] Note shame; keep warmth. [Meta] A lot of care shows up there—let’s go slow and find what feels safe to name."
+      },
+      {
+        text: "Can we just talk strategies?",
+        suggestion: "[Internal] Notice fixing impulse; re-attune. [Meta] We can add strategies—first let me make sure I’m getting what gets hardest inside."
+      },
+      {
+        text: "I skipped the exercises—sorry.",
+        suggestion: "[Internal] Ease urge to teach; steady tone. [Meta] Thanks for telling me—could we notice what got in the way and how it feels to say that now?"
+      },
+      {
+        text: "I feel stupid when you ask about feelings.",
+        suggestion: "[Internal] Soften voice; bracket urge to reassure. [Meta] That’s tough—maybe we name one small signal together instead of a big feeling."
+      },
+      {
+        text: "Maybe therapy isn't for me.",
+        suggestion: "[Internal] Track threat in me; ground. [Meta] A part of you wants to protect you—can we check what that part is worried will happen here?"
+      },
+      {
+        text: "I'll never be good with people.",
+        suggestion: "[Internal] Notice hopelessness; keep steady. [Meta] That sounds heavy—let’s slow and notice how that belief lands in your body right now."
+      },
+      {
+        text: "I'm fine; it's not a big deal.",
+        suggestion: "[Internal] Feel feet; resist pushing; stay curious. [Meta] We can keep it small—what’s the tiniest signal that tells you it’s ‘not a big deal’ and what might be under it?"
       }
     ],
     "case-laura": [
       {
-        text: "Honestly, I don't feel much of anything. It's just... flat.",
-        suggestion: "[Internal] Release pressure to make something happen; breathe; settle. [Meta] We can stay gentle here-what's the quality of this flatness in your body, even a little?"
+        text: "I feel nothing—please don't push me to go there.",
+        suggestion: "[Internal] Titrate; soften voice; drop agenda. [Meta] We won’t push—maybe we just notice the edges of ‘nothing’ together for a breath."
       },
       {
-        text: "When voices get loud I check out. I don't want to go there.",
-        suggestion: "[Internal] Monitor arousal; titrate; keep voice warm. [Meta] Thank you for saying that-we'll go slowly. Could we notice together what starts to happen just before you check out?"
+        text: "Raised voices outside make me want to leave.",
+        suggestion: "[Internal] Track arousal; lengthen exhale; orient to room. [Meta] That makes sense—let’s ground together and notice what your body does right now."
       },
       {
-        text: "Maybe I'm just broken. Maybe feeling isn't for me.",
-        suggestion: "[Internal] Notice sadness in me; bracket urge to convince; re-attune. [Meta] Hearing 'broken' lands heavy-let's take a breath and stay with what makes it feel that way."
+        text: "I'd rather not talk about the past.",
+        suggestion: "[Internal] Respect boundary; release pressure. [Meta] We can stay in the present—what’s happening in you as you say you’d rather not?"
+      },
+      {
+        text: "I drink to sleep; it helps me turn off.",
+        suggestion: "[Internal] Notice protectiveness; keep warmth; avoid shaming. [Meta] It’s been a way to get relief—could we gently notice what you’re turning off at night?"
+      },
+      {
+        text: "Kindness makes me suspicious.",
+        suggestion: "[Internal] Soften face; widen window; accept mistrust. [Meta] That makes sense—let’s go slow and see what part of you pulls back when kindness shows up."
+      },
+      {
+        text: "Maybe this is just chemical.",
+        suggestion: "[Internal] Set down urge to debate; stay collaborative. [Meta] Biology can play a role—we can still help your system feel safer here today."
+      },
+      {
+        text: "Feeling is dangerous for me.",
+        suggestion: "[Internal] Titrate; anchor feet/seat; slow pace. [Meta] We’ll keep it small and safe—just a sip at a time, and we stop if it’s too much."
+      },
+      {
+        text: "I can't handle being pushed.",
+        suggestion: "[Internal] Notice performance pressure; ease. [Meta] Thank you for telling me—let’s let you lead the speed today."
+      },
+      {
+        text: "I am broken; nothing changes.",
+        suggestion: "[Internal] Notice sadness in me; steady voice. [Meta] Hearing ‘broken’ is heavy—can we sit beside that feeling for a moment without trying to fix it?"
+      },
+      {
+        text: "Keeping everything under control feels safer.",
+        suggestion: "[Internal] Respect protector; stay gentle. [Meta] Control has kept you safe—maybe we notice what it’s protecting you from right now."
       }
     ],
     "case-carlos": [
       {
-        text: "If a guy disrespects me, I'm not backing down. That's just how it is.",
-        suggestion: "[Internal] Feel feet; relax fists; widen stance; keep tone steady. [Meta] I hear how important respect is-can we look at the instant right before the heat rises in you?"
+        text: "Respect me or get out—simple.",
+        suggestion: "[Internal] Relax fists; widen stance; slow breath; keep tone steady. [Meta] Respect matters—let’s map the split second before the heat hits so you have more control."
       },
       {
-        text: "My kid saw me punch the wall. I hate that, but he shouldn't have been in the way.",
-        suggestion: "[Internal] Track protectiveness; soften judgment; stay present. [Meta] That moment sounds painful-let's slow down with what hit you inside seeing his face."
+        text: "Don't tell me to breathe.",
+        suggestion: "[Internal] Notice urge to instruct; stay collaborative. [Meta] Got it—we can keep it real and still slow enough to see what hits you first."
       },
       {
-        text: "You're not going to tell me to be soft, are you?",
-        suggestion: "[Internal] Notice pull to defend the model; breathe; stay collaborative. [Meta] We'll work with what matters to you-maybe we can start by understanding what 'soft' would risk."
+        text: "I can't be soft; that's weak.",
+        suggestion: "[Internal] Bracket educate/convince; attune to values. [Meta] Strength is important—maybe we see what ‘soft’ would risk for you."
+      },
+      {
+        text: "People push me; I have to push back.",
+        suggestion: "[Internal] Feel feet; steady pace. [Meta] Makes sense—can we look at what the first jolt feels like inside when you sense a push?"
+      },
+      {
+        text: "My wife should show respect first.",
+        suggestion: "[Internal] Note blame pull; keep warmth. [Meta] I hear that—let’s also notice what hurts in you right in those moments with her."
+      },
+      {
+        text: "I'm not angry; I'm just firm.",
+        suggestion: "[Internal] Notice minimization; soften voice. [Meta] Firm shows up—what happens in your chest and jaw that tells you it’s getting hot?"
+      },
+      {
+        text: "Where I'm from you have to hit first.",
+        suggestion: "[Internal] Respect history; reduce judgment. [Meta] That code kept you safe—let’s see what it protects in you right now."
+      },
+      {
+        text: "Therapy is for people who can't handle life.",
+        suggestion: "[Internal] Notice sting/defensiveness; settle. [Meta] You’ve handled a lot—here we’ll tune your control at flashpoints so life gets easier on you and yours."
+      },
+      {
+        text: "If someone looks at me wrong, I'm going to react.",
+        suggestion: "[Internal] Steady posture; slow tempo. [Meta] Let’s catch the first micro‑signal in your body so you can choose how to respond."
+      },
+      {
+        text: "I'm only here because my wife wants it.",
+        suggestion: "[Internal] Release urge to persuade; align. [Meta] I appreciate you showing up—we can focus on what would actually help at home for you."
       }
     ],
     "case-nina": [
       {
-        text: "I know I shouldn't complain. Other people have real problems. I just need to try harder.",
-        suggestion: "[Internal] Notice over-functioning impulse; slow pace. [Meta] A part of you says 'try harder'-could we gently notice what gets heavy inside when you say that?"
+        text: "I shouldn't talk about myself—others need me more.",
+        suggestion: "[Internal] Slow pace; notice over‑functioning pull. [Meta] You carry a lot—let’s give a little space to what it’s like for you right now."
       },
       {
-        text: "When I ask for help I feel instantly guilty. I want to take it back.",
-        suggestion: "[Internal] Breathe; set down fixing; attune to guilt. [Meta] That guilt feels quick-let's pause with it for a moment together."
+        text: "I feel guilty even sitting here.",
+        suggestion: "[Internal] Breathe low; soften tone; attune to guilt. [Meta] That guilt comes fast—can we notice where it lands in you for a moment?"
       },
       {
-        text: "I handle everything at home. It's fine. I don't want to be a burden here either.",
-        suggestion: "[Internal] Note urge to reassure; return to sensing. [Meta] I hear 'don't be a burden'-what happens in your chest as you say that?"
+        text: "I shouldn't be angry—it’s not kind.",
+        suggestion: "[Internal] Bracket urge to educate; keep warmth. [Meta] Anger shows you something mattered—maybe we name what got hurt without judging it."
+      },
+      {
+        text: "If I rest, I’m lazy.",
+        suggestion: "[Internal] Note inner critic; steady voice. [Meta] That message is harsh—let’s notice how your body tells you it needs rest."
+      },
+      {
+        text: "Sorry for getting emotional.",
+        suggestion: "[Internal] Ease rescuing impulse; slow tempo. [Meta] Your emotion makes sense here—let’s take one breath and let it be here a little."
+      },
+      {
+        text: "Can we talk about helping my husband instead?",
+        suggestion: "[Internal] Notice pull to collude; re‑attune. [Meta] We can include him—and first I want to be sure I’m with what’s heavy for you."
+      },
+      {
+        text: "I should be grateful; I have a good life.",
+        suggestion: "[Internal] Set down compare/shoulds; anchor. [Meta] Gratitude matters and pain still shows up—what’s the part that hurts asking for?"
+      },
+      {
+        text: "I can handle it; I don’t need help.",
+        suggestion: "[Internal] Notice independence pull; stay warm. [Meta] You’re strong—and we can share the load for a minute; what’s the heaviest piece today?"
+      },
+      {
+        text: "I’m wasting your time.",
+        suggestion: "[Internal] Resist reassure; keep presence. [Meta] I want to be here with you—could we notice what makes it feel like a waste right now?"
+      },
+      {
+        text: "I apologize for crying.",
+        suggestion: "[Internal] Soften voice; welcome tears. [Meta] Tears are welcome here—let’s take one slow breath and let them have a little space."
       }
     ],
     "case-aisha": [
       {
-        text: "You didn't reply to my message right away. I felt like you forgot me and I freaked out.",
-        suggestion: "[Internal] Ground; lengthen exhale; steady eye contact; notice own urgency. [Meta] I'm here now-let's slow the breath together and stay with how frightening that felt."
+        text: "You didn't reply fast and I felt abandoned.",
+        suggestion: "[Internal] Anchor feet/seat; lengthen exhale; steady gaze; notice urge to promise. [Meta] I’m here with you now—let’s breathe together and feel a little of how scary that was."
       },
       {
-        text: "If you ever leave, I won't survive. Don't leave me.",
-        suggestion: "[Internal] Notice pull to promise or fix; re-center; soften voice. [Meta] I hear how terrifying that is-let's take this one step at a time and feel a little of that fear together."
+        text: "If you cancel, I don’t think I can come back.",
+        suggestion: "[Internal] Track arousal; keep tempo slow; maintain boundaries. [Meta] Cancellations hit hard—we’ll talk about how to plan for that and stay close to what it stirs."
       },
       {
-        text: "I almost cut last night because the emptiness was too much.",
-        suggestion: "[Internal] Monitor arousal; anchor feet and seat; keep pace slow; consult safety plan if needed. [Meta] Thank you for telling me-can we feel a small, safe slice of that emptiness right now, with me here?"
+        text: "Tell me you care about me.",
+        suggestion: "[Internal] Notice pull to reassure; stay authentic. [Meta] I care about what happens to you here—and I want to understand this ache with you, slowly."
+      },
+      {
+        text: "When I feel empty, I want to hurt myself.",
+        suggestion: "[Internal] Safety first; stabilize; consult plan as needed. [Meta] Thank you for telling me—let’s find a small, safe slice of that emptiness together right now."
+      },
+      {
+        text: "I think you’ll leave like everyone else.",
+        suggestion: "[Internal] Name countertransference; ground. [Meta] That fear makes sense given what you’ve lived—let’s keep checking what helps you feel held here."
+      },
+      {
+        text: "I hate you—don’t leave me.",
+        suggestion: "[Internal] Regulate; soften face; hold boundary. [Meta] I hear both the anger and the reach—let’s stay steady together while we feel a little of both."
+      },
+      {
+        text: "I keep checking if you’re looking at me.",
+        suggestion: "[Internal] Stay present; warm eye contact; slow pace. [Meta] Being seen matters right now—let’s notice what settles as you feel me here with you."
+      },
+      {
+        text: "Do you even want me here?",
+        suggestion: "[Internal] Notice sting; re-attune; steady tone. [Meta] I do want to be here with you—can we notice what part fears I don’t and what it needs?"
+      },
+      {
+        text: "I feel disgusting because of what was done to me.",
+        suggestion: "[Internal] Hold sorrow; avoid fixing; titrate contact. [Meta] I’m so sorry that happened—let’s go gently and let that feeling be seen a little with me."
+      },
+      {
+        text: "Promise you won’t give up on me.",
+        suggestion: "[Internal] Avoid absolute promises; keep frame; stay warm. [Meta] I’m committed to this work with you—and when fear spikes, we’ll keep naming it and finding safety together."
       }
     ],
     "case-david": [
       {
-        text: "Let's be honest-you probably don't have the experience to help someone like me.",
-        suggestion: "[Internal] Notice sting and defensiveness; soften chest and face; re-attune. [Meta] It sounds hard to trust help-before we decide anything, I want to understand what feels at stake for you here."
+        text: "Convince me you’re worth my time.",
+        suggestion: "[Internal] Notice sting/perform impulse; soften chest; steady tone. [Meta] Your time matters—before we decide fit, I want to understand what you most need from this."
       },
       {
-        text: "My wife calls me a narcissist. People love to tear down success.",
-        suggestion: "[Internal] Track urge to confront; breathe; keep tone warm. [Meta] That word lands sharply-could we stay with what it touches in you when she says it?"
+        text: "My success speaks for itself; she overreacts.",
+        suggestion: "[Internal] Bracket urge to debate; stay curious. [Meta] It sounds like feeling misunderstood at home—could we look at what gets touched in you there?"
       },
       {
-        text: "I'm not here to talk about feelings; I want solutions.",
-        suggestion: "[Internal] Set down pressure to justify approach; ground. [Meta] We can be practical-and first, a clearer picture of what hurts will help us choose the right steps."
+        text: "I need efficient solutions, not feelings.",
+        suggestion: "[Internal] Set down justify/prove; remain warm. [Meta] We’ll be efficient—and first minutes spent mapping triggers will save you hours later."
+      },
+      {
+        text: "Are you experienced enough for my case?",
+        suggestion: "[Internal] Soften face; regulate pride/defense. [Meta] It makes sense to ask—let’s also clarify what a good outcome looks like for you."
+      },
+      {
+        text: "People call me a narcissist because they’re jealous.",
+        suggestion: "[Internal] Note reaction; keep voice even. [Meta] Being labeled sounds painful—can we notice what happens in you when you hear that word?"
+      },
+      {
+        text: "I don’t make mistakes—others do.",
+        suggestion: "[Internal] Resist power struggle; return to impact. [Meta] When something goes wrong, what’s hardest inside for you in that moment?"
+      },
+      {
+        text: "I expect results quickly.",
+        suggestion: "[Internal] Ease urgency; hold frame. [Meta] Let’s define the first small result you’d actually feel at home or work."
+      },
+      {
+        text: "Don’t psychoanalyze me.",
+        suggestion: "[Internal] Welcome boundary; reduce jargon. [Meta] We’ll keep it simple and practical—starting with what you feel in tough moments."
+      },
+      {
+        text: "This better not be like my last therapist.",
+        suggestion: "[Internal] Notice comparison pull; stay present. [Meta] Sounds like you were disappointed—what would you want different here?"
+      },
+      {
+        text: "Let’s keep this focused on fixing my wife.",
+        suggestion: "[Internal] Avoid collusion; re‑align to client. [Meta] We can talk about the relationship, and I also want to help you have more choice in your own reactions."
       }
     ],
     "case-marcus": [
       {
-        text: "There isn't much to say. I'm fine.",
-        suggestion: "[Internal] Notice impatience or hopelessness; slow breath; accept quiet. [Meta] We can go slow-what's 'fine' like in your body right now, even if it's just a dull hum?"
+        text: "I’m fine. Nothing to talk about.",
+        suggestion: "[Internal] Accept quiet; soften expectations; slow breath. [Meta] We can keep it simple—what’s ‘fine’ like in your body right now, even if it’s just neutral?"
       },
       {
-        text: "I don't sleep-nightmares keep coming. Talking about it won't change what happened.",
-        suggestion: "[Internal] Track activation; keep voice low and steady; titrate contact. [Meta] We won't push-maybe we can notice together what your body does as you mention the nightmares."
+        text: "Talking doesn’t change anything.",
+        suggestion: "[Internal] Notice hopelessness in me; steady tone. [Meta] You’re right it can’t change the past—sometimes it changes how your body carries it; we can try a tiny step if you like."
       },
       {
-        text: "People don't stick around. It's easier to be alone.",
-        suggestion: "[Internal] Feel feet; sense warmth; bracket urge to persuade. [Meta] That makes sense given what you've lived-can we sit with what alone feels like, right here for a moment?"
+        text: "Nightmares are just part of it.",
+        suggestion: "[Internal] Track arousal; titrate; orient to room. [Meta] As you mention them, let’s notice together what your body does right now—we’ll keep it brief."
+      },
+      {
+        text: "I prefer to keep to myself.",
+        suggestion: "[Internal] Respect protector; stay warm. [Meta] Solitude has kept you safe—maybe we notice what feels safest here today."
+      },
+      {
+        text: "Feelings make things worse.",
+        suggestion: "[Internal] Titrate; keep contact light. [Meta] We can stay at the edge—just a small signal and then we come back."
+      },
+      {
+        text: "I don’t trust therapists.",
+        suggestion: "[Internal] Notice sting; welcome skepticism. [Meta] I appreciate you saying that—we can build trust slowly and you set the pace."
+      },
+      {
+        text: "I don’t remember much—it’s all a blur.",
+        suggestion: "[Internal] Slow; avoid pressing for detail. [Meta] A blur is okay—maybe we notice one present‑moment sensation together."
+      },
+      {
+        text: "Let’s stick to practical tips.",
+        suggestion: "[Internal] Don’t argue; align and bridge. [Meta] We can add practical tools—and first we’ll find the exact moments they’re needed."
+      },
+      {
+        text: "I don’t see the point.",
+        suggestion: "[Internal] Feel feet; steady. [Meta] We can check what a small ‘win’ would even look like and aim only for that today."
+      },
+      {
+        text: "I can handle it alone.",
+        suggestion: "[Internal] Respect independence; stay near. [Meta] You’ve handled a lot—if it helps, we can share a few minutes of it together here."
       }
     ]
   },
@@ -1274,127 +1526,379 @@ export const STATEMENT_SETS = {
     "case-sara": [
       {
         text: "I am worried that talking about feelings will make me spiral. Shouldn't we just keep it positive?",
-        suggestion: "It makes sense to worry about spiraling. In EFT we go slowly and safely so feelings can be named and understood; when they are clearer, loneliness eases and choices open up."
+        suggestion: "It makes sense to worry about that. In EFT we go slowly and safely; naming a little of the feeling helps it settle so nights feel less overwhelming."
       },
       {
-        text: "Why focus on emotion and not goals and productivity hacks?",
-        suggestion: "Given how driven you are, that question fits. Emotion work helps because feelings carry information about needs and limits; when we listen to them, you can set goals that actually support you."
+        text: "Why focus on emotions instead of giving me steps to move on?",
+        suggestion: "Steps help most when they fit the heart. We listen to feelings first so the steps you take actually address what hurts and what you need."
       },
       {
-        text: "If I start crying, will we just stay stuck there?",
-        suggestion: "Tears make sense here. We will titrate, not drown in it; a little contact with the feeling helps it move and tells us what matters most to you."
+        text: "If I cry, won't I just get stuck?",
+        suggestion: "Tears here are titrated. We touch a small bit and come back; that contact lets the sadness move instead of trapping you."
+      },
+      {
+        text: "Isn't it better to distract myself?",
+        suggestion: "Distraction can give short breaks. We also build the skill to feel a little safely, so you are not chased by it at night."
+      },
+      {
+        text: "I feel silly talking about a breakup when others have bigger problems.",
+        suggestion: "Your pain matters. EFT helps you honor it just enough to learn what it asks for—comfort, boundaries, connection—so it eases."
+      },
+      {
+        text: "How will this help me stop thinking about him?",
+        suggestion: "We map the loop that keeps pulling you back—loneliness, hope, self-blame—and give each part care so the loop loosens."
+      },
+      {
+        text: "Could we just set goals to get busy again?",
+        suggestion: "We can add goals. First, a few minutes with the feeling clarifies which goals refill you instead of just numbing you."
+      },
+      {
+        text: "What if I do not know what I feel?",
+        suggestion: "Totally okay. We start with simple sensing—tight, heavy, hollow—and build words from there at your pace."
+      },
+      {
+        text: "Will this take a long time?",
+        suggestion: "You will notice small wins quickly—better sleep, less late-night scrolling—as your system learns it is safe to feel a little and rest."
+      },
+      {
+        text: "How is this different from just venting to friends?",
+        suggestion: "Here we slow and track your body signals, name needs, and practice new choices. That turns venting into change."
       }
     ],
     "case-michael": [
       {
-        text: "I need anger control, not touchy feely stuff. How does talking about feelings help?",
-        suggestion: "It makes sense to want control. In EFT we map what anger is protecting so you can catch the sting underneath faster and choose a steadier response."
+        text: "I need anger control, not touchy-feely stuff. How does this help?",
+        suggestion: "Control matters. We map what your anger protects—usually a quick sting of shame or disrespect—so you can catch it early and choose differently."
       },
       {
-        text: "Isn't this just excusing bad behavior?",
-        suggestion: "Good to name that concern. Understanding your reactions is not excusing them; it gives you leverage to change them in the moments that count."
+        text: "Isn't this just making excuses for blowing up?",
+        suggestion: "No. Understanding the trigger gives you leverage in the moment; it increases accountability because you can act before it explodes."
       },
       {
         text: "Why slow down when I am under pressure to perform?",
-        suggestion: "Because slowing for seconds helps you notice the first hit in your chest; that clarity is what lets you steer instead of snapping."
+        suggestion: "Slowing for 5–10 seconds helps you feel the first jolt in your chest; that clarity is what lets you steer instead of snap."
+      },
+      {
+        text: "I do not want to be weak.",
+        suggestion: "This is not about being weak. It is about precision—knowing exactly what hits you so you can stay strong and steady."
+      },
+      {
+        text: "Can you just give me tools?",
+        suggestion: "We will. Tools land best when tuned to your flashpoints; the emotion work shows us exactly when and how to use them."
+      },
+      {
+        text: "How does paying attention to my body help at work?",
+        suggestion: "Your body flags the moment of threat first—tight jaw, hot neck. Catching that signal lets you pause and respond with authority instead of heat."
+      },
+      {
+        text: "What if I mess up again?",
+        suggestion: "Relapses are data. We review the sequence, refine the map, and practice the pause so the next moment goes better."
+      },
+      {
+        text: "My wife wants results, not talk.",
+        suggestion: "That makes sense. The result we aim for is fewer blowups and faster repairs—this process directly builds that."
+      },
+      {
+        text: "Will this change how my team sees me?",
+        suggestion: "Yes—steadier responses build trust. Catching the sting early shifts you from reactive to respected."
+      },
+      {
+        text: "I am not good at feelings.",
+        suggestion: "You do not have to be. I will guide tiny steps—label a body cue, name one need—so it feels practical and under your control."
       }
     ],
     "case-jason": [
       {
-        text: "Does this really help with social anxiety? I just want to be confident.",
-        suggestion: "It makes sense to want confidence fast. In EFT we help your body recognize the fear and shame signals early so confidence can grow from feeling safer inside."
+        text: "Does this really help social anxiety? I just want confidence.",
+        suggestion: "Confidence grows from safety inside. We teach your body to recognize the early fear/shame signals so they feel manageable and you can speak."
       },
       {
-        text: "What if I blank when you ask about feelings?",
-        suggestion: "Blanking is common. We start with simple sensing so your system learns it is safe to notice and speak a little at a time."
+        text: "What if I blank when you ask what I feel?",
+        suggestion: "Blanking is common. We start with simple signals—tight, hot, buzzy—and build words slowly so it feels doable."
       },
       {
-        text: "Why pay attention to body sensations?",
-        suggestion: "Because your body is where anxiety shows up first. Tracking it gives us a handle to work with, not just thoughts about it."
+        text: "Why focus on my body? My thoughts are the problem.",
+        suggestion: "Thoughts spin fast. Your body gives us an earlier, steadier handle; calming that lowers the spin and the self-criticism."
+      },
+      {
+        text: "I do not want to make it worse by paying attention to it.",
+        suggestion: "We work at the edge, not in the deep end. Small doses of noticing teach your system it is safe, which shrinks the fear over time."
+      },
+      {
+        text: "Can we just practice scripts?",
+        suggestion: "We can practice skills. They stick better when your body feels safer; we will pair both so confidence is real, not forced."
+      },
+      {
+        text: "How long until I feel different in meetings?",
+        suggestion: "Many people notice small shifts within weeks—slower heart rate, less shaking—as we practice brief grounding and kinder self-talk."
+      },
+      {
+        text: "I am embarrassed to talk about this.",
+        suggestion: "Totally understandable. We go gently, and you set the pace; my job is to make it feel safe to try tiny steps."
+      },
+      {
+        text: "What do I do when my mind says I am awkward?",
+        suggestion: "We will name that voice, feel the body cue it rides on, and add a steadier message so you can keep participating."
+      },
+      {
+        text: "Will I always have to work this hard?",
+        suggestion: "It gets easier. As your nervous system learns safety, fewer cues set you off and social moments feel more natural."
+      },
+      {
+        text: "I hate eye contact.",
+        suggestion: "We will not force it. We build tolerance gradually—short looks, soft focus—so contact feels possible without overwhelm."
       }
     ],
     "case-laura": [
       {
         text: "I think this is chemical. How would talking help?",
-        suggestion: "That view makes sense. We can still ease suffering by helping your system feel safer and by gently naming what has been held down; many people find mood shifts as their nervous system settles."
+        suggestion: "Biology can play a role. We also help your nervous system feel safer; as it settles, mood and connection often improve."
       },
       {
         text: "I do not want to relive trauma.",
-        suggestion: "You will not be pushed to relive anything. EFT works in small doses with grounding so you can feel a little and come back, building safety and choice."
+        suggestion: "You will not be pushed to relive anything. We work in tiny doses with grounding so you can feel a little and come back."
       },
       {
         text: "What is the point if I feel numb?",
-        suggestion: "Numbness is a smart protector. We will respect it and look for small signals underneath; even a little awareness can reconnect you without overwhelm."
+        suggestion: "Numbness protected you. We respect it and look for small signals underneath; that gentle contact reconnects you without overwhelm."
+      },
+      {
+        text: "What if kindness makes me suspicious?",
+        suggestion: "We expect that. We will slow down and help your body test safety bit by bit until warmth feels more possible."
+      },
+      {
+        text: "Will this dig up things I cannot handle?",
+        suggestion: "We pace carefully. You lead the speed, and we stop if arousal rises too high—safety first."
+      },
+      {
+        text: "Why notice my body?",
+        suggestion: "Your body tells us when you are safe or on alert. Learning that language lets you steer before panic or shut-down."
+      },
+      {
+        text: "I am tired of feeling flat.",
+        suggestion: "Our goal is to widen your window—more access to feeling and also to calm—so life has color again."
+      },
+      {
+        text: "How will I know it is working?",
+        suggestion: "Signs include better sleep, less startle to raised voices, and moments of warmth that do not feel threatening."
+      },
+      {
+        text: "Can we just talk about practical things?",
+        suggestion: "We can include practical supports. Emotion work makes those supports land because your system is less on guard."
+      },
+      {
+        text: "What if I shut down here?",
+        suggestion: "Then we pause, ground, and return when ready. Even noticing shut-down is progress because it gives us a handle."
       }
     ],
     "case-carlos": [
       {
         text: "Will this make me soft? I need to stay strong.",
-        suggestion: "Strength matters here. Learning what hits you inside first is not softness; it is control, because it lets you choose before fists or words fly."
+        suggestion: "This is about control, not softness. When you know the first hit inside, you can choose before fists or words fly."
       },
       {
-        text: "Why talk about feelings instead of just giving me tools?",
-        suggestion: "Tools work best when they are tuned to the moment. Emotion work shows us the exact trigger and need so the tool you use actually fits."
+        text: "Why talk feelings instead of giving me tools?",
+        suggestion: "We will use tools. Feelings work shows the exact trigger so the right tool lands at the right second."
       },
       {
-        text: "How does this help me at work when guys disrespect me?",
-        suggestion: "We will map the flashpoint so you can feel the first jolt of humiliation or fear and respond with firm, steady respect for yourself instead of an explosion."
+        text: "How does this help when someone disrespects me?",
+        suggestion: "We map the flashpoint—humiliation, fear—so you can respond with firm self-respect instead of an explosion."
+      },
+      {
+        text: "I cannot lose my edge.",
+        suggestion: "You keep your edge. This work sharpens it by giving you control over when and how to use it."
+      },
+      {
+        text: "What if I blow up anyway?",
+        suggestion: "Then we learn from it. Each blowup refines the map so the next time you catch it sooner and repair faster."
+      },
+      {
+        text: "Is breathing really going to change things?",
+        suggestion: "Breath is a brake pedal for your body. It buys you the seconds you need to choose a strong, steady response."
+      },
+      {
+        text: "People will walk over me if I let things slide.",
+        suggestion: "We are not asking you to let it slide—we are building steady ways to claim respect without scaring the people you love."
+      },
+      {
+        text: "I learned you have to hit first.",
+        suggestion: "That rule kept you safe then. Now we update it so your family gets your strength without the blast."
+      },
+      {
+        text: "My kid saw me angry. How does this help him?",
+        suggestion: "You model repair. When you catch it sooner and make amends faster, he learns safety and accountability from you."
+      },
+      {
+        text: "I do not want long therapy.",
+        suggestion: "We focus on flashpoint skills quickly; many men notice fewer outbursts within weeks when the map is clear."
       }
     ],
     "case-nina": [
       {
         text: "Isn't it selfish to focus on my feelings?",
-        suggestion: "Given your history of caring for others, that worry makes sense. Knowing your feelings clarifies needs and limits so you can care sustainably, not selfishly."
+        suggestion: "You have carried others for so long; it makes sense to worry. Here we use your feelings to clarify needs and limits so you can care sustainably."
       },
       {
-        text: "What will noticing my body even do?",
-        suggestion: "Your body tells us early when guilt or sadness shows up; noticing that lets you pause, name it, and choose, instead of being driven by it."
+        text: "What does noticing my body even do?",
+        suggestion: "Your body flags guilt or sadness early. Catching that lets you pause and choose, instead of being driven by it."
       },
       {
         text: "I just want practical steps.",
-        suggestion: "We will be practical. A brief rationale is that emotions point to needs; once we hear them, we can design clear requests and boundaries."
+        suggestion: "We will add steps. Emotion work shows us which boundary or request would actually relieve you, not add more chores."
+      },
+      {
+        text: "I feel bad saying no.",
+        suggestion: "We will practice small, kind no's. Each one teaches your nervous system that limits can be safe and loving."
+      },
+      {
+        text: "I am afraid people will leave if I stop helping so much.",
+        suggestion: "We will test this gently. Clear needs and limits tend to deepen the right relationships and save your energy."
+      },
+      {
+        text: "Can we just organize my schedule?",
+        suggestion: "We can, and it will work best after we map what drains and what restores you so the schedule reflects your needs."
+      },
+      {
+        text: "What if guilt never goes away?",
+        suggestion: "Guilt may still knock. You will learn to notice it, check if it fits, and respond kindly without letting it run you."
+      },
+      {
+        text: "I am embarrassed to ask for help.",
+        suggestion: "We will rehearse small asks here so your body learns that receiving support can be safe and shared."
+      },
+      {
+        text: "I don't want to be needy.",
+        suggestion: "Needing is human. Naming needs clearly helps you and the people you love, because they know how to show up."
+      },
+      {
+        text: "How will I know it is working?",
+        suggestion: "You will notice more energy, fewer headaches, and less resentment as limits get clearer and support increases."
       }
     ],
     "case-aisha": [
       {
-        text: "Talking about abandonment makes me panic. Why would we go there?",
-        suggestion: "It makes sense it feels scary. We will go slowly and only as you want; touching a little of the fear with support can reduce its grip and help you feel steadier."
+        text: "What if talking about abandonment makes me want to hurt myself?",
+        suggestion: "Safety comes first. We will plan for hard moments, work at the edge, and use grounding so you can feel a little and stay safe."
       },
       {
-        text: "What if you leave me like everyone else?",
-        suggestion: "That fear is important to name. Part of our work is building a reliable, predictable process so you can test and feel what consistent support is like."
+        text: "I need you to promise you will never leave.",
+        suggestion: "It makes sense to want that. I cannot promise never, and I can promise we will plan for breaks, name fears, and repair quickly."
       },
       {
-        text: "How does this help when I want to hurt myself?",
-        suggestion: "We map what leads up to that urge and find safer ways to ease the unbearable feeling; naming and soothing the core pain lowers the need to harm."
+        text: "If you cancel I will spiral.",
+        suggestion: "We will prepare together—extra supports, a brief check-in if needed—and use the feelings that come up to build steadiness."
+      },
+      {
+        text: "I feel too much for any therapist.",
+        suggestion: "Your feelings are big because of what you lived. Here we titrate—small sips, lots of grounding—so they feel survivable."
+      },
+      {
+        text: "Why focus on my body when I am panicking?",
+        suggestion: "Your body is the doorway out of panic—breath, feet, chair. Calming those signals gives you room to choose."
+      },
+      {
+        text: "I hate feeling needy.",
+        suggestion: "The need makes sense. We will help you ask clearly, receive in small doses, and also soothe yourself between sessions."
+      },
+      {
+        text: "What if I get attached to you?",
+        suggestion: "Attachment is part of healing here. We will keep clear boundaries and use the bond to learn safety and trust."
+      },
+      {
+        text: "How will this help relationships not blow up?",
+        suggestion: "We will map the flip from cling to push, track early cues, and practice new moves—naming fear, asking directly, taking space safely."
+      },
+      {
+        text: "Will this take forever?",
+        suggestion: "You will notice early wins—fewer panic spikes, quicker calming—as your system learns the path from alarm to steadier ground."
+      },
+      {
+        text: "I cannot trust therapists.",
+        suggestion: "That makes sense. We will go slow, be transparent, and let trust build through many small kept agreements."
       }
     ],
     "case-david": [
       {
-        text: "I want performance coaching, not feelings.",
-        suggestion: "Wanting results makes sense. Emotion work gives you the data under reactions so your leadership and home life become more responsive and less reactive."
+        text: "Why focus on feelings when I need results?",
+        suggestion: "Feelings drive reactions. When you map the sting under anger or distance, you gain control—better outcomes at home and at work."
       },
       {
-        text: "I already know the theory. Why talk about it here?",
-        suggestion: "Knowledge helps; practice changes patterns. We will apply it to live moments so your system learns a different response, not just the idea of one."
+        text: "I do not want to be psychoanalyzed.",
+        suggestion: "We will keep it practical. We track present moments, name what hits, and practice steadier responses you can use immediately."
       },
       {
-        text: "My wife is the problem. Why focus on me?",
-        suggestion: "It is natural to see the problem out there. Working with your inner triggers gives you influence regardless of what others do."
+        text: "Will this help my marriage or is this just about me?",
+        suggestion: "Both. As you steady yourself, you repair faster, listen better, and the relationship shifts in the direction you want."
+      },
+      {
+        text: "I already know the theory.",
+        suggestion: "Great—now we apply it live. We practice in-the-moment so your nervous system learns, not just your head."
+      },
+      {
+        text: "I hate feeling small when I am wrong.",
+        suggestion: "We will help you tolerate that burn for seconds so you can own it quickly and move forward with strength."
+      },
+      {
+        text: "How will this help my leadership?",
+        suggestion: "Steadier emotions mean clearer decisions, fewer blowups, and trust from your team—direct benefits to performance."
+      },
+      {
+        text: "Can we skip childhood stuff?",
+        suggestion: "We can stay in the present. If old patterns show up, we will name just enough to free you in the now."
+      },
+      {
+        text: "What if I do not feel anything?",
+        suggestion: "We start with small signals—tight jaw, hollow chest—and build from there; you keep control of the pace."
+      },
+      {
+        text: "I need quick wins.",
+        suggestion: "Early wins look like shorter arguments, fewer nights on the couch, and calmer tough meetings; we will target those."
+      },
+      {
+        text: "How will I know this is worth it?",
+        suggestion: "You will see concrete shifts—more influence at work, less defensiveness at home, and a steadier sense of self."
       }
     ],
     "case-marcus": [
       {
         text: "Talking will not change what happened.",
-        suggestion: "True, it cannot change the past. It can change how your body carries it now, so the numbness and waves are less extreme and life opens a little."
+        suggestion: "True—it cannot change the past. It can change how your body carries it now so the numbness and waves are less extreme."
       },
       {
         text: "I do not want to get flooded.",
-        suggestion: "We will not push. We will ground and work in small steps so you can feel a little, settle, and build control."
+        suggestion: "We will work in sips—ground first, feel a little, come back—so you stay in control."
       },
       {
-        text: "Why notice my body when I prefer to ignore it?",
-        suggestion: "Because your body signals danger or relief before words do; learning those signals lets you steer sooner and suffer less."
+        text: "I feel nothing most days.",
+        suggestion: "Numbness protected you. We will respect it and look for small signals underneath so you can feel a bit without overwhelm."
+      },
+      {
+        text: "Why notice my body?",
+        suggestion: "Your body tells us when you are safe or on alert. Learning those cues lets you steer before a panic spike or shut-down."
+      },
+      {
+        text: "How will this help with nightmares?",
+        suggestion: "We will calm the system before and after bad nights and process small pieces when safe, so the aftershock is lighter."
+      },
+      {
+        text: "I am better off alone.",
+        suggestion: "Alone has felt safe. We will build safer ways to connect so you can choose closeness without feeling trapped."
+      },
+      {
+        text: "What does progress look like for me?",
+        suggestion: "More sleep, fewer startles, moments of warmth, and the ability to stay with a feeling for a breath without shutting down."
+      },
+      {
+        text: "I do not trust therapists.",
+        suggestion: "Makes sense. We will go slow, be transparent, and let trust build through small, predictable steps."
+      },
+      {
+        text: "Can we just keep it practical?",
+        suggestion: "Yes—we pair grounding skills with brief emotion work so daily life gets easier while we heal at a tolerable pace."
+      },
+      {
+        text: "What if I never feel normal again?",
+        suggestion: "Normal may look different now, and you can feel more steady and connected. We will build that, one small win at a time."
       }
     ]
   },
@@ -2541,256 +3045,760 @@ export const STATEMENT_SETS = {
   "staying-in-contact-intense-affect": {
     "case-sara": [
       {
-        text: "Talking about the breakup makes me cry and I feel like I will lose control.",
-        suggestion: "I am right here. Let's slow the breath together and feel your feet on the floor. We will touch a small slice of this and back off if it is too much."
+        text: "It hits me in a wave and I cannot stop sobbing.",
+        suggestion: "I am here with you. Feel your feet on the floor—two slow exhales together—and we will let a small part of the wave move while the chair holds you."
       },
       {
-        text: "Nights feel unbearable and my chest aches like it will crack.",
-        suggestion: "Yes, that is a lot. Stay with me for two slow breaths, hand on chest if that helps, and notice the ache just a little while you feel the chair holding you."
+        text: "My chest hurts like it is going to split.",
+        suggestion: "Place a hand there if that helps. Let us breathe gently and notice just the edge of the ache for a moment, then we will come back to the room."
       },
       {
-        text: "I want to push this away because the grief feels endless.",
-        suggestion: "That makes sense. For just a moment, let's let a drop of the grief be here while we keep one foot in the room. Tell me if it rises too high."
+        text: "I want to run from this because it never ends.",
+        suggestion: "That urge makes sense. Stay with me—heels heavy, eyes on me—and we will touch a drop of the pain and step back if it climbs."
+      },
+      {
+        text: "Seeing his photo makes my stomach drop and I shake.",
+        suggestion: "I see the shake. Look around and name two colors in the room. While we do, we will let a small part of that drop be here with us."
+      },
+      {
+        text: "I can hardly breathe when I talk about the nights.",
+        suggestion: "Let us lengthen the exhale together—out… and in…—and feel the back of the chair. We will only stay with a tiny slice of the night."
+      },
+      {
+        text: "I feel stupid for crying this hard.",
+        suggestion: "Tears make sense. We will slow the breath, soften the shoulders, and let the tears have a little space while I stay right here."
+      },
+      {
+        text: "My hands go numb and I feel far away.",
+        suggestion: "Let us wake the hands—rub them together—and find your feet on the ground. We will name 'far away' for one breath and come back."
+      },
+      {
+        text: "It feels like a hole in my chest that will swallow me.",
+        suggestion: "We will sit at the edge of that hole together—hand on chest, breath low—and notice a pin‑point of sensation, then return to the room."
+      },
+      {
+        text: "I cannot look at you when I cry.",
+        suggestion: "That is okay. Keep your gaze wherever is easiest and feel your feet. I will stay with you while we let a little of this be here."
+      },
+      {
+        text: "I am afraid if I start I will never stop.",
+        suggestion: "We will start and stop together. One small breath with the feeling, one breath in the room—tell me when it is enough."
       }
     ],
     "case-michael": [
       {
-        text: "When someone calls me out, rage shoots up and I cannot stop it.",
-        suggestion: "I am with you. Feel your feet, loosen your jaw, and drop your shoulders. Let's take one breath and notice the first sting under the heat without judging it."
+        text: "My jaw locks and heat blasts up my neck.",
+        suggestion: "I am here. Unclench the jaw if you can, lower the shoulders, and take one slow exhale—let us notice the first sting under the heat for a moment."
       },
       {
-        text: "I feel humiliated replaying it and my chest is tight.",
-        suggestion: "That tightness shows how hard this hits. Stay with me and breathe low into the belly. We will feel a little of that sting and step back if it spikes."
+        text: "I want to punch a wall right now.",
+        suggestion: "Plant both feet, feel your hands, and breathe low with me. We will ride one small wave together and step back before it crests."
       },
       {
-        text: "Part of me wants to walk out right now.",
-        suggestion: "Thank you for saying that. Let's keep one hand on the chair, one on your chest, and take two breaths together so we can stay with a small piece safely."
+        text: "Humiliation burns when I replay it.",
+        suggestion: "That burn is sharp. Keep your voice low with me—two slow breaths—and we will stay with just the edge of the burn and then pause."
+      },
+      {
+        text: "I can feel the snap coming.",
+        suggestion: "Good noticing. That is our pause point—heels heavy, jaw soft, long exhale—let us name 'snap' together and let it pass."
+      },
+      {
+        text: "I am shaking with anger.",
+        suggestion: "Let the shake have a little room while your feet anchor you. I am with you—one breath with the shake, one breath resting."
+      },
+      {
+        text: "I hate feeling this small.",
+        suggestion: "I hear that. Keep the breath steady—we will stay with the smallness for one breath only, then come back to the room."
+      },
+      {
+        text: "Part of me wants to leave the session.",
+        suggestion: "Thank you for saying it. Stay seated, hands on thighs, and let us take two slow exhales together while we hold just a sliver of this."
+      },
+      {
+        text: "My voice is getting loud.",
+        suggestion: "Let us lower it together—slow the pace—and feel the floor under your shoes. We will keep contact with what hurts without letting it run you."
+      },
+      {
+        text: "I feel like exploding.",
+        suggestion: "We will keep you safe—loosen the fists, broaden the chest, and notice the first jolt underneath the urge; we can pause anytime."
+      },
+      {
+        text: "I do not trust myself right now.",
+        suggestion: "I will hold the pace with you—one breath at a time, feet on the floor—while we let a tiny piece be here and then reset."
       }
     ],
     "case-jason": [
       {
-        text: "My heart pounds and I feel dizzy when you ask about me.",
-        suggestion: "I am here with you. Let's orient to the room, name three things you see, and feel your feet. We will feel a tiny bit of the pounding and pause if needed."
+        text: "Everything goes fuzzy and my heart is racing.",
+        suggestion: "I am here. Look at one thing across the room, feel the chair under you, and take two slow exhales—we will touch a tiny bit of the racing and pause."
       },
       {
-        text: "Shame rushes in and I want to hide.",
-        suggestion: "That rush is strong. Lower the shoulders, soften the breath, and notice the edge of the shame with me for one breath, then we can step back."
+        text: "My hands shake and I want to disappear.",
+        suggestion: "Let your hands rest on your legs—notice the warmth—and breathe low with me. We will let the shake be here for one breath."
       },
       {
-        text: "I feel like I might faint.",
-        suggestion: "Okay, sit back, feel the chair and the cool air on your skin. We will take it in sips - a small look at the fear, then back to the room."
+        text: "I feel nauseous talking about this.",
+        suggestion: "Okay—eyes on me if you can. Slow the breath and feel your feet. We will name 'nauseous' for a moment and then step back."
+      },
+      {
+        text: "It feels like the room is closing in.",
+        suggestion: "Let us widen the view together—name three colors you see—and keep a long exhale; we will stay only with the edge."
+      },
+      {
+        text: "I cannot get a full breath.",
+        suggestion: "Breathe with me—out longer than in—and feel your back against the chair. We will take this in sips."
+      },
+      {
+        text: "I want to hide under the table.",
+        suggestion: "That makes sense. Keep your seat, heels heavy; we will ride one small wave while staying connected here."
+      },
+      {
+        text: "I cannot make eye contact right now.",
+        suggestion: "That is okay. Pick a spot on the wall while we breathe together and let a small part of the fear move."
+      },
+      {
+        text: "My ears are ringing and I feel trapped.",
+        suggestion: "Let us orient—what are two sounds you hear besides the ringing?—and keep the exhale slow as we stay with just the edge."
+      },
+      {
+        text: "I feel like crying and it is embarrassing.",
+        suggestion: "Tears are welcome here. We will keep breathing slow and let a little of the feeling be here with us."
+      },
+      {
+        text: "I think I should leave.",
+        suggestion: "Thank you for saying that. Let us take one more slow breath together and check your body; we will pause anytime you need."
       }
     ],
     "case-laura": [
       {
-        text: "A loud voice outside just now made my stomach drop and I went blank.",
-        suggestion: "I am with you. Let's ground together - feet, seat, breath. We will name 'stomach drop' for one breath and come back to the room if it gets too much."
+        text: "A door slam and I vanish inside.",
+        suggestion: "I am here. Feet, seat, breath—let us name 'vanishing' together for one breath, then we return to the room."
       },
       {
-        text: "When I feel anything, panic rises and I want to numb out.",
-        suggestion: "That panic makes sense. For a moment, stay with me and notice the first ripple of feeling while we keep attention on your feet and the air moving in and out."
+        text: "My body goes numb when I try to feel.",
+        suggestion: "We will respect the numb. Rub your hands, feel the texture, and notice any tiny signal under the numb; we will not push."
       },
       {
-        text: "I feel far away right now.",
-        suggestion: "Thank you. I am here. Look around and name the color of the wall. As you do, see if a small signal of feeling is there that we can touch and then rest."
+        text: "I feel like the room is far away.",
+        suggestion: "Let us orient gently—name two shapes you see—and keep the exhale slow while we hold a small piece of that distance."
+      },
+      {
+        text: "My stomach drops and I freeze.",
+        suggestion: "Okay—breathe low, soften the jaw, and let us stay with the drop for one breath, then release back to the chair."
+      },
+      {
+        text: "I want to numb out right now.",
+        suggestion: "That makes sense. Before we numb, feel your heels and take a slow exhale; we will touch one safe sliver and stop."
+      },
+      {
+        text: "Tears come and I feel stupid.",
+        suggestion: "Tears are welcome. I will hold the pace—breath slow, eyes soft—while we let a little of the feeling move through."
+      },
+      {
+        text: "I cannot trust my body to keep me safe.",
+        suggestion: "We will borrow mine—watch my breath, match my pace, and notice the chair under you; we will keep this very small."
+      },
+      {
+        text: "I feel dizzy and far away.",
+        suggestion: "Name one thing you see, one thing you hear, one thing you feel. We will stay with the edge of 'far away' and pause if needed."
+      },
+      {
+        text: "Kindness makes me want to bolt.",
+        suggestion: "I hear the bolt. Stay seated, eyes anywhere that is easy, and breathe with me; we will feel one breath of the urge and step back."
+      },
+      {
+        text: "I do not want to feel this at all.",
+        suggestion: "Understood. We will hold just a pin‑point of it together for one breath and then come back. You lead the pace."
       }
     ],
     "case-carlos": [
       {
-        text: "I can feel the heat building in my chest right now.",
-        suggestion: "Good noticing. Plant your feet, unclench your jaw, and lower your voice with me. We will ride one wave together and step back before it crests."
+        text: "Heat is rising—my fists want to clench.",
+        suggestion: "Let your fingers uncurl and feel your palms on your legs. Breathe low with me—we will stay with one small wave and pause."
       },
       {
-        text: "Thinking about my kid's face makes my eyes burn.",
-        suggestion: "That burn shows how much you care. Breathe low, feel your hands, and let a small bit of that burn be here with me for two breaths."
+        text: "My voice wants to shout.",
+        suggestion: "Let us lower it together and slow the pace. Feel your feet. We can hold what is hot without letting it explode."
       },
       {
-        text: "I want to bolt from this room.",
-        suggestion: "I hear that. Stay seated with your heels heavy and take a slow exhale. We will feel a safe slice of the urge and then check your body again."
+        text: "I feel like breaking something.",
+        suggestion: "Plant your feet, widen your chest, and take a slow exhale. We will name the urge, feel the first jolt, and step back."
+      },
+      {
+        text: "Thinking of my kid's face guts me.",
+        suggestion: "That shows your heart. Keep breath slow and hands steady; we will let a little of that ache be here with us."
+      },
+      {
+        text: "I am about to walk out.",
+        suggestion: "Thank you for telling me. Stay seated, heels heavy, and we will take two slow breaths before deciding next."
+      },
+      {
+        text: "My chest is pounding.",
+        suggestion: "Match my breathing—out longer than in—and feel the chair hold your back; we will ride a small crest and pause."
+      },
+      {
+        text: "I cannot think straight when this hits.",
+        suggestion: "Let us borrow the body first—feet, hands, jaw soft—so the thinking can come back; we will keep this brief."
+      },
+      {
+        text: "I want to scare people off me.",
+        suggestion: "I hear that protective part. Keep your eyes with me and breathe—we will hold just the edge of it together."
+      },
+      {
+        text: "Respect—this is about respect.",
+        suggestion: "Yes. Let us feel the first sting of disrespect for one breath while your feet anchor you; we can pause anytime."
+      },
+      {
+        text: "I feel out of control.",
+        suggestion: "I will hold steady with you—slow voice, slow breath—so you can feel a small piece and get the reins back."
       }
     ],
     "case-nina": [
       {
-        text: "I am crying and feel guilty for falling apart.",
-        suggestion: "Tears make sense. I am here. Let's slow the breath and feel the support of the chair while we let a little of the cry move through."
+        text: "I cannot stop crying and I feel ashamed.",
+        suggestion: "Tears make sense here. Let us slow the breath together and feel the chair support you while we let a little of the cry move."
       },
       {
-        text: "My chest is tight and my head aches from holding so much.",
-        suggestion: "That is a lot to carry. Put a hand on your chest if that helps, and we will breathe together for two cycles, staying with a small piece of the tightness."
+        text: "My chest is tight and my head throbs.",
+        suggestion: "Put a hand where it is tight if that helps. Breathe low with me—one breath with the tightness, one breath resting."
       },
       {
-        text: "I feel like I might break if I stop.",
-        suggestion: "We will go slowly. Keep one eye on me and one on the feeling - just a sip - and then we will come back to the room."
+        text: "I keep saying sorry for feeling this much.",
+        suggestion: "You do not need to apologize. Stay with me—heels heavy, slow exhale—and we will give this feeling a small bit of space."
+      },
+      {
+        text: "I am shaking from holding everything together.",
+        suggestion: "Let the shake have a little room while you feel the chair under you. We will go one breath at a time."
+      },
+      {
+        text: "I feel like I am failing everyone.",
+        suggestion: "That is heavy. Keep eyes on me if you can—slow breath—and we will stay with the edge of that feeling for a moment."
+      },
+      {
+        text: "If I stop doing, I will fall apart.",
+        suggestion: "We will not stop all at once—just pause here with me for two slow exhales and let a small piece move through."
+      },
+      {
+        text: "I want to leave because this is too much.",
+        suggestion: "Thank you for saying it. Stay seated, feel your feet, and we will check your body together—one more slow breath and we can pause."
+      },
+      {
+        text: "I feel nauseous from stress.",
+        suggestion: "Okay—eyes on a spot that is easy, breath out longer than in, and name one thing you can feel with your hands; we will keep this very small."
+      },
+      {
+        text: "I cannot catch my breath.",
+        suggestion: "Let us lengthen the exhale together and feel the back of the chair. We will take this in sips."
+      },
+      {
+        text: "Part of me is scared to need anything.",
+        suggestion: "I am here. We will stay with one breath of that fear while your feet anchor you, and stop if it rises."
       }
     ],
     "case-aisha": [
       {
-        text: "If you look away, panic explodes and I cannot breathe.",
-        suggestion: "I will stay with you. Eyes here if you can. Let's lengthen the exhale together and feel your feet until a little space opens."
+        text: "If you look away I panic and cannot breathe.",
+        suggestion: "Eyes here if you can. I am with you—let us lengthen the exhale and press your feet into the floor until a little space opens."
       },
       {
-        text: "Last night I wanted to hurt myself because the emptiness felt unbearable.",
-        suggestion: "Thank you for telling me. We will stay safe and go slow. Feel the chair, breathe with me, and let us touch a tiny part of that emptiness for one breath, then come back."
+        text: "The emptiness burns and I want to hurt myself.",
+        suggestion: "Thank you for telling me. Safety first—feel the chair, breathe with me—we will touch a tiny part of the burn for one breath and then come back."
       },
       {
-        text: "I want to run out of the room right now.",
-        suggestion: "I hear the urge. Can we try pressing your feet into the floor and taking two slow exhales while we name 'urge to run' together, then we can reassess."
+        text: "I want to bolt from this room.",
+        suggestion: "I hear the urge. Heels heavy, slow exhale, eyes with me—we will feel just the edge of 'bolt' together and pause if needed."
+      },
+      {
+        text: "Goodbye makes me dizzy and terrified.",
+        suggestion: "We will slow the breath, feel your feet, and plan the ending together so your body knows I am here until we finish."
+      },
+      {
+        text: "I feel like I am too much.",
+        suggestion: "I want to be here with you in this. Let us lower the shoulders and breathe—one small breath with the 'too much' feeling, then rest."
+      },
+      {
+        text: "My chest feels like a black hole.",
+        suggestion: "Place a hand there if you like. We will sit at the edge together—breath low—and name 'black hole' for one breath before coming back."
+      },
+      {
+        text: "I keep checking that you are still here.",
+        suggestion: "I am here. Keep your eyes where it is easiest and breathe with me—let us notice the smallest sign of safety in your body."
+      },
+      {
+        text: "I want to scratch to feel something real.",
+        suggestion: "Let us press your feet down, breathe slow, and hold the urge gently between us for one breath; we can pause anytime."
+      },
+      {
+        text: "I cannot stop crying and I feel ashamed.",
+        suggestion: "Tears are welcome here. Breathe with me and feel the chair—we will let a little of the shame move through and then rest."
+      },
+      {
+        text: "If you cancel I will fall apart.",
+        suggestion: "That fear is big. We will breathe together now and make a simple plan for hard days so your body knows what support is coming."
       }
     ],
     "case-david": [
       {
-        text: "Hearing 'cold' makes my face burn and I want to lash out.",
-        suggestion: "I am here with you. Drop the shoulders, feel your hands, and take one slow breath as we notice the burn without acting on it."
+        text: "My face burns and I want to cut this off.",
+        suggestion: "I am here. Drop the shoulders, feel your hands, slow the breath—we will stay with the burn for one breath and pause."
       },
       {
-        text: "Right now I feel exposed and angry.",
-        suggestion: "That exposed feeling is sharp. Stay with me and breathe low; we will feel a small piece of it and step back if it spikes."
+        text: "I feel exposed and furious.",
+        suggestion: "That is sharp. Keep your voice low with me and breathe—we will hold a thin edge of it together, then step back."
       },
       {
-        text: "I want to shut down this whole conversation.",
-        suggestion: "Thanks for naming it. Keep one hand on the chair and one on your chest; two slow breaths, and we will stay with just the edge of the urge."
+        text: "I want to walk out.",
+        suggestion: "Thank you for saying so. Stay seated, heels heavy, long exhale—we will check your body after two breaths and decide together."
+      },
+      {
+        text: "Admitting I am wrong makes my stomach twist.",
+        suggestion: "Let us notice the twist—hand on belly if helpful—one breath in, longer out; we will not push beyond the edge."
+      },
+      {
+        text: "I cannot stand this word 'cold'.",
+        suggestion: "Let us hold it together for one breath—'cold'—feel your hands and the chair; I am with you while we let a little of it be here."
+      },
+      {
+        text: "I am embarrassed I snapped at home.",
+        suggestion: "That embarrassment is hot. Lower the shoulders and breathe with me; we will keep contact with it for one breath and rest."
+      },
+      {
+        text: "I feel like shutting down.",
+        suggestion: "Let us slow the pace, soften the jaw, and keep the breath steady—we will stay with just the edge of shut‑down and pause if needed."
+      },
+      {
+        text: "My chest feels hollow and tight.",
+        suggestion: "Place a hand there if that helps and match my breathing—out longer than in—while we notice a small part of the tightness."
+      },
+      {
+        text: "I am tempted to defend myself right now.",
+        suggestion: "Let the defense rest for two breaths—feel your feet—and we will hold the first hurt underneath it together."
+      },
+      {
+        text: "I want to blame everyone.",
+        suggestion: "I hear that pull. Stay with me—slow breath, steady tone—and we will feel one breath of what is hardest under the blame."
       }
     ],
     "case-marcus": [
       {
-        text: "A wave is rising and I do not want to feel it.",
-        suggestion: "We will take it in sips. Look around and name three objects, then feel your feet. With me, let one small wave pass and we will come back to the room."
+        text: "A wave is rising and I do not want it.",
+        suggestion: "We will take it in sips—look around and name two objects, feel your feet—and let one small wave pass while we stay in the room."
       },
       {
-        text: "I woke up soaked from a nightmare and now I feel nothing and everything.",
-        suggestion: "That whiplash is hard. We will ground first - feet, seat, breath - and touch a safe sliver of what is here, then step back."
+        text: "My body is buzzing after a nightmare.",
+        suggestion: "Feet, seat, breath—let us ground first. We will hold a safe sliver of the buzz for one breath and then rest."
       },
       {
-        text: "Silence at home feels like giving up.",
-        suggestion: "I am here. As we sit together, breathe low and notice if a small feeling shows up under the silence; we will stay only as long as it feels safe."
+        text: "I feel nothing and everything at once.",
+        suggestion: "That whiplash is rough. We will notice one tiny signal—tight, heavy, warm—and keep the exhale slow together."
+      },
+      {
+        text: "I want to shut down.",
+        suggestion: "We will let the shutdown know we hear it—heels heavy, long exhale—and stay with just the edge, then come back."
+      },
+      {
+        text: "My hands tremble when I try to talk about it.",
+        suggestion: "Let your hands rest on your legs and feel the contact; breathe low with me while we let a small part of the tremble be here."
+      },
+      {
+        text: "Silence at home feels like a weight on my chest.",
+        suggestion: "Place a hand on your chest if helpful; we will name 'weight' for one breath, then return to the room together."
+      },
+      {
+        text: "Crowds make my skin buzz.",
+        suggestion: "Let us orient to the space we are in—two things you see—and breathe out longer than in; we will hold just the edge."
+      },
+      {
+        text: "I am afraid if I feel it will swallow me.",
+        suggestion: "We will sit at the edge together—feet on the ground, steady breath—and touch one pin‑point of feeling, then pause."
+      },
+      {
+        text: "I want to disappear.",
+        suggestion: "Keep your eyes somewhere easy and feel the chair under you. I will stay with you while we let one breath of that urge move."
+      },
+      {
+        text: "I cannot tell if I am here.",
+        suggestion: "Let us name three things in this room and press your feet down. We will keep the breath slow while your body registers 'here'."
       }
     ]
   },
   "self-disclosure": {
     "case-sara": [
       {
-        text: "I feel stupid for crying over this again.",
-        suggestion: "Hearing that, I feel protective of you; your tears make sense to me, and I want to stay with you here."
+        text: "Do you think I am being ridiculous still missing him?",
+        suggestion: "I do not see you as ridiculous—I feel moved by how much this mattered, and I want to stay with you in it."
       },
       {
-        text: "I should not need anyone; it is embarrassing.",
-        suggestion: "As you say that, I notice a heaviness in me, which tells me how much you have had to carry alone."
+        text: "You probably get tired of hearing me cry.",
+        suggestion: "I do not feel tired—I notice care and a wish to help you feel less alone as we sit with this."
       },
       {
-        text: "I worry you will think I am too much.",
-        suggestion: "I feel glad you told me that; I want you to know I want to be here with you in this."
+        text: "Are you the type who gets uncomfortable with tears?",
+        suggestion: "When tears come, I tend to feel protective and steady; if it helps, we can let them have a little room together."
+      },
+      {
+        text: "Do you ever feel lonely like this?",
+        suggestion: "I know loneliness in my own life; noticing that helps me slow down here with you and really make room for yours."
+      },
+      {
+        text: "I am embarrassed you see me like this.",
+        suggestion: "Right now I feel respect for your courage and closeness to you, not judgment."
+      },
+      {
+        text: "Do you think I will always be alone?",
+        suggestion: "A part of me hopes with you that this can change—and today I want to be right here so it feels a little less alone."
+      },
+      {
+        text: "Am I too much for you?",
+        suggestion: "I do not feel overwhelmed—I feel present and committed to staying with you as we go at your pace."
+      },
+      {
+        text: "Are you in a relationship? Does that make you judge me?",
+        suggestion: "I am partnered, and I am not judging you—I notice warmth and a wish to understand what this stirs for you."
+      },
+      {
+        text: "I hate that I need anyone, even you.",
+        suggestion: "Hearing that, I feel compassion and want to honor how hard it is to need, while staying close to you in it."
+      },
+      {
+        text: "Do you actually care about me or just your job?",
+        suggestion: "I care about you and what happens to you—I feel invested in being here with you as a person, not just a role."
       }
     ],
     "case-michael": [
       {
-        text: "I lost it at work again and felt humiliated.",
-        suggestion: "Hearing 'humiliated,' I feel a squeeze in my chest; it makes sense this stings so much."
+        text: "Be honest—do I sound weak talking like this?",
+        suggestion: "As I listen, I do not hear weakness—I feel the sting you carry and a determination in me to help you get steadier."
       },
       {
-        text: "Being seen as weak is the worst thing.",
-        suggestion: "As you say 'weak,' I notice myself slowing down; I want to make room for what hurts under that word."
+        text: "Do you get angry like this?",
+        suggestion: "I know what hot anger feels like in me; remembering that helps me stay calm with you while we track what hits."
       },
       {
-        text: "Do not make me talk about feelings.",
-        suggestion: "I notice a pull in me to prove this helps; I want to own that and stay focused on what matters most to you."
+        text: "You probably think I am the problem at home.",
+        suggestion: "I do not see you as the problem—I feel curious about what hurts under the heat and want to map it with you."
+      },
+      {
+        text: "Are you judging me for yelling?",
+        suggestion: "I am not judging—I notice concern for you and your family, and a real wish to help you have more control in those moments."
+      },
+      {
+        text: "Do therapists get bored hearing this stuff?",
+        suggestion: "I do not feel bored—I feel engaged and focused on understanding the moment it flips for you."
+      },
+      {
+        text: "Are you strong enough to handle me when I am mad?",
+        suggestion: "Right now I feel solid with you; I want to stay steady so you do not have to carry this alone."
+      },
+      {
+        text: "You look calm—does any of this get to you?",
+        suggestion: "I feel the weight of it with you and I am keeping my body steady so we can slow the heat down together."
+      },
+      {
+        text: "Do you even like working with guys like me?",
+        suggestion: "I do—I feel respect for your directness and care about helping you keep your strength while changing what hurts."
+      },
+      {
+        text: "Are you married? I wonder if you take your anger home.",
+        suggestion: "I am partnered, and when I notice anger in me I work to slow it—that is the same steadying I want to help you practice here."
+      },
+      {
+        text: "Tell me you get why this is hard.",
+        suggestion: "I do—I can feel how hard it is, and I want to stand with you while we make it more workable."
       }
     ],
     "case-jason": [
       {
-        text: "I am probably wasting your time.",
-        suggestion: "I feel touched you said that out loud; I value being with you even when words are hard to find."
+        text: "Am I wasting your time right now?",
+        suggestion: "I value this time with you—I feel genuine interest in you, even when it is quiet."
       },
       {
-        text: "People will think I am stupid if I speak.",
-        suggestion: "Hearing that fear, I feel a softness in me; it tells me how much this matters to you."
+        text: "Do you ever feel awkward like me?",
+        suggestion: "I know awkwardness in myself; remembering that makes me want to move slowly and kindly with you here."
       },
       {
-        text: "I stayed home instead of going out again.",
-        suggestion: "I notice sadness in me as you describe staying home; I want to stay close to what that part of you needed."
+        text: "You probably think I am boring.",
+        suggestion: "I do not feel bored—I notice curiosity and warmth toward you."
+      },
+      {
+        text: "Is it okay that I do not know what to say?",
+        suggestion: "It is okay—when clients go blank, I feel patient and want to help find one small signal together."
+      },
+      {
+        text: "Are you disappointed I did not go to the party?",
+        suggestion: "I am not disappointed—I feel care for how tough that was and interest in what got loud inside."
+      },
+      {
+        text: "Do you like working with shy people?",
+        suggestion: "I do—I feel calm and gentle here, and I want to make this a place that feels safe to try small steps."
+      },
+      {
+        text: "Are you judging me for being quiet?",
+        suggestion: "No—what I feel is respect for how hard you are trying and a desire to go at your pace."
+      },
+      {
+        text: "Would you tell me if I said something dumb?",
+        suggestion: "I would be honest kindly—and right now I feel protective of you as you take risks here."
+      },
+      {
+        text: "Do you ever get nervous in groups?",
+        suggestion: "I have—I remember the energy of that, and it helps me stay steady as we make groups easier for you."
+      },
+      {
+        text: "Do you think I will ever be less anxious?",
+        suggestion: "A hopeful part of me believes you can—I feel committed to helping your body learn safety a step at a time."
       }
     ],
     "case-laura": [
       {
-        text: "Mostly I feel nothing.",
-        suggestion: "As you say 'nothing,' I feel a tenderness in me; we can keep this very gentle and at your pace."
+        text: "Does this make you uncomfortable—me feeling nothing?",
+        suggestion: "I do not feel uncomfortable—I feel gentle and patient, and I want to keep it very slow so it stays safe."
       },
       {
-        text: "Raised voices make me panic.",
-        suggestion: "I notice my voice softening as I hear that; I want you to feel how with you I am as we ground together."
+        text: "Are you annoyed I am not opening up?",
+        suggestion: "I am not annoyed—I notice tenderness and respect for how carefully you are protecting yourself."
       },
       {
-        text: "Kindness makes me go distant.",
-        suggestion: "Hearing that, I feel sad for how alone that must have felt, and I want to stay with you as we notice it."
+        text: "You seem calm—do you actually get what this is like?",
+        suggestion: "I feel the gravity of it with you, and I am staying calm on purpose so we can move in tiny steps together."
+      },
+      {
+        text: "Have you worked with trauma like mine before?",
+        suggestion: "Yes, I have—and as I sit with you now I feel protective and careful about pacing this in a way that feels safe to you."
+      },
+      {
+        text: "Does my story make you think less of me?",
+        suggestion: "Hearing your story, I feel respect and sadness for what you carried—not judgment."
+      },
+      {
+        text: "Will you push me to go into details?",
+        suggestion: "I feel committed to not pushing—we will let your pace lead and keep things tolerable."
+      },
+      {
+        text: "Can you tell when I am far away?",
+        suggestion: "Often I can—I notice it as an emptiness in me, and I will check in gently when I sense it."
+      },
+      {
+        text: "Do you think kindness will make me worse?",
+        suggestion: "When I offer kindness here, I do it slowly; I notice a wish to help it feel safe rather than overwhelming."
+      },
+      {
+        text: "Do you worry I will break down?",
+        suggestion: "I do not—I feel steady and ready to slow or stop anytime you need."
+      },
+      {
+        text: "Do you believe I can feel again?",
+        suggestion: "A hopeful part of me does—I feel patient and committed to walking with you until more feeling is possible."
       }
     ],
     "case-carlos": [
       {
-        text: "I punched the wall and my kid saw it.",
-        suggestion: "Hearing about your son's face, my chest tightens; it shows me how much you care about being the dad you want to be."
+        text: "Do you think I am a bad dad for losing it?",
+        suggestion: "Hearing that, I feel your care for your kid—and I want to stand with you while we build more control."
       },
       {
-        text: "Disrespect sets me off fast.",
-        suggestion: "As you say 'disrespect,' I feel a seriousness in me; I want to go slowly right at the place that burns."
+        text: "Are you going to try to make me soft?",
+        suggestion: "I do not want to take your strength—I feel committed to helping you use it in ways that protect what you love."
       },
       {
-        text: "You are not going to try to make me soft, right?",
-        suggestion: "I notice a wish in me to earn your trust; I want to keep this practical and on your side."
+        text: "Does any of this scare you?",
+        suggestion: "I feel steady here with you—my focus is to help you catch what hits before it blows."
+      },
+      {
+        text: "You probably think I am just an angry guy.",
+        suggestion: "I do not—I notice the hurt under the heat, and I want to help you work with it."
+      },
+      {
+        text: "Are you tough enough for me?",
+        suggestion: "Right now I feel solid and on your side; I want to help you keep your edge without the explosion."
+      },
+      {
+        text: "Do you respect me?",
+        suggestion: "I do—I respect your honesty and your wish to change; that makes me want to work hard with you."
+      },
+      {
+        text: "Does breathing stuff even work for you?",
+        suggestion: "When I slow my breath, I feel steadier—it is one way I keep my footing so I can help you do the same."
+      },
+      {
+        text: "Are you married? Do you ever lose your temper?",
+        suggestion: "I am partnered, and when I notice my temper I slow myself; here I want to help you do that in the seconds that count."
+      },
+      {
+        text: "Do you think I can actually change?",
+        suggestion: "A part of me believes you can—I feel motivated to map the flashpoint with you until it shifts."
+      },
+      {
+        text: "Be honest—do you like working with me?",
+        suggestion: "I do—I like your directness and I feel invested in helping you have the family life you want."
       }
     ],
     "case-nina": [
       {
-        text: "If I rest, I feel selfish.",
-        suggestion: "I feel a pang hearing that; it makes sense given what you learned about caring for others first."
+        text: "I feel selfish even taking up space here.",
+        suggestion: "Hearing that, I feel protective of your time—you matter here, and I want to make room for what weighs on you."
       },
       {
-        text: "I am tired of doing everything.",
-        suggestion: "As you say that, I feel moved; you have carried a lot for a long time."
+        text: "Are you judging me for being resentful?",
+        suggestion: "I am not judging—I notice care for how much you give and concern for the cost on you."
       },
       {
-        text: "I do not want to burden you here.",
-        suggestion: "I notice warmth in me for you naming that; you are not a burden here, and I want to stay with what feels heavy."
+        text: "You probably think I should just toughen up.",
+        suggestion: "I do not feel that—I feel compassion and a wish to help you have support and limits that fit you."
+      },
+      {
+        text: "Do you ever feel guilty resting?",
+        suggestion: "I have felt that tug; knowing it helps me slow down here and give you permission to need rest too."
+      },
+      {
+        text: "Does this make you uncomfortable—me crying?",
+        suggestion: "When you cry, I feel closer to you and more committed to moving slowly, not uncomfortable."
+      },
+      {
+        text: "Am I being a burden to you?",
+        suggestion: "I do not experience you as a burden—I feel honored to sit with you while we share the load for a bit."
+      },
+      {
+        text: "Is it okay if I ask for help here?",
+        suggestion: "Yes—when you ask, I feel glad; practicing that here can make it easier out there too."
+      },
+      {
+        text: "Do you actually like working with me?",
+        suggestion: "I do—I feel warmth toward you and want you to feel supported here."
+      },
+      {
+        text: "Will you tell me if I am doing therapy wrong?",
+        suggestion: "I will be honest and kind—right now I feel appreciation for how open you are."
+      },
+      {
+        text: "Do you think I deserve care?",
+        suggestion: "I do—and I feel strongly about helping you receive it, starting in this room."
       }
     ],
     "case-aisha": [
       {
-        text: "If you leave me, I will not survive.",
-        suggestion: "I feel a pull to reassure you right now; I want you to know I am here with you in this moment."
+        text: "Do you actually care about me or are you paid to?",
+        suggestion: "I care about you as a person—right now I feel very with you—and I want to keep showing up in a way that feels steady."
       },
       {
-        text: "Last night I wanted to hurt myself to make it stop.",
-        suggestion: "Hearing that, I feel concerned and very with you; your safety matters to me as we find steadier ground."
+        text: "Will you leave like everyone else?",
+        suggestion: "I feel the ache in that fear; I want to be transparent and dependable here so we can keep building trust."
       },
       {
-        text: "You did not text me back and it hurt.",
-        suggestion: "I notice a pang in me hearing that; I am sorry that hurt and I want to tend to it together."
+        text: "Did I scare you when I said I wanted to hurt myself?",
+        suggestion: "I felt concerned and very present with you—your safety matters to me and I want us to plan for hard moments together."
+      },
+      {
+        text: "You did not message me back and it hurt.",
+        suggestion: "Hearing that, I feel a pang and I am sorry it hurt; I want to understand how it landed so we can repair."
+      },
+      {
+        text: "Are you angry with me?",
+        suggestion: "I do not feel angry—I notice care and a wish to help you feel safer with me right now."
+      },
+      {
+        text: "Do you think I am too much?",
+        suggestion: "I do not—I feel compassion and a desire to help you hold these big feelings together."
+      },
+      {
+        text: "Do you like me?",
+        suggestion: "I feel warmth toward you and I appreciate your honesty—thank you for asking."
+      },
+      {
+        text: "Are you disappointed in me?",
+        suggestion: "I do not feel disappointment—I feel glad you are telling me what is true so we can work with it."
+      },
+      {
+        text: "Can you promise not to give up on me?",
+        suggestion: "I feel committed to this work with you, and I want to keep naming fears together when they show up."
+      },
+      {
+        text: "Do you think I will ever feel okay?",
+        suggestion: "A hopeful part of me believes you can—we will go slowly and I will keep showing up with you."
       }
     ],
     "case-david": [
       {
-        text: "You probably cannot help someone like me.",
-        suggestion: "I notice a small sting in me hearing that; it tells me trust is hard here, and I want to understand that better."
+        text: "Convince me this is worth my time.",
+        suggestion: "Hearing that, I feel the urge to prove something—and I want to stay curious about what would make this feel worthwhile to you."
       },
       {
-        text: "My wife calls me a narcissist.",
-        suggestion: "Hearing that word, I feel the weight in the room; I want to stay with the hurt under the burn."
+        text: "Do you even like working with someone like me?",
+        suggestion: "I do—I feel engaged and I want to help you get results that matter at home and at work."
       },
       {
-        text: "I want solutions, not feelings.",
-        suggestion: "I notice a part of me wanting to convince you; I will keep it brief and useful while we also notice what drives the reactions."
+        text: "Are you impressed by me at all?",
+        suggestion: "What I feel most right now is interest in you and respect for you bringing this here."
+      },
+      {
+        text: "Be honest—do you think I am the problem?",
+        suggestion: "I do not hold you as the problem—I feel focused on what happens in those tough moments and how we can widen your choices."
+      },
+      {
+        text: "Are you bored?",
+        suggestion: "I am not bored—I feel attentive and very present with you."
+      },
+      {
+        text: "Will you tell me if I mess up?",
+        suggestion: "I will be direct and kind—right now I feel invested in your success here."
+      },
+      {
+        text: "Do you ever feel ashamed of being wrong?",
+        suggestion: "I do at times; knowing that burn helps me keep steady with you when it shows up here."
+      },
+      {
+        text: "Do you think I am cold?",
+        suggestion: "I experience you as guarded when it hurts—what I feel is interest in the part that protects you."
+      },
+      {
+        text: "Are you married? Does that make you judge my affair?",
+        suggestion: "I am partnered, and I am not here to judge—I feel focused on understanding what led there and what you want different now."
+      },
+      {
+        text: "Do you respect me?",
+        suggestion: "I do—I feel respect for your drive and I want to help channel it in ways that bring you closer to what you value."
       }
     ],
     "case-marcus": [
       {
-        text: "Most days I feel nothing.",
-        suggestion: "As you say that, I feel a heaviness in me; we can go at your pace and keep it safe."
+        text: "Do you think I am broken?",
+        suggestion: "I do not—I feel respect for how you have survived, and I want to go at a pace that feels safe to you."
       },
       {
-        text: "The nightmares are back.",
-        suggestion: "Hearing about the nights, I feel a steadying urge to slow with you; I am here as we take it one step at a time."
+        text: "Are you frustrated that I do not feel much?",
+        suggestion: "I am not frustrated—I notice patience in me and a wish to keep it very gentle."
       },
       {
-        text: "Being around people feels risky.",
-        suggestion: "I notice respect in me for how you have kept yourself safe; I want to honor that as we work."
+        text: "Does this get to you?",
+        suggestion: "I feel the weight of it and I am staying steady on purpose so we can touch small pieces together."
+      },
+      {
+        text: "Do you even want me here?",
+        suggestion: "I do—I feel glad you are here and I want to keep showing up alongside you."
+      },
+      {
+        text: "Are you going to push me into stuff?",
+        suggestion: "I feel committed to not pushing—we will let your pace lead and stop anytime it is too much."
+      },
+      {
+        text: "Do you think I can change?",
+        suggestion: "A hopeful part of me believes you can—and I want to earn your trust by going slow."
+      },
+      {
+        text: "Would you tell me if I was wasting your time?",
+        suggestion: "I would—and right now I feel that being with you like this matters."
+      },
+      {
+        text: "Do you get scared by trauma stories?",
+        suggestion: "I feel sorrow and care when I hear them, and I keep us grounded so it stays tolerable."
+      },
+      {
+        text: "Do you like working with veterans?",
+        suggestion: "I do—I feel respect for your service and a deep wish to make this room feel safer than most places do."
+      },
+      {
+        text: "Are you okay with silence?",
+        suggestion: "Yes—silence feels useful to me; I feel patient and will stay with you in it."
       }
     ]
   },
