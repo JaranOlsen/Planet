@@ -10,6 +10,11 @@ import {
   LANGUAGE_OVERRIDES,
   STATEMENT_TRANSLATIONS
 } from "./practiceData.js";
+import {
+  submitFeedback,
+  redeemAccessCode,
+  isSupabaseReady
+} from "./backend.js";
 
 const sections = {
   language: document.getElementById("language-selection"),
@@ -64,7 +69,25 @@ const elements = {
   statementPanel: document.querySelector(".statement-panel"),
   suggestionPanel: document.querySelector(".suggestion-panel"),
   suggestionToggle: document.getElementById("toggle-suggestion"),
-  suggestionText: document.getElementById("suggestion-text")
+  suggestionText: document.getElementById("suggestion-text"),
+  feedbackTitle: document.getElementById("feedback-title"),
+  feedbackForm: document.getElementById("feedback-form"),
+  feedbackReason: document.getElementById("feedback-reason"),
+  feedbackReasonLabel: document.getElementById("feedback-reason-label"),
+  feedbackDetails: document.getElementById("feedback-details"),
+  feedbackDetailsLabel: document.getElementById("feedback-details-label"),
+  feedbackStatus: document.getElementById("feedback-status"),
+  feedbackToggle: document.getElementById("feedback-toggle"),
+  feedbackSubmit: document.getElementById("feedback-submit"),
+  lockedBanner: document.getElementById("locked-banner"),
+  paywallOverlay: document.getElementById("paywall-overlay"),
+  paywallMessage: document.getElementById("paywall-message"),
+  paywallHeading: document.getElementById("paywall-heading"),
+  unlockForm: document.getElementById("unlock-form"),
+  unlockCodeInput: document.getElementById("unlock-code"),
+  unlockStatus: document.getElementById("unlock-status"),
+  unlockSubmit: document.getElementById("unlock-submit"),
+  closePaywallButton: document.getElementById("close-paywall")
 };
 
 const state = {
@@ -74,28 +97,65 @@ const state = {
   order: [],
   index: 0,
   suggestionVisible: false,
-  view: "brief"
+  view: "brief",
+  accessLevel: "free",
+  currentStatement: null,
+  unlocking: false,
+  feedbackCollapsed: true
 };
+
+const SHUFFLE_ICON_SRC = `${import.meta.env.BASE_URL}assets/icons/shuffle.svg`;
 
 const languageButtonMap = new Map();
 const skillButtonMap = new Map();
 const caseButtonMap = new Map();
 
+const ACCESS_STORAGE_KEY = "dp_access_level";
+
 const SKILL_PHASE_MAP = {
   "therapist-self-awareness": "beta",
   "providing-treatment-rationale": "beta",
+  "exploratory-questions": "beta",
   "staying-in-contact-intense-affect": "beta",
   "self-disclosure": "beta",
   "marker-recognition-chairwork": "alpha",
   "alliance-repair": "alpha",
-  "empathic-refocusing": "alpha",
-  "exploratory-questions": "beta"
+  "empathic-refocusing": "alpha"
 };
 
 const SKILL_PHASE_LABELS = {
   alpha: "Alpha",
   beta: "Beta"
 };
+
+function loadAccessLevel() {
+  try {
+    const stored = localStorage.getItem(ACCESS_STORAGE_KEY);
+    if (stored) return stored;
+  } catch (err) {
+    // ignore storage errors
+  }
+  return "free";
+}
+
+function saveAccessLevel(level) {
+  state.accessLevel = level;
+  try {
+    localStorage.setItem(ACCESS_STORAGE_KEY, level);
+  } catch (err) {
+    // ignore storage errors
+  }
+  updateLockedBanner();
+}
+
+function hasProAccess() {
+  return state.accessLevel === "pro" || state.accessLevel === "all";
+}
+
+function isCaseLocked(caseItem) {
+  if (!caseItem) return false;
+  return caseItem.tier === "pro" && !hasProAccess();
+}
 
 function getLanguageDefinition(languageId) {
   const fallbackId = LANGUAGE_METADATA[languageId] ? languageId : "en";
@@ -136,6 +196,7 @@ function localizeSkill(languageId, skillId) {
       id: caseId,
       label: caseOverride.label ?? baseCase.label,
       difficulty: caseOverride.difficulty ?? baseCase.difficulty ?? "",
+      tier: caseOverride.tier ?? baseCase.tier ?? "free",
       difficultyLabel:
         caseOverride.difficultyLabel ?? baseCase.difficultyLabel ?? baseCase.difficulty ?? "",
       teaser: caseOverride.teaser ?? baseCase.teaser,
@@ -254,8 +315,10 @@ function applyLanguageStrings(languageId) {
       strings.practiceControlsAria ?? ""
     );
   }
-  elements.shuffleButton.textContent = strings.shuffle;
-  elements.shuffleButton.setAttribute("aria-label", strings.shuffleAria ?? strings.shuffle);
+  if (elements.shuffleButton) {
+    elements.shuffleButton.innerHTML = `<img src="${SHUFFLE_ICON_SRC}" alt="">`;
+    elements.shuffleButton.setAttribute("aria-label", strings.shuffleAria ?? strings.shuffle);
+  }
 
   elements.nextButton.textContent = strings.next;
   elements.nextButton.setAttribute("aria-label", strings.nextAria ?? strings.next);
@@ -291,8 +354,39 @@ function applyLanguageStrings(languageId) {
     elements.statementPanel.setAttribute("aria-label", strings.statementPanelAria ?? "");
   }
 
+  if (elements.lockedBanner) {
+    elements.lockedBanner.textContent = strings.lockedBanner ?? "";
+  }
+  if (elements.paywallHeading) {
+    elements.paywallHeading.textContent = strings.paywallHeading ?? "";
+  }
+  if (elements.paywallMessage) {
+    elements.paywallMessage.textContent = strings.paywallMessage ?? "";
+  }
+  if (elements.unlockSubmit) {
+    elements.unlockSubmit.textContent = strings.unlockSubmit ?? "Unlock";
+  }
+  if (elements.unlockCodeInput) {
+    elements.unlockCodeInput.setAttribute("placeholder", strings.unlockPlaceholder ?? "Access code");
+  }
+
+  if (elements.feedbackTitle) {
+    elements.feedbackTitle.textContent = strings.feedbackTitle ?? "Flag this item";
+  }
+  if (elements.feedbackReasonLabel) {
+    elements.feedbackReasonLabel.textContent = strings.feedbackReasonLabel ?? "What's wrong?";
+  }
+  if (elements.feedbackDetailsLabel) {
+    elements.feedbackDetailsLabel.textContent = strings.feedbackDetailsLabel ?? "Add details";
+  }
+  if (elements.feedbackSubmit) {
+    elements.feedbackSubmit.textContent = strings.feedbackSubmit ?? "Send feedback";
+  }
+  updateFeedbackVisibility();
+
   updateCaseSkillContext(getCurrentSkill());
   updateSuggestionUI();
+  updateLockedBanner();
 }
 
 function renderLanguageOptions() {
@@ -377,11 +471,22 @@ function renderCaseOptions() {
     button.setAttribute("role", "option");
     const isSelected = state.caseId === caseItem.id;
     button.setAttribute("aria-selected", isSelected ? "true" : "false");
+    const locked = isCaseLocked(caseItem);
+    if (locked) {
+      button.classList.add("is-locked");
+    }
+    const lockTag = locked ? `<span class="lock-tag" aria-label="${getUIStrings().lockedLabel}">🔒</span>` : "";
     button.innerHTML = `
-      <span class="card-title">${caseItem.label}</span>
+      <span class="card-title">${caseItem.label} ${lockTag}</span>
       <span class="card-body">${caseItem.teaser}</span>
     `;
-    button.addEventListener("click", () => handleCaseSelection(caseItem.id));
+    button.addEventListener("click", () => {
+      if (locked) {
+        showPaywall(caseItem);
+        return;
+      }
+      handleCaseSelection(caseItem.id);
+    });
     elements.caseList.appendChild(button);
     caseButtonMap.set(caseItem.id, button);
   });
@@ -423,6 +528,36 @@ function updateCaseSkillContext(skill) {
   elements.caseSkillAim.textContent = skill.aim ?? "";
 }
 
+function updateLockedBanner() {
+  if (!elements.lockedBanner) return;
+  const strings = getUIStrings();
+  const hidden = hasProAccess();
+  elements.lockedBanner.hidden = hidden;
+  elements.lockedBanner.classList.toggle("is-hidden", hidden);
+  elements.lockedBanner.textContent = strings.lockedBanner ?? "";
+}
+
+function showPaywall(caseItem) {
+  if (!elements.paywallOverlay || !elements.paywallMessage) return;
+  const strings = getUIStrings();
+  const caseLabel = caseItem?.label ? `: ${caseItem.label}` : "";
+  elements.paywallMessage.textContent = `${strings.paywallMessage ?? ""}${caseLabel}`;
+  elements.paywallOverlay.classList.remove("is-hidden");
+  elements.paywallOverlay.hidden = false;
+  if (elements.unlockStatus) {
+    elements.unlockStatus.textContent = "";
+  }
+  if (elements.unlockCodeInput) {
+    elements.unlockCodeInput.focus();
+  }
+}
+
+function hidePaywall() {
+  if (!elements.paywallOverlay) return;
+  elements.paywallOverlay.classList.add("is-hidden");
+  elements.paywallOverlay.hidden = true;
+}
+
 function ensureOrderForCase() {
   const caseData = getCurrentCase();
   if (!caseData) {
@@ -448,10 +583,16 @@ function showCaseBrief() {
     elements.statementWorkspace.classList.add("is-hidden");
     elements.statementWorkspace.hidden = true;
   }
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 }
 
 function showStatements() {
-  if (!getCurrentCase()) return;
+  const activeCase = getCurrentCase();
+  if (!activeCase) return;
+  if (isCaseLocked(activeCase)) {
+    showPaywall(activeCase);
+    return;
+  }
   state.view = "statements";
   if (elements.caseBriefScreen) {
     elements.caseBriefScreen.classList.add("is-hidden");
@@ -463,6 +604,7 @@ function showStatements() {
   }
   ensureOrderForCase();
   renderActiveStatement();
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 }
 
 function hydratePracticeView() {
@@ -488,6 +630,21 @@ function hydratePracticeView() {
     }
     resetSuggestionVisibility();
     showCaseBrief();
+    updateFeedbackAvailability();
+    return;
+  }
+
+  const locked = isCaseLocked(caseData);
+  if (locked) {
+    elements.statementText.textContent = strings.lockedPlaceholder ?? strings.emptyPrompt;
+    elements.statementCounter.textContent = "";
+    if (elements.suggestionText) {
+      elements.suggestionText.textContent = "";
+    }
+    resetSuggestionVisibility();
+    showCaseBrief();
+    showPaywall(caseData);
+    updateFeedbackAvailability();
     return;
   }
 
@@ -516,22 +673,26 @@ function renderActiveStatement() {
   const strings = getUIStrings();
   const statements = getActiveStatements();
   if (!statements.length) {
+    state.currentStatement = null;
     elements.statementText.textContent = strings.statementFallback;
     elements.statementCounter.textContent = "";
     if (elements.suggestionText) {
       elements.suggestionText.textContent = "";
     }
     resetSuggestionVisibility();
+    updateFeedbackAvailability();
     return;
   }
 
   const currentEntry = getActiveStatement();
+  state.currentStatement = currentEntry;
   elements.statementText.textContent = currentEntry?.text ?? strings.statementFallback;
   elements.statementCounter.textContent = formatCounter(state.index + 1, statements.length);
   if (elements.suggestionText) {
     elements.suggestionText.textContent = currentEntry?.suggestion ?? "";
   }
   resetSuggestionVisibility();
+  updateFeedbackAvailability();
 }
 
 function formatCounter(current, total) {
@@ -583,6 +744,36 @@ function resetSuggestionVisibility() {
   updateSuggestionUI();
 }
 
+function setFeedbackStatus(message) {
+  if (!elements.feedbackStatus) return;
+  elements.feedbackStatus.textContent = message ?? "";
+}
+
+function updateFeedbackVisibility() {
+  if (!elements.feedbackForm || !elements.feedbackToggle) return;
+  const strings = getUIStrings();
+  const collapsed = state.feedbackCollapsed;
+  elements.feedbackForm.classList.toggle("is-hidden", collapsed);
+  elements.feedbackToggle.textContent = collapsed
+    ? strings.feedbackToggleShow ?? "Show form"
+    : strings.feedbackToggleHide ?? "Hide form";
+}
+
+function updateFeedbackAvailability() {
+  if (!elements.feedbackForm || !elements.feedbackSubmit) return;
+  const strings = getUIStrings();
+  const hasStatement = Boolean(state.currentStatement && state.caseId && state.skillId);
+  const configured = isSupabaseReady();
+  elements.feedbackSubmit.disabled = !hasStatement || !configured || state.unlocking;
+  if (!configured) {
+    setFeedbackStatus(strings.feedbackConfigMissing ?? "");
+  } else if (!hasStatement) {
+    setFeedbackStatus(strings.feedbackUnavailable ?? "");
+  } else {
+    setFeedbackStatus("");
+  }
+}
+
 function shuffleArray(source) {
   const array = [...source];
   for (let i = array.length - 1; i > 0; i -= 1) {
@@ -616,6 +807,98 @@ function showPreviousStatement() {
   renderActiveStatement();
 }
 
+async function handleFeedbackSubmit(event) {
+  event.preventDefault();
+  const strings = getUIStrings();
+  if (!state.currentStatement || !state.caseId || !state.skillId) {
+    setFeedbackStatus(strings.feedbackUnavailable ?? "");
+    return;
+  }
+  if (!isSupabaseReady()) {
+    setFeedbackStatus(strings.feedbackConfigMissing ?? "");
+    return;
+  }
+  const reason = elements.feedbackReason?.value ?? "";
+  const details = elements.feedbackDetails?.value ?? "";
+  const payload = {
+    statement_id: state.currentStatement.id,
+    statement_text: state.currentStatement.text ?? "",
+    suggestion_text: state.currentStatement.suggestion ?? "",
+    skill_id: state.skillId,
+    case_id: state.caseId,
+    language_id: state.languageId ?? "en",
+    order_index: state.index,
+    reason,
+    details,
+    user_agent: navigator.userAgent ?? "",
+    created_at: new Date().toISOString()
+  };
+
+  if (elements.feedbackSubmit) {
+    elements.feedbackSubmit.disabled = true;
+  }
+  setFeedbackStatus(strings.feedbackSending ?? "");
+  try {
+    await submitFeedback(payload);
+    setFeedbackStatus(strings.feedbackSuccess ?? "");
+    if (elements.feedbackForm) {
+      elements.feedbackForm.reset();
+    }
+  } catch (err) {
+    const msg = err?.message === "Missing Supabase configuration"
+      ? strings.feedbackConfigMissing ?? err.message
+      : strings.feedbackError ?? err.message ?? "";
+    setFeedbackStatus(msg);
+  } finally {
+    if (elements.feedbackSubmit) {
+      elements.feedbackSubmit.disabled = false;
+    }
+  }
+}
+
+async function handleUnlockSubmit(event) {
+  event.preventDefault();
+  if (state.unlocking) return;
+  const strings = getUIStrings();
+  if (!isSupabaseReady()) {
+    if (elements.unlockStatus) {
+      elements.unlockStatus.textContent = strings.unlockConfigMissing ?? "";
+    }
+    return;
+  }
+  const code = (elements.unlockCodeInput?.value ?? "").trim();
+  if (!code) {
+    if (elements.unlockStatus) {
+      elements.unlockStatus.textContent = strings.unlockMissing ?? "";
+    }
+    return;
+  }
+  state.unlocking = true;
+  if (elements.unlockStatus) {
+    elements.unlockStatus.textContent = strings.unlockWorking ?? "";
+  }
+  try {
+    const result = await redeemAccessCode(code);
+    saveAccessLevel(result.accessLevel ?? "pro");
+    if (elements.unlockStatus) {
+      elements.unlockStatus.textContent = strings.unlockSuccess ?? "";
+    }
+    hidePaywall();
+    renderCaseOptions();
+    hydratePracticeView();
+  } catch (err) {
+    if (elements.unlockStatus) {
+      const msg = err?.message === "invalid_code"
+        ? strings.unlockInvalid ?? ""
+        : strings.unlockError ?? err.message ?? "";
+      elements.unlockStatus.textContent = msg;
+    }
+  } finally {
+    state.unlocking = false;
+    updateFeedbackAvailability();
+  }
+}
+
 function handleLanguageSelection(languageId) {
   state.languageId = languageId;
   state.skillId = null;
@@ -623,6 +906,7 @@ function handleLanguageSelection(languageId) {
   state.order = [];
   state.index = 0;
   state.view = "brief";
+  state.currentStatement = null;
 
   applyLanguageStrings(languageId);
   highlightLanguageSelection(languageId);
@@ -634,6 +918,7 @@ function handleLanguageSelection(languageId) {
     elements.suggestionText.textContent = "";
   }
   resetSuggestionVisibility();
+  updateFeedbackAvailability();
   showSection("skill");
 }
 
@@ -643,6 +928,7 @@ function handleSkillSelection(skillId) {
   state.order = [];
   state.index = 0;
   state.view = "brief";
+  state.currentStatement = null;
 
   highlightSkillSelection(skillId);
   renderCaseOptions();
@@ -652,14 +938,23 @@ function handleSkillSelection(skillId) {
     elements.suggestionText.textContent = "";
   }
   resetSuggestionVisibility();
+  updateFeedbackAvailability();
   showSection("case");
 }
 
 function handleCaseSelection(caseId) {
+  const skill = getCurrentSkill();
+  const targetCase = skill?.cases.find((caseItem) => caseItem.id === caseId);
+  if (isCaseLocked(targetCase)) {
+    showPaywall(targetCase);
+    return;
+  }
+
   state.caseId = caseId;
   state.order = [];
   state.index = 0;
   state.view = "brief";
+  state.currentStatement = null;
 
   highlightCaseSelection(caseId);
   hydratePracticeView();
@@ -673,6 +968,7 @@ function handleBackNavigation(targetKey) {
     state.order = [];
     state.index = 0;
     state.view = "brief";
+    state.currentStatement = null;
     elements.statementText.textContent = getUIStrings().emptyPrompt;
     elements.statementCounter.textContent = "";
     if (elements.suggestionText) {
@@ -682,6 +978,7 @@ function handleBackNavigation(targetKey) {
     highlightSkillSelection(null);
     highlightCaseSelection(null);
     updateCaseSkillContext(null);
+    updateFeedbackAvailability();
     showSection("language");
     return;
   }
@@ -690,6 +987,7 @@ function handleBackNavigation(targetKey) {
     state.caseId = null;
     state.order = [];
     state.index = 0;
+    state.currentStatement = null;
     highlightCaseSelection(null);
     renderCaseOptions();
     if (elements.suggestionText) {
@@ -698,6 +996,7 @@ function handleBackNavigation(targetKey) {
     resetSuggestionVisibility();
     state.view = "brief";
     updateCaseSkillContext(getCurrentSkill());
+    updateFeedbackAvailability();
     showSection("skill");
     return;
   }
@@ -705,6 +1004,7 @@ function handleBackNavigation(targetKey) {
   if (targetKey === "case") {
     state.order = [];
     state.index = 0;
+    state.currentStatement = null;
     highlightCaseSelection(state.caseId);
     renderCaseOptions();
     if (elements.suggestionText) {
@@ -713,6 +1013,7 @@ function handleBackNavigation(targetKey) {
     resetSuggestionVisibility();
     state.view = "brief";
     updateCaseSkillContext(getCurrentSkill());
+    updateFeedbackAvailability();
     showSection("case");
   }
 }
@@ -774,14 +1075,35 @@ function registerEventListeners() {
       updateSuggestionUI();
     });
   }
+
+  if (elements.feedbackForm) {
+    elements.feedbackForm.addEventListener("submit", handleFeedbackSubmit);
+  }
+  if (elements.feedbackToggle) {
+    elements.feedbackToggle.addEventListener("click", () => {
+      state.feedbackCollapsed = !state.feedbackCollapsed;
+      updateFeedbackVisibility();
+    });
+  }
+
+  if (elements.unlockForm) {
+    elements.unlockForm.addEventListener("submit", handleUnlockSubmit);
+  }
+
+  if (elements.closePaywallButton) {
+    elements.closePaywallButton.addEventListener("click", hidePaywall);
+  }
 }
 
 function initialize() {
+  state.accessLevel = loadAccessLevel();
   applyLanguageStrings("en");
   renderLanguageOptions();
   elements.statementText.textContent = getUIStrings("en").emptyPrompt;
   elements.statementCounter.textContent = "";
   resetSuggestionVisibility();
+  updateLockedBanner();
+  updateFeedbackAvailability();
   registerEventListeners();
   showSection("language");
 }

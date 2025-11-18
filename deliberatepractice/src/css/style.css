@@ -37,6 +37,18 @@ picture {
   display: block;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 button {
   font: inherit;
   cursor: pointer;
@@ -158,6 +170,11 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+}
+
+.panel-title {
+  margin-left: auto;
+  text-align: right;
 }
 
 .back-button {
@@ -326,11 +343,7 @@ button {
 }
 
 .practice-controls {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.75rem;
+  display: none;
 }
 
 .statement-workspace {
@@ -392,21 +405,49 @@ button {
 
 .statement-text {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.36rem;
   line-height: 1.7;
   font-weight: 500;
 }
 
 .panel-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .statement-counter {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--color-muted);
+  flex: 1;
+  text-align: center;
+}
+
+.shuffle-button--icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  background-color: hsl(215 40% 97%);
+  color: var(--color-muted);
+}
+
+.shuffle-button--icon:hover {
+  background-color: hsl(215 50% 95%);
+}
+
+.shuffle-button--icon img {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.panel-footer .primary-button {
+  margin-left: auto;
 }
 
 .primary-button {
@@ -434,6 +475,12 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  align-items: center;
+  text-align: center;
+}
+
+.suggestion-panel .ghost-button {
+  align-self: center;
 }
 
 .ghost-button {
@@ -467,6 +514,98 @@ button {
   font-size: 1.08rem;
   line-height: 1.6;
   color: var(--color-text);
+}
+
+.feedback-panel {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  display: grid;
+  gap: 0.6rem;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.feedback-panel h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.feedback-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ghost-button--small {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+select,
+textarea,
+input[type="text"] {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  font: inherit;
+  color: var(--color-text);
+}
+
+.form-status {
+  min-height: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.locked-banner {
+  margin: 0;
+  padding: 0.65rem 1rem;
+  text-align: center;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 0.95rem;
+}
+
+.lock-tag {
+  font-size: 0.9rem;
+}
+
+.card-button.is-locked {
+  position: relative;
+  opacity: 0.9;
+}
+
+.paywall-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  z-index: 999;
+}
+
+.paywall-modal {
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.25rem;
+  max-width: 420px;
+  width: min(90vw, 420px);
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 0.65rem;
 }
 
 .app-footer {

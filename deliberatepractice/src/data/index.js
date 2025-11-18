@@ -63,6 +63,7 @@ const buildCasePayload = (caseId, skillId) => {
     label: meta.label,
     difficulty: meta.difficulty ?? "unknown",
     difficultyLabel: meta.difficultyLabel ?? meta.difficulty ?? "",
+    tier: meta.tier ?? "pro",
     teaser: meta.teaser ?? "",
     history: meta.history ?? "",
     schema: meta.schema ?? "",
