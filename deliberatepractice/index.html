@@ -8,11 +8,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="theme-color" content="#1f3c88" />
     <title>Deliberate Practice Lab</title>
-    <script type="module" crossorigin src="/Planet/assets/deliberatepractice-DV5JHytp.js"></script>
+    <script type="module" crossorigin src="/Planet/assets/deliberatepractice-BGiouoeT.js"></script>
     <link rel="modulepreload" crossorigin href="/Planet/assets/modulepreload-polyfill-B5Qt9EMX.js">
-    <link rel="stylesheet" crossorigin href="/Planet/assets/deliberatepractice-C_WKk7gZ.css">
+    <link rel="stylesheet" crossorigin href="/Planet/assets/deliberatepractice-C9Cits8n.css">
   </head>
   <body>
+    <div class="locked-banner is-hidden" id="locked-banner">Unlock the full library with your access code.</div>
     <header class="app-header">
       <h1 id="app-title">Deliberate Practice Lab</h1>
       <p class="app-tagline" id="app-tagline">
@@ -130,27 +131,49 @@
             <h3 class="case-title" id="statement-case-name"></h3>
             <button id="view-case-brief" class="ghost-button">View Case Brief</button>
           </div>
-          <section class="practice-controls" aria-label="Practice Controls">
-            <button
-              class="shuffle-button"
-              id="shuffle-order"
-              aria-label="Shuffle statement order"
-            >
-              Shuffle Statements
-            </button>
-          </section>
 
           <section class="statement-panel" aria-live="polite">
             <p id="statement-text" class="statement-text"></p>
             <div class="panel-footer">
+              <button
+                class="shuffle-button shuffle-button--icon"
+                id="shuffle-order"
+                aria-label="Shuffle statement order"
+              >
+                🔀
+              </button>
               <span id="statement-counter" class="statement-counter"></span>
-              <button id="next-statement" class="primary-button">Next Statement</button>
+              <button id="next-statement" class="primary-button">Next</button>
             </div>
           </section>
 
           <section class="suggestion-panel">
             <button id="toggle-suggestion" class="ghost-button">Show Suggested Response</button>
             <p id="suggestion-text" class="suggestion-text" hidden></p>
+          </section>
+
+          <section class="feedback-panel">
+            <div class="feedback-header">
+              <h4 id="feedback-title" class="sr-only">Feedback</h4>
+              <button type="button" class="ghost-button ghost-button--small" id="feedback-toggle">
+                Flag
+              </button>
+            </div>
+            <form id="feedback-form" class="is-hidden">
+              <label class="form-label" for="feedback-reason" id="feedback-reason-label">What's wrong?</label>
+              <select id="feedback-reason" name="reason">
+                <option value="quality">Statement or suggestion feels off</option>
+                <option value="translation">Translation issue</option>
+                <option value="offensive">Offensive or inappropriate</option>
+                <option value="other">Other</option>
+              </select>
+
+              <label class="form-label" for="feedback-details" id="feedback-details-label">Add details (optional)</label>
+              <textarea id="feedback-details" name="details" rows="3" placeholder="Tell us what felt wrong or how to improve it."></textarea>
+
+              <button type="submit" class="ghost-button" id="feedback-submit">Send feedback</button>
+              <p id="feedback-status" class="form-status"></p>
+            </form>
           </section>
         </section>
       </section>
@@ -161,6 +184,20 @@
         Copyright © 2025 Jaran Olsen. All rights reserved.
       </small>
     </footer>
+
+    <div class="paywall-overlay is-hidden" id="paywall-overlay" hidden>
+      <div class="paywall-modal">
+        <h3 id="paywall-heading">Unlock the full library</h3>
+        <p id="paywall-message">Enter your access code to view this case.</p>
+        <form id="unlock-form">
+          <label class="form-label" for="unlock-code">Access code</label>
+          <input id="unlock-code" name="accessCode" type="text" autocomplete="one-time-code" placeholder="Enter code" />
+          <button type="submit" class="primary-button" id="unlock-submit">Unlock</button>
+          <p id="unlock-status" class="form-status"></p>
+        </form>
+        <button class="ghost-button" id="close-paywall">Close</button>
+      </div>
+    </div>
 
   </body>
 </html>
