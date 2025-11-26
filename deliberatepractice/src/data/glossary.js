@@ -23,8 +23,8 @@ export const GLOSSARY = {
         ]
       },
       definition: {
-        en: "The first, direct feeling that arises from a situation or need (sadness, anger, fear, longing). Adaptive primary emotions fit the moment; maladaptive primary emotions are old, painful patterns such as toxic shame that get triggered by reminders.",
-        no: "Den første, direkte følelsesreaksjonen på en situasjon eller et behov (tristhet, sinne, frykt, lengsel). Adaptive primærfølelser passer situasjonen; maladaptive primærfølelser er gamle, smertefulle mønstre som giftig skam som trigges av påminnelser."
+        en: "The first, gut-level feeling that arises directly from a situation or need (for example sadness, anger, fear, or longing). In EFT we distinguish helpful primary adaptive emotions that fit the present from older primary maladaptive emotions that replay past injuries.",
+        no: "Den første, mage-nære følelsesreaksjonen som kommer direkte fra en situasjon eller et behov (for eksempel tristhet, sinne, frykt eller lengsel). I EFT skiller vi mellom hjelpsomme primære adaptive følelser som passer nå, og primære maladaptive følelser som gjentar gamle sår."
       }
     },
     {
@@ -35,8 +35,8 @@ export const GLOSSARY = {
         no: ["sekundærfølelse", "sekundærfølelser", "sekundære følelser", "sekundære reaksjoner"]
       },
       definition: {
-        en: "A reaction to the primary feeling (for example, irritation covering hurt, or shame about fear). It often protects, distracts, or inhibits and keeps someone away from the more vulnerable primary emotion.",
-        no: "En reaksjon på den primære følelsen (for eksempel irritasjon som dekker sårhet, eller skam over frykt). Den er ofte beskyttende, avledende eller hemmende og holder en unna det mer sårbare."
+        en: "A feeling about a feeling – for example anger that covers hurt, or shame about fear. Secondary emotions often protect against more vulnerable primary emotions, but also obscure what really needs attention.",
+        no: "En følelse om en følelse – for eksempel sinne som dekker sårhet, eller skam over å være redd. Sekundærfølelser beskytter ofte mot mer sårbare primærfølelser, men gjør det også vanskelig å merke hva som egentlig trenger oppmerksomhet."
       }
     },
     {
@@ -44,8 +44,8 @@ export const GLOSSARY = {
       label: { en: "Core pain", no: "Kjernesmerte" },
       terms: { en: ["core pain"], no: ["kjernesmerte"] },
       definition: {
-        en: "The central wound or hurt underneath surface reactions—often old loneliness, shame, or fear of abandonment—that becomes reactivated in present situations.",
-        no: "Den sentrale smerten under overflaten – ofte gammel ensomhet, skam eller forlatelsesfrykt – som reaktiveres i nåtid."
+        en: "Deep, often old emotional hurt – such as shame, loneliness, or fear of abandonment – that comes from unmet needs in earlier relationships and is easily reactivated in the present.",
+        no: "Dyp, ofte gammel emosjonell smerte – som skam, ensomhet eller forlatelsesfrykt – som stammer fra udekkede behov i tidligere relasjoner og lett trigges i nåtid."
       }
     },
     {
@@ -53,8 +53,8 @@ export const GLOSSARY = {
       label: { en: "Unmet need", no: "Udekket behov" },
       terms: { en: ["unmet need", "unmet needs"], no: ["udekket behov", "udekkede behov"] },
       definition: {
-        en: "Important emotional or attachment needs that were not met when the hurt happened—safety, acceptance, comfort, support. Naming them guides repair and new responses.",
-        no: "Viktige emosjonelle eller relasjonelle behov som ikke ble møtt da smerten oppsto – trygghet, aksept, trøst, støtte. Å navngi dem peker ut hva som må repareres."
+        en: "Important emotional or attachment needs – like safety, acceptance, comfort, or being valued – that were not adequately met when the pain occurred and still seek resolution now.",
+        no: "Viktige emosjonelle eller relasjonelle behov – som trygghet, aksept, trøst eller å bli verdsatt – som ikke ble tilfredsstilt da smerten oppsto og fortsatt søker reparasjon."
       }
     },
     {
@@ -65,8 +65,8 @@ export const GLOSSARY = {
         no: ["opplevelsesnivå", "opplevelsesnivåer", "nivåer av opplevelse"]
       },
       definition: {
-        en: "How directly someone is in touch with their inner world—from distant storytelling to vivid, embodied feeling. Moving down the levels increases emotional clarity and change potential.",
-        no: "Hvor direkte man er i kontakt med egen indre opplevelse – fra å fortelle på avstand til å kjenne den kroppslig og følelsesnært. Dypere nivåer gir mer klarhet og større endringskraft."
+        en: "A way of describing how close someone is to their inner experience, from distant storytelling to vivid, embodied feeling; deeper levels usually bring clearer, more change-promoting emotion.",
+        no: "Et språk for hvor nært noen er egen opplevelse, fra å fortelle på avstand til å kjenne den kroppslig og følelsesnært; dypere nivåer gir ofte mer tydelig og endringsskapende emosjon."
       }
     },
     {
@@ -74,8 +74,8 @@ export const GLOSSARY = {
       label: { en: "CAMS sequence", no: "CAMS-sekvensen" },
       terms: { en: ["CAMS sequence", "CAMS"], no: ["CAMS", "CAMS-sekvensen", "CAMS sekvensen"] },
       definition: {
-        en: "A roadmap for experiential work: moving from global distress (C) to Accessing specific emotions (A), to clarifying Meaning and unmet needs (M), to new Solutions or adaptive responses (S).",
-        no: "Et kart for opplevelsesbasert arbeid: fra kaotisk distress (C) til å få tilgang til spesifikke følelser (A), til mening og udekkede behov (M), til nye løsninger eller adaptive responser (S)."
+        en: "A change roadmap in EFT that tracks movement from global distress, to accessing specific emotions, to making meaning and naming unmet needs, and finally to new adaptive emotional responses and relief.",
+        no: "Et endringskart i EFT som følger bevegelsen fra globalt ubehag, til tilgang til spesifikke følelser, til mening og navngitte udekkede behov, og videre til nye adaptive emosjonelle responser og lettelse."
       }
     },
     {
@@ -83,8 +83,8 @@ export const GLOSSARY = {
       label: { en: "Window of tolerance", no: "Toleransevindu" },
       terms: { en: ["window of tolerance"], no: ["toleransevindu", "toleransevinduet"] },
       definition: {
-        en: "The arousal range where someone can stay present and process emotion without shutting down or becoming flooded. Interventions pace to stay inside this window.",
-        no: "Aktiveringsområdet der man kan være til stede og bearbeide følelser uten å bli overveldet eller nummen. Arbeidet tilpasses for å holde seg innenfor vinduet."
+        en: "The arousal range in which a person can stay present and process emotion without shutting down or becoming flooded; therapy aims to keep the work inside this window.",
+        no: "Aktiveringsområdet der en person kan være til stede og bearbeide følelser uten å bli overveldet eller nummen; terapien tilpasses for å holde arbeidet innenfor dette vinduet."
       }
     },
     {
@@ -107,8 +107,8 @@ export const GLOSSARY = {
         ]
       },
       definition: {
-        en: "An old, rigid emotional response learned in earlier contexts (such as toxic shame or worthlessness) that no longer fits the present and needs to be transformed by new experience.",
-        no: "En gammel, fastlåst følelsesrespons lært i tidligere situasjoner (som giftig skam eller verdiløshet) som ikke passer nå og trenger å forandres gjennom nye erfaringer."
+        en: "An old, rigid emotional response learned in earlier situations – such as toxic shame, worthlessness, or chronic fear – that is easily triggered now but no longer fits and must be transformed by new, adaptive emotion.",
+        no: "En gammel, fastlåst følelsesrespons lært i tidligere situasjoner – som giftig skam, verdiløshet eller kronisk frykt – som trigges lett i dag, men ikke lenger hjelper, og må forandres gjennom nye, adaptive følelser."
       }
     },
     {
@@ -119,8 +119,8 @@ export const GLOSSARY = {
         no: ["korrigerende emosjonell erfaring", "korrigerende erfaring"]
       },
       definition: {
-        en: "A new, lived emotional moment that contradicts an old expectation (for example, being met with care instead of rejection), allowing new learning and meaning.",
-        no: "En ny, kroppslig opplevelse som motsier et gammelt forventningsmønster – for eksempel å bli møtt med varme i stedet for avvisning – og som gjør ny læring mulig."
+        en: "A new emotional moment that contradicts an old expectation – for example, being met with care rather than rejection – so the person can update their meaning and emotional learning.",
+        no: "En ny emosjonell opplevelse som motsier en gammel forventning – for eksempel å bli møtt med varme i stedet for avvisning – og som gjør at mening og emosjonell læring kan oppdateres."
       }
     },
     {
@@ -131,8 +131,8 @@ export const GLOSSARY = {
         no: ["stolarbeid", "to-stols", "to-stolsarbeid", "tom stol"]
       },
       definition: {
-        en: "An experiential task using two or more chairs so the client can speak from different parts or to another person, activating emotion and unmet needs in the here-and-now.",
-        no: "En oppgave med to eller flere stoler der klienten snakker fra ulike deler av seg selv eller til en annen, for å aktivere følelser og udekkede behov her-og-nå."
+        en: "An experiential task using two or more chairs so the client can speak from different parts of self or to another person, vividly activating emotion and unmet needs in the here-and-now.",
+        no: "En opplevelsesbasert oppgave med to eller flere stoler der klienten snakker fra ulike deler av seg selv eller til en annen person, for å aktivere følelser og udekkede behov her-og-nå."
       }
     },
     {
@@ -140,8 +140,8 @@ export const GLOSSARY = {
       label: { en: "Task marker", no: "Oppgavemarkør" },
       terms: { en: ["task marker", "task markers", "marker", "markers"], no: ["oppgavemarkør", "oppgavemarkører", "markør", "markører"] },
       definition: {
-        en: "A cue in the session—like harsh self-attack, unresolved anger, or stuck ambivalence—that signals a specific experiential task such as chair work could help.",
-        no: "Et tegn i timen – som hardt selvangrep, uoppgjort sinne eller fastlått ambivalens – som viser at en spesifikk oppgave, som stolarbeid, kan være nyttig."
+        en: "A recognizable sign in the session – such as harsh self-attack, unresolved anger, or stuck ambivalence – that signals a specific experiential task (like chair work) is likely to help.",
+        no: "Et kjennetegn i timen – som hardt selvangrep, uoppgjort sinne eller fastlått ambivalens – som varsler at en bestemt oppgave, for eksempel stolarbeid, sannsynligvis vil være hjelpsom."
       }
     }
   ],
