@@ -8,9 +8,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="theme-color" content="#1f3c88" />
     <title>Deliberate Practice Lab</title>
-    <script type="module" crossorigin src="/Planet/assets/deliberatepractice-BGiouoeT.js"></script>
+    <script type="module" crossorigin src="/Planet/assets/deliberatepractice-SlcjEreH.js"></script>
     <link rel="modulepreload" crossorigin href="/Planet/assets/modulepreload-polyfill-B5Qt9EMX.js">
-    <link rel="stylesheet" crossorigin href="/Planet/assets/deliberatepractice-C9Cits8n.css">
+    <link rel="stylesheet" crossorigin href="/Planet/assets/deliberatepractice-kkqicchq.css">
   </head>
   <body>
     <div class="locked-banner is-hidden" id="locked-banner">Unlock the full library with your access code.</div>
@@ -73,15 +73,27 @@
           Explore curated cases that mirror real-world dynamics.
         </p>
         <div class="skill-context is-hidden" id="case-skill-context" hidden>
-          <h3 class="skill-context-title" id="case-skill-name"></h3>
-          <dl class="skill-context-details">
-            <dt class="skill-context-label" id="case-skill-marker-label"></dt>
-            <dd class="skill-context-text" id="case-skill-marker"></dd>
-            <dt class="skill-context-label" id="case-skill-summary-label"></dt>
-            <dd class="skill-context-text" id="case-skill-summary"></dd>
-            <dt class="skill-context-label" id="case-skill-aim-label"></dt>
-            <dd class="skill-context-text" id="case-skill-aim"></dd>
-          </dl>
+          <div class="skill-context-header">
+            <h3 class="skill-context-title" id="case-skill-name"></h3>
+            <button
+              type="button"
+              class="skill-context-toggle"
+              id="case-skill-toggle"
+              aria-expanded="false"
+            >
+              Show instructions
+            </button>
+          </div>
+          <div class="skill-context-body is-hidden" id="case-skill-body" hidden>
+            <dl class="skill-context-details">
+              <dt class="skill-context-label" id="case-skill-marker-label"></dt>
+              <dd class="skill-context-text" id="case-skill-marker"></dd>
+              <dt class="skill-context-label" id="case-skill-summary-label"></dt>
+              <dd class="skill-context-text" id="case-skill-summary"></dd>
+              <dt class="skill-context-label" id="case-skill-aim-label"></dt>
+              <dd class="skill-context-text" id="case-skill-aim"></dd>
+            </dl>
+          </div>
         </div>
         <div
           id="case-list"
