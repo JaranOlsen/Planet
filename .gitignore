@@ -11,6 +11,7 @@ node_modules
 dist
 upload/
 backup/
+deliberatepractice/src/md/
 dist-ssr
 *.local
 
