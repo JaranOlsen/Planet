@@ -22,6 +22,8 @@ const ENGLISH_UI = {
   skillMarkerLabel: "Markers",
   skillSummaryLabel: "How to Work",
   skillAimLabel: "Aim",
+  showSkillInstructions: "Show instructions",
+  hideSkillInstructions: "Hide instructions",
   historyLabel: "History",
   schemaLabel: "Core Pain",
   styleLabel: "Style",
@@ -89,6 +91,8 @@ const LANGUAGE_UI_NO = {...ENGLISH_UI,
   skillMarkerLabel: "Markører",
   skillSummaryLabel: "Hvordan jobbe",
   skillAimLabel: "Mål",
+  showSkillInstructions: "Vis instruksjoner",
+  hideSkillInstructions: "Skjul instruksjoner",
   historyLabel: "Bakgrunn",
   schemaLabel: "Kjernesmerte",
   styleLabel: "Stil",
@@ -252,106 +256,106 @@ const NO_CASE_OVERRIDES = {
 const NO_SKILL_OVERRIDES = {
   "therapist-self-awareness": {
     name: "Terapeutens selvbevissthet",
-    description: "Observer din indre tilstand slik at du forblir til stede og mottakelig, og kan velge den mest hjelpsomme responsen.",
-    summary: "Følg kontinuerlig med på egen kropp, følelser og impulser slik at du kan regulere deg og holde innstillingen mot klienten. Når du kjenner spenning, hastverk eller forsvar, senk tempoet, mykne og finn ro før du velger neste steg som tjener klienten.",
-    marker: "Du merker spenning, fiksetrang, forsvar, nummenhet eller sterke trekk mot eller vekk fra klienten.",
-    aim: "Reguler deg selv slik at du forblir jordet, empatisk og i stand til å velge den mest hjelpsomme responsen.",
+    description: "Følg med på din egen indre tilstand slik at du kan være jordet, mottakelig og følelsesmessig regulert nok til å lede arbeidet trygt.",
+    summary: "Terapeutisk selvbevissthet handler om å spore egen kropp, følelser, tanker og impulser i sanntid slik at du kan velge hvordan du vil svare i stedet for å reagere automatisk. Du legger merke til når aktiveringen øker – for eksempel fiksetrang, uro, irritasjon eller nummenhet – og gjenkjenner det som dine egne sekundære reaksjoner, ikke som nøyaktig informasjon om klienten.\n\nI stedet for å handle ut fra disse reaksjonene, stopper du opp, puster og re-sentrerer deg, slik at du kan være en stødig, innstemt tilstedeværelse innenfor klientens toleransevindu. Du legger merke til hva som blir trigget i deg og setter det vennlig i parentes, slik at klientens prosess fortsatt får stå i forgrunnen. Denne bevisstheten hjelper deg å forbli nysgjerrig og empatisk når klienten viser sterke eller krevende følelser, heller enn å bli defensiv, reddende eller trekke deg unna.\n\nNår du regulerer deg selv på denne måten, blir du et pålitelig emosjonelt anker når klienten nærmer seg primære, ofte smertefulle følelser. Du modellerer sunn emosjonell regulering og kongruens, og viser at sterke følelser kan merkes og rommes uten å bli undertrykt eller handlet ut. Over tid gjør denne praksisen det lettere å justere opp eller ned intensiteten i samtalen i tråd med klientens behov, slik at den emosjonelle bearbeidingen kan bli både dyp og trygg.",
+    marker: "Du merker at du blir anspent, får fiksetrang, blir defensiv, nummen eller sterkt dratt mot eller vekk fra klienten, eller at den empatiske nysgjerrigheten glipper. Du får en fornemmelse av at dine egne reaksjoner er i ferd med å styre samspillet mer enn klientens behov.",
+    aim: "Regulere deg selv slik at du forblir jordet, empatisk og innstemt, og kan være med på å samregulere klientens aktivering innenfor et håndterbart vindu. Verne om et trygt rom der kjernesmerte og primære følelser kan komme frem uten å bli avbrutt av ubehandlede reaksjoner hos terapeuten.",
     cases: NO_CASE_OVERRIDES
   },
   "empathic-understanding": {
     name: "Empatisk forståelse",
-    description: "Speil klientens opplevelse med følelsesnært språk for å formidle forståelse og invitere til utdyping.",
-    summary: "Gi korte, følelsesmettede gjentakelser som speiler klientens indre verden slik at de kjenner seg dypt forstått. Match tone og tempo, hold deg i nåtid, og inviter til utdyping uten å legge til råd eller teori.",
-    marker: "Følelser er til stede, klienten trenger å bli hørt, eller fortellingen er uklar og søkende.",
-    aim: "Formidle presis forståelse for å bygge tillit og invitere til mer uttrykk.",
+    description: "Speil klientens indre verden med følelsesnært, presist språk slik at de kjenner seg dypt forstått og invitert til å utforske videre.",
+    summary: "Empatisk forståelse innebærer å gi korte, presise gjentakelser som både fanger hva som skjedde og hvordan det kjennes for klienten akkurat nå. Du lytter etter den emosjonelle meningen under historien og svarer med språk som treffer følelsen, ikke bare fakta. Responsene er korte, her-og-nå-orienterte og frie for råd og tolkninger, slik at klientens opplevelse forblir i sentrum. Hovedintensjonen er å formidle forståelse – dersom opplevelsen fordypes, skjer det som en naturlig følge av å bli møtt.\n\nNår du speiler følelsene med varme og presisjon, kjenner klienten seg mindre alene og mer sett, noe som demper sekundære reaksjoner som skam og tilbaketrekning. Opplevelsen av å være forstått gjør det lettere å bli værende i og utdype de primære følelsene, i stedet for å forklare dem bort eller skifte tema.\n\nOver tid hjelper denne måten å lytte på klienten til å skille mellom lag av følelser og se mønstre i egne reaksjoner. Den styrker alliansen og skaper den tryggheten som trengs for å nærme seg kjernesmerte og udekkede behov. Empatiske gjentakelser organiserer også opplevelsen – det som før var uklart og implisitt blir tydeligere og mer håndterbart. I følelsesfokusert og annen opplevelsesorientert terapi er dette en grunnleggende måte å støtte økt bevissthet, uttrykk og endring på.",
+    marker: "Følelser er tydelig til stede i det klienten forteller, eller historien kjennes uklar, søkende eller fragmentert og de ser ut til å trenge hjelp til å organisere den. Klienten virker «sulten» på å bli hørt, validert og presist sett i sin emosjonelle opplevelse.",
+    aim: "Formidle presis, varm forståelse som gjør at klienten kjenner seg trygg og akseptert akkurat der de er, og som gjør det lettere å utdype følelsene uten å føle seg feil eller overdrevet.",
     cases: NO_CASE_OVERRIDES
   },
   "empathic-affirmation-validation": {
     name: "Empatisk bekreftelse og validering",
-    description: "Legitimer klientens følelser i kontekst slik at skam og selvkritikk dempes.",
-    summary: "Sett ord på hvorfor følelsen er forståelig i klientens situasjon slik at skam slipper og trygghet bygges. Gi varm tillatelse til at følelsen får være der, samtidig som dere beholder rom til å snakke om handlinger ved behov.",
-    marker: "Skam, selvkritikk, unnskyldninger for å føle, eller utsagn som 'jeg burde ikke føle dette' dukker opp.",
-    aim: "Legitimere følelsen slik at selvangrepet avtar og tryggheten til å føle og utforske øker.",
+    description: "Sett følelsene inn i en meningsfull sammenheng og si tydelig at de gir mening, slik at skam og selvangrep myknes og det blir tryggere å føle.",
+    summary: "Empatisk bekreftelse og validering handler om å si tydelig at klientens følelser gir mening i lys av det de har opplevd. Du setter ord på de situasjonene, relasjonene eller livserfaringene som gjør en gitt følelse forståelig, og går imot indre budskap som «jeg overreagerer» eller «jeg burde ikke føle dette». Når du merker skam og selvkritikk, bekrefter du både gyldigheten i følelsen og motet det krever å vise den.\n\nPå den måten demper du sekundære, hemmende følelser som skam, skyld og forakt, som ellers lett kveler primære reaksjoner og hindrer bearbeiding. For mange som har fått følelsene sine avvist, gjort narr av eller straffet, blir ekte validering en korrigerende emosjonell erfaring – tristhet, sinne, frykt eller sårethet møtes med respekt i stedet for kritikk. Det gjør det mulig å bli værende i følelsen lenge nok til at kjernesmerte og udekkede behov kan tre tydeligere frem.\n\nValidering betyr ikke å støtte alle handlinger; du skiller mellom at følelsen er forståelig, og hvordan man velger å handle på den. Over tid hjelper konsistent bekreftelse klienten til å utvikle en mer medfølende indre stemme og mindre kronisk selvangrep, slik at også dypt skambelagte følelser kan komme frem og forandres.",
+    marker: "Klienten uttrykker skam eller hard selvkritikk, bagatelliserer eller unnskylder følelsene sine med utsagn som «jeg burde ikke føle dette» eller «det er teit at jeg er så lei meg». De ser kanskje ned, unngår blikk eller skyver følelsene raskt vekk etter at de har vist seg.",
+    aim: "Legitimere klientens følelsesreaksjoner i lys av livssituasjonen, slik at skam og selvangrep mister grepet og klienten kjenner mer tillatelse til å føle. Bygge emosjonell trygghet og selvmedfølelse slik at primære følelser og kjernesmerte kan nås, utforskes og etter hvert forandres.",
     cases: NO_CASE_OVERRIDES
   },
   "exploratory-questions": {
     name: "Utforskende spørsmål",
     description: "Still åpne, erfaringsnære spørsmål som vender oppmerksomheten innover og utfolder det som er i ferd med å komme.",
-    summary: "Spør enkelt og åpent på en måte som vender oppmerksomheten mot kroppen og øyeblikkets sansninger. Slik får vage eller blandede opplevelser form, og dypere følelser kan komme frem i et tempo som tåles.",
-    marker: "Opplevelsen kjennes vag, blandet, uferdig eller bare sanset uten ord.",
-    aim: "Hjelpe den implisitte opplevelsen å ta form ved å vende oppmerksomheten innover.",
+    summary: "Utforskende spørsmål er enkle, åpne invitasjoner som vender klientens oppmerksomhet mot øyeblikkets kroppslige og emosjonelle opplevelse heller enn analyser og forklaringer. Du spør hva de legger merke til i kroppen, hvilken følelse som er der, eller hva som kjennes mest «i live» akkurat nå.\n\nSlik kan utydelig uro eller rent kognitiv beskrivelse gradvis ta form som mer spesifikke, primære følelser som kan navngis og bearbeides. Du unngår «hvorfor»-spørsmål som lett trekker klienten opp i hodet, og bruker heller «hva», «hvordan» og «hvor» som inviterer til sansing og beskrivelse. Dette beveger klienten fra å snakke om hendelser på avstand til å være mer til stede i egen opplevelse her og nå.\n\nUtforskende spørsmål hjelper også klienten å skille mellom sekundære reaksjoner, som irritasjon eller oppgitthet, og de mer sårbare primære følelsene under, som sårethet, frykt eller skam. Over tid støtter denne måten å spørre på en bevegelse fra diffus uro og kaos til tydeligere kjernesmerte, udekkede behov og nye meninger.",
+    marker: "Klienten beskriver opplevelsen som uklar, blandet, forvirrende eller «bare en merkelig reaksjon», eller de blir værende i historie og analyse uten tydelig kontakt med hva de føler. Du får en fornemmelse av at det finnes en emosjonell kant som er sanset, men ennå ikke satt ord på.",
+    aim: "Lede oppmerksomheten innover slik at implisitt, vag eller før-språklig erfaring kan krystallisere seg til mer konkrete, navngitte følelser. Støtte dypere nivåer av opplevelse og legge grunnlaget for å kunne arbeide direkte med både adaptive og maladaptive primærfølelser.",
     cases: NO_CASE_OVERRIDES
   },
   "providing-treatment-rationale": {
-    name: "Behandlingsrasjonale for EFT",
+    name: "Behandlingsrasjonale for opplevelsesbasert terapi",
     description: "Gi en kort, empatisk forklaring på hvorfor følelsesarbeid hjelper, og hvordan vi gjør det.",
-    summary: "Etter at du har møtt klienten empatisk, forklar med hverdagslig språk hvorfor følelsesarbeid gir lettelse og endring, og hvordan du skal lede det trygt. Bruk forklaringen til å roe tvil, redusere frykt og skape felles retning før nye steg eller oppgaver.",
+    summary: "Et behandlingsrasjonale hjelper klienten å forstå logikken og tryggheten i å arbeide med følelser, særlig når de er skeptiske, redde eller usikre på denne måten å jobbe på. Etter å ha møtt bekymringene deres med empati, forklarer du med hverdagslig språk hvordan følelser organiserer opplevelser, varsler behov og kan endre seg når de får bearbeides fullt ut. Du beskriver også hvordan sekundære reaksjoner og unngåelse ofte holder folk fast, mens tilgang til primære følelser og kjernesmerte åpner for varig endring.\n\nDu er tydelig på din rolle i å regulere tempo og intensitet, slik at klienten ikke blir overlatt til overveldende affekt. Rasjonalet adresserer vanlige bekymringer som «hvis jeg begynner å føle, mister jeg kontrollen» eller «å snakke om følelser hjelper ikke», og bygger samarbeid ved å ramme inn følelsesarbeid som en felles reise med et enkelt kart – fra symptomer og kaos, via kjernesmerte og udekkede behov, til nye emosjonelle responser.\n\nEt godt rasjonale øker villigheten til å delta i opplevelsesorienterte oppgaver som stolarbeid, fokuseringsøvelser eller imaginering når markører dukker opp. Når du vender kort tilbake til denne forklaringen på viktige tidspunkt, minner du klienten om hvorfor det er meningsfullt å vende tilbake til følelsene selv når det kjennes uvant eller skremmende. Over tid støtter den delte forståelsen en sterkere allianse og dypere emosjonell engasjement i arbeidet.",
     marker: "Klienten spør hvordan terapien virker, uttrykker skepsis eller frykt, eller nøler før en oppgave.",
-    aim: "Gi en kort, erfaringsnær forklaring som roer uro og skaper felles retning for arbeidet.",
+    aim: "Gi en kort, erfaringsnær forklaring som roer uro og motstand, skaper felles retning for arbeidet og gjør det tryggere å utforske grunnleggende følelser, kjernesmerte og udekkede behov.",
     cases: NO_CASE_OVERRIDES
   },
   "empathic-explorations": {
     name: "Empatiske utforskninger",
     description: "Følg og utvid forsiktig det som allerede er til stede, slik at klienten kan bli i og utdype opplevelsen.",
-    summary: "Hold deg ved klientens ledende kant – reflekter litt av det som er der, og inviter dem til å dvele og legge merke til mer. Den forsiktige rytmen gjør at kontakten fordypes uten at du går foran deres egen prosess.",
-    marker: "Følelsen er på vei frem men virker skjør; det finnes en levende kant som vil utdypes.",
-    aim: "Holde og utdype kontakten ved å følge og forsiktig utvide det som er i ferd med å komme.",
+    summary: "Empatisk utforsking betyr å følge den emosjonelle kanten som er i ferd med å dukke opp hos klienten, og svare med fint avstemte gjentakelser og invitasjoner til å legge merke til litt mer. I stedet for å hoppe frem til tolkninger, råd eller løsninger, holder du deg ett lite steg bak eller ved siden av klientens egen opplevelse. Du speiler en del av det som er der, og inviterer dem til å dvele, sanse videre og utdype det de føler akkurat nå.\n\nUtforskingen beveger seg langs den stien klienten allerede har lagt ut i ordene sine, og holder seg innenfor det som er eksplisitt uttrykt fremfor å gå under eller forbi det. Det gir skjøre følelsestilstander mulighet til å styrkes og klargjøres uten å bli overveldet eller stengt ned. Dette er spesielt viktig når primære følelser og kjernesmerte begynner å vise seg, men fortsatt kjennes usikre eller blandede.\n\nVed å holde klientens tempo og møte prosessen med ærbødighet, verner du om tryggheten samtidig som kontakten med følelsene fordypes. Empatisk utforsking støtter en bevegelse fra ytre fortellinger og forklaringer til mer levende, kroppslig erfart tristhet, frykt, sinne, skam eller lengsel. Den forebygger også at dere hopper for raskt til reframing, meningstilskrivning eller løsninger, slik at kjernesmerte og udekkede behov får tre tydeligere frem og kan forandres gjennom nye emosjonelle responser.",
+    marker: "Følelser er tydelig på vei frem, men oppleves som skjøre, tentative eller bare delvis uttrykt, og klienten virker villig, men usikker på om de tør å gå dypere. Det er en «levende kant» der små invitasjoner og gjentakelser bringer frem mer følelse og mening.",
+    aim: "Holde og fordype kontakten med fremvoksende emosjonelt materiale slik at både adaptive og maladaptive primærfølelser kan komme fullt til uttrykk og bearbeides. Støtte en dosert, trygg utdyping av kjernesmerte og tilhørende udekkede behov, og legge grunnlaget for senere transformasjon.",
     cases: NO_CASE_OVERRIDES
   },
   "empathic-evocations": {
     name: "Evokativ empati",
     description: "Bruk levende språk og metafor for å gjøre opplevelsen tydeligere og øke kontakten med følelsen.",
-    summary: "Når følelsen er nær men dempet, tilby et kort, konkret bilde eller sanselig språk som fanger opplevelsen. Et treffende uttrykk hjelper klienten å kjenne følelsen tydeligere uten å overdøve dem.",
-    marker: "Klienten snakker om følelser på en flat, fjern eller vanskelig beskrivbar måte.",
-    aim: "Forsterke kontakten ved å tilby levende språk som hjelper følelsen frem.",
+    summary: "Evokativ empati brukes når klienten snakker om noe følelsesmessig ladet på en flat, distansert eller innsnevret måte. Du tilbyr korte, levende bilder eller sanselige beskrivelser som ser ut til å ligne det de kjenner – for eksempel «som en tung stein i brystet» eller «som en storm rett under overflaten». Slike uttrykk snakker til kropp og høyrehjerne og bygger bro mellom tankefortelling og følt erfaring.\n\nNår de er godt avstemt, øker disse bildene aktivering og emosjonell tilstedeværelse forsiktig, uten å presse klienten ut av toleransevinduet. Intellektualiserte fortellinger kan gradvis bli mer kroppslig opplevd, og primære følelser kommer nærmere bevisstheten. Ofte blir noe som har vært implisitt tydeligere – klienten kan si «ja, akkurat sånn kjennes det», eller merke tårer, stramming eller andre kroppssignaler.\n\nEvokasjoner må forbli tentative og samarbeidsorienterte, slik at klienten beholder eierskap til betydningen. Over tid hjelper denne måten å svare på klienten til å utvikle et rikere, mer kroppsforankret språk for sitt indre liv, og styrker både emosjonell innsikt og kapasiteten til å bearbeide følelser.",
+    marker: "Klienten forteller om smertefulle eller viktige hendelser på en flat, distansert eller svært kognitiv måte, med lite synlig affekt eller kroppsbevissthet, samtidig som du aner at følelsene ligger nær – for eksempel gjennom små stemmebrudd, pauser eller korte glimt av følelsesuttrykk. De kan si at de «sånn halvveis» kjenner noe, men ikke helt får tak i det.",
+    aim: "Øke den emosjonelle kontakten ved å tilby levende, resonante bilder som gjør implisitte følelser mer tydelige og kroppslig erfarte. Støtte et skifte fra å beskrive på avstand til å være mer direkte i opplevelsen, slik at primære følelser og kjernesmerte kan nås og bearbeides.",
     cases: NO_CASE_OVERRIDES
   },
   "empathic-conjectures": {
     name: "Empatiske antakelser",
     description: "Tilby forsiktige gjetninger om opplevelser som ligger nær overflaten, for å hjelpe det usagte frem.",
-    summary: "Gjør en myk, tentativ gjetning om den smerten, frykten eller lengselen du aner rett under overflaten. Marker at du kan ta feil, og la klienten bekrefte eller korrigere slik at opplevelsen får sitt eget språk.",
-    marker: "Hint om dypere følelser viser seg gjennom unngåelse, tonebrudd eller uavsluttede fortellinger.",
-    aim: "Sette ord på det som ligger nær overflaten slik at klienten kan bekrefte, avkrefte eller ta eierskap.",
+    summary: "Empatiske antakelser er tentative hypoteser om hva klienten kan føle rett under det de sier. Du lytter til stemme, ansiktsuttrykk, kropp og kontekst, og forsøker forsiktig å sette ord på mulig smerte, frykt, skam eller lengsel som ennå ikke er fullt uttalt. Du markerer tydelig at du kan ta feil – med uttrykk som «jeg lurer på om…» eller «kan det være at…» – slik at klienten står fritt til å bekrefte, justere eller avkrefte.\n\nI motsetning til empatisk utforsking, som utvider det som allerede er klart i bevisstheten, strekker antakelser seg forsiktig under eller bak det som sies for å gi foreløpige ord til det som fortsatt er uklart. Når du treffer, opplever klienten ofte lettelse og gjenkjennelse – som å bli dypt sett – og det blir lettere å eie og uttrykke egen sannhet. Det kan også hjelpe dem å gå fra sekundære forsvar som spøk, irritasjon eller vaghet til mer sårbare, primære følelser.\n\nSelv når antakelsen bommer, vil klientens korrigering som regel tydeliggjøre hva som faktisk kjennes sant og dermed bevege prosessen videre. Denne intervensjonen er særlig nyttig når klienten sirkler rundt kjernesmerte eller når viktige følelser bare slipper gjennom i bruddstykker. Brukt varsomt og med respekt kan empatiske antakelser gi raskere kontakt med spesifikke, maladaptive følelser og de udekkede behovene som ligger under, uten at terapeuten overtar meningsskapingen.",
+    marker: "Hint om dypere følelser viser seg gjennom tonebrudd, flyktige uttrykk, unngåelse eller uavsluttede fortellinger, men klienten navngir ikke følelsene og blir ikke værende i dem. De skifter raskt tema eller glatter over når noe sårt begynner å vise seg.",
+    aim: "Hjelpe nær-overflate, usagt emosjonell erfaring til å ta tydeligere form slik at klienten kan eie, utforske og arbeide med den. Legge til rette for overganger fra defensive eller sekundære reaksjoner til mer direkte kontakt med primærfølelser og kjernesmerte.",
     cases: NO_CASE_OVERRIDES
   },
   "staying-in-contact-intense-affect": {
     name: "Være i kontakt med intens affekt",
-    description: "Hjelp klienten å være trygt med sterk affekt uten å bli overveldet, gjennom jording og passelig tempo.",
-    summary: "Senk tempoet, hjelp klienten å jorde seg, og doser hvor mye av følelsen som kontaktes slik at store bølger av sorg, raseri, panikk eller skam kan bevege seg uten kollaps. Du holder deg nær, validerer styrken og lar mening komme i tålelige porsjoner.",
-    marker: "Affekten skyter i været med gråt, skjelving, raseri, panikk, skamkollaps eller bønn om å stoppe.",
-    aim: "Gi ramme og nærvær slik at sterk følelse kan bearbeides uten overveldelse.",
+    description: "Støtt klienten i å være trygt til stede i sterk følelsesmessig aktivering slik at den kan bevege seg, gi mening og forandres uten overveldelse.",
+    summary: "Å være i kontakt med intens affekt handler om å hjelpe klienten å ri ut bølger av sterke følelser uten å stenge ned eller bli oversvømt utover det de tåler. Når store følelser som sorg, raseri, panikk eller skam skyter i været, senker du tempoet, hjelper klienten å jorde seg og tilbyr et stødig, empatisk nærvær. Du kan rette oppmerksomheten mot kropp, pust eller rommet, slik at én fot er i her-og-nå mens den andre er i følelsesopplevelsen.\n\nDu normaliserer intensiteten, bekrefter at følelsene gir mening, og formidler at du tåler og blir værende med dem. Samtidig titrerer du eksponeringen ved å invitere klienten til å beskrive små biter av opplevelsen, eller ta korte pauser og vende tilbake igjen, for å unngå dissosiasjon eller kollaps.\n\nDenne reguleringen gjør at maladaptive primærfølelser og kjernesmerte kan komme fullt frem og uttrykkes uten å retraumatisere. Det gir ofte en kraftig korrigerende emosjonell erfaring: klienten lærer at de kan føle dypt og likevel være trygge og i kontakt med et annet menneske. Når bølgen har roet seg, hjelper du dem å reflektere over hva følelsen sier om behov, grenser eller verdier. Over tid bygger dette kapasitet til å tåle og regulere sterke følelser også utenfor terapien.",
+    marker: "Affekten eskalerer brått til hulking, skjelving, raseri, panikk, nummenhet eller skamkollaps, og klienten ser ut til å risikere å bli overveldet, dissosiere eller trygle om å stoppe. Pusten blir kanskje grunn, språket uorganisert eller blikket fjernt.",
+    aim: "Gi ramme, jording og empatisk innstilling slik at intense emosjonelle tilstander kan erfares og bearbeides i stedet for å unngås eller stenges ned. Hjelpe klienten å holde seg innenfor toleransevinduet samtidig som det er nok aktivering til at kjernesmerte kan komme frem, forstås og forandres.",
     cases: NO_CASE_OVERRIDES
   },
   "self-disclosure": {
     name: "Selvavsløring",
-    description: "Del kort, relevant indre erfaring i klientens tjeneste for validering, fordypning eller reparasjon.",
-    summary: "Del en kort, ekte bit av din umiddelbare erfaring bare når det tydelig støtter klienten – for eksempel for å vise at du er berørt, bekrefte påvirkningen deres eller reparere et brudd. Hold det konsist, uten forsvar, og vend raskt tilbake til klientens prosess.",
-    marker: "Alliansen trenger validering eller reparasjon, eller et genuint terapeutisk svar vil fordype arbeidet.",
-    aim: "Bruke kort, relevant åpenhet til å styrke båndet eller modellere resonans mens fokuset forblir hos klienten.",
+    description: "Del korte, relevante glimt av din indre opplevelse på en tydelig avgrenset måte som er til for klientens prosess – ikke din egen.",
+    summary: "Selvavsløring i opplevelsesorientert terapi innebærer å dele en kort, ekte bit av din umiddelbare indre opplevelse når det klart tjener klienten. Det kan være å sette ord på hvordan du er emosjonelt berørt, å anerkjenne hvordan klienten virker inn på deg, eller å eie en misattunering som har bidratt til et brudd i alliansen. Utsagnene holdes korte, nøkterne og uten forsvar, og formuleres slik at de støtter – ikke overskygger – klientens erfaring.\n\nBrukt til validering kan selvavsløring bekrefte at klientens smerte er reell og berører andre, og motvirke indre budskap om å være «for mye» eller «ikke troverdig». I alliansearbeid modellerer det ansvarlighet og sårbarhet: konflikten møtes med forståelse og reparasjonsvilje fremfor skyld og tilbaketrekning.\n\nSelvavsløring kan også hjelpe klienter som tviler på at noen kan bry seg virkelig, ved å gi en korrigerende erfaring av å ha emosjonell innvirkning. Noen ganger åpner det også for at klienten kan kjenne mer av sine egne primære følelser ved å legge merke til hvordan du blir berørt. Etter at du har delt, vender du raskt fokuset tilbake til klienten og inviterer deres reaksjon. Over tid kan nøktern, gjennomtenkt selvavsløring fordype tillit og modellere sunn emosjonell åpenhet og relasjonell reparasjon.",
+    marker: "Alliansen kjennes anstrengt, fjern eller usikker, eller klienten stiller spørsmål ved om du forstår, bryr deg eller tåler dem. Du får en fornemmelse av at et kort, helhjertet og gjennomsiktig svar fra deg vil kunne validere deres betydning, klargjøre din posisjon eller bidra til reparasjon.",
+    aim: "Bruke kort, nøye valgt åpenhet til å styrke den terapeutiske relasjonen, validere klientens emosjonelle virkelighet eller reparere misattuneringer. Modellere kongruent følelsesuttrykk samtidig som klientens opplevelse forblir sentrum i arbeidet.",
     cases: NO_CASE_OVERRIDES
   },
   "marker-recognition-chairwork": {
     name: "Gjenkjenne markører og sette opp stolarbeid",
-    description: "Se etter markører og sett trygt opp to-stol eller tom stol når forholdene ligger til rette.",
-    summary: "Lytt etter markører som hard selvkritikk eller uoppgjort relasjon, og tilby en kort begrunnelse for to-stols- eller tom-stol-arbeid. Gi tydelige, trygge instruksjoner og følg aktiveringen slik at den emosjonelle prosessen kan forløse seg innenfor toleransevinduet.",
-    marker: "Tydelige oppgavemarkører som hard selvkritikk, indre splitt eller uoppgjort forhold dukker opp.",
-    aim: "Sette opp en erfaringsdialog som aktiverer udekkede behov og transformerende følelser.",
+    description: "Se etter oppgavemarkører og sett trygt opp fokuserte stol-arbeidsdialoger som aktiverer og transformerer sentrale emosjonelle prosesser.",
+    summary: "Å gjenkjenne markører for stolarbeid betyr å lytte etter spesifikke tegn på at en strukturert stoloppgave kan fremme emosjonell endring – for eksempel hard selvkritikk, uoppgjort sinne mot en annen, fastlåst indre konflikt eller pågående «dialoger» med en fraværende person. Når en slik markør dukker opp, tilbyr du en kort, opplevelsesnær begrunnelse for hvorfor en to-stols- eller tom-stol-dialog kan være hjelpsom.\n\nDeretter setter du opp oppgaven konkret: ordner stolene, avklarer hvem eller hva hver stol representerer, og gir tydelige, trinnvise instrukser for hvordan klienten kan snakke fra de ulike posisjonene. Underveis følger du nøye med på aktivering og trygghet, justerer tempoet, og forsikrer deg om at klienten kjenner seg støttet og ikke presset inn i noe.\n\nSelve strukturen er laget for å aktivere kjernesmerte og udekkede behov her-og-nå, slik at maladaptive emosjonsskjemaer kan oppleves levende. Gjennom guidede bytter og replikker kan klienten få satt ord på behov, uttrykt beskyttende sinne, sørget tap eller gi seg selv medfølelse fra et nytt ståsted. Dette utløser ofte nye, mer adaptive følelsesresponser som endrer meningen den opprinnelige erfaringen har hatt. Etterpå hjelper du klienten å stige ut av rollen, jorde seg og integrere det som skjedde i egen historie og selvforståelse. God markørgjenkjenning og trygt oppsett er avgjørende for å bruke stolarbeid på en kraftfull, men ikke overveldende måte.",
+    marker: "Tydelige oppgavemarkører viser seg, som sterke, gjentatte selvangrep, en tydelig indre konflikt mellom deler av selvet, uoppgjort «uferdig arbeid» med en annen person, eller lammende ambivalens som klienten går i ring rundt. Klienten er emosjonelt engasjert og virker i noen grad villig til å prøve en mer aktiv tilnærming.",
+    aim: "Iverksette godt timede, tydelig strukturerte stoldialoger som bringer kjernesmerte og udekkede behov inn i skarpt fokus og fremkaller nye, mer adaptive emosjonelle responser. Bruke erfaringsnære enactments til å transformere maladaptive emosjonsskjemaer og skape korrigerende emosjonelle erfaringer i øyeblikket.",
     cases: NO_CASE_OVERRIDES
   },
   "alliance-repair": {
     name: "Reparasjon av alliansen",
-    description: "Ta imot reaksjoner uten forsvar, ta radikalt ansvar, og lag en plan sammen for å gå videre.",
-    summary: "Inviter og ta imot misnøye uten å forsvare deg, valider hva klienten kjente, og anerkjenn din del der det trengs. Lag deretter en felles plan for hva som vil hjelpe nå, slik at trygghet, tillit og fremdrift gjenopprettes.",
-    marker: "Tilbaketrekning, irritasjon mot deg, 'du forstår meg ikke', uteblitte timer eller plutselig kjølighet viser seg.",
-    aim: "Gjenopprette tillit og samarbeid ved å ta imot bruddet, ta ansvar og planlegge neste steg sammen.",
+    description: "Legg merke til og adresser brudd med empati, ansvarlighet og samarbeid for å gjenopprette trygghet og tillit i relasjonen.",
+    summary: "Reparasjon av alliansen handler om øyeblikk der klienten føler seg misforstått, såret, avfeid eller distansert fra deg. Du legger først merke til og setter ord på mulige bruddsignaler – som tilbaketrekning, irritasjon, sarkasme, uteblitte timer eller en markert endring i tone.\n\nDeretter inviterer du klienten til å fortelle hvordan de opplever deg og terapien, uten at du går i forsvar. Du gjør det tydelig at følelsene deres om både prosessen og terapeuten er velkomne. Du lytter åpent, validerer virkningen på dem og, der det er passende, anerkjenner din egen del eller en misattunering. Det kan innebære å beklage, justere rammen eller klargjøre intensjoner – alltid med klientens emosjonelle realitet som midtpunkt.\n\nNår du går inn i dette arbeidet, gir du en korrigerende emosjonell erfaring: konflikt og skuffelse møtes med forståelse, ansvarlighet og fortsatt kontakt, ikke med skyldlegging eller avvisning. Ofte berører dette klientens tilknytningssår og udekkede behov for å bli hørt, tatt på alvor og ikke få skylden for relasjonell uro. Når klienten kjenner seg gjenforstått og gjenknyttet, mykner som regel sekundær irritasjon eller tilbaketrekning, og mer sårbar primærfølelse kan komme frem igjen. Reparasjon gjenoppretter det trygge utgangspunktet som trengs for å våge seg tilbake til kjernesmerte og dypt emosjonelt arbeid, og modellerer sunn konflikthåndtering som klienten kan ta med seg inn i andre relasjoner.",
+    marker: "Klienten viser tegn til avstand, irritasjon eller mistillit mot deg – for eksempel «du forstår meg ikke», kjølighet, økt gardering eller at de uteblir fra timer – eller du merker en tydelig endring i stemning etter en intervensjon som ikke traff. De kan gi direkte eller indirekte klager på terapien eller på deg som terapeut.",
+    aim: "Gjenopprette trygghet, tillit og samarbeid ved å ta imot bruddsignaler med empati, validere klientens reaksjoner og eie din del der det er relevant. Fjerne hindringer i relasjonen slik at klienten igjen kan våge seg inn i sårbare primærfølelser og kjernesmerte innenfor en trygg, terapeutisk ramme.",
     cases: NO_CASE_OVERRIDES
   },
   "empathic-refocusing": {
     name: "Empatisk refokusering",
     description: "Navngi beskyttelsen og inviter mildt tilbake når klienten beveger seg bort fra det som er sårt.",
-    summary: "Legg merke til når klienten går over i analyser, spøk eller digresjoner for å slippe unna det ømme punktet. Anerkjenn beskyttelsen og inviter varsomt tilbake slik at arbeidet forblir forankret i følelsen som trenger oppmerksomhet.",
+    summary: "Legg merke til når klienten går over i analyser, spøk eller digresjoner for å slippe unna det ømme punktet. Anerkjenn at denne bevegelsen har vært en viktig beskyttelse, og inviter varsomt oppmerksomheten tilbake til det som så vidt begynte å komme. Slik hjelper du klienten å legge merke til egne unngåelsesmønstre, samtidig som arbeidet holdes forankret i de primære følelsene og kjernesmerten heller enn i sekundære reaksjoner.",
     marker: "Klienten går over i spøk, analyse, digresjoner eller bagatellisering når følelsen nærmer seg.",
-    aim: "Anerkjenne beskyttelsen og invitere varsomt tilbake til den meningsfulle følelsen.",
+    aim: "Anerkjenne beskyttelsen og varsomt lede oppmerksomheten tilbake til den mest meningsfulle, primære følelsen, slik at klienten kan være i den lenge nok til å bearbeide og forandre den.",
     cases: NO_CASE_OVERRIDES
   }
 };
@@ -1878,11 +1882,11 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Hvis vi lytter til den delen, hva beskytter den deg mest mot, og hva ville den trenge for å våge et lite steg mot nærhet?"
     },
 
-    // Behandlingsbegrunnelse i EFT (Providing Treatment Rationale)
+    // Behandlingsrasjonale for opplevelsesbasert terapi (Providing Treatment Rationale)
     // Sara
     "dp_providing-treatment-rationale_case-sara_01": {
       text: "Jeg er redd for at det å snakke om følelser får meg til å spinne. Kan vi ikke bare holde det positivt?",
-      suggestion: "Det gir mening å være redd for det. I EFT går vi sakte og trygt; når vi navngir litt av følelsen, roer den seg og nettene blir mindre overveldende."
+      suggestion: "Det gir mening å være redd for det. I denne utforskingen går vi sakte og trygt; når vi navngir litt av følelsen, roer den seg og nettene blir mindre overveldende."
     },
     "dp_providing-treatment-rationale_case-sara_02": {
       text: "Hvorfor fokusere på følelser i stedet for å gi meg steg for å komme videre?",
@@ -1898,7 +1902,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-sara_05": {
       text: "Jeg føler meg teit som snakker om et brudd når andre har større problemer.",
-      suggestion: "Smerten din betyr noe. EFT hjelper deg å ære den akkurat nok til å høre hva den ber om – trøst, grenser, kontakt – slik at den letter."
+      suggestion: "Smerten din betyr noe. Terapi kan hjelpe deg å lytte til den akkurat nok til å høre hva den ber om – trøst, grenser, kontakt – slik at den letter."
     },
     "dp_providing-treatment-rationale_case-sara_06": {
       text: "Hvordan skal dette hjelpe meg å slutte å tenke på ham?",
@@ -2170,7 +2174,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-aisha_10": {
       text: "Hvordan vet jeg at vi er på rett vei?",
-      suggestion: "Flere små øyeblikk av ro, færre tester, mykere avskjeder og enklere reparasjoner etter uenighet."
+      suggestion: "Flere små øyeblikk av ro, tryggere tillit, lettere avskjeder og enklere reparasjoner etter uenighet."
     },
 
     // David
@@ -2642,26 +2646,26 @@ export const STATEMENT_TRANSLATIONS = {
       text: "Kveldene trekker ut, og leiligheten føles for stor bare for meg.",
       suggestion: "Nettene blir lange, og rommene kjennes for store – med ekko av ensomhet."
     },
-    "dp_empathic-evocations_case-sara_02": {
-      text: "Jeg holder den muntre stemmen på, og under kjennes brystet hult.",
-      suggestion: "En lys stemme over et uthult bryst, som et smil over en verkende smerte."
-    },
+	    "dp_empathic-evocations_case-sara_02": {
+	      text: "Jeg holder den muntre stemmen på, og under kjennes brystet hult.",
+	      suggestion: "En lys stemme lagt over et hult bryst, som et smil over en vond klump."
+	    },
     "dp_empathic-evocations_case-sara_03": {
       text: "Å se jakken hans i skapet treffer som en bølge.",
       suggestion: "Det skyller inn som en bølge idet blikket ditt fanger jakken."
     },
-    "dp_empathic-evocations_case-sara_04": {
-      text: "Jeg våkner og glemmer et sekund, så smeller det tilbake.",
-      suggestion: "Det ene sekundet av lys, og så smeller tyngden ned igjen som en dør."
-    },
+	    "dp_empathic-evocations_case-sara_04": {
+	      text: "Jeg våkner og glemmer et sekund, så smeller det tilbake.",
+	      suggestion: "Det ene lyse sekundet, og så slår tyngden igjen som en dør."
+	    },
     "dp_empathic-evocations_case-sara_05": {
       text: "Når venner spør, avfeier jeg det, men halsen strammer seg.",
       suggestion: "Et uanstrengt skuldertrekk utenpå, mens halsen snører seg inni."
     },
-    "dp_empathic-evocations_case-sara_06": {
-      text: "Jeg scroller sent på kvelden til øynene brenner.",
-      suggestion: "Sene nattescroller – øyne som brenner mens du prøver å løpe fra smerten."
-    },
+	    "dp_empathic-evocations_case-sara_06": {
+	      text: "Jeg scroller sent på kvelden til øynene brenner.",
+	      suggestion: "Sene kvelder med scrolling – øyne som brenner mens du prøver å løpe fra smerten."
+	    },
     "dp_empathic-evocations_case-sara_07": {
       text: "Å høre sangen vår i en butikk gjorde knærne svake.",
       suggestion: "De første tonene tar beina vekk under deg."
@@ -2674,36 +2678,36 @@ export const STATEMENT_TRANSLATIONS = {
       text: "Noen ganger sitter jeg på gulvet og holder rundt knærne bare for å kjenne meg holdt.",
       suggestion: "Krøllet rundt deg selv, en liten sirkel av varme i et kaldt rom."
     },
-    "dp_empathic-evocations_case-sara_10": {
-      text: "Når du er snill mot meg, vil jeg se bort.",
-      suggestion: "Vennlighet kjennes skarp, nesten for sterk – du vender blikket bort fra lyset."
-    },
+	    "dp_empathic-evocations_case-sara_10": {
+	      text: "Når du er snill mot meg, vil jeg se bort.",
+	      suggestion: "Vennlighet kjennes nesten for sterk, og du vender blikket bort fra lyset."
+	    },
 
     // Michael
     "dp_empathic-evocations_case-michael_01": {
       text: "En korrigering foran teamet får ansiktet til å brenne.",
       suggestion: "Ansiktet brenner hett, som om alle øyne er en lyskaster på en feil."
     },
-    "dp_empathic-evocations_case-michael_02": {
-      text: "Jeg går inn allerede anspent, klar for at noen skal trå feil.",
-      suggestion: "Du treffer dørstokken i rustning, kjeven satt, og skanner etter neste treff."
-    },
-    "dp_empathic-evocations_case-michael_03": {
-      text: "Kjeven verker av all spenningen innen dagen er over.",
-      suggestion: "Den verken forteller hvor hardt du har bitt ned på smerten."
-    },
+	    "dp_empathic-evocations_case-michael_02": {
+	      text: "Jeg går inn allerede anspent, klar for at noen skal trå feil.",
+	      suggestion: "Du går over terskelen i rustning, kjeven satt, og skanner etter neste treff."
+	    },
+	    "dp_empathic-evocations_case-michael_03": {
+	      text: "Kjeven verker av all spenningen innen dagen er over.",
+	      suggestion: "Verken i kjeven forteller hvor hardt du har bitt ned på det som gjør vondt."
+	    },
     "dp_empathic-evocations_case-michael_04": {
       text: "Jeg smeller, og så henger skammen som en vekt.",
       suggestion: "Skammen legger seg på deg som en tung frakk du ikke får av."
     },
-    "dp_empathic-evocations_case-michael_05": {
-      text: "Når kona sukker, kjennes det som et slag.",
-      suggestion: "Et lite sukk som lander som et svirrende slag over brystet."
-    },
-    "dp_empathic-evocations_case-michael_06": {
-      text: "Jeg hører «ro deg ned», og noe eksploderer i meg.",
-      suggestion: "De ordene antenner en lysbrann som skyter opp før du rekker å ta den igjen."
-    },
+	    "dp_empathic-evocations_case-michael_05": {
+	      text: "Når kona sukker, kjennes det som et slag.",
+	      suggestion: "Et lite sukk som lander som et stikk over brystet."
+	    },
+	    "dp_empathic-evocations_case-michael_06": {
+	      text: "Jeg hører «ro deg ned», og noe eksploderer i meg.",
+	      suggestion: "De ordene antenner en flamme som skyter opp før du rekker å ta den igjen."
+	    },
     "dp_empathic-evocations_case-michael_07": {
       text: "Hvis jeg ikke vet svaret, synker magen.",
       suggestion: "Å ikke vite sender magen i fritt fall – som en heis som stuper."
@@ -2764,10 +2768,10 @@ export const STATEMENT_TRANSLATIONS = {
     },
 
     // Laura
-    "dp_empathic-evocations_case-laura_01": {
-      text: "De fleste morgener kjennes flate, som om fargene er vasket ut.",
-      suggestion: "Alt i utvaskede toner, som om fargen er drenert."
-    },
+	    "dp_empathic-evocations_case-laura_01": {
+	      text: "De fleste morgener kjennes flate, som om fargene er vasket ut.",
+	      suggestion: "Alt går i utvaskede toner, som om fargene er tappet ut."
+	    },
     "dp_empathic-evocations_case-laura_02": {
       text: "En dør som smeller gjør huden min kald.",
       suggestion: "Lyden sender en kald bølge over huden."
@@ -2806,10 +2810,10 @@ export const STATEMENT_TRANSLATIONS = {
     },
 
     // Carlos
-    "dp_empathic-evocations_case-carlos_01": {
-      text: "Et skjevt glis over bordet får hendene til å dirre.",
-      suggestion: "Det gliset setter hendene i dirring som strømførende ledninger."
-    },
+	    "dp_empathic-evocations_case-carlos_01": {
+	      text: "Et skjevt glis over bordet får hendene til å dirre.",
+	      suggestion: "Det gliset setter strøm i hendene, som om de var levende ledninger."
+	    },
     "dp_empathic-evocations_case-carlos_02": {
       text: "Brystet kjennes stramt som et trommeskinn før det sprekker.",
       suggestion: "Stramt som et trommeskinn spent til bristepunktet."
@@ -2848,14 +2852,14 @@ export const STATEMENT_TRANSLATIONS = {
     },
 
     // Nina
-    "dp_empathic-evocations_case-nina_01": {
-      text: "Skyld slår meg i det jeg setter meg.",
-      suggestion: "Den slår som en summer i det du hviler."
-    },
-    "dp_empathic-evocations_case-nina_02": {
-      text: "Det er som om jeg bærer alles bager – og min egen.",
-      suggestion: "Armer fulle av alles bager, skuldre som brenner."
-    },
+	    "dp_empathic-evocations_case-nina_01": {
+	      text: "Skyld slår meg i det jeg setter meg.",
+	      suggestion: "Skylden slår inn som en alarm idet du endelig setter deg ned."
+	    },
+	    "dp_empathic-evocations_case-nina_02": {
+	      text: "Det er som om jeg bærer alles poser – og min egen.",
+	      suggestion: "Armer fulle av andres poser, skuldre som brenner."
+	    },
     "dp_empathic-evocations_case-nina_03": {
       text: "Magen vrir seg når jeg ber om hjelp.",
       suggestion: "Å be vrir magen i en stram knute."
@@ -2864,10 +2868,10 @@ export const STATEMENT_TRANSLATIONS = {
       text: "Jeg smiler gjennom hodepine og fortsetter å gå.",
       suggestion: "Et smil strekt over et dunkende hode mens du holder det gående."
     },
-    "dp_empathic-evocations_case-nina_05": {
-      text: "Mot kvelden kjennes knoklene tunge.",
-      suggestion: "Tunge knokler, som å vasse i våt betong."
-    },
+	    "dp_empathic-evocations_case-nina_05": {
+	      text: "Ut mot kvelden kjennes kroppen tung helt inn i knoklene.",
+	      suggestion: "Kroppen kjennes tung, som å vasse i våt betong."
+	    },
     "dp_empathic-evocations_case-nina_06": {
       text: "Når jeg sier nei, banker hjertet som om jeg har gjort noe galt.",
       suggestion: "Et bankende hjerte – som en alarm, bare for å ha sagt nei."
@@ -2890,10 +2894,10 @@ export const STATEMENT_TRANSLATIONS = {
     },
 
     // Aisha
-    "dp_empathic-evocations_case-aisha_01": {
-      text: "Når du ser på klokka, synker magen.",
-      suggestion: "Ett blikk på klokka, og magen faller ut."
-    },
+	    "dp_empathic-evocations_case-aisha_01": {
+	      text: "Når du ser på klokka, synker magen.",
+	      suggestion: "Ett blikk på klokka, og magen faller i gulvet."
+	    },
     "dp_empathic-evocations_case-aisha_02": {
       text: "Jeg går fra «ikke gå» til «la meg være i fred» på sekunder.",
       suggestion: "Det snur som en bryter – fra bønn til brann i et blunk."
@@ -2906,10 +2910,10 @@ export const STATEMENT_TRANSLATIONS = {
       text: "Jeg klorer i huden for å kjenne noe virkelig.",
       suggestion: "Klorer for å finne noe virkelig gjennom nummenhet og smerte."
     },
-    "dp_empathic-evocations_case-aisha_05": {
-      text: "Hvis skrivprikkene kommer og forsvinner, får jeg ikke puste.",
-      suggestion: "De tre prikkene forsvinner – og pusten låser seg."
-    },
+	    "dp_empathic-evocations_case-aisha_05": {
+	      text: "Hvis de tre prikkene kommer og forsvinner, får jeg ikke puste.",
+	      suggestion: "De tre prikkene forsvinner – og pusten låser seg."
+	    },
     "dp_empathic-evocations_case-aisha_06": {
       text: "Et farvel gjør meg svimmel.",
       suggestion: "Et farvel får rommet til å tippe og spinne."
@@ -2926,10 +2930,10 @@ export const STATEMENT_TRANSLATIONS = {
       text: "Varmen får tårene til å renne ut av ingenting.",
       suggestion: "Litt varme – og tårene renner som et plutselig regn."
     },
-    "dp_empathic-evocations_case-aisha_10": {
-      text: "Jeg stirrer på døra for å være sikker på at du er her.",
-      suggestion: "Øynene låst på døra – vokter mot at noen forsvinner."
-    },
+	    "dp_empathic-evocations_case-aisha_10": {
+	      text: "Jeg stirrer på døra for å være sikker på at du er her.",
+	      suggestion: "Øynene låst på døra – som om du må vokte mot å bli forlatt."
+	    },
 
     // David
     "dp_empathic-evocations_case-david_01": {
@@ -2964,20 +2968,20 @@ export const STATEMENT_TRANSLATIONS = {
       text: "Å si «jeg tar feil» får ansiktet til å brenne.",
       suggestion: "Ordene gjør ansiktet varmt – som blottlagt hud."
     },
-    "dp_empathic-evocations_case-david_09": {
-      text: "Jeg går rundt i huset om natta når jeg føler meg dømt.",
-      suggestion: "Nattlig vandring – prøver å gå av deg stikket av å bli dømt."
-    },
+	    "dp_empathic-evocations_case-david_09": {
+	      text: "Jeg går rundt i huset om natta når jeg føler meg dømt.",
+	      suggestion: "Nattlig vandring – prøver å gå av deg stikket fra blikkene og dommen."
+	    },
     "dp_empathic-evocations_case-david_10": {
       text: "Etter affæren kjennes huset kaldere.",
       suggestion: "Huset kjennes kaldere, som om varmen snek seg ut gjennom en sprekk."
     },
 
     // Marcus
-    "dp_empathic-evocations_case-marcus_01": {
-      text: "Jeg beveger meg gjennom dagen som et spøkelse.",
-      suggestion: "Spøkelsesaktig gjennom dagen, knapt spor etter deg."
-    },
+	    "dp_empathic-evocations_case-marcus_01": {
+	      text: "Jeg beveger meg gjennom dagen som et spøkelse.",
+	      suggestion: "Du går gjennom dagen som et spøkelse, nesten uten å sette spor."
+	    },
     "dp_empathic-evocations_case-marcus_02": {
       text: "Folkemengder får skuldrene opp til ørene.",
       suggestion: "Skuldre som klatrer opp mot ørene, muskler på vakt."
@@ -2986,10 +2990,10 @@ export const STATEMENT_TRANSLATIONS = {
       text: "Jeg sitter med ryggen mot veggen.",
       suggestion: "Rygg mot vegg, øynene skanner utganger."
     },
-    "dp_empathic-evocations_case-marcus_04": {
-      text: "Mareritt røsker meg våken og etterlater meg summende.",
-      suggestion: "Dratt ut av søvnen, summende som en strømførende ledning."
-    },
+	    "dp_empathic-evocations_case-marcus_04": {
+	      text: "Mareritt røsker meg våken og etterlater meg summende.",
+	      suggestion: "Dratt ut av søvnen, summende i kroppen som om det står strøm i deg."
+	    },
     "dp_empathic-evocations_case-marcus_05": {
       text: "Stillheten hjemme kjennes som en vekt på brystet.",
       suggestion: "Stillhet som presser på brystet som en tung plate."
@@ -3732,10 +3736,10 @@ export const STATEMENT_TRANSLATIONS = {
     },
 
     // Marcus
-    "dp_staying-in-contact-intense-affect_case-marcus_01": {
-      text: "En bølge er i ferd med å reise seg og jeg vil ikke ha den.",
-      suggestion: "Vi tar det i slurker—se deg rundt og nevn to ting, kjenn føttene—og lar en liten bølge passere mens vi blir i rommet."
-    },
+	    "dp_staying-in-contact-intense-affect_case-marcus_01": {
+	      text: "En bølge er i ferd med å reise seg og jeg vil ikke ha den.",
+	      suggestion: "Vi tar det i små slurker—se deg rundt og nevn to ting, kjenn føttene—og lar en liten bølge passere mens vi blir i rommet."
+	    },
     "dp_staying-in-contact-intense-affect_case-marcus_02": {
       text: "Kroppen summer etter et mareritt.",
       suggestion: "Føtter, sete, pust—la oss jorde først. Vi holder en trygg flik av summingen i ett pust og hviler så."

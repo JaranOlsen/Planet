@@ -47,6 +47,8 @@ const elements = {
   caseSkillSummary: document.getElementById("case-skill-summary"),
   caseSkillAimLabel: document.getElementById("case-skill-aim-label"),
   caseSkillAim: document.getElementById("case-skill-aim"),
+  caseSkillToggle: document.getElementById("case-skill-toggle"),
+  caseSkillBody: document.getElementById("case-skill-body"),
   caseBriefHeading: document.getElementById("case-brief-heading"),
   caseVoiceHeading: document.getElementById("case-voice-heading"),
   caseVoice: document.getElementById("case-voice"),
@@ -101,7 +103,8 @@ const state = {
   accessLevel: "free",
   currentStatement: null,
   unlocking: false,
-  feedbackCollapsed: true
+  feedbackCollapsed: true,
+  skillContextExpanded: false
 };
 
 const SHUFFLE_ICON_SRC = `${import.meta.env.BASE_URL}assets/icons/shuffle.svg`;
@@ -498,6 +501,22 @@ function highlightCaseSelection(caseId) {
   });
 }
 
+function renderSkillContextExpansion(hasSkill) {
+  const expanded = hasSkill && state.skillContextExpanded;
+  if (elements.caseSkillBody) {
+    elements.caseSkillBody.hidden = !expanded;
+    elements.caseSkillBody.classList.toggle("is-hidden", !expanded);
+  }
+  if (elements.caseSkillToggle) {
+    const strings = getUIStrings();
+    const showText = strings.showSkillInstructions ?? "Show instructions";
+    const hideText = strings.hideSkillInstructions ?? "Hide instructions";
+    elements.caseSkillToggle.textContent = expanded ? hideText : showText;
+    elements.caseSkillToggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+    elements.caseSkillToggle.disabled = !hasSkill;
+  }
+}
+
 function updateCaseSkillContext(skill) {
   if (
     !elements.caseSkillContext ||
@@ -516,6 +535,7 @@ function updateCaseSkillContext(skill) {
     elements.caseSkillMarker.textContent = "";
     elements.caseSkillSummary.textContent = "";
     elements.caseSkillAim.textContent = "";
+    renderSkillContextExpansion(false);
     return;
   }
 
@@ -524,8 +544,19 @@ function updateCaseSkillContext(skill) {
   elements.caseSkillName.textContent = skill.name ?? "";
   elements.caseSkillMarker.textContent = skill.marker ?? "";
   const summaryText = skill.summary ?? skill.description ?? "";
-  elements.caseSkillSummary.textContent = summaryText;
+  elements.caseSkillSummary.textContent = "";
+  if (summaryText) {
+    const paragraphs = String(summaryText).split(/\n\s*\n/);
+    paragraphs.forEach((para) => {
+      const trimmed = para.trim();
+      if (!trimmed) return;
+      const p = document.createElement("p");
+      p.textContent = trimmed;
+      elements.caseSkillSummary.appendChild(p);
+    });
+  }
   elements.caseSkillAim.textContent = skill.aim ?? "";
+  renderSkillContextExpansion(true);
 }
 
 function updateLockedBanner() {
@@ -907,6 +938,7 @@ function handleLanguageSelection(languageId) {
   state.index = 0;
   state.view = "brief";
   state.currentStatement = null;
+  state.skillContextExpanded = false;
 
   applyLanguageStrings(languageId);
   highlightLanguageSelection(languageId);
@@ -929,6 +961,7 @@ function handleSkillSelection(skillId) {
   state.index = 0;
   state.view = "brief";
   state.currentStatement = null;
+  state.skillContextExpanded = false;
 
   highlightSkillSelection(skillId);
   renderCaseOptions();
@@ -959,6 +992,12 @@ function handleCaseSelection(caseId) {
   highlightCaseSelection(caseId);
   hydratePracticeView();
   showSection("practice");
+}
+
+function handleSkillContextToggle() {
+  if (!getCurrentSkill()) return;
+  state.skillContextExpanded = !state.skillContextExpanded;
+  renderSkillContextExpansion(true);
 }
 
 function handleBackNavigation(targetKey) {
@@ -1042,6 +1081,10 @@ function registerEventListeners() {
   }
   if (elements.casesBackButton) {
     elements.casesBackButton.addEventListener("click", () => handleBackNavigation("case"));
+  }
+
+  if (elements.caseSkillToggle) {
+    elements.caseSkillToggle.addEventListener("click", handleSkillContextToggle);
   }
 
   if (elements.statementPanel) {

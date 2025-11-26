@@ -129,6 +129,38 @@ button {
   color: #1f3c88;
 }
 
+.skill-context-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.skill-context-toggle {
+  border-radius: 999px;
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  background-color: rgba(37, 99, 235, 0.12);
+  color: #1f3c88;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.skill-context-toggle:hover {
+  background-color: rgba(37, 99, 235, 0.25);
+  border-color: rgba(37, 99, 235, 0.55);
+  transform: translateY(-1px);
+}
+
+.skill-context-toggle:active {
+  transform: translateY(0);
+}
+
+.skill-context-body.is-hidden {
+  display: none !important;
+}
+
 .skill-context-details {
   margin: 0;
   display: grid;
@@ -149,6 +181,14 @@ button {
   font-size: 0.96rem;
   line-height: 1.55;
   color: var(--color-text);
+}
+
+.skill-context-text p {
+  margin: 0 0 0.7rem;
+}
+
+.skill-context-text p:last-child {
+  margin-bottom: 0;
 }
 
 .panel.is-hidden {

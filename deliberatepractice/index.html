@@ -71,15 +71,27 @@
           Explore curated cases that mirror real-world dynamics.
         </p>
         <div class="skill-context is-hidden" id="case-skill-context" hidden>
-          <h3 class="skill-context-title" id="case-skill-name"></h3>
-          <dl class="skill-context-details">
-            <dt class="skill-context-label" id="case-skill-marker-label"></dt>
-            <dd class="skill-context-text" id="case-skill-marker"></dd>
-            <dt class="skill-context-label" id="case-skill-summary-label"></dt>
-            <dd class="skill-context-text" id="case-skill-summary"></dd>
-            <dt class="skill-context-label" id="case-skill-aim-label"></dt>
-            <dd class="skill-context-text" id="case-skill-aim"></dd>
-          </dl>
+          <div class="skill-context-header">
+            <h3 class="skill-context-title" id="case-skill-name"></h3>
+            <button
+              type="button"
+              class="skill-context-toggle"
+              id="case-skill-toggle"
+              aria-expanded="false"
+            >
+              Show instructions
+            </button>
+          </div>
+          <div class="skill-context-body is-hidden" id="case-skill-body" hidden>
+            <dl class="skill-context-details">
+              <dt class="skill-context-label" id="case-skill-marker-label"></dt>
+              <dd class="skill-context-text" id="case-skill-marker"></dd>
+              <dt class="skill-context-label" id="case-skill-summary-label"></dt>
+              <dd class="skill-context-text" id="case-skill-summary"></dd>
+              <dt class="skill-context-label" id="case-skill-aim-label"></dt>
+              <dd class="skill-context-text" id="case-skill-aim"></dd>
+            </dl>
+          </div>
         </div>
         <div
           id="case-list"

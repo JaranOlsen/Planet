@@ -1526,7 +1526,7 @@ export const STATEMENT_SETS = {
     "case-sara": [
       {
         text: "I am worried that talking about feelings will make me spiral. Shouldn't we just keep it positive?",
-        suggestion: "It makes sense to worry about that. In EFT we go slowly and safely; naming a little of the feeling helps it settle so nights feel less overwhelming."
+        suggestion: "It makes sense to worry about that. In this exploration we go slowly and safely; naming a little of the feeling helps it settle so nights feel less overwhelming."
       },
       {
         text: "Why focus on emotions instead of giving me steps to move on?",
@@ -1542,7 +1542,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "I feel silly talking about a breakup when others have bigger problems.",
-        suggestion: "Your pain matters. EFT helps you honor it just enough to learn what it asks for—comfort, boundaries, connection—so it eases."
+        suggestion: "Your pain matters. Therapy can help you honor it just enough to learn what it asks for—comfort, boundaries, connection—so it eases."
       },
       {
         text: "How will this help me stop thinking about him?",
