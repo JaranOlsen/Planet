@@ -191,6 +191,127 @@ button {
   margin-bottom: 0;
 }
 
+.glossary-panel {
+  margin-top: 0.35rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(37, 99, 235, 0.25);
+}
+
+.glossary-panel.is-hidden {
+  display: none;
+}
+
+.glossary-hint {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #1f3c88;
+}
+
+.glossary-card {
+  margin-top: 0.55rem;
+  padding: 0.85rem 0.95rem;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  box-shadow: 0 6px 14px -10px rgba(15, 23, 42, 0.35);
+  position: relative;
+  z-index: 5;
+}
+
+.glossary-card.is-hidden {
+  display: none;
+}
+
+.glossary-card.is-floating {
+  position: fixed;
+  max-width: min(360px, calc(100vw - 28px));
+  width: auto;
+  min-width: 220px;
+  z-index: 25;
+}
+
+.glossary-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.glossary-card-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.glossary-card-title span {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.glossary-term {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.glossary-definition {
+  margin: 0.35rem 0 0;
+  color: var(--color-text);
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.glossary-close {
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  background: white;
+  width: 28px;
+  height: 28px;
+  font-size: 1.15rem;
+  line-height: 1;
+  color: #1f3c88;
+  display: grid;
+  place-items: center;
+}
+
+.glossary-close:hover {
+  background: rgba(37, 99, 235, 0.08);
+}
+
+.glossary-close:active {
+  transform: translateY(1px);
+}
+
+.glossary-chip {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  color: rgb(25, 67, 157);
+  font: inherit;
+  text-decoration: underline dotted rgba(37, 99, 235, 0.6);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  transition: color 0.18s ease, text-decoration-color 0.18s ease, background-color 0.18s ease;
+}
+
+.glossary-chip:hover {
+  color: #1f3c88;
+  text-decoration-color: rgba(37, 99, 235, 0.9);
+}
+
+.glossary-chip:active,
+.glossary-chip.is-active {
+  color: #1f3c88;
+  text-decoration-color: rgba(37, 99, 235, 0.9);
+  background: rgba(37, 99, 235, 0.06);
+}
+
 .panel.is-hidden {
   display: none;
 }

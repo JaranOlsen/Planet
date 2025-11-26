@@ -8,7 +8,8 @@ import {
   LANGUAGE_METADATA,
   LANGUAGE_UI,
   LANGUAGE_OVERRIDES,
-  STATEMENT_TRANSLATIONS
+  STATEMENT_TRANSLATIONS,
+  GLOSSARY
 } from "./practiceData.js";
 import {
   submitFeedback,
@@ -49,6 +50,13 @@ const elements = {
   caseSkillAim: document.getElementById("case-skill-aim"),
   caseSkillToggle: document.getElementById("case-skill-toggle"),
   caseSkillBody: document.getElementById("case-skill-body"),
+  glossaryPanel: document.getElementById("glossary-panel"),
+  glossaryHint: document.getElementById("glossary-hint"),
+  glossaryCard: document.getElementById("glossary-card"),
+  glossaryTitle: document.getElementById("glossary-title"),
+  glossaryTerm: document.getElementById("glossary-term"),
+  glossaryDefinition: document.getElementById("glossary-definition"),
+  glossaryClose: document.getElementById("glossary-close"),
   caseBriefHeading: document.getElementById("case-brief-heading"),
   caseVoiceHeading: document.getElementById("case-voice-heading"),
   caseVoice: document.getElementById("case-voice"),
@@ -104,7 +112,8 @@ const state = {
   currentStatement: null,
   unlocking: false,
   feedbackCollapsed: true,
-  skillContextExpanded: false
+  skillContextExpanded: false,
+  activeGlossaryTermId: null
 };
 
 const SHUFFLE_ICON_SRC = `${import.meta.env.BASE_URL}assets/icons/shuffle.svg`;
@@ -112,6 +121,7 @@ const SHUFFLE_ICON_SRC = `${import.meta.env.BASE_URL}assets/icons/shuffle.svg`;
 const languageButtonMap = new Map();
 const skillButtonMap = new Map();
 const caseButtonMap = new Map();
+let activeGlossaryChip = null;
 
 const ACCESS_STORAGE_KEY = "dp_access_level";
 
@@ -186,6 +196,137 @@ function getStatementTranslations(languageId) {
   return STATEMENT_TRANSLATIONS[languageId] ?? {};
 }
 
+function getGlossaryEntries(languageId) {
+  const target = GLOSSARY[languageId];
+  const fallback = Array.isArray(target) && target.length > 0 ? target : GLOSSARY.en;
+  return Array.isArray(fallback) ? fallback : [];
+}
+
+function resolveGlossaryEntry(languageId, entryId) {
+  if (!entryId) return null;
+  const entries = getGlossaryEntries(languageId);
+  const fallbackEntries = getGlossaryEntries("en");
+  return entries.find((entry) => entry.id === entryId) ?? fallbackEntries.find((entry) => entry.id === entryId) ?? null;
+}
+
+function buildGlossaryIndex(languageId) {
+  const entries = getGlossaryEntries(languageId);
+  const fallbackEntries = getGlossaryEntries("en");
+  const source = entries.length ? entries : fallbackEntries;
+
+  return source
+    .map((entry) => {
+      const langTerms = entry.terms?.[languageId] ?? entry.terms?.en ?? [];
+      return langTerms
+        .filter(Boolean)
+        .map((term) => ({
+          entryId: entry.id,
+          term
+        }));
+    })
+    .flat()
+    .sort((a, b) => b.term.length - a.term.length);
+}
+
+const WORD_BOUNDARY_REGEX = /[a-zæøå0-9]/i;
+
+function createGlossaryFragment(text, languageId) {
+  const fragment = document.createDocumentFragment();
+  const content = typeof text === "string" ? text : "";
+  if (!content) {
+    fragment.appendChild(document.createTextNode(""));
+    return fragment;
+  }
+
+  const index = buildGlossaryIndex(languageId);
+  if (!index.length) {
+    fragment.appendChild(document.createTextNode(content));
+    return fragment;
+  }
+
+  const lowerContent = content.toLowerCase();
+  const matches = [];
+
+  const isBoundary = (start, length) => {
+    const before = lowerContent[start - 1];
+    const after = lowerContent[start + length];
+    const validBefore = !before || !WORD_BOUNDARY_REGEX.test(before);
+    const validAfter = !after || !WORD_BOUNDARY_REGEX.test(after);
+    return validBefore && validAfter;
+  };
+
+  index.forEach(({ term, entryId }) => {
+    const value = term?.trim();
+    if (!value) return;
+    const needle = value.toLowerCase();
+    let searchStart = 0;
+    while (searchStart < lowerContent.length) {
+      const hit = lowerContent.indexOf(needle, searchStart);
+      if (hit === -1) break;
+      if (isBoundary(hit, needle.length)) {
+        matches.push({ start: hit, end: hit + needle.length, entryId });
+      }
+      searchStart = hit + needle.length;
+    }
+  });
+
+  if (!matches.length) {
+    fragment.appendChild(document.createTextNode(content));
+    return fragment;
+  }
+
+  matches.sort((a, b) => a.start - b.start || b.end - a.end);
+  const filtered = [];
+  let lastEnd = 0;
+  matches.forEach((match) => {
+    if (match.start < lastEnd) return;
+    filtered.push(match);
+    lastEnd = match.end;
+  });
+
+  let cursor = 0;
+  filtered.forEach((match) => {
+    if (match.start > cursor) {
+      fragment.appendChild(document.createTextNode(content.slice(cursor, match.start)));
+    }
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "glossary-chip";
+    chip.dataset.termId = match.entryId;
+    chip.textContent = content.slice(match.start, match.end);
+    fragment.appendChild(chip);
+    cursor = match.end;
+  });
+
+  if (cursor < content.length) {
+    fragment.appendChild(document.createTextNode(content.slice(cursor)));
+  }
+
+  return fragment;
+}
+
+function renderGlossaryBlock(container, text, languageId) {
+  if (!container) return;
+  container.textContent = "";
+  const content = typeof text === "string" ? text : "";
+  if (!content) return;
+  container.appendChild(createGlossaryFragment(content, languageId));
+}
+
+function renderGlossaryParagraphs(container, text, languageId) {
+  if (!container) return;
+  container.textContent = "";
+  const content = typeof text === "string" ? text : "";
+  if (!content) return;
+  const paragraphs = content.split(/\n\s*\n/);
+  paragraphs.forEach((para) => {
+    const trimmed = para.trim();
+    if (!trimmed) return;
+    const p = document.createElement("p");
+    p.appendChild(createGlossaryFragment(trimmed, languageId));
+    container.appendChild(p);
+  });
+}
 function localizeSkill(languageId, skillId) {
   const baseSkill = BASE_PRACTICE[skillId];
   if (!baseSkill) return null;
@@ -294,6 +435,17 @@ function applyLanguageStrings(languageId) {
   }
   if (elements.caseSkillAimLabel) {
     elements.caseSkillAimLabel.textContent = strings.skillAimLabel ?? "Aim";
+  }
+  if (elements.glossaryHint) {
+    elements.glossaryHint.textContent = strings.glossaryHint ?? "";
+  }
+  if (elements.glossaryTitle) {
+    elements.glossaryTitle.textContent = strings.glossaryTitle ?? "Key term";
+  }
+  if (elements.glossaryClose) {
+    const closeLabel = strings.glossaryClose ?? "Close definition";
+    elements.glossaryClose.setAttribute("aria-label", closeLabel);
+    elements.glossaryClose.title = closeLabel;
   }
 
   elements.caseBriefHeading.textContent =
@@ -515,6 +667,124 @@ function renderSkillContextExpansion(hasSkill) {
     elements.caseSkillToggle.setAttribute("aria-expanded", expanded ? "true" : "false");
     elements.caseSkillToggle.disabled = !hasSkill;
   }
+  if (!expanded) {
+    hideGlossaryCard();
+  }
+}
+
+function setGlossaryVisibility(visible) {
+  if (!elements.glossaryPanel) return;
+  elements.glossaryPanel.hidden = !visible;
+  elements.glossaryPanel.classList.toggle("is-hidden", !visible);
+  if (!visible) {
+    hideGlossaryCard();
+  }
+}
+
+function setActiveGlossaryChip(target) {
+  if (activeGlossaryChip) {
+    activeGlossaryChip.classList.remove("is-active");
+  }
+  activeGlossaryChip = target ?? null;
+  if (activeGlossaryChip) {
+    activeGlossaryChip.classList.add("is-active");
+  }
+}
+
+function hideGlossaryCard() {
+  state.activeGlossaryTermId = null;
+  setActiveGlossaryChip(null);
+  if (elements.glossaryCard) {
+    elements.glossaryCard.hidden = true;
+    elements.glossaryCard.classList.add("is-hidden");
+    elements.glossaryCard.classList.remove("is-floating");
+    elements.glossaryCard.style.left = "";
+    elements.glossaryCard.style.top = "";
+    elements.glossaryCard.style.visibility = "";
+  }
+  if (elements.glossaryTerm) {
+    elements.glossaryTerm.textContent = "";
+  }
+  if (elements.glossaryDefinition) {
+    elements.glossaryDefinition.textContent = "";
+  }
+}
+
+function positionGlossaryCard(chip) {
+  if (!elements.glossaryCard || !chip) return;
+  const card = elements.glossaryCard;
+  const rect = chip.getBoundingClientRect();
+  const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+  card.classList.add("is-floating");
+  card.style.position = "fixed";
+  card.style.maxWidth = "min(360px, calc(100vw - 28px))";
+  card.style.visibility = "hidden";
+
+  // Force layout to get size.
+  const cardWidth = card.offsetWidth || 280;
+  const cardHeight = card.offsetHeight || 140;
+
+  const horizontalCenter = rect.left + rect.width / 2;
+  let left = horizontalCenter - cardWidth / 2;
+  const margin = 12;
+  if (left < margin) left = margin;
+  if (left + cardWidth + margin > viewportWidth) {
+    left = viewportWidth - cardWidth - margin;
+  }
+
+  const preferredTop = rect.bottom + 8;
+  let top = preferredTop;
+  if (preferredTop + cardHeight + margin > viewportHeight) {
+    top = rect.top - cardHeight - 8;
+    if (top < margin) top = margin;
+  }
+
+  card.style.left = `${left}px`;
+  card.style.top = `${top}px`;
+  card.style.visibility = "visible";
+}
+
+function showGlossaryDefinition(termId, chip) {
+  if (!termId || !elements.glossaryCard) return;
+  const languageId = state.languageId ?? "en";
+  const entry = resolveGlossaryEntry(languageId, termId);
+  if (!entry) return;
+  const strings = getUIStrings(languageId);
+  const label =
+    entry.label?.[languageId] ??
+    entry.label?.en ??
+    chip?.textContent ??
+    "";
+  const definition = entry.definition?.[languageId] ?? entry.definition?.en ?? "";
+
+  if (elements.glossaryTitle) {
+    elements.glossaryTitle.textContent = strings.glossaryTitle ?? "Key term";
+  }
+  if (elements.glossaryTerm) {
+    elements.glossaryTerm.textContent = label;
+  }
+  if (elements.glossaryDefinition) {
+    elements.glossaryDefinition.textContent = definition;
+  }
+
+  const card = elements.glossaryCard;
+  card.hidden = false;
+  card.classList.remove("is-hidden");
+  state.activeGlossaryTermId = termId;
+  setActiveGlossaryChip(chip ?? null);
+  requestAnimationFrame(() => positionGlossaryCard(chip));
+}
+
+function refreshActiveGlossaryDefinition() {
+  if (!state.activeGlossaryTermId) {
+    hideGlossaryCard();
+    return;
+  }
+  const selector = `.glossary-chip[data-term-id="${state.activeGlossaryTermId}"]`;
+  const chip = elements.caseSkillBody?.querySelector(selector) ?? null;
+  showGlossaryDefinition(state.activeGlossaryTermId, chip);
 }
 
 function updateCaseSkillContext(skill) {
@@ -528,6 +798,9 @@ function updateCaseSkillContext(skill) {
     return;
   }
 
+  const languageId = state.languageId ?? "en";
+  hideGlossaryCard();
+
   if (!skill) {
     elements.caseSkillContext.hidden = true;
     elements.caseSkillContext.classList.add("is-hidden");
@@ -535,6 +808,7 @@ function updateCaseSkillContext(skill) {
     elements.caseSkillMarker.textContent = "";
     elements.caseSkillSummary.textContent = "";
     elements.caseSkillAim.textContent = "";
+    setGlossaryVisibility(false);
     renderSkillContextExpansion(false);
     return;
   }
@@ -542,20 +816,11 @@ function updateCaseSkillContext(skill) {
   elements.caseSkillContext.hidden = false;
   elements.caseSkillContext.classList.remove("is-hidden");
   elements.caseSkillName.textContent = skill.name ?? "";
-  elements.caseSkillMarker.textContent = skill.marker ?? "";
+  renderGlossaryBlock(elements.caseSkillMarker, skill.marker ?? "", languageId);
   const summaryText = skill.summary ?? skill.description ?? "";
-  elements.caseSkillSummary.textContent = "";
-  if (summaryText) {
-    const paragraphs = String(summaryText).split(/\n\s*\n/);
-    paragraphs.forEach((para) => {
-      const trimmed = para.trim();
-      if (!trimmed) return;
-      const p = document.createElement("p");
-      p.textContent = trimmed;
-      elements.caseSkillSummary.appendChild(p);
-    });
-  }
-  elements.caseSkillAim.textContent = skill.aim ?? "";
+  renderGlossaryParagraphs(elements.caseSkillSummary, summaryText, languageId);
+  renderGlossaryBlock(elements.caseSkillAim, skill.aim ?? "", languageId);
+  setGlossaryVisibility(true);
   renderSkillContextExpansion(true);
 }
 
@@ -1086,6 +1351,21 @@ function registerEventListeners() {
   if (elements.caseSkillToggle) {
     elements.caseSkillToggle.addEventListener("click", handleSkillContextToggle);
   }
+
+  if (elements.caseSkillBody) {
+    elements.caseSkillBody.addEventListener("click", (event) => {
+      const chip = event.target.closest(".glossary-chip");
+      if (!chip) return;
+      showGlossaryDefinition(chip.dataset.termId, chip);
+    });
+  }
+
+  if (elements.glossaryClose) {
+    elements.glossaryClose.addEventListener("click", hideGlossaryCard);
+  }
+
+  window.addEventListener("resize", refreshActiveGlossaryDefinition, { passive: true });
+  window.addEventListener("scroll", refreshActiveGlossaryDefinition, { passive: true });
 
   if (elements.statementPanel) {
     let touchStartX = null;

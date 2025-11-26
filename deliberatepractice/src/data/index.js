@@ -3,6 +3,7 @@
 import { SKILLS } from "./skills.js";
 import { CASES } from "./cases.js";
 import { STATEMENT_SETS } from "./statements.js";
+import { GLOSSARY } from "./glossary.js";
 import {
   LANGUAGE_ORDER,
   LANGUAGE_METADATA,
@@ -99,5 +100,6 @@ export {
   LANGUAGE_METADATA,
   LANGUAGE_UI,
   LANGUAGE_OVERRIDES,
-  STATEMENT_TRANSLATIONS
+  STATEMENT_TRANSLATIONS,
+  GLOSSARY
 };
