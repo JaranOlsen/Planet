@@ -14,7 +14,8 @@ import {
 import {
   submitFeedback,
   redeemAccessCode,
-  isSupabaseReady
+  isSupabaseReady,
+  logAccessCodeAttempt
 } from "./backend.js";
 
 const sections = {
@@ -1156,6 +1157,7 @@ async function handleUnlockSubmit(event) {
   event.preventDefault();
   if (state.unlocking) return;
   const strings = getUIStrings();
+  const languageId = state.languageId ?? "en";
   if (!isSupabaseReady()) {
     if (elements.unlockStatus) {
       elements.unlockStatus.textContent = strings.unlockConfigMissing ?? "";
@@ -1175,6 +1177,7 @@ async function handleUnlockSubmit(event) {
   }
   try {
     const result = await redeemAccessCode(code);
+    logAccessCodeAttempt({ code, status: "success", languageId }).catch(() => {});
     saveAccessLevel(result.accessLevel ?? "pro");
     if (elements.unlockStatus) {
       elements.unlockStatus.textContent = strings.unlockSuccess ?? "";
@@ -1183,6 +1186,8 @@ async function handleUnlockSubmit(event) {
     renderCaseOptions();
     hydratePracticeView();
   } catch (err) {
+    const status = err?.message === "invalid_code" ? "invalid" : "error";
+    logAccessCodeAttempt({ code, status, languageId }).catch(() => {});
     if (elements.unlockStatus) {
       const msg = err?.message === "invalid_code"
         ? strings.unlockInvalid ?? ""

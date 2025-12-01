@@ -23,8 +23,8 @@ export const GLOSSARY = {
         ]
       },
       definition: {
-        en: "The first, gut-level feeling that arises directly from a situation or need (for example sadness, anger, fear, or longing). In EFT we distinguish helpful primary adaptive emotions that fit the present from older primary maladaptive emotions that replay past injuries.",
-        no: "Den første, mage-nære følelsesreaksjonen som kommer direkte fra en situasjon eller et behov (for eksempel tristhet, sinne, frykt eller lengsel). I EFT skiller vi mellom hjelpsomme primære adaptive følelser som passer nå, og primære maladaptive følelser som gjentar gamle sår."
+        en: "The first, gut-level feeling that arises directly from a situation or need (for example sadness, anger, fear, or longing). In Emotion-focused therapy we distinguish helpful primary adaptive emotions that fit the present from older primary maladaptive emotions that replay past injuries.",
+        no: "Den første, mage-nære følelsesreaksjonen som kommer direkte fra en situasjon eller et behov (for eksempel tristhet, sinne, frykt eller lengsel). I emosjonsfokusert terapi skiller vi mellom hjelpsomme primære adaptive følelser som passer nå, og primære maladaptive følelser som gjentar gamle sår."
       }
     },
     {
@@ -74,8 +74,8 @@ export const GLOSSARY = {
       label: { en: "CAMS sequence", no: "CAMS-sekvensen" },
       terms: { en: ["CAMS sequence", "CAMS"], no: ["CAMS", "CAMS-sekvensen", "CAMS sekvensen"] },
       definition: {
-        en: "A change roadmap in EFT that tracks movement from global distress, to accessing specific emotions, to making meaning and naming unmet needs, and finally to new adaptive emotional responses and relief.",
-        no: "Et endringskart i EFT som følger bevegelsen fra globalt ubehag, til tilgang til spesifikke følelser, til mening og navngitte udekkede behov, og videre til nye adaptive emosjonelle responser og lettelse."
+        en: "A change roadmap in Emotion-focused therapy that tracks movement from global distress, to accessing specific emotions, to making meaning and naming unmet needs, and finally to new adaptive emotional responses and relief.",
+        no: "Et endringskart i emosjonsfokusert terapi som følger bevegelsen fra globalt ubehag, til tilgang til spesifikke følelser, til mening og navngitte udekkede behov, og videre til nye adaptive emosjonelle responser og lettelse."
       }
     },
     {

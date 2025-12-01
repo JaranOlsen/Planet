@@ -78,3 +78,43 @@ export async function redeemAccessCode(code) {
 export function isSupabaseReady() {
   return hasSupabaseConfig();
 }
+
+function getUserAgent() {
+  if (typeof navigator === "undefined") return null;
+  return navigator.userAgent ?? null;
+}
+
+function getCountryGuess() {
+  if (typeof navigator === "undefined") return null;
+  const locale = navigator.language || (Array.isArray(navigator.languages) ? navigator.languages[0] : "");
+  if (!locale) return null;
+  const parts = locale.split(/[-_]/);
+  if (parts.length >= 2 && parts[1]) {
+    return parts[1].toUpperCase();
+  }
+  return null;
+}
+
+/**
+ * Log any access code attempt (success or failure) for simple counts and geo hints.
+ * Expects a Supabase table `access_code_usage` with columns:
+ *  access_code (text), status (text), language_id (text), country (text),
+ *  user_agent (text), created_at (timestamptz default now()).
+ */
+export async function logAccessCodeAttempt({ code, status, languageId }) {
+  if (!hasSupabaseConfig()) return;
+  const payload = {
+    access_code: code,
+    status,
+    language_id: languageId ?? null,
+    country: getCountryGuess(),
+    user_agent: getUserAgent(),
+    created_at: new Date().toISOString()
+  };
+  try {
+    await postJson("/rest/v1/access_code_usage", payload);
+  } catch (err) {
+    // Logging should never break unlocking; surface quietly.
+    console.warn("Failed to log access code usage", err);
+  }
+}
