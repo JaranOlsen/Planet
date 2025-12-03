@@ -756,7 +756,7 @@ export const STATEMENT_TRANSLATIONS = {
     // Sara
     "dp_empathic-understanding_case-sara_01": {
       text: "Om kvelden føles leiligheten enorm, og jeg kjenner meg så alene.",
-      suggestion: "Kveldene bærer en tung ensomhet som fyller hele rommet."
+      suggestion: "Kveldene bærer med seg en tung ensomhet som fyller hele rommet."
     },
     "dp_empathic-understanding_case-sara_02": {
       text: "Jeg sier hele tiden til venner at det går bra, men jeg er utslitt av å late som.",
@@ -768,11 +768,11 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_empathic-understanding_case-sara_04": {
       text: "Jeg hater at jeg fortsatt sjekker telefonen i håp om at det er ham.",
-      suggestion: "Det finnes et vart håp som fortsatt strekker seg, selv om det gjør vondt."
+      suggestion: "Det er fortsatt et håp der som ikke slukner, selv om det gjør vondt."
     },
     "dp_empathic-understanding_case-sara_05": {
-      text: "Å våkne er verst—de første sekundene før jeg husker.",
-      suggestion: "Morgenen treffer hardt når minnene krasjer inn etter et kort øyeblikk av letthet."
+      text: "Å våkne er det verste — sjokket etter de første sekundene før jeg husker.",
+      suggestion: "Morgenen treffer hardt når minnene krasjer inn etter et kort øyeblikk av frihet."
     },
     "dp_empathic-understanding_case-sara_06": {
       text: "Jeg kjenner meg flau over at jeg ikke er over det ennå.",
@@ -1161,8 +1161,8 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Selvsagt bekymrer du deg for å ta plass; sorgen din hører hjemme her og gir mening."
     },
     "dp_empathic-affirmation-validation_case-sara_08": {
-      text: "Mat smaker ingenting og magen synker ofte.",
-      suggestion: "Den hule, fallende magefølelsen stemmer med hvor dypt dette traff."
+      text: "Mat smaker ingenting og jeg får ofte et skikkelig sug i magen.",
+      suggestion: "Det gir mening at kroppen din reagerer slik; den forteller deg hvor viktig dette er for deg."
     },
     "dp_empathic-affirmation-validation_case-sara_09": {
       text: "Venner inviterer meg ut, og jeg finner unnskyldninger fordi jeg ikke vil gråte offentlig.",

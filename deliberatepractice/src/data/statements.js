@@ -401,7 +401,7 @@ export const STATEMENT_SETS = {
         suggestion: "There is a tender hope that still reaches, even while it hurts."
       },
       {
-        text: "Waking up is the worst—those first seconds before I remember.",
+        text: "Waking up is the worst — the shock after those first seconds before I remember.",
         suggestion: "Mornings hit hard as the memory crashes in after a brief lightness."
       },
       {
@@ -794,7 +794,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Food doesn't taste like anything and my stomach drops a lot.",
-        suggestion: "That hollow, dropped‑stomach feeling fits how deeply this landed."
+        suggestion: "No wonder your body reacts this way; it tells you how important this is for you."
       },
       {
         text: "Friends invite me out and I make excuses because I don't want to cry in public.",
