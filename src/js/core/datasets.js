@@ -241,8 +241,14 @@ export function createMindmap() {
 }
 
 const mindmapRegistry = [
-  { name: 'Full', module: '../data/planetData.js', images: '../data/planetImageData.js' },
-  { name: 'Simple', module: '../data/planetSimpleData.js', images: '../data/planetSimpleImageData.js' },
+  {
+    name: 'Full',
+    load: () => Promise.all([import('../data/planetData.js'), import('../data/planetImageData.js')]),
+  },
+  {
+    name: 'Simple',
+    load: () => Promise.all([import('../data/planetSimpleData.js'), import('../data/planetSimpleImageData.js')]),
+  },
 ];
 
 let activeMindmapIndex = 0;
@@ -256,11 +262,7 @@ export async function switchMindmap(index) {
   mindmapSwitchInProgress = true;
   const entry = mindmapRegistry[index];
   try {
-    const cacheBust = `?t=${Date.now()}`;
-    const [mod, imgMod] = await Promise.all([
-      import(/* @vite-ignore */ `${entry.module}${cacheBust}`),
-      import(/* @vite-ignore */ `${entry.images}${cacheBust}`),
-    ]);
+    const [mod, imgMod] = await entry.load();
 
     const required = ['planetTagData', 'planetConnections', 'planetArrowedConnections', 'planetDashedConnections', 'planetTunnelConnections'];
     const missing = required.filter((k) => !mod[k]);
