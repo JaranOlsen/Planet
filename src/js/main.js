@@ -24,10 +24,16 @@ import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, const
 import { pushContent, handleCarouselButton } from './content.js'
 import { initialiseVersion } from './versions.js'
 import { creation } from './creation.js'
-import { updateGutta, guttCrumbMesh, maraCrumbMesh } from './gutta.js'
+import { updateGutta, guttCrumbMesh, maraCrumbMesh, cycleStatsChartView } from './gutta.js'
 import { setupIntro, introState, fadeOutAudio, animateLetterSpacing } from './core/intro.js'
 import { DeveloperHud } from './core/developerHud.js'
 import { PlanetEnvironment } from './core/planetEnvironment.js'
+
+if (import.meta.hot) {
+    import.meta.hot.on('vite:beforeUpdate', () => {
+        window.location.reload();
+    });
+}
 
 //IMPORT DATA
 // Default / initial mindmap dataset (index 0). Additional datasets loaded dynamically.
@@ -128,13 +134,29 @@ let guttaState = {
     mara: [],
     species: undefined,
     init: false,
+    exampleGuttIndex: 0,
+    exampleMaraIndex: 0,
+    exampleGuttId: null,
+    exampleMaraId: null,
 }
 
 let guttaStats = {
     kills: 0,
     totalHungerAtKill: 0,
     munch: 0,
-    totalHungerAtMunch: 0
+    totalHungerAtMunch: 0,
+    guttMatingAttempts: 0,
+    maraMatingAttempts: 0,
+    guttMatingSuccesses: 0,
+    maraMatingSuccesses: 0,
+    guttMatingFailures: 0,
+    maraMatingFailures: 0,
+    guttBirths: 0,
+    maraBirths: 0,
+    guttBirthsBlocked: 0,
+    maraBirthsBlocked: 0,
+    guttDeaths: 0,
+    maraDeaths: 0
 }
 
 // Loaders used across the environment and dataset initialisation
@@ -243,22 +265,16 @@ let fps;
 
 const fpsContainer = document.querySelector('#fpsCounter');
 const fpsDisplay = document.createElement('div');
-
-function refreshLoop() {
-    window.requestAnimationFrame(() => {
-        const now = performance.now();
-        while (times.length > 0 && times[0] <= now - 1000) {
-            times.shift();
-        }
-        times.push(now);
-        fps = times.length;
-        fpsDisplay.textContent = fps;
-        refreshLoop();
-    });
-}
 fpsContainer.appendChild(fpsDisplay);
 
-refreshLoop();
+function updateFpsCounter(now) {
+    while (times.length > 0 && times[0] <= now - 1000) {
+        times.shift();
+    }
+    times.push(now);
+    fps = times.length;
+    fpsDisplay.textContent = fps;
+}
 
 
 //INTERACTION FUNCTIONS
@@ -273,10 +289,20 @@ function scanPins() {
 document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
+    const hasModifier = event.shiftKey || event.ctrlKey || event.altKey || event.metaKey;
+
+    if (event.altKey && (keyCode === 37 || keyCode === 39)) {
+        if (guttaStatScreen.style.display === "block") {
+            event.preventDefault();
+            const direction = keyCode === 37 ? -1 : 1;
+            cycleStatsChartView(direction);
+        }
+        return;
+    }
 
     //Controls
     if (focusElement !== "tagInput") {
-        if (keyCode == 79) { //O
+        if (!hasModifier && keyCode == 79) { //O
             if (window.appStatus === "orbit") {
                 window.appStatus = "flight";
                 orbitControls.enabled = false;
@@ -294,6 +320,37 @@ function onDocumentKeyUp(event) {
                 orbitControls.update();
             }
         }
+        if (event.shiftKey) {
+            if (keyCode === 37 || keyCode === 39) { // Shift + Left/Right
+                const delta = keyCode === 37 ? -1 : 1;
+                adjustExampleIndex('exampleGuttId', 'exampleGuttIndex', guttaState.gutta, delta);
+                return;
+            }
+            if (keyCode === 38 || keyCode === 40) { // Shift + Up/Down
+                const delta = keyCode === 38 ? -1 : 1;
+                adjustExampleIndex('exampleMaraId', 'exampleMaraIndex', guttaState.mara, delta);
+                return;
+            }
+            if (window.appStatus === "orbit") {
+                if (keyCode == 71) { // Shift+G
+                    const mode = getFollowMode() === "gutt" ? "manual" : "gutt";
+                    setFollowMode(mode);
+                    console.log(mode === "gutt" ? "Orbit now follows the exampleGutt" : "Orbit follow disabled");
+                    return;
+                }
+                if (keyCode == 77) { // Shift+M
+                    const mode = getFollowMode() === "mara" ? "manual" : "mara";
+                    setFollowMode(mode);
+                    console.log(mode === "mara" ? "Orbit now follows the exampleMara" : "Orbit follow disabled");
+                    return;
+                }
+            }
+        }
+
+        if (hasModifier) {
+            return;
+        }
+
         // Only do this when in flight-mode:
         if (window.appStatus === "flight") {
             if (keyCode == 71) { // 'G'
@@ -320,6 +377,7 @@ function onDocumentKeyUp(event) {
 
     }
     if (focusElement !== "tagInput" && window.appStatus !== "flight") {
+        if (hasModifier) return;
         //Slide control
         if (slideshowStatus.activeSlideshow !== undefined && (keyCode === 37 || keyCode === 116)) { // left arrow or play button on USB remote
             const leftButton = document.querySelector("[data-carousel-button='left']");
@@ -1186,6 +1244,45 @@ function processPointerUpEvent(event) {
 let octreeHelperRoot = new THREE.Object3D();
 scene.add(octreeHelperRoot);
 
+function clampExampleIndex(list, index) {
+    if (!list || list.length === 0) return -1;
+    const safeIndex = Number.isFinite(index) ? index : 0;
+    return ((safeIndex % list.length) + list.length) % list.length;
+}
+
+function getExampleAgent(list, idKey, indexKey) {
+    if (!list || list.length === 0) return null;
+    let idx = -1;
+    const currentId = guttaState[idKey];
+    if (currentId !== null && currentId !== undefined) {
+        idx = list.findIndex(agent => agent.ID === currentId);
+    }
+    if (idx === -1) {
+        idx = clampExampleIndex(list, guttaState[indexKey]);
+    }
+    if (idx === -1) return null;
+    guttaState[indexKey] = idx;
+    guttaState[idKey] = list[idx].ID;
+    return list[idx];
+}
+
+function adjustExampleIndex(idKey, indexKey, list, delta) {
+    if (!list || list.length === 0) return null;
+    let idx = -1;
+    const currentId = guttaState[idKey];
+    if (currentId !== null && currentId !== undefined) {
+        idx = list.findIndex(agent => agent.ID === currentId);
+    }
+    if (idx === -1) {
+        idx = clampExampleIndex(list, guttaState[indexKey]);
+    }
+    if (idx === -1) return null;
+    idx = clampExampleIndex(list, idx + delta);
+    guttaState[indexKey] = idx;
+    guttaState[idKey] = list[idx].ID;
+    return list[idx];
+}
+
 function followAgent(agent) {
     // Disable manual flight controls
     flyControls.enabled = false;
@@ -1235,13 +1332,38 @@ function followAgent(agent) {
     camera.lookAt(agentWorldPos);
 }
 
+function followOrbitAgent(agent) {
+    if (!agent) return;
+    jaraniusCenter.updateMatrixWorld(true);
+    const agentWorldPos = jaraniusCenter.localToWorld(agent.position3D.clone());
+    const center = middleOfPlanet;
+    const distance = camera.position.distanceTo(center);
+    const normal = agentWorldPos.clone().sub(center).normalize();
+    const desiredPos = center.clone().add(normal.multiplyScalar(distance));
+    orbitControls.target.copy(center);
+    camera.position.copy(desiredPos);
+}
+
 //ANIMATIONLOOP
 
 function animate() {
     renderer.setAnimationLoop( render );
 }
 
+const FPS_LIMIT = 30;
+const FRAME_INTERVAL_MS = FPS_LIMIT > 0 ? 1000 / FPS_LIMIT : 0;
+let lastFrameTimeMs = 0;
+
 function render() {  
+    const now = performance.now();
+    if (FRAME_INTERVAL_MS > 0) {
+        if (now - lastFrameTimeMs < FRAME_INTERVAL_MS) {
+            return;
+        }
+        lastFrameTimeMs = now - ((now - lastFrameTimeMs) % FRAME_INTERVAL_MS);
+    }
+
+    updateFpsCounter(now);
 
     updateGutta(guttaState, guttaStats, jaranius, nuggets, developer, octreeHelperRoot)
     
@@ -1298,20 +1420,16 @@ function render() {
         updateFlightSpeedByDistance(distance);
     }
 
-    if (orbitControls.enabled) {
-        orbitControls.update();
-    }
-
     if (window.appStatus === "flight") {
         const currentFollowMode = getFollowMode();
         if (currentFollowMode === "gutt") {
-          const exampleGutt = guttaState.gutta[0];
+          const exampleGutt = getExampleAgent(guttaState.gutta, 'exampleGuttId', 'exampleGuttIndex');
           if (exampleGutt) {
             followAgent(exampleGutt);
           }
         }
         else if (currentFollowMode === "mara") {
-          const exampleMara = guttaState.mara[0];
+          const exampleMara = getExampleAgent(guttaState.mara, 'exampleMaraId', 'exampleMaraIndex');
           if (exampleMara) {
             followAgent(exampleMara);
           }
@@ -1321,6 +1439,19 @@ function render() {
           flyControls.enabled = true;
         }
       }
+
+    if (window.appStatus === "orbit") {
+        const currentFollowMode = getFollowMode();
+        if (currentFollowMode === "gutt") {
+            followOrbitAgent(getExampleAgent(guttaState.gutta, 'exampleGuttId', 'exampleGuttIndex'));
+        } else if (currentFollowMode === "mara") {
+            followOrbitAgent(getExampleAgent(guttaState.mara, 'exampleMaraId', 'exampleMaraIndex'));
+        }
+    }
+
+    if (orbitControls.enabled) {
+        orbitControls.update();
+    }
 
     if (resizeRendererToDisplaySize()) {
         const canvas = renderer.domElement;

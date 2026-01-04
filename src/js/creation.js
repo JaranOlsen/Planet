@@ -62,7 +62,7 @@ export function creation(version, postLoadingManager, guttaState, scene) {
         const jaranius = createJaranius(diffuseTexture4k, normalTexture1k, roughnessTexture1k, cloudsTexture1k, cloudsNormal1k, version)
         createContexts(version)
         createMindmap()
-        createGutta(10, 3, version, guttaState, jaranius)
+        createGutta(1000, 100, version, guttaState, jaranius)
     } 
 }
 

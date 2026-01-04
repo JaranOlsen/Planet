@@ -8,6 +8,13 @@ export default defineConfig({
   root: "./",
   publicDir: 'Public',
   plugins: [
+    {
+      name: 'force-full-reload',
+      handleHotUpdate({ server }) {
+        server.ws.send({ type: 'full-reload' });
+        return [];
+      },
+    },
     vitePluginString(), //changed from vitePluginString.default()
   ],
   build: {

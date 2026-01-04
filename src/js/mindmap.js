@@ -700,6 +700,8 @@ export function instantiateNugget(index, lat, lng, color, size, slides, destinat
 
     const position = convertLatLngtoCartesian(lat, lng, 5 + 0.01);
     nugget.position.set(position.x, position.y, position.z);
+    nugget.castShadow = true;
+    nugget.receiveShadow = true;
 
     destination.add(nugget);
     intersectObjectsArray.push(nugget);
