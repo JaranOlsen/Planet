@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "test:takadimi": "node --test takadimi/notation.test.mjs",
     "preview": "vite preview",
     "deploy": "vite build && gh-pages -d dist"
   },
@@ -26,6 +27,7 @@
     "express": "^4.21.2",
     "three": "^0.169.0",
     "three-csm": "^4.2.1",
+    "vexflow": "^5.0.0",
     "wordcloud": "^1.2.2",
     "ws": "^8.18.0"
   }

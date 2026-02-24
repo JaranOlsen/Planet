@@ -417,7 +417,7 @@ label {
   top: 5%;
   width: max-content;
   color: white;
-  font-size: small;
+  font-size: x-small;
   text-align: left;
   z-index: 0;
   display: none;
@@ -433,8 +433,8 @@ label {
   display: flex;
 }
 #hotKeys .hotkey {
-  width: 40px; /* You can adjust this width as needed */
-  text-align: center;
+  width: 100px;
+  text-align: right;
 }
 #hotKeys .description {
   text-align: left;

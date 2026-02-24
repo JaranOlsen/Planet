@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Takadimi Rhythm Builder</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <main class="app">
+        <header class="app-header">
+          <div class="header-text">
+            <p class="eyebrow">Takadimi Rhythm Builder</p>
+          </div>
+          <div class="header-actions">
+            <div class="transport">
+              <button id="playBtn" class="btn" type="button">Play</button>
+              <div class="mode-toggle" role="group" aria-label="Play mode">
+                <button
+                  id="modeBarBtn"
+                  class="toggle-btn is-active"
+                  type="button"
+                >
+                  Bar
+                </button>
+                <button id="modeSongBtn" class="toggle-btn" type="button">
+                  Song
+                </button>
+              </div>
+              <div class="tempo">
+                <label for="tempoInput">Tempo</label>
+                <div class="tempo-field">
+                  <input
+                    id="tempoInput"
+                    type="number"
+                    min="40"
+                    max="220"
+                    step="1"
+                    value="90"
+                  />
+                  <span class="tempo-unit">BPM</span>
+                </div>
+              </div>
+              <div class="tempo">
+                <label for="metroVolume">Metronome</label>
+                <div class="tempo-field slider-field">
+                  <input
+                    id="metroVolume"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="70"
+                  />
+                  <span class="tempo-unit">Vol</span>
+                </div>
+              </div>
+            </div>
+            <div class="utility">
+              <button id="addBarBtn" class="btn" type="button">
+                Add Bar
+              </button>
+              <button id="clearBtn" class="btn ghost" type="button">Clear</button>
+            </div>
+          </div>
+        </header>
+
+        <details class="collapsible grid-section" open>
+          <summary class="collapse-summary">Bar Editor</summary>
+          <div class="collapse-body">
+            <div class="grid-head">
+              <div class="head-beats">
+                <span>Beat 1</span>
+                <span>Beat 2</span>
+                <span>Beat 3</span>
+                <span>Beat 4</span>
+              </div>
+            </div>
+            <div id="rhythmGrid" class="rhythm-grid" aria-live="polite"></div>
+          </div>
+        </details>
+
+        <details class="collapsible track-section" open>
+          <summary class="collapse-summary">Song Track</summary>
+          <div class="collapse-body">
+            <div class="track-header">
+              <div class="track-meta">
+                <div id="songCount" class="track-count">0 bars</div>
+                <div id="editorStatus" class="track-status">
+                  Editing draft bar (not in song)
+                </div>
+                <div class="track-actions">
+                  <button id="updateBarBtn" class="btn" type="button">
+                    Update Bar
+                  </button>
+                  <button id="duplicateBarBtn" class="btn ghost" type="button">
+                    Duplicate
+                  </button>
+                  <button id="deleteBarBtn" class="btn ghost" type="button">
+                    Delete
+                  </button>
+                  <button id="moveLeftBtn" class="btn ghost" type="button">
+                    Move Left
+                  </button>
+                  <button id="moveRightBtn" class="btn ghost" type="button">
+                    Move Right
+                  </button>
+                  <button id="saveSongBtn" class="btn ghost" type="button">
+                    Save Song
+                  </button>
+                  <button id="loadSongBtn" class="btn ghost" type="button">
+                    Load Song
+                  </button>
+                  <button id="clearSongBtn" class="btn ghost" type="button">
+                    Clear Song
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div id="songTrack" class="song-track"></div>
+          </div>
+        </details>
+
+        <section class="output-section">
+          <details class="collapsible output-group" open>
+            <summary class="collapse-summary">Takadimi Output</summary>
+            <div class="collapse-body">
+              <div id="outputBeats" class="output-beats"></div>
+            </div>
+          </details>
+
+          <details class="collapsible output-group" open>
+            <summary class="collapse-summary">Note Values</summary>
+            <div class="collapse-body">
+              <div id="noteBeats" class="output-beats"></div>
+            </div>
+          </details>
+
+          <details class="collapsible output-group" open>
+            <summary class="collapse-summary">Sheet Music Notes</summary>
+            <div class="collapse-body">
+              <div id="sheetBeats" class="output-beats sheet-beats"></div>
+            </div>
+          </details>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
