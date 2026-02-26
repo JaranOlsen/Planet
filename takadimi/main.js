@@ -11,10 +11,10 @@ import {
   Voice,
 } from "vexflow";
 import {
-  buildNoteValueString,
   buildSegmentsFromBar,
   collectNotesFrom,
   dottedMap,
+  formatNoteLength,
   splitSegmentsToTokens,
 } from "./notation.js";
 
@@ -29,6 +29,7 @@ const syllables = {
   // Adjust this if you prefer a different 32nd-note syllable scheme.
   8: ["ta", "ka", "di", "mi", "ta", "ka", "di", "mi"],
 };
+const beatPositionSyllables = ["ta", "ka", "di", "mi"];
 
 const vexDurationMap = {
   1: "32",
@@ -61,6 +62,9 @@ const moveLeftBtn = document.getElementById("moveLeftBtn");
 const moveRightBtn = document.getElementById("moveRightBtn");
 const saveSongBtn = document.getElementById("saveSongBtn");
 const loadSongBtn = document.getElementById("loadSongBtn");
+const exportSongBtn = document.getElementById("exportSongBtn");
+const importSongBtn = document.getElementById("importSongBtn");
+const importSongInput = document.getElementById("importSongInput");
 const clearSongBtn = document.getElementById("clearSongBtn");
 const playBtn = document.getElementById("playBtn");
 const modeBarBtn = document.getElementById("modeBarBtn");
@@ -97,6 +101,12 @@ let playbackBars = [];
 let playbackLength = TOTAL_STEPS;
 let activeSongIndex = null;
 let trackPlayhead = { barIndex: null, stepIndex: null };
+let takadimiUnitsByBar = [];
+let noteValueUnitsByBar = [];
+let sheetUnitsByBar = [];
+let activeTakadimiUnit = null;
+let activeNoteValueUnit = null;
+let activeSheetUnit = null;
 
 const clampTempo = (value) => {
   const tempo = Number(value);
@@ -339,6 +349,57 @@ const setPlayhead = (index) => {
   playheadIndex = index;
 };
 
+const removeActiveOutputUnit = (unitNode, className) => {
+  if (!unitNode) {
+    return;
+  }
+  unitNode.classList.remove(className);
+};
+
+const findUnitAtStep = (units, stepInBar) =>
+  units?.find((unit) => stepInBar >= unit.start && stepInBar < unit.end) ?? null;
+
+const setOutputHighlight = (barIndex, stepInBar) => {
+  removeActiveOutputUnit(activeTakadimiUnit, "is-current");
+  removeActiveOutputUnit(activeNoteValueUnit, "is-current");
+  removeActiveOutputUnit(activeSheetUnit, "is-current");
+  activeTakadimiUnit = null;
+  activeNoteValueUnit = null;
+  activeSheetUnit = null;
+
+  if (barIndex === null || barIndex < 0) {
+    return;
+  }
+
+  const takadimiUnit = findUnitAtStep(takadimiUnitsByBar[barIndex], stepInBar);
+  if (takadimiUnit?.node) {
+    takadimiUnit.node.classList.add("is-current");
+    activeTakadimiUnit = takadimiUnit.node;
+  }
+
+  const noteUnit = findUnitAtStep(noteValueUnitsByBar[barIndex], stepInBar);
+  if (noteUnit?.node) {
+    noteUnit.node.classList.add("is-current");
+    activeNoteValueUnit = noteUnit.node;
+  }
+
+  const sheetUnit = findUnitAtStep(sheetUnitsByBar[barIndex], stepInBar);
+  if (sheetUnit?.node) {
+    sheetUnit.node.classList.add("is-current");
+    activeSheetUnit = sheetUnit.node;
+  }
+};
+
+const resolveOutputBarForBarPlayback = () => {
+  if (songBars.length === 0) {
+    return 0;
+  }
+  if (selectedBarIndex !== null && selectedBarIndex >= 0) {
+    return selectedBarIndex;
+  }
+  return null;
+};
+
 const updatePlayhead = () => {
   if (!isPlaying || !audioContext) {
     return;
@@ -359,10 +420,12 @@ const updatePlayhead = () => {
     setPlayhead(null);
     setTrackPlayhead(barIndex, stepInBar);
     setActiveSongIndex(barIndex);
+    setOutputHighlight(barIndex, stepInBar);
   } else {
     setTrackPlayhead(null, null);
     setPlayhead(stepInBar);
     setActiveSongIndex(null);
+    setOutputHighlight(resolveOutputBarForBarPlayback(), stepInBar);
   }
   visualId = requestAnimationFrame(updatePlayhead);
 };
@@ -375,6 +438,7 @@ const stopPlayhead = () => {
   setPlayhead(null);
   setActiveSongIndex(null);
   setTrackPlayhead(null, null);
+  setOutputHighlight(null, 0);
 };
 
 const restoreBaseState = () => {
@@ -542,31 +606,209 @@ const createLabelCardHtml = (labelText, html) => {
   return card;
 };
 
-const buildTakadimiString = (activeState, tiedState) => {
-  const onsets = collectOnsetsFrom(activeState, tiedState);
-  const beatStrings = [];
+const buildTakadimiData = (activeState, tiedState) => {
+  const notes = collectNotesFrom(activeState, tiedState);
+  const beats = [];
 
   for (let beat = 0; beat < BEATS; beat += 1) {
-    const positions = onsets
-      .filter((start) => Math.floor(start / STEPS_PER_BEAT) === beat)
-      .map((start) => start % STEPS_PER_BEAT)
+    const beatNotes = notes
+      .filter((note) => Math.floor(note.start / STEPS_PER_BEAT) === beat)
       .sort((a, b) => a - b);
+    const positions = beatNotes.map((note) => note.start % STEPS_PER_BEAT);
 
     if (positions.length === 0) {
-      beatStrings.push("-");
+      beats.push({ units: [], rest: true });
+      continue;
+    }
+
+    // Custom mode requested: when this beat has one onset on the beat
+    // and it is at least a quarter-note long, label by beat position.
+    if (
+      beatNotes.length === 1 &&
+      positions[0] === 0 &&
+      beatNotes[0].length >= STEPS_PER_BEAT
+    ) {
+      beats.push({
+        rest: false,
+        units: [
+          {
+            text: beatPositionSyllables[beat] ?? "ta",
+            start: beatNotes[0].start,
+            length: beatNotes[0].length,
+          },
+        ],
+      });
       continue;
     }
 
     const gridSize = inferGrid(positions);
     const mapping = syllables[gridSize];
     const step = STEPS_PER_BEAT / gridSize;
-    const text = positions
-      .map((pos) => mapping[Math.round(pos / step)])
-      .join(" ");
-    beatStrings.push(text);
+    const units = beatNotes.map((note) => {
+      const slot = Math.round((note.start % STEPS_PER_BEAT) / step);
+      const mappingIndex = Math.max(0, Math.min(mapping.length - 1, slot));
+      return {
+        text: mapping[mappingIndex],
+        start: note.start,
+        length: note.length,
+      };
+    });
+    beats.push({ rest: false, units });
   }
 
-  return beatStrings.join(" | ");
+  const text = beats
+    .map((beat) => {
+      if (beat.rest) {
+        return "-";
+      }
+      return beat.units.map((unit) => unit.text).join(" ");
+    })
+    .join(" | ");
+
+  return { beats, text };
+};
+
+const createTakadimiCard = (labelText, takadimiData) => {
+  const card = document.createElement("div");
+  card.className = "beat-card";
+
+  const label = document.createElement("div");
+  label.className = "beat-label";
+  label.textContent = labelText;
+
+  const value = document.createElement("div");
+  value.className = "beat-text timed-line";
+
+  const units = [];
+  takadimiData.beats.forEach((beat, beatIndex) => {
+    if (beatIndex > 0) {
+      value.append(" | ");
+    }
+    if (beat.rest) {
+      const rest = document.createElement("span");
+      rest.className = "timed-rest";
+      rest.textContent = "-";
+      value.append(rest);
+      return;
+    }
+
+    beat.units.forEach((unit, unitIndex) => {
+      if (unitIndex > 0) {
+        value.append(" ");
+      }
+      const span = document.createElement("span");
+      span.className = "timed-unit takadimi-unit";
+      span.textContent = unit.text;
+      value.append(span);
+      units.push({
+        start: unit.start,
+        end: unit.start + unit.length,
+        node: span,
+      });
+    });
+  });
+
+  card.append(label, value);
+  return { card, units };
+};
+
+const buildNoteValueData = (bar) => {
+  const segments = buildSegmentsFromBar(bar);
+  const tokens = splitSegmentsToTokens(segments);
+  const units = [];
+  let pendingNote = null;
+
+  tokens.forEach((token) => {
+    const label = formatNoteLength(token.length);
+    if (token.type === "rest") {
+      if (pendingNote) {
+        units.push(pendingNote);
+        pendingNote = null;
+      }
+      units.push({
+        type: "rest",
+        text: `rest ${label}`,
+        start: token.start,
+        length: token.length,
+      });
+      return;
+    }
+
+    if (!token.tieFromPrev) {
+      if (pendingNote) {
+        units.push(pendingNote);
+      }
+      pendingNote = {
+        type: "note",
+        text: label,
+        start: token.start,
+        length: token.length,
+      };
+    } else if (pendingNote) {
+      pendingNote.text = `${pendingNote.text}~${label}`;
+      pendingNote.length += token.length;
+    }
+
+    if (!token.tieToNext && pendingNote) {
+      units.push(pendingNote);
+      pendingNote = null;
+    }
+  });
+
+  if (pendingNote) {
+    units.push(pendingNote);
+  }
+
+  return {
+    text: units.map((unit) => unit.text).join(" · "),
+    units,
+    tokens,
+  };
+};
+
+const createNoteValueCard = (labelText, noteValueData) => {
+  const card = document.createElement("div");
+  card.className = "beat-card";
+
+  const label = document.createElement("div");
+  label.className = "beat-label";
+  label.textContent = labelText;
+
+  const value = document.createElement("div");
+  value.className = "beat-text timed-line";
+
+  const units = [];
+  noteValueData.units.forEach((unit, index) => {
+    if (index > 0) {
+      value.append(" · ");
+    }
+    const span = document.createElement("span");
+    span.className = `timed-unit note-value-unit${
+      unit.type === "rest" ? " is-rest" : ""
+    }`;
+    span.textContent = unit.text;
+    value.append(span);
+    units.push({
+      start: unit.start,
+      end: unit.start + unit.length,
+      node: span,
+    });
+  });
+
+  card.append(label, value);
+  return { card, units };
+};
+
+const createSheetCard = (labelText, sheetData) => {
+  const card = createLabelCardHtml(labelText, sheetData.svg);
+  const value = card.querySelector(".beat-text");
+  const glyphNodes = Array.from(value?.querySelectorAll(".vf-stavenote") ?? []);
+  const units = sheetData.tokens.map((token, index) => ({
+    start: token.start,
+    end: token.start + token.length,
+    node: glyphNodes[index] ?? null,
+  }));
+  return { card, units };
 };
 
 const getBarsForOutput = () => {
@@ -696,11 +938,17 @@ const buildSheetSvgForBar = (bar) => {
   const tokens = splitSegmentsToTokens(segments);
 
   try {
-    return renderSheetFromTokens(tokens, width, height);
+    return {
+      svg: renderSheetFromTokens(tokens, width, height),
+      tokens,
+    };
   } catch (error) {
     try {
       const safeTokens = buildSafeTokensFromBar(bar);
-      return renderSheetFromTokens(safeTokens, width, height);
+      return {
+        svg: renderSheetFromTokens(safeTokens, width, height),
+        tokens: safeTokens,
+      };
     } catch (safeError) {
       if (!sheetRenderWarningShown) {
         console.error(
@@ -710,7 +958,10 @@ const buildSheetSvgForBar = (bar) => {
         );
         sheetRenderWarningShown = true;
       }
-      return `<div class="sheet-fallback">Sheet rendering unavailable for this bar.</div>`;
+      return {
+        svg: `<div class="sheet-fallback">Sheet rendering unavailable for this bar.</div>`,
+        tokens,
+      };
     }
   }
 };
@@ -721,22 +972,28 @@ const updateOutput = () => {
   outputBeats.innerHTML = "";
   noteBeats.innerHTML = "";
   sheetBeats.innerHTML = "";
+  takadimiUnitsByBar = [];
+  noteValueUnitsByBar = [];
+  sheetUnitsByBar = [];
+  activeTakadimiUnit = null;
+  activeNoteValueUnit = null;
+  activeSheetUnit = null;
 
   bars.forEach((bar, index) => {
-    const takadimi = buildTakadimiString(bar.active, bar.tied);
-    outputBeats.appendChild(
-      createLabelCard(`Bar ${index + 1}`, takadimi)
-    );
+    const takadimiData = buildTakadimiData(bar.active, bar.tied);
+    const takadimiCard = createTakadimiCard(`Bar ${index + 1}`, takadimiData);
+    outputBeats.appendChild(takadimiCard.card);
+    takadimiUnitsByBar[index] = takadimiCard.units;
 
-    const noteValueText = buildNoteValueString(bar);
-    noteBeats.appendChild(
-      createLabelCard(`Bar ${index + 1}`, noteValueText || "-")
-    );
+    const noteValueData = buildNoteValueData(bar);
+    const noteValueCard = createNoteValueCard(`Bar ${index + 1}`, noteValueData);
+    noteBeats.appendChild(noteValueCard.card);
+    noteValueUnitsByBar[index] = noteValueCard.units;
 
     const sheetSvg = buildSheetSvgForBar(bar);
-    sheetBeats.appendChild(
-      createLabelCardHtml(`Bar ${index + 1}`, sheetSvg)
-    );
+    const sheetCard = createSheetCard(`Bar ${index + 1}`, sheetSvg);
+    sheetBeats.appendChild(sheetCard.card);
+    sheetUnitsByBar[index] = sheetCard.units;
   });
 };
 
@@ -993,29 +1250,74 @@ const cloneBar = (bar) => ({
 });
 
 const buildSongStoragePayload = () => ({
-  version: 2,
+  version: 3,
   bars: songBars.map(cloneBar),
   draftBar: snapshotBar(),
   selectedBarIndex,
   tempo: clampTempo(tempoInput.value),
   metronomeVolume: clampVolume(metroVolume.value),
   playMode,
+  savedAt: new Date().toISOString(),
 });
+
+const flashButton = (button, label) => {
+  const original = button.textContent;
+  button.textContent = label;
+  setTimeout(() => {
+    button.textContent = original;
+  }, 1300);
+};
+
+const applySongPayload = (parsed) => {
+  const legacyBars = Array.isArray(parsed) ? parsed : null;
+  const payload =
+    legacyBars === null && parsed && typeof parsed === "object" ? parsed : null;
+
+  const sourceBars = legacyBars ?? payload?.bars;
+  if (!Array.isArray(sourceBars)) {
+    return false;
+  }
+
+  const loaded = sourceBars.map(sanitizeBar).filter(Boolean);
+  const draftBar = sanitizeBar(payload?.draftBar);
+  const requestedIndex = Number(payload?.selectedBarIndex);
+  const hasRequestedIndex = Number.isInteger(requestedIndex);
+
+  if (payload?.tempo !== undefined) {
+    tempoInput.value = clampTempo(payload.tempo);
+  }
+  if (payload?.metronomeVolume !== undefined) {
+    metroVolume.value = clampVolume(payload.metronomeVolume);
+  }
+  if (payload?.playMode === "song" || payload?.playMode === "bar") {
+    setPlayMode(payload.playMode);
+  }
+
+  songBars.length = 0;
+  songBars.push(...loaded);
+  if (songBars.length > 0) {
+    const safeIndex = hasRequestedIndex
+      ? Math.max(0, Math.min(songBars.length - 1, requestedIndex))
+      : 0;
+    selectSongBar(safeIndex);
+  } else {
+    selectedBarIndex = null;
+    editorDirty = false;
+    if (draftBar) {
+      loadBarIntoEditor(draftBar);
+    }
+    renderSongTrack();
+    updateOutput();
+  }
+  return true;
+};
 
 const saveSong = () => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(buildSongStoragePayload()));
-    const original = saveSongBtn.textContent;
-    saveSongBtn.textContent = "Saved";
-    setTimeout(() => {
-      saveSongBtn.textContent = original;
-    }, 1200);
+    flashButton(saveSongBtn, "Saved Local");
   } catch (error) {
-    const original = saveSongBtn.textContent;
-    saveSongBtn.textContent = "Save failed";
-    setTimeout(() => {
-      saveSongBtn.textContent = original;
-    }, 1200);
+    flashButton(saveSongBtn, "Save Failed");
   }
 };
 
@@ -1023,52 +1325,60 @@ const loadSong = () => {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (!stored) {
+      flashButton(loadSongBtn, "No Local Save");
       return;
     }
     const parsed = JSON.parse(stored);
-    const legacyBars = Array.isArray(parsed) ? parsed : null;
-    const payload =
-      legacyBars === null && parsed && typeof parsed === "object"
-        ? parsed
-        : null;
-
-    const sourceBars = legacyBars ?? payload?.bars;
-    if (!Array.isArray(sourceBars)) {
-      return;
-    }
-    const loaded = sourceBars.map(sanitizeBar).filter(Boolean);
-    const draftBar = sanitizeBar(payload?.draftBar);
-    const requestedIndex = Number(payload?.selectedBarIndex);
-    const hasRequestedIndex = Number.isInteger(requestedIndex);
-
-    if (payload?.tempo !== undefined) {
-      tempoInput.value = clampTempo(payload.tempo);
-    }
-    if (payload?.metronomeVolume !== undefined) {
-      metroVolume.value = clampVolume(payload.metronomeVolume);
-    }
-    if (payload?.playMode === "song" || payload?.playMode === "bar") {
-      setPlayMode(payload.playMode);
-    }
-
-    songBars.length = 0;
-    songBars.push(...loaded);
-    if (songBars.length > 0) {
-      const safeIndex = hasRequestedIndex
-        ? Math.max(0, Math.min(songBars.length - 1, requestedIndex))
-        : 0;
-      selectSongBar(safeIndex);
+    if (applySongPayload(parsed)) {
+      flashButton(loadSongBtn, "Loaded Local");
     } else {
-      selectedBarIndex = null;
-      editorDirty = false;
-      if (draftBar) {
-        loadBarIntoEditor(draftBar);
-      }
-      renderSongTrack();
-      updateOutput();
+      flashButton(loadSongBtn, "Load Failed");
     }
   } catch (error) {
-    // Ignore malformed storage.
+    flashButton(loadSongBtn, "Load Failed");
+  }
+};
+
+const exportSongToFile = () => {
+  try {
+    const payload = buildSongStoragePayload();
+    const fileData = JSON.stringify(payload, null, 2);
+    const blob = new Blob([fileData], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const stamp = payload.savedAt
+      .replace(/[:]/g, "-")
+      .replace(/\.\d+Z$/, "Z");
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `takadimi-song-${stamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    flashButton(exportSongBtn, "Exported");
+  } catch (error) {
+    flashButton(exportSongBtn, "Export Failed");
+  }
+};
+
+const importSongFromFile = async (event) => {
+  const input = event.target;
+  const file = input.files?.[0];
+  if (!file) {
+    return;
+  }
+  try {
+    const content = await file.text();
+    const parsed = JSON.parse(content);
+    if (applySongPayload(parsed)) {
+      flashButton(importSongBtn, "Imported");
+    } else {
+      flashButton(importSongBtn, "Import Failed");
+    }
+  } catch (error) {
+    flashButton(importSongBtn, "Import Failed");
+  } finally {
+    input.value = "";
   }
 };
 
@@ -1089,6 +1399,9 @@ moveLeftBtn.addEventListener("click", () => moveSelectedBar(-1));
 moveRightBtn.addEventListener("click", () => moveSelectedBar(1));
 saveSongBtn.addEventListener("click", saveSong);
 loadSongBtn.addEventListener("click", loadSong);
+exportSongBtn.addEventListener("click", exportSongToFile);
+importSongBtn.addEventListener("click", () => importSongInput.click());
+importSongInput.addEventListener("change", importSongFromFile);
 clearSongBtn.addEventListener("click", clearSong);
 playBtn.addEventListener("click", togglePlayback);
 modeBarBtn.addEventListener("click", () => setPlayMode("bar"));

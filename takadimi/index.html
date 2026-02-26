@@ -106,15 +106,27 @@
                     Move Right
                   </button>
                   <button id="saveSongBtn" class="btn ghost" type="button">
-                    Save Song
+                    Save Local
                   </button>
                   <button id="loadSongBtn" class="btn ghost" type="button">
-                    Load Song
+                    Load Local
+                  </button>
+                  <button id="exportSongBtn" class="btn ghost" type="button">
+                    Export File
+                  </button>
+                  <button id="importSongBtn" class="btn ghost" type="button">
+                    Import File
                   </button>
                   <button id="clearSongBtn" class="btn ghost" type="button">
                     Clear Song
                   </button>
                 </div>
+                <input
+                  id="importSongInput"
+                  type="file"
+                  accept="application/json,.json"
+                  hidden
+                />
               </div>
             </div>
             <div id="songTrack" class="song-track"></div>
@@ -130,16 +142,16 @@
           </details>
 
           <details class="collapsible output-group" open>
-            <summary class="collapse-summary">Note Values</summary>
+            <summary class="collapse-summary">Sheet Music Notes</summary>
             <div class="collapse-body">
-              <div id="noteBeats" class="output-beats"></div>
+              <div id="sheetBeats" class="output-beats sheet-beats"></div>
             </div>
           </details>
 
           <details class="collapsible output-group" open>
-            <summary class="collapse-summary">Sheet Music Notes</summary>
+            <summary class="collapse-summary">Note Values</summary>
             <div class="collapse-body">
-              <div id="sheetBeats" class="output-beats sheet-beats"></div>
+              <div id="noteBeats" class="output-beats"></div>
             </div>
           </details>
         </section>
