@@ -9,6 +9,7 @@ import {
   LANGUAGE_UI,
   LANGUAGE_OVERRIDES,
   STATEMENT_TRANSLATIONS,
+  STATEMENT_TRANSLATION_REVISION,
   GLOSSARY
 } from "./practiceData.js";
 import {
@@ -369,6 +370,9 @@ function localizeStatements(languageId, baseStatements) {
   const translationMap = getStatementTranslations(languageId);
 
   return (baseStatements ?? []).map((entry) => {
+    if (languageId !== "en" && entry.revision && STATEMENT_TRANSLATION_REVISION !== entry.revision) {
+      return entry;
+    }
     const t = translationMap[entry.id];
     if (typeof t === "string") {
       return { ...entry, text: t };
@@ -1121,6 +1125,8 @@ async function handleFeedbackSubmit(event) {
     statement_id: state.currentStatement.id,
     statement_text: state.currentStatement.text ?? "",
     suggestion_text: state.currentStatement.suggestion ?? "",
+    content_revision: state.currentStatement.revision ?? "",
+    track: state.currentStatement.track ?? "",
     skill_id: state.skillId,
     case_id: state.caseId,
     language_id: state.languageId ?? "en",

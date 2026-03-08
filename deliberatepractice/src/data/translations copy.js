@@ -1,7 +1,5 @@
 "use strict";
 
-import { CONTENT_REVISION } from "./contentMeta.js";
-
 export const LANGUAGE_ORDER = ["en", "no"];
 
 export const LANGUAGE_METADATA = {
@@ -158,8 +156,6 @@ export const LANGUAGE_UI = {
   en: ENGLISH_UI,
   no: LANGUAGE_UI_NO
 };
-
-export const STATEMENT_TRANSLATION_REVISION = CONTENT_REVISION;
 
 const NO_CASE_OVERRIDES = {
   "case-sara": {
@@ -645,7 +641,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_therapist-self-awareness_case-aisha_04": {
       text: "Når jeg føler meg tom, vil jeg skade meg selv.",
-      suggestion: "[Internt] Sikkerhet først; finn ro; merk eventuell panikk og orienter deg mot sikkerhetsplanen. [Meta] Takk for at du sier det. La oss jorde først og sikre at du er trygg, og så legge merke til en bitte liten kant av tomheten sammen."
+      suggestion: "[Internt] Sikkerhet først; stabiliser; bruk plan ved behov. [Meta] Takk for at du sier det – la oss finne en liten, trygg bit av den tomheten sammen akkurat nå."
     },
     "dp_therapist-self-awareness_case-aisha_05": {
       text: "Jeg tror du forlater meg som alle andre.",
@@ -802,7 +798,7 @@ export const STATEMENT_TRANSLATIONS = {
     // Michael
     "dp_empathic-understanding_case-michael_01": {
       text: "Når noen påpeker en feil, føler jeg meg ydmyket og smeller.",
-      suggestion: "En korrigering treffer som ydmykelse, og sinnet kommer fort."
+      suggestion: "En korrigering lander som ydmykelse, og sinnet skyter fram for å dekke over."
     },
     "dp_empathic-understanding_case-michael_02": {
       text: "Jeg tåler ikke å bli bedt om å roe meg.",
@@ -822,7 +818,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_empathic-understanding_case-michael_06": {
       text: "Jeg forbereder meg altfor mye så ingen kan ta meg på senga.",
-      suggestion: "Du forbereder deg hardt så du ikke blir tatt på senga eller eksponert."
+      suggestion: "Forberedelsene er måten du beskytter deg på mot å bli tatt på senga eller kalt ut."
     },
     "dp_empathic-understanding_case-michael_07": {
       text: "Kona mi sitt tonefall kan tenne meg før jeg rekker å tenke.",
@@ -856,7 +852,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_empathic-understanding_case-jason_04": {
       text: "Komplimenter fester seg ikke; jeg tror ikke på dem.",
-      suggestion: "Ros fester seg ikke, og selvtvilen kommer raskt tilbake."
+      suggestion: "Ros glir av fordi den indre kritikeren er høylytt."
     },
     "dp_empathic-understanding_case-jason_05": {
       text: "Jeg øver på meldinger i evigheter og sender dem likevel ikke.",
@@ -956,11 +952,11 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_empathic-understanding_case-carlos_08": {
       text: "Jeg vil ha respekt mer enn noe annet.",
-      suggestion: "Respekt kjennes helt avgjørende for deg, og utfordringer lander som trusler."
+      suggestion: "Respekt betyr trygghet for deg, så utfordringer lander som trusler."
     },
     "dp_empathic-understanding_case-carlos_09": {
       text: "Jeg slår i vegger i stedet for folk.",
-      suggestion: "Når heten skyter opp, går den inn i veggen i stedet for en person, og det skremmer deg også."
+      suggestion: "Du lar varmen gå ut over ting for å holde den borte fra folk, selv om det samtidig skremmer deg."
     },
     "dp_empathic-understanding_case-carlos_10": {
       text: "Jeg vil at familien min skal føle seg trygg med meg.",
@@ -1032,7 +1028,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_empathic-understanding_case-aisha_06": {
       text: "Hvis noen avlyser, vil jeg gi opp.",
-      suggestion: "En avlysning svir som å bli droppet, og du får lyst til å trekke deg unna."
+      suggestion: "En avlysning svir som å bli avvist, og du vil beskytte deg."
     },
     "dp_empathic-understanding_case-aisha_07": {
       text: "Jeg hater meg selv etter at jeg eksploderer.",
@@ -1040,7 +1036,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_empathic-understanding_case-aisha_08": {
       text: "Jeg tester folk for å se om de bryr seg.",
-      suggestion: "Å teste folk er måten du sjekker om du betyr noe og om de blir."
+      suggestion: "Å teste er en måte du prøver å føle deg ønsket og trygg."
     },
     "dp_empathic-understanding_case-aisha_09": {
       text: "Avskjeder gjør meg svimmel.",
@@ -1054,7 +1050,7 @@ export const STATEMENT_TRANSLATIONS = {
     // David
     "dp_empathic-understanding_case-david_01": {
       text: "Å bli kalt kald får meg til å stritte imot med en gang.",
-      suggestion: "Det ordet svir, og du hardner raskt til."
+      suggestion: "Det ordet svir, og du hardner fort til for å dekke over det som gjør vondt."
     },
     "dp_empathic-understanding_case-david_02": {
       text: "Hvis jeg ikke er på topp, føler jeg meg verdiløs.",
@@ -1225,7 +1221,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Selvsagt hamrer hjertet når det å bli sett kjennes risikabelt."
     },
     "dp_empathic-affirmation-validation_case-jason_02": {
-      text: "Jeg holder blikket nede så folk ikke legger merke til meg.",
+      text: "Jeg unngår øyekontakt så folk ikke legger merke til meg.",
       suggestion: "Det gir mening at du prøver å være usynlig når oppmerksomhet føles farlig."
     },
     "dp_empathic-affirmation-validation_case-jason_03": {
@@ -1341,7 +1337,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Med din historie gir det mening at ro kan kjennes farlig i stedet for trygg."
     },
     "dp_empathic-affirmation-validation_case-carlos_10": {
-      text: "Mer enn noe annet vil jeg at familien min skal føle seg trygg med meg.",
+      text: "Jeg vil at familien min skal føle seg trygg med meg.",
       suggestion: "Ønsket om at de skal være trygge gir mening, og viser hvor mye du bryr deg."
     },
 
@@ -1674,7 +1670,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Når du tenker på den sangen, hva kom gjennom sprekken, og hvordan kjente kroppen det?"
     },
     "dp_exploratory-questions_case-laura_09": {
-      text: "Jeg ender med å be om unnskyldning når jeg trenger trøst.",
+      text: "Jeg beklager at jeg trenger trøst.",
       suggestion: "Hvor i deg bor den beklagelsen, og under den – hvilket behov vil bli navngitt akkurat nå?"
     },
     "dp_exploratory-questions_case-laura_10": {
@@ -1692,7 +1688,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Når du ser for deg at du går frem og tilbake, hva er den verste delen kroppen prøver å komme seg gjennom, og hva ville lette det én prosent?"
     },
     "dp_exploratory-questions_case-carlos_03": {
-      text: "Hvis jeg trekker meg, føles det som om jeg forsvinner.",
+      text: "Hvis jeg trekker meg, føler jeg meg som ingenting.",
       suggestion: "La oss sitte litt med «ingenting» i ett pust – hvilket bilde følger med, og hvor kjenner du det mest?"
     },
     "dp_exploratory-questions_case-carlos_04": {
@@ -1720,7 +1716,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Akkurat nå, hvis hendene dine hadde ord, hva ville de sagt at de holder fast i?"
     },
     "dp_exploratory-questions_case-carlos_10": {
-      text: "Det jeg vil mest, er at familien min skal føle seg trygg med meg.",
+      text: "Jeg vil at familien min skal føle seg trygg med meg.",
       suggestion: "Når du holder på det ønsket, hvilken følelse stiger nå, og hvilket lite kroppssignal sier at trygghet er til stede?"
     },
 
@@ -1734,7 +1730,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Hvis vi pauser opptattheten i to pust, hva viser seg under, og hva trenger det akkurat nå?"
     },
     "dp_exploratory-questions_case-nina_03": {
-      text: "Ordet nei knyter magen min i knute.",
+      text: "Å si nei knyter magen.",
       suggestion: "Bli litt ved knuten – hvor stor er den, og hvilken frykt bærer den om hva som skjer hvis du sier nei?"
     },
     "dp_exploratory-questions_case-nina_04": {
@@ -1742,7 +1738,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Når det ordet lander, hvor kjenner du det, og hva vil du at den skamfulle delen skal høre fra deg?"
     },
     "dp_exploratory-questions_case-nina_05": {
-      text: "Jeg ber om unnskyldning selv for den minste forespørselen.",
+      text: "Jeg unnskylder meg for selv små forespørsler.",
       suggestion: "Når du ser for deg å spørre, hvilken yngre del er redd for å være en byrde, og hvor kjenner du den?"
     },
     "dp_exploratory-questions_case-nina_06": {
@@ -1796,7 +1792,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "I den trekkampen, hvilken del lengter etter å bli og hvilken del vil rømme – hva trenger hver av dem fra deg?"
     },
     "dp_exploratory-questions_case-aisha_08": {
-      text: "Jeg tester folk for å se om de bryr seg nok til å bli.",
+      text: "Jeg tester folk for å se om de bryr seg.",
       suggestion: "Når du ser for deg en test, hvilken frykt prøver du å besvare, og hvordan ville det være å be direkte om omsorg – bare litt?"
     },
     "dp_exploratory-questions_case-aisha_09": {
@@ -1804,7 +1800,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Når du kjenner det selvhatet, hvor lander det i kroppen, og hva trenger den sårede delen under det mest?"
     },
     "dp_exploratory-questions_case-aisha_10": {
-      text: "Det å si farvel gjør meg svimmel.",
+      text: "Avskjeder gjør meg svimmel.",
       suggestion: "Når svimmelheten kommer, hva hjelper føttene dine å finne gulvet, og hvilken følelse ligger under?"
     },
 
@@ -1900,7 +1896,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-sara_02": {
       text: "Hvorfor fokusere på følelser i stedet for å gi meg steg for å komme videre?",
-      suggestion: "Steg hjelper mest når de passer til det som gjør vondt, fordi følelsene viser hva som faktisk er såret og hva du trenger. Vi lytter dit først, så stegene du tar treffer den egentlige smerten."
+      suggestion: "Steg hjelper mest når de treffer hjertet. Vi lytter først til følelsene, så stegene faktisk adresserer det som gjør vondt – og det du trenger."
     },
     "dp_providing-treatment-rationale_case-sara_03": {
       text: "Hvis jeg gråter, blir jeg ikke bare sittende fast da?",
@@ -1928,7 +1924,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-sara_09": {
       text: "Tar dette lang tid?",
-      suggestion: "Folk merker ofte små skift underveis, fordi det å lære å kjenne litt tryggere kan mykne løkkene som holder deg fast."
+      suggestion: "Du vil merke små gevinster raskt – bedre søvn, mindre scrolling sent på kvelden – når systemet lærer at det er trygt å kjenne litt og hvile."
     },
     "dp_providing-treatment-rationale_case-sara_10": {
       text: "Hvordan er dette annerledes enn å lufte seg for venner?",
@@ -1950,11 +1946,11 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-michael_04": {
       text: "Jeg vil ikke være svak.",
-      suggestion: "Dette handler ikke om å være svak. Det handler om presisjon, fordi når du vet nøyaktig hva som treffer deg, kan du stå sterkt og stødig."
+      suggestion: "Dette handler ikke om svakhet, men presisjon – å vite nøyaktig hva som treffer deg, så du kan stå stødig og sterk."
     },
     "dp_providing-treatment-rationale_case-michael_05": {
       text: "Kan du bare gi meg verktøy?",
-      suggestion: "Det skal vi. Verktøy lander best når de er tilpasset tennpunktene dine, fordi følelsesarbeidet viser oss akkurat når og hvordan de skal brukes."
+      suggestion: "Det gjør vi. Verktøy treffer best når de tilpasses dine tennpunkter; følelsesarbeidet viser oss akkurat når og hvordan."
     },
     "dp_providing-treatment-rationale_case-michael_06": {
       text: "Hvordan hjelper det å være oppmerksom på kroppen på jobb?",
@@ -1974,7 +1970,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-michael_10": {
       text: "Jeg er ikke flink med følelser.",
-      suggestion: "Det trenger du ikke være. Jeg guider deg i små steg – ett kroppssignal, ett behov – fordi det gjør arbeidet praktisk og holder det under din kontroll."
+      suggestion: "Du trenger ikke være det. Jeg guider deg i mikrosteg – sett ord på ett kroppssignal, ett behov – så det kjennes praktisk og under din kontroll."
     },
 
     // Jason
@@ -1988,7 +1984,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-jason_03": {
       text: "Hvorfor fokusere på kroppen? Det er jo tankene som er problemet.",
-      suggestion: "Tankene spinner fort. Vi følger kroppen fordi den gir oss et tidligere og mer stabilt holdepunkt; når vi roer det, dempes ofte både spinningen og selvkritikken."
+      suggestion: "Tankene spinner fort. Kroppen gir oss et tidligere og mer stødig holdepunkt; når vi roer det, roer ofte tankespinnet og selvkritikken seg også."
     },
     "dp_providing-treatment-rationale_case-jason_04": {
       text: "Jeg vil ikke gjøre det verre ved å gi det mer oppmerksomhet.",
@@ -2000,7 +1996,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-jason_06": {
       text: "Hvor lang tid tar det før dette kjennes lettere?",
-      suggestion: "De første skiftene er ofte små: litt mindre beredskap, litt mer rom til å være til stede når oppmerksomheten rettes mot deg."
+      suggestion: "Mange merker små skift i løpet av uker – roligere puls, mindre skjelving, færre ganger du blir helt blank – når vi øver kort jording og snillere indre dialog."
     },
     "dp_providing-treatment-rationale_case-jason_07": {
       text: "Jeg synes det er pinlig å snakke om dette.",
@@ -2008,7 +2004,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-jason_08": {
       text: "Hva gjør jeg når hodet sier at jeg er klønete?",
-      suggestion: "Vi setter ord på den stemmen, følger kroppssignalet den rir på, og legger til et stødigere budskap, fordi det gjør det lettere å bli værende i stedet for å forsvinne."
+      suggestion: "Vi setter ord på den stemmen, kjenner kroppssignalet den henger sammen med, og legger til et stødigere budskap, så du kan fortsette å delta."
     },
     "dp_providing-treatment-rationale_case-jason_09": {
       text: "Må jeg jobbe så hardt med dette hele tiden?",
@@ -2022,26 +2018,26 @@ export const STATEMENT_TRANSLATIONS = {
     // Laura
     "dp_providing-treatment-rationale_case-laura_01": {
       text: "Jeg tror dette bare er kjemisk. Hvordan skulle det hjelpe å snakke?",
-      suggestion: "Biologi kan spille en rolle. Vi hjelper også nervesystemet ditt til å føle seg tryggere, fordi humør og kontakt ofte bedres når det roer seg."
+      suggestion: "Biologi kan spille en rolle. Samtidig kan vi hjelpe nervesystemet ditt til å føle seg tryggere; når det roer seg, blir ofte både humør og kontakt bedre."
     },
     "dp_providing-treatment-rationale_case-laura_02": {
       text: "Jeg vil ikke gjenoppleve traumer.",
-      suggestion: "Du kommer ikke til å bli presset til å gjenoppleve noe. Vi jobber i små doser med jording, fordi det å kjenne litt og komme tilbake er det som bygger trygghet."
+      suggestion: "Du kommer ikke til å bli presset til å gjenoppleve noe. Vi jobber i små doser med jording, så du kan kjenne litt og komme tilbake."
     },
     "dp_providing-treatment-rationale_case-laura_03": {
       text: "Hva er poenget når jeg er nummen?",
-      suggestion: "Nummenhet har beskyttet deg. Vi respekterer den og leter etter små signaler under, fordi den varsomme kontakten kan knytte deg til deg selv igjen uten å overvelde."
+      suggestion: "Nummenhet har beskyttet deg. Vi respekterer den og leter etter små signaler under; den milde kontakten kan koble deg på igjen uten å overvelde deg."
     },
     "dp_providing-treatment-rationale_case-laura_04": {
       text: "Hva om vennlighet gjør meg mistenksom?",
-      suggestion: "Det forventer vi. Vi senker tempoet og hjelper kroppen din å teste trygghet bit for bit, fordi det er slik varme kan kjennes mer mulig."
+      suggestion: "Det forventer vi. Vi senker tempoet og hjelper kroppen din å teste trygghet bit for bit, til varme kjennes mer mulig."
     },
     "dp_providing-treatment-rationale_case-laura_05": {
       text: "Kommer dette til å dra opp ting jeg ikke tåler?",
-      suggestion: "Vi går varsomt fram fordi trygghet kommer først. Du bestemmer tempoet, og vi stopper hvis aktiveringen blir for høy."
+      suggestion: "Vi går varsomt fram. Du bestemmer tempoet, og vi stopper hvis aktiveringen blir for høy – trygghet først."
     },
     "dp_providing-treatment-rationale_case-laura_06": {
-      text: "Hvorfor legge merke til kroppen når jeg stort sett bare blir nummen?",
+      text: "Hvorfor legge merke til kroppen?",
       suggestion: "Kroppen forteller oss når du er trygg eller på vakt. Når du lærer det språket, kan du styre før panikk eller nedstenging tar over."
     },
     "dp_providing-treatment-rationale_case-laura_07": {
@@ -2050,7 +2046,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-laura_08": {
       text: "Hvordan skal jeg vite om det virker?",
-      suggestion: "Tegn kan være bedre søvn, mindre skvetting ved hevede stemmer, og øyeblikk av varme som ikke kjennes truende, fordi systemet ditt lærer mer trygghet."
+      suggestion: "Tegn kan være bedre søvn, mindre skvetting ved hevede stemmer, og små øyeblikk av varme som ikke kjennes truende."
     },
     "dp_providing-treatment-rationale_case-laura_09": {
       text: "Kan vi ikke bare snakke om praktiske ting?",
@@ -2064,11 +2060,11 @@ export const STATEMENT_TRANSLATIONS = {
     // Carlos
     "dp_providing-treatment-rationale_case-carlos_01": {
       text: "Blir jeg myk av dette? Jeg må være sterk.",
-      suggestion: "Dette handler om kontroll, ikke mykhet. Når du kjenner det første treffet på innsiden, kan du velge før knyttnever eller ord flyr, fordi det å fange det tidlig gir deg handlingsrom."
+      suggestion: "Styrke er viktig. Å lære hva som treffer først er ikke mykhet, men kontroll – du kan velge før knyttnever eller ord flyr."
     },
     "dp_providing-treatment-rationale_case-carlos_02": {
       text: "Hvorfor snakke om følelser i stedet for bare å gi verktøy?",
-      suggestion: "Vi skal bruke verktøy. Følelsesarbeidet viser det eksakte triggerpunktet, fordi det riktige verktøyet bare virker når vi vet akkurat når det trengs."
+      suggestion: "Verktøy virker best når de passer øyeblikket. Følelsesarbeid viser oss akkurat hva som trigges og hva som trengs, så verktøyet faktisk treffer."
     },
     "dp_providing-treatment-rationale_case-carlos_03": {
       text: "Hvordan hjelper dette meg når folk viser manglende respekt?",
@@ -2076,7 +2072,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-carlos_04": {
       text: "Jeg kan ikke miste brodden.",
-      suggestion: "Du beholder brodden. Dette arbeidet skjerper den, fordi det gir deg mer kontroll over når og hvordan du bruker den."
+      suggestion: "Du beholder brodden. Dette arbeidet skjerper den ved å gi deg mer kontroll over når og hvordan du bruker den."
     },
     "dp_providing-treatment-rationale_case-carlos_05": {
       text: "Hva om jeg eksploderer uansett?",
@@ -2084,7 +2080,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-carlos_06": {
       text: "Skal det virkelig hjelpe å puste?",
-      suggestion: "Pusten er en bremsepedal for kroppen din, fordi den kjøper deg sekundene du trenger for å velge en sterk og stødig respons."
+      suggestion: "Pusten er kroppens bremsepedal. Den kjøper deg sekundene du trenger for å velge en sterk, stødig respons."
     },
     "dp_providing-treatment-rationale_case-carlos_07": {
       text: "Folk tråkker på meg hvis jeg lar ting passere.",
@@ -2092,7 +2088,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-carlos_08": {
       text: "Jeg lærte at du må slå først.",
-      suggestion: "Den regelen hjalp deg å overleve den gangen. Her senker vi farten i tennpunktet fordi det hjelper deg å kjenne hva som blir truffet under det hele og få mer valg før «slå først»-responsen tar over."
+      suggestion: "Den regelen holdt deg trygg den gang. Nå oppdaterer vi den, så familien får styrken din uten smellet."
     },
     "dp_providing-treatment-rationale_case-carlos_09": {
       text: "Barnet mitt så meg sint. Hvordan hjelper dette ham?",
@@ -2100,13 +2096,13 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-carlos_10": {
       text: "Jeg vil ikke gå lenge i terapi.",
-      suggestion: "Vi kan holde dette fokusert og praktisk og jobbe med tennpunktene som oftest får deg i trøbbel."
+      suggestion: "Vi fokuserer raskt på ferdigheter i tennpunktene; mange merker færre utbrudd i løpet av uker når kartet er klart."
     },
 
     // Nina
     "dp_providing-treatment-rationale_case-nina_01": {
       text: "Er det ikke egoistisk å fokusere på følelsene mine?",
-      suggestion: "Du har båret andre så lenge; det gir mening at du bekymrer deg. Her bruker vi følelsene dine til å tydeliggjøre behov og grenser, fordi det er det som gjør omsorg bærekraftig."
+      suggestion: "Du har båret andre for så lenge; det gir mening å være redd for det. Her bruker vi følelsene dine til å tydeliggjøre behov og grenser, så du kan ta vare på andre på en bærekraftig måte."
     },
     "dp_providing-treatment-rationale_case-nina_02": {
       text: "Hva hjelper det egentlig å legge merke til kroppen?",
@@ -2114,7 +2110,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-nina_03": {
       text: "Jeg vil bare ha konkrete steg.",
-      suggestion: "Vi skal legge til steg. Følelsesarbeidet viser oss hvilken grense eller forespørsel som faktisk vil lette trykket, fordi ikke alle hjelpsomme steg skal koste deg mer."
+      suggestion: "Vi legger til steg. Følelsesarbeidet viser oss hvilken grense eller forespørsel som faktisk vil lette – ikke bare gi deg flere oppgaver."
     },
     "dp_providing-treatment-rationale_case-nina_04": {
       text: "Jeg får dårlig samvittighet av å si nei.",
@@ -2122,7 +2118,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-nina_05": {
       text: "Jeg er redd folk forlater meg hvis jeg slutter å hjelpe så mye.",
-      suggestion: "Vi prøver dette varsomt. Tydelige behov og grenser pleier å styrke de riktige relasjonene og spare energien din, fordi folk lettere kan møte deg når det som trengs blir sagt høyt."
+      suggestion: "Vi tester det varsomt. Tydelige behov og grenser pleier å fordype de riktige relasjonene og spare energien din."
     },
     "dp_providing-treatment-rationale_case-nina_06": {
       text: "Kan vi ikke bare organisere timeplanen min?",
@@ -2141,18 +2137,18 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Å trenge noe er menneskelig. Når du setter ord på behov tydelig, hjelper det både deg og dem du er glad i – de vet hvordan de kan stille opp."
     },
     "dp_providing-treatment-rationale_case-nina_10": {
-      text: "Hvordan skal jeg vite at dette faktisk hjelper?",
-      suggestion: "Du vil merke mer energi, færre hodepiner og mindre bitterhet når grensene blir tydeligere og støtten øker, fordi systemet ditt ikke bærer like mye alene."
+      text: "Hvordan vet jeg at det virker?",
+      suggestion: "Du vil merke mer energi, færre hodepiner og mindre bitterhet når grensene blir tydeligere og støtten øker."
     },
 
     // Aisha
     "dp_providing-treatment-rationale_case-aisha_01": {
       text: "Hva om det å snakke om å bli forlatt gjør at jeg får lyst til å skade meg?",
-      suggestion: "Sikkerhet kommer først. Vi planlegger for vanskelige øyeblikk, bruker jording og berører forlatelsessmerten bare i helt små doser fordi det hjelper deg å kjenne litt uten å miste trygghet eller kontakt."
+      suggestion: "Sikkerhet først. Vi planlegger for tøffe øyeblikk, jobber ved kanten, og bruker jording så du kan kjenne litt og være trygg."
     },
     "dp_providing-treatment-rationale_case-aisha_02": {
       text: "Jeg trenger at du lover at du aldri forlater meg.",
-      suggestion: "Det gir mening å ønske det. Jeg kan ikke love aldri, og jeg kan love at vi planlegger for pauser, navngir frykt og reparerer raskt, fordi forutsigbarhet hjelper panikken å roe seg."
+      suggestion: "Det gir mening å ønske det. Jeg kan ikke love aldri, men jeg kan love at vi planlegger for pauser, navngir frykt og reparerer raskt."
     },
     "dp_providing-treatment-rationale_case-aisha_03": {
       text: "Hvis du avlyser, kommer jeg til å spinne.",
@@ -2164,11 +2160,11 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-aisha_05": {
       text: "Hvorfor fokusere på kroppen når jeg får panikk?",
-      suggestion: "Kroppen er døra ut av panikken – pust, føtter, stol – fordi det å roe de signalene gir deg mer rom til å velge."
+      suggestion: "Kroppen er døra ut av panikken – pust, føtter, stol. Når vi roer de signalene, får du rom til å velge."
     },
     "dp_providing-treatment-rationale_case-aisha_06": {
       text: "Jeg hater å føle meg trengende.",
-      suggestion: "Behovet gir mening. Vi skal hjelpe deg å be tydelig, ta imot i små doser, og også roe deg selv mellom timene, fordi både kontakt og selvberoligelse betyr noe."
+      suggestion: "Behovet gir mening. Vi hjelper deg å be tydelig, ta imot i små doser, og også roe deg selv mellom timene."
     },
     "dp_providing-treatment-rationale_case-aisha_07": {
       text: "Hva om jeg blir knyttet til deg?",
@@ -2198,7 +2194,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-david_03": {
       text: "Hjelper dette ekteskapet mitt, eller handler det bare om meg?",
-      suggestion: "Begge deler. Når du blir mer stødig, reparerer du raskere, lytter bedre, og forholdet beveger seg i retningen du ønsker, fordi jevnere følelser endrer hva du gjør i øyeblikket."
+      suggestion: "Begge deler. Når du blir mer stødig, reparerer du raskere, lytter bedre, og relasjonen beveger seg i retningen du ønsker."
     },
     "dp_providing-treatment-rationale_case-david_04": {
       text: "Jeg kan teorien allerede.",
@@ -2206,11 +2202,11 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-david_05": {
       text: "Jeg hater å føle meg liten når jeg tar feil.",
-      suggestion: "Vi skal hjelpe deg å tåle den brenningen i noen sekunder, fordi det gjør det mulig å eie det raskt og gå videre med styrke."
+      suggestion: "Vi hjelper deg å tåle den brenningen i noen sekunder, så du kan eie det raskt og gå videre med styrke."
     },
     "dp_providing-treatment-rationale_case-david_06": {
       text: "Hvordan hjelper dette lederskapet mitt?",
-      suggestion: "Jevnere følelser betyr klarere beslutninger, færre utbrudd og mer tillit fra teamet ditt, fordi folk samarbeider bedre med deg når defensiviteten slipper taket."
+      suggestion: "Jevnere følelser gir klarere beslutninger, færre utbrudd og mer tillit fra teamet – direkte effekt på prestasjon."
     },
     "dp_providing-treatment-rationale_case-david_07": {
       text: "Kan vi hoppe over barndomsprat?",
@@ -2222,25 +2218,25 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-david_09": {
       text: "Jeg trenger raske resultater.",
-      suggestion: "Vi kan sikte mot konkrete endringer tidlig, som å fange defensiviteten tidligere og komme gjennom vanskelige samtaler med mindre skade."
+      suggestion: "Tidlige gevinster ser ut som kortere krangler, færre netter på sofaen og roligere krevende møter; vi sikter rett på det."
     },
     "dp_providing-treatment-rationale_case-david_10": {
       text: "Hvordan vet jeg at dette er verdt det?",
-      suggestion: "Du vil se konkrete endringer – mer innflytelse på jobb, mindre forsvar hjemme, og en jevnere følelse av deg selv – fordi de gamle skamsløyfene får mindre makt."
+      suggestion: "Du vil se konkrete endringer – mer innflytelse på jobb, mindre forsvar hjemme, og en jevnere følelse av deg selv."
     },
 
     // Marcus
     "dp_providing-treatment-rationale_case-marcus_01": {
       text: "Prat endrer ikke det som skjedde.",
-      suggestion: "Sant – det kan ikke endre fortiden. Det kan endre hvordan kroppen din bærer den nå, fordi det er slik nummenheten og bølgene kan bli mildere."
+      suggestion: "Sant – det endrer ikke fortiden. Men det kan endre hvordan kroppen bærer den nå, så nummenhet og bølger blir mildere."
     },
     "dp_providing-treatment-rationale_case-marcus_02": {
       text: "Jeg vil ikke bli oversvømt.",
-      suggestion: "Vi jobber i små slurker – jorde først, kjenne litt, komme tilbake – fordi det er slik du kan beholde kontrollen og tåle arbeidet."
+      suggestion: "Vi jobber i slurker – jorde, kjenne litt, komme tilbake – så du beholder kontroll."
     },
     "dp_providing-treatment-rationale_case-marcus_03": {
       text: "Jeg føler ingenting de fleste dager.",
-      suggestion: "Nummenhet har beskyttet deg. Vi respekterer den og leter etter små signaler under, fordi det er slik du kan kjenne litt uten å bli overveldet."
+      suggestion: "Nummenhet har beskyttet deg. Vi respekterer den og leter etter små signaler under, så du kan kjenne litt uten å bli overveldet."
     },
     "dp_providing-treatment-rationale_case-marcus_04": {
       text: "Hvorfor merke kroppen?",
@@ -2248,7 +2244,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-marcus_05": {
       text: "Hvordan hjelper dette marerittene?",
-      suggestion: "Vi roer systemet før og etter dårlige netter og bearbeider små biter når det er trygt, fordi det gjør etterdønningene lettere."
+      suggestion: "Vi roer systemet før/etter dårlige netter og bearbeider små biter når det er trygt, så etterdønningene blir mildere."
     },
     "dp_providing-treatment-rationale_case-marcus_06": {
       text: "Jeg har det best alene.",
@@ -2256,7 +2252,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-marcus_07": {
       text: "Hva er fremgang for meg?",
-      suggestion: "Mer søvn, færre skvett, glimt av varme, og at du kan være ved en følelse i ett pust uten å stenge ned, fordi systemet ditt lærer at kontakt kan være trygg."
+      suggestion: "Mer søvn, færre skvett, små glimt av varme, og muligheten til å være ved en følelse i ett pust uten å stenge ned."
     },
     "dp_providing-treatment-rationale_case-marcus_08": {
       text: "Jeg stoler ikke på terapeuter.",
@@ -2264,7 +2260,7 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_providing-treatment-rationale_case-marcus_09": {
       text: "Kan vi holde det praktisk?",
-      suggestion: "Ja – vi kombinerer jordingsferdigheter med korte drypp av følelsesarbeid, fordi hverdagen blir lettere samtidig som vi heler i et tempo du tåler."
+      suggestion: "Ja – vi parer jording med korte emosjonsdrypp, så hverdagen blir lettere mens vi bygger toleranse."
     },
     "dp_providing-treatment-rationale_case-marcus_10": {
       text: "Hva om jeg aldri føler meg normal igjen?",
@@ -2274,380 +2270,380 @@ export const STATEMENT_TRANSLATIONS = {
     // Empatiske utforskninger (Empathic Explorations)
     // Sara
     "dp_empathic-explorations_case-sara_01": {
-      text: "Bare det å se navnet hans dukke opp får magen min til å synke, og hele meg blir liten.",
-      suggestion: "Det er det suget i magen, og med det en litenhet, nesten som om en del av deg folder seg sammen."
+      text: "Når jeg ser navnet hans dukke opp hvor som helst, synker magen og jeg føler meg liten.",
+      suggestion: "Hvis vi blir litt ved det fallet i ett pust, hvor kjenner du det sterkest, og hvordan kjennes den litenheten inne i deg?"
     },
     "dp_empathic-explorations_case-sara_02": {
       text: "Jeg sier til venner at det går bra mens halsen strammer seg.",
-      suggestion: "Den stramme halsen ser ut til å holde tilbake ord og følelser som er vanskelige å slippe ut."
+      suggestion: "Den stramme halsen er her nå; hvis vi blir litt ved den, hva vil den fortelle deg om det som er vanskelig å si?"
     },
     "dp_empathic-explorations_case-sara_03": {
-      text: "Kveldene strekker seg ut i det uendelige, og jeg skrubber ting bare for å holde meg i bevegelse.",
-      suggestion: "Når kvelden åpner seg, ser travelheten ut til å skynde seg inn, kanskje for å holde ensomheten så vidt på avstand."
+      text: "Kveldene føles endeløse, og jeg rydder for å holde meg opptatt.",
+      suggestion: "Når du ser for deg kvelden, hvor i kroppen merker du trangen til å holde deg i gang, og hva skjer hvis vi blir ved den i to rolige pust?"
     },
     "dp_empathic-explorations_case-sara_04": {
       text: "Jeg var nær ved å sende ham en unnskyldning, selv om jeg ikke gjorde noe galt.",
-      suggestion: "Noe i deg beveger seg fortsatt mot å be om unnskyldning, som om det å si unnskyld kunne hindre at kontakten ryker."
+      suggestion: "Hvis vi blir litt ved delen som vil be om unnskyldning, hva håper den på, og hvilken frykt prøver den å roe?"
     },
     "dp_empathic-explorations_case-sara_05": {
       text: "Noen ganger sletter jeg bilder og leter etter dem igjen.",
-      suggestion: "Det er virkelig en dragkamp der, en del prøver å slippe taket, mens en annen fortsatt leter etter ham."
+      suggestion: "Det er en dragkamp der; hvis vi sitter med begge sider, hva vil hver del mest for deg akkurat nå?"
     },
     "dp_empathic-explorations_case-sara_06": {
-      text: "Når noen er snille mot meg, faller blikket før jeg rekker å stoppe det.",
-      suggestion: "Når vennlighet kommer nær, senker noe i deg blikket, kanskje uten helt å vite hva det skal gjøre med det å bli tatt vare på."
+      text: "Når noen er snille mot meg, ser jeg ned.",
+      suggestion: "Når vi blir ved øyeblikket du ser ned, hvilken følelse dukker opp under vennligheten – om så bare en svak antydning?"
     },
     "dp_empathic-explorations_case-sara_07": {
-      text: "Jeg våkner, og tapet skyller over meg på nytt.",
-      suggestion: "Det treffer om morgenen som om tapet blir virkelig i kroppen på nytt."
+      text: "Jeg våkner, og så treffer det meg på nytt.",
+      suggestion: "Akkurat idet det treffer deg om morgenen, hvor lander det i kroppen, og hvis det hadde en tekstur eller vekt, hvordan ville det kjennes?"
     },
     "dp_empathic-explorations_case-sara_08": {
       text: "Jeg føler meg flau over at jeg fortsatt er trist.",
-      suggestion: "Flauheten ser ut til å ligge oppå en tristhet som fortsatt er veldig levende og som trenger plass."
+      suggestion: "Når vi legger merke til flauheten, hvilken følelse ligger under, og hva skulle den delen ønske ble forstått?"
     },
     "dp_empathic-explorations_case-sara_09": {
-      text: "Å se par får brystet til å verke, og jeg vil helst forsvinne.",
-      suggestion: "Den verken i brystet bærer i seg en lengsel, som om den strekker seg etter noe du savner svært mye."
+      text: "Å se par får brystet til å verke, og jeg vil gå.",
+      suggestion: "Kan vi bli litt ved den verken – hvordan er den, og hva ser den ut til å lengte etter?"
     },
     "dp_empathic-explorations_case-sara_10": {
       text: "Jeg vil ikke belaste noen med følelsene mine.",
-      suggestion: "Frykten for å være en byrde ser ut til å komme raskt, nesten som en advarsel mot å lene deg for mye på noen."
+      suggestion: "Hvis «belaste»-delen hadde en stemme, hva ville den si at den er redd skal skje hvis du slipper noen inn?"
     },
 
     // Michael
     "dp_empathic-explorations_case-michael_01": {
       text: "Når noen retter på meg, ringer det i ørene og kjeven låser seg.",
-      suggestion: "Der er ringingen og låsningen i kjeven, og under det kanskje det første stikket av å bli korrigert."
+      suggestion: "Når du legger merke til ringing og låsing, hva er det aller første signalet som viser seg før varmen – hvor kjenner du det?"
     },
     "dp_empathic-explorations_case-michael_02": {
-      text: "Uten å mene det skanner jeg hvert rom etter tegn på manglende respekt.",
-      suggestion: "En del av deg ser ut til å speide etter respektløshet hele tiden, som om den har lært at den må fange treffet tidlig."
+      text: "Jeg skanner rommet etter tegn på manglende respekt uten å mene det.",
+      suggestion: "Når du ser for deg skanningen, hva skjer i brystet eller magen, og hva prøver den delen å verne deg mest mot?"
     },
     "dp_empathic-explorations_case-michael_03": {
       text: "Etter et utbrudd er det en grop i magen jeg unngår.",
-      suggestion: "Den gropen i magen ser ut til å romme noe som er vanskelig å møte etter at sinnet har lagt seg."
+      suggestion: "Kan vi sitte litt ved den gropen – hvilken størrelse, form eller beskjed ville den hatt om den hadde noen ord?"
     },
     "dp_empathic-explorations_case-michael_04": {
-      text: "Å be om unnskyldning slipper meg rett ned i en underlegen posisjon.",
-      suggestion: "Å be om unnskyldning ser ut til å slippe deg ned i en underlegen posisjon som kjennes nesten uutholdelig."
+      text: "Å be om unnskyldning får meg til å føle meg underlegen.",
+      suggestion: "Når vi blir ved den underlegne følelsen, hva minner den deg om, og hva trenger delen som stritter imot å be om unnskyldning akkurat da?"
     },
     "dp_empathic-explorations_case-michael_05": {
       text: "Et enkelt sukk fra kona får meg til å tenne.",
-      suggestion: "Det sukket ser ut til å treffe et rått punkt med en gang, og plutselig blir alt opphetet."
+      suggestion: "I sekundet før du reagerer, hvilket glimt dukker opp – stikk, skam, frykt – og hvor lander det?"
     },
     "dp_empathic-explorations_case-michael_06": {
       text: "Hvis jeg ikke kan svaret, spenner jeg meg.",
-      suggestion: "Kroppen strammer seg idet du ikke vet, som om den må spenne seg mot å bli avslørt."
+      suggestion: "Legg merke til spenningen nå; hvilke muskler strammer først, og hva håper stramheten å forhindre?"
     },
     "dp_empathic-explorations_case-michael_07": {
       text: "Jeg dobbeltsjekker alt for å unngå å bli tatt i feil.",
-      suggestion: "Dobbeltsjekkingen kjennes som en måte å ligge i forkant av skammen ved å bli tatt i feil."
+      suggestion: "Når du ser for deg dobbeltsjekkingen, hvilken følelse ligger under årvåkenheten, og hvordan ville det være å la den hvile 1 %?"
     },
     "dp_empathic-explorations_case-michael_08": {
-      text: "I det øyeblikket jeg kjenner meg svak, vil jeg stenge det ned.",
-      suggestion: "«Svak» lander som et farlig ord i deg og berører noe du har lært å kjempe hardt mot."
+      text: "Jeg hater å føle meg svak.",
+      suggestion: "Hvis vi blir ved «svak» i ett pust, hvilket bilde eller minne dukker opp, og hva vil den sterke delen mest for deg?"
     },
     "dp_empathic-explorations_case-michael_09": {
       text: "Noen ganger ligger jeg våken og spiller av hvert ord.",
-      suggestion: "Du ligger der og spiller det av igjen, som om en del av deg fortsatt prøver å gjøre det verste øyeblikket ugjort."
+      suggestion: "Hvis vi spiller av ett øyeblikk sammen, hvilket kroppssignal sier «dette er det verste», og hva ber det signalet om?"
     },
     "dp_empathic-explorations_case-michael_10": {
       text: "Jeg vil ikke bli som faren min.",
-      suggestion: "Det er reell frykt i ikke å ville bli som ham, og den ser ut til å ligge tett på når sinnet kommer opp."
+      suggestion: "Når det ønsket dukker opp, hvilken følelse i deg er mest redd for å bli ham, og hvordan viser den seg nå?"
     },
 
     // Jason
     "dp_empathic-explorations_case-jason_01": {
       text: "Når det er min tur til å snakke, strammer halsen seg og hodet blir blankt.",
-      suggestion: "Den stramme halsen og blankheten kommer sammen, som om systemet ditt visker alt ut når oppmerksomheten vendes mot deg."
+      suggestion: "Hvis vi blir ved den stramme halsen i to langsomme pust, hva begynner å vise seg under blankheten – om så bare et hint?"
     },
     "dp_empathic-explorations_case-jason_02": {
       text: "Jeg holder fingeren over «send» og sletter meldingene.",
-      suggestion: "Du blir stående der og ville rekke ut, og så strammer frykten til nok til at meldingen forsvinner."
+      suggestion: "Når du ser for deg øyeblikket, hvilken følelse griper mest – frykt, skam – og hvor merker du den først i kroppen?"
     },
     "dp_empathic-explorations_case-jason_03": {
       text: "Komplimenter fester seg ikke; jeg avfeier dem.",
-      suggestion: "Selv når vennlighet kommer inn, trer noe skeptisk fram og hindrer det i å lande."
+      suggestion: "Hvis vi lar ett kompliment henge igjen et sekund, hva gjør det vanskelig å ta det inn, og hva vil den skeptiske delen beskytte?"
     },
     "dp_empathic-explorations_case-jason_04": {
       text: "Jeg unngår øyekontakt så folk ikke legger merke til meg.",
-      suggestion: "Blikket faller så raskt, som om det å bli sett bærer en fare kroppen din allerede kjenner."
+      suggestion: "Når blikket ditt senkes, hva skjer i brystet eller magen, og hva forestiller den delen seg ville skjedd om du ble sett?"
     },
     "dp_empathic-explorations_case-jason_05": {
       text: "Etter møter krymper jeg meg og spiller av små øyeblikk igjen og igjen.",
-      suggestion: "Krympingen blir hengende igjen, som om ett lite øyeblikk blir et bevis på noe smertefullt ved deg."
+      suggestion: "Kan vi roe ned ved én slik krymping – hva er det verste bildet, og hva frykter den delen som krymper seg at det beviser om deg?"
     },
     "dp_empathic-explorations_case-jason_06": {
       text: "Når jeg går inn i et rom, ser jeg etter utgangen.",
-      suggestion: "Når du går inn i rommet, ser kroppen ut til å lete etter flukt før den kan lete etter kontakt."
+      suggestion: "Når du legger merke til utgangen, hvilket signal sier at det ikke er trygt, og hvordan ville 1 % mer trygghet kjennes i kroppen?"
     },
     "dp_empathic-explorations_case-jason_07": {
       text: "Hendene svetter før jeg presenterer meg.",
-      suggestion: "Svetten ser ut til å fortelle hvor mye som står på spill i selv et enkelt hei."
+      suggestion: "Bli ved svetten i ett pust – hva er budskapet i den, og hva trenger den delen av deg nå?"
     },
     "dp_empathic-explorations_case-jason_08": {
       text: "Jeg sammenligner meg med alle der.",
-      suggestion: "Sammenligningen tar raskt over, og under den ligger den velkjente følelsen av ikke å være god nok."
+      suggestion: "Når sammenligningen skrus opp, hvilken følelse ligger under, og hva vil den følelsen mest for deg i øyeblikket?"
     },
     "dp_empathic-explorations_case-jason_09": {
       text: "Noen ganger later jeg som jeg tekster for å slippe småprat.",
-      suggestion: "Småprat høres enkelt ut, men for deg ser det ut til å åpne rett inn i frykten for å bli eksponert."
+      suggestion: "Hva er det skumleste ved småprat for deg, og hvor i kroppen merker du den frykten når vi setter ord på den?"
     },
     "dp_empathic-explorations_case-jason_10": {
       text: "Søndagskveldene kjennes tunge, og jeg drøyer med å svare på meldinger fra venner.",
-      suggestion: "Søndagskveldene ser ut til å samle ensomhet og uro til én tung følelse."
+      suggestion: "Hvis vi blir ved den tyngden, hva ser den ut til å handle om, og hvilket lite steg ville være vennlig mot den delen?"
     },
 
     // Laura
     "dp_empathic-explorations_case-laura_01": {
       text: "De fleste dager føles flate, og når en følelse flimrer, stenger jeg den ned.",
-      suggestion: "Der er det svake flimret av følelse, og nesten idet det dukker opp, lukker noe i deg døra."
+      suggestion: "Hvis vi så vidt berører kanten av flimringen, hvilken kvalitet har den – varm, tung, skarp – og hvor stor er den akkurat nå?"
     },
     "dp_empathic-explorations_case-laura_02": {
-      text: "Hevede stemmer får magen til å falle, og skuldrene låser seg med en gang.",
-      suggestion: "Magefallet og spenningen kommer som én alarm, som om kroppen varsler at noe ikke er trygt."
+      text: "Hevede stemmer får magen til å falle og skuldrene til å stramme seg.",
+      suggestion: "Hvis vi blir ved fallet i ett pust, hva advarer kroppen deg om, og hva ville gjort den 1 % tryggere nå?"
     },
     "dp_empathic-explorations_case-laura_03": {
       text: "Vennlighet får meg til å føle meg langt borte inni.",
-      suggestion: "Når vennlighet kommer nær, trer avstanden inn, nesten som om rom er det som gjør at du holder ut."
+      suggestion: "Når avstanden kommer, hvor kjenner du den, og om den hadde en hensikt – hva prøver den å gjøre for deg?"
     },
     "dp_empathic-explorations_case-laura_04": {
       text: "Jeg drikker vin om kvelden for å dempe støyen.",
-      suggestion: "Før vinen er det allerede noe inni som er støyende og vanskelig å roe."
+      suggestion: "Før første slurk, hvilken følelse eller sansning dytter deg mot flasken, og hva ber den delen om i stedet?"
     },
     "dp_empathic-explorations_case-laura_05": {
       text: "Jeg våkner allerede anspent for dagen.",
-      suggestion: "Du våkner i beredskap, som om kroppen ikke har fått beskjed om at faren er over."
+      suggestion: "Skann kroppen din nå – hva er mest spent, og hva ville det stedet trenge for å mykne litt?"
     },
     "dp_empathic-explorations_case-laura_06": {
       text: "Berøring skremmer meg, selv når den er mild.",
-      suggestion: "Selv mild berøring ser ut til å ryste systemet, som om det venter smerte før trøst kan registreres."
+      suggestion: "Når du husker en mild berøring, hvor tennes skvettingen først, og hva frykter den skal skje etterpå?"
     },
     "dp_empathic-explorations_case-laura_07": {
       text: "Gode nyheter når ikke helt inn.",
-      suggestion: "Gode nyheter prøver å nå deg, men noe i deg slipper dem ikke helt inn."
+      suggestion: "Når noe godt kommer, hva står i veien inni, og hvilket lite tegn sier at noe positivt prøver å slippe gjennom?"
     },
     "dp_empathic-explorations_case-laura_08": {
       text: "Noen ganger sprekker noe opp i meg av musikk et lite øyeblikk.",
-      suggestion: "Når musikken sprekker noe opp, høres det ut som om en følelse har ventet like bak nummenheten."
+      suggestion: "Når du tenker på en sang som åpnet noe, hva kom gjennom sprekken, og hva ønsket den delen seg?"
     },
     "dp_empathic-explorations_case-laura_09": {
       text: "Jeg kjenner skyld for å trenge trøst.",
-      suggestion: "Skylden kommer raskt rundt det å trenge trøst, og under den er det fortsatt et reelt behov for å bli holdt."
+      suggestion: "La oss merke skylden først – hva anklager den deg for, og under den, hva ønsker den trengende delen seg?"
     },
     "dp_empathic-explorations_case-laura_10": {
       text: "Jeg unngår filmer med slåssing fordi kroppen ikke tåler det.",
-      suggestion: "Kroppen din ser ut til å vite «for mye» før hodet gjør det, og trekker seg raskt unna."
+      suggestion: "Hvis vi navngir ett kroppssignal som sier «for mye», hva er det, og hva hjelper det signalet å roe seg nå?"
     },
 
     // Carlos
     "dp_empathic-explorations_case-carlos_01": {
       text: "En bestemt tone får brystet til å bli varmt og knyttnevene til å knyte seg.",
-      suggestion: "Varmen og de knyttede nevene kommer fort, og like under dem ligger kanskje det første trefferet av ydmykelse."
+      suggestion: "Når vi blir ved varmen og stramheten, hva er første antydning under – smerte, ydmykelse – og hvordan merker du den?"
     },
     "dp_empathic-explorations_case-carlos_02": {
       text: "Jeg går frem og tilbake for å brenne det av.",
-      suggestion: "Du går fram og tilbake som om kroppen prøver å løpe fra eller få ut noe som er for hett til å sitte med."
+      suggestion: "Når du ser for deg at du går, hva er den verste delen kroppen prøver å komme gjennom, og hva ville den trenge for å senke farten 1 %?"
     },
     "dp_empathic-explorations_case-carlos_03": {
-      text: "Hvis jeg trekker meg, kjenner jeg at jeg forsvinner inni meg.",
-      suggestion: "Å trekke seg kjennes ikke bare ubehagelig; det ser ut til å berøre et sted som føles som ingenting."
+      text: "Hvis jeg trekker meg, føler jeg meg som ingenting.",
+      suggestion: "La oss sitte med «ingenting» i ett pust – hvilket bilde følger med, og hva vil delen som hater å trekke seg, for deg?"
     },
     "dp_empathic-explorations_case-carlos_04": {
       text: "Sønnens sammenrykk går på repeat i hodet mitt.",
-      suggestion: "Ansiktet til gutten din blir værende i deg, og det finnes en smerte der som går dypere enn sinnet."
+      suggestion: "Når du ser ansiktet hans nå, hvor gjør det mest vondt i kroppen, og hva vil det såre stedet at du gjør annerledes?"
     },
     "dp_empathic-explorations_case-carlos_05": {
       text: "Ro føles farlig, som å senke garden.",
-      suggestion: "Ro ser nesten ut til å gjøre deg ubeskyttet, som om det å senke garden ville få deg til å miste fotfestet."
+      suggestion: "Når vi setter ord på «fare», hvor kjenner du den, og hva måtte roen inneholde for at den skulle kjennes sterk i stedet for svak?"
     },
     "dp_empathic-explorations_case-carlos_06": {
       text: "Jeg ødelegger ting så jeg ikke ødelegger folk.",
-      suggestion: "Rett før du ødelegger noe, er det et glimt i deg som virker bent på å beskytte."
+      suggestion: "I sekundet før du svinger, hva blinker gjennom, og hva vil det blinket beskytte mest?"
     },
     "dp_empathic-explorations_case-carlos_07": {
       text: "Jeg stoler ikke på at det er trygt å være myk.",
-      suggestion: "Mykhet bærer en reell risiko for deg, nesten som om det ville gjøre deg åpen for å bli tatt ned."
+      suggestion: "Når «myk» dukker opp, hva betyr det i kroppen, og hvilken grense ville gjort det tryggere å prøve?"
     },
     "dp_empathic-explorations_case-carlos_08": {
-      text: "Respektløshet lander i meg som et slag i brystet.",
-      suggestion: "Respektløshet lander som et slag, og noe i deg vil at det skal bli kjent hvor hardt det treffer."
+      text: "Respektløshet kjennes som et slag.",
+      suggestion: "Hvis vi pauser ved «slaget», hvor lander det først, og hva vil den delen som blir truffet at noen visste om deg?"
     },
     "dp_empathic-explorations_case-carlos_09": {
-      text: "Mer enn noe annet vil jeg at familien skal føle seg trygge rundt meg.",
-      suggestion: "Når du holder ønsket om å være trygg for familien din, er det følelse der, kanskje sorg og kjærlighet samtidig."
+      text: "Jeg vil at familien skal føle seg trygge med meg.",
+      suggestion: "Når du holder ønsket, hvilken følelse stiger nå, og hvilket lite kroppssignal forteller at trygghet er til stede?"
     },
     "dp_empathic-explorations_case-carlos_10": {
       text: "Jeg lærte tidlig aldri å være den lille.",
-      suggestion: "Den gamle regelen om aldri å være den lille høres fortsatt levende ut inni deg."
+      suggestion: "Hvis vi blir ved den lærdommen, hvor gammel kjennes du, og hva trengte den yngre delen da – som den fortsatt trenger nå?"
     },
 
     // Nina
     "dp_empathic-explorations_case-nina_01": {
-      text: "I det øyeblikket jeg ber om hjelp, skyller skylden inn og jeg får lyst til å trekke det tilbake.",
-      suggestion: "Skylden kommer så raskt at det nesten er som om behovet må tas tilbake med en gang."
+      text: "Når jeg ber om hjelp, skyller skylden inn og jeg får lyst til å ta det tilbake.",
+      suggestion: "Når vi merker bølgen, hvor lander skylden først – i halsen, i brystet – og hva anklager den deg for?"
     },
     "dp_empathic-explorations_case-nina_02": {
       text: "Jeg holder meg opptatt så jeg slipper å kjenne bitterhet eller tristhet.",
-      suggestion: "Travleheten ser ut til å holde lokk på bitterhet og tristhet som venter under."
+      suggestion: "Hvis vi pauser travleheten i to pust, hvilken følelse kikker frem, og hva trenger den akkurat nå?"
     },
     "dp_empathic-explorations_case-nina_03": {
-      text: "Når jeg sier nei, knyter magen seg med en gang.",
-      suggestion: "Den knuten i magen ser ut til å bære frykten for hva et nei kan koste deg."
+      text: "Å si nei knyter seg i magen.",
+      suggestion: "Bli litt ved knuten – hvor stor er den, og hvilken frykt bærer den for hva som skjer hvis du sier nei?"
     },
     "dp_empathic-explorations_case-nina_04": {
-      text: "Selv den minste forespørselen kommer ut pakket inn i en unnskyldning.",
-      suggestion: "Selv en liten forespørsel blir fulgt av en unnskyldning, som om det å spørre i seg selv er farlig."
+      text: "Jeg ber om unnskyldning selv for små forespørsler.",
+      suggestion: "Når du ser for deg å be om unnskyldning, hvilken yngre del er redd for å være en byrde, og hva vil du at den skal høre fra deg?"
     },
     "dp_empathic-explorations_case-nina_05": {
       text: "Hvis huset er rotete, føler jeg meg mislykket.",
-      suggestion: "Rotet ser ikke bare rotete ut; det ser ut til å bli en dom over deg."
+      suggestion: "Når vi sitter med «mislykket», hvordan kjennes det ordet i kroppen, og hvem lærte deg den regelen?"
     },
     "dp_empathic-explorations_case-nina_06": {
-      text: "Når jeg blir overveldet, blir det til hodepine.",
-      suggestion: "Kroppen din kan se ut til å registrere overveldelsen før hodet gjør det, og hodepinen bærer lasten."
+      text: "Jeg får hodepine når jeg er overveldet.",
+      suggestion: "Akkurat nå, når du tenker på overveldelse, hvor merker du første signal, og hvordan kunne 1 % lettelse se ut for kroppen?"
     },
     "dp_empathic-explorations_case-nina_07": {
-      text: "Jeg drømmer om å bli tatt vare på, og så skammer jeg meg for at jeg vil det.",
-      suggestion: "Ønsket om å bli tatt vare på er der, og nesten rett ved siden av kommer skammen over å ønske det."
+      text: "Jeg drømmer om å bli tatt vare på, og føler meg egoistisk for å ville det.",
+      suggestion: "Hvis vi blir litt ved ønsket, hvilken følelse følger med, og hva frykter «egoist»-delen vil skje?"
     },
     "dp_empathic-explorations_case-nina_08": {
       text: "Jeg tar på meg alt så ingen blir skuffet over meg.",
-      suggestion: "Du bærer så mye for at ingen skal bli skuffet, og belastningen av det viser seg i kroppen."
+      suggestion: "Når du holder den byrden, hva er det tyngste stykket nå, og hvilken grense ville kroppen din takket deg for?"
     },
     "dp_empathic-explorations_case-nina_09": {
-      text: "Jeg sammenligner meg med andre mødre, og jeg krymper inni meg.",
-      suggestion: "Sammenligning krymper deg raskt og treffer det lille ikke-god-nok-stedet."
+      text: "Jeg sammenligner meg med andre mødre og føler meg liten.",
+      suggestion: "Når «liten» dukker opp, hvor i kroppen er den, og hva trenger den lille delen mest i dag?"
     },
     "dp_empathic-explorations_case-nina_10": {
-      text: "Om kvelden krasjer jeg etter å ha holdt alt sammen hele dagen.",
-      suggestion: "Om kvelden, når det å holde seg sammen stopper, ser følelsene endelig ut til å komme fram."
+      text: "Jeg krasjer om kvelden etter å ha holdt meg sammen hele dagen.",
+      suggestion: "Når du ser for deg krasjet, hvilken følelse slipper endelig gjennom, og hvordan kunne et mildt kveldsritual for den delen se ut?"
     },
 
     // Aisha
     "dp_empathic-explorations_case-aisha_01": {
       text: "Hvis et svar ikke kommer, kjennes det som om det åpner seg et hull i brystet, og jeg får ikke puste.",
-      suggestion: "Når svaret ikke kommer, er det som om det åpner seg et hull i brystet og alt i deg begynner å falle."
+      suggestion: "Hvis vi blir ved kanten av det hullet, hvor sitter pusten fast, og hva trenger den vettskremte delen akkurat nå?"
     },
     "dp_empathic-explorations_case-aisha_02": {
       text: "Jeg går fra «ikke forlat meg» til «la meg være i fred» på sekunder.",
-      suggestion: "Svingningen går så fort, nesten som om frykten for å miste noen vipper rett over i å skyve dem bort."
+      suggestion: "I pustet rett før det snur, hvilken følelse blinker – tap, raseri – og hva vil den at du skal gjøre for å føle deg trygg?"
     },
     "dp_empathic-explorations_case-aisha_03": {
       text: "Noen ganger klorer jeg meg selv for å kjenne noe som er virkelig.",
-      suggestion: "Trangen til å klore ser ut til å komme når tomheten blir nesten uutholdelig og du trenger noe virkelig for å bryte gjennom."
+      suggestion: "Når du setter ord på trangen, hvor i kroppen sitter tomheten, og om den hadde form eller temperatur – hvordan er den?"
     },
     "dp_empathic-explorations_case-aisha_04": {
-      text: "I det øyeblikket du ser bort, føles det som om jeg blir sluppet.",
-      suggestion: "Følelsen av å bli sluppet kjennes svært ung, som om en gammel forlatthet plutselig er her igjen."
+      text: "Når du ser bort, føles det som om jeg blir sluppet.",
+      suggestion: "Hvis vi blir ved den følelsen av å bli sluppet i ett sakte pust, hvor gammel kjennes du, og hva trengte den yngre delen da?"
     },
     "dp_empathic-explorations_case-aisha_05": {
-      text: "Jeg tester folk fordi jeg må vite om de bryr seg nok til å bli.",
-      suggestion: "Å teste folk kjennes som en desperat måte å sjekke om du betyr nok til at de blir."
+      text: "Jeg tester folk for å se om de bryr seg.",
+      suggestion: "Når du ser for deg at du tester, hvilken frykt prøver du å få svar på, og hvordan ville det være å be direkte om omsorg – bare litt?"
     },
     "dp_empathic-explorations_case-aisha_06": {
-      text: "Farvel får rommet til å tippe.",
-      suggestion: "Farvel treffer så hardt at kroppen snurrer, som om adskillelse i seg selv blir desorienterende."
+      text: "Å ta farvel gjør meg svimmel.",
+      suggestion: "Når svimmelheten kommer, hvor i føttene kjenner du gulvet, og hva trenger du å høre for å vite at jeg fortsatt er her med deg?"
     },
     "dp_empathic-explorations_case-aisha_07": {
-      text: "Vennlighet får meg til å hulke, og en annen del av meg vil bare stikke.",
-      suggestion: "Vennlighet berører begge stedene samtidig, delen som sulter etter den, og delen som vil løpe."
+      text: "Vennlighet gjør at jeg både begynner å hulke og får lyst til å løpe.",
+      suggestion: "Når begge deler er der, hvilken del vil ta inn vennligheten og hvilken vil rømme – hva trenger hver av dem fra deg nå?"
     },
     "dp_empathic-explorations_case-aisha_08": {
-      text: "Det som ble gjort mot meg får meg til å føle meg skitten i min egen kropp.",
-      suggestion: "Den skitne følelsen høres ut som noe du bærer i kroppen fra det som ble gjort mot deg."
+      text: "Jeg føler meg skitten på grunn av det som ble gjort mot meg.",
+      suggestion: "Hvis vi forsiktig berører delen som føler seg tilsølt, hvilke ord eller bilder bærer den, og hva vil den aller helst at jeg skal vite?"
     },
     "dp_empathic-explorations_case-aisha_09": {
       text: "Jeg stirrer på døra for å være sikker på at du ikke avslutter tidlig.",
-      suggestion: "Øynene dine holder vakt ved døra, som om det å slappe av bare et sekund kunne bety å bli forlatt."
+      suggestion: "Når blikket ditt hviler på døra, hva frykter den årvåkne delen ville skje hvis den slapp litt taket i ett pust?"
     },
     "dp_empathic-explorations_case-aisha_10": {
-      text: "Hvis du avlyser, er det noe i meg som aldri vil komme tilbake.",
-      suggestion: "En avlysning kjennes ikke liten i det hele tatt; den lander som en skarp bekreftelse på at du kan bli droppet."
+      text: "Hvis du avlyser, vil jeg ikke komme tilbake.",
+      suggestion: "La oss bli litt ved stikket når du avlyser – hvor kjenner du det, og hva ville hjulpet den delen å føle seg holdt nok til å komme tilbake?"
     },
 
     // David
     "dp_empathic-explorations_case-david_01": {
       text: "Når hun sier at jeg er kald, brenner det i ansiktet og brystet blir hardt.",
-      suggestion: "Når «kald» lander, ser det harde brystet og det brennende ansiktet ut til å komme inn for å beskytte noe mer ømt."
+      suggestion: "Når vi merker brenningen og hardheten, hvilken smerte ligger like under, og hva ber den om som er vanskelig å vise?"
     },
     "dp_empathic-explorations_case-david_02": {
       text: "Hvis jeg ikke er best, føler jeg meg tom.",
-      suggestion: "Hvis du ikke er best, er det det hule stedet, som om noe viktig renner ut av deg."
+      suggestion: "La oss sitte litt ved tomheten – hvilken størrelse eller tekstur har den, og hva ser det ut til at den savner mest?"
     },
     "dp_empathic-explorations_case-david_03": {
-      text: "Når jeg føler meg dømt, glatter jeg skjorten og begynner å ramse opp prestasjoner.",
-      suggestion: "Å rette seg opp og ramse opp prestasjoner kjennes som å ta på rustning mot skam."
+      text: "Jeg glatter skjorten og ramser opp prestasjoner når jeg føler meg dømt.",
+      suggestion: "Når du ser for deg at du retter deg opp, hvilken følelse tar du på deg rustning mot, og hvordan ville det være å la meg se 1 % av den?"
     },
     "dp_empathic-explorations_case-david_04": {
       text: "Ros føles godt, men renner ut igjen.",
-      suggestion: "Ros kommer inn, men den ser ut til å være vanskelig å holde fast på, som om den ikke når delen som tviler."
+      suggestion: "Hvis vi holder igjen ett lite kompliment et sekund lenger, hvor lander det, og hva gjør det vanskelig å beholde?"
     },
     "dp_empathic-explorations_case-david_05": {
       text: "Jeg sjekker telefonen i vanskelige samtaler.",
-      suggestion: "Blikket mot telefonen kjennes som en rask utgang når nærhet eller kritikk begynner å svi."
+      suggestion: "I det øyeblikket blikket faller, hvilken følelse skyter opp, og hva ville hjulpet den delen å bli litt lenger?"
     },
     "dp_empathic-explorations_case-david_06": {
-      text: "Når barna gråter, blir jeg utålmodig før jeg engang skjønner hvorfor.",
-      suggestion: "Barnas tårer ser ut til å vekke noe i deg som er vanskelig å bære, og utålmodigheten kommer raskt."
+      text: "Når barna gråter, blir jeg utålmodig.",
+      suggestion: "Når du ser for deg tårene, hva skjer i kroppen, og hva trenger den utålmodige delen for å kunne mykne?"
     },
     "dp_empathic-explorations_case-david_07": {
       text: "Å innrømme at jeg tar feil får ansiktet til å brenne.",
-      suggestion: "Den brennende følelsen rundt å ta feil ser ut til å henge sammen med en reell frykt for å bli sett som liten eller mislykket."
+      suggestion: "Bli ved brenningen i ett pust – hva er den redd for å bli sett som, og hva ville du ønske ble forstått om deg der?"
     },
     "dp_empathic-explorations_case-david_08": {
-      text: "Siden affæren føles nettene matte, flate og tunge.",
-      suggestion: "Nettene er flate og tunge, og det kjennes som om det ligger noe under dem som ikke er blitt sagt."
+      text: "Siden affæren har nettene føltes flate og tunge.",
+      suggestion: "Når du merker de flate, tunge nettene, hvilken svak følelse ligger under, og hva skulle den ønske du kunne si?"
     },
     "dp_empathic-explorations_case-david_09": {
-      text: "Jeg vil at folk skal legge merke til og anerkjenne det jeg gjør.",
-      suggestion: "Ønsket om anerkjennelse ser ut til å bære en sult etter å bli sett og vite at du betyr noe."
+      text: "Jeg vil ha anerkjennelse for det jeg gjør.",
+      suggestion: "Når du holder ønsket, hvilken følelse stiger når anerkjennelsen uteblir, og hva trenger den mest fra de du er glad i?"
     },
     "dp_empathic-explorations_case-david_10": {
-      text: "Tanken på å være ordinær kjennes uutholdelig for meg.",
-      suggestion: "«Ordinær» høres ut som mer enn gjennomsnittlig; det ser ut til å berøre en dyp frykt for å være lite verdt."
+      text: "Jeg hater å være ordinær.",
+      suggestion: "Når «ordinær» dukker opp, hva betyr det i kroppen, og hvilken lengsel peker det mot?"
     },
 
     // Marcus
     "dp_empathic-explorations_case-marcus_01": {
       text: "De fleste dager er jeg nummen, og så treffer en bølge helt ut av det blå.",
-      suggestion: "De fleste dager holder nummenheten stand, og så kommer bølgen som om følelsen bryter gjennom på én gang."
+      suggestion: "Det finnes en kant før bølgen; hvis vi holder oss nær den kanten, hvilket kroppssignal sier at den kommer, og hva hjelper deg å ri 1 % av den nå?"
     },
     "dp_empathic-explorations_case-marcus_02": {
-      text: "Mareritt river meg våken, og etterpå føler jeg meg både oppskrudd og hul.",
-      suggestion: "Oppskrudd og tom står side om side, kroppen på vakt mens alt annet føles langt unna."
+      text: "Mareritt rykker meg våken, og jeg føler meg både oppskrudd og tom.",
+      suggestion: "Akkurat her med oppskrudd og tom – hvilken er sterkest nå, og hva trenger den delen av deg fra oss i dette øyeblikket?"
     },
     "dp_empathic-explorations_case-marcus_03": {
       text: "Folkemengder gjør meg spent, så jeg holder meg i utkanten.",
-      suggestion: "I folkemengder flytter kroppen seg raskt mot kanten, som om nærhet og eksponering blir for mye."
+      suggestion: "Når du ser for deg kanten, hvor i kroppen er spenningen høyest, og hvordan ville trygghet kjennes der i ett pust?"
     },
     "dp_empathic-explorations_case-marcus_04": {
       text: "Stillheten i leiligheten kjennes tung.",
-      suggestion: "Den tunge stillheten ser ut til å legge seg rett over deg, nesten som om rommet fylles av det som er holdt tilbake."
+      suggestion: "Når den tunge stillheten lander, hvor kjenner du den mest, og om den hadde en vekt eller farge – hvordan ville den vært?"
     },
     "dp_empathic-explorations_case-marcus_05": {
-      text: "Etter jobb sitter jeg i bilen og utsetter å gå opp.",
-      suggestion: "Det å sitte i bilen kjennes som en pause før du møter det som venter der oppe."
+      text: "Jeg sitter i bilen etter jobb for å slippe å gå opp.",
+      suggestion: "Når du ser for deg at du sitter der, hvilken følelse er du ikke klar til å møte, og hva ville den trenge for å ta ett lite steg mot døra?"
     },
     "dp_empathic-explorations_case-marcus_06": {
       text: "Jeg har lyset dempet og unngår telefoner.",
-      suggestion: "Det dempede lyset og de ubesvarte telefonene ser ut til å hjelpe med å holde verden på avstand."
+      suggestion: "Når du ser for deg dempet lys, hva sier kroppen om kontakt akkurat nå, og hvor finnes den minste åpningen for kontakt?"
     },
     "dp_empathic-explorations_case-marcus_07": {
       text: "Gode øyeblikk kjennes uvirkelige, som om de er bak glass.",
-      suggestion: "Gode øyeblikk er der, men de blir bak glass, ikke helt nær nok til å kjennes virkelige."
+      suggestion: "Hvis vi holder fast ved én liten god ting, hvordan registrerer kroppen den, og hva blokkerer den fra å komme nærmere?"
     },
     "dp_empathic-explorations_case-marcus_08": {
-      text: "En plutselig lyd skyter gjennom meg, og jeg skvetter.",
-      suggestion: "Skvettingen kommer med en gang, og det ser ut til at kroppen fortsatt venter trussel før hodet rekker å følge med."
+      text: "Plutselige lyder får meg til å skvette.",
+      suggestion: "Bli litt ved skvettingen i ett pust – hva dukker opp rett etter, og hva hjelper deg å lande raskest i de øyeblikkene?"
     },
     "dp_empathic-explorations_case-marcus_09": {
       text: "Jeg tar ikke telefonen når familien ringer, fordi jeg ikke vil kjenne på noe.",
-      suggestion: "Å ikke svare familien ser ut til å være en måte å hindre smertefulle følelser i å bli satt i gang."
+      suggestion: "Når du legger merke til unngåelsen, hvilken følelse venter på den andre siden av samtalen, og hvordan kunne støtte se ut for å våge å berøre 1 % av den?"
     },
     "dp_empathic-explorations_case-marcus_10": {
       text: "En del av meg tror at jeg har det best alene for alltid.",
-      suggestion: "Delen som sier at alene er best høres beskyttende ut, som om den prøver hardt å hindre at du blir såret igjen."
+      suggestion: "Hvis vi sitter med den delen med vennlighet, hva beskytter den deg mest mot, og hva ville den trenge for å våge et lite steg mot nærhet?"
     },
 
     // Empatisk fremkalling (Empathic Evocations)
@@ -2723,7 +2719,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Å ikke vite sender magen i fritt fall – som en heis som stuper."
     },
     "dp_empathic-evocations_case-michael_08": {
-      text: "Jeg smeller igjen dører fordi det føles bedre enn å la meg kjenne meg liten.",
+      text: "Jeg smeller igjen dører fordi det føles bedre enn å føle meg liten.",
       suggestion: "Det store smellet er der for å dekke over det lille stikket inni."
     },
     "dp_empathic-evocations_case-michael_09": {
@@ -3158,7 +3154,7 @@ export const STATEMENT_TRANSLATIONS = {
 
     // Laura
     "dp_empathic-conjectures_case-laura_01": {
-      text: "Når noen er vennlige mot meg, blir jeg fort mistenksom.",
+      text: "Vennlighet gjør meg mistenksom.",
       suggestion: "Du tar avstand; jeg lurer på om nærhet vekker en gammel frykt for svik."
     },
     "dp_empathic-conjectures_case-laura_02": {
@@ -3166,7 +3162,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Kroppen din husker fare; kanskje kommer frykten før hodet rekker å forstå."
     },
     "dp_empathic-conjectures_case-laura_03": {
-      text: "En del av meg føler skyld over at jeg virker så nummen.",
+      text: "Jeg føler meg skyldig fordi jeg ikke føler så mye.",
       suggestion: "Du dømmer nummenheten; jeg lurer på om den er en beskytter som vokter en veldig sår sorg."
     },
     "dp_empathic-conjectures_case-laura_04": {
@@ -3300,7 +3296,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Du ber og skyver; kan det være at både lengselen og frykten er enorme?"
     },
     "dp_empathic-conjectures_case-aisha_05": {
-      text: "Hvis du avlyser, er det en del av meg som aldri vil komme tilbake.",
+      text: "Hvis du avlyser, vil jeg ikke komme tilbake.",
       suggestion: "Det stikker; jeg lurer på om det kjennes tryggere å avvise først enn å risikere å bli droppet."
     },
     "dp_empathic-conjectures_case-aisha_06": {
@@ -3308,15 +3304,15 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Du føler deg for mye; kanskje er det skammen fra det du ble utsatt for som taler."
     },
     "dp_empathic-conjectures_case-aisha_07": {
-      text: "Vennlighet får meg til å hulke, og en annen del vil bare stikke.",
+      text: "Vennlighet får meg til å hulke og ville løpe.",
       suggestion: "Det lander stort; jeg gjetter at en del lengter etter det, mens en annen forventer at det forsvinner."
     },
     "dp_empathic-conjectures_case-aisha_08": {
-      text: "Jeg tester folk for å finne ut om de virkelig bryr seg.",
+      text: "Jeg tester folk for å se om de bryr seg.",
       suggestion: "Du tester; kanskje prøver du å bevise at du betyr noe før du våger å stole på."
     },
     "dp_empathic-conjectures_case-aisha_09": {
-      text: "Etter at jeg har slått ut, vender jeg meg hardt mot meg selv.",
+      text: "Jeg hater meg selv etter at jeg har slått ut.",
       suggestion: "Du blir hard mot deg selv; jeg lurer på om det dekker en sorg over hvor alene du kjenner deg."
     },
     "dp_empathic-conjectures_case-aisha_10": {
@@ -3346,7 +3342,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Det kjennes ydmykende; jeg lurer på om det treffer en gammel skam over å ta feil."
     },
     "dp_empathic-conjectures_case-david_06": {
-      text: "I vanskelige samtaler griper jeg etter telefonen og glipper ut.",
+      text: "Jeg sjekker telefonen under vanskelige samtaler.",
       suggestion: "Du søker utvei; kanskje føles nærhet farlig når du forventer å bli bedømt."
     },
     "dp_empathic-conjectures_case-david_07": {
@@ -3368,7 +3364,7 @@ export const STATEMENT_TRANSLATIONS = {
 
     // Marcus
 	    "dp_empathic-conjectures_case-marcus_01": {
-	      text: "De fleste dager føler jeg meg avstengt, og ingenting slipper inn.",
+	      text: "Jeg føler ingenting de fleste dager.",
 	      suggestion: "Du føler deg flat; jeg lurer på om nummenheten beskytter deg mot mye smerte."
 	    },
 	    "dp_empathic-conjectures_case-marcus_02": {
@@ -3376,7 +3372,7 @@ export const STATEMENT_TRANSLATIONS = {
 	      suggestion: "Du overdøver stillheten; kanskje stillheten bringer minner og sorg tettere på."
 	    },
 	    "dp_empathic-conjectures_case-marcus_03": {
-	      text: "Jeg passer på å ha ryggen mot veggen.",
+	      text: "Jeg sitter med ryggen mot veggen.",
 	      suggestion: "Du søker trygghet; jeg lurer på om kroppen din fortsatt står i beredskap for fare."
 	    },
 	    "dp_empathic-conjectures_case-marcus_04": {
@@ -3621,7 +3617,7 @@ export const STATEMENT_TRANSLATIONS = {
 
 	    // Nina
 	    "dp_staying-in-contact-intense-affect_case-nina_01": {
-	      text: "Jeg klarer ikke slutte å gråte, og så skammer jeg meg for hvor mye jeg trenger.",
+	      text: "Jeg klarer ikke slutte å gråte, og jeg skammer meg.",
 	      suggestion: "Tårer gir mening her. La oss roe pusten sammen og kjenne at stolen støtter deg, mens vi lar litt av gråten få bevege seg."
 	    },
 	    "dp_staying-in-contact-intense-affect_case-nina_02": {
@@ -3668,7 +3664,7 @@ export const STATEMENT_TRANSLATIONS = {
 	    },
 	    "dp_staying-in-contact-intense-affect_case-aisha_02": {
 	      text: "Tomheten brenner og jeg vil skade meg selv.",
-	      suggestion: "Takk for at du sier det. La oss jorde først i stolen og føttene dine. Vi berører bare den aller minste kanten av den brennende tomheten i ett pust, og så trekker vi oss tilbake og jorder igjen."
+	      suggestion: "Takk for at du sier det. Sikkerhet først—kjenn stolen, pust med meg—vi berører en bitte liten del av den brennende tomheten i ett pust, og så kommer vi tilbake."
 	    },
 	    "dp_staying-in-contact-intense-affect_case-aisha_03": {
 	      text: "Jeg vil stikke fra dette rommet.",
@@ -3929,7 +3925,7 @@ export const STATEMENT_TRANSLATIONS = {
 	    },
 	    "dp_self-disclosure_case-laura_04": {
 	      text: "Har du jobbet med traumer som mine før?",
-	      suggestion: "Ja. Når jeg sitter her med deg nå, merker jeg omsorg og varsomhet i meg, og jeg vil holde et tempo som kjennes trygt for deg."
+	      suggestion: "Ja—og nå som jeg sitter her med deg, kjenner jeg meg beskyttende og opptatt av at vi holder et tempo som kjennes trygt for deg."
 	    },
     "dp_self-disclosure_case-laura_05": {
       text: "Får historien min deg til å tenke mindre om meg?",
@@ -4117,10 +4113,10 @@ export const STATEMENT_TRANSLATIONS = {
     },
     "dp_self-disclosure_case-david_09": {
       text: "Er du gift? Får det deg til å dømme affæren min?",
-      suggestion: "Jeg er i et forhold, og jeg vil svare tydelig at jeg ikke er her for å dømme deg. Jeg er opptatt av å forstå hva som ledet dit, og hva du vil annerledes nå."
+      suggestion: "Jeg er i et forhold, og jeg er ikke her for å dømme—jeg fokuserer på å forstå hva som ledet dit, og hva du vil annerledes nå."
     },
     "dp_self-disclosure_case-david_10": {
-      text: "Respekterer du meg egentlig?",
+      text: "Respekterer du meg?",
       suggestion: "Det gjør jeg—jeg kjenner respekt for drivkraften din, og vil hjelpe deg kanalisere den på måter som bringer deg nærmere det du verdsetter."
     },
 
@@ -4138,7 +4134,7 @@ export const STATEMENT_TRANSLATIONS = {
       suggestion: "Jeg kjenner tyngden av det og holder meg stødig med vilje slik at vi kan berøre små biter sammen."
     },
 	    "dp_self-disclosure_case-marcus_04": {
-	      text: "Vil du ha meg her i det hele tatt?",
+	      text: "Vil du i det hele tatt ha meg her?",
 	      suggestion: "Det vil jeg—jeg er glad for at du er her, og jeg vil fortsette å møte opp ved siden av deg."
 	    },
     "dp_self-disclosure_case-marcus_05": {
@@ -4178,7 +4174,7 @@ export const STATEMENT_TRANSLATIONS = {
 	    },
 	    "dp_marker-recognition-chairwork_case-sara_03": {
 	      text: "Hver gang jeg får tårer, sier en annen del: «Ta deg sammen.»",
-	      suggestion: "Det høres ut som en tydelig kritikermarkør. Vil du prøve en kort to-stol-øvelse: sitte som kritikeren i én kort runde, og så bytte stol og svare fra den såre siden? Jeg veileder rundene."
+	      suggestion: "Det høres ut som en tydelig kritikermarkør. Vil du prøve å sitte som kritikeren i én kort runde, og så bytte og svare fra det ømme stedet? Jeg veileder rundene."
 	    },
 
     // Michael
@@ -4240,7 +4236,7 @@ export const STATEMENT_TRANSLATIONS = {
     // Nina
 	    "dp_marker-recognition-chairwork_case-nina_01": {
 	      text: "En stemme sier: «Ikke be om hjelp, du er egoistisk.»",
-	      suggestion: "Det er en tydelig kritiker-markør. Vil du prøve en kort to-stol-øvelse: snakke som den stemmen i ett minutt, og så bytte stol og la den trengende siden svare? Jeg veileder og holder det trygt."
+	      suggestion: "Det er en tydelig kritiker-markør. Kan du prøve å snakke som den stemmen i ett minutt, og så bytte og la den trengende siden svare? Jeg veileder og holder det trygt."
 	    },
 	    "dp_marker-recognition-chairwork_case-nina_02": {
 	      text: "Jeg vil si til eksen at jeg følte meg forlatt med alt ansvaret og all skylden.",
@@ -4315,7 +4311,7 @@ export const STATEMENT_TRANSLATIONS = {
 	    },
 	    "dp_alliance-repair_case-michael_02": {
 	      text: "Du fortsetter å presse følelser; jeg sa jeg trenger verktøy.",
-	      suggestion: "Takk for at du sier det. Du har rett: Jeg lente meg for langt inn i følelsene uten å balansere med verktøy, og jeg beklager at jeg ikke fanget det du ba om. Det vil jeg eie og justere sammen med deg, så la oss planlegge en kort følelsessjekk og deretter en konkret strategi hver gang."
+	      suggestion: "Det er helt rett å si fra. Jeg lente meg for mye mot følelser, uten å balansere med verktøy. La oss planlegge sammen: en kort følelsessjekk, så ett konkret grep hver gang."
 	    },
 	    "dp_alliance-repair_case-michael_03": {
 	      text: "Da du pauset og så på meg, følte jeg meg dømt.",
@@ -4333,7 +4329,7 @@ export const STATEMENT_TRANSLATIONS = {
 	    },
 	    "dp_alliance-repair_case-jason_03": {
 	      text: "Jeg følte meg presset da du spurte om kroppen med en gang.",
-	      suggestion: "Takk for at du sier det. Du har rett, jeg gikk for fort fram, og det beklager jeg. Hva om jeg spør om lov først og holder spørsmålene lettere, og så sier du fra om det er ok å gå ett steg dypere?"
+	      suggestion: "Takk for at du sier det. Jeg gikk for fort. Kan jeg spørre om lov først og holde spørsmålene litt lettere—og så sier du fra om det er ok å gå et steg dypere?"
 	    },
 
     // Laura
@@ -4347,7 +4343,7 @@ export const STATEMENT_TRANSLATIONS = {
 	    },
 	    "dp_alliance-repair_case-laura_03": {
 	      text: "Du snakket fort, og jeg hang ikke med.",
-	      suggestion: "Takk for at du sier det. Jeg hører at tempoet mitt ble for høyt, og det vil jeg eie. Jeg vil snakke saktere og sjekke inn oftere; stopp meg når som helst hvis det går for fort."
+	      suggestion: "Takk for at du sier det. Jeg vil senke tempoet og sjekke inn oftere; stopp meg når som helst hvis det kjennes for fort."
 	    },
 
     // Carlos
@@ -4357,7 +4353,7 @@ export const STATEMENT_TRANSLATIONS = {
 	    },
 	    "dp_alliance-repair_case-carlos_02": {
 	      text: "Du ber meg bremse hele tiden; det høres mykt ut.",
-	      suggestion: "Takk for at du er tydelig. Jeg hører at ordvalget mitt landet feil. Jeg respekterer at du vil ha styrke, og jeg vil justere ved å kalle det å holde kontroll og holde dette fast og praktisk."
+	      suggestion: "Takk for at du er tydelig. Jeg respekterer at du vil være sterk. La oss kalle det å holde kontroll, og så holder vi det fast og praktisk."
 	    },
 	    "dp_alliance-repair_case-carlos_03": {
 	      text: "Da jeg snakket om ungen min, så du bort og jeg følte meg avvist.",
@@ -4385,7 +4381,7 @@ export const STATEMENT_TRANSLATIONS = {
 	    },
 	    "dp_alliance-repair_case-aisha_02": {
 	      text: "Å avslutte presis på tiden føltes som at du slapp meg.",
-	      suggestion: "Takk for at du sier det. Jeg ser hvordan avslutningen kan kjennes brå, og jeg beklager at det landet sånn. Jeg vil gi litt mer varsel, og vi kan planlegge et kort anker før vi runder av."
+	      suggestion: "Takk for at du sier det. Jeg ser hvordan avslutningen kan kjennes brå. Jeg vil gi litt mer varsel, og vi kan lage et kort anker før vi runder av."
 	    },
 	    "dp_alliance-repair_case-aisha_03": {
 	      text: "Da du foreslo en pause, hørtes det ut som om du ga opp meg.",
@@ -4399,7 +4395,7 @@ export const STATEMENT_TRANSLATIONS = {
 	    },
 	    "dp_alliance-repair_case-david_02": {
 	      text: "Du er for opptatt av følelser. Jeg ba om strategi.",
-	      suggestion: "Takk for tilbakemeldingen. Du har rett i at jeg lente meg for mye mot følelser og for lite mot strategi, og det beklager jeg. Det vil jeg eie. La oss planlegge sammen: en kort sjekk på det som treffer, og så konkrete strategiøvelser hver time."
+	      suggestion: "Det er en fair tilbakemelding. La oss planlegge sammen: en kort sjekk på det som treffer, og så konkrete strategiøvelser hver time."
 	    },
 	    "dp_alliance-repair_case-david_03": {
 	      text: "Det kjentes som om du tok konas parti.",
@@ -4417,7 +4413,7 @@ export const STATEMENT_TRANSLATIONS = {
 	    },
 	    "dp_alliance-repair_case-marcus_03": {
 	      text: "Da du spurte om marerittene, følte jeg meg presset.",
-	      suggestion: "Takk for at du sier det. Jeg hører at spørsmålet mitt kjentes pressende, og det vil jeg eie. Jeg skal be om samtykke før vi berører traumeinnhold og holde det i veldig små, jordede trinn."
+	      suggestion: "Takk for at du sier det. Jeg vil be om samtykke før vi berører traumeinnhold, og holde det i veldig små trinn med jording først."
 	    }
   }
 };

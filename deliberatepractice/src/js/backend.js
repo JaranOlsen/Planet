@@ -50,7 +50,9 @@ async function getJson(path) {
 /**
  * Persist user feedback about a statement/response.
  * Expects a Supabase table `feedback` with matching columns and RLS policy that allows
- * inserts using the anon key.
+ * inserts using the anon key. Recommended columns now include:
+ * statement_id, statement_text, suggestion_text, content_revision, track,
+ * skill_id, case_id, language_id, order_index, reason, details, user_agent, created_at.
  */
 export async function submitFeedback(payload) {
   return postJson("/rest/v1/feedback", payload);

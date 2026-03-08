@@ -67,10 +67,17 @@ const importSongBtn = document.getElementById("importSongBtn");
 const importSongInput = document.getElementById("importSongInput");
 const clearSongBtn = document.getElementById("clearSongBtn");
 const playBtn = document.getElementById("playBtn");
+const speakBtn = document.getElementById("speakBtn");
 const modeBarBtn = document.getElementById("modeBarBtn");
 const modeSongBtn = document.getElementById("modeSongBtn");
+const speechOnlyBtn = document.getElementById("speechOnlyBtn");
+const speechWithMetroBtn = document.getElementById("speechWithMetroBtn");
 const tempoInput = document.getElementById("tempoInput");
 const metroVolume = document.getElementById("metroVolume");
+const outputScopeSelectedBtn = document.getElementById("outputScopeSelectedBtn");
+const outputScopeAllBtn = document.getElementById("outputScopeAllBtn");
+const moreActions = document.getElementById("moreActions");
+const uiStatusLive = document.getElementById("uiStatusLive");
 
 const cells = [];
 const active = Array(TOTAL_STEPS).fill(false);
@@ -107,6 +114,16 @@ let sheetUnitsByBar = [];
 let activeTakadimiUnit = null;
 let activeNoteValueUnit = null;
 let activeSheetUnit = null;
+let outputScope = "selected";
+let isSpeaking = false;
+let speechMode = "speech-only";
+let speechTimerId = null;
+let speechCompletionTimerId = null;
+let speechSessionToken = 0;
+let speechStartedMetronome = false;
+let speechSamples = null;
+let speechSampleRate = 0;
+let activeSpeechSources = [];
 
 const clampTempo = (value) => {
   const tempo = Number(value);
@@ -125,6 +142,185 @@ const clampVolume = (value) => {
 };
 
 const getMetronomeVolume = () => clampVolume(metroVolume.value) / 100;
+
+const announceStatus = (message) => {
+  if (!uiStatusLive) {
+    return;
+  }
+  uiStatusLive.textContent = "";
+  window.setTimeout(() => {
+    uiStatusLive.textContent = message;
+  }, 25);
+};
+
+const isTextEditingTarget = (target) => {
+  if (!target) {
+    return false;
+  }
+  if (target instanceof HTMLElement && target.isContentEditable) {
+    return true;
+  }
+  const tagName = target.tagName?.toLowerCase();
+  return (
+    tagName === "input" ||
+    tagName === "textarea" ||
+    tagName === "select" ||
+    tagName === "button"
+  );
+};
+
+const supportsSpeechSamples = () =>
+  typeof window !== "undefined" &&
+  (typeof window.AudioContext === "function" ||
+    typeof window.webkitAudioContext === "function");
+
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+const createSyllableSample = (ctx, syllable) => {
+  const vowelProfiles = {
+    a: [
+      { f: 800, bw: 150, gain: 1.0 },
+      { f: 1200, bw: 180, gain: 0.72 },
+      { f: 2500, bw: 320, gain: 0.34 },
+    ],
+    i: [
+      { f: 300, bw: 100, gain: 0.9 },
+      { f: 2300, bw: 220, gain: 1.0 },
+      { f: 3000, bw: 260, gain: 0.42 },
+    ],
+  };
+
+  const configs = {
+    ta: {
+      duration: 0.155,
+      f0Start: 182,
+      f0End: 164,
+      onsetMs: 0.004,
+      burstMs: 0.011,
+      burstGain: 0.5,
+      burstFreq: 5200,
+      vowel: "a",
+      nasalMs: 0,
+    },
+    ka: {
+      duration: 0.165,
+      f0Start: 168,
+      f0End: 152,
+      onsetMs: 0.01,
+      burstMs: 0.018,
+      burstGain: 0.46,
+      burstFreq: 2600,
+      vowel: "a",
+      nasalMs: 0,
+    },
+    di: {
+      duration: 0.148,
+      f0Start: 214,
+      f0End: 196,
+      onsetMs: 0.005,
+      burstMs: 0.008,
+      burstGain: 0.36,
+      burstFreq: 3800,
+      vowel: "i",
+      nasalMs: 0,
+    },
+    mi: {
+      duration: 0.17,
+      f0Start: 208,
+      f0End: 190,
+      onsetMs: 0.002,
+      burstMs: 0.004,
+      burstGain: 0.1,
+      burstFreq: 1700,
+      vowel: "i",
+      nasalMs: 0.045,
+      nasalFreq: 245,
+    },
+  };
+  const cfg = configs[syllable] ?? configs.ta;
+  const formants = vowelProfiles[cfg.vowel] ?? vowelProfiles.a;
+  const sampleRate = ctx.sampleRate;
+  const frameCount = Math.floor(cfg.duration * sampleRate);
+  const buffer = ctx.createBuffer(1, frameCount, sampleRate);
+  const data = buffer.getChannelData(0);
+  const attack = 0.003;
+  const release = 0.04;
+  const twoPi = Math.PI * 2;
+
+  for (let i = 0; i < frameCount; i += 1) {
+    const t = i / sampleRate;
+    const progress = t / cfg.duration;
+    const f0 = cfg.f0Start + (cfg.f0End - cfg.f0Start) * progress;
+    const voicedOn = clamp((t - cfg.onsetMs) / 0.012, 0, 1);
+
+    let voiced = 0;
+    const harmonicCount = 24;
+    for (let h = 1; h <= harmonicCount; h += 1) {
+      const harmonicFreq = f0 * h;
+      let harmonicGain = 0;
+      for (let j = 0; j < formants.length; j += 1) {
+        const formant = formants[j];
+        const distance = (harmonicFreq - formant.f) / formant.bw;
+        harmonicGain += formant.gain * Math.exp(-(distance * distance));
+      }
+      if (harmonicGain < 0.0001) {
+        continue;
+      }
+      voiced +=
+        (harmonicGain / h) * Math.sin(twoPi * harmonicFreq * t + h * 0.13);
+    }
+    voiced *= voicedOn * 0.85;
+
+    const burstPhase = clamp(t / cfg.burstMs, 0, 1);
+    const burstEnv = burstPhase >= 1 ? 0 : (1 - burstPhase) ** 2;
+    const noise = Math.random() * 2 - 1;
+    const burstBand =
+      0.7 * Math.sin(twoPi * cfg.burstFreq * t) +
+      0.3 * Math.sin(twoPi * cfg.burstFreq * 1.7 * t);
+    const burst = noise * burstBand * burstEnv * cfg.burstGain;
+
+    let nasal = 0;
+    if (cfg.nasalMs && cfg.nasalMs > 0 && t < cfg.nasalMs) {
+      const nasalEnv = (1 - t / cfg.nasalMs) * 0.24;
+      nasal =
+        nasalEnv *
+        (Math.sin(twoPi * (cfg.nasalFreq ?? 240) * t) +
+          0.4 * Math.sin(twoPi * (cfg.nasalFreq ?? 240) * 2 * t));
+    }
+
+    const breath = (Math.random() * 2 - 1) * voicedOn * 0.02;
+
+    const attackEnv = clamp(t / attack, 0, 1);
+    const releaseEnv = clamp((cfg.duration - t) / release, 0, 1);
+    const env = Math.min(attackEnv, releaseEnv) ** 0.92;
+    data[i] = (burst + voiced + nasal + breath) * env;
+  }
+
+  let peak = 0;
+  for (let i = 0; i < frameCount; i += 1) {
+    peak = Math.max(peak, Math.abs(data[i]));
+  }
+  if (peak > 0.001) {
+    const scale = 0.75 / peak;
+    for (let i = 0; i < frameCount; i += 1) {
+      data[i] *= scale;
+    }
+  }
+  return buffer;
+};
+
+const ensureSpeechSamples = (ctx) => {
+  if (speechSamples && speechSampleRate === ctx.sampleRate) {
+    return;
+  }
+  speechSamples = {
+    ta: createSyllableSample(ctx, "ta"),
+    ka: createSyllableSample(ctx, "ka"),
+    di: createSyllableSample(ctx, "di"),
+    mi: createSyllableSample(ctx, "mi"),
+  };
+  speechSampleRate = ctx.sampleRate;
+};
 
 const normalizeTies = () => {
   tied[0] = false;
@@ -202,6 +398,7 @@ const selectSongBar = (index) => {
     selectedBarIndex = null;
     editorDirty = false;
     syncTrackControls();
+    updateOutput();
     return;
   }
   selectedBarIndex = index;
@@ -231,7 +428,8 @@ const renderSongTrack = () => {
   }
 
   songBars.forEach((bar, index) => {
-    const item = document.createElement("div");
+    const item = document.createElement("button");
+    item.type = "button";
     item.className = "track-bar";
     if (index === activeSongIndex) {
       item.classList.add("is-playing");
@@ -239,14 +437,32 @@ const renderSongTrack = () => {
     if (index === selectedBarIndex) {
       item.classList.add("is-selected");
     }
+    item.setAttribute(
+      "aria-label",
+      `Select bar ${index + 1}${index === selectedBarIndex ? ", selected" : ""}`
+    );
+    item.setAttribute(
+      "aria-pressed",
+      index === selectedBarIndex ? "true" : "false"
+    );
     item.dataset.index = index.toString();
     item.addEventListener("click", () => {
       selectSongBar(index);
     });
 
+    const labelWrap = document.createElement("div");
+    labelWrap.className = "track-label-wrap";
+
     const label = document.createElement("div");
     label.className = "track-label";
     label.textContent = `Bar ${index + 1}`;
+
+    const hitCount = getOnsetSetForBar(bar).size;
+    const detail = document.createElement("div");
+    detail.className = "track-detail";
+    detail.textContent = `${hitCount} ${hitCount === 1 ? "hit" : "hits"}`;
+
+    labelWrap.append(label, detail);
 
     const steps = document.createElement("div");
     steps.className = "track-steps";
@@ -265,7 +481,7 @@ const renderSongTrack = () => {
       stepNodes.push(step);
     }
 
-    item.append(label, steps);
+    item.append(labelWrap, steps);
     songTrack.appendChild(item);
     trackStepNodes.push(stepNodes);
   });
@@ -314,6 +530,10 @@ const setActiveSongIndex = (index) => {
   const items = songTrack.querySelectorAll(".track-bar");
   items.forEach((item, itemIndex) => {
     item.classList.toggle("is-playing", itemIndex === index);
+    item.setAttribute(
+      "aria-pressed",
+      itemIndex === selectedBarIndex ? "true" : "false"
+    );
   });
 };
 
@@ -668,6 +888,57 @@ const buildTakadimiData = (activeState, tiedState) => {
   return { beats, text };
 };
 
+const buildSpeechBarsForCurrentMode = () => {
+  if (playMode === "song" && songBars.length > 0) {
+    return songBars;
+  }
+  return [snapshotBar()];
+};
+
+const buildSpeechEventsFromBar = (bar, barIndex = 0) => {
+  const takadimiData = buildTakadimiData(bar.active, bar.tied);
+  const events = [];
+  takadimiData.beats.forEach((beat, beatIndex) => {
+    if (beat.rest) {
+      return;
+    }
+    beat.units.forEach((unit) => {
+      events.push({
+        text: unit.text.toLowerCase(),
+        startStep: unit.start,
+        durationSteps: unit.length,
+        barIndex,
+        beatIndex,
+        syllableCount: 1,
+      });
+    });
+  });
+  return events;
+};
+
+const buildSpeechTimeline = (bars, tempo) => {
+  const safeTempo = clampTempo(tempo);
+  const msPerStep = (60_000 / safeTempo) / STEPS_PER_BEAT;
+  const events = bars.flatMap((bar, barIndex) =>
+    buildSpeechEventsFromBar(bar, barIndex).map((event) => {
+      const absoluteStep = barIndex * TOTAL_STEPS + event.startStep;
+      return {
+        ...event,
+        absoluteStep,
+        startMs: absoluteStep * msPerStep,
+        durationMs: event.durationSteps * msPerStep,
+      };
+    })
+  );
+
+  return {
+    events,
+    msPerStep,
+    totalSteps: bars.length * TOTAL_STEPS,
+    totalMs: bars.length * TOTAL_STEPS * msPerStep,
+  };
+};
+
 const createTakadimiCard = (labelText, takadimiData) => {
   const card = document.createElement("div");
   card.className = "beat-card";
@@ -811,11 +1082,45 @@ const createSheetCard = (labelText, sheetData) => {
   return { card, units };
 };
 
+const syncOutputScopeControls = () => {
+  outputScopeSelectedBtn.classList.toggle("is-active", outputScope === "selected");
+  outputScopeAllBtn.classList.toggle("is-active", outputScope === "all");
+  outputScopeSelectedBtn.setAttribute(
+    "aria-pressed",
+    outputScope === "selected" ? "true" : "false"
+  );
+  outputScopeAllBtn.setAttribute(
+    "aria-pressed",
+    outputScope === "all" ? "true" : "false"
+  );
+};
+
+const setOutputScope = (scope) => {
+  outputScope = scope === "all" ? "all" : "selected";
+  syncOutputScopeControls();
+  updateOutput();
+};
+
 const getBarsForOutput = () => {
   if (songBars.length === 0) {
-    return [snapshotBar()];
+    return [{ sourceIndex: 0, label: "Draft Bar", bar: snapshotBar() }];
   }
-  return songBars;
+
+  if (outputScope === "selected" && selectedBarIndex !== null) {
+    return [
+      {
+        sourceIndex: selectedBarIndex,
+        label: `Bar ${selectedBarIndex + 1}`,
+        bar: songBars[selectedBarIndex],
+      },
+    ];
+  }
+
+  return songBars.map((bar, index) => ({
+    sourceIndex: index,
+    label: `Bar ${index + 1}`,
+    bar,
+  }));
 };
 
 let sheetRenderWarningShown = false;
@@ -979,22 +1284,226 @@ const updateOutput = () => {
   activeNoteValueUnit = null;
   activeSheetUnit = null;
 
-  bars.forEach((bar, index) => {
+  bars.forEach(({ sourceIndex, label, bar }) => {
     const takadimiData = buildTakadimiData(bar.active, bar.tied);
-    const takadimiCard = createTakadimiCard(`Bar ${index + 1}`, takadimiData);
+    const takadimiCard = createTakadimiCard(label, takadimiData);
     outputBeats.appendChild(takadimiCard.card);
-    takadimiUnitsByBar[index] = takadimiCard.units;
+    takadimiUnitsByBar[sourceIndex] = takadimiCard.units;
 
     const noteValueData = buildNoteValueData(bar);
-    const noteValueCard = createNoteValueCard(`Bar ${index + 1}`, noteValueData);
+    const noteValueCard = createNoteValueCard(label, noteValueData);
     noteBeats.appendChild(noteValueCard.card);
-    noteValueUnitsByBar[index] = noteValueCard.units;
+    noteValueUnitsByBar[sourceIndex] = noteValueCard.units;
 
     const sheetSvg = buildSheetSvgForBar(bar);
-    const sheetCard = createSheetCard(`Bar ${index + 1}`, sheetSvg);
+    const sheetCard = createSheetCard(label, sheetSvg);
     sheetBeats.appendChild(sheetCard.card);
-    sheetUnitsByBar[index] = sheetCard.units;
+    sheetUnitsByBar[sourceIndex] = sheetCard.units;
   });
+};
+
+const syncSpeechModeControls = () => {
+  const isSpeechOnly = speechMode === "speech-only";
+  speechOnlyBtn.classList.toggle("is-active", isSpeechOnly);
+  speechWithMetroBtn.classList.toggle("is-active", !isSpeechOnly);
+  speechOnlyBtn.setAttribute("aria-pressed", isSpeechOnly ? "true" : "false");
+  speechWithMetroBtn.setAttribute("aria-pressed", isSpeechOnly ? "false" : "true");
+};
+
+const syncSpeechSupportControls = () => {
+  const supported = supportsSpeechSamples();
+  speakBtn.disabled = !supported;
+  speechOnlyBtn.disabled = !supported;
+  speechWithMetroBtn.disabled = !supported;
+  if (!supported) {
+    speakBtn.textContent = "Speech Unavailable";
+  } else if (!isSpeaking) {
+    speakBtn.textContent = "Speak";
+  }
+};
+
+const clearSpeechTimers = () => {
+  if (speechTimerId) {
+    clearTimeout(speechTimerId);
+    speechTimerId = null;
+  }
+  if (speechCompletionTimerId) {
+    clearTimeout(speechCompletionTimerId);
+    speechCompletionTimerId = null;
+  }
+};
+
+const stopActiveSpeechSources = () => {
+  activeSpeechSources.forEach((source) => {
+    try {
+      source.stop();
+    } catch (error) {
+      // Source may already be ended.
+    }
+  });
+  activeSpeechSources = [];
+};
+
+const playSpeechSampleAt = (event, startTime) => {
+  if (!audioContext || !speechSamples) {
+    return;
+  }
+  const sample = speechSamples[event.text] ?? speechSamples.ta;
+  if (!sample) {
+    return;
+  }
+  const eventStartTime = startTime + event.startMs / 1000;
+  const targetDuration = Math.max(0.045, event.durationMs / 1000);
+  const playbackRate = clamp(sample.duration / (targetDuration * 0.9), 0.75, 3.9);
+
+  const source = audioContext.createBufferSource();
+  const gain = audioContext.createGain();
+  source.buffer = sample;
+  source.playbackRate.value = playbackRate;
+  gain.gain.value = 0.95;
+  source.connect(gain);
+  gain.connect(audioContext.destination);
+
+  source.onended = () => {
+    activeSpeechSources = activeSpeechSources.filter((node) => node !== source);
+  };
+
+  source.start(eventStartTime);
+  source.stop(eventStartTime + Math.max(0.06, targetDuration * 1.08));
+  activeSpeechSources.push(source);
+};
+
+const cancelSpeechPlayback = (
+  reason = null,
+  { announce = true, keepMetronome = false } = {}
+) => {
+  const wasSpeaking = isSpeaking;
+  isSpeaking = false;
+  clearSpeechTimers();
+  speechSessionToken += 1;
+  stopActiveSpeechSources();
+
+  if (!keepMetronome && speechStartedMetronome && isPlaying) {
+    stopPlayback();
+  }
+  speechStartedMetronome = false;
+
+  if (wasSpeaking) {
+    speakBtn.textContent = "Speak";
+  }
+
+  if (announce && reason) {
+    announceStatus(reason);
+  }
+};
+
+const stopSpeechPlayback = (reason = "Speech stopped.") => {
+  cancelSpeechPlayback(reason);
+};
+
+const finalizeSpeechSession = (sessionToken, announce) => {
+  if (!isSpeaking || sessionToken !== speechSessionToken) {
+    return;
+  }
+  cancelSpeechPlayback(null, {
+    announce: false,
+    keepMetronome: true,
+  });
+  if (announce) {
+    announceStatus("Speech finished.");
+  }
+};
+
+const startSpeechPlayback = async ({ announce = true } = {}) => {
+  if (!supportsSpeechSamples()) {
+    syncSpeechSupportControls();
+    if (announce) {
+      announceStatus("Sample playback is unavailable in this browser.");
+    }
+    return;
+  }
+  if (!audioContext) {
+    const AudioCtor = window.AudioContext || window.webkitAudioContext;
+    audioContext = new AudioCtor();
+  }
+  if (audioContext.state === "suspended") {
+    await audioContext.resume();
+  }
+  ensureSpeechSamples(audioContext);
+
+  const bars = buildSpeechBarsForCurrentMode();
+  const timeline = buildSpeechTimeline(bars, tempoInput.value);
+  if (timeline.events.length === 0) {
+    if (announce) {
+      announceStatus("No pronounceable Takadimi syllables in the selected scope.");
+    }
+    return;
+  }
+
+  const wasPlayingBeforeSpeech = isPlaying;
+  if (speechMode === "speech-only") {
+    if (isPlaying) {
+      stopPlayback();
+    }
+    speechStartedMetronome = false;
+  } else if (!isPlaying) {
+    await startPlayback();
+    speechStartedMetronome = true;
+  } else {
+    speechStartedMetronome = false;
+  }
+
+  if (isSpeaking) {
+    cancelSpeechPlayback(null, {
+      announce: false,
+      keepMetronome: speechMode === "speech+metro" && wasPlayingBeforeSpeech,
+    });
+  }
+
+  isSpeaking = true;
+  speakBtn.textContent = "Stop Speech";
+  clearSpeechTimers();
+  speechSessionToken += 1;
+  const sessionToken = speechSessionToken;
+  const startTime = audioContext.currentTime + 0.06;
+
+  timeline.events.forEach((event) => {
+    playSpeechSampleAt(event, startTime);
+  });
+
+  speechTimerId = setTimeout(() => {
+    finalizeSpeechSession(sessionToken, false);
+  }, timeline.totalMs + 450);
+
+  speechCompletionTimerId = setTimeout(() => {
+    finalizeSpeechSession(sessionToken, announce);
+  }, timeline.totalMs + 1200);
+
+  if (announce) {
+    announceStatus("Takadimi speech started.");
+  }
+};
+
+const toggleSpeechPlayback = () => {
+  if (isSpeaking) {
+    stopSpeechPlayback("Speech stopped.");
+  } else {
+    void startSpeechPlayback();
+  }
+};
+
+const restartSpeechPlayback = () => {
+  if (!isSpeaking) {
+    return;
+  }
+  cancelSpeechPlayback(null, { announce: false, keepMetronome: false });
+  void startSpeechPlayback({ announce: false });
+};
+
+const setSpeechMode = (mode) => {
+  speechMode = mode === "speech+metro" ? "speech+metro" : "speech-only";
+  syncSpeechModeControls();
+  restartSpeechPlayback();
 };
 
 const clearGrid = () => {
@@ -1006,7 +1515,7 @@ const clearGrid = () => {
 
 const buildPlaybackBars = () => {
   if (playMode === "song" && songBars.length > 0) {
-    return getBarsForOutput().map((bar) => ({
+    return songBars.map((bar) => ({
       active: bar.active.slice(),
       tied: bar.tied.slice(),
       onsets: getOnsetSetForBar(bar),
@@ -1135,6 +1644,15 @@ const stopPlayback = () => {
 };
 
 const togglePlayback = () => {
+  if (isSpeaking) {
+    const hadMetronome = isPlaying;
+    cancelSpeechPlayback("Speech stopped.", { announce: true });
+    if (hadMetronome) {
+      return;
+    }
+    startPlayback();
+    return;
+  }
   if (isPlaying) {
     stopPlayback();
   } else {
@@ -1153,6 +1671,7 @@ const setPlayMode = (mode) => {
     stopPlayback();
     startPlayback();
   }
+  restartSpeechPlayback();
 };
 
 const addBarToSong = () => {
@@ -1260,9 +1779,10 @@ const buildSongStoragePayload = () => ({
   savedAt: new Date().toISOString(),
 });
 
-const flashButton = (button, label) => {
+const flashButton = (button, label, statusMessage = label) => {
   const original = button.textContent;
   button.textContent = label;
+  announceStatus(statusMessage);
   setTimeout(() => {
     button.textContent = original;
   }, 1300);
@@ -1315,9 +1835,9 @@ const applySongPayload = (parsed) => {
 const saveSong = () => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(buildSongStoragePayload()));
-    flashButton(saveSongBtn, "Saved Local");
+    flashButton(saveSongBtn, "Saved Local", "Song saved locally.");
   } catch (error) {
-    flashButton(saveSongBtn, "Save Failed");
+    flashButton(saveSongBtn, "Save Failed", "Saving song failed.");
   }
 };
 
@@ -1325,17 +1845,17 @@ const loadSong = () => {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (!stored) {
-      flashButton(loadSongBtn, "No Local Save");
+      flashButton(loadSongBtn, "No Local Save", "No local save was found.");
       return;
     }
     const parsed = JSON.parse(stored);
     if (applySongPayload(parsed)) {
-      flashButton(loadSongBtn, "Loaded Local");
+      flashButton(loadSongBtn, "Loaded Local", "Song loaded from local storage.");
     } else {
-      flashButton(loadSongBtn, "Load Failed");
+      flashButton(loadSongBtn, "Load Failed", "Loading song failed.");
     }
   } catch (error) {
-    flashButton(loadSongBtn, "Load Failed");
+    flashButton(loadSongBtn, "Load Failed", "Loading song failed.");
   }
 };
 
@@ -1355,9 +1875,9 @@ const exportSongToFile = () => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    flashButton(exportSongBtn, "Exported");
+    flashButton(exportSongBtn, "Exported", "Song exported to a file.");
   } catch (error) {
-    flashButton(exportSongBtn, "Export Failed");
+    flashButton(exportSongBtn, "Export Failed", "Exporting song failed.");
   }
 };
 
@@ -1371,12 +1891,12 @@ const importSongFromFile = async (event) => {
     const content = await file.text();
     const parsed = JSON.parse(content);
     if (applySongPayload(parsed)) {
-      flashButton(importSongBtn, "Imported");
+      flashButton(importSongBtn, "Imported", "Song imported from file.");
     } else {
-      flashButton(importSongBtn, "Import Failed");
+      flashButton(importSongBtn, "Import Failed", "Importing song failed.");
     }
   } catch (error) {
-    flashButton(importSongBtn, "Import Failed");
+    flashButton(importSongBtn, "Import Failed", "Importing song failed.");
   } finally {
     input.value = "";
   }
@@ -1388,6 +1908,68 @@ const clearSong = () => {
   editorDirty = false;
   renderSongTrack();
   updateOutput();
+  announceStatus("Song cleared.");
+};
+
+const syncMoreActionsForViewport = () => {
+  if (!moreActions) {
+    return;
+  }
+  if (window.innerWidth <= 600) {
+    moreActions.removeAttribute("open");
+  } else {
+    moreActions.setAttribute("open", "");
+  }
+};
+
+const handleGlobalShortcuts = (event) => {
+  if (
+    event.defaultPrevented ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.altKey ||
+    isTextEditingTarget(event.target)
+  ) {
+    return;
+  }
+
+  if (event.code === "Space") {
+    event.preventDefault();
+    togglePlayback();
+    return;
+  }
+
+  const key = event.key.toLowerCase();
+  if (key === "s") {
+    event.preventDefault();
+    toggleSpeechPlayback();
+    return;
+  }
+
+  if (key === "a") {
+    event.preventDefault();
+    addBarToSong();
+    return;
+  }
+
+  if (key === "backspace" || key === "delete") {
+    if (selectedBarIndex !== null) {
+      event.preventDefault();
+      deleteSelectedBar();
+    }
+    return;
+  }
+
+  if (event.code === "BracketLeft") {
+    event.preventDefault();
+    moveSelectedBar(-1);
+    return;
+  }
+
+  if (event.code === "BracketRight") {
+    event.preventDefault();
+    moveSelectedBar(1);
+  }
 };
 
 clearBtn.addEventListener("click", clearGrid);
@@ -1404,8 +1986,15 @@ importSongBtn.addEventListener("click", () => importSongInput.click());
 importSongInput.addEventListener("change", importSongFromFile);
 clearSongBtn.addEventListener("click", clearSong);
 playBtn.addEventListener("click", togglePlayback);
+speakBtn.addEventListener("click", toggleSpeechPlayback);
 modeBarBtn.addEventListener("click", () => setPlayMode("bar"));
 modeSongBtn.addEventListener("click", () => setPlayMode("song"));
+speechOnlyBtn.addEventListener("click", () => setSpeechMode("speech-only"));
+speechWithMetroBtn.addEventListener("click", () => setSpeechMode("speech+metro"));
+outputScopeSelectedBtn.addEventListener("click", () => setOutputScope("selected"));
+outputScopeAllBtn.addEventListener("click", () => setOutputScope("all"));
+window.addEventListener("resize", syncMoreActionsForViewport);
+window.addEventListener("keydown", handleGlobalShortcuts);
 
 tempoInput.addEventListener("change", () => {
   tempoInput.value = clampTempo(tempoInput.value);
@@ -1421,6 +2010,10 @@ metroVolume.addEventListener("input", () => {
 
 metroVolume.value = clampVolume(metroVolume.value);
 setPlayMode("bar");
+setSpeechMode("speech-only");
+setOutputScope("selected");
+syncMoreActionsForViewport();
+syncSpeechSupportControls();
 
 buildGrid();
 syncCells();
