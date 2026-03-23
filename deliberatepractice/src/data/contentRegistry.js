@@ -15,7 +15,7 @@ export const CONTENT_REGISTRY_SUMMARY = {
     "too_generic",
     "duplicate_pattern"
   ],
-  "generatedAt": "2026-03-08T10:03:03.062Z"
+  "generatedAt": "2026-03-08T10:54:55.898Z"
 };
 
 export const CONTENT_REGISTRY = {
@@ -39,8 +39,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-sara_02",
@@ -60,8 +68,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-sara_03",
@@ -81,8 +97,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-sara_04",
@@ -102,8 +126,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-sara_05",
@@ -123,8 +155,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-sara_06",
@@ -144,8 +184,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-sara_07",
@@ -165,8 +213,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-sara_08",
@@ -186,8 +242,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-sara_09",
@@ -207,8 +271,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-sara_10",
@@ -228,8 +300,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-michael": [
@@ -251,8 +331,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-michael_02",
@@ -272,8 +360,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-michael_03",
@@ -293,8 +389,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-michael_04",
@@ -314,8 +418,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-michael_05",
@@ -335,8 +447,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-michael_06",
@@ -356,8 +476,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-michael_07",
@@ -377,8 +505,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-michael_08",
@@ -398,8 +534,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-michael_09",
@@ -419,8 +563,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-michael_10",
@@ -440,8 +592,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-jason": [
@@ -463,8 +623,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-jason_02",
@@ -484,8 +652,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-jason_03",
@@ -505,8 +681,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-jason_04",
@@ -526,8 +710,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-jason_05",
@@ -547,8 +739,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-jason_06",
@@ -568,8 +768,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-jason_07",
@@ -589,8 +797,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-jason_08",
@@ -610,8 +826,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-jason_09",
@@ -631,8 +855,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-jason_10",
@@ -652,8 +884,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-laura": [
@@ -675,8 +915,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-laura_02",
@@ -696,8 +944,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-laura_03",
@@ -717,8 +973,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-laura_04",
@@ -742,11 +1006,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -767,8 +1033,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-laura_06",
@@ -788,8 +1062,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-laura_07",
@@ -809,8 +1091,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-laura_08",
@@ -830,8 +1120,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-laura_09",
@@ -851,8 +1149,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-laura_10",
@@ -872,8 +1178,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-carlos": [
@@ -895,8 +1209,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-carlos_02",
@@ -916,8 +1238,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-carlos_03",
@@ -937,8 +1267,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-carlos_04",
@@ -958,8 +1296,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-carlos_05",
@@ -979,8 +1325,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-carlos_06",
@@ -1000,8 +1354,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-carlos_07",
@@ -1025,11 +1387,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -1050,8 +1414,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-carlos_09",
@@ -1071,8 +1443,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-carlos_10",
@@ -1092,8 +1472,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-nina": [
@@ -1115,8 +1503,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-nina_02",
@@ -1136,8 +1532,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-nina_03",
@@ -1157,8 +1561,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-nina_04",
@@ -1178,8 +1590,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-nina_05",
@@ -1199,8 +1619,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-nina_06",
@@ -1220,8 +1648,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-nina_07",
@@ -1241,8 +1677,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-nina_08",
@@ -1262,8 +1706,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-nina_09",
@@ -1283,8 +1735,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-nina_10",
@@ -1304,8 +1764,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-aisha": [
@@ -1327,8 +1795,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-aisha_02",
@@ -1348,8 +1824,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-aisha_03",
@@ -1369,8 +1853,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-aisha_04",
@@ -1394,11 +1886,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -1419,8 +1913,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-aisha_06",
@@ -1440,8 +1942,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-aisha_07",
@@ -1461,8 +1971,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-aisha_08",
@@ -1482,8 +2000,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-aisha_09",
@@ -1503,8 +2029,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-aisha_10",
@@ -1524,8 +2058,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-david": [
@@ -1547,8 +2089,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-david_02",
@@ -1568,8 +2118,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-david_03",
@@ -1589,8 +2147,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-david_04",
@@ -1610,8 +2176,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-david_05",
@@ -1631,8 +2205,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-david_06",
@@ -1652,8 +2234,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-david_07",
@@ -1673,8 +2263,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-david_08",
@@ -1694,8 +2292,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-david_09",
@@ -1715,8 +2321,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-david_10",
@@ -1736,8 +2350,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-marcus": [
@@ -1759,8 +2381,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-marcus_02",
@@ -1780,8 +2410,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-marcus_03",
@@ -1805,11 +2443,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -1830,8 +2470,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-marcus_05",
@@ -1851,8 +2499,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-marcus_06",
@@ -1872,8 +2528,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-marcus_07",
@@ -1893,8 +2557,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-marcus_08",
@@ -1914,8 +2586,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-marcus_09",
@@ -1935,8 +2615,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_therapist-self-awareness_case-marcus_10",
@@ -1956,8 +2644,16 @@ export const CONTENT_REGISTRY = {
           "empathic_attunement",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-therapist-self-awareness-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ]
   },
@@ -1980,8 +2676,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-sara_02",
@@ -2000,8 +2704,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-sara_03",
@@ -2020,8 +2732,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-sara_04",
@@ -2040,8 +2760,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-sara_05",
@@ -2060,8 +2788,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-sara_06",
@@ -2080,8 +2816,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-sara_07",
@@ -2100,8 +2844,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-sara_08",
@@ -2120,8 +2872,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-sara_09",
@@ -2140,8 +2900,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-sara_10",
@@ -2160,8 +2928,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-michael": [
@@ -2182,8 +2958,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-michael_02",
@@ -2202,8 +2986,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-michael_03",
@@ -2222,8 +3014,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-michael_04",
@@ -2242,8 +3042,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-michael_05",
@@ -2262,8 +3070,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-michael_06",
@@ -2282,8 +3098,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-michael_07",
@@ -2302,8 +3126,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-michael_08",
@@ -2322,8 +3154,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-michael_09",
@@ -2342,8 +3182,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-michael_10",
@@ -2362,8 +3210,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-jason": [
@@ -2384,8 +3240,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-jason_02",
@@ -2404,8 +3268,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-jason_03",
@@ -2424,8 +3296,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-jason_04",
@@ -2444,8 +3324,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-jason_05",
@@ -2464,8 +3352,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-jason_06",
@@ -2484,8 +3380,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-jason_07",
@@ -2504,8 +3408,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-jason_08",
@@ -2524,8 +3436,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-jason_09",
@@ -2544,8 +3464,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-jason_10",
@@ -2564,8 +3492,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-laura": [
@@ -2586,8 +3522,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-laura_02",
@@ -2606,8 +3550,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-laura_03",
@@ -2626,8 +3578,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-laura_04",
@@ -2650,11 +3610,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -2674,8 +3636,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-laura_06",
@@ -2694,8 +3664,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-laura_07",
@@ -2714,8 +3692,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-laura_08",
@@ -2734,8 +3720,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-laura_09",
@@ -2754,8 +3748,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-laura_10",
@@ -2774,8 +3776,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-carlos": [
@@ -2796,8 +3806,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-carlos_02",
@@ -2816,8 +3834,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-carlos_03",
@@ -2836,8 +3862,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-carlos_04",
@@ -2856,8 +3890,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-carlos_05",
@@ -2876,8 +3918,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-carlos_06",
@@ -2896,8 +3946,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-carlos_07",
@@ -2916,8 +3974,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-carlos_08",
@@ -2936,8 +4002,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-carlos_09",
@@ -2960,11 +4034,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -2984,8 +4060,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-nina": [
@@ -3006,8 +4090,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-nina_02",
@@ -3026,8 +4118,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-nina_03",
@@ -3046,8 +4146,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-nina_04",
@@ -3066,8 +4174,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-nina_05",
@@ -3086,8 +4202,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-nina_06",
@@ -3106,8 +4230,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-nina_07",
@@ -3126,8 +4258,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-nina_08",
@@ -3146,8 +4286,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-nina_09",
@@ -3166,8 +4314,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-nina_10",
@@ -3186,8 +4342,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-aisha": [
@@ -3208,8 +4372,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-aisha_02",
@@ -3228,8 +4400,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-aisha_03",
@@ -3248,8 +4428,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-aisha_04",
@@ -3268,8 +4456,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-aisha_05",
@@ -3288,8 +4484,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-aisha_06",
@@ -3308,8 +4512,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-aisha_07",
@@ -3328,8 +4540,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-aisha_08",
@@ -3348,8 +4568,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-aisha_09",
@@ -3368,8 +4596,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-aisha_10",
@@ -3388,8 +4624,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-david": [
@@ -3410,8 +4654,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-david_02",
@@ -3430,8 +4682,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-david_03",
@@ -3450,8 +4710,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-david_04",
@@ -3470,8 +4738,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-david_05",
@@ -3490,8 +4766,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-david_06",
@@ -3510,8 +4794,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-david_07",
@@ -3534,11 +4826,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -3558,8 +4852,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-david_09",
@@ -3578,8 +4880,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-david_10",
@@ -3598,8 +4908,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-marcus": [
@@ -3620,8 +4938,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-marcus_02",
@@ -3640,8 +4966,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-marcus_03",
@@ -3664,11 +4998,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -3688,8 +5024,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-marcus_05",
@@ -3708,8 +5052,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-marcus_06",
@@ -3728,8 +5080,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-marcus_07",
@@ -3748,8 +5108,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-marcus_08",
@@ -3768,8 +5136,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-marcus_09",
@@ -3788,8 +5164,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-understanding_case-marcus_10",
@@ -3808,8 +5192,16 @@ export const CONTENT_REGISTRY = {
           "reflect_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-understanding-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ]
   },
@@ -3832,8 +5224,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-sara_02",
@@ -3852,8 +5252,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-sara_03",
@@ -3872,8 +5280,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-sara_04",
@@ -3892,8 +5308,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-sara_05",
@@ -3912,8 +5336,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-sara_06",
@@ -3932,8 +5364,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-sara_07",
@@ -3952,8 +5392,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-sara_08",
@@ -3972,8 +5420,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-sara_09",
@@ -3992,8 +5448,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-sara_10",
@@ -4012,8 +5476,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-michael": [
@@ -4034,8 +5506,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-michael_02",
@@ -4054,8 +5534,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-michael_03",
@@ -4074,8 +5562,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-michael_04",
@@ -4094,8 +5590,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-michael_05",
@@ -4114,8 +5618,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-michael_06",
@@ -4134,8 +5646,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-michael_07",
@@ -4154,8 +5674,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-michael_08",
@@ -4174,8 +5702,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-michael_09",
@@ -4194,8 +5730,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-michael_10",
@@ -4214,8 +5758,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-jason": [
@@ -4236,8 +5788,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-jason_02",
@@ -4256,8 +5816,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-jason_03",
@@ -4276,8 +5844,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-jason_04",
@@ -4296,8 +5872,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-jason_05",
@@ -4316,8 +5900,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-jason_06",
@@ -4336,8 +5928,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-jason_07",
@@ -4356,8 +5956,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-jason_08",
@@ -4376,8 +5984,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-jason_09",
@@ -4396,8 +6012,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-jason_10",
@@ -4416,8 +6040,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-laura": [
@@ -4438,8 +6070,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-laura_02",
@@ -4458,8 +6098,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-laura_03",
@@ -4478,8 +6126,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-laura_04",
@@ -4498,8 +6154,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-laura_05",
@@ -4518,8 +6182,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-laura_06",
@@ -4538,8 +6210,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-laura_07",
@@ -4558,8 +6238,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-laura_08",
@@ -4578,8 +6266,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-laura_09",
@@ -4598,8 +6294,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-laura_10",
@@ -4618,8 +6322,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-carlos": [
@@ -4640,8 +6352,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-carlos_02",
@@ -4660,8 +6380,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-carlos_03",
@@ -4680,8 +6408,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-carlos_04",
@@ -4700,8 +6436,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-carlos_05",
@@ -4720,8 +6464,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-carlos_06",
@@ -4740,8 +6492,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-carlos_07",
@@ -4760,8 +6520,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-carlos_08",
@@ -4780,8 +6548,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-carlos_09",
@@ -4800,8 +6576,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-carlos_10",
@@ -4820,8 +6604,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-nina": [
@@ -4842,8 +6634,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-nina_02",
@@ -4862,8 +6662,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-nina_03",
@@ -4882,8 +6690,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-nina_04",
@@ -4902,8 +6718,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-nina_05",
@@ -4922,8 +6746,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-nina_06",
@@ -4942,8 +6774,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-nina_07",
@@ -4962,8 +6802,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-nina_08",
@@ -4982,8 +6830,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-nina_09",
@@ -5002,8 +6858,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-nina_10",
@@ -5022,8 +6886,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-aisha": [
@@ -5044,8 +6916,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-aisha_02",
@@ -5064,8 +6944,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-aisha_03",
@@ -5084,8 +6972,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-aisha_04",
@@ -5104,8 +7000,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-aisha_05",
@@ -5124,8 +7028,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-aisha_06",
@@ -5144,8 +7056,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-aisha_07",
@@ -5164,8 +7084,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-aisha_08",
@@ -5184,8 +7112,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-aisha_09",
@@ -5204,8 +7140,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-aisha_10",
@@ -5224,8 +7168,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-david": [
@@ -5246,8 +7198,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-david_02",
@@ -5266,8 +7226,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-david_03",
@@ -5286,8 +7254,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-david_04",
@@ -5306,8 +7282,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-david_05",
@@ -5326,8 +7310,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-david_06",
@@ -5346,8 +7338,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-david_07",
@@ -5366,8 +7366,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-david_08",
@@ -5386,8 +7394,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-david_09",
@@ -5406,8 +7422,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-david_10",
@@ -5426,8 +7450,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-marcus": [
@@ -5452,11 +7484,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -5476,8 +7510,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-marcus_03",
@@ -5496,8 +7538,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-marcus_04",
@@ -5516,8 +7566,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-marcus_05",
@@ -5536,8 +7594,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-marcus_06",
@@ -5556,8 +7622,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-marcus_07",
@@ -5576,8 +7650,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-marcus_08",
@@ -5596,8 +7678,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-marcus_09",
@@ -5616,8 +7706,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-affirmation-validation_case-marcus_10",
@@ -5636,8 +7734,16 @@ export const CONTENT_REGISTRY = {
           "validate_context",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-affirmation-validation-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ]
   },
@@ -5661,8 +7767,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-sara_02",
@@ -5682,8 +7796,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-sara_03",
@@ -5703,8 +7825,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-sara_04",
@@ -5724,8 +7854,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-sara_05",
@@ -5745,8 +7883,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-sara_06",
@@ -5766,8 +7912,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-sara_07",
@@ -5787,8 +7941,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-sara_08",
@@ -5808,8 +7970,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-sara_09",
@@ -5829,8 +7999,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-sara_10",
@@ -5850,8 +8028,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-michael": [
@@ -5873,8 +8059,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-michael_02",
@@ -5894,8 +8088,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-michael_03",
@@ -5915,8 +8117,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-michael_04",
@@ -5936,8 +8146,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-michael_05",
@@ -5957,8 +8175,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-michael_06",
@@ -5978,8 +8204,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-michael_07",
@@ -5999,8 +8233,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-michael_08",
@@ -6020,8 +8262,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-michael_09",
@@ -6041,8 +8291,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-michael_10",
@@ -6062,8 +8320,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-jason": [
@@ -6085,8 +8351,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-jason_02",
@@ -6106,8 +8380,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-jason_03",
@@ -6127,8 +8409,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-jason_04",
@@ -6148,8 +8438,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-jason_05",
@@ -6169,8 +8467,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-jason_06",
@@ -6190,8 +8496,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-jason_07",
@@ -6211,8 +8525,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-jason_08",
@@ -6232,8 +8554,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-jason_09",
@@ -6253,8 +8583,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-jason_10",
@@ -6274,8 +8612,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-laura": [
@@ -6297,8 +8643,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-laura_02",
@@ -6318,8 +8672,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-laura_03",
@@ -6339,8 +8701,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-laura_04",
@@ -6360,8 +8730,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-laura_05",
@@ -6385,11 +8763,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -6410,8 +8790,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-laura_07",
@@ -6431,8 +8819,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-laura_08",
@@ -6452,8 +8848,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-laura_09",
@@ -6473,8 +8877,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-laura_10",
@@ -6494,8 +8906,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-carlos": [
@@ -6517,8 +8937,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-carlos_02",
@@ -6538,8 +8966,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-carlos_03",
@@ -6559,8 +8995,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-carlos_04",
@@ -6580,8 +9024,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-carlos_05",
@@ -6601,8 +9053,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-carlos_06",
@@ -6622,8 +9082,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-carlos_07",
@@ -6643,8 +9111,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-carlos_08",
@@ -6664,8 +9140,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-carlos_09",
@@ -6685,8 +9169,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-carlos_10",
@@ -6706,8 +9198,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-nina": [
@@ -6729,8 +9229,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-nina_02",
@@ -6750,8 +9258,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-nina_03",
@@ -6771,8 +9287,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-nina_04",
@@ -6792,8 +9316,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-nina_05",
@@ -6813,8 +9345,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-nina_06",
@@ -6834,8 +9374,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-nina_07",
@@ -6855,8 +9403,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-nina_08",
@@ -6876,8 +9432,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-nina_09",
@@ -6897,8 +9461,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-nina_10",
@@ -6918,8 +9490,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-aisha": [
@@ -6941,8 +9521,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-aisha_02",
@@ -6962,8 +9550,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-aisha_03",
@@ -6983,8 +9579,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-aisha_04",
@@ -7004,8 +9608,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-aisha_05",
@@ -7025,8 +9637,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-aisha_06",
@@ -7046,8 +9666,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-aisha_07",
@@ -7067,8 +9695,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-aisha_08",
@@ -7088,8 +9724,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-aisha_09",
@@ -7109,8 +9753,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-aisha_10",
@@ -7130,8 +9782,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-david": [
@@ -7153,8 +9813,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-david_02",
@@ -7174,8 +9842,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-david_03",
@@ -7195,8 +9871,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-david_04",
@@ -7216,8 +9900,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-david_05",
@@ -7237,8 +9929,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-david_06",
@@ -7258,8 +9958,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-david_07",
@@ -7279,8 +9987,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-david_08",
@@ -7304,11 +10020,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -7329,8 +10047,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-david_10",
@@ -7350,8 +10076,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-marcus": [
@@ -7373,8 +10107,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-marcus_02",
@@ -7398,11 +10140,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -7423,8 +10167,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-marcus_04",
@@ -7444,8 +10196,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-marcus_05",
@@ -7465,8 +10225,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-marcus_06",
@@ -7486,8 +10254,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-marcus_07",
@@ -7507,8 +10283,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-marcus_08",
@@ -7528,8 +10312,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-marcus_09",
@@ -7549,8 +10341,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_exploratory-questions_case-marcus_10",
@@ -7570,8 +10370,16 @@ export const CONTENT_REGISTRY = {
           "explore_meaning",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-exploratory-questions-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ]
   },
@@ -7595,8 +10403,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-sara_02",
@@ -7616,8 +10432,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-sara_03",
@@ -7637,8 +10461,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-sara_04",
@@ -7658,8 +10490,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-sara_05",
@@ -7679,8 +10519,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-sara_06",
@@ -7700,8 +10548,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-sara_07",
@@ -7721,8 +10577,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-sara_08",
@@ -7742,8 +10606,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-sara_09",
@@ -7763,8 +10635,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-sara_10",
@@ -7784,8 +10664,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-michael": [
@@ -7807,8 +10695,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-michael_02",
@@ -7828,8 +10724,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-michael_03",
@@ -7849,8 +10753,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-michael_04",
@@ -7870,8 +10782,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-michael_05",
@@ -7891,8 +10811,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-michael_06",
@@ -7912,8 +10840,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-michael_07",
@@ -7933,8 +10869,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-michael_08",
@@ -7954,8 +10898,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-michael_09",
@@ -7975,8 +10927,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-michael_10",
@@ -7996,8 +10956,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-jason": [
@@ -8019,8 +10987,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-jason_02",
@@ -8040,8 +11016,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-jason_03",
@@ -8061,8 +11045,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-jason_04",
@@ -8082,8 +11074,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-jason_05",
@@ -8103,8 +11103,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-jason_06",
@@ -8124,8 +11132,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-jason_07",
@@ -8145,8 +11161,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-jason_08",
@@ -8166,8 +11190,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-jason_09",
@@ -8187,8 +11219,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-jason_10",
@@ -8208,8 +11248,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-laura": [
@@ -8231,8 +11279,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-laura_02",
@@ -8256,11 +11312,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -8281,8 +11339,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-laura_04",
@@ -8302,8 +11368,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-laura_05",
@@ -8323,8 +11397,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-laura_06",
@@ -8344,8 +11426,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-laura_07",
@@ -8365,8 +11455,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-laura_08",
@@ -8386,8 +11484,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-laura_09",
@@ -8407,8 +11513,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-laura_10",
@@ -8428,8 +11542,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-carlos": [
@@ -8451,8 +11573,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-carlos_02",
@@ -8472,8 +11602,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-carlos_03",
@@ -8493,8 +11631,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-carlos_04",
@@ -8514,8 +11660,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-carlos_05",
@@ -8535,8 +11689,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-carlos_06",
@@ -8556,8 +11718,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-carlos_07",
@@ -8577,8 +11747,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-carlos_08",
@@ -8602,11 +11780,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -8627,8 +11807,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-carlos_10",
@@ -8648,8 +11836,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-nina": [
@@ -8671,8 +11867,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-nina_02",
@@ -8692,8 +11896,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-nina_03",
@@ -8713,8 +11925,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-nina_04",
@@ -8734,8 +11954,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-nina_05",
@@ -8755,8 +11983,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-nina_06",
@@ -8776,8 +12012,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-nina_07",
@@ -8797,8 +12041,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-nina_08",
@@ -8818,8 +12070,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-nina_09",
@@ -8839,8 +12099,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-nina_10",
@@ -8860,8 +12128,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-aisha": [
@@ -8887,11 +12163,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -8912,8 +12190,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-aisha_03",
@@ -8933,8 +12219,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-aisha_04",
@@ -8954,8 +12248,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-aisha_05",
@@ -8975,8 +12277,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-aisha_06",
@@ -8996,8 +12306,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-aisha_07",
@@ -9017,8 +12335,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-aisha_08",
@@ -9038,8 +12364,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-aisha_09",
@@ -9059,8 +12393,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-aisha_10",
@@ -9080,8 +12422,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-david": [
@@ -9103,8 +12453,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-david_02",
@@ -9124,8 +12482,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-david_03",
@@ -9145,8 +12511,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-david_04",
@@ -9166,8 +12540,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-david_05",
@@ -9187,8 +12569,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-david_06",
@@ -9208,8 +12598,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-david_07",
@@ -9229,8 +12627,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-david_08",
@@ -9250,8 +12656,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-david_09",
@@ -9271,8 +12685,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-david_10",
@@ -9292,8 +12714,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-marcus": [
@@ -9315,8 +12745,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-marcus_02",
@@ -9336,8 +12774,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-marcus_03",
@@ -9357,8 +12803,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-marcus_04",
@@ -9378,8 +12832,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-marcus_05",
@@ -9403,11 +12865,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -9428,8 +12892,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-marcus_07",
@@ -9449,8 +12921,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-marcus_08",
@@ -9470,8 +12950,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-marcus_09",
@@ -9491,8 +12979,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_providing-treatment-rationale_case-marcus_10",
@@ -9512,8 +13008,16 @@ export const CONTENT_REGISTRY = {
           "normalize_experiential_work",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-providing-treatment-rationale-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ]
   },
@@ -9537,8 +13041,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-sara_02",
@@ -9558,8 +13070,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-sara_03",
@@ -9579,8 +13099,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-sara_04",
@@ -9600,8 +13128,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-sara_05",
@@ -9621,8 +13157,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-sara_06",
@@ -9642,8 +13186,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-sara_07",
@@ -9663,8 +13215,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-sara_08",
@@ -9684,8 +13244,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-sara_09",
@@ -9705,8 +13273,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-sara_10",
@@ -9726,8 +13302,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-michael": [
@@ -9749,8 +13333,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-michael_02",
@@ -9770,8 +13362,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-michael_03",
@@ -9791,8 +13391,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-michael_04",
@@ -9812,8 +13420,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-michael_05",
@@ -9833,8 +13449,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-michael_06",
@@ -9854,8 +13478,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-michael_07",
@@ -9875,8 +13507,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-michael_08",
@@ -9896,8 +13536,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-michael_09",
@@ -9917,8 +13565,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-michael_10",
@@ -9938,8 +13594,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-jason": [
@@ -9961,8 +13625,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-jason_02",
@@ -9982,8 +13654,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-jason_03",
@@ -10003,8 +13683,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-jason_04",
@@ -10024,8 +13712,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-jason_05",
@@ -10045,8 +13741,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-jason_06",
@@ -10066,8 +13770,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-jason_07",
@@ -10087,8 +13799,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-jason_08",
@@ -10108,8 +13828,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-jason_09",
@@ -10129,8 +13857,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-jason_10",
@@ -10150,8 +13886,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-laura": [
@@ -10173,8 +13917,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-laura_02",
@@ -10194,8 +13946,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-laura_03",
@@ -10215,8 +13975,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-laura_04",
@@ -10240,11 +14008,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -10265,8 +14035,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-laura_06",
@@ -10286,8 +14064,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-laura_07",
@@ -10307,8 +14093,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-laura_08",
@@ -10328,8 +14122,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-laura_09",
@@ -10349,8 +14151,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-laura_10",
@@ -10370,8 +14180,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-carlos": [
@@ -10393,8 +14211,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-carlos_02",
@@ -10414,8 +14240,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-carlos_03",
@@ -10435,8 +14269,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-carlos_04",
@@ -10456,8 +14298,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-carlos_05",
@@ -10477,8 +14327,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-carlos_06",
@@ -10498,8 +14356,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-carlos_07",
@@ -10519,8 +14385,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-carlos_08",
@@ -10540,8 +14414,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-carlos_09",
@@ -10561,8 +14443,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-carlos_10",
@@ -10582,8 +14472,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-nina": [
@@ -10605,8 +14503,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-nina_02",
@@ -10626,8 +14532,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-nina_03",
@@ -10647,8 +14561,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-nina_04",
@@ -10668,8 +14590,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-nina_05",
@@ -10689,8 +14619,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-nina_06",
@@ -10710,8 +14648,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-nina_07",
@@ -10731,8 +14677,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-nina_08",
@@ -10752,8 +14706,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-nina_09",
@@ -10773,8 +14735,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-nina_10",
@@ -10794,8 +14764,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-aisha": [
@@ -10817,8 +14795,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-aisha_02",
@@ -10838,8 +14824,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-aisha_03",
@@ -10859,8 +14853,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-aisha_04",
@@ -10880,8 +14882,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-aisha_05",
@@ -10901,8 +14911,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-aisha_06",
@@ -10922,8 +14940,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-aisha_07",
@@ -10943,8 +14969,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-aisha_08",
@@ -10964,8 +14998,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-aisha_09",
@@ -10985,8 +15027,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-aisha_10",
@@ -11006,8 +15056,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-david": [
@@ -11029,8 +15087,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-david_02",
@@ -11050,8 +15116,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-david_03",
@@ -11071,8 +15145,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-david_04",
@@ -11092,8 +15174,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-david_05",
@@ -11113,8 +15203,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-david_06",
@@ -11134,8 +15232,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-david_07",
@@ -11155,8 +15261,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-david_08",
@@ -11180,11 +15294,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -11205,8 +15321,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-david_10",
@@ -11226,8 +15350,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-marcus": [
@@ -11249,8 +15381,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-marcus_02",
@@ -11274,11 +15414,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -11299,8 +15441,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-marcus_04",
@@ -11320,8 +15470,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-marcus_05",
@@ -11341,8 +15499,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-marcus_06",
@@ -11362,8 +15528,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-marcus_07",
@@ -11383,8 +15557,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-marcus_08",
@@ -11404,8 +15586,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-marcus_09",
@@ -11425,8 +15615,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-explorations_case-marcus_10",
@@ -11446,8 +15644,16 @@ export const CONTENT_REGISTRY = {
           "follow_leading_edge",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-explorations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ]
   },
@@ -11471,8 +15677,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-sara_02",
@@ -11492,8 +15706,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-sara_03",
@@ -11513,8 +15735,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-sara_04",
@@ -11534,8 +15764,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-sara_05",
@@ -11555,8 +15793,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-sara_06",
@@ -11576,8 +15822,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-sara_07",
@@ -11597,8 +15851,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-sara_08",
@@ -11618,8 +15880,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-sara_09",
@@ -11639,8 +15909,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-sara_10",
@@ -11660,8 +15938,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-michael": [
@@ -11683,8 +15969,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-michael_02",
@@ -11704,8 +15998,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-michael_03",
@@ -11725,8 +16027,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-michael_04",
@@ -11746,8 +16056,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-michael_05",
@@ -11767,8 +16085,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-michael_06",
@@ -11788,8 +16114,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-michael_07",
@@ -11809,8 +16143,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-michael_08",
@@ -11830,8 +16172,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-michael_09",
@@ -11851,8 +16201,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-michael_10",
@@ -11872,8 +16230,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-jason": [
@@ -11895,8 +16261,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-jason_02",
@@ -11916,8 +16290,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-jason_03",
@@ -11937,8 +16319,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-jason_04",
@@ -11958,8 +16348,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-jason_05",
@@ -11979,8 +16377,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-jason_06",
@@ -12000,8 +16406,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-jason_07",
@@ -12021,8 +16435,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-jason_08",
@@ -12042,8 +16464,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-jason_09",
@@ -12063,8 +16493,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-jason_10",
@@ -12084,8 +16522,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-laura": [
@@ -12107,8 +16553,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-laura_02",
@@ -12128,8 +16582,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-laura_03",
@@ -12149,8 +16611,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-laura_04",
@@ -12170,8 +16640,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-laura_05",
@@ -12191,8 +16669,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-laura_06",
@@ -12212,8 +16698,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-laura_07",
@@ -12233,8 +16727,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-laura_08",
@@ -12254,8 +16756,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-laura_09",
@@ -12275,8 +16785,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-laura_10",
@@ -12296,8 +16814,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-carlos": [
@@ -12319,8 +16845,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-carlos_02",
@@ -12340,8 +16874,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-carlos_03",
@@ -12361,8 +16903,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-carlos_04",
@@ -12382,8 +16932,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-carlos_05",
@@ -12403,8 +16961,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-carlos_06",
@@ -12424,8 +16990,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-carlos_07",
@@ -12445,8 +17019,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-carlos_08",
@@ -12466,8 +17048,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-carlos_09",
@@ -12487,8 +17077,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-carlos_10",
@@ -12508,8 +17106,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-nina": [
@@ -12531,8 +17137,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-nina_02",
@@ -12552,8 +17166,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-nina_03",
@@ -12573,8 +17195,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-nina_04",
@@ -12594,8 +17224,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-nina_05",
@@ -12615,8 +17253,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-nina_06",
@@ -12636,8 +17282,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-nina_07",
@@ -12657,8 +17311,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-nina_08",
@@ -12678,8 +17340,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-nina_09",
@@ -12699,8 +17369,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-nina_10",
@@ -12720,8 +17398,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-aisha": [
@@ -12743,8 +17429,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-aisha_02",
@@ -12764,8 +17458,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-aisha_03",
@@ -12785,8 +17487,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-aisha_04",
@@ -12806,8 +17516,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-aisha_05",
@@ -12827,8 +17545,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-aisha_06",
@@ -12848,8 +17574,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-aisha_07",
@@ -12869,8 +17603,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-aisha_08",
@@ -12890,8 +17632,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-aisha_09",
@@ -12911,8 +17661,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-aisha_10",
@@ -12932,8 +17690,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-david": [
@@ -12955,8 +17721,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-david_02",
@@ -12976,8 +17750,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-david_03",
@@ -12997,8 +17779,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-david_04",
@@ -13018,8 +17808,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-david_05",
@@ -13039,8 +17837,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-david_06",
@@ -13060,8 +17866,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-david_07",
@@ -13081,8 +17895,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-david_08",
@@ -13102,8 +17924,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-david_09",
@@ -13123,8 +17953,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-david_10",
@@ -13148,11 +17986,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       }
     ],
@@ -13175,8 +18015,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-marcus_02",
@@ -13196,8 +18044,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-marcus_03",
@@ -13217,8 +18073,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-marcus_04",
@@ -13242,11 +18106,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -13267,8 +18133,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-marcus_06",
@@ -13288,8 +18162,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-marcus_07",
@@ -13309,8 +18191,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-marcus_08",
@@ -13330,8 +18220,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-marcus_09",
@@ -13351,8 +18249,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-evocations_case-marcus_10",
@@ -13372,8 +18278,16 @@ export const CONTENT_REGISTRY = {
           "heighten_felt_sense",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-evocations-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ]
   },
@@ -13397,8 +18311,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-sara_02",
@@ -13418,8 +18340,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-sara_03",
@@ -13439,8 +18369,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-sara_04",
@@ -13460,8 +18398,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-sara_05",
@@ -13481,8 +18427,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-sara_06",
@@ -13502,8 +18456,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-sara_07",
@@ -13523,8 +18485,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-sara_08",
@@ -13544,8 +18514,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-sara_09",
@@ -13565,8 +18543,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-sara_10",
@@ -13586,8 +18572,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-michael": [
@@ -13609,8 +18603,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-michael_02",
@@ -13630,8 +18632,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-michael_03",
@@ -13651,8 +18661,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-michael_04",
@@ -13672,8 +18690,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-michael_05",
@@ -13693,8 +18719,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-michael_06",
@@ -13714,8 +18748,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-michael_07",
@@ -13735,8 +18777,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-michael_08",
@@ -13756,8 +18806,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-michael_09",
@@ -13777,8 +18835,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-michael_10",
@@ -13798,8 +18864,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-jason": [
@@ -13821,8 +18895,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-jason_02",
@@ -13842,8 +18924,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-jason_03",
@@ -13863,8 +18953,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-jason_04",
@@ -13884,8 +18982,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-jason_05",
@@ -13905,8 +19011,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-jason_06",
@@ -13926,8 +19040,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-jason_07",
@@ -13947,8 +19069,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-jason_08",
@@ -13968,8 +19098,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-jason_09",
@@ -13993,11 +19131,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -14018,8 +19158,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-laura": [
@@ -14041,8 +19189,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-laura_02",
@@ -14062,8 +19218,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-laura_03",
@@ -14083,8 +19247,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-laura_04",
@@ -14104,8 +19276,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-laura_05",
@@ -14125,8 +19305,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-laura_06",
@@ -14146,8 +19334,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-laura_07",
@@ -14167,8 +19363,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-laura_08",
@@ -14188,8 +19392,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-laura_09",
@@ -14209,8 +19421,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-laura_10",
@@ -14230,8 +19450,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-carlos": [
@@ -14253,8 +19481,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-carlos_02",
@@ -14274,8 +19510,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-carlos_03",
@@ -14295,8 +19539,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-carlos_04",
@@ -14316,8 +19568,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-carlos_05",
@@ -14337,8 +19597,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-carlos_06",
@@ -14358,8 +19626,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-carlos_07",
@@ -14379,8 +19655,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-carlos_08",
@@ -14400,8 +19684,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-carlos_09",
@@ -14421,8 +19713,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-carlos_10",
@@ -14442,8 +19742,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-nina": [
@@ -14465,8 +19773,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-nina_02",
@@ -14486,8 +19802,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-nina_03",
@@ -14507,8 +19831,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-nina_04",
@@ -14528,8 +19860,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-nina_05",
@@ -14549,8 +19889,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-nina_06",
@@ -14570,8 +19918,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-nina_07",
@@ -14591,8 +19947,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-nina_08",
@@ -14612,8 +19976,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-nina_09",
@@ -14633,8 +20005,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-nina_10",
@@ -14654,8 +20034,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-aisha": [
@@ -14677,8 +20065,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-aisha_02",
@@ -14698,8 +20094,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-aisha_03",
@@ -14719,8 +20123,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-aisha_04",
@@ -14740,8 +20152,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-aisha_05",
@@ -14761,8 +20181,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-aisha_06",
@@ -14782,8 +20210,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-aisha_07",
@@ -14803,8 +20239,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-aisha_08",
@@ -14824,8 +20268,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-aisha_09",
@@ -14845,8 +20297,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-aisha_10",
@@ -14866,8 +20326,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-david": [
@@ -14889,8 +20357,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-david_02",
@@ -14910,8 +20386,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-david_03",
@@ -14931,8 +20415,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-david_04",
@@ -14952,8 +20444,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-david_05",
@@ -14973,8 +20473,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-david_06",
@@ -14994,8 +20502,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-david_07",
@@ -15015,8 +20531,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-david_08",
@@ -15036,8 +20560,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-david_09",
@@ -15057,8 +20589,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-david_10",
@@ -15078,8 +20618,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-marcus": [
@@ -15101,8 +20649,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-marcus_02",
@@ -15122,8 +20678,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-marcus_03",
@@ -15143,8 +20707,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-marcus_04",
@@ -15164,8 +20736,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-marcus_05",
@@ -15185,8 +20765,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-marcus_06",
@@ -15206,8 +20794,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-marcus_07",
@@ -15232,11 +20828,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -15257,8 +20855,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-marcus_09",
@@ -15278,8 +20884,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_empathic-conjectures_case-marcus_10",
@@ -15299,8 +20913,16 @@ export const CONTENT_REGISTRY = {
           "name_underlying_feeling",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-empathic-conjectures-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ]
   },
@@ -15325,8 +20947,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-sara_02",
@@ -15347,8 +20977,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-sara_03",
@@ -15369,8 +21007,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-sara_04",
@@ -15391,8 +21037,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-sara_05",
@@ -15413,8 +21067,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-sara_06",
@@ -15435,8 +21097,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-sara_07",
@@ -15457,8 +21127,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-sara_08",
@@ -15479,8 +21157,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-sara_09",
@@ -15501,8 +21187,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-sara_10",
@@ -15523,8 +21217,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-michael": [
@@ -15547,8 +21249,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-michael_02",
@@ -15573,11 +21283,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -15599,8 +21311,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-michael_04",
@@ -15621,8 +21341,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-michael_05",
@@ -15643,8 +21371,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-michael_06",
@@ -15665,8 +21401,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-michael_07",
@@ -15687,8 +21431,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-michael_08",
@@ -15709,8 +21461,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-michael_09",
@@ -15731,8 +21491,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-michael_10",
@@ -15753,8 +21521,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-jason": [
@@ -15777,8 +21553,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-jason_02",
@@ -15799,8 +21583,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-jason_03",
@@ -15821,8 +21613,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-jason_04",
@@ -15843,8 +21643,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-jason_05",
@@ -15865,8 +21673,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-jason_06",
@@ -15887,8 +21703,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-jason_07",
@@ -15909,8 +21733,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-jason_08",
@@ -15931,8 +21763,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-jason_09",
@@ -15953,8 +21793,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-jason_10",
@@ -15975,8 +21823,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-laura": [
@@ -15999,8 +21855,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-laura_02",
@@ -16021,8 +21885,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-laura_03",
@@ -16043,8 +21915,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-laura_04",
@@ -16065,8 +21945,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-laura_05",
@@ -16087,8 +21975,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-laura_06",
@@ -16109,8 +22005,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-laura_07",
@@ -16131,8 +22035,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-laura_08",
@@ -16153,8 +22065,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-laura_09",
@@ -16175,8 +22095,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-laura_10",
@@ -16197,8 +22125,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-carlos": [
@@ -16221,8 +22157,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-carlos_02",
@@ -16243,8 +22187,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-carlos_03",
@@ -16265,8 +22217,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-carlos_04",
@@ -16287,8 +22247,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-carlos_05",
@@ -16309,8 +22277,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-carlos_06",
@@ -16331,8 +22307,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-carlos_07",
@@ -16353,8 +22337,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-carlos_08",
@@ -16375,8 +22367,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-carlos_09",
@@ -16397,8 +22397,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-carlos_10",
@@ -16419,8 +22427,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-nina": [
@@ -16443,8 +22459,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-nina_02",
@@ -16465,8 +22489,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-nina_03",
@@ -16487,8 +22519,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-nina_04",
@@ -16509,8 +22549,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-nina_05",
@@ -16531,8 +22579,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-nina_06",
@@ -16553,8 +22609,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-nina_07",
@@ -16575,8 +22639,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-nina_08",
@@ -16597,8 +22669,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-nina_09",
@@ -16619,8 +22699,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-nina_10",
@@ -16641,8 +22729,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-aisha": [
@@ -16665,8 +22761,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-aisha_02",
@@ -16691,11 +22795,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -16717,8 +22823,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-aisha_04",
@@ -16739,8 +22853,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-aisha_05",
@@ -16761,8 +22883,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-aisha_06",
@@ -16783,8 +22913,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-aisha_07",
@@ -16805,8 +22943,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-aisha_08",
@@ -16827,8 +22973,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-aisha_09",
@@ -16849,8 +23003,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-aisha_10",
@@ -16871,8 +23033,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-david": [
@@ -16895,8 +23065,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-david_02",
@@ -16917,8 +23095,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-david_03",
@@ -16939,8 +23125,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-david_04",
@@ -16961,8 +23155,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-david_05",
@@ -16983,8 +23185,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-david_06",
@@ -17005,8 +23215,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-david_07",
@@ -17027,8 +23245,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-david_08",
@@ -17049,8 +23275,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-david_09",
@@ -17071,8 +23305,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-david_10",
@@ -17093,8 +23335,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-marcus": [
@@ -17117,8 +23367,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-marcus_02",
@@ -17143,11 +23401,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -17169,8 +23429,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-marcus_04",
@@ -17191,8 +23459,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-marcus_05",
@@ -17213,8 +23489,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-marcus_06",
@@ -17235,8 +23519,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-marcus_07",
@@ -17257,8 +23549,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-marcus_08",
@@ -17279,8 +23579,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-marcus_09",
@@ -17301,8 +23609,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_staying-in-contact-intense-affect_case-marcus_10",
@@ -17323,8 +23639,16 @@ export const CONTENT_REGISTRY = {
           "co_regulation",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-staying-in-contact-intense-affect-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ]
   },
@@ -17348,8 +23672,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-sara_02",
@@ -17369,8 +23701,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-sara_03",
@@ -17390,8 +23730,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-sara_04",
@@ -17411,8 +23759,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-sara_05",
@@ -17432,8 +23788,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-sara_06",
@@ -17453,8 +23817,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-sara_07",
@@ -17474,8 +23846,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-sara_08",
@@ -17495,8 +23875,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-sara_09",
@@ -17516,8 +23904,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-sara_10",
@@ -17537,8 +23933,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-michael": [
@@ -17560,8 +23964,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-michael_02",
@@ -17581,8 +23993,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-michael_03",
@@ -17602,8 +24022,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-michael_04",
@@ -17623,8 +24051,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-michael_05",
@@ -17644,8 +24080,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-michael_06",
@@ -17665,8 +24109,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-michael_07",
@@ -17686,8 +24138,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-michael_08",
@@ -17707,8 +24167,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-michael_09",
@@ -17728,8 +24196,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-michael_10",
@@ -17749,8 +24225,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-jason": [
@@ -17772,8 +24256,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-jason_02",
@@ -17793,8 +24285,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-jason_03",
@@ -17814,8 +24314,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-jason_04",
@@ -17835,8 +24343,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-jason_05",
@@ -17856,8 +24372,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-jason_06",
@@ -17877,8 +24401,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-jason_07",
@@ -17898,8 +24430,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-jason_08",
@@ -17919,8 +24459,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-jason_09",
@@ -17940,8 +24488,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-jason_10",
@@ -17961,8 +24517,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-laura": [
@@ -17984,8 +24548,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-laura_02",
@@ -18005,8 +24577,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-laura_03",
@@ -18026,8 +24606,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-laura_04",
@@ -18051,11 +24639,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -18076,8 +24666,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-laura_06",
@@ -18097,8 +24695,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-laura_07",
@@ -18118,8 +24724,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-laura_08",
@@ -18139,8 +24753,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-laura_09",
@@ -18160,8 +24782,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-laura_10",
@@ -18181,8 +24811,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-carlos": [
@@ -18204,8 +24842,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-carlos_02",
@@ -18225,8 +24871,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-carlos_03",
@@ -18246,8 +24900,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-carlos_04",
@@ -18267,8 +24929,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-carlos_05",
@@ -18288,8 +24958,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-carlos_06",
@@ -18309,8 +24987,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-carlos_07",
@@ -18330,8 +25016,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-carlos_08",
@@ -18351,8 +25045,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-carlos_09",
@@ -18372,8 +25074,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-carlos_10",
@@ -18393,8 +25103,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-nina": [
@@ -18416,8 +25134,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-nina_02",
@@ -18437,8 +25163,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-nina_03",
@@ -18458,8 +25192,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-nina_04",
@@ -18479,8 +25221,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-nina_05",
@@ -18500,8 +25250,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-nina_06",
@@ -18521,8 +25279,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-nina_07",
@@ -18542,8 +25308,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-nina_08",
@@ -18563,8 +25337,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-nina_09",
@@ -18584,8 +25366,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-nina_10",
@@ -18605,8 +25395,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-aisha": [
@@ -18628,8 +25426,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-aisha_02",
@@ -18649,8 +25455,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-aisha_03",
@@ -18674,11 +25488,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -18699,8 +25515,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-aisha_05",
@@ -18720,8 +25544,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-aisha_06",
@@ -18741,8 +25573,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-aisha_07",
@@ -18762,8 +25602,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-aisha_08",
@@ -18783,8 +25631,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-aisha_09",
@@ -18804,8 +25660,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-aisha_10",
@@ -18825,8 +25689,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-david": [
@@ -18848,8 +25720,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-david_02",
@@ -18869,8 +25749,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-david_03",
@@ -18890,8 +25778,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-david_04",
@@ -18911,8 +25807,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-david_05",
@@ -18932,8 +25836,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-david_06",
@@ -18953,8 +25865,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-david_07",
@@ -18974,8 +25894,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-david_08",
@@ -18995,8 +25923,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-david_09",
@@ -19020,11 +25956,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -19045,8 +25983,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-marcus": [
@@ -19068,8 +26014,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-marcus_02",
@@ -19089,8 +26043,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-marcus_03",
@@ -19110,8 +26072,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-marcus_04",
@@ -19131,8 +26101,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-marcus_05",
@@ -19152,8 +26130,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-marcus_06",
@@ -19173,8 +26159,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-marcus_07",
@@ -19194,8 +26188,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-marcus_08",
@@ -19219,11 +26221,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       },
       {
@@ -19244,8 +26248,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_self-disclosure_case-marcus_10",
@@ -19265,8 +26277,16 @@ export const CONTENT_REGISTRY = {
           "return_to_client",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-self-disclosure-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ]
   },
@@ -19290,8 +26310,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-sara_02",
@@ -19311,8 +26339,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-sara_03",
@@ -19332,8 +26368,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-michael": [
@@ -19355,8 +26399,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-michael_02",
@@ -19376,8 +26428,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-michael_03",
@@ -19397,8 +26457,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-jason": [
@@ -19420,8 +26488,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-jason_02",
@@ -19441,8 +26517,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-jason_03",
@@ -19462,8 +26546,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-laura": [
@@ -19485,8 +26577,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-laura_02",
@@ -19506,8 +26606,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-laura_03",
@@ -19527,8 +26635,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-carlos": [
@@ -19550,8 +26666,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-carlos_02",
@@ -19571,8 +26695,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-carlos_03",
@@ -19592,8 +26724,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-nina": [
@@ -19615,8 +26755,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-nina_02",
@@ -19636,8 +26784,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-nina_03",
@@ -19657,8 +26813,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-aisha": [
@@ -19680,8 +26844,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-aisha_02",
@@ -19701,8 +26873,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-aisha_03",
@@ -19722,8 +26902,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-david": [
@@ -19745,8 +26933,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-david_02",
@@ -19766,8 +26962,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-david_03",
@@ -19787,8 +26991,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-marcus": [
@@ -19810,8 +27022,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-marcus_02",
@@ -19831,8 +27051,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_marker-recognition-chairwork_case-marcus_03",
@@ -19852,8 +27080,16 @@ export const CONTENT_REGISTRY = {
           "offer_task_setup",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-marker-recognition-chairwork-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ]
   },
@@ -19877,8 +27113,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-sara_02",
@@ -19898,8 +27142,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-sara_03",
@@ -19919,8 +27171,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-michael": [
@@ -19942,8 +27202,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-michael_02",
@@ -19963,8 +27231,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-michael_03",
@@ -19984,8 +27260,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-jason": [
@@ -20007,8 +27291,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-jason_02",
@@ -20028,8 +27320,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-jason_03",
@@ -20049,8 +27349,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-laura": [
@@ -20072,8 +27380,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-laura_02",
@@ -20093,8 +27409,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-laura_03",
@@ -20114,8 +27438,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-carlos": [
@@ -20137,8 +27469,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-carlos_02",
@@ -20158,8 +27498,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-carlos_03",
@@ -20179,8 +27527,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-nina": [
@@ -20202,8 +27558,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-nina_02",
@@ -20223,8 +27587,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-nina_03",
@@ -20244,8 +27616,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-aisha": [
@@ -20267,8 +27647,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-aisha_02",
@@ -20288,8 +27676,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-aisha_03",
@@ -20309,8 +27705,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-david": [
@@ -20332,8 +27736,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-david_02",
@@ -20353,8 +27765,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-david_03",
@@ -20374,8 +27794,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       }
     ],
     "case-marcus": [
@@ -20397,8 +27825,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-marcus_02",
@@ -20418,8 +27854,16 @@ export const CONTENT_REGISTRY = {
           "own_impact",
           "legacy_matrix_item"
         ],
-        "reviewStatus": "legacy_imported",
-        "revision": "2026-03-07-v1"
+        "reviewStatus": "approved",
+        "revision": "2026-03-07-v1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
+        "reviewFocus": [
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
+        ]
       },
       {
         "id": "dp_alliance-repair_case-marcus_03",
@@ -20443,11 +27887,13 @@ export const CONTENT_REGISTRY = {
         ],
         "reviewStatus": "approved",
         "revision": "2026-03-07-v1",
-        "reviewPass": "2026-03-08-high-risk-pass-1",
+        "reviewPass": "2026-03-08-alliance-repair-pass-1",
         "reviewFocus": [
-          "safety",
-          "eft_fidelity",
-          "case_voice"
+          "benchmark_alignment",
+          "case_voice",
+          "skill_purity",
+          "translation_check",
+          "safety"
         ]
       }
     ]

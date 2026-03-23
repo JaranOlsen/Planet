@@ -52,7 +52,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Don't start with feelings; give me tools.",
-        suggestion: "[Internal] Notice urge to justify approach; re-center. [Meta] We can be practical—and mapping what hits you first will make any tool work better."
+        suggestion: "[Internal] Notice urge to justify approach; re-center. [Meta] We can stay practical, and first I want to get what hits you so fast in those moments."
       },
       {
         text: "My wife exaggerates—I’m not that angry.",
@@ -152,7 +152,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Maybe this is just chemical.",
-        suggestion: "[Internal] Set down urge to debate; stay collaborative. [Meta] Biology can play a role—we can still help your system feel safer here today."
+        suggestion: "[Internal] Set down urge to debate; stay collaborative. [Meta] That may be part of it, and I still want to stay close to what your system is going through right now."
       },
       {
         text: "Feeling is dangerous for me.",
@@ -202,7 +202,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Therapy is for people who can't handle life.",
-        suggestion: "[Internal] Notice sting/defensiveness; settle. [Meta] You’ve handled a lot—here we’ll tune your control at flashpoints so life gets easier on you and yours."
+        suggestion: "[Internal] Notice sting/defensiveness; settle. [Meta] You’ve had to handle a lot. I want to understand what life asks of you right where it gets hardest."
       },
       {
         text: "If someone looks at me wrong, I'm going to react.",
@@ -308,7 +308,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "I need efficient solutions, not feelings.",
-        suggestion: "[Internal] Set down justify/prove; remain warm. [Meta] We’ll be efficient—and first minutes spent mapping triggers will save you hours later."
+        suggestion: "[Internal] Set down justify/prove; remain warm. [Meta] We can keep this efficient, and I want to start by really getting what happens in you under pressure."
       },
       {
         text: "Are you experienced enough for my case?",
@@ -346,7 +346,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Talking doesn’t change anything.",
-        suggestion: "[Internal] Notice hopelessness in me; steady tone. [Meta] You’re right it can’t change the past—sometimes it changes how your body carries it; we can try a tiny step if you like."
+        suggestion: "[Internal] Notice hopelessness in me; steady tone. [Meta] It sounds like talking has felt useless. We do not have to force anything—maybe we just notice what happens in you as you say that."
       },
       {
         text: "Nightmares are just part of it.",
@@ -370,7 +370,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Let’s stick to practical tips.",
-        suggestion: "[Internal] Don’t argue; align and bridge. [Meta] We can add practical tools—and first we’ll find the exact moments they’re needed."
+        suggestion: "[Internal] Don’t argue; align and bridge. [Meta] We can stay practical. I just want to be with you in the exact moment things start to tighten."
       },
       {
         text: "I don’t see the point.",
@@ -394,7 +394,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "When I see his name anywhere, my stomach drops.",
-        suggestion: "Seeing his name punches your stomach and the loss rushes back."
+        suggestion: "Seeing his name drops your stomach and brings the loss rushing back."
       },
       {
         text: "I hate that I still check my phone hoping it's him.",
@@ -520,7 +520,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Kindness makes me back away.",
-        suggestion: "Warmth comes close and a protector pulls you back."
+        suggestion: "Kindness comes near and something in you pulls back to stay safe."
       },
       {
         text: "I drink at night to quiet my mind.",
@@ -654,7 +654,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "I scratch at my skin to feel something.",
-        suggestion: "You reach for sensation when the numb and pain feel unbearable."
+        suggestion: "You reach for sensation when the numbness and pain feel unbearable."
       },
       {
         text: "If someone cancels, I want to quit.",
@@ -726,7 +726,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Then out of nowhere, a wave hits me.",
-        suggestion: "Waves crash in suddenly and take you under."
+        suggestion: "Feelings can hit out of nowhere and overwhelm you."
       },
       {
         text: "Nightmares leave me wired and empty.",
@@ -738,7 +738,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "I sit in the dark after work.",
-        suggestion: "The quiet, dark room matches the emptiness inside."
+        suggestion: "Sitting in the dark fits how empty and shut down you feel."
       },
       {
         text: "Good moments feel unreal.",
@@ -754,7 +754,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "I sometimes think it wouldn't matter if I disappeared.",
-        suggestion: "Hopelessness whispers that you do not matter."
+        suggestion: "A hopeless part tells you that you do not matter."
       },
       {
         text: "I want connection and can't tolerate it.",
@@ -992,7 +992,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Asking for help makes me feel like a burden.",
-        suggestion: "Asking for help feeling like a burden makes sense after years of being the helper."
+        suggestion: "It makes sense asking for help feels burdensome after years of being the one who helps everyone else."
       },
       {
         text: "If the house is messy, I feel like a bad person.",
@@ -1204,7 +1204,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Apologizing makes me feel one‑down.",
-        suggestion: "Where in your body do you feel 'one‑down,' and what would help that place feel a little steadier?"
+        suggestion: "Where in your body do you feel that 'one‑down' feeling most right now?"
       },
       {
         text: "When I am unsure of an answer, my chest tightens.",
@@ -1272,7 +1272,7 @@ export const STATEMENT_SETS = {
     "case-laura": [
       {
         text: "Most days feel muted, like I am behind glass.",
-        suggestion: "As you notice the glass now, where do you feel it, and what lets you know it is there—numbness, distance, coolness?"
+        suggestion: "As you notice that 'behind glass' feeling now, where do you feel the distance most in your body?"
       },
       {
         text: "Raised voices make my stomach drop and my shoulders tense.",
@@ -1350,7 +1350,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "What I want most is for my family to feel safe with me.",
-        suggestion: "As you hold that wish, what feeling rises now, and what is one small body signal that tells you safety is present?"
+        suggestion: "As you hold that wish, what feeling rises in you right now?"
       }
     ],
     "case-nina": [
@@ -1392,7 +1392,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "I crash at night after holding it together all day.",
-        suggestion: "As you picture the crash, what feeling finally comes through, and what would a kind end‑of‑day ritual look like for that part?"
+        suggestion: "As you picture the crash, what feeling finally comes through?"
       }
     ],
     "case-aisha": [
@@ -1426,7 +1426,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "I test people to see whether they care enough to stay.",
-        suggestion: "As you picture a test, what fear are you trying to answer, and what would it be like to ask for care directly—just a little?"
+        suggestion: "As you picture a test, what fear are you trying to answer inside?"
       },
       {
         text: "I hate myself after I lash out.",
@@ -1498,7 +1498,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "I sit in the car after work to avoid going upstairs.",
-        suggestion: "As you picture sitting there, what feeling are you not ready to face, and what would it need to take one small step?"
+        suggestion: "As you picture sitting there, what feeling is waiting for you upstairs?"
       },
       {
         text: "I keep the lights low and ignore calls.",
@@ -2048,7 +2048,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "I wake already braced for the day.",
-        suggestion: "You wake braced, as if your body has not gotten the message that the danger is over."
+        suggestion: "You wake braced, with your body already pulled tight before the day has even started."
       },
       {
         text: "Touch startles me even when it's gentle.",
@@ -2074,7 +2074,7 @@ export const STATEMENT_SETS = {
     "case-carlos": [
       {
         text: "A certain tone makes my chest heat and my fists clench.",
-        suggestion: "The heat and clenched fists come fast, and just under them there may be that first hit of humiliation."
+        suggestion: "The heat and clenched fists come fast, and the whole reaction seems to gather around that first hit inside."
       },
       {
         text: "I pace the room to burn it off.",
@@ -2090,7 +2090,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Calm feels dangerous, like I'm letting my guard down.",
-        suggestion: "Calm almost seems to leave you exposed, as if dropping your guard would mean losing your footing."
+        suggestion: "Calm almost seems to leave you exposed, with your body bracing as soon as the guard starts to drop."
       },
       {
         text: "I break things so I don't break people.",
@@ -2106,7 +2106,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "More than anything, I want my family to feel safe around me.",
-        suggestion: "When you hold the wish to be safe for your family, there is feeling there, maybe grief and love together."
+        suggestion: "When you hold the wish to be safe for your family, there is a lot of feeling there all at once."
       },
       {
         text: "I learned early never to be the small one.",
@@ -2170,7 +2170,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "The moment you look away, I feel dropped.",
-        suggestion: "That dropped feeling seems very young, as though an old abandonment is suddenly right here."
+        suggestion: "That dropped feeling comes in all at once, like your whole body knows it before there are words."
       },
       {
         text: "I test people because I need to know whether they care enough to stay.",
@@ -2200,11 +2200,11 @@ export const STATEMENT_SETS = {
     "case-david": [
       {
         text: "When she says I'm cold, my face burns and my chest goes hard.",
-        suggestion: "When 'cold' lands, the hard chest and burning face seem to come in to protect something more tender."
+        suggestion: "When 'cold' lands, the hard chest and burning face come in right away and everything in you seems to lock down."
       },
       {
         text: "If I'm not the best, I feel hollow.",
-        suggestion: "If you are not the best, there is that hollow place, as if something important drains out of you."
+        suggestion: "If you are not the best, there is that hollow place and it seems to drain the strength right out of you."
       },
       {
         text: "When I feel judged, I smooth my shirt and start listing achievements.",
@@ -3334,7 +3334,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "If you cancel I will fall apart.",
-        suggestion: "That fear is big. We will breathe together now and make a simple plan for hard days so your body knows what support is coming."
+        suggestion: "That fear hits hard right here. Stay with my voice, press your feet down, and let us take two slow breaths so your body can feel we are still connected as we come to the ending."
       }
     ],
     "case-david": [
@@ -3454,7 +3454,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Are you in a relationship? Does that make you judge me?",
-        suggestion: "I am partnered, and I am not judging you—I notice warmth and a wish to understand what this stirs for you."
+        suggestion: "I am partnered, and what matters most here is that I am not judging you. I notice warmth and a wish to understand what this stirs for you."
       },
       {
         text: "I hate that I need anyone, even you.",
@@ -3710,7 +3710,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Can you promise not to give up on me?",
-        suggestion: "I feel committed to this work with you, and I want to keep naming fears together when they show up."
+        suggestion: "I feel committed to working with you, and I want us to keep naming that fear together when it shows up between us."
       },
       {
         text: "Do you think I will ever feel okay?",
@@ -3752,7 +3752,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "Are you married? Does that make you judge my affair?",
-        suggestion: "I am partnered, and I want to answer clearly that I am not here to judge you. I feel focused on understanding what led there and what you want different now."
+        suggestion: "I am partnered, and I want to be clear that I am not here to judge you. What I feel most is interest in what led there and what you want different now."
       },
       {
         text: "Do you actually respect me?",
@@ -3862,7 +3862,7 @@ export const STATEMENT_SETS = {
     "case-carlos": [
       {
         text: "A voice says, If you are not on top, you are nothing.",
-        suggestion: "I hear a tough inner coach. Would you try a two-chair: speak as that coach, then switch to the part that feels small and answer back? I will guide it."
+        suggestion: "I hear a harsh critical voice. Would you try a brief two-chair: let that voice speak first, then switch to the part that feels small and answer back? I will guide it."
       },
       {
         text: "I wish I could tell my father what his belt did to me.",
@@ -3922,7 +3922,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "I want to tell my younger self he did not deserve what happened.",
-        suggestion: "That is unfinished business with a younger self. An empty-chair with him for one or two lines could be healing. We will ground and stop if needed."
+        suggestion: "That sounds like unfinished business with your younger self. We could place him in the empty chair and let you say those words directly, just a line or two, while I help you stay grounded."
       },
       {
         text: "When someone reaches out, I pull away.",
@@ -3942,7 +3942,7 @@ export const STATEMENT_SETS = {
       },
       {
         text: "I worry you think I am too needy for therapy.",
-        suggestion: "It makes sense to worry about that here. I am sorry if anything I did fed that. Can we agree I will say out loud if I am missing you, and you will flag it when you feel judged?"
+        suggestion: "It makes sense to worry about that here. I am sorry if anything I did fed that. Can we agree I will say out loud if I am missing you, and you can flag it when you start to feel like too much here?"
       }
     ],
     "case-michael": [
@@ -4018,7 +4018,7 @@ export const STATEMENT_SETS = {
     "case-aisha": [
       {
         text: "When you did not reply to my message fast, I panicked and felt abandoned.",
-        suggestion: "I am sorry my timing added to your pain. Your feelings make sense. Let us set clear message expectations together and what you can do between sessions when panic hits."
+        suggestion: "I am sorry the gap felt like abandonment; I can see how sharply that landed. I want to stay with that hurt first, and then we can clarify message expectations together."
       },
       {
         text: "Ending on time felt like you dropped me.",
