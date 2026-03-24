@@ -11,6 +11,18 @@ export const nuggets = [];
 
 let activePlanetImages = planetImageDataInitial;
 
+const fullMindmapModule = Object.freeze({
+  planetTagData: planetTagDataInitial,
+  planetConnections: planetConnectionsInitial,
+  planetArrowedConnections: planetArrowedConnectionsInitial,
+  planetDashedConnections: planetDashedConnectionsInitial,
+  planetTunnelConnections: planetTunnelConnectionsInitial,
+});
+
+const fullMindmapImageModule = Object.freeze({
+  planetImageData: planetImageDataInitial,
+});
+
 const datasetState = {
   jaranius: null,
   planetContent: null,
@@ -243,7 +255,7 @@ export function createMindmap() {
 const mindmapRegistry = [
   {
     name: 'Full',
-    load: () => Promise.all([import('../data/planetData.js'), import('../data/planetImageData.js')]),
+    load: () => Promise.resolve([fullMindmapModule, fullMindmapImageModule]),
   },
   {
     name: 'Simple',
@@ -300,6 +312,10 @@ export function setActivePlanetImages(images) {
 
 export function getActivePlanetImages() {
   return activePlanetImages;
+}
+
+export function getActivePlanetTagData() {
+  return contexts[0]?.tagData || fullMindmapModule.planetTagData;
 }
 
 export function isDeveloperMode() {

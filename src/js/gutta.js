@@ -4,7 +4,7 @@ import { getRandomBell, getRandomInt, getRandomNum, convertLatLngtoCartesian, co
 import { generateRandomSanskritName } from './miscScripts.js'
 import { DoubleSide, ExtrudeGeometry } from 'three'
 import { GUI } from 'dat.gui'
-import { planetTagData } from './data/planetData.js';
+import { getActivePlanetTagData } from './core/datasets.js';
 
 // Global or outside function scope
 let guttaInstancedMeshes = {};
@@ -2749,7 +2749,7 @@ function refreshStats(guttaState, guttaStats) {
         // Find closest node in planetTagData
         let closestNodeGutt = null;
         let minDistanceGutt = Infinity;
-        for (let node of planetTagData) {
+        for (let node of getActivePlanetTagData()) {
             const distance = angularDistance(guttLatLng.lat, guttLatLng.lng, node.lat, node.lng);
             if (distance < minDistanceGutt) {
                 minDistanceGutt = distance;
@@ -2801,7 +2801,7 @@ function refreshStats(guttaState, guttaStats) {
         // Find closest node in planetTagData
         let closestNodeMara = null;
         let minDistanceMara = Infinity;
-        for (let node of planetTagData) {
+        for (let node of getActivePlanetTagData()) {
             const distance = angularDistance(maraLatLng.lat, maraLatLng.lng, node.lat, node.lng);
             if (distance < minDistanceMara) {
                 minDistanceMara = distance;

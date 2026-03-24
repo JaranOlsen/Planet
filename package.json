@@ -10,7 +10,7 @@
     "build": "vite build",
     "test:takadimi": "node --test takadimi/notation.test.mjs",
     "preview": "vite preview",
-    "deploy": "vite build && gh-pages -d dist"
+    "deploy": "vite build && node scripts/prune-pages-dist.mjs && gh-pages -d dist"
   },
   "devDependencies": {
     "@types/dat.gui": "^0.7.13",
