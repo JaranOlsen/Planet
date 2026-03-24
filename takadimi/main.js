@@ -14,7 +14,6 @@ import {
   buildSegmentsFromBar,
   collectNotesFrom,
   dottedMap,
-  formatNoteLength,
   splitSegmentsToTokens,
 } from "./notation.js";
 
@@ -44,13 +43,12 @@ const vexDurationMap = {
   32: "w",
 };
 
-const STORAGE_KEY = "takadimi-song-v1";
-
 const grid = document.getElementById("rhythmGrid");
 const outputBeats = document.getElementById("outputBeats");
-const noteBeats = document.getElementById("noteBeats");
 const sheetBeats = document.getElementById("sheetBeats");
 const songTrack = document.getElementById("songTrack");
+const trackActionGroups = document.getElementById("trackActionGroups");
+const songActions = document.getElementById("songActions");
 const songCount = document.getElementById("songCount");
 const editorStatus = document.getElementById("editorStatus");
 const clearBtn = document.getElementById("clearBtn");
@@ -60,29 +58,23 @@ const duplicateBarBtn = document.getElementById("duplicateBarBtn");
 const deleteBarBtn = document.getElementById("deleteBarBtn");
 const moveLeftBtn = document.getElementById("moveLeftBtn");
 const moveRightBtn = document.getElementById("moveRightBtn");
-const saveSongBtn = document.getElementById("saveSongBtn");
-const loadSongBtn = document.getElementById("loadSongBtn");
 const exportSongBtn = document.getElementById("exportSongBtn");
 const importSongBtn = document.getElementById("importSongBtn");
 const importSongInput = document.getElementById("importSongInput");
 const clearSongBtn = document.getElementById("clearSongBtn");
 const playBtn = document.getElementById("playBtn");
-const speakBtn = document.getElementById("speakBtn");
 const modeBarBtn = document.getElementById("modeBarBtn");
 const modeSongBtn = document.getElementById("modeSongBtn");
-const speechOnlyBtn = document.getElementById("speechOnlyBtn");
-const speechWithMetroBtn = document.getElementById("speechWithMetroBtn");
 const tempoInput = document.getElementById("tempoInput");
 const metroVolume = document.getElementById("metroVolume");
-const outputScopeSelectedBtn = document.getElementById("outputScopeSelectedBtn");
-const outputScopeAllBtn = document.getElementById("outputScopeAllBtn");
-const moreActions = document.getElementById("moreActions");
+const autoscrollToggle = document.getElementById("autoscrollToggle");
 const uiStatusLive = document.getElementById("uiStatusLive");
 
 const cells = [];
 const active = Array(TOTAL_STEPS).fill(false);
 const tied = Array(TOTAL_STEPS).fill(false);
 const songBars = [];
+let trackBarNodes = [];
 let trackStepNodes = [];
 let selectedBarIndex = null;
 let editorDirty = false;
@@ -103,27 +95,19 @@ let nextNoteTime = 0;
 let playStartTime = 0;
 let playheadIndex = null;
 let visualId = null;
-let playMode = "bar";
+let playMode = "song";
 let playbackBars = [];
 let playbackLength = TOTAL_STEPS;
 let activeSongIndex = null;
 let trackPlayhead = { barIndex: null, stepIndex: null };
 let takadimiUnitsByBar = [];
-let noteValueUnitsByBar = [];
 let sheetUnitsByBar = [];
+let takadimiCardsByBar = [];
+let sheetCardsByBar = [];
 let activeTakadimiUnit = null;
-let activeNoteValueUnit = null;
 let activeSheetUnit = null;
-let outputScope = "selected";
-let isSpeaking = false;
-let speechMode = "speech-only";
-let speechTimerId = null;
-let speechCompletionTimerId = null;
-let speechSessionToken = 0;
-let speechStartedMetronome = false;
-let speechSamples = null;
-let speechSampleRate = 0;
-let activeSpeechSources = [];
+let autoScrollEnabled = false;
+let takadimiOutputLayoutFrame = null;
 
 const clampTempo = (value) => {
   const tempo = Number(value);
@@ -136,7 +120,7 @@ const clampTempo = (value) => {
 const clampVolume = (value) => {
   const volume = Number(value);
   if (Number.isNaN(volume)) {
-    return 70;
+    return 30;
   }
   return Math.min(100, Math.max(0, volume));
 };
@@ -167,159 +151,6 @@ const isTextEditingTarget = (target) => {
     tagName === "select" ||
     tagName === "button"
   );
-};
-
-const supportsSpeechSamples = () =>
-  typeof window !== "undefined" &&
-  (typeof window.AudioContext === "function" ||
-    typeof window.webkitAudioContext === "function");
-
-const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
-
-const createSyllableSample = (ctx, syllable) => {
-  const vowelProfiles = {
-    a: [
-      { f: 800, bw: 150, gain: 1.0 },
-      { f: 1200, bw: 180, gain: 0.72 },
-      { f: 2500, bw: 320, gain: 0.34 },
-    ],
-    i: [
-      { f: 300, bw: 100, gain: 0.9 },
-      { f: 2300, bw: 220, gain: 1.0 },
-      { f: 3000, bw: 260, gain: 0.42 },
-    ],
-  };
-
-  const configs = {
-    ta: {
-      duration: 0.155,
-      f0Start: 182,
-      f0End: 164,
-      onsetMs: 0.004,
-      burstMs: 0.011,
-      burstGain: 0.5,
-      burstFreq: 5200,
-      vowel: "a",
-      nasalMs: 0,
-    },
-    ka: {
-      duration: 0.165,
-      f0Start: 168,
-      f0End: 152,
-      onsetMs: 0.01,
-      burstMs: 0.018,
-      burstGain: 0.46,
-      burstFreq: 2600,
-      vowel: "a",
-      nasalMs: 0,
-    },
-    di: {
-      duration: 0.148,
-      f0Start: 214,
-      f0End: 196,
-      onsetMs: 0.005,
-      burstMs: 0.008,
-      burstGain: 0.36,
-      burstFreq: 3800,
-      vowel: "i",
-      nasalMs: 0,
-    },
-    mi: {
-      duration: 0.17,
-      f0Start: 208,
-      f0End: 190,
-      onsetMs: 0.002,
-      burstMs: 0.004,
-      burstGain: 0.1,
-      burstFreq: 1700,
-      vowel: "i",
-      nasalMs: 0.045,
-      nasalFreq: 245,
-    },
-  };
-  const cfg = configs[syllable] ?? configs.ta;
-  const formants = vowelProfiles[cfg.vowel] ?? vowelProfiles.a;
-  const sampleRate = ctx.sampleRate;
-  const frameCount = Math.floor(cfg.duration * sampleRate);
-  const buffer = ctx.createBuffer(1, frameCount, sampleRate);
-  const data = buffer.getChannelData(0);
-  const attack = 0.003;
-  const release = 0.04;
-  const twoPi = Math.PI * 2;
-
-  for (let i = 0; i < frameCount; i += 1) {
-    const t = i / sampleRate;
-    const progress = t / cfg.duration;
-    const f0 = cfg.f0Start + (cfg.f0End - cfg.f0Start) * progress;
-    const voicedOn = clamp((t - cfg.onsetMs) / 0.012, 0, 1);
-
-    let voiced = 0;
-    const harmonicCount = 24;
-    for (let h = 1; h <= harmonicCount; h += 1) {
-      const harmonicFreq = f0 * h;
-      let harmonicGain = 0;
-      for (let j = 0; j < formants.length; j += 1) {
-        const formant = formants[j];
-        const distance = (harmonicFreq - formant.f) / formant.bw;
-        harmonicGain += formant.gain * Math.exp(-(distance * distance));
-      }
-      if (harmonicGain < 0.0001) {
-        continue;
-      }
-      voiced +=
-        (harmonicGain / h) * Math.sin(twoPi * harmonicFreq * t + h * 0.13);
-    }
-    voiced *= voicedOn * 0.85;
-
-    const burstPhase = clamp(t / cfg.burstMs, 0, 1);
-    const burstEnv = burstPhase >= 1 ? 0 : (1 - burstPhase) ** 2;
-    const noise = Math.random() * 2 - 1;
-    const burstBand =
-      0.7 * Math.sin(twoPi * cfg.burstFreq * t) +
-      0.3 * Math.sin(twoPi * cfg.burstFreq * 1.7 * t);
-    const burst = noise * burstBand * burstEnv * cfg.burstGain;
-
-    let nasal = 0;
-    if (cfg.nasalMs && cfg.nasalMs > 0 && t < cfg.nasalMs) {
-      const nasalEnv = (1 - t / cfg.nasalMs) * 0.24;
-      nasal =
-        nasalEnv *
-        (Math.sin(twoPi * (cfg.nasalFreq ?? 240) * t) +
-          0.4 * Math.sin(twoPi * (cfg.nasalFreq ?? 240) * 2 * t));
-    }
-
-    const breath = (Math.random() * 2 - 1) * voicedOn * 0.02;
-
-    const attackEnv = clamp(t / attack, 0, 1);
-    const releaseEnv = clamp((cfg.duration - t) / release, 0, 1);
-    const env = Math.min(attackEnv, releaseEnv) ** 0.92;
-    data[i] = (burst + voiced + nasal + breath) * env;
-  }
-
-  let peak = 0;
-  for (let i = 0; i < frameCount; i += 1) {
-    peak = Math.max(peak, Math.abs(data[i]));
-  }
-  if (peak > 0.001) {
-    const scale = 0.75 / peak;
-    for (let i = 0; i < frameCount; i += 1) {
-      data[i] *= scale;
-    }
-  }
-  return buffer;
-};
-
-const ensureSpeechSamples = (ctx) => {
-  if (speechSamples && speechSampleRate === ctx.sampleRate) {
-    return;
-  }
-  speechSamples = {
-    ta: createSyllableSample(ctx, "ta"),
-    ka: createSyllableSample(ctx, "ka"),
-    di: createSyllableSample(ctx, "di"),
-    mi: createSyllableSample(ctx, "mi"),
-  };
-  speechSampleRate = ctx.sampleRate;
 };
 
 const normalizeTies = () => {
@@ -408,6 +239,7 @@ const selectSongBar = (index) => {
 
 const renderSongTrack = () => {
   songTrack.innerHTML = "";
+  trackBarNodes = [];
   trackStepNodes = [];
   trackPlayhead = { barIndex: null, stepIndex: null };
   if (selectedBarIndex !== null && selectedBarIndex >= songBars.length) {
@@ -481,8 +313,17 @@ const renderSongTrack = () => {
       stepNodes.push(step);
     }
 
-    item.append(labelWrap, steps);
+    const pattern = document.createElement("div");
+    pattern.className = "track-pattern";
+    pattern.append(steps);
+
+    const takadimiData = buildTakadimiData(bar.active, bar.tied);
+    const trackTakadimi = createTakadimiGridLine(takadimiData, "track-takadimi");
+    pattern.append(trackTakadimi.line);
+
+    item.append(labelWrap, pattern);
     songTrack.appendChild(item);
+    trackBarNodes.push(item);
     trackStepNodes.push(stepNodes);
   });
 
@@ -573,7 +414,8 @@ const removeActiveOutputUnit = (unitNode, className) => {
   if (!unitNode) {
     return;
   }
-  unitNode.classList.remove(className);
+  const nodes = unitNode.nodes ?? (unitNode.node ? [unitNode.node] : []);
+  nodes.forEach((node) => node?.classList.remove(className));
 };
 
 const findUnitAtStep = (units, stepInBar) =>
@@ -581,10 +423,8 @@ const findUnitAtStep = (units, stepInBar) =>
 
 const setOutputHighlight = (barIndex, stepInBar) => {
   removeActiveOutputUnit(activeTakadimiUnit, "is-current");
-  removeActiveOutputUnit(activeNoteValueUnit, "is-current");
   removeActiveOutputUnit(activeSheetUnit, "is-current");
   activeTakadimiUnit = null;
-  activeNoteValueUnit = null;
   activeSheetUnit = null;
 
   if (barIndex === null || barIndex < 0) {
@@ -592,21 +432,15 @@ const setOutputHighlight = (barIndex, stepInBar) => {
   }
 
   const takadimiUnit = findUnitAtStep(takadimiUnitsByBar[barIndex], stepInBar);
-  if (takadimiUnit?.node) {
-    takadimiUnit.node.classList.add("is-current");
-    activeTakadimiUnit = takadimiUnit.node;
-  }
-
-  const noteUnit = findUnitAtStep(noteValueUnitsByBar[barIndex], stepInBar);
-  if (noteUnit?.node) {
-    noteUnit.node.classList.add("is-current");
-    activeNoteValueUnit = noteUnit.node;
+  if (takadimiUnit?.nodes?.length) {
+    takadimiUnit.nodes.forEach((node) => node.classList.add("is-current"));
+    activeTakadimiUnit = takadimiUnit;
   }
 
   const sheetUnit = findUnitAtStep(sheetUnitsByBar[barIndex], stepInBar);
-  if (sheetUnit?.node) {
-    sheetUnit.node.classList.add("is-current");
-    activeSheetUnit = sheetUnit.node;
+  if (sheetUnit?.nodes?.length) {
+    sheetUnit.nodes.forEach((node) => node.classList.add("is-current"));
+    activeSheetUnit = sheetUnit;
   }
 };
 
@@ -635,12 +469,16 @@ const updatePlayhead = () => {
   const barIndex = Math.floor(step / TOTAL_STEPS);
   const stepInBar = step % TOTAL_STEPS;
   const useSongVisual = playMode === "song" && songBars.length > 0;
+  const songBarChanged = useSongVisual && barIndex !== activeSongIndex;
 
   if (useSongVisual) {
     setPlayhead(null);
     setTrackPlayhead(barIndex, stepInBar);
     setActiveSongIndex(barIndex);
     setOutputHighlight(barIndex, stepInBar);
+    if (songBarChanged) {
+      scrollPlaybackTargetIntoView(barIndex);
+    }
   } else {
     setTrackPlayhead(null, null);
     setPlayhead(stepInBar);
@@ -794,7 +632,7 @@ const inferGrid = (positions) => {
   return 8;
 };
 
-const createLabelCard = (labelText, text) => {
+const createBeatCard = (labelText) => {
   const card = document.createElement("div");
   card.className = "beat-card";
 
@@ -802,28 +640,36 @@ const createLabelCard = (labelText, text) => {
   label.className = "beat-label";
   label.textContent = labelText;
 
-  const value = document.createElement("div");
-  value.className = "beat-text";
-  value.textContent = text;
-
-  card.append(label, value);
-  return card;
+  card.append(label);
+  return { card, label };
 };
 
-const createLabelCardHtml = (labelText, html) => {
-  const card = document.createElement("div");
-  card.className = "beat-card";
+const buildTakadimiPlacementUnits = (takadimiData) => {
+  const units = [];
 
-  const label = document.createElement("div");
-  label.className = "beat-label";
-  label.textContent = labelText;
+  takadimiData.beats.forEach((beat, beatIndex) => {
+    const beatStart = beatIndex * STEPS_PER_BEAT;
+    if (beat.rest) {
+      units.push({
+        text: "-",
+        start: beatStart,
+        length: STEPS_PER_BEAT,
+        isRest: true,
+      });
+      return;
+    }
 
-  const value = document.createElement("div");
-  value.className = "beat-text";
-  value.innerHTML = html;
+    beat.units.forEach((unit) => {
+      units.push({
+        text: unit.text,
+        start: unit.start,
+        length: unit.length,
+        isRest: false,
+      });
+    });
+  });
 
-  card.append(label, value);
-  return card;
+  return units;
 };
 
 const buildTakadimiData = (activeState, tiedState) => {
@@ -888,232 +734,261 @@ const buildTakadimiData = (activeState, tiedState) => {
   return { beats, text };
 };
 
-const buildSpeechBarsForCurrentMode = () => {
-  if (playMode === "song" && songBars.length > 0) {
-    return songBars;
-  }
-  return [snapshotBar()];
-};
-
-const buildSpeechEventsFromBar = (bar, barIndex = 0) => {
-  const takadimiData = buildTakadimiData(bar.active, bar.tied);
-  const events = [];
-  takadimiData.beats.forEach((beat, beatIndex) => {
-    if (beat.rest) {
-      return;
-    }
-    beat.units.forEach((unit) => {
-      events.push({
-        text: unit.text.toLowerCase(),
-        startStep: unit.start,
-        durationSteps: unit.length,
-        barIndex,
-        beatIndex,
-        syllableCount: 1,
-      });
-    });
-  });
-  return events;
-};
-
-const buildSpeechTimeline = (bars, tempo) => {
-  const safeTempo = clampTempo(tempo);
-  const msPerStep = (60_000 / safeTempo) / STEPS_PER_BEAT;
-  const events = bars.flatMap((bar, barIndex) =>
-    buildSpeechEventsFromBar(bar, barIndex).map((event) => {
-      const absoluteStep = barIndex * TOTAL_STEPS + event.startStep;
-      return {
-        ...event,
-        absoluteStep,
-        startMs: absoluteStep * msPerStep,
-        durationMs: event.durationSteps * msPerStep,
-      };
-    })
-  );
-
-  return {
-    events,
-    msPerStep,
-    totalSteps: bars.length * TOTAL_STEPS,
-    totalMs: bars.length * TOTAL_STEPS * msPerStep,
-  };
-};
-
-const createTakadimiCard = (labelText, takadimiData) => {
-  const card = document.createElement("div");
-  card.className = "beat-card";
-
-  const label = document.createElement("div");
-  label.className = "beat-label";
-  label.textContent = labelText;
-
-  const value = document.createElement("div");
-  value.className = "beat-text timed-line";
-
+const createTakadimiTextLine = (takadimiData, className) => {
+  const line = document.createElement("div");
+  line.className = `${className} timed-line`;
   const units = [];
+
   takadimiData.beats.forEach((beat, beatIndex) => {
     if (beatIndex > 0) {
-      value.append(" | ");
+      line.append(" | ");
     }
     if (beat.rest) {
       const rest = document.createElement("span");
       rest.className = "timed-rest";
       rest.textContent = "-";
-      value.append(rest);
+      line.append(rest);
       return;
     }
 
     beat.units.forEach((unit, unitIndex) => {
       if (unitIndex > 0) {
-        value.append(" ");
+        line.append(" ");
       }
       const span = document.createElement("span");
       span.className = "timed-unit takadimi-unit";
       span.textContent = unit.text;
-      value.append(span);
+      line.append(span);
       units.push({
         start: unit.start,
         end: unit.start + unit.length,
-        node: span,
+        nodes: [span],
       });
     });
   });
 
-  card.append(label, value);
-  return { card, units };
+  return { line, units };
 };
 
-const buildNoteValueData = (bar) => {
-  const segments = buildSegmentsFromBar(bar);
-  const tokens = splitSegmentsToTokens(segments);
-  const units = [];
-  let pendingNote = null;
+const createTakadimiGridLine = (takadimiData, className) => {
+  const line = document.createElement("div");
+  line.className = `${className} takadimi-grid`;
+  const placements = buildTakadimiPlacementUnits(takadimiData);
 
-  tokens.forEach((token) => {
-    const label = formatNoteLength(token.length);
-    if (token.type === "rest") {
-      if (pendingNote) {
-        units.push(pendingNote);
-        pendingNote = null;
-      }
-      units.push({
-        type: "rest",
-        text: `rest ${label}`,
-        start: token.start,
-        length: token.length,
-      });
-      return;
-    }
-
-    if (!token.tieFromPrev) {
-      if (pendingNote) {
-        units.push(pendingNote);
-      }
-      pendingNote = {
-        type: "note",
-        text: label,
-        start: token.start,
-        length: token.length,
-      };
-    } else if (pendingNote) {
-      pendingNote.text = `${pendingNote.text}~${label}`;
-      pendingNote.length += token.length;
-    }
-
-    if (!token.tieToNext && pendingNote) {
-      units.push(pendingNote);
-      pendingNote = null;
-    }
+  placements.forEach((placement) => {
+    const span = document.createElement("span");
+    span.className = placement.isRest
+      ? "takadimi-grid-unit timed-rest"
+      : "takadimi-grid-unit timed-unit takadimi-unit";
+    span.textContent = placement.text;
+    const anchorStep = placement.isRest
+      ? placement.start + Math.max(0, Math.floor(placement.length / 2))
+      : placement.start;
+    span.style.gridColumn = `${Math.min(TOTAL_STEPS, anchorStep + 1)}`;
+    line.append(span);
   });
 
-  if (pendingNote) {
-    units.push(pendingNote);
-  }
+  return { line, placements };
+};
+
+const createSheetTakadimiLine = (takadimiData) => {
+  const line = document.createElement("div");
+  line.className = "sheet-takadimi";
+  const placements = buildTakadimiPlacementUnits(takadimiData).map((placement) => {
+    const span = document.createElement("span");
+    span.className = placement.isRest
+      ? "sheet-takadimi-unit timed-rest"
+      : "sheet-takadimi-unit timed-unit takadimi-unit";
+    span.textContent = placement.text;
+    line.append(span);
+    return {
+      ...placement,
+      nodes: [span],
+    };
+  });
+
+  return { line, placements };
+};
+
+const createTakadimiCard = (labelText, takadimiData) => {
+  const { card } = createBeatCard(labelText);
+  const takadimiLine = createTakadimiTextLine(takadimiData, "beat-text");
+  card.append(takadimiLine.line);
+  return { card, units: takadimiLine.units, line: takadimiLine.line };
+};
+
+const createSheetCard = (labelText, sheetData, takadimiData) => {
+  const { card } = createBeatCard(labelText);
+  const body = document.createElement("div");
+  body.className = "sheet-card-body";
+
+  const notation = document.createElement("div");
+  notation.className = "sheet-notation";
+  notation.innerHTML = sheetData.svg;
+
+  const takadimiLine = createSheetTakadimiLine(takadimiData);
+  body.append(notation, takadimiLine.line);
+  card.append(body);
+
+  const glyphNodes = Array.from(notation.querySelectorAll(".vf-stavenote"));
+  const notePlacementsByStart = new Map(
+    takadimiLine.placements
+      .filter((placement) => !placement.isRest)
+      .map((placement) => [placement.start, placement])
+  );
+  const restPlacementsByStart = new Map(
+    takadimiLine.placements
+      .filter((placement) => placement.isRest)
+      .map((placement) => [placement.start, placement])
+  );
+  const units = sheetData.tokens.map((token, index) => {
+    const nodes = [];
+    const glyphNode = glyphNodes[index];
+    if (glyphNode) {
+      nodes.push(glyphNode);
+    }
+    if (!token.tieFromPrev) {
+      const takadimiUnit =
+        token.type === "note"
+          ? notePlacementsByStart.get(token.start)
+          : restPlacementsByStart.get(token.start);
+      if (takadimiUnit?.nodes?.length) {
+        nodes.push(...takadimiUnit.nodes);
+      }
+    }
+    return {
+      start: token.start,
+      end: token.start + token.length,
+      nodes,
+    };
+  });
 
   return {
-    text: units.map((unit) => unit.text).join(" · "),
+    card,
     units,
-    tokens,
+    layout: {
+      notation,
+      line: takadimiLine.line,
+      placements: takadimiLine.placements,
+      tokens: sheetData.tokens,
+      glyphNodes,
+    },
   };
 };
 
-const createNoteValueCard = (labelText, noteValueData) => {
-  const card = document.createElement("div");
-  card.className = "beat-card";
+const getRelativeGlyphCenter = (glyphNode, containerNode) => {
+  if (!glyphNode || !containerNode) {
+    return null;
+  }
 
-  const label = document.createElement("div");
-  label.className = "beat-label";
-  label.textContent = labelText;
+  const measureNode = glyphNode.querySelector?.(".vf-notehead") ?? glyphNode;
+  const glyphRect = measureNode.getBoundingClientRect();
+  const containerRect = containerNode.getBoundingClientRect();
+  if (glyphRect.width <= 0 || containerRect.width <= 0) {
+    return null;
+  }
 
-  const value = document.createElement("div");
-  value.className = "beat-text timed-line";
+  return glyphRect.left - containerRect.left + glyphRect.width / 2;
+};
 
-  const units = [];
-  noteValueData.units.forEach((unit, index) => {
-    if (index > 0) {
-      value.append(" · ");
+const getFallbackTakadimiCenter = (placement, lineNode) => {
+  const width = lineNode.clientWidth;
+  if (width <= 0) {
+    return 0;
+  }
+  return ((placement.start + placement.length / 2) / TOTAL_STEPS) * width;
+};
+
+const layoutSheetTakadimiCard = (layout) => {
+  if (!layout) {
+    return;
+  }
+
+  const { line, placements, tokens, glyphNodes } = layout;
+  const noteAnchors = new Map();
+  const restAnchors = new Map();
+
+  tokens.forEach((token, index) => {
+    const glyphNode = glyphNodes[index];
+    if (!glyphNode || token.tieFromPrev) {
+      return;
     }
-    const span = document.createElement("span");
-    span.className = `timed-unit note-value-unit${
-      unit.type === "rest" ? " is-rest" : ""
-    }`;
-    span.textContent = unit.text;
-    value.append(span);
-    units.push({
-      start: unit.start,
-      end: unit.start + unit.length,
-      node: span,
-    });
+    if (token.type === "note") {
+      noteAnchors.set(token.start, glyphNode);
+    } else if (!restAnchors.has(token.start)) {
+      restAnchors.set(token.start, glyphNode);
+    }
   });
 
-  card.append(label, value);
-  return { card, units };
+  placements.forEach((placement) => {
+    const glyphNode = placement.isRest
+      ? restAnchors.get(placement.start)
+      : noteAnchors.get(placement.start);
+    const center =
+      getRelativeGlyphCenter(glyphNode, line) ??
+      getFallbackTakadimiCenter(placement, line);
+    placement.nodes.forEach((node) => {
+      node.style.left = `${center}px`;
+    });
+  });
 };
 
-const createSheetCard = (labelText, sheetData) => {
-  const card = createLabelCardHtml(labelText, sheetData.svg);
-  const value = card.querySelector(".beat-text");
-  const glyphNodes = Array.from(value?.querySelectorAll(".vf-stavenote") ?? []);
-  const units = sheetData.tokens.map((token, index) => ({
-    start: token.start,
-    end: token.start + token.length,
-    node: glyphNodes[index] ?? null,
-  }));
-  return { card, units };
+let sheetTakadimiLayoutFrame = null;
+
+const scheduleSheetTakadimiLayout = (layouts) => {
+  if (sheetTakadimiLayoutFrame) {
+    cancelAnimationFrame(sheetTakadimiLayoutFrame);
+  }
+
+  sheetTakadimiLayoutFrame = requestAnimationFrame(() => {
+    layouts.forEach((layout) => layoutSheetTakadimiCard(layout));
+    sheetTakadimiLayoutFrame = null;
+  });
 };
 
-const syncOutputScopeControls = () => {
-  outputScopeSelectedBtn.classList.toggle("is-active", outputScope === "selected");
-  outputScopeAllBtn.classList.toggle("is-active", outputScope === "all");
-  outputScopeSelectedBtn.setAttribute(
-    "aria-pressed",
-    outputScope === "selected" ? "true" : "false"
-  );
-  outputScopeAllBtn.setAttribute(
-    "aria-pressed",
-    outputScope === "all" ? "true" : "false"
-  );
+const lineWraps = (line) => {
+  if (!line) {
+    return false;
+  }
+  const lineHeight = Number.parseFloat(getComputedStyle(line).lineHeight);
+  const renderedHeight = line.getBoundingClientRect().height;
+  if (lineHeight > 0) {
+    return renderedHeight > lineHeight * 1.5;
+  }
+  return line.scrollHeight > line.clientHeight + 1;
 };
 
-const setOutputScope = (scope) => {
-  outputScope = scope === "all" ? "all" : "selected";
-  syncOutputScopeControls();
-  updateOutput();
+const scheduleTakadimiOutputLayout = (barCount, lines) => {
+  if (takadimiOutputLayoutFrame) {
+    cancelAnimationFrame(takadimiOutputLayoutFrame);
+    takadimiOutputLayoutFrame = null;
+  }
+
+  const maxColumns = Math.min(4, Math.max(1, barCount));
+  outputBeats.style.setProperty("--output-columns", String(maxColumns));
+
+  if (barCount <= 2) {
+    return;
+  }
+
+  takadimiOutputLayoutFrame = requestAnimationFrame(() => {
+    const wrapped = lines.some((line) => lineWraps(line));
+    const columnCount = wrapped ? Math.min(2, barCount) : maxColumns;
+    outputBeats.style.setProperty("--output-columns", String(columnCount));
+    takadimiOutputLayoutFrame = null;
+  });
+};
+
+const setAutoScrollEnabled = (enabled) => {
+  autoScrollEnabled = Boolean(enabled);
+  if (autoscrollToggle) {
+    autoscrollToggle.checked = autoScrollEnabled;
+  }
 };
 
 const getBarsForOutput = () => {
   if (songBars.length === 0) {
     return [{ sourceIndex: 0, label: "Draft Bar", bar: snapshotBar() }];
-  }
-
-  if (outputScope === "selected" && selectedBarIndex !== null) {
-    return [
-      {
-        sourceIndex: selectedBarIndex,
-        label: `Bar ${selectedBarIndex + 1}`,
-        bar: songBars[selectedBarIndex],
-      },
-    ];
   }
 
   return songBars.map((bar, index) => ({
@@ -1158,7 +1033,7 @@ const renderSheetFromTokens = (tokens, width, height) => {
   renderer.resize(width, height);
 
   const context = renderer.getContext();
-  const stave = new Stave(16, 34, width - 32);
+  const stave = new Stave(16, 16, width - 32);
   stave.addClef("percussion");
   stave.addTimeSignature("4/4");
   stave.setContext(context).draw();
@@ -1237,7 +1112,7 @@ const renderSheetFromTokens = (tokens, width, height) => {
 
 const buildSheetSvgForBar = (bar) => {
   const width = 780;
-  const height = 180;
+  const height = 138;
 
   const segments = buildSegmentsFromBar(bar);
   const tokens = splitSegmentsToTokens(segments);
@@ -1275,235 +1150,39 @@ const updateOutput = () => {
   const bars = getBarsForOutput();
 
   outputBeats.innerHTML = "";
-  noteBeats.innerHTML = "";
   sheetBeats.innerHTML = "";
   takadimiUnitsByBar = [];
-  noteValueUnitsByBar = [];
   sheetUnitsByBar = [];
+  takadimiCardsByBar = [];
+  sheetCardsByBar = [];
   activeTakadimiUnit = null;
-  activeNoteValueUnit = null;
   activeSheetUnit = null;
+  const sheetLayouts = [];
+  const takadimiLines = [];
 
   bars.forEach(({ sourceIndex, label, bar }) => {
     const takadimiData = buildTakadimiData(bar.active, bar.tied);
     const takadimiCard = createTakadimiCard(label, takadimiData);
     outputBeats.appendChild(takadimiCard.card);
     takadimiUnitsByBar[sourceIndex] = takadimiCard.units;
-
-    const noteValueData = buildNoteValueData(bar);
-    const noteValueCard = createNoteValueCard(label, noteValueData);
-    noteBeats.appendChild(noteValueCard.card);
-    noteValueUnitsByBar[sourceIndex] = noteValueCard.units;
+    takadimiCardsByBar[sourceIndex] = takadimiCard.card;
+    takadimiLines.push(takadimiCard.line);
 
     const sheetSvg = buildSheetSvgForBar(bar);
-    const sheetCard = createSheetCard(label, sheetSvg);
+    const sheetCard = createSheetCard(label, sheetSvg, takadimiData);
     sheetBeats.appendChild(sheetCard.card);
     sheetUnitsByBar[sourceIndex] = sheetCard.units;
-  });
-};
-
-const syncSpeechModeControls = () => {
-  const isSpeechOnly = speechMode === "speech-only";
-  speechOnlyBtn.classList.toggle("is-active", isSpeechOnly);
-  speechWithMetroBtn.classList.toggle("is-active", !isSpeechOnly);
-  speechOnlyBtn.setAttribute("aria-pressed", isSpeechOnly ? "true" : "false");
-  speechWithMetroBtn.setAttribute("aria-pressed", isSpeechOnly ? "false" : "true");
-};
-
-const syncSpeechSupportControls = () => {
-  const supported = supportsSpeechSamples();
-  speakBtn.disabled = !supported;
-  speechOnlyBtn.disabled = !supported;
-  speechWithMetroBtn.disabled = !supported;
-  if (!supported) {
-    speakBtn.textContent = "Speech Unavailable";
-  } else if (!isSpeaking) {
-    speakBtn.textContent = "Speak";
-  }
-};
-
-const clearSpeechTimers = () => {
-  if (speechTimerId) {
-    clearTimeout(speechTimerId);
-    speechTimerId = null;
-  }
-  if (speechCompletionTimerId) {
-    clearTimeout(speechCompletionTimerId);
-    speechCompletionTimerId = null;
-  }
-};
-
-const stopActiveSpeechSources = () => {
-  activeSpeechSources.forEach((source) => {
-    try {
-      source.stop();
-    } catch (error) {
-      // Source may already be ended.
+    sheetCardsByBar[sourceIndex] = sheetCard.card;
+    if (sheetCard.layout) {
+      sheetLayouts.push(sheetCard.layout);
     }
   });
-  activeSpeechSources = [];
-};
 
-const playSpeechSampleAt = (event, startTime) => {
-  if (!audioContext || !speechSamples) {
-    return;
+  scheduleTakadimiOutputLayout(bars.length, takadimiLines);
+
+  if (sheetLayouts.length > 0) {
+    scheduleSheetTakadimiLayout(sheetLayouts);
   }
-  const sample = speechSamples[event.text] ?? speechSamples.ta;
-  if (!sample) {
-    return;
-  }
-  const eventStartTime = startTime + event.startMs / 1000;
-  const targetDuration = Math.max(0.045, event.durationMs / 1000);
-  const playbackRate = clamp(sample.duration / (targetDuration * 0.9), 0.75, 3.9);
-
-  const source = audioContext.createBufferSource();
-  const gain = audioContext.createGain();
-  source.buffer = sample;
-  source.playbackRate.value = playbackRate;
-  gain.gain.value = 0.95;
-  source.connect(gain);
-  gain.connect(audioContext.destination);
-
-  source.onended = () => {
-    activeSpeechSources = activeSpeechSources.filter((node) => node !== source);
-  };
-
-  source.start(eventStartTime);
-  source.stop(eventStartTime + Math.max(0.06, targetDuration * 1.08));
-  activeSpeechSources.push(source);
-};
-
-const cancelSpeechPlayback = (
-  reason = null,
-  { announce = true, keepMetronome = false } = {}
-) => {
-  const wasSpeaking = isSpeaking;
-  isSpeaking = false;
-  clearSpeechTimers();
-  speechSessionToken += 1;
-  stopActiveSpeechSources();
-
-  if (!keepMetronome && speechStartedMetronome && isPlaying) {
-    stopPlayback();
-  }
-  speechStartedMetronome = false;
-
-  if (wasSpeaking) {
-    speakBtn.textContent = "Speak";
-  }
-
-  if (announce && reason) {
-    announceStatus(reason);
-  }
-};
-
-const stopSpeechPlayback = (reason = "Speech stopped.") => {
-  cancelSpeechPlayback(reason);
-};
-
-const finalizeSpeechSession = (sessionToken, announce) => {
-  if (!isSpeaking || sessionToken !== speechSessionToken) {
-    return;
-  }
-  cancelSpeechPlayback(null, {
-    announce: false,
-    keepMetronome: true,
-  });
-  if (announce) {
-    announceStatus("Speech finished.");
-  }
-};
-
-const startSpeechPlayback = async ({ announce = true } = {}) => {
-  if (!supportsSpeechSamples()) {
-    syncSpeechSupportControls();
-    if (announce) {
-      announceStatus("Sample playback is unavailable in this browser.");
-    }
-    return;
-  }
-  if (!audioContext) {
-    const AudioCtor = window.AudioContext || window.webkitAudioContext;
-    audioContext = new AudioCtor();
-  }
-  if (audioContext.state === "suspended") {
-    await audioContext.resume();
-  }
-  ensureSpeechSamples(audioContext);
-
-  const bars = buildSpeechBarsForCurrentMode();
-  const timeline = buildSpeechTimeline(bars, tempoInput.value);
-  if (timeline.events.length === 0) {
-    if (announce) {
-      announceStatus("No pronounceable Takadimi syllables in the selected scope.");
-    }
-    return;
-  }
-
-  const wasPlayingBeforeSpeech = isPlaying;
-  if (speechMode === "speech-only") {
-    if (isPlaying) {
-      stopPlayback();
-    }
-    speechStartedMetronome = false;
-  } else if (!isPlaying) {
-    await startPlayback();
-    speechStartedMetronome = true;
-  } else {
-    speechStartedMetronome = false;
-  }
-
-  if (isSpeaking) {
-    cancelSpeechPlayback(null, {
-      announce: false,
-      keepMetronome: speechMode === "speech+metro" && wasPlayingBeforeSpeech,
-    });
-  }
-
-  isSpeaking = true;
-  speakBtn.textContent = "Stop Speech";
-  clearSpeechTimers();
-  speechSessionToken += 1;
-  const sessionToken = speechSessionToken;
-  const startTime = audioContext.currentTime + 0.06;
-
-  timeline.events.forEach((event) => {
-    playSpeechSampleAt(event, startTime);
-  });
-
-  speechTimerId = setTimeout(() => {
-    finalizeSpeechSession(sessionToken, false);
-  }, timeline.totalMs + 450);
-
-  speechCompletionTimerId = setTimeout(() => {
-    finalizeSpeechSession(sessionToken, announce);
-  }, timeline.totalMs + 1200);
-
-  if (announce) {
-    announceStatus("Takadimi speech started.");
-  }
-};
-
-const toggleSpeechPlayback = () => {
-  if (isSpeaking) {
-    stopSpeechPlayback("Speech stopped.");
-  } else {
-    void startSpeechPlayback();
-  }
-};
-
-const restartSpeechPlayback = () => {
-  if (!isSpeaking) {
-    return;
-  }
-  cancelSpeechPlayback(null, { announce: false, keepMetronome: false });
-  void startSpeechPlayback({ announce: false });
-};
-
-const setSpeechMode = (mode) => {
-  speechMode = mode === "speech+metro" ? "speech+metro" : "speech-only";
-  syncSpeechModeControls();
-  restartSpeechPlayback();
 };
 
 const clearGrid = () => {
@@ -1644,15 +1323,6 @@ const stopPlayback = () => {
 };
 
 const togglePlayback = () => {
-  if (isSpeaking) {
-    const hadMetronome = isPlaying;
-    cancelSpeechPlayback("Speech stopped.", { announce: true });
-    if (hadMetronome) {
-      return;
-    }
-    startPlayback();
-    return;
-  }
   if (isPlaying) {
     stopPlayback();
   } else {
@@ -1671,7 +1341,6 @@ const setPlayMode = (mode) => {
     stopPlayback();
     startPlayback();
   }
-  restartSpeechPlayback();
 };
 
 const addBarToSong = () => {
@@ -1775,9 +1444,25 @@ const buildSongStoragePayload = () => ({
   selectedBarIndex,
   tempo: clampTempo(tempoInput.value),
   metronomeVolume: clampVolume(metroVolume.value),
+  autoScrollEnabled,
   playMode,
   savedAt: new Date().toISOString(),
 });
+
+const syncSongActionsStickyState = () => {
+  if (!trackActionGroups || !songActions) {
+    return;
+  }
+  trackActionGroups.classList.toggle("is-sticky", songActions.open);
+};
+
+const normalizeExportFilename = (value, fallback) => {
+  const trimmed = value?.trim();
+  const baseName = trimmed || fallback;
+  const sanitized = baseName.replace(/[<>:"/\\|?*\u0000-\u001f]/g, "-").trim();
+  const fileName = sanitized || fallback;
+  return fileName.toLowerCase().endsWith(".json") ? fileName : `${fileName}.json`;
+};
 
 const flashButton = (button, label, statusMessage = label) => {
   const original = button.textContent;
@@ -1809,6 +1494,9 @@ const applySongPayload = (parsed) => {
   if (payload?.metronomeVolume !== undefined) {
     metroVolume.value = clampVolume(payload.metronomeVolume);
   }
+  if (payload?.autoScrollEnabled !== undefined) {
+    setAutoScrollEnabled(payload.autoScrollEnabled);
+  }
   if (payload?.playMode === "song" || payload?.playMode === "bar") {
     setPlayMode(payload.playMode);
   }
@@ -1832,33 +1520,6 @@ const applySongPayload = (parsed) => {
   return true;
 };
 
-const saveSong = () => {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(buildSongStoragePayload()));
-    flashButton(saveSongBtn, "Saved Local", "Song saved locally.");
-  } catch (error) {
-    flashButton(saveSongBtn, "Save Failed", "Saving song failed.");
-  }
-};
-
-const loadSong = () => {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) {
-      flashButton(loadSongBtn, "No Local Save", "No local save was found.");
-      return;
-    }
-    const parsed = JSON.parse(stored);
-    if (applySongPayload(parsed)) {
-      flashButton(loadSongBtn, "Loaded Local", "Song loaded from local storage.");
-    } else {
-      flashButton(loadSongBtn, "Load Failed", "Loading song failed.");
-    }
-  } catch (error) {
-    flashButton(loadSongBtn, "Load Failed", "Loading song failed.");
-  }
-};
-
 const exportSongToFile = () => {
   try {
     const payload = buildSongStoragePayload();
@@ -1868,9 +1529,15 @@ const exportSongToFile = () => {
     const stamp = payload.savedAt
       .replace(/[:]/g, "-")
       .replace(/\.\d+Z$/, "Z");
+    const suggestedName = `takadimi-song-${stamp}.json`;
+    const requestedName = window.prompt("Export filename:", suggestedName);
+    if (requestedName === null) {
+      URL.revokeObjectURL(url);
+      return;
+    }
     const a = document.createElement("a");
     a.href = url;
-    a.download = `takadimi-song-${stamp}.json`;
+    a.download = normalizeExportFilename(requestedName, suggestedName);
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -1911,15 +1578,146 @@ const clearSong = () => {
   announceStatus("Song cleared.");
 };
 
-const syncMoreActionsForViewport = () => {
-  if (!moreActions) {
+const getVisibleHeight = (rect) =>
+  Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+
+const getAutoscrollLineMetrics = (items, barIndex) => {
+  const currentItem = items[barIndex];
+  if (!currentItem) {
+    return null;
+  }
+
+  const renderedItems = items.filter(Boolean);
+  const tolerance = 6;
+  const currentTop = currentItem.getBoundingClientRect().top;
+  const currentLine = renderedItems.filter(
+    (item) => Math.abs(item.getBoundingClientRect().top - currentTop) < tolerance
+  );
+
+  if (currentLine.length === 0) {
+    return null;
+  }
+
+  const lineTop = Math.min(...currentLine.map((item) => item.getBoundingClientRect().top));
+  let lineBottom = Math.max(...currentLine.map((item) => item.getBoundingClientRect().bottom));
+  const laterItems = renderedItems.filter(
+    (item) => item.getBoundingClientRect().top > currentTop + tolerance
+  );
+
+  if (laterItems.length > 0) {
+    const nextLineTop = Math.min(
+      ...laterItems.map((item) => item.getBoundingClientRect().top)
+    );
+    const nextLine = laterItems.filter(
+      (item) => Math.abs(item.getBoundingClientRect().top - nextLineTop) < tolerance
+    );
+    lineBottom = Math.max(
+      lineBottom,
+      ...nextLine.map((item) => item.getBoundingClientRect().bottom)
+    );
+  }
+
+  return { top: lineTop, bottom: lineBottom };
+};
+
+const keepPlaybackLinesVisible = (lineMetrics) => {
+  if (!lineMetrics) {
     return;
   }
-  if (window.innerWidth <= 600) {
-    moreActions.removeAttribute("open");
-  } else {
-    moreActions.setAttribute("open", "");
+
+  const topPadding = 18;
+  const bottomPadding = 24;
+  if (
+    lineMetrics.top >= topPadding &&
+    lineMetrics.bottom <= window.innerHeight - bottomPadding
+  ) {
+    return;
   }
+
+  const visibleBand = window.innerHeight - topPadding - bottomPadding;
+  const currentScrollTop = window.scrollY;
+  const maxScrollTop = Math.max(
+    0,
+    document.documentElement.scrollHeight - window.innerHeight
+  );
+  const nextScrollTop =
+    lineMetrics.bottom - lineMetrics.top <= visibleBand
+      ? currentScrollTop + lineMetrics.top - topPadding
+      : currentScrollTop + lineMetrics.bottom - (window.innerHeight - bottomPadding);
+
+  window.scrollTo({
+    top: Math.max(0, Math.min(maxScrollTop, nextScrollTop)),
+    behavior: "smooth",
+  });
+};
+
+const scrollPlaybackTargetIntoView = (barIndex) => {
+  if (!autoScrollEnabled || playMode !== "song") {
+    return;
+  }
+
+  const candidates = [
+    {
+      container: songTrack,
+      target: trackBarNodes[barIndex] ?? null,
+      items: trackBarNodes,
+    },
+    {
+      container: outputBeats,
+      target: takadimiCardsByBar[barIndex] ?? null,
+      items: takadimiCardsByBar,
+    },
+    {
+      container: sheetBeats,
+      target: sheetCardsByBar[barIndex] ?? null,
+      items: sheetCardsByBar,
+    },
+  ]
+    .filter(
+      ({ container, target }) =>
+        container &&
+        target &&
+        !container.closest("details")?.matches(":not([open])")
+    )
+    .map(({ container, target, items }) => {
+      const rect = container.getBoundingClientRect();
+      return {
+        target,
+        items,
+        rect,
+        visibleHeight: getVisibleHeight(rect),
+      };
+    })
+    .filter(({ visibleHeight }) => visibleHeight > 0);
+
+  if (candidates.length === 0) {
+    return;
+  }
+
+  const viewportMidpoint = window.innerHeight / 2;
+  const primaryCandidates = candidates.filter(
+    ({ rect }) => rect.top <= viewportMidpoint && rect.bottom >= viewportMidpoint
+  );
+  const ranked = primaryCandidates.length > 0 ? primaryCandidates : candidates;
+  const selectedCandidate = ranked.sort(
+    (candidateA, candidateB) => candidateB.visibleHeight - candidateA.visibleHeight
+  )[0];
+  const lineMetrics = getAutoscrollLineMetrics(selectedCandidate.items, barIndex);
+
+  if (!lineMetrics) {
+    selectedCandidate.target.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "nearest",
+    });
+    return;
+  }
+
+  keepPlaybackLinesVisible(lineMetrics);
+};
+
+const handleWindowResize = () => {
+  updateOutput();
 };
 
 const handleGlobalShortcuts = (event) => {
@@ -1940,11 +1738,6 @@ const handleGlobalShortcuts = (event) => {
   }
 
   const key = event.key.toLowerCase();
-  if (key === "s") {
-    event.preventDefault();
-    toggleSpeechPlayback();
-    return;
-  }
 
   if (key === "a") {
     event.preventDefault();
@@ -1979,21 +1772,18 @@ duplicateBarBtn.addEventListener("click", duplicateSelectedBar);
 deleteBarBtn.addEventListener("click", deleteSelectedBar);
 moveLeftBtn.addEventListener("click", () => moveSelectedBar(-1));
 moveRightBtn.addEventListener("click", () => moveSelectedBar(1));
-saveSongBtn.addEventListener("click", saveSong);
-loadSongBtn.addEventListener("click", loadSong);
 exportSongBtn.addEventListener("click", exportSongToFile);
 importSongBtn.addEventListener("click", () => importSongInput.click());
 importSongInput.addEventListener("change", importSongFromFile);
 clearSongBtn.addEventListener("click", clearSong);
 playBtn.addEventListener("click", togglePlayback);
-speakBtn.addEventListener("click", toggleSpeechPlayback);
 modeBarBtn.addEventListener("click", () => setPlayMode("bar"));
 modeSongBtn.addEventListener("click", () => setPlayMode("song"));
-speechOnlyBtn.addEventListener("click", () => setSpeechMode("speech-only"));
-speechWithMetroBtn.addEventListener("click", () => setSpeechMode("speech+metro"));
-outputScopeSelectedBtn.addEventListener("click", () => setOutputScope("selected"));
-outputScopeAllBtn.addEventListener("click", () => setOutputScope("all"));
-window.addEventListener("resize", syncMoreActionsForViewport);
+autoscrollToggle.addEventListener("change", () => {
+  setAutoScrollEnabled(autoscrollToggle.checked);
+});
+songActions?.addEventListener("toggle", syncSongActionsStickyState);
+window.addEventListener("resize", handleWindowResize);
 window.addEventListener("keydown", handleGlobalShortcuts);
 
 tempoInput.addEventListener("change", () => {
@@ -2009,11 +1799,9 @@ metroVolume.addEventListener("input", () => {
 });
 
 metroVolume.value = clampVolume(metroVolume.value);
-setPlayMode("bar");
-setSpeechMode("speech-only");
-setOutputScope("selected");
-syncMoreActionsForViewport();
-syncSpeechSupportControls();
+setAutoScrollEnabled(false);
+setPlayMode("song");
+syncSongActionsStickyState();
 
 buildGrid();
 syncCells();
