@@ -1,0 +1,69 @@
+/* Ensure the mindmap fills the slide area */
+#mindmap-slide {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #1a1a1a; /* Dark background color */
+}
+
+/* Adjust the mindmap container to fit within the slide */
+#mindmap-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Style for the nodes */
+.mindmap-node {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff; /* Default border color */
+    border-radius: 50%;
+    background-color: #007acc; /* Default background color */
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: transform 0.3s;
+    padding: 5px;
+    overflow: hidden;
+    color: white;
+    z-index: 2; /* Ensure nodes appear above lines */
+}
+
+/* Hover effect */
+.mindmap-node:hover {
+    transform: scale(1.05);
+    background-color: rgba(0, 122, 204, 1); /* Fully opaque on hover */
+}
+
+/* Style for the lines */
+.mindmap-line {
+    stroke: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
+    stroke-width: 2;
+    z-index: 1; /* Ensure lines appear below nodes */
+}
+
+/* Text styling */
+.mindmap-text {
+    word-wrap: break-word;
+    text-align: center;
+}
+
+/* Ensure nodes don't become too small or too large */
+.mindmap-node {
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 150px;
+    max-height: 150px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .mindmap-node {
+        min-width: 40px;
+        min-height: 40px;
+    }
+}

@@ -1,0 +1,509 @@
+.eft-slide {
+    --eft-progress: 0%;
+    --eft-bg-deep: #0c1016;
+    --eft-bg-mid: #141a22;
+    --eft-border: rgba(194, 207, 219, 0.14);
+    --eft-text: #f4ede2;
+    --eft-muted: rgba(244, 237, 226, 0.68);
+    --eft-process: #5c7686;
+    --eft-process-stroke: rgba(164, 191, 207, 0.7);
+    --eft-emotion: #9b6b58;
+    --eft-emotion-stroke: rgba(228, 186, 165, 0.72);
+    --eft-core: #ead9b3;
+    --eft-core-stroke: rgba(255, 242, 212, 0.88);
+    width: 100%;
+    height: 100%;
+    padding: clamp(16px, 3vw, 32px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 1.8vw, 18px);
+    color: var(--eft-text);
+    font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    background:
+        radial-gradient(circle at 50% 46%, rgba(235, 217, 179, 0.12), transparent 28%),
+        radial-gradient(circle at 20% 18%, rgba(92, 118, 134, 0.18), transparent 34%),
+        radial-gradient(circle at 80% 20%, rgba(155, 107, 88, 0.15), transparent 30%),
+        linear-gradient(180deg, var(--eft-bg-mid) 0%, var(--eft-bg-deep) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.eft-slide::before,
+.eft-slide::after {
+    content: "";
+    position: absolute;
+    border-radius: 999px;
+    pointer-events: none;
+    filter: blur(40px);
+    opacity: 0.55;
+}
+
+.eft-slide::before {
+    width: 34vw;
+    height: 34vw;
+    min-width: 280px;
+    min-height: 280px;
+    top: -12%;
+    left: -8%;
+    background: radial-gradient(circle, rgba(92, 118, 134, 0.2), transparent 68%);
+}
+
+.eft-slide::after {
+    width: 30vw;
+    height: 30vw;
+    min-width: 240px;
+    min-height: 240px;
+    right: -10%;
+    bottom: -18%;
+    background: radial-gradient(circle, rgba(234, 217, 179, 0.16), transparent 70%);
+}
+
+.eft-stage,
+.eft-axis {
+    width: 100%;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.eft-stage {
+    flex: 1 1 auto;
+    min-height: 0;
+    position: relative;
+    border-radius: 34px;
+    border: 1px solid var(--eft-border);
+    overflow: hidden;
+    touch-action: none;
+    cursor: ew-resize;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01)),
+        radial-gradient(circle at 50% 40%, rgba(255, 245, 225, 0.05), transparent 28%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 36px 80px rgba(0, 0, 0, 0.36);
+}
+
+.eft-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.06), transparent 30%),
+        radial-gradient(circle at 52% 48%, rgba(255, 255, 255, 0.04), transparent 42%);
+    pointer-events: none;
+}
+
+.eft-stage.is-dragging {
+    cursor: grabbing;
+}
+
+.eft-drag-hint {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 9px 16px;
+    border-radius: 999px;
+    color: var(--eft-muted);
+    font-size: clamp(11px, 1.4vw, 14px);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    background: rgba(8, 11, 15, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    transition: opacity 220ms ease, transform 220ms ease;
+    pointer-events: none;
+}
+
+.eft-slide.is-axis-revealed .eft-drag-hint {
+    opacity: 0.18;
+    transform: translateX(-50%) translateY(-4px);
+}
+
+.eft-chart {
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: auto;
+}
+
+.eft-chart text {
+    user-select: none;
+    pointer-events: none;
+}
+
+.eft-guide {
+    fill: none;
+    stroke: rgba(238, 229, 210, 0.08);
+    stroke-width: 1.5;
+    stroke-dasharray: 7 9;
+}
+
+.eft-band-outline {
+    fill: none;
+    stroke-width: 1.8;
+}
+
+.eft-curve-path {
+    fill: none;
+    stroke: none;
+}
+
+.eft-curve-label {
+    font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-anchor: middle;
+    transition: opacity 180ms ease;
+}
+
+.eft-chart text.eft-hover-target {
+    pointer-events: auto;
+    cursor: help;
+}
+
+.eft-chart text.eft-hover-target * {
+    pointer-events: auto;
+}
+
+.eft-curve-label textPath {
+    dominant-baseline: middle;
+}
+
+.eft-curve-label--process {
+    fill: rgba(198, 219, 231, 0.78);
+}
+
+.eft-curve-label--emotion {
+    fill: rgba(240, 212, 194, 0.82);
+}
+
+.eft-core-label {
+    font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    transition: opacity 220ms ease;
+}
+
+.eft-core-label--early {
+    fill: rgba(246, 236, 213, 0.8);
+}
+
+.eft-core-label--middle {
+    fill: rgba(251, 242, 221, 0.92);
+}
+
+.eft-core-label--late {
+    fill: rgba(255, 247, 228, 0.96);
+}
+
+.eft-core-hitbox,
+.eft-node__hitbox {
+    fill: rgba(255, 255, 255, 0.001);
+    stroke: none;
+    pointer-events: auto;
+    cursor: help;
+}
+
+.eft-node__ellipse {
+    stroke-width: 1.5;
+    pointer-events: none;
+    transition: opacity 220ms ease, fill 220ms ease, stroke 220ms ease;
+}
+
+.eft-node__rim {
+    fill: none;
+    stroke: rgba(255, 247, 228, 0.28);
+    stroke-width: 1;
+    pointer-events: none;
+    transition: stroke 220ms ease, opacity 220ms ease;
+}
+
+.eft-node__text {
+    font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    transition: opacity 220ms ease;
+}
+
+.eft-node__text--early {
+    fill: rgba(122, 73, 66, 0.94);
+}
+
+.eft-node__text--middle {
+    fill: rgba(86, 60, 33, 0.94);
+}
+
+.eft-node__text--late {
+    fill: rgba(84, 96, 53, 0.94);
+}
+
+.eft-tooltip {
+    --eft-tooltip-x: 0px;
+    --eft-tooltip-y: 0px;
+    --eft-tooltip-accent: linear-gradient(90deg, rgba(255, 241, 209, 0.92), rgba(234, 217, 179, 0.62));
+    --eft-tooltip-chip-bg: rgba(255, 255, 255, 0.05);
+    --eft-tooltip-chip-border: rgba(255, 255, 255, 0.06);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: min(320px, calc(100% - 28px));
+    padding: 16px 16px 14px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+        linear-gradient(180deg, rgba(16, 20, 28, 0.94), rgba(10, 13, 18, 0.95)),
+        rgba(9, 12, 18, 0.92);
+    box-shadow:
+        0 22px 48px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(18px);
+    color: var(--eft-text);
+    opacity: 0;
+    transform: translate3d(var(--eft-tooltip-x), calc(var(--eft-tooltip-y) + 8px), 0) scale(0.985);
+    transition: opacity 160ms ease, transform 160ms ease;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.eft-tooltip::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 14px;
+    right: 14px;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--eft-tooltip-accent);
+    opacity: 0.95;
+}
+
+.eft-tooltip.is-visible {
+    opacity: 1;
+    transform: translate3d(var(--eft-tooltip-x), var(--eft-tooltip-y), 0) scale(1);
+}
+
+.eft-tooltip[data-tone="process"] {
+    --eft-tooltip-accent: linear-gradient(90deg, rgba(164, 191, 207, 0.95), rgba(92, 118, 134, 0.55));
+    --eft-tooltip-chip-bg: rgba(92, 118, 134, 0.13);
+    --eft-tooltip-chip-border: rgba(164, 191, 207, 0.16);
+    border-color: rgba(164, 191, 207, 0.28);
+    box-shadow:
+        0 22px 48px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(92, 118, 134, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.eft-tooltip[data-tone="emotion"] {
+    --eft-tooltip-accent: linear-gradient(90deg, rgba(228, 186, 165, 0.96), rgba(155, 107, 88, 0.54));
+    --eft-tooltip-chip-bg: rgba(155, 107, 88, 0.14);
+    --eft-tooltip-chip-border: rgba(228, 186, 165, 0.16);
+    border-color: rgba(228, 186, 165, 0.24);
+    box-shadow:
+        0 22px 48px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(155, 107, 88, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.eft-tooltip[data-tone="core"] {
+    --eft-tooltip-accent: linear-gradient(90deg, rgba(255, 242, 212, 0.95), rgba(234, 217, 179, 0.58));
+    --eft-tooltip-chip-bg: rgba(234, 217, 179, 0.15);
+    --eft-tooltip-chip-border: rgba(255, 242, 212, 0.16);
+    border-color: rgba(255, 242, 212, 0.24);
+}
+
+.eft-tooltip[data-tone="primary"] {
+    --eft-tooltip-accent: linear-gradient(90deg, rgba(255, 233, 187, 0.95), rgba(208, 181, 136, 0.58));
+    --eft-tooltip-chip-bg: rgba(208, 181, 136, 0.14);
+    --eft-tooltip-chip-border: rgba(255, 233, 187, 0.14);
+    border-color: rgba(255, 231, 179, 0.24);
+}
+
+.eft-tooltip__title {
+    margin: 0 0 12px;
+    font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    font-size: 24px;
+    line-height: 1.08;
+    letter-spacing: 0.01em;
+}
+
+.eft-tooltip__section + .eft-tooltip__section {
+    margin-top: 12px;
+}
+
+.eft-tooltip__eyebrow {
+    margin: 0 0 8px;
+    color: rgba(244, 237, 226, 0.58);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.eft-tooltip__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.eft-tooltip__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: var(--eft-tooltip-chip-bg);
+    border: 1px solid var(--eft-tooltip-chip-border);
+    font-size: 13px;
+    line-height: 1;
+}
+
+.eft-tooltip__emoji {
+    font-size: 15px;
+}
+
+.eft-tooltip__needs {
+    margin: 0;
+    color: rgba(244, 237, 226, 0.82);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.eft-axis {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(18px);
+    transition: opacity 260ms ease, transform 260ms ease;
+    padding-bottom: 2px;
+}
+
+.eft-slide.is-axis-revealed .eft-axis {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.eft-axis,
+.eft-axis__track,
+.eft-axis__labels,
+.eft-axis__labels span,
+.eft-axis__handle {
+    touch-action: none;
+    cursor: ew-resize;
+}
+
+.eft-axis__track {
+    position: relative;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    overflow: visible;
+}
+
+.eft-axis__track::before {
+    content: "";
+    position: absolute;
+    inset: -14px 0;
+    background: linear-gradient(90deg, rgba(92, 118, 134, 0.1), rgba(234, 217, 179, 0.1));
+    filter: blur(12px);
+    opacity: 0.7;
+}
+
+.eft-axis.is-dragging .eft-axis__track {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.eft-axis__progress {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--eft-progress);
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(92, 118, 134, 0.92), rgba(234, 217, 179, 0.96));
+}
+
+.eft-axis__handle {
+    position: absolute;
+    top: 50%;
+    left: var(--eft-progress);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff8eb, #ead9b3 68%);
+    border: 1px solid rgba(255, 252, 244, 0.84);
+    box-shadow:
+        0 0 0 4px rgba(234, 217, 179, 0.16),
+        0 12px 28px rgba(0, 0, 0, 0.28);
+    transform: translate(-50%, -50%);
+    transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+.eft-axis.is-dragging .eft-axis__handle {
+    transform: translate(-50%, -50%) scale(1.06);
+    box-shadow:
+        0 0 0 5px rgba(234, 217, 179, 0.2),
+        0 14px 32px rgba(0, 0, 0, 0.3);
+}
+
+.eft-axis__labels {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    color: var(--eft-muted);
+    font-size: clamp(11px, 1.35vw, 14px);
+    letter-spacing: 0.03em;
+}
+
+.eft-axis__labels span:nth-child(2) {
+    text-align: center;
+}
+
+.eft-axis__labels span:last-child {
+    text-align: right;
+}
+
+@media (max-width: 900px) {
+    .eft-slide {
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .eft-stage {
+        border-radius: 26px;
+        min-height: 300px;
+    }
+
+    .eft-drag-hint {
+        top: 16px;
+        max-width: calc(100% - 26px);
+        white-space: normal;
+        text-align: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .eft-axis__labels {
+        font-size: 11px;
+    }
+
+    .eft-curve-label {
+        letter-spacing: 0.02em;
+    }
+
+    .eft-tooltip {
+        width: min(280px, calc(100% - 20px));
+        padding: 14px;
+    }
+
+    .eft-tooltip__title {
+        font-size: 20px;
+    }
+}

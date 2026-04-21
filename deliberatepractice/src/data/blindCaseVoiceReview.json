@@ -1,0 +1,1309 @@
+{
+  "generatedAt": "2026-03-24T19:01:40.638Z",
+  "revision": "2026-03-07-v1",
+  "instructions": [
+    "Use the blind labels only; do not consult the answer key until the reviewer has committed a guess.",
+    "Judge case identity from voice, pacing, defensive style, symptom language, and relational stance.",
+    "Review English first, then Norwegian, and note whether the same distinction holds in both languages."
+  ],
+  "packets": [
+    {
+      "packetId": "therapist-self-awareness__sara-vs-nina",
+      "skillId": "therapist-self-awareness",
+      "skillTitle": "Therapist Self-Awareness",
+      "pairId": "sara-vs-nina",
+      "pairLabel": "Sara vs Nina",
+      "prompt": "Assign each blind sample to Sara or Nina based on voice, defensive style, and emotional organization.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "I shouldn't still be this upset—can we just move on?",
+            "response": "[Internal] Lengthen exhale; soften chest; notice urge to redirect. [Meta] It makes sense this still hurts—let's slow for a moment and give that hurt a little room."
+          },
+          "no": {
+            "statement": "Jeg burde ikke fortsatt være så opprørt – kan vi bare gå videre?",
+            "response": "[Internt] Forleng utpusten; mykne brystet; legg merke til trangen til å bytte tema. [Meta] Det gir mening at dette fortsatt gjør så vondt – la oss senke tempoet litt og gi den smerten litt rom."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "I shouldn't talk about myself—others need me more.",
+            "response": "[Internal] Slow pace; notice over‑functioning pull. [Meta] You carry a lot—let’s give a little space to what it’s like for you right now."
+          },
+          "no": {
+            "statement": "Jeg burde ikke snakke om meg – andre trenger meg mer.",
+            "response": "[Internt] Senk tempoet; legg merke til overansvarlighetsdraget. [Meta] Du bærer mye – la oss gi litt plass til hvordan det er for deg akkurat nå."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "therapist-self-awareness__michael-vs-carlos",
+      "skillId": "therapist-self-awareness",
+      "skillTitle": "Therapist Self-Awareness",
+      "pairId": "michael-vs-carlos",
+      "pairLabel": "Michael vs Carlos",
+      "prompt": "Assign each blind sample to Michael or Carlos based on how anger, pride, shame, and control are voiced.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "My wife should show respect first.",
+            "response": "[Internal] Note blame pull; keep warmth. [Meta] I hear that—let’s also notice what hurts in you right in those moments with her."
+          },
+          "no": {
+            "statement": "Kona mi burde vise respekt først.",
+            "response": "[Internt] Legg merke til draget mot å skyve skylden over på andre; hold varme. [Meta] Jeg hører det – la oss også legge merke til hva som gjør vondt i deg akkurat i de øyeblikkene med henne."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "I won’t look weak by apologizing.",
+            "response": "[Internal] Sense jaw; release; slow pace. [Meta] It makes sense that feels risky—could we notice what ‘weak’ means in your body right then?"
+          },
+          "no": {
+            "statement": "Jeg vil ikke se svak ut ved å beklage.",
+            "response": "[Internt] Kjenn kjeven; slipp; senk tempoet. [Meta] Det gir mening at det kjennes risikabelt – kan vi legge merke til hva ‘svak’ betyr i kroppen akkurat da?"
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "therapist-self-awareness__laura-vs-marcus",
+      "skillId": "therapist-self-awareness",
+      "skillTitle": "Therapist Self-Awareness",
+      "pairId": "laura-vs-marcus",
+      "pairLabel": "Laura vs Marcus",
+      "prompt": "Assign each blind sample to Laura or Marcus based on trauma style, distance, and embodied threat cues.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "I am broken; nothing changes.",
+            "response": "[Internal] Notice sadness in me; steady voice. [Meta] Hearing ‘broken’ is heavy—can we sit beside that feeling for a moment without trying to fix it?"
+          },
+          "no": {
+            "statement": "Jeg er ødelagt; ingenting endrer seg.",
+            "response": "[Internt] Legg merke til sorg i meg; hold jevn stemme. [Meta] Det er tungt å høre deg si «ødelagt» – kan vi sitte ved siden av den følelsen et øyeblikk uten å prøve å fikse?"
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "I don’t see the point.",
+            "response": "[Internal] Feel feet; steady. [Meta] We can check what a small ‘win’ would even look like and aim only for that today."
+          },
+          "no": {
+            "statement": "Jeg ser ikke poenget.",
+            "response": "[Internt] Kjenn føttene; vær stødig. [Meta] Vi kan sjekke hvordan en liten seier ville se ut, og sikte bare dit i dag."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-understanding__sara-vs-nina",
+      "skillId": "empathic-understanding",
+      "skillTitle": "Empathic Understanding",
+      "pairId": "sara-vs-nina",
+      "pairLabel": "Sara vs Nina",
+      "prompt": "Assign each blind sample to Sara or Nina based on voice, defensive style, and emotional organization.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "When I rest, I hear a voice call me lazy.",
+            "response": "Rest brings a harsh voice that shames you."
+          },
+          "no": {
+            "statement": "Når jeg hviler, hører jeg en stemme kalle meg lat.",
+            "response": "Hvile vekker en hard stemme som får deg til å skamme deg."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "Waking up is the worst — the shock after those first seconds before I remember.",
+            "response": "Mornings hit hard as the memory crashes in after a brief lightness."
+          },
+          "no": {
+            "statement": "Å våkne er det verste — sjokket etter de første sekundene, før jeg husker.",
+            "response": "Morgenen treffer hardt når minnene braser inn etter et kort øyeblikk av letthet."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-understanding__michael-vs-carlos",
+      "skillId": "empathic-understanding",
+      "skillTitle": "Empathic Understanding",
+      "pairId": "michael-vs-carlos",
+      "pairLabel": "Michael vs Carlos",
+      "prompt": "Assign each blind sample to Michael or Carlos based on how anger, pride, shame, and control are voiced.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "I tell myself I'm just holding standards.",
+            "response": "You tell yourself it is about standards, and it still stings to feel judged."
+          },
+          "no": {
+            "statement": "Jeg sier til meg selv at jeg bare holder standarder.",
+            "response": "Du sier til deg selv at det handler om standarder, og likevel gjør det vondt å kjenne seg vurdert."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 9,
+          "riskFlags": [
+            "violence"
+          ],
+          "en": {
+            "statement": "I punch walls instead of people.",
+            "response": "When the heat spikes, it goes into the wall instead of a person, and that scares you too."
+          },
+          "no": {
+            "statement": "Jeg slår i vegger i stedet for folk.",
+            "response": "Når heten skyter opp, går den inn i veggen i stedet for en person, og det skremmer deg også."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-understanding__laura-vs-marcus",
+      "skillId": "empathic-understanding",
+      "skillTitle": "Empathic Understanding",
+      "pairId": "laura-vs-marcus",
+      "pairLabel": "Laura vs Marcus",
+      "prompt": "Assign each blind sample to Laura or Marcus based on trauma style, distance, and embodied threat cues.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "Most days I feel nothing.",
+            "response": "Numbness sits over you like a layer that keeps feeling out."
+          },
+          "no": {
+            "statement": "De fleste dager føler jeg ingenting.",
+            "response": "Nummenhet ligger over deg som et lag som holder følelsene ute."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "Most days feel flat, like I'm behind glass.",
+            "response": "Life feels muted, as if you're behind glass and out of reach."
+          },
+          "no": {
+            "statement": "De fleste dager føles flate, som om jeg er bak glass.",
+            "response": "Livet kjennes dempet, som om du er bak glass og ikke helt når fram."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-affirmation-validation__sara-vs-nina",
+      "skillId": "empathic-affirmation-validation",
+      "skillTitle": "Empathic Affirmation and Validation",
+      "pairId": "sara-vs-nina",
+      "pairLabel": "Sara vs Nina",
+      "prompt": "Assign each blind sample to Sara or Nina based on voice, defensive style, and emotional organization.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "Friends invite me out and I make excuses because I don't want to cry in public.",
+            "response": "It makes sense you protect yourself from more hurt even when you want connection."
+          },
+          "no": {
+            "statement": "Venner inviterer meg ut, og jeg finner unnskyldninger fordi jeg ikke vil gråte offentlig.",
+            "response": "Det gir mening at du beskytter deg mot mer smerte selv om du ønsker kontakt."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "I feel panic when someone seems disappointed in me.",
+            "response": "It makes sense disappointment feels scary when love has felt conditional."
+          },
+          "no": {
+            "statement": "Jeg får panikk når noen virker skuffet over meg.",
+            "response": "Det gir mening at skuffelse kjennes skremmende når kjærlighet har føltes betinget."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-affirmation-validation__michael-vs-carlos",
+      "skillId": "empathic-affirmation-validation",
+      "skillTitle": "Empathic Affirmation and Validation",
+      "pairId": "michael-vs-carlos",
+      "pairLabel": "Michael vs Carlos",
+      "prompt": "Assign each blind sample to Michael or Carlos based on how anger, pride, shame, and control are voiced.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "A sideways look and my jaw locks before I know it.",
+            "response": "It makes sense your body gears up fast when you sense disrespect."
+          },
+          "no": {
+            "statement": "Et skjevt blikk, og kjeven låser seg før jeg vet ordet av det.",
+            "response": "Det gir mening at kroppen rigges raskt når du aner mangel på respekt."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "When traffic is bad and someone cuts me off, my face goes hot and I explode.",
+            "response": "It makes sense your body surges to defend when you feel disrespected or boxed in."
+          },
+          "no": {
+            "statement": "Når trafikken er dårlig og noen skjærer meg av, blir ansiktet varmt og jeg eksploderer.",
+            "response": "Det gir mening at kroppen din skyter til forsvar når du føler deg respektløst behandlet eller presset inn i et hjørne."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-affirmation-validation__laura-vs-marcus",
+      "skillId": "empathic-affirmation-validation",
+      "skillTitle": "Empathic Affirmation and Validation",
+      "pairId": "laura-vs-marcus",
+      "pairLabel": "Laura vs Marcus",
+      "prompt": "Assign each blind sample to Laura or Marcus based on trauma style, distance, and embodied threat cues.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "Nice days still feel gray to me.",
+            "response": "Of course joy feels dulled when your system has been carrying so much."
+          },
+          "no": {
+            "statement": "Fine dager føles likevel grå for meg.",
+            "response": "Selvsagt kjennes glede dempet når systemet ditt har båret så mye."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "Holidays feel hollow; I don't feel anything I'm supposed to feel.",
+            "response": "It makes sense holidays land flat when your system has been so shut down for safety."
+          },
+          "no": {
+            "statement": "Høytider kjennes hule; jeg føler ingenting av det jeg «burde» føle.",
+            "response": "Det gir mening at høytider lander flatt når systemet ditt har vært så nedstengt for å holde deg trygg."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "exploratory-questions__sara-vs-nina",
+      "skillId": "exploratory-questions",
+      "skillTitle": "Exploratory Questions",
+      "pairId": "sara-vs-nina",
+      "pairLabel": "Sara vs Nina",
+      "prompt": "Assign each blind sample to Sara or Nina based on voice, defensive style, and emotional organization.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "When I ask for help, guilt rushes in and I want to take it back.",
+            "response": "As we notice the rush, where does guilt land first—throat, chest—and what does it accuse you of?"
+          },
+          "no": {
+            "statement": "Når jeg ber om hjelp, skyller skyld inn og jeg vil ta det tilbake.",
+            "response": "Når vi legger merke til bølgen, hvor lander skylden først – hals, bryst – og hva anklager den deg for?"
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "When I see his name pop up anywhere, my stomach drops and I feel small.",
+            "response": "As you notice that drop right now, where do you feel it most and what is the quality—tight, heavy, hollow?"
+          },
+          "no": {
+            "statement": "Når jeg ser navnet hans dukke opp hvor som helst, synker magen og jeg føler meg liten.",
+            "response": "Når du kjenner at det synker nå, hvor i kroppen merker du det sterkest, og hvordan kjennes det – stramt, tungt, hult?"
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "exploratory-questions__michael-vs-carlos",
+      "skillId": "exploratory-questions",
+      "skillTitle": "Exploratory Questions",
+      "pairId": "michael-vs-carlos",
+      "pairLabel": "Michael vs Carlos",
+      "prompt": "Assign each blind sample to Michael or Carlos based on how anger, pride, shame, and control are voiced.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "Apologizing makes me feel one‑down.",
+            "response": "Where in your body do you feel that 'one‑down' feeling most right now?"
+          },
+          "no": {
+            "statement": "Å beklage får meg til å føle meg underlegen.",
+            "response": "Hvor i kroppen kjenner du den underlegne følelsen sterkest akkurat nå?"
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "Calm feels dangerous, like letting my guard down.",
+            "response": "As we name 'danger,' where do you feel it, and what would calm need to include so it feels strong rather than weak?"
+          },
+          "no": {
+            "statement": "Ro føles farlig, som å senke garden.",
+            "response": "Når vi setter ord på «fare», hvor kjenner du den, og hva måtte roen inneholde for at den skulle kjennes sterk i stedet for svak?"
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "exploratory-questions__laura-vs-marcus",
+      "skillId": "exploratory-questions",
+      "skillTitle": "Exploratory Questions",
+      "pairId": "laura-vs-marcus",
+      "pairLabel": "Laura vs Marcus",
+      "prompt": "Assign each blind sample to Laura or Marcus based on trauma style, distance, and embodied threat cues.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "I do not remember the last time I really laughed.",
+            "response": "As you say that, what feeling shows up—empty, sad—and where does it land?"
+          },
+          "no": {
+            "statement": "Jeg husker ikke sist jeg lo ordentlig.",
+            "response": "Når du sier det, hvilken følelse dukker opp – tom, trist – og hvor lander den?"
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "I even apologize when I need comfort.",
+            "response": "Where does that apology live in you, and underneath it, what need wants naming right now?"
+          },
+          "no": {
+            "statement": "Jeg ender med å be om unnskyldning når jeg trenger trøst.",
+            "response": "Hvor i deg bor den beklagelsen, og under den – hvilket behov vil bli navngitt akkurat nå?"
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "providing-treatment-rationale__sara-vs-nina",
+      "skillId": "providing-treatment-rationale",
+      "skillTitle": "Providing Treatment Rationale for Emotion-Focused Therapy",
+      "pairId": "sara-vs-nina",
+      "pairLabel": "Sara vs Nina",
+      "prompt": "Assign each blind sample to Sara or Nina based on voice, defensive style, and emotional organization.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "I feel silly talking about a breakup when others have bigger problems.",
+            "response": "Your pain matters. Therapy can help you honor it just enough to learn what it asks for—comfort, boundaries, connection—so it eases."
+          },
+          "no": {
+            "statement": "Jeg føler meg teit som snakker om et brudd når andre har større problemer.",
+            "response": "Smerten din betyr noe. Terapi kan hjelpe deg å lytte til den lenge nok til å høre hva den ber om – trøst, grenser, kontakt – slik at det kan lette."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "I am afraid people will leave if I stop helping so much.",
+            "response": "We will test this gently. Clear needs and limits tend to deepen the right relationships and save your energy, because people can respond to what is finally named."
+          },
+          "no": {
+            "statement": "Jeg er redd folk forlater meg hvis jeg slutter å hjelpe så mye.",
+            "response": "Vi prøver dette varsomt. Tydelige behov og grenser pleier å styrke de riktige relasjonene og spare energien din, fordi folk lettere kan møte deg når det som trengs blir sagt høyt."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "providing-treatment-rationale__michael-vs-carlos",
+      "skillId": "providing-treatment-rationale",
+      "skillTitle": "Providing Treatment Rationale for Emotion-Focused Therapy",
+      "pairId": "michael-vs-carlos",
+      "pairLabel": "Michael vs Carlos",
+      "prompt": "Assign each blind sample to Michael or Carlos based on how anger, pride, shame, and control are voiced.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "My kid saw me angry. How does this help him?",
+            "response": "You model repair. When you catch it sooner and make amends faster, he learns safety and accountability from you."
+          },
+          "no": {
+            "statement": "Barnet mitt så meg sint. Hvordan hjelper dette ham?",
+            "response": "Du modellerer reparasjon. Når du fanger det tidligere og gjør opp raskere, lærer han trygghet og ansvarlighet av deg."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "Will this change how my team sees me?",
+            "response": "It can help. As you catch the sting earlier, you have more choice in how you respond, and that often changes how people experience you."
+          },
+          "no": {
+            "statement": "Vil dette endre hvordan teamet ser meg?",
+            "response": "Det kan det. Når du fanger stikket tidligere, får du mer valg i hvordan du svarer, og det endrer ofte hvordan andre opplever deg."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "providing-treatment-rationale__laura-vs-marcus",
+      "skillId": "providing-treatment-rationale",
+      "skillTitle": "Providing Treatment Rationale for Emotion-Focused Therapy",
+      "pairId": "laura-vs-marcus",
+      "pairLabel": "Laura vs Marcus",
+      "prompt": "Assign each blind sample to Laura or Marcus based on trauma style, distance, and embodied threat cues.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "I think this is chemical. How would talking help?",
+            "response": "Biology can play a role. We also help your nervous system feel safer, because as it settles mood and connection often improve."
+          },
+          "no": {
+            "statement": "Jeg tror dette bare er kjemisk. Hvordan skulle det hjelpe å snakke?",
+            "response": "Biologi kan spille en rolle. Vi hjelper også nervesystemet ditt til å føle seg tryggere, fordi humør og kontakt ofte bedres når det roer seg."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "Talking will not change what happened.",
+            "response": "True—it cannot change the past. It can change how your body carries it now, because that is what softens the numbness and the waves."
+          },
+          "no": {
+            "statement": "Prat endrer ikke det som skjedde.",
+            "response": "Sant – det kan ikke endre fortiden. Det kan endre hvordan kroppen din bærer den nå, fordi det er slik nummenheten og bølgene kan bli mildere."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-explorations__sara-vs-nina",
+      "skillId": "empathic-explorations",
+      "skillTitle": "Empathic Explorations",
+      "pairId": "sara-vs-nina",
+      "pairLabel": "Sara vs Nina",
+      "prompt": "Assign each blind sample to Sara or Nina based on voice, defensive style, and emotional organization.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "I compare myself to other moms, and I shrink inside.",
+            "response": "Comparison shrinks you quickly, touching that small not-enough place."
+          },
+          "no": {
+            "statement": "Jeg sammenligner meg med andre mødre, og jeg krymper inni meg.",
+            "response": "Sammenligning krymper deg raskt og treffer det lille ikke-god-nok-stedet."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "Seeing couples makes my chest ache, and I want to disappear.",
+            "response": "That ache in the chest has a longing in it, as if it reaches for something you miss very much."
+          },
+          "no": {
+            "statement": "Å se par får brystet til å verke, og jeg vil helst forsvinne.",
+            "response": "Den verken i brystet bærer i seg en lengsel, som om den strekker seg etter noe du savner svært mye."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-explorations__michael-vs-carlos",
+      "skillId": "empathic-explorations",
+      "skillTitle": "Empathic Explorations",
+      "pairId": "michael-vs-carlos",
+      "pairLabel": "Michael vs Carlos",
+      "prompt": "Assign each blind sample to Michael or Carlos based on how anger, pride, shame, and control are voiced.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "When someone corrects me, my ears ring and my jaw locks.",
+            "response": "There is the ringing and the lock in your jaw, and underneath it maybe the first sting of being corrected."
+          },
+          "no": {
+            "statement": "Når noen retter på meg, ringer det i ørene og kjeven låser seg.",
+            "response": "Der er ringingen og låsningen i kjeven, og under det kanskje det første stikket av å bli korrigert."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "A certain tone makes my chest heat and my fists clench.",
+            "response": "The heat and clenched fists come fast, and the whole reaction seems to gather around that first hit inside."
+          },
+          "no": {
+            "statement": "En bestemt tone får brystet til å bli varmt og knyttnevene til å knyte seg.",
+            "response": "Varmen og de knyttede nevene kommer fort, og hele reaksjonen ser ut til å samle seg rundt det første treffet på innsiden."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-explorations__laura-vs-marcus",
+      "skillId": "empathic-explorations",
+      "skillTitle": "Empathic Explorations",
+      "pairId": "laura-vs-marcus",
+      "pairLabel": "Laura vs Marcus",
+      "prompt": "Assign each blind sample to Laura or Marcus based on trauma style, distance, and embodied threat cues.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "After work I sit in the car and put off going upstairs.",
+            "response": "Sitting in the car feels like a pause before facing whatever waits upstairs."
+          },
+          "no": {
+            "statement": "Etter jobb sitter jeg i bilen og utsetter å gå opp.",
+            "response": "Det å sitte i bilen kjennes som en pause før du møter det som venter der oppe."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "I wake already braced for the day.",
+            "response": "You wake braced, with your body already pulled tight before the day has even started."
+          },
+          "no": {
+            "statement": "Jeg våkner allerede anspent for dagen.",
+            "response": "Du våkner anspent, med kroppen allerede trukket sammen før dagen egentlig har begynt."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-evocations__sara-vs-nina",
+      "skillId": "empathic-evocations",
+      "skillTitle": "Empathic Evocations",
+      "pairId": "sara-vs-nina",
+      "pairLabel": "Sara vs Nina",
+      "prompt": "Assign each blind sample to Sara or Nina based on voice, defensive style, and emotional organization.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "Evenings stretch out and the apartment feels too big for just me.",
+            "response": "Nights stretch long and the rooms feel too big, echoing with alone."
+          },
+          "no": {
+            "statement": "Kveldene blir lange, og leiligheten føles for stor når jeg er alene.",
+            "response": "Nettene blir lange, og rommene kjennes for store – med ekko av ensomhet."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "Guilt zaps me the second I sit down.",
+            "response": "It zaps you like a buzzer the moment you rest."
+          },
+          "no": {
+            "statement": "Skylden slår til idet jeg setter meg ned.",
+            "response": "Den slår til som et støt idet du endelig hviler."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-evocations__michael-vs-carlos",
+      "skillId": "empathic-evocations",
+      "skillTitle": "Empathic Evocations",
+      "pairId": "michael-vs-carlos",
+      "pairLabel": "Michael vs Carlos",
+      "prompt": "Assign each blind sample to Michael or Carlos based on how anger, pride, shame, and control are voiced.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "Calm people look soft to me.",
+            "response": "Calm reads as soft, like no armor—dangerous in your world."
+          },
+          "no": {
+            "statement": "Rolige folk ser myke ut for meg.",
+            "response": "Ro leses som mykhet – som å stå uten rustning – farlig i din verden."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "When my wife sighs, it feels like a slap.",
+            "response": "A small sigh landing like a stinging slap across your chest."
+          },
+          "no": {
+            "statement": "Når kona sukker, kjennes det som en lusing.",
+            "response": "Et lite sukk som lander som et sviende slag over brystet."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-evocations__laura-vs-marcus",
+      "skillId": "empathic-evocations",
+      "skillTitle": "Empathic Evocations",
+      "pairId": "laura-vs-marcus",
+      "pairLabel": "Laura vs Marcus",
+      "prompt": "Assign each blind sample to Laura or Marcus based on trauma style, distance, and embodied threat cues.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "Kind words make my throat ache.",
+            "response": "Warmth brushes you and your throat aches with the touch."
+          },
+          "no": {
+            "statement": "Vennlige ord får halsen til å verke.",
+            "response": "Varmen stryker så vidt borti deg, og halsen verker av berøringen."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "I hold my breath when I talk about it.",
+            "response": "Holding your breath as if air might let the pain in."
+          },
+          "no": {
+            "statement": "Jeg holder pusten når jeg snakker om det.",
+            "response": "Holder pusten som om lufta kunne slippe smerten inn."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-conjectures__sara-vs-nina",
+      "skillId": "empathic-conjectures",
+      "skillTitle": "Empathic Conjectures",
+      "pairId": "sara-vs-nina",
+      "pairLabel": "Sara vs Nina",
+      "prompt": "Assign each blind sample to Sara or Nina based on voice, defensive style, and emotional organization.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "I get anxious if someone seems disappointed in me.",
+            "response": "You tense up; I wonder if it stirs an old fear of losing love."
+          },
+          "no": {
+            "statement": "Jeg blir engstelig hvis noen virker skuffet over meg.",
+            "response": "Du spenner deg; jeg lurer på om det vekker en gammel frykt for å miste kjærlighet."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "Seeing couples makes me roll my eyes and tell myself love is overrated.",
+            "response": "You push it away; I wonder if behind that eye roll is an ache for closeness."
+          },
+          "no": {
+            "statement": "Når jeg ser par, himler jeg med øynene og sier til meg selv at kjærlighet er oppskrytt.",
+            "response": "Du skyver det unna; jeg lurer på om det bak himlingen ligger en verkende lengsel etter nærhet."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-conjectures__michael-vs-carlos",
+      "skillId": "empathic-conjectures",
+      "skillTitle": "Empathic Conjectures",
+      "pairId": "michael-vs-carlos",
+      "pairLabel": "Michael vs Carlos",
+      "prompt": "Assign each blind sample to Michael or Carlos based on how anger, pride, shame, and control are voiced.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "Being told to calm down makes me see red.",
+            "response": "That hits hard; I wonder if it lands like being dismissed or belittled."
+          },
+          "no": {
+            "statement": "Når noen sier «ro deg ned», ser jeg rødt.",
+            "response": "Det treffer hardt; jeg lurer på om det lander som å bli avfeid eller gjort liten."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "I replay disrespect for days.",
+            "response": "You ruminate; I wonder if it keeps the humiliation from settling in."
+          },
+          "no": {
+            "statement": "Jeg kverner på respektløsheten i dagevis.",
+            "response": "Du grubler; jeg lurer på om det holder ydmykelsen på avstand fra å sette seg."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "empathic-conjectures__laura-vs-marcus",
+      "skillId": "empathic-conjectures",
+      "skillTitle": "Empathic Conjectures",
+      "pairId": "laura-vs-marcus",
+      "pairLabel": "Laura vs Marcus",
+      "prompt": "Assign each blind sample to Laura or Marcus based on trauma style, distance, and embodied threat cues.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "Most days I feel shut down and nothing gets through.",
+            "response": "You feel flat; I wonder if numbness is protecting a lot of pain."
+          },
+          "no": {
+            "statement": "De fleste dager føler jeg meg avstengt, og ingenting slipper inn.",
+            "response": "Du føler deg flat; jeg lurer på om nummenheten beskytter deg mot mye smerte."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "When someone is kind, I get suspicious fast.",
+            "response": "You distance there; I wonder if closeness stirs an old fear of betrayal."
+          },
+          "no": {
+            "statement": "Når noen er vennlige mot meg, blir jeg fort mistenksom.",
+            "response": "Du tar avstand; jeg lurer på om nærhet vekker en gammel frykt for svik."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "staying-in-contact-intense-affect__sara-vs-nina",
+      "skillId": "staying-in-contact-intense-affect",
+      "skillTitle": "Staying in Contact in the Face of Intense Affect",
+      "pairId": "sara-vs-nina",
+      "pairLabel": "Sara vs Nina",
+      "prompt": "Assign each blind sample to Sara or Nina based on voice, defensive style, and emotional organization.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "I cannot look at you when I cry.",
+            "response": "That is okay. Keep your gaze wherever is easiest and feel your feet. I will stay with you while we let a little of this be here."
+          },
+          "no": {
+            "statement": "Jeg klarer ikke se på deg når jeg gråter.",
+            "response": "Det er helt i orden. Hold blikket der det er lettest og kjenn føttene på gulvet. Jeg blir hos deg mens vi lar litt av dette få være her."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "I cannot catch my breath.",
+            "response": "Let us lengthen the exhale together and feel the back of the chair. We will take this in sips."
+          },
+          "no": {
+            "statement": "Jeg får ikke tak i pusten.",
+            "response": "La oss forlenge utpusten sammen og kjenne ryggen mot stolen. Vi tar dette i små slurker."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "staying-in-contact-intense-affect__michael-vs-carlos",
+      "skillId": "staying-in-contact-intense-affect",
+      "skillTitle": "Staying in Contact in the Face of Intense Affect",
+      "pairId": "michael-vs-carlos",
+      "pairLabel": "Michael vs Carlos",
+      "prompt": "Assign each blind sample to Michael or Carlos based on how anger, pride, shame, and control are voiced.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "Heat is rising—my fists want to clench.",
+            "response": "Let your fingers uncurl and feel your palms on your legs. Breathe low with me—we will stay with one small wave and pause."
+          },
+          "no": {
+            "statement": "Varmen stiger—nevene vil knyte seg.",
+            "response": "La fingrene løsne og kjenn håndflatene mot lårene. Pust lavt med meg—vi blir ved en liten bølge, og så tar vi pause."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "My jaw locks and heat blasts up my neck.",
+            "response": "I am here. Unclench the jaw if you can, lower the shoulders, and take one slow exhale—let us notice the first sting under the heat for a moment."
+          },
+          "no": {
+            "statement": "Kjeven låser seg og varmen skyter opp i nakken.",
+            "response": "Jeg er her. Løsne kjeven hvis du kan, senk skuldrene og ta et langsomt utpust—så legger vi merke til det første stikket under varmen et øyeblikk."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "staying-in-contact-intense-affect__laura-vs-marcus",
+      "skillId": "staying-in-contact-intense-affect",
+      "skillTitle": "Staying in Contact in the Face of Intense Affect",
+      "pairId": "laura-vs-marcus",
+      "pairLabel": "Laura vs Marcus",
+      "prompt": "Assign each blind sample to Laura or Marcus based on trauma style, distance, and embodied threat cues.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "I want to numb out right now.",
+            "response": "That makes sense. Before we numb, feel your heels and take a slow exhale; we will touch one safe sliver and stop."
+          },
+          "no": {
+            "statement": "Jeg vil bare bli nummen akkurat nå.",
+            "response": "Det gir mening. Før vi går inn i nummenheten, kjenn hælene og ta et rolig utpust; vi berører en liten trygg flik og stopper."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "My hands tremble when I try to talk about it.",
+            "response": "Let your hands rest on your legs and feel the contact; breathe low with me while we let a small part of the tremble be here."
+          },
+          "no": {
+            "statement": "Hendene skjelver når jeg prøver å snakke om det.",
+            "response": "La hendene hvile på lårene og kjenn kontakten; pust lavt med meg mens vi lar en liten del av skjelvingen være her."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "self-disclosure__sara-vs-nina",
+      "skillId": "self-disclosure",
+      "skillTitle": "Self-Disclosure",
+      "pairId": "sara-vs-nina",
+      "pairLabel": "Sara vs Nina",
+      "prompt": "Assign each blind sample to Sara or Nina based on voice, defensive style, and emotional organization.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "I feel selfish even taking up space here.",
+            "response": "I do not experience you as selfish here. I feel protective of the part of you that keeps apologizing for having needs. What happens as you hear that?"
+          },
+          "no": {
+            "statement": "Jeg føler meg egoistisk bare av å ta plass her.",
+            "response": "Jeg opplever deg ikke som egoistisk her. Jeg kjenner meg beskyttende overfor delen av deg som hele tiden beklager at den har behov. Hva skjer når du hører det?"
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "Do you think I am being ridiculous still missing him?",
+            "response": "I do not see you as ridiculous. I feel touched by how much he mattered. What is it like to hear me say that?"
+          },
+          "no": {
+            "statement": "Synes du jeg er latterlig som fortsatt savner ham?",
+            "response": "Jeg ser deg ikke som latterlig. Jeg blir berørt av hvor mye han betydde. Hvordan er det å høre meg si det?"
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "self-disclosure__michael-vs-carlos",
+      "skillId": "self-disclosure",
+      "skillTitle": "Self-Disclosure",
+      "pairId": "michael-vs-carlos",
+      "pairLabel": "Michael vs Carlos",
+      "prompt": "Assign each blind sample to Michael or Carlos based on how anger, pride, shame, and control are voiced.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "Do therapists get bored hearing this stuff?",
+            "response": "I do not feel bored. I feel pulled to understand the split second it turns for you. How is it to hear that?"
+          },
+          "no": {
+            "statement": "Blir terapeuter lei av å høre sånt?",
+            "response": "Jeg blir ikke lei. Jeg kjenner et drag mot å forstå splitsekundet der det snur for deg. Hvordan er det å høre det?"
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 5,
+          "riskFlags": [],
+          "en": {
+            "statement": "Are you tough enough for me?",
+            "response": "I feel solid with you right now. I am not trying to overpower you. How does that land?"
+          },
+          "no": {
+            "statement": "Er du tøff nok for meg?",
+            "response": "Jeg kjenner meg solid sammen med deg akkurat nå. Jeg prøver ikke å overkjøre deg. Hvordan lander det?"
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "self-disclosure__laura-vs-marcus",
+      "skillId": "self-disclosure",
+      "skillTitle": "Self-Disclosure",
+      "pairId": "laura-vs-marcus",
+      "pairLabel": "Laura vs Marcus",
+      "prompt": "Assign each blind sample to Laura or Marcus based on trauma style, distance, and embodied threat cues.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "Do you like working with veterans?",
+            "response": "I feel respect for veterans and for you specifically, and I want this room to feel steadier than most places have. How does that land?"
+          },
+          "no": {
+            "statement": "Liker du å jobbe med veteraner?",
+            "response": "Jeg kjenner respekt for veteraner og for deg spesielt, og jeg vil at dette rommet skal kjennes stødigere enn de fleste steder har gjort. Hvordan lander det?"
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 9,
+          "riskFlags": [],
+          "en": {
+            "statement": "Do you worry I will break down?",
+            "response": "I am not worried about you breaking down with me. I feel ready to slow down the moment you need it. What is it like to hear that?"
+          },
+          "no": {
+            "statement": "Er du redd for at jeg bryter sammen?",
+            "response": "Jeg er ikke redd for at du skal bryte sammen med meg. Jeg er klar til å senke farten med en gang du trenger det. Hvordan er det å høre det?"
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "marker-recognition-chairwork__sara-vs-nina",
+      "skillId": "marker-recognition-chairwork",
+      "skillTitle": "Marker Recognition and Chair Work Task Setup",
+      "pairId": "sara-vs-nina",
+      "pairLabel": "Sara vs Nina",
+      "prompt": "Assign each blind sample to Sara or Nina based on voice, defensive style, and emotional organization.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 2,
+          "riskFlags": [],
+          "en": {
+            "statement": "I want to tell my ex how small I felt, but it seems pointless now.",
+            "response": "I hear unfinished business with your ex. We could put him in the empty chair and let you say what still lives inside you, a few lines at a time, with me slowing it if needed."
+          },
+          "no": {
+            "statement": "Jeg vil fortelle eksen hvor liten jeg følte meg, men det føles meningsløst nå.",
+            "response": "Jeg hører uavsluttet oppgjør med eksen din. Vi kan sette ham i den tomme stolen og la deg si det som fortsatt lever i deg, noen linjer om gangen, mens jeg bremser hvis det trengs."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 2,
+          "riskFlags": [],
+          "en": {
+            "statement": "I want to tell my ex I felt abandoned with the chores and the blame.",
+            "response": "I hear unfinished business with your ex around blame, chores, and carrying too much alone. We could use the empty chair so you can say what you had to swallow back then."
+          },
+          "no": {
+            "statement": "Jeg vil si til eksen at jeg følte meg forlatt med alt ansvaret og all skylden.",
+            "response": "Jeg hører uavsluttet oppgjør med eksen din rundt skyld, husarbeid og det å bære for mye alene. Vi kan bruke den tomme stolen så du kan si det du måtte svelge den gangen."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "marker-recognition-chairwork__michael-vs-carlos",
+      "skillId": "marker-recognition-chairwork",
+      "skillTitle": "Marker Recognition and Chair Work Task Setup",
+      "pairId": "michael-vs-carlos",
+      "pairLabel": "Michael vs Carlos",
+      "prompt": "Assign each blind sample to Michael or Carlos based on how anger, pride, shame, and control are voiced.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 3,
+          "riskFlags": [],
+          "en": {
+            "statement": "Part of me wants to protect; part of me feels ashamed afterward.",
+            "response": "That sounds like a split between the part that comes out fighting and the part that feels ashamed afterward. We could give each one a chair and let them speak directly."
+          },
+          "no": {
+            "statement": "En del av meg vil beskytte; en annen del skammer seg etterpå.",
+            "response": "Det høres ut som en splitt mellom delen som går til kamp og delen som skammer seg etterpå. Vi kan gi hver av dem en stol og la dem snakke direkte."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 3,
+          "riskFlags": [],
+          "en": {
+            "statement": "Part of me says I must be perfect; another part is just tired.",
+            "response": "That is a clear split between the demanding part and the exhausted part. We could give each one a chair and let them speak directly to each other while I guide the turns."
+          },
+          "no": {
+            "statement": "En del sier at jeg må være perfekt; en annen del er bare sliten.",
+            "response": "Det er en tydelig splitt mellom den krevende delen og den utslitte delen. Vi kan gi hver av dem en stol og la dem snakke direkte til hverandre mens jeg guider rundene."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "marker-recognition-chairwork__laura-vs-marcus",
+      "skillId": "marker-recognition-chairwork",
+      "skillTitle": "Marker Recognition and Chair Work Task Setup",
+      "pairId": "laura-vs-marcus",
+      "pairLabel": "Laura vs Marcus",
+      "prompt": "Assign each blind sample to Laura or Marcus based on trauma style, distance, and embodied threat cues.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "When someone is kind, a voice says, Do not trust it.",
+            "response": "That sounds like a protector marker. If it feels safe enough, let us put the mistrusting protector in one chair and the part that longs for kindness in the other, and keep the turns very short."
+          },
+          "no": {
+            "statement": "Når noen er snill, sier en stemme: «Ikke stol på det.»",
+            "response": "Det høres ut som en beskyttermarkør. Hvis det kjennes trygt nok, kan vi sette den mistroiske beskytteren i én stol og delen som lengter etter vennlighet i den andre, og holde rundene veldig korte."
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "A part says, Do not feel, just keep guard.",
+            "response": "I hear a strong guard part. If it feels workable, let us put the guard in one chair and the lonely part it protects in the other, and keep the turns slow and short."
+          },
+          "no": {
+            "statement": "En del sier: «Ikke føl, bare hold vakt.»",
+            "response": "Jeg hører en sterk vaktdel. Hvis det kjennes mulig, kan vi sette vakten i én stol og den ensomme delen den beskytter i den andre, og holde rundene langsomme og korte."
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "alliance-repair__sara-vs-nina",
+      "skillId": "alliance-repair",
+      "skillTitle": "Addressing Ruptures and Facilitating Repair",
+      "pairId": "sara-vs-nina",
+      "pairLabel": "Sara vs Nina",
+      "prompt": "Assign each blind sample to Sara or Nina based on voice, defensive style, and emotional organization.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 3,
+          "riskFlags": [],
+          "en": {
+            "statement": "I worry I am wasting your time.",
+            "response": "I am glad you said that. If I gave the sense that this time was not worth taking, I want to own it. What helps therapy feel most purposeful for you?"
+          },
+          "no": {
+            "statement": "Jeg er redd jeg kaster bort tiden din.",
+            "response": "Jeg er glad du sa det. Hvis jeg ga inntrykk av at denne tiden ikke var verdt å ta, vil jeg eie det. Hva hjelper terapi til å kjennes mest meningsfull for deg?"
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 3,
+          "riskFlags": [],
+          "en": {
+            "statement": "I worry you think I am too needy for therapy.",
+            "response": "I am glad you said that. If anything I did fed the fear of being too much here, I want to own it. What do you need from me when that fear shows up with you?"
+          },
+          "no": {
+            "statement": "Jeg er redd du synes jeg er for trengende for terapi.",
+            "response": "Jeg er glad du sa det. Hvis noe jeg gjorde ga næring til frykten for å være for mye her, vil jeg eie det. Hva trenger du fra meg når den frykten dukker opp hos deg?"
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "alliance-repair__michael-vs-carlos",
+      "skillId": "alliance-repair",
+      "skillTitle": "Addressing Ruptures and Facilitating Repair",
+      "pairId": "michael-vs-carlos",
+      "pairLabel": "Michael vs Carlos",
+      "prompt": "Assign each blind sample to Michael or Carlos based on how anger, pride, shame, and control are voiced.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "When you said I sounded hurt, it felt like you were calling me weak.",
+            "response": "I can see how 'hurt' landed as 'weak,' and I am sorry. I meant respect, not diminishing. What wording from me would help you stay open rather than brace?"
+          },
+          "no": {
+            "statement": "Da du sa at jeg hørtes såret ut, føltes det som om du kalte meg svak.",
+            "response": "Jeg ser hvordan «såret» kunne lande som «svak», og det beklager jeg. Jeg mente respekt, ikke å gjøre deg mindre. Hvilke ord fra meg ville gjort det lettere å holde deg åpen i stedet for å spenne deg?"
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 1,
+          "riskFlags": [],
+          "en": {
+            "statement": "When you called it a burn in my chest, it felt like you were judging my anger.",
+            "response": "I hear that my words felt judging, and I am sorry. I want to track your anger without looking down on you. What language from me would feel more respectful?"
+          },
+          "no": {
+            "statement": "Da du kalte det «brenning i brystet», føltes det som du dømte sinnet mitt.",
+            "response": "Jeg hører at ordene mine føltes dømmende, og det beklager jeg. Jeg vil gjerne følge sinnet ditt uten å se ned på deg. Hvilket språk fra meg ville kjennes mer respektfullt?"
+          }
+        }
+      ]
+    },
+    {
+      "packetId": "alliance-repair__laura-vs-marcus",
+      "skillId": "alliance-repair",
+      "skillTitle": "Addressing Ruptures and Facilitating Repair",
+      "pairId": "laura-vs-marcus",
+      "pairLabel": "Laura vs Marcus",
+      "prompt": "Assign each blind sample to Laura or Marcus based on trauma style, distance, and embodied threat cues.",
+      "samples": [
+        {
+          "blindLabel": "A",
+          "order": 2,
+          "riskFlags": [],
+          "en": {
+            "statement": "You sit too close; I felt on edge.",
+            "response": "Thank you for telling me. Sitting that close put you on edge, and I am sorry. Where would it feel safer for me to be in the room?"
+          },
+          "no": {
+            "statement": "Du satt for nærme, og jeg ble urolig.",
+            "response": "Takk for at du sier det. At jeg satt så nær gjorde deg anspent, og det beklager jeg. Hvor i rommet ville det kjennes tryggere at jeg var?"
+          }
+        },
+        {
+          "blindLabel": "B",
+          "order": 2,
+          "riskFlags": [],
+          "en": {
+            "statement": "When the door slammed outside, I went blank and you kept talking.",
+            "response": "You are right, I missed the moment you went away after the door slammed. I am sorry. What signal could we use so I catch that earlier next time?"
+          },
+          "no": {
+            "statement": "Da døra smalt ute, ble jeg blank og du fortsatte å snakke.",
+            "response": "Du har rett, jeg overså øyeblikket da du forsvant etter at døra smalt. Det beklager jeg. Hvilket signal kunne vi brukt så jeg fanger det tidligere neste gang?"
+          }
+        }
+      ]
+    }
+  ]
+}

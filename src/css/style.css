@@ -1,0 +1,463 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+#container {
+  position: relative;  /* makes this the origin of its children */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#labBadge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 20000;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(8, 12, 20, 0.78);
+  color: #f5d36b;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+#canvas {
+  width: 100%;  /* let our container decide our size */
+  height: 100%;
+  display: block;
+}
+
+
+/*  || COMMON ELEMENTS */
+/*p
+h1, h2, h3, h4, h5
+ul and ol
+The table properties
+Links
+*/
+p {
+  font-size: 2.5vw
+}
+h1 {
+  font-size: 5vw;
+}
+h2 {
+  font-size: 4.5vw;
+}
+h3 {
+  font-size: 4vw;
+}
+h4 {
+  font-size: 3.5vw;
+}
+h5 {
+  font-size: 3vw;
+}
+ul {
+  height: 100%;
+  margin: 0;
+  font-size: 2.5vw;
+}
+.emphasis {
+  display: inline;
+  font-style: italic;
+}
+.strong {
+  display: inline;
+  font-weight: bold;
+}
+.underline {
+  display: inline;
+  text-decoration: underline;
+}
+.semi-transparent {
+  display: inline;
+  opacity: 0.6;
+}
+
+/*  ||  VERSION SCREEN */
+#versions {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 20;
+  padding: 20;
+  transform: translateY(-50%);
+
+}
+.version-option {
+  position: relative;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  transform: translateX(-50%);
+  font-size: 2rem;
+  line-height: 4rem;
+}
+@media (max-width: 768px) {
+  .version-option {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .version-option {
+    font-size: 1.25rem;
+  }
+}
+.version-option:hover,
+.version-option:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.version-option:focus{
+  outline: 1px solid black;
+}
+#footer {
+  position: absolute;
+  left: 50%;
+  bottom: 0%;
+  width: 100%;
+  height: 5%;
+  margin: 20;
+  padding: 20;
+  font-size: x-small;
+  color: white;
+  line-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  transform: translateX(-50%);
+  text-align: center;
+}
+a:link {
+  color: white;
+  text-decoration: none;
+}
+a:visited {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: lightblue;
+  text-decoration: none;
+  display: block;
+}
+a:active {
+  color: lightblue;
+  text-decoration: none;
+}
+#fullscreen-button {
+  padding-top: 10vh;
+  font-size: 1rem;
+}
+
+
+/*  || INTRO SCREEN */
+#credits {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0 .5rem;
+  width: 90%;
+  text-align: center;
+  left: 50%;
+  top: 5%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: .75rem;
+  display: none;
+}
+
+
+.silence-center-container {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 6;
+}
+
+#silence {
+  position: relative;
+  z-index: 6;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 0 .5rem;
+  width: auto;
+  text-align: center;
+  font-size: 5rem;
+  letter-spacing: 4rem;
+  display: none;
+}
+
+
+#intro-label {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: .85rem;
+}
+#intro-select {
+  background-color: transparent; /* Makes the dropdown background transparent */
+  color: rgba(255, 255, 255, 0.5); /* Sets the text color to white with some transparency */
+  font-size: .75rem; /* Matches the font size with intro-label */
+  border: none; /* Removes the default border */
+  outline: none; /* Removes the outline to maintain a minimalist style */
+  -webkit-appearance: none; /* Removes default style in WebKit browsers */
+  -moz-appearance: none; /* Removes default style in Mozilla browsers */
+  appearance: none; /* Removes default style for other browsers */
+  text-align: center; /* Center the text */
+  padding-right: 30px; /* Add right padding to prevent text from overlapping with the background arrow */
+  
+}
+
+/* You might also want to style the dropdown arrow if you want a completely custom look */
+#intro-select::-ms-expand {
+  display: none; /* Hides the default dropdown arrow in IE/Edge */
+}
+
+#intro-select:-webkit-autofill,
+#intro-select:-webkit-autofill:hover, 
+#intro-select:-webkit-autofill:focus,
+#intro-select:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+/* Custom arrow for browsers other than IE/Edge */
+#intro-select {
+  /* Adding a custom arrow icon */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="%23ffffff"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.7rem top 50%; /* Position the arrow nicely */
+  background-size: 1.2rem; /* Size of the arrow */
+}
+
+#playbutton {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 10rem;
+  display: none;
+}
+#playbutton:hover,
+#playbutton:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#playbutton:focus{
+  outline: 1px solid black;
+}
+#skipbutton {
+  position: absolute;
+  z-index: 3;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 50%;
+  top: 85%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 1rem;
+  display: none;
+}
+#skipbutton:hover,
+#skipbutton:focus{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#skipbutton:focus{
+  outline: 1px solid black;
+}
+
+/*  || SUBTITLES */
+#subtitle-container {
+  position: absolute;
+  bottom: 5%;
+  width: 90%;
+  translate: 5%;
+  text-align: center;
+  pointer-events: none;
+  font-family: Arial, sans-serif;
+  font-size: 2.5rem;
+  color: white;
+  display: none;
+}
+
+/*  || PROGRESS BAR */
+.progress-bar-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 500;
+}
+#progress-bar {
+  width: 30%;
+  margin-top: 0.5%;
+  height: 2%;
+}
+label {
+  color: white;
+  font-size: 2rem;
+}
+
+/*  || FPS COUNTER */
+#fpsCounter {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: black;
+  z-index: 0;
+  display: none;
+}
+#fpsCounter>div {
+  position: absolute;  /* let us position them inside the container */
+  left: 0;             /* make their default position the top left of the container */
+  top: 0;
+  padding: 5px;
+  color: white;
+  text-align: center;
+  cursor: pointer;     /* change the cursor to a hand when over us */
+  font-size: x-small;
+  user-select: none; 
+}
+
+/*  || GUTTA STATS */
+#guttaStatScreen{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: none;
+  color: white;
+  font-size: x-small;
+  user-select: none; 
+  pointer-events: none;
+}
+#guttaStatScreen .gutta-stats-layout {
+  position: absolute;
+  left: 2%;
+  top: 5%;
+  right: 2%;
+  bottom: 5%;
+  display: flex;
+  gap: 2%;
+}
+#guttaStatScreen .gutta-stats-left {
+  flex: 1 1 67%;
+  max-width: 67%;
+  padding: 6px 10px;
+  text-align: left;
+}
+#guttaStatScreen .gutta-stats-right {
+  flex: 0 0 33%;
+  max-width: 33%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#guttaStatScreen .gutta-graph-block {
+  flex: 1 1 0;
+  min-height: 110px;
+  padding: 6px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+#guttaStatScreen .gutta-graph-title {
+  font-size: 10px;
+  margin-bottom: 4px;
+}
+#guttaStatScreen .gutta-graph-canvas {
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: block;
+}
+#guttaStatScreen .gutta-graph-legend {
+  margin-top: 4px;
+  font-size: 8px;
+  line-height: 1.2;
+  column-count: 3;
+  column-gap: 8px;
+  color: rgba(255, 255, 255, 0.85);
+}
+#guttaStatScreen .gutta-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  break-inside: avoid;
+  margin-bottom: 2px;
+}
+#guttaStatScreen .gutta-legend-swatch {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/*  || HOTKEYS */
+#hotKeys {
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  width: max-content;
+  color: white;
+  font-size: x-small;
+  text-align: left;
+  z-index: 0;
+  display: none;
+  user-select: none; 
+  cursor: pointer;
+}
+#hotKeys .hotkeyTitle {
+  font-size: medium;
+  margin-top:20px;
+  margin-bottom:5px;
+}
+#hotKeys .hotkey-line {
+  display: flex;
+}
+#hotKeys .hotkey {
+  width: 100px;
+  text-align: right;
+}
+#hotKeys .description {
+  text-align: left;
+  margin-left: 10px; /* Space between hotkey and description */
+}
