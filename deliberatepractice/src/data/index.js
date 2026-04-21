@@ -15,6 +15,7 @@ import {
   REVIEW_STATUSES
 } from "./contentMeta.js";
 import {
+  CASE_FORMULATION_TRANSLATIONS,
   LANGUAGE_ORDER,
   LANGUAGE_METADATA,
   LANGUAGE_UI,
@@ -81,11 +82,13 @@ const buildCasePayload = (caseId, skillId) => {
       label: caseId,
       difficulty: "unknown",
       difficultyLabel: "",
-      teaser: "",
-      history: "",
-      schema: "",
-      style: "",
-      voice: "",
+    teaser: "",
+    history: "",
+    schema: "",
+    corePain: "",
+    practiceEdge: "",
+    style: "",
+    voice: "",
       caseBible: null,
       statements: []
     };
@@ -102,6 +105,8 @@ const buildCasePayload = (caseId, skillId) => {
     teaser: meta.teaser ?? "",
     history: meta.history ?? "",
     schema: meta.schema ?? "",
+    corePain: CASE_BIBLES[meta.id]?.corePain ?? "",
+    practiceEdge: meta.practiceEdge ?? "",
     style: meta.style ?? "",
     voice: meta.voice ?? "",
     dossier: meta.dossier,
@@ -122,6 +127,8 @@ const BASE_PRACTICE = productionSkills.reduce((acc, skill) => {
     summary: skill.summary,
     marker: skill.marker,
     aim: skill.aim,
+    practiceFocus: skill.practiceFocus ?? "",
+    commonMiss: skill.commonMiss ?? "",
     cases
   };
   return acc;
@@ -137,6 +144,7 @@ export {
   CONTENT_REVISION,
   EXPERIMENTAL_SKILL_IDS,
   HIGH_RISK_FLAGS,
+  CASE_FORMULATION_TRANSLATIONS,
   LANGUAGE_ORDER,
   LANGUAGE_METADATA,
   LANGUAGE_UI,

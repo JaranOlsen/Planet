@@ -5,6 +5,7 @@ import {
   CASE_ORDER,
   LANGUAGE_ORDER,
   BASE_PRACTICE,
+  CASE_FORMULATION_TRANSLATIONS,
   LANGUAGE_METADATA,
   LANGUAGE_UI,
   LANGUAGE_OVERRIDES,
@@ -41,6 +42,8 @@ const elements = {
   practiceSkill: document.getElementById("practice-skill"),
   caseName: document.getElementById("case-name"),
   caseSchema: document.getElementById("case-schema"),
+  caseCorePainItem: document.getElementById("case-core-pain-item"),
+  caseCorePain: document.getElementById("case-core-pain"),
   caseStyle: document.getElementById("case-style"),
   caseSkillContext: document.getElementById("case-skill-context"),
   caseSkillName: document.getElementById("case-skill-name"),
@@ -50,6 +53,10 @@ const elements = {
   caseSkillSummary: document.getElementById("case-skill-summary"),
   caseSkillAimLabel: document.getElementById("case-skill-aim-label"),
   caseSkillAim: document.getElementById("case-skill-aim"),
+  caseSkillPracticeFocusLabel: document.getElementById("case-skill-practice-focus-label"),
+  caseSkillPracticeFocus: document.getElementById("case-skill-practice-focus"),
+  caseSkillCommonMissLabel: document.getElementById("case-skill-common-miss-label"),
+  caseSkillCommonMiss: document.getElementById("case-skill-common-miss"),
   caseSkillToggle: document.getElementById("case-skill-toggle"),
   caseSkillBody: document.getElementById("case-skill-body"),
   glossaryPanel: document.getElementById("glossary-panel"),
@@ -68,7 +75,10 @@ const elements = {
   startPracticeButton: document.getElementById("start-practice"),
   viewCaseBriefButton: document.getElementById("view-case-brief"),
   caseSchemaLabel: document.getElementById("case-schema-label"),
+  caseCorePainLabel: document.getElementById("case-core-pain-label"),
   caseStyleLabel: document.getElementById("case-style-label"),
+  casePracticeEdgeLabel: document.getElementById("case-practice-edge-label"),
+  casePracticeEdge: document.getElementById("case-practice-edge"),
   statementText: document.getElementById("statement-text"),
   statementCounter: document.getElementById("statement-counter"),
   shuffleButton: document.getElementById("shuffle-order"),
@@ -196,6 +206,10 @@ function getOverrides(languageId) {
 
 function getStatementTranslations(languageId) {
   return STATEMENT_TRANSLATIONS[languageId] ?? {};
+}
+
+function getCaseFormulationTranslations(languageId) {
+  return CASE_FORMULATION_TRANSLATIONS[languageId] ?? {};
 }
 
 function getGlossaryEntries(languageId) {
@@ -338,6 +352,7 @@ function localizeSkill(languageId, skillId) {
     const baseCase = baseSkill.cases[caseId];
     if (!baseCase) return null;
     const caseOverride = overrides.cases?.[caseId] ?? {};
+    const caseFormulationOverride = getCaseFormulationTranslations(languageId)[caseId] ?? {};
     return {
       id: caseId,
       label: caseOverride.label ?? baseCase.label,
@@ -348,9 +363,15 @@ function localizeSkill(languageId, skillId) {
       teaser: caseOverride.teaser ?? baseCase.teaser,
       history: caseOverride.history ?? baseCase.history,
       schema: caseOverride.schema ?? baseCase.schema,
+      corePain:
+        caseOverride.corePain ??
+        caseFormulationOverride.corePain ??
+        (languageId === "en" ? baseCase.corePain ?? "" : ""),
+      practiceEdge: caseOverride.practiceEdge ?? baseCase.practiceEdge ?? "",
       style: caseOverride.style ?? baseCase.style,
       voice: caseOverride.voice ?? baseCase.voice,
       dossier: caseOverride.dossier ?? baseCase.dossier ?? "",
+      caseBible: baseCase.caseBible ?? null,
       statements: localizeStatements(languageId, baseCase.statements)
     };
   }).filter(Boolean);
@@ -362,6 +383,8 @@ function localizeSkill(languageId, skillId) {
     summary: overrides.summary ?? baseSkill.summary,
     marker: overrides.marker ?? baseSkill.marker,
     aim: overrides.aim ?? baseSkill.aim,
+    practiceFocus: overrides.practiceFocus ?? baseSkill.practiceFocus ?? "",
+    commonMiss: overrides.commonMiss ?? baseSkill.commonMiss ?? "",
     cases
   };
 }
@@ -441,6 +464,14 @@ function applyLanguageStrings(languageId) {
   if (elements.caseSkillAimLabel) {
     elements.caseSkillAimLabel.textContent = strings.skillAimLabel ?? "Aim";
   }
+  if (elements.caseSkillPracticeFocusLabel) {
+    elements.caseSkillPracticeFocusLabel.textContent =
+      strings.skillPracticeFocusLabel ?? "What to practice";
+  }
+  if (elements.caseSkillCommonMissLabel) {
+    elements.caseSkillCommonMissLabel.textContent =
+      strings.skillCommonMissLabel ?? "Common miss";
+  }
   if (elements.glossaryHint) {
     elements.glossaryHint.textContent = strings.glossaryHint ?? "";
   }
@@ -456,7 +487,14 @@ function applyLanguageStrings(languageId) {
   elements.caseBriefHeading.textContent =
     strings.roleBriefHeading ?? strings.caseBriefHeading ?? "Role Background";
   elements.caseSchemaLabel.textContent = strings.schemaLabel;
+  if (elements.caseCorePainLabel) {
+    elements.caseCorePainLabel.textContent = strings.corePainLabel ?? "Core Pain";
+  }
   elements.caseStyleLabel.textContent = strings.styleLabel;
+  if (elements.casePracticeEdgeLabel) {
+    elements.casePracticeEdgeLabel.textContent =
+      strings.casePracticeEdgeLabel ?? "What to listen for";
+  }
   elements.caseVoiceHeading.textContent = strings.clientVoiceHeading ?? "Client Voice";
   elements.startPracticeButton.textContent = strings.startPractice ?? "Begin Practice";
   elements.viewCaseBriefButton.textContent = strings.viewCaseBrief ?? "View Case Brief";
@@ -798,7 +836,9 @@ function updateCaseSkillContext(skill) {
     !elements.caseSkillName ||
     !elements.caseSkillMarker ||
     !elements.caseSkillSummary ||
-    !elements.caseSkillAim
+    !elements.caseSkillAim ||
+    !elements.caseSkillPracticeFocus ||
+    !elements.caseSkillCommonMiss
   ) {
     return;
   }
@@ -813,6 +853,8 @@ function updateCaseSkillContext(skill) {
     elements.caseSkillMarker.textContent = "";
     elements.caseSkillSummary.textContent = "";
     elements.caseSkillAim.textContent = "";
+    elements.caseSkillPracticeFocus.textContent = "";
+    elements.caseSkillCommonMiss.textContent = "";
     setGlossaryVisibility(false);
     renderSkillContextExpansion(false);
     return;
@@ -825,6 +867,8 @@ function updateCaseSkillContext(skill) {
   const summaryText = skill.summary ?? skill.description ?? "";
   renderGlossaryParagraphs(elements.caseSkillSummary, summaryText, languageId);
   renderGlossaryBlock(elements.caseSkillAim, skill.aim ?? "", languageId);
+  renderGlossaryBlock(elements.caseSkillPracticeFocus, skill.practiceFocus ?? "", languageId);
+  renderGlossaryBlock(elements.caseSkillCommonMiss, skill.commonMiss ?? "", languageId);
   setGlossaryVisibility(true);
   renderSkillContextExpansion(true);
 }
@@ -920,6 +964,15 @@ function hydratePracticeView() {
       elements.statementCaseName.textContent = "";
     }
     elements.caseSchema.textContent = "";
+    if (elements.caseCorePain) {
+      elements.caseCorePain.textContent = "";
+    }
+    if (elements.caseCorePainItem) {
+      elements.caseCorePainItem.hidden = true;
+    }
+    if (elements.casePracticeEdge) {
+      elements.casePracticeEdge.textContent = "";
+    }
     elements.caseStyle.textContent = "";
     if (elements.caseVoice) {
       elements.caseVoice.textContent = "";
@@ -955,6 +1008,16 @@ function hydratePracticeView() {
     elements.statementCaseName.textContent = caseData.label;
   }
   elements.caseSchema.textContent = caseData.schema ?? "";
+  if (elements.caseCorePain) {
+    const corePain = (caseData.corePain ?? "").trim();
+    elements.caseCorePain.textContent = corePain;
+    if (elements.caseCorePainItem) {
+      elements.caseCorePainItem.hidden = !corePain;
+    }
+  }
+  if (elements.casePracticeEdge) {
+    elements.casePracticeEdge.textContent = caseData.practiceEdge ?? "";
+  }
   elements.caseStyle.textContent = caseData.style ?? "";
   if (elements.caseVoice) {
     elements.caseVoice.textContent = (caseData.voice ?? caseData.history ?? "").trim();

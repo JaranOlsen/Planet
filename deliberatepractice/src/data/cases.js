@@ -13,6 +13,7 @@ export const CASES = [
     history:
       "Sara is a 28-year-old junior marketing professional who appears composed at work while privately spiraling after a breakup that reignites childhood abandonment pain from emotionally distant parents.",
     schema: "If I am not perfect or needed, people leave because I am unlovable.",
+    practiceEdge: "Listen for quiet abandonment pain hidden beneath composure, apology, and self-blame.",
     style:
       "Soft, even tone with small apologetic smiles; glance down; swallow tears; quick 'I'm fine' deflections; hands clasped; steady pace with short pauses.",
     voice:
@@ -30,6 +31,7 @@ export const CASES = [
     history:
       "Michael is a 35-year-old middle manager whose quick temper is straining his marriage and work relationships; criticism from others instantly revives the shame he carried growing up with a demanding, emotionally distant father.",
     schema: "If I am not in control and impeccable, I will be exposed as weak and rejected.",
+    practiceEdge: "Track humiliation under anger and the instant he reads criticism as disrespect.",
     style:
       "Firm, clipped voice; volume can rise on offense words; jaw tight; arms crossed; direct eye contact; sharp exhales; slight forward lean.",
     voice:
@@ -47,6 +49,7 @@ export const CASES = [
     history:
       "Jason is a 24-year-old analyst who freezes in meetings and avoids social invitations; bullying and anxious caregiving in childhood left him convinced he is defective and destined to be alone.",
     schema: "If people really see me, they will confirm I am awkward and unworthy.",
+    practiceEdge: "Work in tiny steps; blankness and self-erasure are the difficulty, not resistance.",
     style:
       "Quiet, hesitant voice; long pauses; sentences trail off; eyes down; fidgeting hands; shoulders slightly hunched; soft throat-clears.",
     voice:
@@ -63,6 +66,7 @@ export const CASES = [
     history:
       "Laura is a 45-year-old nurse and recent divorcee who presents with chronic emptiness, panic flashes, and a history of childhood abuse that taught her intimacy equals danger and shame.",
     schema: "If I let my guard down, I will be hurt or abandoned because I am damaged.",
+    practiceEdge: "Go slowly around numbness and mistrust; safety cues matter more than emotional intensity.",
     style:
       "Low, flat tone; slow pace; gaze into middle distance; minimal gestures; long exhales; occasional hand to throat; small startle then withdraw.",
     voice:
@@ -79,6 +83,7 @@ export const CASES = [
     history:
       "Carlos is a 30-year-old construction supervisor who goes from calm to destructive in seconds; growing up with violence taught him strength means never feeling small, so shame and fear surface as explosive anger.",
     schema: "If I am not the toughest in the room, I will be disrespected and hurt.",
+    practiceEdge: "Respect pride while listening for the small, ashamed, hurt place beneath the threat response.",
     style:
       "Strong, direct voice in quick bursts; jaw clenched; chest forward; brows knit; quick hand chops; nasal sighs; brief glare then look away.",
     voice:
@@ -95,6 +100,7 @@ export const CASES = [
     history:
       "Nina is a 40-year-old teacher and mother who faints from stress, juggles everyone's needs, and collapses into guilt whenever she feels anger or asks for help.",
     schema: "If I stop taking care of everyone, I will be abandoned and prove I am selfish.",
+    practiceEdge: "Expect guilt to rush in the moment need or anger appears.",
     style:
       "Warm, polite tone; apologetic laughs; quick 'sorry' before needs; over-nodding; smile while upset; breath held then small sigh; hands smoothing clothing.",
     voice:
@@ -111,6 +117,7 @@ export const CASES = [
     history:
       "Aisha is a 26-year-old with a history of foster care, self-harm, and intense relationships; perceived distancing unleashes panic, rage, and desperate bids to keep people close.",
     schema: "If someone steps back, it means I am unlovable and I will be left alone forever.",
+    practiceEdge: "Stay anchored to attachment terror, rapid state shifts, and boundary sensitivity.",
     style:
       "Fast, urgent speech; voice wavers; tears close; wide eyes then narrow; clutch chest or reach out; sudden shifts from pleading to sharp; quick breaths.",
     voice:
@@ -127,6 +134,7 @@ export const CASES = [
     history:
       "David is a 42-year-old finance leader whose marriage is collapsing; conditional childhood love left him chasing perfection and raging when anyone highlights his flaws.",
     schema: "If I am not exceptional, I am worthless and will be discarded.",
+    practiceEdge: "Look beneath status, certainty, and contempt for shame, hollowness, and fear of ordinariness.",
     style:
       "Measured, confident tone; controlled pace; chin slightly raised; steady eye contact; small dismissive chuckle; smooth hand gestures; sigh when challenged.",
     voice:
@@ -143,6 +151,7 @@ export const CASES = [
     history:
       "Marcus is a 34-year-old veteran and security guard who lives alone, cycles between numbness and flashbacks, and struggles to trust anyone after repeated betrayals and battlefield losses.",
     schema: "Letting people close guarantees hurt, so it is safer to feel nothing.",
+    practiceEdge: "Work at the edge of numbness, hypervigilance, and lonely grief without pushing for detail.",
     style:
       "Low volume; few words; long pauses; flat tone; eyes down or scanning; jaw set; shoulders tight; minimal gesture; slight tremor near hard topics.",
     voice:

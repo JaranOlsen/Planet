@@ -24,7 +24,7 @@ import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, const
 import { pushContent, handleCarouselButton } from './content.js'
 import { initialiseVersion } from './versions.js'
 import { creation } from './creation.js'
-import { updateGutta, guttCrumbMesh, maraCrumbMesh, cycleStatsChartView } from './gutta.js'
+import { updateGutta, guttCrumbMesh, maraCrumbMesh, cycleStatsChartView, toggleParametersPanel } from './gutta.js'
 import { setupIntro, introState, fadeOutAudio, animateLetterSpacing } from './core/intro.js'
 import { DeveloperHud } from './core/developerHud.js'
 import { PlanetEnvironment } from './core/planetEnvironment.js'
@@ -114,6 +114,139 @@ export let slideshowStatus = {
     activeSlide: undefined,
     activeSlideLength: undefined,
     activeSubSlide: undefined
+}
+
+const silenceOverlayElementIds = [
+    'credits',
+    'skipbutton',
+    'playbutton',
+    'subtitle-container',
+    'versions',
+    'footer',
+    'hotKeys',
+    'slides',
+    'fpsCounter',
+    'guttaStatScreen',
+];
+
+const silenceOverlayState = {
+    previousAppStatus: undefined,
+    previousCursor: '',
+    previousOrbitEnabled: false,
+    previousFlyEnabled: false,
+    previousTitleVisible: false,
+    hiddenDisplays: new Map(),
+    resumeIntroAudio: false,
+    introAudioTime: 0,
+};
+
+function enterSilenceScreen() {
+    if (window.appStatus === "initialising" || window.appStatus === "silence" || window.appStatus === "flight") {
+        return;
+    }
+
+    const silence = document.getElementById('silence');
+    const silenceAudio = document.getElementById('silenceAudio');
+    if (!silence || !silenceAudio) {
+        return;
+    }
+
+    silenceOverlayState.previousAppStatus = window.appStatus;
+    silenceOverlayState.previousCursor = document.body.style.cursor;
+    silenceOverlayState.previousOrbitEnabled = orbitControls.enabled;
+    silenceOverlayState.previousFlyEnabled = flyControls.enabled;
+    silenceOverlayState.hiddenDisplays.clear();
+
+    silenceOverlayElementIds.forEach((id) => {
+        const element = document.getElementById(id);
+        if (!element) {
+            return;
+        }
+        silenceOverlayState.hiddenDisplays.set(id, element.style.display);
+        element.style.display = 'none';
+    });
+
+    const title = scene.getObjectByName('title');
+    silenceOverlayState.previousTitleVisible = !!title && title.visible;
+    if (title) {
+        title.visible = false;
+    }
+
+    silenceOverlayState.resumeIntroAudio = !!introState.audio && !introState.audio.paused;
+    silenceOverlayState.introAudioTime = silenceOverlayState.resumeIntroAudio ? introState.audio.currentTime : 0;
+    if (silenceOverlayState.resumeIntroAudio) {
+        introState.audio.pause();
+    }
+
+    silence.style.display = 'block';
+    silence.style.letterSpacing = '4rem';
+    silence.style.marginRight = '-4rem';
+    document.body.style.cursor = 'none';
+    orbitControls.enabled = false;
+    flyControls.enabled = false;
+    window.appStatus = "silence";
+
+    silenceAudio.pause();
+    silenceAudio.currentTime = 0;
+    silenceAudio.volume = 1;
+    silenceAudio.play().catch((error) => {
+        console.warn('Unable to play silence audio:', error);
+    });
+    animateLetterSpacing();
+}
+
+function exitSilenceScreen() {
+    if (window.appStatus !== "silence") {
+        return;
+    }
+
+    const silence = document.getElementById('silence');
+    const silenceAudio = document.getElementById('silenceAudio');
+    if (silence) {
+        silence.style.display = 'none';
+    }
+
+    silenceOverlayState.hiddenDisplays.forEach((displayValue, id) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.style.display = displayValue;
+        }
+    });
+    silenceOverlayState.hiddenDisplays.clear();
+
+    const title = scene.getObjectByName('title');
+    if (title) {
+        title.visible = silenceOverlayState.previousTitleVisible;
+    }
+
+    orbitControls.enabled = silenceOverlayState.previousOrbitEnabled;
+    flyControls.enabled = silenceOverlayState.previousFlyEnabled;
+    document.body.style.cursor = silenceOverlayState.previousCursor || 'default';
+    window.appStatus = silenceOverlayState.previousAppStatus || "orbit";
+
+    if (silenceOverlayState.resumeIntroAudio && introState.audio) {
+        introState.audio.currentTime = silenceOverlayState.introAudioTime;
+        introState.audio.play().catch((error) => {
+            console.warn('Unable to resume intro audio:', error);
+        });
+    }
+
+    silenceOverlayState.previousAppStatus = undefined;
+    silenceOverlayState.resumeIntroAudio = false;
+    silenceOverlayState.introAudioTime = 0;
+
+    if (silenceAudio) {
+        fadeOutAudio(silenceAudio, 5000);
+    }
+}
+
+function toggleSilenceScreen() {
+    if (window.appStatus === "silence") {
+        exitSilenceScreen();
+        return;
+    }
+
+    enterSilenceScreen();
 }
 
 window.actionsCompleted = true
@@ -276,6 +409,52 @@ function updateFpsCounter(now) {
     fpsDisplay.textContent = fps;
 }
 
+function toggleHotKeysOverlay() {
+    const hotKeys = document.querySelector('#hotKeys');
+    if (!hotKeys) {
+        return;
+    }
+
+    hotKeys.style.display = hotKeys.style.display == "block" ? "none" : "block";
+}
+
+function toggleFpsOverlay() {
+    fpsContainer.style.display = fpsContainer.style.display == "block" ? "none" : "block";
+}
+
+function closeActiveOverlay() {
+    if (focusElement === "tagInput") {
+        const tagInput = document.getElementById("tagInput");
+        if (tagInput) {
+            tagInput.style.display = "none";
+            tagInput.blur();
+        }
+        focusElement = undefined;
+        return true;
+    }
+
+    if (window.appStatus === "silence") {
+        exitSilenceScreen();
+        return true;
+    }
+
+    if (slideshowStatus.activeSlideshow !== undefined) {
+        const exitButton = document.querySelector("[data-carousel-button='exit']");
+        if (exitButton) {
+            slideshowStatus = handleCarouselButton(exitButton, slideshowStatus);
+            return true;
+        }
+    }
+
+    const hotKeys = document.querySelector('#hotKeys');
+    if (hotKeys && hotKeys.style.display == "block") {
+        hotKeys.style.display = "none";
+        return true;
+    }
+
+    return false;
+}
+
 
 //INTERACTION FUNCTIONS
 function scanPins() {
@@ -289,7 +468,32 @@ function scanPins() {
 document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
+    const code = event.code;
     const hasModifier = event.shiftKey || event.ctrlKey || event.altKey || event.metaKey;
+    const digitMatch = /^Digit([1-9])$/.exec(code);
+
+    if (code === "Escape" && closeActiveOverlay()) {
+        return;
+    }
+
+    if (focusElement !== "tagInput" && !hasModifier && code === "KeyS" && window.appStatus !== "flight") {
+        toggleSilenceScreen();
+        return;
+    }
+
+    if (window.appStatus === "silence") {
+        return;
+    }
+
+    if (focusElement !== "tagInput" && !hasModifier && code === "KeyH") {
+        toggleHotKeysOverlay();
+        return;
+    }
+
+    if (focusElement !== "tagInput" && !hasModifier && code === "KeyP") {
+        toggleFpsOverlay();
+        return;
+    }
 
     if (event.altKey && (keyCode === 37 || keyCode === 39)) {
         if (guttaStatScreen.style.display === "block") {
@@ -331,6 +535,20 @@ function onDocumentKeyUp(event) {
                 adjustExampleIndex('exampleMaraId', 'exampleMaraIndex', guttaState.mara, delta);
                 return;
             }
+            if (window.appStatus !== "flight" && code === "KeyS") { // Shift+S
+                if (window.appStatus == "orbit") {
+                    planetEnvironment.toggleSpiral();
+                }
+                return;
+            }
+            if (window.appStatus !== "flight" && code === "KeyE") { // Shift+E
+                planetEnvironment.toggleEnneagram();
+                return;
+            }
+            if (developer && code === "KeyP") { // Shift+P
+                toggleParametersPanel();
+                return;
+            }
             if (window.appStatus === "orbit") {
                 if (keyCode == 71) { // Shift+G
                     const mode = getFollowMode() === "gutt" ? "manual" : "gutt";
@@ -344,6 +562,11 @@ function onDocumentKeyUp(event) {
                     console.log(mode === "mara" ? "Orbit now follows the exampleMara" : "Orbit follow disabled");
                     return;
                 }
+            }
+            if (window.appStatus !== "flight" && digitMatch) { // Shift+1..9
+                const index = Number(digitMatch[1]) - 1; // 0-based
+                switchMindmap(index);
+                return;
             }
         }
 
@@ -410,13 +633,6 @@ function onDocumentKeyUp(event) {
                 if (!event.shiftKey && keyCode == 48) {
             queueAmbientIntensity(0.5, clock);
           }
-                // Mindmap switching: Shift+1..9 (prevent light adjustments earlier)
-                if (event.shiftKey && keyCode >= 49 && keyCode <= 57) { // '1'..'9'
-                    const index = keyCode - 49; // 0-based
-                    switchMindmap(index);
-                    return; // stop further number key side-effects
-                }
-
         //Stats display
         if (keyCode == 71) { //G
             if (guttaStatScreen.style.display == "block") {
@@ -428,11 +644,6 @@ function onDocumentKeyUp(event) {
                 guttCrumbMesh.visible = true;
                 maraCrumbMesh.visible = true;
             }
-        }
-        if (keyCode == 74) { //J
-            if (fpsContainer.style.display == "block") {
-                fpsContainer.style.display = "none"
-            } else fpsContainer.style.display = "block"
         }
 
         //Content display
@@ -474,55 +685,6 @@ function onDocumentKeyUp(event) {
                 }
             }
             console.log(contexts)
-        }
-        if (keyCode == 83) { //S
-            if (window.appStatus == "intro-menu") {
-                const silence = document.getElementById('silence')
-                const credits = document.getElementById('credits')
-                const skipbutton = document.getElementById('skipbutton')
-                const playbutton = document.getElementById('playbutton')
-                silence.style.display = "block"
-                credits.style.display = "none"
-                skipbutton.style.display = "none"
-                playbutton.style.display = "none"
-                window.appStatus = "silence"
-                const title = scene.getObjectByName('title')
-                title.visible = false
-                document.body.style.cursor = 'none';
-                silenceAudio.volume = 1;
-                silenceAudio.play();
-                animateLetterSpacing()
-            } else if (window.appStatus == "silence") {
-                const silence = document.getElementById('silence')
-                const credits = document.getElementById('credits')
-                const skipbutton = document.getElementById('skipbutton')
-                const playbutton = document.getElementById('playbutton')
-                silence.style.display = "none"
-                credits.style.display = "block"
-                skipbutton.style.display = "block"
-                playbutton.style.display = "block"
-                window.appStatus = "intro-menu"
-                const title = scene.getObjectByName('title')
-                title.visible = true
-                document.body.style.cursor = 'default';
-                fadeOutAudio(silenceAudio, 5000)
-            }
-            if (window.appStatus == "orbit") {
-                planetEnvironment.toggleSpiral();
-            }
-            
-        }
-        if (keyCode == 89) { //Y
-            planetEnvironment.toggleEnneagram();
-        }
-
-        const hotKeys = document.querySelector('#hotKeys')
-        if (keyCode == 75) { //K
-            if (hotKeys.style.display == "block") {
-                hotKeys.style.display = "none"
-            } else {
-                hotKeys.style.display = "block" 
-            }
         }
 
         //Node management
@@ -982,6 +1144,10 @@ document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     const keyCode = event.which;
 
+    if (window.appStatus === "silence") {
+        return;
+    }
+
     if (selectedNodes.length > 0 && developer == true  && slideshowStatus.activeSlideshow == undefined && focusElement !== "tagInput" && !flyControls.enabled) {
         for (let node = 0; node < selectedNodes.length; node++) {
             if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
@@ -1128,6 +1294,10 @@ function onPointerMove(event) {
 
 function onPointerClick(event) {
     event.preventDefault();
+
+    if (window.appStatus === "silence") {
+        return;
+    }
 
     // Only respond to primary mouse button (or touch)
     if (event.button !== undefined && event.button !== 0) return;

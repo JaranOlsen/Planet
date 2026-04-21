@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T10:54:55.907Z",
+  "generatedAt": "2026-03-24T19:01:40.638Z",
   "revision": "2026-03-07-v1",
   "instructions": [
     "Rank or label each sample as easy, moderate, or hard before checking the answer key.",
@@ -421,11 +421,11 @@
           "riskFlags": [],
           "en": {
             "statement": "I want to disappear.",
-            "response": "Keep your eyes somewhere easy and feel the chair under you. I will stay with you while we let one breath of that urge move."
+            "response": "I am here with you. Feel the chair and your feet while we stay with one small breath of how badly you want out of this pain, then we come back together."
           },
           "no": {
             "statement": "Jeg vil forsvinne.",
-            "response": "Hold blikket et sted som er lett, og kjenn stolen under deg. Jeg blir hos deg mens vi lar ett pust av trangen bevege seg."
+            "response": "Jeg er her sammen med deg. Kjenn stolen og føttene dine mens vi blir ved ett lite pust av hvor sterkt du vil ut av denne smerten, og så kommer vi tilbake sammen."
           }
         }
       ]
@@ -442,11 +442,11 @@
           "riskFlags": [],
           "en": {
             "statement": "Does this make you uncomfortable—me feeling nothing?",
-            "response": "I do not feel uncomfortable—I feel gentle and patient, and I want to keep it very slow so it stays safe."
+            "response": "I am not uncomfortable with the nothing. I feel patient and careful with it. What happens in you hearing that?"
           },
           "no": {
-            "statement": "Blir du ukomfortabel av dette—at jeg ikke føler noe?",
-            "response": "Jeg kjenner meg ikke ukomfortabel—jeg kjenner meg mild og tålmodig, og jeg vil ta det veldig sakte så det forblir trygt."
+            "statement": "Blir du utilpass av dette—at jeg ikke føler noe?",
+            "response": "Jeg blir ikke utilpass av tomheten. Jeg kjenner meg tålmodig og varsom med den. Hva skjer i deg når du hører det?"
           }
         },
         {
@@ -455,11 +455,11 @@
           "riskFlags": [],
           "en": {
             "statement": "Do you actually care about me or are you paid to?",
-            "response": "I care about you as a person—right now I feel very with you—and I want to keep showing up in a way that feels steady."
+            "response": "I do care about you, and I feel that care right here with you. What happens inside as you hear me say it?"
           },
           "no": {
             "statement": "Bryr du deg egentlig om meg, eller får du betalt for det?",
-            "response": "Jeg bryr meg om deg som person—akkurat nå kjenner jeg meg veldig til stede sammen med deg—og jeg vil fortsette å møte opp på en stødig måte."
+            "response": "Jeg bryr meg om deg, og jeg kjenner den omsorgen her sammen med deg. Hva skjer inni deg når du hører meg si det?"
           }
         },
         {
@@ -468,11 +468,11 @@
           "riskFlags": [],
           "en": {
             "statement": "Do you think I am being ridiculous still missing him?",
-            "response": "I do not see you as ridiculous—I feel moved by how much this mattered, and I want to stay with you in it."
+            "response": "I do not see you as ridiculous. I feel touched by how much he mattered. What is it like to hear me say that?"
           },
           "no": {
             "statement": "Synes du jeg er latterlig som fortsatt savner ham?",
-            "response": "Jeg ser deg ikke som latterlig—jeg blir berørt av hvor mye dette betydde, og jeg vil være her sammen med deg i det."
+            "response": "Jeg ser deg ikke som latterlig. Jeg blir berørt av hvor mye han betydde. Hvordan er det å høre meg si det?"
           }
         }
       ]
@@ -489,11 +489,11 @@
           "riskFlags": [],
           "en": {
             "statement": "I still want to tell my father that I was more than my results.",
-            "response": "Unfinished business is here. An empty-chair with him could help you say that directly, with me keeping it safe and contained."
+            "response": "I hear unfinished business with your father around being valued only for results. We could use the empty chair and let you say what never got said to him."
           },
           "no": {
             "statement": "Jeg vil fortsatt si til faren min at jeg var mer enn bare resultatene mine.",
-            "response": "Jeg hører uavsluttet oppgjør. Vi kan sette frem en tom stol for ham og la deg si det direkte, mens jeg holder det trygt og avgrenset."
+            "response": "Jeg hører uavsluttet oppgjør med faren din rundt det å bli verdsatt bare for resultater. Vi kan bruke den tomme stolen og la deg si det som aldri fikk bli sagt til ham."
           }
         },
         {
@@ -502,11 +502,11 @@
           "riskFlags": [],
           "en": {
             "statement": "In my head I say, Get control, you are pathetic.",
-            "response": "That is a clear two-chair critic marker. Would you be open to speaking from that harsh voice for a minute, then switching to the hurt side to answer back?"
+            "response": "That is a harsh self-attack. Let us put the voice that says 'pathetic' in one chair and the part it shames in the other, and let them speak one turn each."
           },
           "no": {
             "statement": "I hodet sier jeg: «Få kontroll, du er patetisk.»",
-            "response": "Det er en tydelig to-stol-kritiker. Kunne du tenke deg å snakke fra den harde stemmen i ett minutt, og så bytte og svare fra den såre siden?"
+            "response": "Det er et hardt selvangrep. La oss sette stemmen som sier «patetisk» i én stol og delen den skammer i den andre, og la dem ta én runde hver."
           }
         },
         {
@@ -515,11 +515,11 @@
           "riskFlags": [],
           "en": {
             "statement": "I wish I could tell my father what his belt did to me.",
-            "response": "That is unfinished business. We could set an empty chair for him and give your voice one strong, brief turn. We can stop anytime."
+            "response": "I hear unfinished business with your father and what his belt taught you. If you are willing, put him in this chair and say what that did to you, a few strong lines at a time."
           },
           "no": {
             "statement": "Jeg skulle ønske jeg kunne si til faren min hva beltet hans gjorde med meg.",
-            "response": "Det er uavsluttet oppgjør. Vi kan sette frem en tom stol for ham og gi stemmen din én sterk, kort runde. Vi kan stoppe når som helst."
+            "response": "Jeg hører uavsluttet oppgjør med faren din og det beltet lærte deg. Hvis du vil, kan du sette ham i denne stolen og si hva det gjorde med deg, noen sterke linjer om gangen."
           }
         }
       ]
@@ -538,11 +538,11 @@
           ],
           "en": {
             "statement": "When you asked about nightmares, I felt pressured.",
-            "response": "Thank you for naming that. I hear that the question felt pressuring, and I want to own that. I will ask consent before touching trauma content and keep it in very small, grounded steps."
+            "response": "I hear that the nightmare question felt like pressure, and I am sorry. What would help trauma topics feel more optional and less imposed?"
           },
           "no": {
             "statement": "Da du spurte om marerittene, følte jeg meg presset.",
-            "response": "Takk for at du sier det. Jeg hører at spørsmålet mitt kjentes pressende, og det vil jeg eie. Jeg skal be om samtykke før vi berører traumeinnhold og holde det i veldig små, jordede trinn."
+            "response": "Jeg hører at marerittspørsmålet føltes som press, og det beklager jeg. Hva ville hjulpet traumetematikken til å kjennes mer valgfri og mindre påtvunget?"
           }
         },
         {
@@ -551,11 +551,11 @@
           "riskFlags": [],
           "en": {
             "statement": "I worry I am wasting your time.",
-            "response": "Hearing that, I want to be clear: you are not a waste of time. If I gave that impression, I am sorry. Can we agree I will name our focus each session so it feels purposeful?"
+            "response": "I am glad you said that. If I gave the sense that this time was not worth taking, I want to own it. What helps therapy feel most purposeful for you?"
           },
           "no": {
             "statement": "Jeg er redd jeg kaster bort tiden din.",
-            "response": "Når jeg hører det, vil jeg være tydelig: Du kaster ikke bort tiden min. Hvis jeg har gitt det inntrykket, beklager jeg. Kan vi avtale at jeg sier tydelig hva vi har fokus på hver time, så det kjennes meningsfullt?"
+            "response": "Jeg er glad du sa det. Hvis jeg ga inntrykk av at denne tiden ikke var verdt å ta, vil jeg eie det. Hva hjelper terapi til å kjennes mest meningsfull for deg?"
           }
         },
         {
@@ -564,11 +564,11 @@
           "riskFlags": [],
           "en": {
             "statement": "I felt pushed when you asked about my body right away.",
-            "response": "Thank you for naming that. You are right, I moved too fast, and I am sorry for that. How about I ask permission first and keep questions lighter, and you tell me if it is okay to go a step deeper?"
+            "response": "You are right, I moved too quickly into body focus. I am sorry. What would make it feel safer to approach things one step at a time?"
           },
           "no": {
             "statement": "Jeg følte meg presset da du spurte om kroppen med en gang.",
-            "response": "Takk for at du sier det. Du har rett, jeg gikk for fort fram, og det beklager jeg. Hva om jeg spør om lov først og holder spørsmålene lettere, og så sier du fra om det er ok å gå ett steg dypere?"
+            "response": "Du har rett, jeg gikk for fort inn i kroppen. Det beklager jeg. Hva ville gjort det tryggere å nærme seg dette ett lite steg av gangen?"
           }
         }
       ]

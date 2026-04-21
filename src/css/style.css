@@ -171,11 +171,12 @@ a:active {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 6;
 }
 
 #silence {
   position: relative;
-  z-index: 3;
+  z-index: 6;
   border: none;
   color: rgba(255, 255, 255, 0.75);
   padding: 0 .5rem;

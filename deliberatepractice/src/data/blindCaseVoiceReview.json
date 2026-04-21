@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T10:54:55.907Z",
+  "generatedAt": "2026-03-24T19:01:40.638Z",
   "revision": "2026-03-07-v1",
   "instructions": [
     "Use the blind labels only; do not consult the answer key until the reviewer has committed a guess.",
@@ -165,11 +165,11 @@
           "riskFlags": [],
           "en": {
             "statement": "I tell myself I'm just holding standards.",
-            "response": "You frame it as standards while inside it hurts to feel judged."
+            "response": "You tell yourself it is about standards, and it still stings to feel judged."
           },
           "no": {
             "statement": "Jeg sier til meg selv at jeg bare holder standarder.",
-            "response": "Du kaller det standarder, samtidig som det gjør vondt å føle seg vurdert."
+            "response": "Du sier til deg selv at det handler om standarder, og likevel gjør det vondt å kjenne seg vurdert."
           }
         },
         {
@@ -504,11 +504,11 @@
           "riskFlags": [],
           "en": {
             "statement": "Will this change how my team sees me?",
-            "response": "Yes—steadier responses build trust. Catching the sting early shifts you from reactive to respected."
+            "response": "It can help. As you catch the sting earlier, you have more choice in how you respond, and that often changes how people experience you."
           },
           "no": {
             "statement": "Vil dette endre hvordan teamet ser meg?",
-            "response": "Ja – jevnere responser bygger tillit. Når du fanger stikket tidlig, går du fra reaktiv til mer stødig – og mer respektert."
+            "response": "Det kan det. Når du fanger stikket tidligere, får du mer valg i hvordan du svarer, og det endrer ofte hvordan andre opplever deg."
           }
         }
       ]
@@ -995,11 +995,11 @@
           "riskFlags": [],
           "en": {
             "statement": "I feel selfish even taking up space here.",
-            "response": "Hearing that, I feel protective of your time—you matter here, and I want to make room for what weighs on you."
+            "response": "I do not experience you as selfish here. I feel protective of the part of you that keeps apologizing for having needs. What happens as you hear that?"
           },
           "no": {
             "statement": "Jeg føler meg egoistisk bare av å ta plass her.",
-            "response": "Når jeg hører det, får jeg lyst til å beskytte tiden din—du betyr noe her, og jeg vil gi rom for det som tynger."
+            "response": "Jeg opplever deg ikke som egoistisk her. Jeg kjenner meg beskyttende overfor delen av deg som hele tiden beklager at den har behov. Hva skjer når du hører det?"
           }
         },
         {
@@ -1008,11 +1008,11 @@
           "riskFlags": [],
           "en": {
             "statement": "Do you think I am being ridiculous still missing him?",
-            "response": "I do not see you as ridiculous—I feel moved by how much this mattered, and I want to stay with you in it."
+            "response": "I do not see you as ridiculous. I feel touched by how much he mattered. What is it like to hear me say that?"
           },
           "no": {
             "statement": "Synes du jeg er latterlig som fortsatt savner ham?",
-            "response": "Jeg ser deg ikke som latterlig—jeg blir berørt av hvor mye dette betydde, og jeg vil være her sammen med deg i det."
+            "response": "Jeg ser deg ikke som latterlig. Jeg blir berørt av hvor mye han betydde. Hvordan er det å høre meg si det?"
           }
         }
       ]
@@ -1031,11 +1031,11 @@
           "riskFlags": [],
           "en": {
             "statement": "Do therapists get bored hearing this stuff?",
-            "response": "I do not feel bored—I feel engaged and focused on understanding the moment it flips for you."
+            "response": "I do not feel bored. I feel pulled to understand the split second it turns for you. How is it to hear that?"
           },
           "no": {
             "statement": "Blir terapeuter lei av å høre sånt?",
-            "response": "Jeg kjenner meg ikke lei—jeg er engasjert og fokusert på å forstå øyeblikket det tipper for deg."
+            "response": "Jeg blir ikke lei. Jeg kjenner et drag mot å forstå splitsekundet der det snur for deg. Hvordan er det å høre det?"
           }
         },
         {
@@ -1044,11 +1044,11 @@
           "riskFlags": [],
           "en": {
             "statement": "Are you tough enough for me?",
-            "response": "Right now I feel solid and on your side; I want to help you keep your edge without the explosion."
+            "response": "I feel solid with you right now. I am not trying to overpower you. How does that land?"
           },
           "no": {
             "statement": "Er du tøff nok for meg?",
-            "response": "Akkurat nå kjenner jeg meg solid og på din side; jeg vil hjelpe deg å beholde kanten uten eksplosjonen."
+            "response": "Jeg kjenner meg solid sammen med deg akkurat nå. Jeg prøver ikke å overkjøre deg. Hvordan lander det?"
           }
         }
       ]
@@ -1067,11 +1067,11 @@
           "riskFlags": [],
           "en": {
             "statement": "Do you like working with veterans?",
-            "response": "I do—I feel respect for your service and a deep wish to make this room feel safer than most places do."
+            "response": "I feel respect for veterans and for you specifically, and I want this room to feel steadier than most places have. How does that land?"
           },
           "no": {
             "statement": "Liker du å jobbe med veteraner?",
-            "response": "Det gjør jeg—jeg kjenner respekt for tjenesten din og et sterkt ønske om at dette rommet skal kjennes tryggere enn de fleste steder."
+            "response": "Jeg kjenner respekt for veteraner og for deg spesielt, og jeg vil at dette rommet skal kjennes stødigere enn de fleste steder har gjort. Hvordan lander det?"
           }
         },
         {
@@ -1080,11 +1080,11 @@
           "riskFlags": [],
           "en": {
             "statement": "Do you worry I will break down?",
-            "response": "I do not—I feel steady and ready to slow or stop anytime you need."
+            "response": "I am not worried about you breaking down with me. I feel ready to slow down the moment you need it. What is it like to hear that?"
           },
           "no": {
             "statement": "Er du redd for at jeg bryter sammen?",
-            "response": "Det er jeg ikke—jeg kjenner meg stødig og klar til å bremse eller stoppe når du trenger."
+            "response": "Jeg er ikke redd for at du skal bryte sammen med meg. Jeg er klar til å senke farten med en gang du trenger det. Hvordan er det å høre det?"
           }
         }
       ]
@@ -1103,11 +1103,11 @@
           "riskFlags": [],
           "en": {
             "statement": "I want to tell my ex how small I felt, but it seems pointless now.",
-            "response": "I hear unfinished business with him. We could place an empty chair for him and let you say what needs saying, just for a minute. I will keep it safe and brief."
+            "response": "I hear unfinished business with your ex. We could put him in the empty chair and let you say what still lives inside you, a few lines at a time, with me slowing it if needed."
           },
           "no": {
             "statement": "Jeg vil fortelle eksen hvor liten jeg følte meg, men det føles meningsløst nå.",
-            "response": "Jeg hører uavsluttet oppgjør med ham. Vi kan sette frem en tom stol for ham og la deg si det som trengs, bare ett minutt. Jeg holder det trygt og kort."
+            "response": "Jeg hører uavsluttet oppgjør med eksen din. Vi kan sette ham i den tomme stolen og la deg si det som fortsatt lever i deg, noen linjer om gangen, mens jeg bremser hvis det trengs."
           }
         },
         {
@@ -1116,11 +1116,11 @@
           "riskFlags": [],
           "en": {
             "statement": "I want to tell my ex I felt abandoned with the chores and the blame.",
-            "response": "Unfinished business is here. We could place an empty chair for him and let you say what you held back, with permission to stop at any point."
+            "response": "I hear unfinished business with your ex around blame, chores, and carrying too much alone. We could use the empty chair so you can say what you had to swallow back then."
           },
           "no": {
             "statement": "Jeg vil si til eksen at jeg følte meg forlatt med alt ansvaret og all skylden.",
-            "response": "Jeg hører uavsluttet oppgjør. Vi kan sette frem en tom stol for ham og la deg si det du holdt tilbake, med mulighet til å stoppe når som helst."
+            "response": "Jeg hører uavsluttet oppgjør med eksen din rundt skyld, husarbeid og det å bære for mye alene. Vi kan bruke den tomme stolen så du kan si det du måtte svelge den gangen."
           }
         }
       ]
@@ -1139,11 +1139,11 @@
           "riskFlags": [],
           "en": {
             "statement": "Part of me wants to protect; part of me feels ashamed afterward.",
-            "response": "That split can be worked in a short two-chair: protector in one chair, ashamed part in the other. I will keep turns short and steady."
+            "response": "That sounds like a split between the part that comes out fighting and the part that feels ashamed afterward. We could give each one a chair and let them speak directly."
           },
           "no": {
             "statement": "En del av meg vil beskytte; en annen del skammer seg etterpå.",
-            "response": "Den splittelsen kan jobbes med i en kort to-stol: beskytteren i én stol, den skamfulle delen i den andre. Jeg holder rundene korte og jevne."
+            "response": "Det høres ut som en splitt mellom delen som går til kamp og delen som skammer seg etterpå. Vi kan gi hver av dem en stol og la dem snakke direkte."
           }
         },
         {
@@ -1152,11 +1152,11 @@
           "riskFlags": [],
           "en": {
             "statement": "Part of me says I must be perfect; another part is just tired.",
-            "response": "Sounds like an internal split. A short two-chair dialogue could help each side speak. I will guide short turns so it stays safe."
+            "response": "That is a clear split between the demanding part and the exhausted part. We could give each one a chair and let them speak directly to each other while I guide the turns."
           },
           "no": {
             "statement": "En del sier at jeg må være perfekt; en annen del er bare sliten.",
-            "response": "Det høres ut som en indre splittelse. En kort to-stol-dialog kan la hver del få si sitt. Jeg veileder korte runder så det kjennes trygt."
+            "response": "Det er en tydelig splitt mellom den krevende delen og den utslitte delen. Vi kan gi hver av dem en stol og la dem snakke direkte til hverandre mens jeg guider rundene."
           }
         }
       ]
@@ -1175,11 +1175,11 @@
           "riskFlags": [],
           "en": {
             "statement": "When someone is kind, a voice says, Do not trust it.",
-            "response": "I hear an inner protector. If you like, we can try a gentle two-chair: give that protector a chair and let it speak, then let your longing answer. We will keep it very brief and grounded."
+            "response": "That sounds like a protector marker. If it feels safe enough, let us put the mistrusting protector in one chair and the part that longs for kindness in the other, and keep the turns very short."
           },
           "no": {
             "statement": "Når noen er snill, sier en stemme: «Ikke stol på det.»",
-            "response": "Jeg hører en indre beskytter. Om du vil, kan vi prøve en mild to-stol-øvelse: gi beskytteren en stol og la den snakke, og så la lengselen svare. Vi holder det veldig kort og jordende."
+            "response": "Det høres ut som en beskyttermarkør. Hvis det kjennes trygt nok, kan vi sette den mistroiske beskytteren i én stol og delen som lengter etter vennlighet i den andre, og holde rundene veldig korte."
           }
         },
         {
@@ -1188,11 +1188,11 @@
           "riskFlags": [],
           "en": {
             "statement": "A part says, Do not feel, just keep guard.",
-            "response": "Protector marker. If you are willing, we can try a very short two-chair: give the guard a voice, then let the lonely part answer. We will keep it titrated."
+            "response": "I hear a strong guard part. If it feels workable, let us put the guard in one chair and the lonely part it protects in the other, and keep the turns slow and short."
           },
           "no": {
             "statement": "En del sier: «Ikke føl, bare hold vakt.»",
-            "response": "Beskytter-markør. Hvis du vil, kan vi prøve en veldig kort to-stol-øvelse: gi vakten en stemme, og så la den ensomme delen svare. Vi doserer det."
+            "response": "Jeg hører en sterk vaktdel. Hvis det kjennes mulig, kan vi sette vakten i én stol og den ensomme delen den beskytter i den andre, og holde rundene langsomme og korte."
           }
         }
       ]
@@ -1211,11 +1211,11 @@
           "riskFlags": [],
           "en": {
             "statement": "I worry I am wasting your time.",
-            "response": "Hearing that, I want to be clear: you are not a waste of time. If I gave that impression, I am sorry. Can we agree I will name our focus each session so it feels purposeful?"
+            "response": "I am glad you said that. If I gave the sense that this time was not worth taking, I want to own it. What helps therapy feel most purposeful for you?"
           },
           "no": {
             "statement": "Jeg er redd jeg kaster bort tiden din.",
-            "response": "Når jeg hører det, vil jeg være tydelig: Du kaster ikke bort tiden min. Hvis jeg har gitt det inntrykket, beklager jeg. Kan vi avtale at jeg sier tydelig hva vi har fokus på hver time, så det kjennes meningsfullt?"
+            "response": "Jeg er glad du sa det. Hvis jeg ga inntrykk av at denne tiden ikke var verdt å ta, vil jeg eie det. Hva hjelper terapi til å kjennes mest meningsfull for deg?"
           }
         },
         {
@@ -1224,11 +1224,11 @@
           "riskFlags": [],
           "en": {
             "statement": "I worry you think I am too needy for therapy.",
-            "response": "It makes sense to worry about that here. I am sorry if anything I did fed that. Can we agree I will say out loud if I am missing you, and you can flag it when you start to feel like too much here?"
+            "response": "I am glad you said that. If anything I did fed the fear of being too much here, I want to own it. What do you need from me when that fear shows up with you?"
           },
           "no": {
             "statement": "Jeg er redd du synes jeg er for trengende for terapi.",
-            "response": "Det gir mening at du bekymrer deg for det her. Jeg beklager hvis noe jeg gjorde forsterket den frykten. Kan vi avtale at jeg sier tydelig fra hvis jeg merker at jeg mister deg, og at du sier fra når du begynner å føle deg som for mye her?"
+            "response": "Jeg er glad du sa det. Hvis noe jeg gjorde ga næring til frykten for å være for mye her, vil jeg eie det. Hva trenger du fra meg når den frykten dukker opp hos deg?"
           }
         }
       ]
@@ -1247,11 +1247,11 @@
           "riskFlags": [],
           "en": {
             "statement": "When you said I sounded hurt, it felt like you were calling me weak.",
-            "response": "I can see how that could land. I am sorry. My aim was to respect what hit you. Would it fit better if I ask first and keep the language that feels strong to you?"
+            "response": "I can see how 'hurt' landed as 'weak,' and I am sorry. I meant respect, not diminishing. What wording from me would help you stay open rather than brace?"
           },
           "no": {
             "statement": "Da du sa at jeg hørtes såret ut, føltes det som om du kalte meg svak.",
-            "response": "Jeg ser hvordan det kan ha landet. Beklager. Intensjonen min var å respektere det som traff deg. Ville det passet bedre om jeg spør først og bruker et språk som kjennes sterkt for deg?"
+            "response": "Jeg ser hvordan «såret» kunne lande som «svak», og det beklager jeg. Jeg mente respekt, ikke å gjøre deg mindre. Hvilke ord fra meg ville gjort det lettere å holde deg åpen i stedet for å spenne deg?"
           }
         },
         {
@@ -1260,11 +1260,11 @@
           "riskFlags": [],
           "en": {
             "statement": "When you called it a burn in my chest, it felt like you were judging my anger.",
-            "response": "I hear that. My intent was to track your body, not judge you. I am sorry it landed that way. I will ask first and use your words for it."
+            "response": "I hear that my words felt judging, and I am sorry. I want to track your anger without looking down on you. What language from me would feel more respectful?"
           },
           "no": {
             "statement": "Da du kalte det «brenning i brystet», føltes det som du dømte sinnet mitt.",
-            "response": "Jeg hører det. Intensjonen min var å spore kroppen din, ikke å dømme deg. Jeg beklager at det landet sånn. Jeg spør først og bruker dine ord."
+            "response": "Jeg hører at ordene mine føltes dømmende, og det beklager jeg. Jeg vil gjerne følge sinnet ditt uten å se ned på deg. Hvilket språk fra meg ville kjennes mer respektfullt?"
           }
         }
       ]
@@ -1283,11 +1283,11 @@
           "riskFlags": [],
           "en": {
             "statement": "You sit too close; I felt on edge.",
-            "response": "I appreciate you telling me. I am sorry for the discomfort. We can adjust the seating and confirm what feels safe for you."
+            "response": "Thank you for telling me. Sitting that close put you on edge, and I am sorry. Where would it feel safer for me to be in the room?"
           },
           "no": {
             "statement": "Du satt for nærme, og jeg ble urolig.",
-            "response": "Takk for at du sier det. Jeg beklager ubehaget. Vi kan justere sittestillingen og avstemme hva som kjennes trygt for deg."
+            "response": "Takk for at du sier det. At jeg satt så nær gjorde deg anspent, og det beklager jeg. Hvor i rommet ville det kjennes tryggere at jeg var?"
           }
         },
         {
@@ -1296,11 +1296,11 @@
           "riskFlags": [],
           "en": {
             "statement": "When the door slammed outside, I went blank and you kept talking.",
-            "response": "You are right, I missed the shift. I am sorry. Next time I will pause and ground with you first; can we practice a signal you can use if you start to blank?"
+            "response": "You are right, I missed the moment you went away after the door slammed. I am sorry. What signal could we use so I catch that earlier next time?"
           },
           "no": {
             "statement": "Da døra smalt ute, ble jeg blank og du fortsatte å snakke.",
-            "response": "Du har rett, jeg fikk ikke med meg skiftet. Jeg beklager. Neste gang pauser jeg og jorder sammen med deg først; kan vi øve på et signal du kan bruke hvis du begynner å bli blank?"
+            "response": "Du har rett, jeg overså øyeblikket da du forsvant etter at døra smalt. Det beklager jeg. Hvilket signal kunne vi brukt så jeg fanger det tidligere neste gang?"
           }
         }
       ]

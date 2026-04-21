@@ -71,6 +71,10 @@ flyControls.update = function updateWithMomentum(delta) {
 
 // Listen for keypresses to control momentum-based flight adjustments
 document.addEventListener('keydown', (event) => {
+  if (!flyControls.enabled || window.appStatus === 'silence') {
+    return;
+  }
+
   const speed = 0.001; // Adjust speed for movement
   const rollSpeed = 0.000001; // Adjust speed for rolling
 

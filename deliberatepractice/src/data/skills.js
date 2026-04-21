@@ -10,7 +10,11 @@ export const SKILLS = [
     marker:
       "You notice tension, urgency to fix, defensiveness, numbness, or strong pulls toward or away from the client, or you realize you are losing empathic curiosity. You sense that your own emotional reactions are beginning to shape the interaction more than the client’s needs.",
     aim:
-      "Regulate yourself so you can remain grounded, empathic, and attuned, co-regulating the client’s arousal within a workable window. Protect the therapeutic environment so core pain and primary emotion can safely surface without being derailed by the therapist’s unprocessed reactions."
+      "Regulate yourself so you can remain grounded, empathic, and attuned, co-regulating the client’s arousal within a workable window. Protect the therapeutic environment so core pain and primary emotion can safely surface without being derailed by the therapist’s unprocessed reactions.",
+    practiceFocus:
+      "Catch your own reaction first, regulate it, then answer from grounded attunement.",
+    commonMiss:
+      "Turning self-awareness into a scripted intervention or moving into fixing before you have actually re-centered."
   },
   {
     id: "empathic-understanding",
@@ -21,7 +25,11 @@ export const SKILLS = [
     marker:
       "Emotion is present in the client’s narrative, or their story feels unclear, searching, or fragmented and they seem to need help organizing it. The client appears hungry to feel heard, validated, and accurately seen in their emotional experience.",
     aim:
-      "Convey precise, compassionate understanding so the client feels safe and accepted in exactly where they are. Keep the focus on accurate mirroring rather than on actively deepening emotion, while allowing any spontaneous deepening of experience that may naturally arise from feeling understood."
+      "Convey precise, compassionate understanding so the client feels safe and accepted in exactly where they are. Keep the focus on accurate mirroring rather than on actively deepening emotion, while allowing any spontaneous deepening of experience that may naturally arise from feeling understood.",
+    practiceFocus:
+      "Mirror the client’s felt meaning in concise, accurate language that stays close to their words.",
+    commonMiss:
+      "Adding explanation, reassurance, or deepening before the client fully feels understood."
   },
   {
     id: "empathic-affirmation-validation",
@@ -32,7 +40,11 @@ export const SKILLS = [
     marker:
       "The client shows shame, self-criticism, minimization, or apologizes for their feelings with phrases like 'I shouldn’t feel this way' or 'It’s stupid that I’m so upset.' They may look down, avert gaze, or quickly try to push feelings away after they arise.",
     aim:
-      "Legitimize the client’s emotional responses in context so shame and self-attack loosen their grip and the client feels permission to feel. Strengthen emotional safety and self-compassion so primary emotions and core pain can be more fully accessed, explored, and transformed."
+      "Legitimize the client’s emotional responses in context so shame and self-attack loosen their grip and the client feels permission to feel. Strengthen emotional safety and self-compassion so primary emotions and core pain can be more fully accessed, explored, and transformed.",
+    practiceFocus:
+      "Name why the feeling makes sense in context, especially where shame or self-attack appears.",
+    commonMiss:
+      "Validating behavior instead of emotion, or sounding generic instead of linking the feeling to the client’s history or situation."
   },
   {
     id: "exploratory-questions",
@@ -43,18 +55,26 @@ export const SKILLS = [
     marker:
       "The client describes their experience as fuzzy, mixed, confusing, or 'just a weird reaction,' or they seem stuck in story and analysis without clear access to what they feel. There is a sensed but not-yet-articulated emotional edge that wants help to take shape.",
     aim:
-      "Guide attention inward so implicit, vague, or pre-verbal experience can crystallize into specific, nameable emotions. Facilitate deeper levels of experiencing and pave the way for accessing primary adaptive or maladaptive emotions that can be processed and transformed."
+      "Guide attention inward so implicit, vague, or pre-verbal experience can crystallize into specific, nameable emotions. Facilitate deeper levels of experiencing and pave the way for accessing primary adaptive or maladaptive emotions that can be processed and transformed.",
+    practiceFocus:
+      "Ask one open, inward-turning question at a time about body, feeling, or meaning.",
+    commonMiss:
+      "Stacking questions, asking 'why,' or pulling the client into analysis instead of experience."
   },
   {
     id: "providing-treatment-rationale",
-    name: "Providing Treatment Rationale for Experiential Work",
-    description: "Offer a clear, empathic explanation of why working with emotion helps and how you will guide it safely, to reduce anxiety and resistance.",
+    name: "Providing Treatment Rationale for Emotion-Focused Therapy",
+    description: "Offer a clear, empathic explanation of why EFT works with emotion and how you will guide it safely, to reduce anxiety and resistance.",
     summary:
       "Providing a treatment rationale helps clients understand the logic and safety of focusing on emotion, especially when they feel skeptical, frightened, or confused about this way of working. After joining empathically with their concerns, you explain in everyday language how emotions organize experience, signal needs, and can transform when fully processed. You describe that secondary reactions and avoidance often keep people stuck, whereas accessing and working through primary emotions and core pain can lead to lasting change.\n\nYou also clarify your role in pacing and regulating the work so the client does not feel abandoned to overwhelming affect. This rationale directly addresses common secondary fears such as 'If I start feeling, I’ll lose control' or 'Talking about feelings won’t help.' It builds collaboration by framing emotion-focused, experiential work as a shared journey with a map (e.g., moving from distress, to core pain, to unmet needs and new emotional responses).\n\nA good rationale can increase the client’s willingness to engage in experiential tasks such as chair work, focusing, or imagery when markers appear. When revisited briefly at key points, it reminds the client why returning to emotion is important even when it feels risky or unfamiliar. Over time, this shared understanding supports a stronger alliance and deeper emotional engagement in the work.",
     marker:
       "Clients ask how therapy works, question the value of focusing on feelings, voice fears about being overwhelmed, or hesitate before experiential tasks. They may look puzzled, skeptical, or disconnected when you invite attention to emotion or the body.",
     aim:
-      "Reduce anxiety, confusion, and resistance by giving a concise, empathic rationale that frames emotion work as meaningful, safe, and goal-directed. Align client and therapist around the purpose of emotion-focused, experiential work so clients feel more willing to explore primary emotions, core pain, and unmet needs."
+      "Reduce anxiety, confusion, and resistance by giving a concise, empathic rationale that frames emotion work as meaningful, safe, and goal-directed. Align client and therapist around the purpose of emotion-focused, experiential work so clients feel more willing to explore primary emotions, core pain, and unmet needs.",
+    practiceFocus:
+      "Explain emotion work in plain language that connects directly to this client’s fear, goals, and safety needs.",
+    commonMiss:
+      "Sounding abstract, preachy, or theory-heavy rather than collaborative and personally relevant."
   },
   {
     id: "empathic-explorations",
@@ -65,7 +85,11 @@ export const SKILLS = [
     marker:
       "Emotion is clearly emerging but feels delicate, tentative, or only partially expressed, and the client seems willing but uncertain about going deeper. There is a 'live edge' where slight prompting and reflection leads to more feeling and meaning.",
     aim:
-      "Sustain and deepen contact with emerging emotional material so primary adaptive or maladaptive emotions can fully surface and be worked with. Support a paced, safe unfolding of core pain and associated unmet needs, setting the stage for later transformation."
+      "Sustain and deepen contact with emerging emotional material so primary adaptive or maladaptive emotions can fully surface and be worked with. Support a paced, safe unfolding of core pain and associated unmet needs, setting the stage for later transformation.",
+    practiceFocus:
+      "Stay one small step behind the client’s leading edge and invite a little more contact with what is already there.",
+    commonMiss:
+      "Jumping ahead with interpretation, intensity, or insight before the feeling has had room to unfold."
   },
   {
     id: "empathic-evocations",
@@ -76,7 +100,11 @@ export const SKILLS = [
     marker:
       "The client describes painful or important events in a flat, detached, or overly cognitive way, with little affect or body awareness, yet there are signs that feelings are close (e.g., subtle cracks in tone or brief pauses). They may say they 'sort of' feel something but cannot quite access it.",
     aim:
-      "Heighten emotional contact by offering vivid, resonant language that helps implicit feelings become explicit and embodied. Support a shift from distant narration to active experiencing so primary emotion and core pain can be more fully accessed and processed."
+      "Heighten emotional contact by offering vivid, resonant language that helps implicit feelings become explicit and embodied. Support a shift from distant narration to active experiencing so primary emotion and core pain can be more fully accessed and processed.",
+    practiceFocus:
+      "Offer vivid, sensory language that helps near-surface feeling come alive in the body.",
+    commonMiss:
+      "Using language that feels poetic, imported, or too dramatic for the client’s actual experience."
   },
   {
     id: "empathic-conjectures",
@@ -87,7 +115,11 @@ export const SKILLS = [
       marker:
       "Hints of deeper emotion appear through tonal cracks, fleeting expressions, avoidance, or unfinished narratives, but the client does not explicitly name or dwell in those feelings. They may quickly move away when something tender starts to surface.",
     aim:
-      "Help near-surface, unspoken emotional experience take clearer shape so clients can own, explore, and work with it. Facilitate transitions from defensive or secondary reactions to more direct contact with primary emotions and core pain."
+      "Help near-surface, unspoken emotional experience take clearer shape so clients can own, explore, and work with it. Facilitate transitions from defensive or secondary reactions to more direct contact with primary emotions and core pain.",
+    practiceFocus:
+      "Make a soft, tentative guess about the unspoken feeling or need just beneath the surface.",
+    commonMiss:
+      "Sounding certain, mind-reading, or leaping too far beyond what the client has shown."
   },
   {
     id: "staying-in-contact-intense-affect",
@@ -98,7 +130,11 @@ export const SKILLS = [
     marker:
       "Affect suddenly escalates into sobbing, shaking, rage, panic, numbness, or shame collapse, and the client seems at risk of being overwhelmed, dissociating, or pleading to stop. Their breathing may become shallow, their speech disorganized, or their gaze distant.",
     aim:
-      "Provide containment, grounding, and empathic attunement so intense emotional states can be experienced and processed rather than avoided or shut down. Maintain the client within their window of tolerance while allowing enough activation for core pain to emerge, make sense, and transform."
+      "Provide containment, grounding, and empathic attunement so intense emotional states can be experienced and processed rather than avoided or shut down. Maintain the client within their window of tolerance while allowing enough activation for core pain to emerge, make sense, and transform.",
+    practiceFocus:
+      "Ground first, titrate the feeling, and keep one foot in the room while one foot stays with the emotion.",
+    commonMiss:
+      "Either letting affect flood the client or shutting it down before the emotional meaning can emerge."
   },
   {
     id: "self-disclosure",
@@ -109,18 +145,26 @@ export const SKILLS = [
     marker:
       "The alliance feels strained, distant, or uncertain, or the client explicitly questions your care, understanding, or impact. A heartfelt, transparent response from you would likely validate their importance, clarify your position, or help repair a rupture.",
     aim:
-      "Use brief, carefully chosen transparency to strengthen the therapeutic bond, validate the client’s emotional reality, or repair misattunements. Model congruent emotional expression while keeping the client’s experience at the center of the work."
+      "Use brief, carefully chosen transparency to strengthen the therapeutic bond, validate the client’s emotional reality, or repair misattunements. Model congruent emotional expression while keeping the client’s experience at the center of the work.",
+    practiceFocus:
+      "Share only a brief, immediate piece of your inner response that clearly serves the client’s process, then return focus.",
+    commonMiss:
+      "Slipping into biography, reassurance, or therapist-centered talk that makes the moment less about the client."
   },
   {
     id: "marker-recognition-chairwork",
     name: "Marker Recognition & Chair-Work Task Setup",
-    description: "Identify task markers and collaboratively set up focused chair dialogues that activate and transform core emotional processes.",
+    description: "Identify self-critical, self-interruptive, and unfinished-business markers, then collaboratively set up focused two-chair or empty-chair work.",
     summary:
-      "Marker recognition means listening for specific signs that a structured chair task could facilitate emotional change, such as harsh self-criticism, unresolved anger toward another, stuck decisional conflict, or unresolved trauma dialogues. Once such a marker appears, you offer a brief experiential rationale that explains how a two-chair or empty-chair dialogue might help. You then set up the task concretely: arranging chairs, clarifying who or what each chair represents, and giving clear instructions on how to speak from each position.\n\nYou monitor the client’s arousal and readiness, ensuring they feel supported and not forced into the task. During the dialogue, the structure is designed to fully activate core pain and unmet needs in the here-and-now, allowing maladaptive emotional schemes to be vividly experienced. Through guided exchanges, the client can articulate unmet needs, express protective anger, mourn losses, or offer compassion from a new stance.\n\nThis frequently leads to new adaptive emotional responses that transform the meaning of the original experience. Afterward, you help the client de-role, ground themselves, and integrate what happened into their narrative and self-concept. Proper marker recognition and task setup are crucial for harnessing the power of chair work without overwhelming or confusing the client.",
+      "Marker recognition in this exercise means hearing three specific task markers: a self-evaluative or self-critical split, a self-interruptive split, or unfinished business with a significant other. When one of these markers appears, you name it briefly and offer a short experiential rationale for why a two-chair dialogue (for critic or interrupter splits) or an empty-chair dialogue (for unfinished business) might help.\n\nYou then set the task up concretely: place the chairs, specify who or what each chair represents, and give simple first-turn instructions such as letting the critic speak in a few direct lines or imagining the other person in the chair and telling them what it cost. You monitor readiness, pacing, and arousal so the task stays collaborative rather than pushed.\n\nAt this stage, the goal is not to complete the whole task but to launch it clearly enough that the relevant emotional process becomes vivid and organized. A good setup helps clients take ownership of how they criticize or interrupt themselves, or begin to address unresolved pain with another person. After the first exchange, you keep the structure clear, the emotional focus specific, and the client grounded enough to continue.",
     marker:
-      "Clear task markers emerge, such as strong, repetitive self-attacks, an internal split between parts, unresolved 'unfinished business' with another person, or paralyzing ambivalence that the client keeps circling without resolution. The client appears emotionally engaged and at least somewhat willing to experiment with a more active approach.",
+      "Markers include repetitive self-attack or worry that functions like an inner critic, clear signs of shutting down or blocking one’s own feeling or expression, and unresolved, emotionally charged unfinished business with a significant other. The client is engaged enough to try a brief two-chair or empty-chair enactment.",
     aim:
-      "Launch well-timed, clearly structured chair dialogues that bring core pain and unmet needs into vivid awareness and evoke new adaptive emotional responses. Use experiential enactment to transform maladaptive emotional schemes and create corrective emotional experiences in the moment."
+      "Set up the right chair task at the right moment so the key emotional process becomes vivid, organized, and workable. Help clients begin contacting core pain, unmet need, or self-interruption in a structured way that can later deepen into fuller emotional change.",
+    practiceFocus:
+      "Name the marker, give a brief rationale, set up the chairs concretely, and keep the first turn simple.",
+    commonMiss:
+      "Launching chair work without clear readiness, a clear marker, or specific enough instructions."
   },
   {
     id: "alliance-repair",
@@ -131,7 +175,11 @@ export const SKILLS = [
     marker:
       "The client shows signs of disconnection, irritation, or mistrust toward you, such as 'You don’t get me,' coolness, guardedness, or avoidance of sessions, or you sense a shift in the atmosphere after a misattuned intervention. They may offer direct or indirect complaints about the therapy or about you.",
     aim:
-      "Re-establish safety, trust, and collaboration by openly receiving rupture feedback, validating the client’s feelings, and owning your part where relevant. Clear obstacles in the relationship so the client can again engage vulnerably with their primary emotions and core pain in a secure therapeutic context."
+      "Re-establish safety, trust, and collaboration by openly receiving rupture feedback, validating the client’s feelings, and owning your part where relevant. Clear obstacles in the relationship so the client can again engage vulnerably with their primary emotions and core pain in a secure therapeutic context.",
+    practiceFocus:
+      "Receive the client’s impact, validate it, own your part, and ask what would help now.",
+    commonMiss:
+      "Explaining your intention too soon, defending yourself, or moving back to technique before repair lands."
   },
   {
     id: "empathic-refocusing",
@@ -142,6 +190,10 @@ export const SKILLS = [
     marker:
       "As emotion nears, the client suddenly shifts into joking, intellectualizing, storytelling, problem-solving, or minimizing, and the emotional charge in the room drops. They may appear more animated cognitively but less connected to their body and feelings.",
     aim:
-      "Acknowledge and normalize the protective move while gently redirecting attention to the meaningful emotion that was emerging. Help clients stay in contact with primary emotional experience and core pain long enough for processing and transformation, without shaming or fighting their defenses."
+      "Acknowledge and normalize the protective move while gently redirecting attention to the meaningful emotion that was emerging. Help clients stay in contact with primary emotional experience and core pain long enough for processing and transformation, without shaming or fighting their defenses.",
+    practiceFocus:
+      "Name the protective move warmly and invite a return to the just-lost feeling.",
+    commonMiss:
+      "Confronting the defense too bluntly or sounding frustrated by the client’s avoidance."
   }
 ];

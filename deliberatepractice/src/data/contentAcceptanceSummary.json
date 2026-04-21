@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T10:54:55.907Z",
+  "generatedAt": "2026-03-24T19:01:40.638Z",
   "revision": "2026-03-07-v1",
   "status": {
     "totalItems": 954,
@@ -8,9 +8,9 @@
       "approved": 954
     },
     "duplicateStatementCount": 0,
-    "skillPurityWarningCount": 0,
-    "reviewQueueCount": 0,
-    "qaClean": true
+    "skillPurityWarningCount": 11,
+    "reviewQueueCount": 11,
+    "qaClean": false
   },
   "artifacts": {
     "spotCheckPacketPath": "/Users/jaran/three/Planet/deliberatepractice/src/data/contentSpotCheckPacket.json",

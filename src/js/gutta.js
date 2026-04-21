@@ -9,6 +9,8 @@ import { getActivePlanetTagData } from './core/datasets.js';
 // Global or outside function scope
 let guttaInstancedMeshes = {};
 let maraInstancedMeshes = {};
+let parametersGui = null;
+let parametersGuiVisible = false;
 
 // InstancedMesh for Gutt crumbs and Mara crumbs:
 export let guttCrumbMesh;
@@ -3131,6 +3133,21 @@ function ensureVertexColors(geometry) {
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 }
 
+export function toggleParametersPanel() {
+    if (!parametersGui) {
+        return false;
+    }
+
+    parametersGuiVisible = !parametersGuiVisible;
+    if (parametersGuiVisible) {
+        parametersGui.show();
+    } else {
+        parametersGui.hide();
+    }
+
+    return parametersGuiVisible;
+}
+
 export function createGutta(numberOfGutta, numberOfMara, version, guttaState, destination) {
     
     guttaState.init = true
@@ -3138,7 +3155,14 @@ export function createGutta(numberOfGutta, numberOfMara, version, guttaState, de
     instancePools.gutt = [];
     instancePools.mara = [];
 
-    const gui = new GUI()
+    if (parametersGui) {
+        parametersGui.destroy();
+        parametersGui = null;
+    }
+
+    const gui = new GUI({ hideable: false })
+    parametersGui = gui;
+    parametersGuiVisible = true;
     let parameters = {
         gutt_alignment: 0.1,
         gutt_alignment_perception_distance: 0.1,
@@ -3412,7 +3436,10 @@ export function createGutta(numberOfGutta, numberOfMara, version, guttaState, de
     reproductionParameters.add(parameters, 'gutt_gestation_frames', 100, 4000, 10).name('Gutt Gestation');
     reproductionParameters.add(parameters, 'mara_gestation_frames', 100, 4000, 10).name('Mara Gestation');
     reproductionParameters.close();
-    if (version !== 0) gui.hide()
+    if (version !== 0) {
+        gui.hide()
+        parametersGuiVisible = false;
+    }
     
     const guttaScale = 0.0002;
     const maraScale = 0.0002;
