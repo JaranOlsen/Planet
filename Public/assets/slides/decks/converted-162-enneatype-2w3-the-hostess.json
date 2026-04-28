@@ -1,0 +1,56 @@
+{
+  "id": "converted-162-enneatype-2w3-the-hostess",
+  "title": "Converted: Enneatype 2w3 - The Hostess",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[162]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 162,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 2w3",
+      "title": "The Hostess",
+      "backgroundColor": "rgb(53, 29, 20)",
+      "image": "assets/images/enneagram/sunflower.webp",
+      "imagePosition": "56%",
+      "body": [
+        {
+          "text": "The Generous, Ambitious Type: Caring, Altruistic, Adaptable, Enthusiastic, and Success-Oriented.",
+          "strong": true
+        },
+        "As a Two wing Three, you combine the empathetic, altruistic nature of Enneatype 2 with the adaptability, drive, and goal orientation of the Three. Your strong inclination to help others is matched with an energetic commitment to achieve your goals.",
+        "You're often tuned into the needs of others, and your actions are frequently driven by a desire to make a positive difference in their lives. But you also possess a drive for personal achievement and recognition, which can motivate you to strive for success and excel in your chosen field. This combination of care for others and ambition often leads you to be a charismatic and influential individual who can inspire others and effect change."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 2w3",
+      "title": "The Hostess",
+      "backgroundColor": "rgb(53, 29, 20)",
+      "image": "assets/images/enneagram/sunflower.webp",
+      "imagePosition": "56%",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Cultivate genuine self-esteem from within, independent of external validation.",
+            "Practice mindful self-reflection to recognize when you're adjusting yourself to please others.",
+            "Learn to set boundaries and express your own needs and feelings openly.",
+            "Appreciate the value of authentic relationships over impressing or winning over others.",
+            "Accept that it's okay to put your needs first sometimes."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

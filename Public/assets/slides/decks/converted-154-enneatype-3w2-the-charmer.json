@@ -1,0 +1,56 @@
+{
+  "id": "converted-154-enneatype-3w2-the-charmer",
+  "title": "Converted: Enneatype 3w2 - The Charmer",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[154]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 154,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 3w2",
+      "title": "The Charmer",
+      "backgroundColor": "rgb(78, 86, 61)",
+      "image": "assets/images/enneagram/rainbow.webp",
+      "imagePosition": "40%",
+      "body": [
+        {
+          "text": "The Ambitious, Generous Type: Driven, Successful, Charming, People-oriented, and Altruistic.",
+          "strong": true
+        },
+        "As a Three wing Two, you embody the adaptability and goal-orientation of the Three, coupled with the nurturing, empathetic nature of a Two. Your success-oriented drive is complemented by a people-centric focus, creating a blend of ambition and compassion. This results in an innate charisma and an ability to understand and connect with others, making you a compelling and inspiring figure.",
+        "With a strong desire to make a positive impact on others, your pursuit of personal goals is often imbued with a layer of altruism and concern for others. You have a unique ability to encourage and motivate, seamlessly weaving together your personal ambitions with your innate need to help and connect with others. This balance of personal achievement and support for others characterizes your approach to life."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 3w2",
+      "title": "The Charmer",
+      "backgroundColor": "rgb(78, 86, 61)",
+      "image": "assets/images/enneagram/rainbow.webp",
+      "imagePosition": "bottom",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Develop an appreciation for intrinsic worth over external success.",
+            "Allow vulnerability in relationships, sharing not just successes, but struggles as well.",
+            "Value personal growth and ethical action over achievements and recognition.",
+            "Practice mindful self-reflection to understand your own feelings and needs.",
+            "Learn to disconnect from work and enjoy rest and relaxation without guilt."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

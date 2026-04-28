@@ -1,0 +1,34 @@
+{
+  "id": "converted-070-25-still-flowing-water",
+  "title": "Converted: #25 Still Flowing Water",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[70]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 70,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#25 Still Flowing Water",
+      "image": "assets/images/roadToHere/25t.webp",
+      "alt": "#25 Still Flowing Water cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-25-still-flowing-water",
+        "title": "Insight Timer Embed: Road To Here - #25 Still Flowing Water | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-25-still-flowing-water"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

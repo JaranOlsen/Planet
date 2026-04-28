@@ -7,7 +7,7 @@ export const planetNuggetData = [ //ID, LATITUDE, LONGITUDE, COLOR (see palette.
         "lng": 95,
         "color": 2,
         "size": 150,
-        "slides": 94
+        "slides": 408
     },
     {
         "id": "0B9E2C1B-258D-4D9B-A777-519BCCF889D2",
@@ -15,7 +15,7 @@ export const planetNuggetData = [ //ID, LATITUDE, LONGITUDE, COLOR (see palette.
         "lng": 49,
         "color": 2,
         "size": 150,
-        "slides": 95
+        "slides": 409
     },
     {
         "id": "43F13382-5AC9-4705-A1F9-ADE764269F0A",
@@ -23,7 +23,7 @@ export const planetNuggetData = [ //ID, LATITUDE, LONGITUDE, COLOR (see palette.
         "lng": 10,
         "color": 2,
         "size": 150,
-        "slides": 96
+        "slides": 410
     },
     {
         "id": "C6E10CC1-EB1B-42B1-AA34-4F9753486601",
@@ -31,7 +31,7 @@ export const planetNuggetData = [ //ID, LATITUDE, LONGITUDE, COLOR (see palette.
         "lng": -30,
         "color": 2,
         "size": 150,
-        "slides": 97
+        "slides": 411
     },
     {
         "id": "C8A28E83-DE30-4FEF-B1C8-893DF3836692",
@@ -39,7 +39,7 @@ export const planetNuggetData = [ //ID, LATITUDE, LONGITUDE, COLOR (see palette.
         "lng": -48,
         "color": 2,
         "size": 150,
-        "slides": 98
+        "slides": 412
     },
     {
         "id": "EF773EF3-0A60-42B6-B05A-BDC7BDED59AB",
@@ -47,7 +47,7 @@ export const planetNuggetData = [ //ID, LATITUDE, LONGITUDE, COLOR (see palette.
         "lng": -115,
         "color": 2,
         "size": 150,
-        "slides": 99
+        "slides": 413
     },
     {
         "id": "4BD0896D-F543-4DE3-8C43-D2C29F9D6FCB",
@@ -55,7 +55,7 @@ export const planetNuggetData = [ //ID, LATITUDE, LONGITUDE, COLOR (see palette.
         "lng": -151,
         "color": 2,
         "size": 150,
-        "slides": 100
+        "slides": 414
     },
     {
         "id": "63C7D0C9-FC0D-49A6-B8F0-1682617A396A",
@@ -63,7 +63,7 @@ export const planetNuggetData = [ //ID, LATITUDE, LONGITUDE, COLOR (see palette.
         "lng": -147,
         "color": 2,
         "size": 150,
-        "slides": 101
+        "slides": 415
     },
     {
         "id": "AF05DA75-41AC-4793-80A4-11110E081BF6",
@@ -71,7 +71,7 @@ export const planetNuggetData = [ //ID, LATITUDE, LONGITUDE, COLOR (see palette.
         "lng": 119.5,
         "color": 2,
         "size": 150,
-        "slides": 102
+        "slides": 416
     },
     {
         "id": "54500943-65EA-401B-B4B2-6C671BE363B3",
@@ -79,7 +79,7 @@ export const planetNuggetData = [ //ID, LATITUDE, LONGITUDE, COLOR (see palette.
         "lng": 138.2,
         "color": 2,
         "size": 150,
-        "slides": 103
+        "slides": 417
     },
     {
         "id": "5998C6F2-1237-4A85-98E2-0DEED4DADB00",
@@ -87,7 +87,7 @@ export const planetNuggetData = [ //ID, LATITUDE, LONGITUDE, COLOR (see palette.
         "lng": 117,
         "color": 2,
         "size": 150,
-        "slides": 104
+        "slides": 418
     },
     {
         "id": "F6DC855A-EFD1-47B8-BB13-979B0FC36719",
@@ -95,7 +95,7 @@ export const planetNuggetData = [ //ID, LATITUDE, LONGITUDE, COLOR (see palette.
         "lng": 79.5,
         "color": 2,
         "size": 150,
-        "slides": 105
+        "slides": 419
     },
     {
         "id": "9A2A330C-6107-4E21-9F20-4199D79D9D3A",
@@ -103,7 +103,7 @@ export const planetNuggetData = [ //ID, LATITUDE, LONGITUDE, COLOR (see palette.
         "lng": 103.5,
         "color": 2,
         "size": 150,
-        "slides": 106
+        "slides": 420
     },
     /* {
         "id": "60BB520E-247B-4497-9430-9BB3FBA62CCF",

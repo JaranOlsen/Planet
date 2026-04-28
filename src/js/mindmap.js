@@ -13,6 +13,7 @@ import { contexts } from './core/datasets.js'
 //  IMPORT TEXTURES
 import dash from '/assets/textures/dash.webp'
 import arrow from '/assets/textures/arrow6.webp'
+import tagFontUrl from '/assets/fonts/SourceSans3_Regular.json?url';
 
 //  IMPORT MATERIALS
 import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWireframeMaterials } from './data/materials.js';
@@ -24,7 +25,7 @@ import rocksModel from '../models/rocks.glb';
 import arrowConnectionVertexShader from '../shaders/arrowConnectionVertex.glsl'
 import arrowConnectionFragmentShader from '../shaders/arrowConnectionFragment.glsl'
 
-const tagFont = "/Planet/assets/fonts/SourceSans3_Regular.json"
+const tagFont = tagFontUrl;
 
 const textureLoader = new THREE.TextureLoader()
 

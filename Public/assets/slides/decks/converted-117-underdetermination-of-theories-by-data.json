@@ -1,0 +1,25 @@
+{
+  "id": "converted-117-underdetermination-of-theories-by-data",
+  "title": "Converted: Underdetermination of theories by data",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[117]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 117,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Limitation",
+      "title": "Underdetermination of theories by data",
+      "body": [
+        "Empirical evidence is often insufficient to uniquely determine a single theory. Multiple competing theories may be consistent with the same set of data, making it difficult to conclusively establish one theory over another."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

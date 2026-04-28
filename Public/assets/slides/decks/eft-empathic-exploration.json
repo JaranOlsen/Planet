@@ -1,0 +1,83 @@
+{
+  "id": "eft-empathic-exploration",
+  "title": "EFT: Empathic Exploration",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Three practical clinician-facing slides for empathic exploration in EFT.",
+  "sources": [
+    {
+      "label": "Watson and Sharbanee, Emotion Focused Therapy: Case Conceptualization and Treatment",
+      "url": "https://www.researchgate.net/publication/356370129_Emotion_Focused_Therapy_-_Case_Conceptualization_and_Treatment_Adults"
+    },
+    {
+      "label": "Case formulation in Emotion-Focused Therapy",
+      "url": "https://1library.net/document/y8n4622y-case-formulation-in-emotion-focused-therapy.html"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Empathic Exploration",
+      "title": "Marker: an edge is forming",
+      "image": "assets/images/gut/eft-process/empathic-exploration.png",
+      "body": "Use exploration when the client is near experience but cannot yet stay with it.",
+      "bullets": [
+        "A hint, image, bodily signal, or unfinished sentence appears.",
+        "The client circles the same place without symbolizing it.",
+        "Primary emotion is hidden behind explanation or story."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Empathic Exploration",
+      "title": "Work at the client's live edge",
+      "body": "The intervention is precise following: close enough to deepen, loose enough for the client's organismic process to lead.",
+      "steps": [
+        "Reflect the most alive phrase, gesture, tone, or bodily cue.",
+        "Ask for one concrete moment rather than the whole life pattern.",
+        "Conjecture tentatively and give the client easy authority to correct you.",
+        "Move between words, body, image, need, and action tendency.",
+        "Mark micro-shifts: softening, tears, anger, breath, stillness, clarity.",
+        "Let meaning emerge after contact, not before it."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Empathic Exploration",
+      "title": "Choose the response mode by process",
+      "headers": [
+        "Client process",
+        "Best response",
+        "Watch for"
+      ],
+      "rows": [
+        [
+          "Vague but bodily",
+          "Evocative reflection",
+          "A felt shift or better word."
+        ],
+        [
+          "Over-explaining",
+          "Refocus to one moment",
+          "Defensiveness if you move too fast."
+        ],
+        [
+          "Emotion rising",
+          "Affirm and deepen",
+          "Flooding or collapse."
+        ],
+        [
+          "New meaning appears",
+          "Reflect agency and need",
+          "Premature summary."
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

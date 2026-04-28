@@ -1,0 +1,70 @@
+{
+  "id": "converted-149-enneatype-7-enthusiast",
+  "title": "Converted: Enneatype 7 - The Enthusiast",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[149], preserving the original D3 mindmap as a legacy-slide.",
+  "legacy": {
+    "contentData": 149,
+    "refs": ["1", "2", "3cj"]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 7",
+      "title": "The Enthusiast",
+      "backgroundColor": "rgb(35, 84, 59)",
+      "image": "assets/images/enneagram/balloons.webp",
+      "body": [
+        {
+          "text": "The Busy, Fun-Loving Type: Spontaneous, Versatile, Distractible, and Scattered.",
+          "strong": true
+        },
+        "As a Seven, you are an optimistic enthusiast, always planning for future adventures and possibilities. You find joy in exploration and variety, seeking to make the most out of every opportunity. You tend to avoid negative emotions or boredom, preferring to stay busy with activities and plans.",
+        "You have a knack for storytelling and can easily entertain others with your experiences and ideas. However, your constant pursuit of novelty can make it challenging for you to stay focused, be present in the moment, or deal with painful emotions."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 7",
+      "title": "The Enthusiast",
+      "backgroundColor": "rgb(78, 46, 52)",
+      "image": "assets/images/enneagram/suitcases.webp",
+      "imagePosition": "top",
+      "bullets": [
+        {
+          "text": "Basic fear:",
+          "items": ["Of being deprived and in pain"]
+        },
+        {
+          "text": "Basic desire:",
+          "items": ["To be satisfied and content - to have their needs fulfilled"]
+        },
+        {
+          "text": "Key motivations",
+          "items": [
+            "Want to maintain their freedom and happiness",
+            "to avoid missing out on worthwhile experiences",
+            "to keep themselves excited and occupied",
+            "to avoid and discharge pain"
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Type 7 Interactive Mindmap",
+      "theme": "gut",
+      "legacy": {
+        "slideshow": 149,
+        "slide": "3cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

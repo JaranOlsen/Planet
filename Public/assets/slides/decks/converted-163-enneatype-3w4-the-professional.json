@@ -1,0 +1,56 @@
+{
+  "id": "converted-163-enneatype-3w4-the-professional",
+  "title": "Converted: Enneatype 3w4 - The Professional",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[163]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 163,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 3w4",
+      "title": "The Professional",
+      "backgroundColor": "rgb(44, 30, 47)",
+      "image": "assets/images/enneagram/diamond.webp",
+      "imagePosition": "bottom",
+      "body": [
+        {
+          "text": "The Ambitious, Individualistic Type: Driven, Successful, Self-aware, Expressive, and Sensitive.",
+          "strong": true
+        },
+        "As a Three wing Four, you blend the driven, adaptable nature of a Three with the expressive, introspective nature of a Four. Your ambition and striving for success are influenced by a deep desire for authenticity and individual expression. This unique combination cultivates a strong drive to succeed, coupled with a desire for individuality and personal authenticity.",
+        "You are drawn towards fields where your creativity and individuality can shine through, as your achievements are often marked by a unique vision and personal style. The expressive Four wing adds depth to your Three's focus on success, creating a dynamic interplay of ambition and individuality that fuels your endeavors."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 3w4",
+      "title": "The Professional",
+      "backgroundColor": "rgb(44, 30, 47)",
+      "image": "assets/images/enneagram/diamond.webp",
+      "imagePosition": "bottom",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Spend time in self-reflection to understand your emotions and inner needs.",
+            "Acknowledge that it's okay to make mistakes and learn from them rather than seeing them as failures.",
+            "Balance your ambition with empathy and attention to the feelings of others.",
+            "Learn to value authenticity over perception and presentation.",
+            "Prioritize self-care and wellness over relentless pursuit of goals."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

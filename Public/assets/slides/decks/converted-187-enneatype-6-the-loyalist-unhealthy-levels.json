@@ -1,0 +1,38 @@
+{
+  "id": "converted-187-enneatype-6-the-loyalist-unhealthy-levels",
+  "title": "Converted: Enneatype 6 - The Loyalist - Unhealthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[187]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 187,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 6",
+      "title": "The Loyalist",
+      "density": "long",
+      "backgroundColor": "rgb(82, 57, 44)",
+      "image": "assets/images/enneagram/lighthouse.webp",
+      "imagePosition": "50% 60%",
+      "bullets": [
+        {
+          "text": "Unhealthy Levels:",
+          "ordered": true,
+          "start": 7,
+          "items": [
+            "Fearing they have jeopardized their security, they may become panicky, volatile, and self-disparaging, often feeling acutely inferior. Viewing themselves as defenseless, they seek stronger authority or beliefs to solve all their problems. They can be highly divisive, disparaging and berating others.",
+            "They might feel persecuted and believe others are \"out to get them,\" which leads them to lash out and act irrationally, ultimately causing what they fear. This level may also be marked by fanaticism and violence.",
+            "In a hysterical state and attempting to escape punishment, they may become self-destructive and suicidal. Instances of alcoholism, drug overdoses, and self-abasing behavior are common. This level generally corresponds to the Passive-Aggressive and Paranoid personality disorders."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

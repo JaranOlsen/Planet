@@ -1,0 +1,153 @@
+{
+  "id": "meaning-love",
+  "title": "The Essence of Love / Meaning",
+  "theme": "aether",
+  "slides": [
+    {
+      "template": "quote-vignette",
+      "overline": "The Essence",
+      "title": "Love as Allowing",
+      "body": [
+        {
+          "text": "Peace is allowing what is not to rest. Love is allowing what is to be.",
+          "emphasis": true
+        },
+        {
+          "text": "A v2 slide should feel spacious, consistent, and grounded in the planet's contemplative tone."
+        }
+      ],
+      "source": "Aether v2",
+      "image": "assets/images/background/rippleLake.webp",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    [
+      {
+        "template": "half-image-bullets",
+        "overline": "Teaching Frame",
+        "title": "Three Movements",
+        "image": "assets/images/jalito/meditation.webp",
+        "body": "A compact split layout for the teaching slides that currently work well in the raw HTML deck.",
+        "bullets": [
+          "Name the lived pattern plainly.",
+          "Anchor it with an image that carries mood.",
+          "Reveal points slowly enough for live facilitation."
+        ],
+        "reveal": "sequence"
+      },
+      {
+        "template": "steps-checklist",
+        "overline": "Practice",
+        "title": "A Soft Landing",
+        "body": "Nested arrays preserve the existing vertical subslide mechanic.",
+        "steps": [
+          "Begin in orbit and orient to the whole field.",
+          "Choose one node that feels alive.",
+          "Move closer and let the content arrive in stages.",
+          "Return to orbit with one phrase worth remembering."
+        ],
+        "reveal": "sequence"
+      }
+    ],
+    {
+      "template": "two-column",
+      "overline": "Slide Mechanics",
+      "title": "Orbit And Flight",
+      "subtitle": "The same deck can hold conceptual comparison slides without custom HTML.",
+      "columns": [
+        {
+          "title": "Orbit",
+          "body": "Wide context, relationship, and narrative structure."
+        },
+        {
+          "title": "Flight",
+          "body": "Close detail, embodied exploration, and sensory specificity."
+        }
+      ],
+      "reveal": "sequence"
+    },
+    {
+      "template": "statistics",
+      "overline": "Runtime Contract",
+      "title": "Structured, Not Flat",
+      "stats": [
+        {
+          "value": "13",
+          "label": "registered templates"
+        },
+        {
+          "value": "0",
+          "label": "raw HTML fields"
+        },
+        {
+          "value": "1",
+          "label": "hard frame"
+        }
+      ],
+      "reveal": "sequence"
+    },
+    {
+      "template": "word-cloud",
+      "overline": "Interactive Slot",
+      "title": "Words The AI Can Safely Place",
+      "words": [
+        ["presence", 9],
+        ["meaning", 8],
+        ["warmth", 6],
+        ["attention", 6],
+        ["allowing", 5],
+        ["clarity", 4],
+        ["ground", 4],
+        ["silence", 3]
+      ],
+      "reveal": "sequence"
+    },
+    {
+      "template": "mindmap-slot",
+      "overline": "Interactive Slot",
+      "title": "A Safe Mindmap Shape",
+      "nodes": [
+        {
+          "id": "love",
+          "label": "Love",
+          "x": 500,
+          "y": 260,
+          "r": 58
+        },
+        {
+          "id": "accepting",
+          "label": "Accepting",
+          "x": 270,
+          "y": 160
+        },
+        {
+          "id": "letting",
+          "label": "Letting Be",
+          "x": 730,
+          "y": 160
+        },
+        {
+          "id": "meaning",
+          "label": "Meaning",
+          "x": 500,
+          "y": 420
+        }
+      ],
+      "links": [
+        {
+          "from": "love",
+          "to": "accepting"
+        },
+        {
+          "from": "love",
+          "to": "letting"
+        },
+        {
+          "from": "love",
+          "to": "meaning"
+        }
+      ],
+      "reveal": "sequence"
+    }
+  ]
+}

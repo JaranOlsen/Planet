@@ -1,0 +1,166 @@
+{
+  "id": "converted-140-path-of-the-heart",
+  "title": "Converted: Path of the Heart",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[140]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 140,
+    "refs": [
+      "1",
+      "2",
+      "3-1",
+      "3-2",
+      "3-3",
+      "3-4",
+      "3-5",
+      "3-6",
+      "3-7",
+      "3-8",
+      "3-9",
+      "3-10",
+      "3-11",
+      "3-12",
+      "3-13",
+      "3-14"
+    ]
+  },
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Path of the Heart",
+      "title": "Path of the Heart",
+      "image": "assets/images/buddhism/ox.webp",
+      "alt": "Ox-herding image used in the heart path",
+      "body": "Liberation\n↑\nDeveloping insight\n↑\nStilling the mind\n↑\nMorality and goodness",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "textAlign": "center"
+    },
+    {
+      "template": "split-image",
+      "overline": "Path of the Heart",
+      "title": "What is Missing in (traditional) Buddhism?",
+      "image": "assets/images/jalito/face.webp",
+      "alt": "Portrait from the Path of the Heart legacy deck",
+      "bullets": [
+        {
+          "text": "From the psychotherapy traditions",
+          "children": [
+            "Working with emotional blockages stemming from personal experiences",
+            "Tailoring the method to the individual"
+          ]
+        },
+        {
+          "text": "From metaphysics and direct-path approaches",
+          "children": [
+            "An intellectually consistent framework for understanding the Buddhist worldview",
+            "Methods that utilize modern talents, and that are less hampered by modern limitations"
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    [
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/face.webp",
+        "alt": "Path of the Heart legacy image 3-1",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/kuti.webp",
+        "alt": "Path of the Heart legacy image 3-2",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/bot.webp",
+        "alt": "Path of the Heart legacy image 3-3",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/pindabat2.webp",
+        "alt": "Path of the Heart legacy image 3-4",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/watmarpjan.webp",
+        "alt": "Path of the Heart legacy image 3-5",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/ajahns.webp",
+        "alt": "Path of the Heart legacy image 3-6",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/meditation.webp",
+        "alt": "Path of the Heart legacy image 3-7",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/family.webp",
+        "alt": "Path of the Heart legacy image 3-8",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/sweep.webp",
+        "alt": "Path of the Heart legacy image 3-9",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/cave.webp",
+        "alt": "Path of the Heart legacy image 3-10",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/cold.webp",
+        "alt": "Path of the Heart legacy image 3-11",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/grandparents.webp",
+        "alt": "Path of the Heart legacy image 3-12",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/brother.webp",
+        "alt": "Path of the Heart legacy image 3-13",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/jalito/ordination.webp",
+        "alt": "Path of the Heart legacy image 3-14",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      }
+    ]
+  ]
+}

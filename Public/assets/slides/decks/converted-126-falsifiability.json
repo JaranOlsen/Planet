@@ -1,0 +1,25 @@
+{
+  "id": "converted-126-falsifiability",
+  "title": "Converted: Falsifiability",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[126]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 126,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Quality",
+      "title": "Falsifiability",
+      "body": [
+        "The theory should be structured in a way that allows for the possibility of being proven wrong through empirical evidence."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

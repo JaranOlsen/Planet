@@ -1,0 +1,73 @@
+{
+  "id": "converted-010-witnessing",
+  "title": "Converted: Witnessing",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[10]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 10,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Witnessing",
+      "title": "The Witnessing Position is a Half Way Stage",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/H-SEfK4uFa8",
+        "title": "The Witnessing Position is a Half Way Stage"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience1/Slide1.webp",
+      "alt": "Witnessing legacy image 2",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience1/Slide2.webp",
+      "alt": "Witnessing legacy image 3",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience1/Slide3.webp",
+      "alt": "Witnessing legacy image 4",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience1/Slide4.webp",
+      "alt": "Witnessing legacy image 5",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience1/Slide5.webp",
+      "alt": "Witnessing legacy image 6",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience1/Slide6.webp",
+      "alt": "Witnessing legacy image 7",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

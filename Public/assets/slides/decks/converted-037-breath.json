@@ -1,0 +1,59 @@
+{
+  "id": "converted-037-breath",
+  "title": "Converted: Breath",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[37]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 37,
+    "refs": [
+      "1",
+      "2",
+      "3"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Breath",
+      "title": "Practicing mindfulness of breathing",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/FYVmfHvODJw",
+        "title": "Practicing mindfulness of breathing"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "split-image",
+      "overline": "Breath",
+      "title": "Development",
+      "image": "assets/images/anapana/lovethebreath.webp",
+      "alt": "Development",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "bullets": [
+        "Abandon the project of trying to get, achieve or attain",
+        "Learn to fall in love with the breath",
+        "Learn to love and appreciate the simple breath"
+      ]
+    },
+    {
+      "template": "split-image",
+      "overline": "Breath",
+      "title": "The Beautiful Breath",
+      "image": "assets/images/anapana/beautifulbreath.webp",
+      "alt": "The Beautiful Breath",
+      "bullets": [
+        "Blowing on ember",
+        "Water flowing in and out",
+        "Bow on a violin string",
+        "Water lapping",
+        "Carving on snowboard",
+        "Like listening to the birds"
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

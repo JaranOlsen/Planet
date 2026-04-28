@@ -21,12 +21,14 @@ import {
     isDeveloperMode,
 } from './core/datasets.js'
 import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng, easeInOutQuad } from './mathScripts.js'
-import { pushContent, handleCarouselButton } from './content.js'
+import { pushContent, handleCarouselButton, createSlideshowStatus, createPreviewSlideshowStatus } from './content.js'
+import { revealNextSlideStep } from './slides.js'
 import { initialiseVersion } from './versions.js'
 import { creation } from './creation.js'
 import { updateGutta, guttCrumbMesh, maraCrumbMesh, cycleStatsChartView, toggleParametersPanel } from './gutta.js'
 import { setupIntro, introState, fadeOutAudio, animateLetterSpacing } from './core/intro.js'
 import { DeveloperHud } from './core/developerHud.js'
+import { DeveloperSlideLab } from './core/developerSlideLab.js'
 import { PlanetEnvironment } from './core/planetEnvironment.js'
 
 if (import.meta.hot) {
@@ -37,7 +39,6 @@ if (import.meta.hot) {
 
 //IMPORT DATA
 // Default / initial mindmap dataset (index 0). Additional datasets loaded dynamically.
-import { contentData } from './data/contentData.js'
 import { palette } from './data/palette.js'
 import { pinMaterials, pinWireframeMaterials, boxMaterials } from './data/materials.js'
 
@@ -68,6 +69,7 @@ function updateDeveloperHud() {
 function createContexts(version) {
     const devMode = datasetsCreateContexts(version);
     developer = devMode;
+    developerSlideLab.setDeveloperMode(developer);
     if (!developer) {
         developerHud.hide();
     } else {
@@ -114,6 +116,30 @@ export let slideshowStatus = {
     activeSlide: undefined,
     activeSlideLength: undefined,
     activeSubSlide: undefined
+}
+
+const developerSlideLab = new DeveloperSlideLab({
+    onPreviewDeck: previewDeckInSlideshow,
+    onRevealStep: revealNextSlideStep,
+});
+
+window.slideLab = {
+    previewDeck: previewDeckInSlideshow,
+    revealNext: revealNextSlideStep,
+    getDiagnostics: () => window.slideDiagnostics,
+};
+
+async function previewDeckInSlideshow(deck) {
+    slideshowStatus = createPreviewSlideshowStatus(deck);
+    await pushContent(slideshowStatus);
+    if (window.appStatus == "flight") {
+        flyControls.enabled = false;
+        document.body.style.cursor = 'default';
+    }
+    window.appStatus = "slideshow";
+    const slideShowScreen = document.querySelector(`#slides`);
+    slideShowScreen.style.display = "flex";
+    return window.slideDiagnostics;
 }
 
 const silenceOverlayElementIds = [
@@ -471,8 +497,13 @@ function onDocumentKeyUp(event) {
     const code = event.code;
     const hasModifier = event.shiftKey || event.ctrlKey || event.altKey || event.metaKey;
     const digitMatch = /^Digit([1-9])$/.exec(code);
+    const textEntryActive = isTextEntryTarget(event.target);
 
     if (code === "Escape" && closeActiveOverlay()) {
+        return;
+    }
+
+    if (textEntryActive) {
         return;
     }
 
@@ -547,6 +578,10 @@ function onDocumentKeyUp(event) {
             }
             if (developer && code === "KeyP") { // Shift+P
                 toggleParametersPanel();
+                return;
+            }
+            if (developer && code === "KeyL") { // Shift+L
+                developerSlideLab.toggle();
                 return;
             }
             if (window.appStatus === "orbit") {
@@ -1140,6 +1175,11 @@ function onDocumentKeyUp(event) {
     }
 }
 
+function isTextEntryTarget(target) {
+    if (!(target instanceof Element)) return false;
+    return Boolean(target.closest('input, textarea, select, [contenteditable="true"], #developer-slide-lab'));
+}
+
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     const keyCode = event.which;
@@ -1292,7 +1332,7 @@ function onPointerMove(event) {
     }
 }
 
-function onPointerClick(event) {
+async function onPointerClick(event) {
     event.preventDefault();
 
     if (window.appStatus === "silence") {
@@ -1329,20 +1369,8 @@ function onPointerClick(event) {
         updateDeveloperHud();
 
     if (camera.position.distanceTo(selectedPin.position) < 10 && contexts[selectedContext].tagData[selectedNode].slides !== undefined && slideshowStatus.activeSlideshow == undefined) {
-            slideshowStatus.activeSlideshow = contexts[selectedContext].tagData[selectedNode].slides
-            slideshowStatus.activeSlideshowLength = contentData[slideshowStatus.activeSlideshow].length
-            if (Array.isArray(contentData[slideshowStatus.activeSlideshow][0])) {
-                slideshowStatus.activeSlide = 0
-                slideshowStatus.activeSlideLength = contentData[slideshowStatus.activeSlideshow][0].length
-                slideshowStatus.activeSubSlide = 0
-            } else {
-                slideshowStatus.activeSlide = 0
-                slideshowStatus.activeSlideLength = undefined
-                slideshowStatus.activeSubSlide = undefined
-
-            }
-
-            pushContent(slideshowStatus)
+            slideshowStatus = await createSlideshowStatus(contexts[selectedContext].tagData[selectedNode].slides);
+            await pushContent(slideshowStatus)
             if (window.appStatus == "flight") {
                 flyControls.enabled = false
                 document.body.style.cursor = 'default';

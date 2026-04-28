@@ -1,0 +1,79 @@
+{
+  "id": "eft-self-disclosure",
+  "title": "EFT: Self-Disclosure",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Three practical clinician-facing slides for therapist self-disclosure in EFT.",
+  "sources": [
+    {
+      "label": "Watson and Sharbanee, Emotion Focused Therapy: Case Conceptualization and Treatment",
+      "url": "https://www.researchgate.net/publication/356370129_Emotion_Focused_Therapy_-_Case_Conceptualization_and_Treatment_Adults"
+    },
+    {
+      "label": "Case formulation in Emotion-Focused Therapy",
+      "url": "https://1library.net/document/y8n4622y-case-formulation-in-emotion-focused-therapy.html"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Self-Disclosure",
+      "title": "Marker: your experience may help",
+      "image": "assets/images/gut/eft-process/self-disclosure.png",
+      "body": "Use disclosure only when it supports contact, safety, repair, or experiencing.",
+      "bullets": [
+        "A relational moment needs transparency to remain authentic.",
+        "The client is guessing your reaction and losing contact.",
+        "A brief disclosure could validate reality or repair a miss.",
+        "If the disclosure meets your need, do not use it."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Self-Disclosure",
+      "title": "Make it brief, relevant, and return it to the client",
+      "body": "In EFT, therapist genuineness supports the client's experiencing; it should not become a second focus of care.",
+      "steps": [
+        "Check your motive: repair, contact, validation, or process guidance.",
+        "Disclose the smallest truthful piece needed for the clinical purpose.",
+        "Use present-moment language: what I notice in me as I sit with you.",
+        "Immediately ask how it lands in the client's body or meaning-making.",
+        "Track whether it opens experience, closes experience, or shifts care onto you.",
+        "Repair quickly if the client feels burdened, exposed, or managed."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Self-Disclosure",
+      "title": "Decision filter",
+      "headers": [
+        "Disclosure type",
+        "Use when",
+        "Do not use when"
+      ],
+      "rows": [
+        [
+          "Impact",
+          "Clarifies impact and supports agency.",
+          "It asks the client to manage you."
+        ],
+        [
+          "Repair",
+          "You missed, pushed, or misunderstood.",
+          "It becomes self-defense."
+        ],
+        [
+          "Normalizing",
+          "Reduces shame and returns to experience.",
+          "It replaces emotional processing."
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

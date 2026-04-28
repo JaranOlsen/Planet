@@ -8,6 +8,7 @@ import { createGutta } from './gutta.js';
 
 //  IMPORT MATERIALS
 import { textMaterial } from './data/materials.js';
+import tagFontUrl from '/assets/fonts/SourceSans3_Regular.json?url';
 
 //  IMPORT TEXTURES
     // ||Diffuse
@@ -59,7 +60,7 @@ export function creation(version, postLoadingManager, guttaState, scene) {
 }
 
 function createTitle(scene) {
-    const tagFont = "/Planet/assets/fonts/SourceSans3_Regular.json"
+    const tagFont = tagFontUrl
 
         const loader = new FontLoader();
         loader.load(tagFont, function (font) {

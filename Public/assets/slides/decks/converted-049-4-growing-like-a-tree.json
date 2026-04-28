@@ -1,0 +1,34 @@
+{
+  "id": "converted-049-4-growing-like-a-tree",
+  "title": "Converted: #4 Growing Like A Tree",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[49]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 49,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#4 Growing Like A Tree",
+      "image": "assets/images/roadToHere/4t.webp",
+      "alt": "#4 Growing Like A Tree cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-4-growing-like-a-tree",
+        "title": "Insight Timer Embed: Road To Here - #4 Growing Like A Tree | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-4-growing-like-a-tree"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

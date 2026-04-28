@@ -1,0 +1,25 @@
+{
+  "id": "converted-005-phases-of-paradigm-change",
+  "title": "Converted: Phases of paradigm change",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[5]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 5,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Phases of paradigm change",
+      "title": "Thomas Kuhn: The Structure of Scientific Revolutions",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/L70T4pQv7P8",
+        "title": "Thomas Kuhn: The Structure of Scientific Revolutions"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

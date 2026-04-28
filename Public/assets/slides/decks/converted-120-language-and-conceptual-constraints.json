@@ -1,0 +1,25 @@
+{
+  "id": "converted-120-language-and-conceptual-constraints",
+  "title": "Converted: Language and conceptual constraints",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[120]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 120,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Limitation",
+      "title": "Language and conceptual constraints",
+      "body": [
+        "Theories are expressed using human language and concepts, which are inevitably limited in their capacity to precisely capture or represent the full complexity of the phenomena they seek to explain."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

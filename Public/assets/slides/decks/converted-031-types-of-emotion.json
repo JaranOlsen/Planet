@@ -1,0 +1,80 @@
+{
+  "id": "converted-031-types-of-emotion",
+  "title": "Converted: Types of emotion",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[31]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 31,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ]
+  },
+  "slides": [
+    {
+      "template": "gallery",
+      "overline": "Types of emotion",
+      "title": "Primary and secondary emotions",
+      "images": [
+        {
+          "src": "assets/images/emotion/primarysecondary3.webp",
+          "alt": "Primary and secondary emotions image 1"
+        },
+        {
+          "src": "assets/images/emotion/primarysecondary4.webp",
+          "alt": "Primary and secondary emotions image 2"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Types of emotion",
+      "title": "What is the difference between primary and secondary emotions?",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/7xTwvfGckLo",
+        "title": "What is the difference between primary and secondary emotions?"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Types of emotion",
+      "title": "What is core pain?",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/31RQw-cLgOQ",
+        "title": "What is core pain?"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Types of emotion",
+      "title": "Is core pain the same as unmet need?",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/BqshniPymrQ",
+        "title": "Is core pain the same as unmet need?"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Types of emotion",
+      "title": "Different kinds of emotional responses in EFT",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/sJl3GJLTUj4",
+        "title": "Different kinds of emotional responses in EFT"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

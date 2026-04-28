@@ -1,0 +1,25 @@
+{
+  "id": "converted-040-loving-kindness",
+  "title": "Converted: Loving-kindness",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[40]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 40,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Loving-kindness",
+      "title": "Developing loving-kindness to other people",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/cxbSlP9kdno",
+        "title": "Developing loving-kindness to other people"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

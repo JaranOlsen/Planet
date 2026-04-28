@@ -1,0 +1,34 @@
+{
+  "id": "converted-077-32-the-monkey-s-fist",
+  "title": "Converted: #32 The Monkey's Fist",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[77]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 77,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#32 The Monkey's Fist",
+      "image": "assets/images/roadToHere/32t.webp",
+      "alt": "#32 The Monkey's Fist cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-32-the-monkeys-fist",
+        "title": "Insight Timer Embed: Road To Here - #32 The Monkey's Fist | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-32-the-monkeys-fist"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

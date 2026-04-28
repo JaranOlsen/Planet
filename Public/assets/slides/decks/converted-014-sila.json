@@ -1,0 +1,84 @@
+{
+  "id": "converted-014-sila",
+  "title": "Converted: Sīla",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[14]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 14,
+    "refs": [
+      "1j",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "word-cloud",
+      "overline": "Sīla",
+      "title": "The Felt Field of Virtue",
+      "words": [
+        ["Sīla", 7],
+        ["virtue", 6],
+        ["morality", 6],
+        ["goodness", 6],
+        ["ethics", 5],
+        ["righteousness", 5],
+        ["generosity", 5],
+        ["integrity", 5],
+        ["character", 5],
+        ["honesty", 4],
+        ["decency", 4],
+        ["discipline", 4],
+        ["empathy", 4],
+        ["compassion", 4],
+        ["friendliness", 4],
+        ["dignity", 3],
+        ["warmth", 3],
+        ["respect", 3],
+        ["tolerance", 3],
+        ["trustworthiness", 3],
+        ["principle", 2],
+        ["nobility", 2],
+        ["propriety", 2],
+        ["honor", 2],
+        ["conscience", 2],
+        ["faithfulness", 2],
+        ["restraint", 2],
+        ["duty", 2],
+        ["loyalty", 2],
+        ["justice", 2],
+        ["uprightness", 2],
+        ["scruples", 2],
+        ["equity", 2],
+        ["fairness", 2],
+        ["modesty", 2],
+        ["incorruptibility", 2]
+      ],
+      "colors": [
+        "#b08968",
+        "#c9a66b",
+        "#a3b18a",
+        "#708d81",
+        "#7f8d5a",
+        "#d8c68e"
+      ],
+      "weightFactor": 16,
+      "rotateRatio": 0.1,
+      "minRotation": -0.75,
+      "maxRotation": 0.75,
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "title": "Kant's Axe",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/x_uUEaeqFog",
+        "title": "Kant's Axe",
+        "aspectRatio": "16 / 9"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

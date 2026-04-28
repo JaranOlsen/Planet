@@ -1,0 +1,205 @@
+{
+  "id": "converted-001-ontologies",
+  "title": "Converted: Ontologies",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[1]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 1,
+    "refs": [
+      "1",
+      "2-1",
+      "2-2",
+      "2-3",
+      "2-4",
+      "2-5",
+      "3-1",
+      "3-2",
+      "3-3",
+      "3-4",
+      "3-5",
+      "4-1",
+      "4-2",
+      "4-3",
+      "4-4",
+      "4-5",
+      "5-1",
+      "5-2",
+      "5-3",
+      "5-4",
+      "5-5",
+      "6",
+      "7"
+    ]
+  },
+  "slides": [
+    {
+      "template": "full-image",
+      "image": "assets/images/ontology/Slide154.webp",
+      "alt": "Ontologies legacy image 1",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    [
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide155.webp",
+        "alt": "Ontologies legacy image 2-1",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide156.webp",
+        "alt": "Ontologies legacy image 2-2",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide157.webp",
+        "alt": "Ontologies legacy image 2-3",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide158.webp",
+        "alt": "Ontologies legacy image 2-4",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide159.webp",
+        "alt": "Ontologies legacy image 2-5",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      }
+    ],
+    [
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide160.webp",
+        "alt": "Ontologies legacy image 3-1",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide161.webp",
+        "alt": "Ontologies legacy image 3-2",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide162.webp",
+        "alt": "Ontologies legacy image 3-3",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide163.webp",
+        "alt": "Ontologies legacy image 3-4",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide164.webp",
+        "alt": "Ontologies legacy image 3-5",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      }
+    ],
+    [
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide165.webp",
+        "alt": "Ontologies legacy image 4-1",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide166.webp",
+        "alt": "Ontologies legacy image 4-2",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide167.webp",
+        "alt": "Ontologies legacy image 4-3",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide168.webp",
+        "alt": "Ontologies legacy image 4-4",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide169.webp",
+        "alt": "Ontologies legacy image 4-5",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      }
+    ],
+    [
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide170.webp",
+        "alt": "Ontologies legacy image 5-1",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide171.webp",
+        "alt": "Ontologies legacy image 5-2",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide172.webp",
+        "alt": "Ontologies legacy image 5-3",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide173.webp",
+        "alt": "Ontologies legacy image 5-4",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "full-image",
+        "image": "assets/images/ontology/Slide174.webp",
+        "alt": "Ontologies legacy image 5-5",
+        "reveal": "none",
+        "transition": "crossfade-soft"
+      }
+    ],
+    {
+      "template": "full-image",
+      "image": "assets/images/ontology/Slide175.webp",
+      "alt": "Ontologies legacy image 6",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/ontology/Slide176.webp",
+      "alt": "Ontologies legacy image 7",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

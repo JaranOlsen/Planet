@@ -1,0 +1,58 @@
+{
+  "id": "converted-152-enneatype-1w9-the-idealist",
+  "title": "Converted: Enneatype 1w9 - The Idealist",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[152]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 152,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 1w9",
+      "title": "The Idealist",
+      "backgroundColor": "rgb(83, 113, 117)",
+      "image": "assets/images/enneagram/zen.webp",
+      "imagePosition": "50%",
+      "imageFlip": true,
+      "body": [
+        {
+          "text": "The Rational, Idealistic, Peaceful Type: Principled, Purposeful, Self-Controlled, Perfectionistic, Patient, and Accepting.",
+          "strong": true
+        },
+        "As a One wing Nine, you embody many of the characteristics of Enneatype 1, including a deep sense of responsibility, integrity, and adherence to ethical and moral standards. Your strong inner critic persists, encouraging you towards perfection and order. However, the influence of the Nine wing introduces a more patient, accepting and serene aspect to your personality.",
+        "While you're still bothered by imperfections and inefficiencies, you're often more able to let go, prioritize peace, and accept things as they are. Your approach to teaching and improving others' lives is tempered by an understanding and respect for their individual paths and rhythms. This unique blend makes you a balanced force for positive change."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 1w9",
+      "title": "The Idealist",
+      "backgroundColor": "rgb(83, 113, 117)",
+      "image": "assets/images/enneagram/zen.webp",
+      "imagePosition": "50%",
+      "imageFlip": true,
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Cultivate acceptance and patience, understanding that perfection is an ongoing journey, not a destination.",
+            "Practice mindfulness techniques to quiet your inner critic and engage more fully in the present moment.",
+            "Value and recognize the worth in others' ways of doing things, even if they differ from your own.",
+            "Allow space for mistakes, understanding they're part of the learning process.",
+            "Learn to manage frustrations in a productive way instead of holding onto resentment."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

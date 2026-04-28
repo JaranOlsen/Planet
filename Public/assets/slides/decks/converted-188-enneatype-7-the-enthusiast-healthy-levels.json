@@ -1,0 +1,38 @@
+{
+  "id": "converted-188-enneatype-7-the-enthusiast-healthy-levels",
+  "title": "Converted: Enneatype 7 - The Enthusiast - Healthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[188]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 188,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 7",
+      "title": "The Enthusiast",
+      "density": "long",
+      "backgroundColor": "rgb(78, 46, 52)",
+      "image": "assets/images/enneagram/suitcases.webp",
+      "imagePosition": "top",
+      "bullets": [
+        {
+          "text": "Healthy Levels:",
+          "ordered": true,
+          "start": 1,
+          "items": [
+            "At their best, Type 7 individuals assimilate experiences in depth, which makes them deeply grateful and appreciative for what they have. They become awed by the simple wonders of life and exhibit joyous and ecstatic feelings. They may also experience intimations of spiritual reality and the boundless goodness of life.",
+            "They are highly responsive, excitable, and enthusiastic about sensation and experience. Being the most extroverted type, stimuli bring immediate responses—they find everything invigorating. They are lively, vivacious, eager, spontaneous, resilient, and cheerful.",
+            "They easily become accomplished achievers and generalists who excel at many different things: multi-talented. They are practical, productive, usually prolific, and capable of cross-fertilizing areas of interest."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

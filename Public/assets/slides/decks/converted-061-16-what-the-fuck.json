@@ -1,0 +1,34 @@
+{
+  "id": "converted-061-16-what-the-fuck",
+  "title": "Converted: #16 What The Fuck?",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[61]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 61,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#16 What The Fuck?",
+      "image": "assets/images/roadToHere/16t.webp",
+      "alt": "#16 What The Fuck? cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-16-what-the",
+        "title": "Insight Timer Embed: Road To Here - #16 What The Fuck? | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-16-what-the"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

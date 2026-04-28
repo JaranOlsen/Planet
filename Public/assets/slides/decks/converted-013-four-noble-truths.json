@@ -1,0 +1,25 @@
+{
+  "id": "converted-013-four-noble-truths",
+  "title": "Converted: Four noble truths",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[13]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 13,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Four noble truths",
+      "title": "Buddhisms Four Noble Truths",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/TK-MbNj83NM",
+        "title": "Buddhisms Four Noble Truths"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

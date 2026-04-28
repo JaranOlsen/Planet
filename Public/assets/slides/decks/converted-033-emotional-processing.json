@@ -1,0 +1,48 @@
+{
+  "id": "converted-033-emotional-processing",
+  "title": "Converted: Emotional Processing",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[33] with the original interactive chart preserved as a first-class legacy-slide entry.",
+  "legacy": {
+    "contentData": 33,
+    "refs": [
+      "1",
+      "2",
+      "3cj"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "title": "Emotional Deepening Process",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/kNRg2DFtgOw",
+        "title": "Emotional Deepening process",
+        "aspectRatio": "16 / 9"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "title": "Pascual-Leone Emotional Processing Model",
+      "image": "assets/images/mindmaps/pascualLeoneModel.webp",
+      "alt": "Pascual-Leone model of emotional processing",
+      "body": "A clinical map for tracking movement from secondary processes toward primary adaptive emotion and need.",
+      "reveal": "sequence",
+      "transition": "slide-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Interactive Emotional Processing Chart",
+      "theme": "gut",
+      "legacy": {
+        "slideshow": 33,
+        "slide": "3cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

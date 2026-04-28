@@ -1,0 +1,28 @@
+{
+  "id": "custom-slide-showcase",
+  "title": "Custom Slide Showcase",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Runtime sample for the custom interactive slide escape hatch.",
+  "slides": [
+    {
+      "template": "custom",
+      "title": "Sample Custom Interactive Slide",
+      "custom": {
+        "id": "sample-custom-slide",
+        "htmlRef": "assets/slides/custom/sample-custom-slide/index.html",
+        "styleRefs": [
+          "assets/slides/custom/sample-custom-slide/style.css"
+        ],
+        "scriptRefs": [
+          {
+            "src": "assets/slides/custom/sample-custom-slide/module.js",
+            "type": "module"
+          }
+        ]
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

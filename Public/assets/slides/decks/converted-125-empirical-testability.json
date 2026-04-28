@@ -1,0 +1,25 @@
+{
+  "id": "converted-125-empirical-testability",
+  "title": "Converted: Empirical testability",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[125]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 125,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Quality",
+      "title": "Empirical testability",
+      "body": [
+        "A good theory should generate testable predictions or hypotheses that can be confirmed or refuted through empirical observation or experimentation."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

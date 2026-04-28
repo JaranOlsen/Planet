@@ -1,0 +1,442 @@
+{
+  "id": "head-showcase",
+  "title": "Head Path Structured Showcase",
+  "theme": "head",
+  "path": "head",
+  "description": "Full structured template library for the head path.",
+  "slides": [
+    {
+      "template": "opening",
+      "overline": "Head Path",
+      "title": "The Path Of Realisation",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "subtitle": "Philosophy, ontology, inquiry, and the clear seeing of what is true.",
+      "image": "assets/images/background/solarsystem.webp",
+      "pills": [
+        "Question",
+        "View",
+        "Method",
+        "Truth"
+      ],
+      "stats": [
+        {
+          "value": "2",
+          "label": "views"
+        },
+        {
+          "value": "4",
+          "label": "tests"
+        },
+        {
+          "value": "1",
+          "label": "question"
+        }
+      ]
+    },
+    {
+      "template": "quote",
+      "overline": "Head Path",
+      "title": "Quote",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "image": "assets/images/consciousness/venn.webp",
+      "body": [
+        {
+          "text": "A clear view does not end mystery; it removes the confusion that obscures it.",
+          "emphasis": true
+        },
+        {
+          "text": "Use this family for ontology, epistemology, argument, models, and inquiry."
+        }
+      ],
+      "source": "Philosophy path"
+    },
+    {
+      "template": "long-text",
+      "overline": "Head Path",
+      "title": "Long Text",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": [
+        {
+          "text": "Head slides should make distinctions crisp while preserving the larger question."
+        },
+        {
+          "text": "Prefer exact terms, visible structure, and clean comparison surfaces.",
+          "emphasis": true
+        }
+      ]
+    },
+    {
+      "template": "full-image",
+      "overline": "Head Path",
+      "title": "Full Image",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "image": "assets/images/background/solarsystem.webp",
+      "body": "A full-image slide can open a philosophical horizon before analysis begins."
+    },
+    {
+      "template": "split-image",
+      "overline": "Head Path",
+      "title": "Split Image",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "image": "assets/images/features/idealism.webp",
+      "body": "Use split-image slides when a model or concept needs a visual anchor.",
+      "bullets": [
+        "Define the question.",
+        "Separate assumptions from observations.",
+        "Compare live options.",
+        "Name what would change the view."
+      ]
+    },
+    {
+      "template": "title-bullets",
+      "overline": "Head Path",
+      "title": "Title Bullets",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Philosophy slides need explicit distinctions and stable hierarchy.",
+      "bullets": [
+        "Define the question.",
+        "Separate assumptions from observations.",
+        "Compare live options.",
+        "Name what would change the view."
+      ]
+    },
+    {
+      "template": "bullets",
+      "overline": "Head Path",
+      "title": "Bullets",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Philosophy slides need explicit distinctions and stable hierarchy.",
+      "bullets": [
+        "Define the question.",
+        "Separate assumptions from observations.",
+        "Compare live options.",
+        "Name what would change the view."
+      ]
+    },
+    {
+      "template": "two-column",
+      "overline": "Head Path",
+      "title": "Two Column",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "subtitle": "Make the tension visible before trying to resolve it.",
+      "columns": [
+        {
+          "title": "Concept",
+          "body": "What distinction is doing the explanatory work?"
+        },
+        {
+          "title": "Experience",
+          "body": "What must any adequate view still account for?"
+        }
+      ]
+    },
+    {
+      "template": "steps",
+      "overline": "Head Path",
+      "title": "Steps",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Use steps for inquiry, argument, and conceptual unpacking.",
+      "steps": [
+        "State the claim.",
+        "Expose the premise.",
+        "Test the implication.",
+        "Compare alternatives.",
+        "Return to experience."
+      ]
+    },
+    {
+      "template": "checklist",
+      "overline": "Head Path",
+      "title": "Checklist",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Use this before argument or model slides.",
+      "items": [
+        "Terms are defined.",
+        "Scope is bounded.",
+        "Alternatives are named.",
+        "Inference is visible."
+      ]
+    },
+    {
+      "template": "statistics",
+      "overline": "Head Path",
+      "title": "Statistics",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "stats": [
+        {
+          "value": "2",
+          "label": "views"
+        },
+        {
+          "value": "4",
+          "label": "tests"
+        },
+        {
+          "value": "1",
+          "label": "question"
+        }
+      ]
+    },
+    {
+      "template": "profile",
+      "overline": "Head Path",
+      "title": "Profile",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "image": "assets/images/features/headLogo.webp",
+      "body": "Profile slides can hold a thinker, concept, school, claim, or mode of knowing.",
+      "bullets": [
+        "Claim",
+        "Assumption",
+        "Consequence"
+      ]
+    },
+    {
+      "template": "gallery",
+      "overline": "Head Path",
+      "title": "Gallery",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "images": [
+        {
+          "src": "assets/images/features/idealism.webp",
+          "caption": "Idealism"
+        },
+        {
+          "src": "assets/images/features/physicalism.webp",
+          "caption": "Physicalism"
+        },
+        {
+          "src": "assets/images/features/panpsychism.webp",
+          "caption": "Panpsychism"
+        }
+      ]
+    },
+    {
+      "template": "media",
+      "overline": "Head Path",
+      "title": "Media",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Media slides can hold talks, diagrams, debate clips, or explanatory visuals.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/z_Gy3mTztgg",
+        "title": "Philosophy sample media"
+      }
+    },
+    {
+      "template": "timeline",
+      "overline": "Head Path",
+      "title": "Timeline",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Show the movement of an argument or paradigm shift.",
+      "timeline": [
+        {
+          "title": "Question",
+          "body": "A problem becomes explicit."
+        },
+        {
+          "title": "Model",
+          "body": "A framework makes it intelligible."
+        },
+        {
+          "title": "Anomaly",
+          "body": "The framework meets its limit."
+        },
+        {
+          "title": "Revision",
+          "body": "A clearer view becomes possible."
+        }
+      ]
+    },
+    {
+      "template": "table",
+      "overline": "Head Path",
+      "title": "Table",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "headers": [
+        "View",
+        "Strength",
+        "Risk"
+      ],
+      "rows": [
+        [
+          "Physicalism",
+          "Public method",
+          "Reduction"
+        ],
+        [
+          "Idealism",
+          "Experience first",
+          "Inflation"
+        ],
+        [
+          "Dualism",
+          "Intuitive split",
+          "Bridge problem"
+        ]
+      ]
+    },
+    {
+      "template": "card-grid",
+      "overline": "Head Path",
+      "title": "Card Grid",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Cards are useful for claims, definitions, schools, or argument moves.",
+      "cards": [
+        {
+          "title": "Ontology",
+          "body": "What exists?"
+        },
+        {
+          "title": "Epistemology",
+          "body": "How can it be known?"
+        },
+        {
+          "title": "Method",
+          "body": "What checks the claim?"
+        }
+      ]
+    },
+    {
+      "template": "call-to-action",
+      "overline": "Head Path",
+      "title": "Call To Action",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Choose one assumption and test whether the next slide still needs it.",
+      "action": {
+        "label": "Start Inquiry"
+      },
+      "note": "Clarity is a practice, not just a conclusion."
+    },
+    {
+      "template": "word-cloud",
+      "overline": "Head Path",
+      "title": "Word Cloud",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "words": [
+        [
+          "truth",
+          9
+        ],
+        [
+          "inquiry",
+          8
+        ],
+        [
+          "ontology",
+          7
+        ],
+        [
+          "clarity",
+          7
+        ],
+        [
+          "view",
+          6
+        ],
+        [
+          "method",
+          5
+        ],
+        [
+          "reason",
+          4
+        ]
+      ]
+    },
+    {
+      "template": "quadrant-chart",
+      "overline": "Head Path",
+      "title": "Quadrant Chart",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "quadrants": [
+        {
+          "x": 250,
+          "y": 155,
+          "label": "Direct"
+        },
+        {
+          "x": 750,
+          "y": 155,
+          "label": "Conceptual"
+        },
+        {
+          "x": 250,
+          "y": 435,
+          "label": "Private"
+        },
+        {
+          "x": 750,
+          "y": 435,
+          "label": "Public"
+        }
+      ]
+    },
+    {
+      "template": "mindmap-slot",
+      "overline": "Head Path",
+      "title": "Mindmap Slot",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "nodes": [
+        {
+          "id": "root",
+          "label": "Question",
+          "x": 500,
+          "y": 260,
+          "r": 58
+        },
+        {
+          "id": "view",
+          "label": "View",
+          "x": 270,
+          "y": 160
+        },
+        {
+          "id": "method",
+          "label": "Method",
+          "x": 730,
+          "y": 160
+        },
+        {
+          "id": "truth",
+          "label": "Truth",
+          "x": 500,
+          "y": 420
+        }
+      ],
+      "links": [
+        {
+          "from": "root",
+          "to": "view"
+        },
+        {
+          "from": "root",
+          "to": "method"
+        },
+        {
+          "from": "root",
+          "to": "truth"
+        }
+      ]
+    }
+  ]
+}

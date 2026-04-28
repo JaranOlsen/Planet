@@ -1,0 +1,80 @@
+{
+  "id": "converted-008-open-awareness",
+  "title": "Converted: Open awareness",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[8]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 8,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Open awareness",
+      "title": "Open awareness",
+      "body": [
+        "Close your eyes and relax. Just listen."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "long-text",
+      "overline": "Open awareness",
+      "title": "Open awareness",
+      "body": [
+        "Opening awareness up to it all. Letting everything be as it is."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "long-text",
+      "overline": "Open awareness",
+      "title": "Open awareness",
+      "body": [
+        "Being right here, right now. No doing, just being."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "long-text",
+      "overline": "Open awareness",
+      "title": "Open awareness",
+      "body": [
+        "Allowing the mind to settle. Welcoming stillness and calm."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "long-text",
+      "overline": "Open awareness",
+      "title": "Open awareness",
+      "body": [
+        "No need to strain or concentrate. The mind is naturally awake and aware."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "long-text",
+      "overline": "Open awareness",
+      "title": "Open awareness",
+      "body": [
+        "Just being the knowing. Being now, being here."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

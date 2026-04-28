@@ -1,0 +1,78 @@
+{
+  "id": "eft-alliance-work",
+  "title": "EFT: Alliance Work",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Three practical clinician-facing slides for EFT alliance work.",
+  "sources": [
+    {
+      "label": "Watson and Sharbanee, Emotion Focused Therapy: Case Conceptualization and Treatment",
+      "url": "https://www.researchgate.net/publication/356370129_Emotion_Focused_Therapy_-_Case_Conceptualization_and_Treatment_Adults"
+    },
+    {
+      "label": "Case formulation in Emotion-Focused Therapy",
+      "url": "https://1library.net/document/y8n4622y-case-formulation-in-emotion-focused-therapy.html"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Alliance Work",
+      "title": "Marker: the process is between you",
+      "image": "assets/images/gut/eft-process/alliance-work.png",
+      "body": "Use alliance work when contact with you becomes the active emotional field.",
+      "bullets": [
+        "Compliance, withdrawal, irritation, or confusion replaces exploration.",
+        "The client responds to task pressure more than felt process.",
+        "A rupture, misattunement, or fear of your reaction is live."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Alliance Work",
+      "title": "Repair before you resume the task",
+      "body": "In EFT, the relationship is not a warm-up for technique; it is the condition that makes experiential work possible.",
+      "steps": [
+        "Stop the task and name the process lightly: something changed between us.",
+        "Invite correction: what did I miss, push, assume, or not understand?",
+        "Validate the protective logic before asking for deeper contact.",
+        "Take responsibility for your part without making the client care for you.",
+        "Ask what would make the next minute safer or more useful.",
+        "Only return to task work when the client's body shows renewed consent."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Alliance Work",
+      "title": "Experienced clinician tracking",
+      "headers": [
+        "If you see",
+        "Track",
+        "Intervene"
+      ],
+      "rows": [
+        [
+          "Yes, but flat",
+          "Appeasement or task pressure",
+          "Slow down and check consent."
+        ],
+        [
+          "Argues content",
+          "A missed meaning or dignity need",
+          "Reflect protest, not debate."
+        ],
+        [
+          "Performs insight",
+          "Fear of disappointing you",
+          "Invite the trying-to-be-good part."
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

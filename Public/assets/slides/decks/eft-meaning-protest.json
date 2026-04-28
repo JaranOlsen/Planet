@@ -1,0 +1,77 @@
+{
+  "id": "eft-meaning-protest",
+  "title": "EFT: Meaning Protest",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Three practical clinician-facing slides extracted from the EFT interventions practice deck.",
+  "sources": [
+    {
+      "label": "Vrana and Greenberg, Overview of Emotion-Focused Therapy",
+      "url": "https://www.researchgate.net/publication/325379801_Overview_of_emotion-focused_therapy"
+    },
+    {
+      "label": "Markers and tasks summary",
+      "url": "https://www.lotus-on-the-ripple.com/single-post/2019/02/11/integrating-being-and-doing-in-emotion-focused-therapy"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Meaning Protest",
+      "title": "Marker: protest at violated meaning",
+      "image": "assets/images/gut/ashley-batz-betmVWGYcLY-unsplash.jpg",
+      "body": "Use when grief is organized around what the event means.",
+      "bullets": [
+        "Listen for 'Why this?', 'It should not be', 'What kind of world allows this?'",
+        "Validate the protest as contact with value and injury.",
+        "Differentiate meaning-making from positive reframing."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Meaning Protest",
+      "title": "Meaning creation sequence",
+      "body": "Keep one hand on the wound and one hand on the values the wound reveals.",
+      "steps": [
+        "Let the protest speak fully before asking for perspective.",
+        "Ask what value was violated: love, fairness, dignity, safety, trust.",
+        "Name what was lost and what cannot be made acceptable.",
+        "Explore what remains worth protecting, honoring, or changing.",
+        "Formulate a next meaning that can be lived, not merely believed."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Meaning Protest",
+      "title": "Clinical discernment",
+      "headers": [
+        "Client process",
+        "Therapist task",
+        "Risk"
+      ],
+      "rows": [
+        [
+          "Raw protest",
+          "Affirm the violated value.",
+          "Premature acceptance."
+        ],
+        [
+          "Collapse into nihilism",
+          "Find the need under the conclusion.",
+          "Arguing philosophy."
+        ],
+        [
+          "Emerging value",
+          "Translate into stance or action.",
+          "Making it too neat."
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

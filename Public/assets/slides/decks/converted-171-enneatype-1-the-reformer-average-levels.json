@@ -1,0 +1,39 @@
+{
+  "id": "converted-171-enneatype-1-the-reformer-average-levels",
+  "title": "Converted: Enneatype 1 - The Reformer - Average Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[171]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 171,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 1",
+      "title": "The Reformer",
+      "density": "long",
+      "backgroundColor": "rgb(96, 81, 59)",
+      "image": "assets/images/enneagram/scale.webp",
+      "imagePosition": "70%",
+      "imageFlip": true,
+      "bullets": [
+        {
+          "text": "Average Levels:",
+          "ordered": true,
+          "start": 4,
+          "items": [
+            "As they start to grapple with reality, they may become more idealistic, feeling a responsibility to rectify things around them. They are often drawn to causes and work tirelessly to enact change, promoting their ideas of how things should be.",
+            "The fear of errors starts to overshadow their actions, pushing them to align everything with their lofty ideals. They may become more rigid, suppressing their emotions and impulses, and might turn into workaholics, with an almost obsessive focus on punctuality and precision.",
+            "Criticism towards themselves and others intensifies. They become sticklers for perfection, becoming increasingly impatient and judgmental. They may try to enforce their views on others, leading to abrasive and confrontational behavior."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

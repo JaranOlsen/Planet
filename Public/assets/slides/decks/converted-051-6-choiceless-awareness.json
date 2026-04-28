@@ -1,0 +1,34 @@
+{
+  "id": "converted-051-6-choiceless-awareness",
+  "title": "Converted: #6 Choiceless Awareness",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[51]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 51,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#6 Choiceless Awareness",
+      "image": "assets/images/roadToHere/6t.webp",
+      "alt": "#6 Choiceless Awareness cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-6-choiceless-awareness",
+        "title": "Insight Timer Embed: Road To Here - #6 Choiceless Awareness | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-6-choiceless-awareness"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

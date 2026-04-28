@@ -1,0 +1,34 @@
+{
+  "id": "converted-047-2-distracted-by-truth",
+  "title": "Converted: #2 Distracted By Truth",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[47]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 47,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#2 Distracted By Truth",
+      "image": "assets/images/roadToHere/2t.webp",
+      "alt": "#2 Distracted By Truth cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-2-distracted-by-truth",
+        "title": "Insight Timer Embed: Road To Here - #2 Distracted By Truth | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-2-distracted-by-truth"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

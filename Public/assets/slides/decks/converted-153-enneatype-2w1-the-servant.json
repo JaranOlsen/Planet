@@ -1,0 +1,55 @@
+{
+  "id": "converted-153-enneatype-2w1-the-servant",
+  "title": "Converted: Enneatype 2w1 - The Servant",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[153]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 153,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 2w1",
+      "title": "The Servant",
+      "backgroundColor": "rgb(61, 41, 25)",
+      "image": "assets/images/enneagram/anchor.webp",
+      "body": [
+        {
+          "text": "The Generous, Idealistic Type: Caring, Altruistic, Ethical, Principled, and Self-Controlled.",
+          "strong": true
+        },
+        "As a Two wing One, you embody many of the characteristics of Enneatype 2, including a natural inclination to help others and a strong sense of empathy. However, the One wing contributes a firm adherence to ethical standards, a keen sense of responsibility, and a striving for perfection.",
+        "Your caring nature is paired with a desire for integrity and justice, which often leads to involvement in causes or activities that benefit others. You may sometimes find yourself frustrated with inefficiencies, imperfections, and especially injustices in your surroundings. Your approach to help and serve is often underlined by a wish to do things correctly and make the world a more ethical place."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 2w1",
+      "title": "The Servant",
+      "backgroundColor": "rgb(61, 41, 25)",
+      "image": "assets/images/enneagram/anchor.webp",
+      "imagePosition": "56%",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Develop a habit of self-reflection to recognize your own needs and feelings.",
+            "Learn to ask for help and express your needs to others without feeling guilty.",
+            "Cultivate an understanding that you can be loved for who you are, not just for what you do for others.",
+            "Allow yourself to accept that you're not responsible for everyone else's happiness.",
+            "Seek to balance your inner ideals with the realities and limitations of the world."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}
