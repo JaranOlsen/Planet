@@ -768,6 +768,9 @@ function registerConnectionEditor(edgeRef) {
       new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]),
       connectionHandleGuideMaterials[handleIndex],
     );
+    guide.userData.connectionEdge = edgeRef;
+    guide.userData.connectionHandleIndex = handleIndex;
+    guide.userData.connectionHandleGuide = true;
     guide.renderOrder = 29;
     guide.visible = false;
     guide.frustumCulled = false;
@@ -779,6 +782,7 @@ function registerConnectionEditor(edgeRef) {
     const handle = new THREE.Mesh(connectionHandleGeometry, connectionHandleMaterials[handleIndex]);
     handle.userData.connectionEdge = edgeRef;
     handle.userData.connectionHandleIndex = handleIndex;
+    handle.userData.connectionHandle = true;
     handle.renderOrder = 30;
     handle.visible = false;
     handle.frustumCulled = false;

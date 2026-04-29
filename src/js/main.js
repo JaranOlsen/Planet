@@ -46,6 +46,7 @@ import { setupIntro, introState, fadeOutAudio, animateLetterSpacing } from './co
 import { DeveloperHud } from './core/developerHud.js'
 import { DeveloperSlideLab } from './core/developerSlideLab.js'
 import { PlanetEnvironment } from './core/planetEnvironment.js'
+import { SettlementMapLayer } from './settlementMap.js'
 
 if (import.meta.hot) {
     import.meta.hot.on('vite:beforeUpdate', () => {
@@ -76,6 +77,9 @@ let selectedNode = null;
 let selectedNodes = []
 let showContent = true;
 let fastMove = false;
+let settlementMode = false;
+let settlementMapLayer = null;
+let settlementLabelRefreshTimer = null;
 const developerHud = new DeveloperHud();
 
 function getSelectedConnectionNodeIds() {
@@ -143,9 +147,21 @@ function switchMindmap(index) {
     const result = datasetsSwitchMindmap(index);
     if (result && typeof result.then === 'function') {
         return result.then((value) => {
+            markSettlementMapDirty();
+            if (settlementMode) {
+                setClassicMindmapVisualsVisible(false);
+                scheduleSettlementLabelStyleRefresh();
+                syncSettlementMapVisibility();
+            }
             updateDeveloperHud();
             return value;
         });
+    }
+    markSettlementMapDirty();
+    if (settlementMode) {
+        setClassicMindmapVisualsVisible(false);
+        scheduleSettlementLabelStyleRefresh();
+        syncSettlementMapVisibility();
     }
     updateDeveloperHud();
     return result;
@@ -534,6 +550,184 @@ function clearConnectionDestination(destination) {
     destination.clear();
 }
 
+function ensureSettlementMapLayer() {
+    if (!settlementMapLayer && jaranius) {
+        settlementMapLayer = new SettlementMapLayer({
+            jaranius,
+            contexts,
+            getSunWorldPosition: () => planetEnvironment.getSunWorldPosition(),
+            getCameraWorldPosition: (target) => camera.getWorldPosition(target),
+        });
+    }
+    return settlementMapLayer;
+}
+
+function setClassicMindmapVisualsVisible(visible) {
+    const planetCtx = contexts[0];
+    if (planetCtx?.pins) {
+        planetCtx.pins.forEach((pin) => {
+            pin.visible = visible;
+        });
+    }
+    if (planetCtx?.connectionDestination) {
+        planetCtx.connectionDestination.visible = true;
+        planetCtx.connectionDestination.children.forEach((child) => {
+            const isEditorObject = child.userData?.connectionHandle || child.userData?.connectionHandleGuide;
+            child.visible = isEditorObject ? child.visible : visible;
+        });
+        updateConnectionHandleVisibility();
+    }
+}
+
+function applySettlementLabelStyle(active) {
+    const planetCtx = contexts[0];
+    if (!planetCtx) return;
+
+    planetCtx.boxes?.forEach((box) => {
+        if (!box) return;
+        if (!box.userData.classicMaterial) box.userData.classicMaterial = box.material;
+        if (box.userData.classicVisible === undefined) box.userData.classicVisible = box.visible;
+        if (active) {
+            if (!box.userData.settlementMaterial) {
+                const material = box.userData.classicMaterial.clone();
+                if (material.color) material.color.set(0xf1e5c4);
+                if (material.emissive) material.emissive.set(0x2a2114);
+                if (material.emissiveIntensity !== undefined) material.emissiveIntensity = 0.035;
+                material.transparent = true;
+                material.opacity = 0.12;
+                material.depthWrite = false;
+                box.userData.settlementMaterial = material;
+            }
+            box.material = box.userData.settlementMaterial;
+            box.visible = false;
+        } else {
+            box.material = box.userData.classicMaterial;
+            box.visible = box.userData.classicVisible;
+        }
+    });
+
+    planetCtx.tags?.forEach((tag) => {
+        if (!tag) return;
+        if (!tag.userData.classicMaterial) tag.userData.classicMaterial = tag.material;
+        if (!tag.userData.classicScale) tag.userData.classicScale = tag.scale.clone();
+        if (active) {
+            if (!tag.userData.settlementMaterial) {
+                const material = tag.userData.classicMaterial.clone();
+                if (material.color) material.color.set(0x11100d);
+                material.transparent = true;
+                material.opacity = 0.58;
+                material.depthWrite = false;
+                tag.userData.settlementMaterial = material;
+            }
+            tag.material = tag.userData.settlementMaterial;
+            tag.scale.copy(tag.userData.classicScale).multiplyScalar(0.58);
+        } else {
+            tag.material = tag.userData.classicMaterial;
+            tag.scale.copy(tag.userData.classicScale);
+        }
+    });
+}
+
+function updateSettlementDebugVisibility() {
+    if (typeof octreeHelperRoot !== 'undefined') {
+        octreeHelperRoot.visible = !settlementMode;
+    }
+}
+
+function scheduleSettlementLabelStyleRefresh() {
+    if (settlementLabelRefreshTimer) {
+        clearInterval(settlementLabelRefreshTimer);
+        settlementLabelRefreshTimer = null;
+    }
+
+    let remainingPasses = 8;
+    const refresh = () => {
+        if (!settlementMode) {
+            clearInterval(settlementLabelRefreshTimer);
+            settlementLabelRefreshTimer = null;
+            return;
+        }
+        applySettlementLabelStyle(true);
+        remainingPasses -= 1;
+        if (remainingPasses <= 0) {
+            clearInterval(settlementLabelRefreshTimer);
+            settlementLabelRefreshTimer = null;
+        }
+    };
+
+    refresh();
+    settlementLabelRefreshTimer = setInterval(refresh, 250);
+}
+
+function syncSettlementMapVisibility() {
+    if (!settlementMapLayer) return;
+    const shouldShow = Boolean(settlementMode && showContent);
+    if (shouldShow) {
+        settlementMapLayer.setVisible(true)
+            .then(refreshSelectedSettlementPin)
+            .catch(handleSettlementMapError);
+    } else {
+        settlementMapLayer.root.visible = false;
+    }
+}
+
+function refreshSelectedSettlementPin() {
+    if (!settlementMode || selectedContext !== 0 || selectedNode === null || selectedNode === undefined || !settlementMapLayer) return;
+    const nextPin = settlementMapLayer.intersectObjects.find((object) => object.index === selectedNode);
+    if (nextPin) selectedPin = nextPin;
+}
+
+async function setSettlementMode(active) {
+    settlementMode = active;
+    const layer = ensureSettlementMapLayer();
+    if (!layer) return;
+
+    if (active) {
+        hoverPins([]);
+        await layer.setVisible(showContent);
+        refreshSelectedSettlementPin();
+        setClassicMindmapVisualsVisible(false);
+        scheduleSettlementLabelStyleRefresh();
+    } else {
+        if (settlementLabelRefreshTimer) {
+            clearInterval(settlementLabelRefreshTimer);
+            settlementLabelRefreshTimer = null;
+        }
+        layer.hover([]);
+        layer.root.visible = false;
+        setClassicMindmapVisualsVisible(showContent);
+        applySettlementLabelStyle(false);
+    }
+    updateSettlementDebugVisibility();
+    updateDeveloperHud();
+}
+
+function handleSettlementMapError(error) {
+    console.error('Settlement map mode failed:', error);
+    settlementMode = false;
+    if (settlementMapLayer) {
+        settlementMapLayer.root.visible = false;
+    }
+    setClassicMindmapVisualsVisible(showContent);
+    applySettlementLabelStyle(false);
+    updateDeveloperHud();
+}
+
+function markSettlementMapDirty() {
+    if (!settlementMapLayer) return;
+    settlementMapLayer.markDirty();
+    if (settlementMode && showContent && settlementMapLayer.isVisible()) {
+        settlementMapLayer.setVisible(true)
+            .then(refreshSelectedSettlementPin)
+            .catch(handleSettlementMapError);
+    }
+}
+
+async function toggleSettlementMode() {
+    await setSettlementMode(!settlementMode);
+    console.log(`Settlement map mode: ${settlementMode ? 'on' : 'off'}`);
+}
+
 function connectionEditorOptions(contextIndex, kind) {
     return {
         developer,
@@ -557,6 +751,10 @@ function redrawDeveloperConnections(contextIndex) {
     createConnections(ctx.tagData, ctx.arrowConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, ctx.connectionDestination, false, true, false, connectionEditorOptions(contextIndex, 'arrow'));
     createConnections(ctx.tagData, ctx.dashedConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, ctx.connectionDestination, true, false, false, connectionEditorOptions(contextIndex, 'dashed'));
     createConnections(ctx.tagData, ctx.tunnelConnectionData, 0.001, 6, 0.1, curveMinAltitude, ctx.connectionDestination, false, false, true, connectionEditorOptions(contextIndex, 'tunnel'));
+    if (settlementMode && contextIndex === 0) {
+        setClassicMindmapVisualsVisible(false);
+    }
+    markSettlementMapDirty();
     updateDeveloperHud();
 }
 
@@ -574,11 +772,22 @@ function serializeConnectionRows(rows) {
 
 
 //INTERACTION FUNCTIONS
+function getActiveIntersectObjects() {
+    if (settlementMode && settlementMapLayer?.isVisible()) {
+        return settlementMapLayer.intersectObjects;
+    }
+    return intersectObjectsArray;
+}
+
 function scanPins() {
     raycaster.setFromCamera(pointer, camera);
-    const intersects = raycaster.intersectObjects(intersectObjectsArray);
+    const intersects = raycaster.intersectObjects(getActiveIntersectObjects());
 
-    hoverPins(intersects)
+    if (settlementMode && settlementMapLayer?.isVisible()) {
+        settlementMapLayer.hover(intersects);
+    } else {
+        hoverPins(intersects)
+    }
 }
 
 //EVENTS KEYBOARD
@@ -665,6 +874,10 @@ function onDocumentKeyUp(event) {
             }
             if (window.appStatus !== "flight" && code === "KeyE") { // Shift+E
                 planetEnvironment.toggleEnneagram();
+                return;
+            }
+            if (window.appStatus !== "flight" && code === "KeyC") { // Shift+C
+                toggleSettlementMode().catch(handleSettlementMapError);
                 return;
             }
             if (developer && code === "KeyP") { // Shift+P
@@ -782,6 +995,14 @@ function onDocumentKeyUp(event) {
                 jaranius.add(planetContent)
                 jaranius.add(jaraniusConnections)
                 showContent = true
+            }
+            if (settlementMode) {
+                setClassicMindmapVisualsVisible(false);
+                scheduleSettlementLabelStyleRefresh();
+                syncSettlementMapVisibility();
+            } else {
+                setClassicMindmapVisualsVisible(showContent);
+                applySettlementLabelStyle(false);
             }
         }
         if (keyCode == 73) { //I
@@ -1206,12 +1427,16 @@ function onDocumentKeyDown(event) {
                 contexts[selectedContext].tagData[selectedNodes[node]].lat = posLatLng.lat.toFixed(1)
                 contexts[selectedContext].tagData[selectedNodes[node]].lng = posLatLng.lng.toFixed(1)
                 refreshNode(selectedContext, selectedNodes[node])
+                if (selectedContext === 0) markSettlementMapDirty()
             }
         }
     } else if (selectedPin != null && developer == true  && slideshowStatus.activeSlideshow == undefined && focusElement !== "tagInput" && !flyControls.enabled) {
 
         if (keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39){
-            let posLatLng = convertCartesiantoLatLng(selectedPin.position.x, selectedPin.position.y, selectedPin.position.z);
+            const selectedNodeData = contexts[selectedContext]?.tagData?.[selectedNode];
+            let posLatLng = selectedNodeData
+                ? { lat: Number(selectedNodeData.lat), lng: Number(selectedNodeData.lng) }
+                : convertCartesiantoLatLng(selectedPin.position.x, selectedPin.position.y, selectedPin.position.z);
             console.log(posLatLng)
             if (keyCode == 38) {
                 if (fastMove) posLatLng.lat += .4;
@@ -1234,6 +1459,7 @@ function onDocumentKeyDown(event) {
             contexts[selectedContext].tagData[selectedNode].lat = posLatLng.lat.toFixed(1)
             contexts[selectedContext].tagData[selectedNode].lng = posLatLng.lng.toFixed(1)
             refreshNode(selectedContext, selectedNode)
+            if (selectedContext === 0) markSettlementMapDirty()
         }
     }     
 };
@@ -1272,6 +1498,7 @@ document.getElementById("tagInput").addEventListener("keydown", function (event)
             if (newArrowConnectionsDestination !== undefined) newArrowConnectionsDestination.push([id])
             if (newDashedConnectionsDestination !== undefined) newDashedConnectionsDestination.push([id])
             if (newTunnelConnectionsDestination !== undefined) newTunnelConnectionsDestination.push([id])
+            if (selectedContext === 0) markSettlementMapDirty()
 
             const globalIndex = newTagDestination.length - 1
             updateDeveloperHud();
@@ -1356,7 +1583,7 @@ async function onPointerClick(event) {
     pointer.y = -(y / window.innerHeight) * 2 + 1;
   
     raycaster.setFromCamera(pointer, camera);
-    const intersects = raycaster.intersectObjects(intersectObjectsArray);
+    const intersects = raycaster.intersectObjects(getActiveIntersectObjects());
   
     if (intersects.length > 0) {
         selectedPin = intersects[0].object;
@@ -1388,6 +1615,7 @@ let connectionHandleDragOrbitWasEnabled = false;
 function processPointerUpEvent(event) {
     if (developer && isConnectionHandleDragActive()) {
         endConnectionHandleDrag();
+        markSettlementMapDirty();
         orbitControls.enabled = connectionHandleDragOrbitWasEnabled;
         connectionHandleDragOrbitWasEnabled = false;
         selectState = false;
@@ -1593,7 +1821,7 @@ function render() {
 
     updateFpsCounter(now);
 
-    updateGutta(guttaState, guttaStats, jaranius, nuggets, developer, octreeHelperRoot)
+    updateGutta(guttaState, guttaStats, jaranius, nuggets, developer && !settlementMode, octreeHelperRoot)
     
     const camPos = camera.position
     const camRot = camera.rotation
@@ -1613,6 +1841,7 @@ function render() {
         });
 
         scanPins();
+        settlementMapLayer?.update();
         updateLightIntensity(clock);
     }
 
