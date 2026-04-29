@@ -33,6 +33,51 @@ export const intersectObjectsArray = []
 
 export const hoveredPins = []
 
+export const connectionHandleObjects = []
+
+const connectionEditorState = {
+  edges: [],
+  activeHandle: null,
+};
+
+const CONNECTION_CURVE_SAMPLE_COUNT = 32;
+const CONNECTION_HANDLE_T_VALUES = [1 / 3, 2 / 3];
+const CONNECTION_HANDLE_LIMIT_DEGREES = 60;
+
+const connectionHandleGeometry = new THREE.SphereGeometry(0.045, 12, 12);
+const connectionHandleMaterials = [
+  new THREE.MeshStandardMaterial({
+    color: 0x65d6ff,
+    emissive: 0x1b6f91,
+    emissiveIntensity: 0.75,
+    transparent: true,
+    opacity: 0.9,
+    depthTest: false,
+  }),
+  new THREE.MeshStandardMaterial({
+    color: 0xffd36a,
+    emissive: 0x8a5c0e,
+    emissiveIntensity: 0.75,
+    transparent: true,
+    opacity: 0.9,
+    depthTest: false,
+  }),
+];
+const connectionHandleGuideMaterials = [
+  new THREE.LineBasicMaterial({
+    color: 0x65d6ff,
+    transparent: true,
+    opacity: 0.45,
+    depthTest: false,
+  }),
+  new THREE.LineBasicMaterial({
+    color: 0xffd36a,
+    transparent: true,
+    opacity: 0.45,
+    depthTest: false,
+  }),
+];
+
 let cachedTagFont = null;
 let tagFontPromise = null;
 
@@ -520,11 +565,335 @@ export function refreshNode(contextIndex, nodeIndex) {
   updateTagTransform(ctx.tags[nodeIndex]);
 }
 
-export function createConnections(tagSource, connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, destination, dashed, arrowed, tunnel) {
+export function getConnectionTargetId(connectionEntry) {
+  if (typeof connectionEntry === 'string') return connectionEntry;
+  if (!connectionEntry || typeof connectionEntry !== 'object') return undefined;
+  return connectionEntry.id || connectionEntry.target || connectionEntry.to;
+}
+
+export function findConnectionTargetIndex(connectionRow, targetId) {
+  if (!Array.isArray(connectionRow)) return -1;
+  return connectionRow.findIndex((entry, index) => index > 0 && getConnectionTargetId(entry) === targetId);
+}
+
+function getConnectionCurveValues(connectionEntry) {
+  if (!connectionEntry || typeof connectionEntry !== 'object') return [0, 0];
+
+  // Values are lateral angular offsets in degrees: same sign = C, opposite signs = S.
+  const raw = connectionEntry.curve || connectionEntry.handles;
+  if (Array.isArray(raw)) {
+    return [
+      Number.isFinite(Number(raw[0])) ? Number(raw[0]) : 0,
+      Number.isFinite(Number(raw[1])) ? Number(raw[1]) : 0,
+    ];
+  }
+
+  if (raw && typeof raw === 'object') {
+    return [
+      Number.isFinite(Number(raw.start)) ? Number(raw.start) : Number(raw.a) || 0,
+      Number.isFinite(Number(raw.end)) ? Number(raw.end) : Number(raw.b) || 0,
+    ];
+  }
+
+  return [0, 0];
+}
+
+function readEdgeCurveValues(edgeRef) {
+  return getConnectionCurveValues(edgeRef.connectionRow[edgeRef.targetEntryIndex]);
+}
+
+function setConnectionCurveValue(edgeRef, handleIndex, value) {
+  const current = edgeRef.connectionRow[edgeRef.targetEntryIndex];
+  const targetId = getConnectionTargetId(current);
+  if (!targetId) return;
+
+  const curve = getConnectionCurveValues(current);
+  const rounded = Math.abs(value) < 0.05 ? 0 : Number(value.toFixed(1));
+  curve[handleIndex] = rounded;
+
+  if (Math.abs(curve[0]) < 0.05 && Math.abs(curve[1]) < 0.05) {
+    edgeRef.connectionRow[edgeRef.targetEntryIndex] = targetId;
+    return;
+  }
+
+  const next = current && typeof current === 'object' ? { ...current } : { id: targetId };
+  delete next.handles;
+  next.id = targetId;
+  next.curve = curve;
+  edgeRef.connectionRow[edgeRef.targetEntryIndex] = next;
+}
+
+function getFallbackSideUnit(startUnit, endUnit) {
+  const mid = startUnit.clone().add(endUnit).normalize();
+  const candidates = [
+    new THREE.Vector3(0, 1, 0),
+    new THREE.Vector3(1, 0, 0),
+    new THREE.Vector3(0, 0, 1),
+  ];
+
+  for (const candidate of candidates) {
+    const side = new THREE.Vector3().crossVectors(mid, candidate);
+    if (side.lengthSq() > 1e-6) return side.normalize();
+  }
+
+  return new THREE.Vector3(0, 1, 0);
+}
+
+function getConnectionSideUnit(startUnit, endUnit) {
+  const side = new THREE.Vector3().crossVectors(startUnit, endUnit);
+  if (side.lengthSq() > 1e-8) return side.normalize();
+  return getFallbackSideUnit(startUnit, endUnit);
+}
+
+function cubicBezierValue(p0, p1, p2, p3, t) {
+  const invT = 1 - t;
+  return (
+    invT * invT * invT * p0 +
+    3 * invT * invT * t * p1 +
+    3 * invT * t * t * p2 +
+    t * t * t * p3
+  );
+}
+
+function getCurveOffsetDegrees(curveValues, t) {
+  const first = Number(curveValues[0]) || 0;
+  const second = Number(curveValues[1]) || 0;
+  return cubicBezierValue(0, first, second, 0, t);
+}
+
+function getConnectionFrame(startUnit, endUnit, t) {
+  const baseUnit = slerpVectors(startUnit, endUnit, t).normalize();
+  const sideUnit = getConnectionSideUnit(startUnit, endUnit);
+  return { baseUnit, sideUnit };
+}
+
+function getConnectionCurvePoint(startUnit, endUnit, curveValues, t, curveMinAltitude, curveMaxAltitude) {
+  return getConnectionOffsetPoint(
+    startUnit,
+    endUnit,
+    getCurveOffsetDegrees(curveValues, t),
+    t,
+    curveMinAltitude,
+    curveMaxAltitude,
+  );
+}
+
+function getConnectionOffsetPoint(startUnit, endUnit, offsetDegrees, t, curveMinAltitude, curveMaxAltitude) {
+  const { baseUnit, sideUnit } = getConnectionFrame(startUnit, endUnit, t);
+  const offset = THREE.MathUtils.degToRad(offsetDegrees);
+  const direction = baseUnit
+    .clone()
+    .multiplyScalar(Math.cos(offset))
+    .add(sideUnit.clone().multiplyScalar(Math.sin(offset)))
+    .normalize();
+  const altitude = curveMinAltitude + curveMaxAltitude * Math.sin(Math.PI * t);
+  return direction.multiplyScalar(altitude);
+}
+
+function getConnectionControlPoint(edgeRef, handleIndex) {
+  const curveValues = readEdgeCurveValues(edgeRef);
+  const t = CONNECTION_HANDLE_T_VALUES[handleIndex];
+  return getConnectionOffsetPoint(
+    edgeRef.startUnit,
+    edgeRef.endUnit,
+    curveValues[handleIndex],
+    t,
+    edgeRef.curveMinAltitude,
+    edgeRef.curveMaxAltitude,
+  );
+}
+
+function createConnectionTubeGeometry(edgeRef) {
+  const curveValues = readEdgeCurveValues(edgeRef);
+  const points = Array.from({ length: CONNECTION_CURVE_SAMPLE_COUNT + 1 }, (_, i) => {
+    const t = i / CONNECTION_CURVE_SAMPLE_COUNT;
+    return getConnectionCurvePoint(
+      edgeRef.startUnit,
+      edgeRef.endUnit,
+      curveValues,
+      t,
+      edgeRef.curveMinAltitude,
+      edgeRef.curveMaxAltitude,
+    );
+  });
+
+  const path = new THREE.CatmullRomCurve3(points);
+  return new THREE.TubeGeometry(
+    path,
+    CONNECTION_CURVE_SAMPLE_COUNT,
+    edgeRef.radius,
+    edgeRef.radialSegments,
+    false,
+  );
+}
+
+function getConnectionHandlePosition(edgeRef, handleIndex) {
+  return getConnectionControlPoint(edgeRef, handleIndex);
+}
+
+function updateConnectionHandlePositions(edgeRef) {
+  edgeRef.handles.forEach((handle, index) => {
+    const handlePoint = getConnectionHandlePosition(edgeRef, index);
+    handle.position.copy(handlePoint);
+
+    const guide = edgeRef.guides?.[index];
+    if (guide?.geometry?.attributes?.position) {
+      const curvePoint = getConnectionCurvePoint(
+        edgeRef.startUnit,
+        edgeRef.endUnit,
+        readEdgeCurveValues(edgeRef),
+        CONNECTION_HANDLE_T_VALUES[index],
+        edgeRef.curveMinAltitude,
+        edgeRef.curveMaxAltitude,
+      );
+      const positions = guide.geometry.attributes.position;
+      positions.setXYZ(0, curvePoint.x, curvePoint.y, curvePoint.z);
+      positions.setXYZ(1, handlePoint.x, handlePoint.y, handlePoint.z);
+      positions.needsUpdate = true;
+      guide.geometry.computeBoundingSphere();
+    }
+  });
+}
+
+function refreshConnectionEdgeGeometry(edgeRef) {
+  const nextGeometry = createConnectionTubeGeometry(edgeRef);
+  if (edgeRef.mesh.geometry) edgeRef.mesh.geometry.dispose();
+  edgeRef.mesh.geometry = nextGeometry;
+  updateConnectionHandlePositions(edgeRef);
+}
+
+function registerConnectionEditor(edgeRef) {
+  const guides = CONNECTION_HANDLE_T_VALUES.map((_, handleIndex) => {
+    const guide = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]),
+      connectionHandleGuideMaterials[handleIndex],
+    );
+    guide.renderOrder = 29;
+    guide.visible = false;
+    guide.frustumCulled = false;
+    edgeRef.destination.add(guide);
+    return guide;
+  });
+
+  const handles = CONNECTION_HANDLE_T_VALUES.map((_, handleIndex) => {
+    const handle = new THREE.Mesh(connectionHandleGeometry, connectionHandleMaterials[handleIndex]);
+    handle.userData.connectionEdge = edgeRef;
+    handle.userData.connectionHandleIndex = handleIndex;
+    handle.renderOrder = 30;
+    handle.visible = false;
+    handle.frustumCulled = false;
+    edgeRef.destination.add(handle);
+    connectionHandleObjects.push(handle);
+    return handle;
+  });
+
+  edgeRef.guides = guides;
+  edgeRef.handles = handles;
+  updateConnectionHandlePositions(edgeRef);
+  connectionEditorState.edges.push(edgeRef);
+}
+
+export function clearConnectionEditorObjectsForDestination(destination) {
+  for (let i = connectionHandleObjects.length - 1; i >= 0; i--) {
+    const handle = connectionHandleObjects[i];
+    const edgeRef = handle.userData.connectionEdge;
+    if (!destination || edgeRef?.destination === destination) {
+      if (handle.parent) handle.parent.remove(handle);
+      connectionHandleObjects.splice(i, 1);
+      if (connectionEditorState.activeHandle === handle) {
+        connectionEditorState.activeHandle = null;
+      }
+    }
+  }
+
+  for (let i = connectionEditorState.edges.length - 1; i >= 0; i--) {
+    if (!destination || connectionEditorState.edges[i].destination === destination) {
+      connectionEditorState.edges[i].guides?.forEach((guide) => {
+        if (guide.parent) guide.parent.remove(guide);
+        if (guide.geometry) guide.geometry.dispose();
+      });
+      connectionEditorState.edges.splice(i, 1);
+    }
+  }
+}
+
+export function refreshConnectionHandleVisibility(contextIndex, selectedNodeIds = []) {
+  const selectedIds = new Set(selectedNodeIds.filter(Boolean));
+  const hasSelection = selectedIds.size > 0;
+
+  connectionHandleObjects.forEach((handle) => {
+    const edgeRef = handle.userData.connectionEdge;
+    const handleIndex = handle.userData.connectionHandleIndex;
+    const isContext = edgeRef?.contextIndex === contextIndex;
+    const isSelected = selectedIds.has(edgeRef?.sourceId) || selectedIds.has(edgeRef?.targetId);
+    const visible = Boolean(hasSelection && isContext && isSelected && handle.parent);
+    handle.visible = visible;
+    if (edgeRef?.guides?.[handleIndex]) {
+      edgeRef.guides[handleIndex].visible = visible;
+    }
+  });
+}
+
+export function beginConnectionHandleDrag(raycaster) {
+  const visibleHandles = connectionHandleObjects.filter((handle) => handle.visible && handle.parent);
+  const intersects = raycaster.intersectObjects(visibleHandles, false);
+  if (!intersects.length) return false;
+  connectionEditorState.activeHandle = intersects[0].object;
+  return true;
+}
+
+export function isConnectionHandleDragActive() {
+  return Boolean(connectionEditorState.activeHandle);
+}
+
+export function updateConnectionHandleDrag(raycaster) {
+  const handle = connectionEditorState.activeHandle;
+  if (!handle) return false;
+
+  const edgeRef = handle.userData.connectionEdge;
+  const handleIndex = handle.userData.connectionHandleIndex;
+  if (!edgeRef?.destination) return false;
+
+  const inverseMatrix = new THREE.Matrix4().copy(edgeRef.destination.matrixWorld).invert();
+  const localRay = raycaster.ray.clone().applyMatrix4(inverseMatrix);
+  const surface = new THREE.Sphere(new THREE.Vector3(0, 0, 0), edgeRef.curveMinAltitude);
+  const localPoint = new THREE.Vector3();
+  const intersection = localRay.intersectSphere(surface, localPoint);
+  if (!intersection) return true;
+
+  const t = CONNECTION_HANDLE_T_VALUES[handleIndex];
+  const { baseUnit, sideUnit } = getConnectionFrame(edgeRef.startUnit, edgeRef.endUnit, t);
+  const unitPoint = localPoint.normalize();
+  const value = THREE.MathUtils.clamp(
+    THREE.MathUtils.radToDeg(Math.atan2(unitPoint.dot(sideUnit), unitPoint.dot(baseUnit))),
+    -CONNECTION_HANDLE_LIMIT_DEGREES,
+    CONNECTION_HANDLE_LIMIT_DEGREES,
+  );
+
+  setConnectionCurveValue(edgeRef, handleIndex, value);
+  refreshConnectionEdgeGeometry(edgeRef);
+  return true;
+}
+
+export function endConnectionHandleDrag() {
+  const handle = connectionEditorState.activeHandle;
+  connectionEditorState.activeHandle = null;
+  if (!handle) return;
+
+  const edgeRef = handle.userData.connectionEdge;
+  if (!edgeRef) return;
+  const entry = edgeRef.connectionRow[edgeRef.targetEntryIndex];
+  console.log('Connection curve', edgeRef.sourceId, '->', edgeRef.targetId, entry);
+}
+
+export function createConnections(tagSource, connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, destination, dashed, arrowed, tunnel, editorOptions = {}) {
+    if (!Array.isArray(tagSource) || !Array.isArray(connectionSource) || !destination) return;
     tagSource.forEach((sourceItem, i) => {
         connectionSource.forEach((connection, j) => {
             if (sourceItem.id === connection[0]) {
-                connection.slice(1).forEach((targetId, k) => {
+                connection.slice(1).forEach((connectionEntry, k) => {
+                    const targetId = getConnectionTargetId(connectionEntry);
+                    if (!targetId) return;
                     tagSource.forEach((target, l) => {
                         if (target.id === targetId) {
                             let p1 = convertLatLngtoCartesian(sourceItem.lat, sourceItem.lng, curveMinAltitude);
@@ -546,7 +915,16 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
                             let weight = (sourceItem.size + target.size) / 2;
                             if (arrowed == true) weight *= 4
                             if (tunnel !== true) {
-                                getCurve(p1, p2, weight);
+                                getCurve(p1, p2, weight, {
+                                  sourceId: sourceItem.id,
+                                  targetId,
+                                  connectionSource,
+                                  connectionRow: connection,
+                                  connectionRowIndex: j,
+                                  targetEntryIndex: k + 1,
+                                  contextIndex: editorOptions.contextIndex,
+                                  kind: editorOptions.kind || (arrowed ? 'arrow' : dashed ? 'dashed' : 'normal'),
+                                });
                             } else digTunnel(p1, p2, weight)
                         }
                     });
@@ -555,15 +933,9 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         });
     });
 
-    function getCurve(p1, p2, weight){
+    function getCurve(p1, p2, weight, metadata){
         const v1 = new THREE.Vector3(p1.x, p1.y, p1.z);
         const v2 = new THREE.Vector3(p2.x, p2.y, p2.z);
-        const points = Array.from({length: 21}, (_, i) => {
-            const p = new THREE.Vector3().lerpVectors(v1, v2, i/20);
-            p.normalize();
-            p.multiplyScalar(curveMinAltitude + curveMaxAltitude * Math.sin(Math.PI * i / 20));
-            return p;
-        });
 
         let material = connectionMaterial;
         let segmentModifier = 1
@@ -613,10 +985,22 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
             segmentModifier = 5
         }
 
-        const path = new THREE.CatmullRomCurve3(points);
-        const geometry = new THREE.TubeGeometry(path, 20, curveThickness * weight, curveRadiusSegments * segmentModifier, false);
-
+        const edgeRef = {
+            ...metadata,
+            startUnit: v1.clone().normalize(),
+            endUnit: v2.clone().normalize(),
+            curveMinAltitude,
+            curveMaxAltitude,
+            radius: curveThickness * weight,
+            radialSegments: curveRadiusSegments * segmentModifier,
+            destination,
+            handles: [],
+            guides: [],
+            mesh: null,
+        };
+        const geometry = createConnectionTubeGeometry(edgeRef);
         const curve = new THREE.Mesh(geometry, material);
+        edgeRef.mesh = curve;
         if (arrowed) {
             // Save the mesh and its texture in the global curveMeshes array
             window.curveMeshes.push({
@@ -629,6 +1013,10 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         curve.castShadow = true;
 
         destination.add(curve);
+
+        if (editorOptions.developer && !tunnel) {
+            registerConnectionEditor(edgeRef);
+        }
     }
 
     function digTunnel(p1, p2, weight){

@@ -8,7 +8,23 @@ window.WordCloud = WordCloud;
 //  IMPORT SCRIPTS
 import { renderer, camera, clock, orbitControls, flyControls, resizeRendererToDisplaySize, updateFlightSpeedByDistance, getFollowMode, setFollowMode } from './core/camera.js'
 import { setupLighting } from './core/lighting.js'
-import { createImages, createTags, hoveredPins, intersectObjectsArray, createConnections, hoverPins, instantiateNugget, refreshNode } from './mindmap.js'
+import {
+    createImages,
+    createTags,
+    hoveredPins,
+    intersectObjectsArray,
+    createConnections,
+    hoverPins,
+    instantiateNugget,
+    refreshNode,
+    beginConnectionHandleDrag,
+    updateConnectionHandleDrag,
+    endConnectionHandleDrag,
+    isConnectionHandleDragActive,
+    refreshConnectionHandleVisibility,
+    clearConnectionEditorObjectsForDestination,
+    findConnectionTargetIndex,
+} from './mindmap.js'
 import {
     configureDatasets,
     contexts,
@@ -62,8 +78,35 @@ let showContent = true;
 let fastMove = false;
 const developerHud = new DeveloperHud();
 
+function getSelectedConnectionNodeIds() {
+    const ctx = contexts[selectedContext];
+    if (!ctx?.tagData) return [];
+
+    if (selectedNodes.length > 0) {
+        return selectedNodes
+            .map((nodeIndex) => ctx.tagData[nodeIndex]?.id)
+            .filter(Boolean);
+    }
+
+    if (selectedNode !== null && selectedNode !== undefined) {
+        return [ctx.tagData[selectedNode]?.id].filter(Boolean);
+    }
+
+    return [];
+}
+
+function updateConnectionHandleVisibility() {
+    if (!developer) {
+        refreshConnectionHandleVisibility(selectedContext, []);
+        return;
+    }
+
+    refreshConnectionHandleVisibility(selectedContext, getSelectedConnectionNodeIds());
+}
+
 function updateDeveloperHud() {
     developerHud.update({ developer, contexts, selectedContext });
+    updateConnectionHandleVisibility();
 }
 
 function createContexts(version) {
@@ -358,6 +401,7 @@ configureDatasets({
     createImages,
     createTags,
     createConnections,
+    clearConnectionEditorObjectsForDestination,
     intersectObjectsArray,
 });
 
@@ -479,6 +523,53 @@ function closeActiveOverlay() {
     }
 
     return false;
+}
+
+function clearConnectionDestination(destination) {
+    if (!destination) return;
+    clearConnectionEditorObjectsForDestination(destination);
+    if (Array.isArray(window.curveMeshes)) {
+        window.curveMeshes = window.curveMeshes.filter((curveData) => curveData.mesh?.parent !== destination);
+    }
+    destination.clear();
+}
+
+function connectionEditorOptions(contextIndex, kind) {
+    return {
+        developer,
+        contextIndex,
+        kind,
+    };
+}
+
+function redrawDeveloperConnections(contextIndex) {
+    const ctx = contexts[contextIndex];
+    if (!ctx?.connectionDestination) return;
+
+    clearConnectionDestination(ctx.connectionDestination);
+
+    const curveThickness = 0.0001;
+    const curveRadiusSegments = 3;
+    const curveMaxAltitude = 0.03;
+    const curveMinAltitude = ctx.radius;
+
+    createConnections(ctx.tagData, ctx.connectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, ctx.connectionDestination, false, false, false, connectionEditorOptions(contextIndex, 'normal'));
+    createConnections(ctx.tagData, ctx.arrowConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, ctx.connectionDestination, false, true, false, connectionEditorOptions(contextIndex, 'arrow'));
+    createConnections(ctx.tagData, ctx.dashedConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, ctx.connectionDestination, true, false, false, connectionEditorOptions(contextIndex, 'dashed'));
+    createConnections(ctx.tagData, ctx.tunnelConnectionData, 0.001, 6, 0.1, curveMinAltitude, ctx.connectionDestination, false, false, true, connectionEditorOptions(contextIndex, 'tunnel'));
+    updateDeveloperHud();
+}
+
+function serializeConnectionEntry(entry) {
+    if (typeof entry === 'string') return JSON.stringify(entry);
+    return JSON.stringify(entry);
+}
+
+function serializeConnectionRows(rows) {
+    if (!Array.isArray(rows)) return '';
+    return rows
+        .map((row) => `[${row.map(serializeConnectionEntry).join(', ')}],`)
+        .join('\n');
 }
 
 
@@ -725,6 +816,7 @@ function onDocumentKeyUp(event) {
         //Node management
         if (keyCode == 90 && developer == true) { //Z - clear selection
             selectedNodes.length = 0
+            updateDeveloperHud()
         }
         if (keyCode == 65 && developer == true) { //A - add to selection
             if (selectedNode !== null) {
@@ -732,6 +824,7 @@ function onDocumentKeyUp(event) {
                     selectedNodes.push(selectedNode)
                 }
                 console.log(selectedNodes)
+                updateDeveloperHud()
             }
         }
         if (keyCode == 70 && developer == true) { //F - toggle fast move
@@ -750,43 +843,19 @@ function onDocumentKeyUp(event) {
             output = output + "\n]\n\n// ā ī ū ṅ ñ ṇ ṭ ṭh ḍ ḍh ṇ ḷ ṃ ṁ ŋ \n\n //azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBNéÉàÀèÈùÙëËüÜïÏâêîôûÂÊÎÔÛíÍáÁóÓúÚñÑłŁçÇýÝčČšŠæÆœŒāīūṅṇṭḍḷṃṁ/\*-+7894561230,;:!?¡¿.%$£€={}()[]&~'\`#_°@АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯяüÜöÖäÄñÑςερτυθιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜåÅæÆøØ \n\nexport const planetConnections = [\n"
 
             const connectionSource = contexts[selectedContext].connectionData
-            for (let i = 0; i < connectionSource.length; i++) {
-                output = output + "["
-                connectionSource[i].forEach((item) => {
-                    output = output + "\"" + item + "\", "
-                })
-                output = output + "],\n"
-            }
+            output = output + serializeConnectionRows(connectionSource)
             output = output + "\n]\n\nexport const planetArrowedConnections = [\n"
 
             const arrowConnectionSource = contexts[selectedContext].arrowConnectionData
-            for (let i = 0; i < arrowConnectionSource.length; i++) {
-                output = output + "["
-                arrowConnectionSource[i].forEach((item) => {
-                    output = output + "\"" + item + "\", "
-                })
-                output = output + "],\n"
-            }
+            output = output + serializeConnectionRows(arrowConnectionSource)
             output = output + "\n]\n\nexport const planetDashedConnections = [\n"
 
             const dashedConnectionSource = contexts[selectedContext].dashedConnectionData
-            for (let i = 0; i < dashedConnectionSource.length; i++) {
-                output = output + "["
-                dashedConnectionSource[i].forEach((item) => {
-                    output = output + "\"" + item + "\", "
-                })
-                output = output + "],\n"
-            }
+            output = output + serializeConnectionRows(dashedConnectionSource)
             output = output + "\n]\n\nexport const planetTunnelConnections = [\n"
 
             const tunnelConnectionSource = contexts[selectedContext].tunnelConnectionData
-            for (let i = 0; i < tunnelConnectionSource.length; i++) {
-                output = output + "["
-                tunnelConnectionSource[i].forEach((item) => {
-                    output = output + "\"" + item + "\", "
-                })
-                output = output + "],\n"
-            }
+            output = output + serializeConnectionRows(tunnelConnectionSource)
             output = output + "\n]"
             console.log(output)
         }
@@ -825,20 +894,20 @@ function onDocumentKeyUp(event) {
                 contexts[selectedContext].tagDestination.remove(selectedTag)
 
                 for (let i = 0; i < contexts[selectedContext].tagData.length; i++) {
-                    const index1 = contexts[selectedContext].connectionData[i].indexOf(id)
+                    const index1 = findConnectionTargetIndex(contexts[selectedContext].connectionData[i], id)
                     if (index1 !== -1) contexts[selectedContext].connectionData[i].splice(index1, 1)
                     
                     if (contexts[selectedContext].arrowConnectionData !== undefined) {
-                        const index2 = contexts[selectedContext].arrowConnectionData[i].indexOf(id)
+                        const index2 = findConnectionTargetIndex(contexts[selectedContext].arrowConnectionData[i], id)
                         if (index2 !== -1) contexts[selectedContext].arrowConnectionData[i].splice(index2, 1)
                     }
 
                     if (contexts[selectedContext].dashedConnectionData !== undefined) {
-                        const index3 = contexts[selectedContext].dashedConnectionData[i].indexOf(id)
+                        const index3 = findConnectionTargetIndex(contexts[selectedContext].dashedConnectionData[i], id)
                         if (index3 !== -1) contexts[selectedContext].dashedConnectionData[i].splice(index3, 1)
                     }
                     if (contexts[selectedContext].tunnelConnectionData !== undefined) {
-                        const index4 = contexts[selectedContext].tunnelConnectionData[i].indexOf(id)
+                        const index4 = findConnectionTargetIndex(contexts[selectedContext].tunnelConnectionData[i], id)
                         if (index4 !== -1) contexts[selectedContext].tunnelConnectionData[i].splice(index4, 1)
                     }
                 }
@@ -854,146 +923,69 @@ function onDocumentKeyUp(event) {
                 selectedPin = null
                 selectedBox = null
                 selectedTag = null
-                updateDeveloperHud();
+                redrawDeveloperConnections(selectedContext)
             }           
         }
         if (keyCode == 82 && developer == true) { //R - create new connections
             if (selectedNodes.length > 1) {
                 for (let i = 1; i < selectedNodes.length; i++){
-                    if (contexts[selectedContext].connectionData[selectedNodes[0]].includes(contexts[selectedContext].tagData[selectedNodes[i]].id)) {
-                        const index = contexts[selectedContext].connectionData[selectedNodes[0]].indexOf(contexts[selectedContext].tagData[selectedNodes[i]].id)
-                        if (index > -1) {
-                            contexts[selectedContext].connectionData[selectedNodes[0]].splice(index, 1)
-                        }
-                    } else contexts[selectedContext].connectionData[selectedNodes[0]].push(contexts[selectedContext].tagData[selectedNodes[i]].id)
+                    const targetId = contexts[selectedContext].tagData[selectedNodes[i]].id
+                    const row = contexts[selectedContext].connectionData[selectedNodes[0]]
+                    const index = findConnectionTargetIndex(row, targetId)
+                    if (index > -1) {
+                        row.splice(index, 1)
+                    } else row.push(targetId)
                 }
 
-                const context = {
-                    tagSource: contexts[selectedContext].tagData,
-                    connectionSource: contexts[selectedContext].connectionData, 
-                    curveMinAltitude: contexts[selectedContext].radius, 
-                    context: contexts[selectedContext].connectionDestination
-                }
-                console.log(context.context)
-                context.context.clear()//What on earth is the point of this???
-                console.log(context.context)
-                const curveThickness = 0.0001
-                const curveRadiusSegments = 3
-                const curveMaxAltitude = 0.03
-                createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, false, false)
+                redrawDeveloperConnections(selectedContext)
             
             } 
         }
         if (keyCode == 86 && developer == true) { //V - create new arrow connections
             if (selectedNodes.length > 1) {
                 for (let i = 1; i < selectedNodes.length; i++){
-                    if (contexts[selectedContext].arrowConnectionData[selectedNodes[0]].includes(contexts[selectedContext].tagData[selectedNodes[i]].id)) {
-                        const index = contexts[selectedContext].arrowConnectionData[selectedNodes[0]].indexOf(contexts[selectedContext].tagData[selectedNodes[i]].id)
-                        if (index > -1) {
-                            contexts[selectedContext].arrowConnectionData[selectedNodes[0]].splice(index, 1)
-                        }
-                    } else contexts[selectedContext].arrowConnectionData[selectedNodes[0]].push(contexts[selectedContext].tagData[selectedNodes[i]].id)
+                    const targetId = contexts[selectedContext].tagData[selectedNodes[i]].id
+                    const row = contexts[selectedContext].arrowConnectionData[selectedNodes[0]]
+                    const index = findConnectionTargetIndex(row, targetId)
+                    if (index > -1) {
+                        row.splice(index, 1)
+                    } else row.push(targetId)
                 }
 
-                const context = {
-                    tagSource: contexts[selectedContext].tagData,
-                    connectionSource: contexts[selectedContext].arrowConnectionData, 
-                    curveMinAltitude: contexts[selectedContext].radius, 
-                    context: contexts[selectedContext].connectionDestination
-                }
-                context.context.clear() //What on earth is the point of this???
-                const curveThickness = 0.0001
-                const curveRadiusSegments = 3
-                const curveMaxAltitude = 0.03
-                createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, false, true, false)
+                redrawDeveloperConnections(selectedContext)
             } 
         }
         if (keyCode == 66 && developer == true) { //B - create new dashed connections
             if (selectedNodes.length > 1) {
                 for (let i = 1; i < selectedNodes.length; i++){
-                    if (contexts[selectedContext].dashedConnectionData[selectedNodes[0]].includes(contexts[selectedContext].tagData[selectedNodes[i]].id)) {
-                        const index = contexts[selectedContext].dashedConnectionData[selectedNodes[0]].indexOf(contexts[selectedContext].tagData[selectedNodes[i]].id)
-                        if (index > -1) {
-                            contexts[selectedContext].dashedConnectionData[selectedNodes[0]].splice(index, 1)
-                        }
-                    } else contexts[selectedContext].dashedConnectionData[selectedNodes[0]].push(contexts[selectedContext].tagData[selectedNodes[i]].id)
+                    const targetId = contexts[selectedContext].tagData[selectedNodes[i]].id
+                    const row = contexts[selectedContext].dashedConnectionData[selectedNodes[0]]
+                    const index = findConnectionTargetIndex(row, targetId)
+                    if (index > -1) {
+                        row.splice(index, 1)
+                    } else row.push(targetId)
                 }
 
-                const context = {
-                    tagSource: contexts[selectedContext].tagData,
-                    connectionSource: contexts[selectedContext].dashedConnectionData, 
-                    curveMinAltitude: contexts[selectedContext].radius, 
-                    context: contexts[selectedContext].connectionDestination
-                }
-                context.context.clear()//What on earth is the point of this???
-                const curveThickness = 0.0001
-                const curveRadiusSegments = 3
-                const curveMaxAltitude = 0.03
-                createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, true, false, false)
+                redrawDeveloperConnections(selectedContext)
             } 
         }
         if (keyCode == 78 && developer == true) { //N - create new tunnel connections
             if (selectedNodes.length > 1) {
                 for (let i = 1; i < selectedNodes.length; i++){
-                    if (contexts[selectedContext].tunnelConnectionData[selectedNodes[0]].includes(contexts[selectedContext].tagData[selectedNodes[i]].id)) {
-                        const index = contexts[selectedContext].tunnelConnectionData[selectedNodes[0]].indexOf(contexts[selectedContext].tagData[selectedNodes[i]].id)
-                        if (index > -1) {
-                            contexts[selectedContext].tunnelConnectionData[selectedNodes[0]].splice(index, 1)
-                        }
-                    } else contexts[selectedContext].tunnelConnectionData[selectedNodes[0]].push(contexts[selectedContext].tagData[selectedNodes[i]].id)
+                    const targetId = contexts[selectedContext].tagData[selectedNodes[i]].id
+                    const row = contexts[selectedContext].tunnelConnectionData[selectedNodes[0]]
+                    const index = findConnectionTargetIndex(row, targetId)
+                    if (index > -1) {
+                        row.splice(index, 1)
+                    } else row.push(targetId)
                 }
 
-                const context = {
-                    tagSource: contexts[selectedContext].tagData,
-                    connectionSource: contexts[selectedContext].tunnelConnectionData, 
-                    curveMinAltitude: contexts[selectedContext].radius, 
-                    context: contexts[selectedContext].connectionDestination
-                }
-                context.context.clear()//What on earth is the point of this???
-                const curveThickness = 0.001
-                const curveRadiusSegments = 6
-                const curveMaxAltitude = 0.1
-                createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, false, false, true)
+                redrawDeveloperConnections(selectedContext)
             } 
         }
         
         if (keyCode == 87 && developer == true) { //W - redraw connections
-            const context = {
-                tagSource: contexts[selectedContext].tagData,
-                connectionSource: contexts[selectedContext].connectionData, 
-                curveMinAltitude: contexts[selectedContext].radius, 
-                context: contexts[selectedContext].connectionDestination
-            }
-            context.context.clear()
-            const curveThickness = 0.0001
-            const curveRadiusSegments = 3
-            const curveMaxAltitude = 0.03
-            createConnections(context.tagSource, context.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, context.curveMinAltitude, context.context, false, false, false)
-            
-            const arrowContext = {
-                tagSource: contexts[selectedContext].tagData,
-                connectionSource: contexts[selectedContext].arrowConnectionData, 
-                curveMinAltitude: contexts[selectedContext].radius, 
-                context: contexts[selectedContext].connectionDestination
-            }
-            createConnections(arrowContext.tagSource, arrowContext.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, arrowContext.curveMinAltitude, arrowContext.context, false, true, false)
-        
-            const dashedContext = {
-                tagSource: contexts[selectedContext].tagData,
-                connectionSource: contexts[selectedContext].dashedConnectionData, 
-                curveMinAltitude: contexts[selectedContext].radius, 
-                context: contexts[selectedContext].connectionDestination
-            }
-            createConnections(dashedContext.tagSource, dashedContext.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, dashedContext.curveMinAltitude, dashedContext.context, true, false, false)
-        
-            const tunnelContext = {
-                tagSource: contexts[selectedContext].tagData,
-                connectionSource: contexts[selectedContext].tunnelConnectionData, 
-                curveMinAltitude: contexts[selectedContext].radius, 
-                context: contexts[selectedContext].connectionDestination
-            }
-            createConnections(tunnelContext.tagSource, tunnelContext.connectionSource, curveThickness, curveRadiusSegments, curveMaxAltitude, tunnelContext.curveMinAltitude, tunnelContext.context, false, false, true)
-        
+            redrawDeveloperConnections(selectedContext)
         } 
         if (keyCode == 69 && developer == true) { //E - change color
             if (selectedNodes.length > 1) {
@@ -1330,6 +1322,13 @@ function onPointerMove(event) {
             selectState = false;
         }
     }
+
+    if (developer && isConnectionHandleDragActive()) {
+        raycaster.setFromCamera(pointer, camera);
+        updateConnectionHandleDrag(raycaster);
+        selectState = false;
+        event.preventDefault();
+    }
 }
 
 async function onPointerClick(event) {
@@ -1362,7 +1361,9 @@ async function onPointerClick(event) {
     if (intersects.length > 0) {
         selectedPin = intersects[0].object;
 
+        const previousContext = selectedContext;
         selectedContext = intersects[0].object.context;
+        if (previousContext !== selectedContext) selectedNodes.length = 0;
         selectedNode = intersects[0].object.index;
         selectedBox = contexts[selectedContext]?.boxes[selectedNode] || null;
         selectedTag = contexts[selectedContext]?.tags[selectedNode] || null;
@@ -1383,7 +1384,19 @@ async function onPointerClick(event) {
 }
 
 let selectState = false
+let connectionHandleDragOrbitWasEnabled = false;
 function processPointerUpEvent(event) {
+    if (developer && isConnectionHandleDragActive()) {
+        endConnectionHandleDrag();
+        orbitControls.enabled = connectionHandleDragOrbitWasEnabled;
+        connectionHandleDragOrbitWasEnabled = false;
+        selectState = false;
+        initialTouchPosition.x = null;
+        initialTouchPosition.y = null;
+        event.preventDefault();
+        return;
+    }
+
     // Suppress click if we were orbit-dragging (OrbitControls active)
     if (selectState && !orbitDragging) {
       onPointerClick(event);
@@ -1396,6 +1409,23 @@ function processPointerUpEvent(event) {
   
   window.addEventListener('pointermove', onPointerMove);
     window.addEventListener('pointerdown', (event) => {
+        const isTouch = !!event.changedTouches;
+        const cx = isTouch ? event.changedTouches[0].clientX : event.clientX;
+        const cy = isTouch ? event.changedTouches[0].clientY : event.clientY;
+        pointer.x = (cx / window.innerWidth) * 2 - 1;
+        pointer.y = -(cy / window.innerHeight) * 2 + 1;
+
+        if (developer && !isTextEntryTarget(event.target)) {
+            raycaster.setFromCamera(pointer, camera);
+            if (beginConnectionHandleDrag(raycaster)) {
+                connectionHandleDragOrbitWasEnabled = orbitControls.enabled;
+                orbitControls.enabled = false;
+                selectState = false;
+                event.preventDefault();
+                return;
+            }
+        }
+
         selectState = true;
         // record initial position for click-vs-drag detection
         if (event.changedTouches) {
