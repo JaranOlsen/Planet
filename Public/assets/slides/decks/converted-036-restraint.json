@@ -1,0 +1,112 @@
+{
+  "id": "converted-036-restraint",
+  "title": "Converted: Restraint",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[36]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 36,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Restraint",
+      "title": "Developing sense restraint",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/OwVhyod-Ar4",
+        "title": "Developing sense restraint"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/restraint/work.webp",
+      "alt": "Restraint legacy image 2",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/restraint/weekend.webp",
+      "alt": "Restraint legacy image 3",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/restraint/cabin.webp",
+      "alt": "Restraint legacy image 4",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/restraint/meditation.webp",
+      "alt": "Restraint legacy image 5",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/restraint/retreat.webp",
+      "alt": "Restraint legacy image 6",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/restraint/breath.webp",
+      "alt": "Restraint legacy image 7",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/restraint/graph.webp",
+      "alt": "Restraint legacy image 8",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "dense-bullets",
+      "overline": "Restraint",
+      "title": "Withdrawal symptoms",
+      "groups": [
+        {
+          "title": "Affective and cognitive",
+          "items": [
+            "Depression: drop in mood, motivation, hope, or access to sadness.",
+            "Anxiety: nervousness, tension, panic, or threat scanning.",
+            "Fatigue: low energy and reduced capacity for daily activity.",
+            "Sleep disturbance: insomnia, oversleeping, or unstable rhythms.",
+            "Cognitive impairment: reduced concentration, memory, and decisions."
+          ]
+        },
+        {
+          "title": "Body and behavior",
+          "items": [
+            "Physical symptoms: headaches, dizziness, appetite shifts, gut complaints.",
+            "Mood swings: rapid shifts in affective tone and intensity.",
+            "Cravings: strong impulse to return to the object of restraint.",
+            "Irritability or agitation: disproportionate frustration.",
+            "Anhedonia: reduced interest in normally rewarding activity."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

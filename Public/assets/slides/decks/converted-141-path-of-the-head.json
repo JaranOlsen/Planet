@@ -1,0 +1,65 @@
+{
+  "id": "converted-141-path-of-the-head",
+  "title": "Converted: Path of the Head",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured conversion of legacy contentData[141]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 141,
+    "refs": [
+      "1",
+      "2",
+      "3"
+    ]
+  },
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Path of the Head",
+      "title": "Path of the Head",
+      "image": "assets/images/features/god.webp",
+      "alt": "Path of the Head",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "\"Killing the Buddha\"\n↑\nMerging / surrendering\n↑\nWitnessing\n↑\nIdentification\n↑\nDiscovering the important questions",
+      "textAlign": "center"
+    },
+    {
+      "template": "split-image",
+      "overline": "Path of the Head",
+      "title": "What is Missing in Philosophy?",
+      "image": "assets/images/cartoons/magic.webp",
+      "alt": "Path of the Head",
+      "bullets": [
+        {
+          "text": "From the wisdom traditions",
+          "children": [
+            "Awakening practices; accessing deeper truths about self, nature, life, and death",
+            "Helpful narratives/myths about that which is beyond our intellectual grasp"
+          ]
+        },
+        {
+          "text": "From the psychotherapy traditions",
+          "children": [
+            "Contact with the body and emotions",
+            "Contact with emotional and relational needs"
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "split-image",
+      "overline": "Path of the Head",
+      "title": "Path of the Head",
+      "image": "assets/images/cartoons/magic.webp",
+      "alt": "Path of the Head",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": [
+        "The Hard Problem of Consciousness"
+      ]
+    }
+  ]
+}

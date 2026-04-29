@@ -1,0 +1,201 @@
+{
+  "id": "converted-011-re-uniting",
+  "title": "Converted: Re-uniting",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[11]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 11,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Re-uniting",
+      "title": "The Witnessing Position is a Half Way Stage",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/H-SEfK4uFa8",
+        "title": "The Witnessing Position is a Half Way Stage"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience2/Slide1.webp",
+      "alt": "Re-uniting legacy image 2",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience2/Slide2.webp",
+      "alt": "Re-uniting legacy image 3",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience2/Slide3.webp",
+      "alt": "Re-uniting legacy image 4",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience2/Slide4.webp",
+      "alt": "Re-uniting legacy image 5",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience2/Slide5.webp",
+      "alt": "Re-uniting legacy image 6",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience2/Slide6.webp",
+      "alt": "Re-uniting legacy image 7",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience2/Slide7.webp",
+      "alt": "Re-uniting legacy image 8",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience2/Slide8.webp",
+      "alt": "Re-uniting legacy image 9",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience2/Slide9.webp",
+      "alt": "Re-uniting legacy image 10",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience2/Slide10.webp",
+      "alt": "Re-uniting legacy image 11",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/experience2/Slide11.webp",
+      "alt": "Re-uniting legacy image 12",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/awareness1/Slide1.webp",
+      "alt": "Re-uniting legacy image 13",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/awareness1/Slide2.webp",
+      "alt": "Re-uniting legacy image 14",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/awareness1/Slide3.webp",
+      "alt": "Re-uniting legacy image 15",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/awareness1/Slide4.webp",
+      "alt": "Re-uniting legacy image 16",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/awareness1/Slide5.webp",
+      "alt": "Re-uniting legacy image 17",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/awareness1/Slide6.webp",
+      "alt": "Re-uniting legacy image 18",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/awareness1/Slide7.webp",
+      "alt": "Re-uniting legacy image 19",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/awareness1/Slide8.webp",
+      "alt": "Re-uniting legacy image 20",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/awareness1/Slide9.webp",
+      "alt": "Re-uniting legacy image 21",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/awareness1/Slide10.webp",
+      "alt": "Re-uniting legacy image 22",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/awareness1/Slide11.webp",
+      "alt": "Re-uniting legacy image 23",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

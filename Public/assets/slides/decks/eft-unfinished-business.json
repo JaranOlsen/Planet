@@ -1,0 +1,62 @@
+{
+  "id": "eft-unfinished-business",
+  "title": "EFT: Unfinished Business",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Three practical clinician-facing slides extracted from the EFT interventions practice deck.",
+  "sources": [
+    {
+      "label": "Vrana and Greenberg, Overview of Emotion-Focused Therapy",
+      "url": "https://www.researchgate.net/publication/325379801_Overview_of_emotion-focused_therapy"
+    },
+    {
+      "label": "Markers and tasks summary",
+      "url": "https://www.lotus-on-the-ripple.com/single-post/2019/02/11/integrating-being-and-doing-in-emotion-focused-therapy"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Unfinished Business",
+      "title": "Marker: unresolved feeling toward a significant other",
+      "image": "assets/images/gut/fermin-rodriguez-penelas-LJD_00L7Clo-unsplash.jpg",
+      "body": "Use when the absent other is emotionally present in the room.",
+      "bullets": [
+        "Listen for lingering hurt, anger, longing, grief, or blocked protest.",
+        "Clarify who belongs in the chair and what scene is alive now.",
+        "Do not force forgiveness; track completion, not moral resolution."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Unfinished Business",
+      "title": "Empty-chair arc",
+      "body": "Move from global complaint to specific emotional contact, then toward a new internal stance.",
+      "steps": [
+        "Bring the other into the chair vividly enough to evoke contact.",
+        "Express primary emotion and unmet need directly to the other.",
+        "If useful, enact the other's response and test its impact.",
+        "Return to the self: what is true, what was missing, what is no longer owed.",
+        "Consolidate a stance: accountability, boundary, grief, release, or compassion."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "checklist",
+      "overline": "Unfinished Business",
+      "title": "Do not mistake these for resolution",
+      "body": "The task can look dramatic while staying emotionally unchanged. Track organismic shift.",
+      "items": [
+        "Insight without contact: 'I understand why they did it.'",
+        "Premature forgiveness that bypasses anger or grief.",
+        "Retaliatory expression that leaves the vulnerable need untouched.",
+        "A polished narrative with no bodily relief or new boundary."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "converted-118-falsifiability-and-the-problem-of-induction",
+  "title": "Converted: Falsifiability and the problem of induction",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[118]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 118,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Limitation",
+      "title": "Falsifiability and the problem of induction",
+      "body": [
+        "The process of induction, or generalizing from specific observations to broader principles, is inherently uncertain. Even a theory that has been supported by a large body of evidence could potentially be falsified by new observations, which means that all theories are, in principle, provisional and subject to revision."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

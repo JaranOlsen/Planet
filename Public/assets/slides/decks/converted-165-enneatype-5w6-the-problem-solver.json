@@ -1,0 +1,56 @@
+{
+  "id": "converted-165-enneatype-5w6-the-problem-solver",
+  "title": "Converted: Enneatype 5w6 - The Problem Solver",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[165]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 165,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 5w6",
+      "title": "The Problem Solver",
+      "backgroundColor": "rgb(65, 52, 44)",
+      "image": "assets/images/enneagram/keys.webp",
+      "imagePosition": "50% 80%",
+      "body": [
+        {
+          "text": "The Analytical, Loyal Type: Intellectual, Introspective, Detail-oriented, Loyal, and Responsible.",
+          "strong": true
+        },
+        "As a Five wing Six, you merge the intellectual, introspective nature of a Five with the loyal, responsible traits of a Six. This results in a personality that's not just focused on intellectual understanding, but also concerned with practical applications and community welfare. Your intellectual pursuits are deeply rooted in your desire for clarity, but your Six wing adds a layer of loyalty and responsibility.",
+        "Your dedication to understanding the world around you is matched by a strong sense of duty towards your community or group. As such, you often apply your analytical skills to solving practical problems, striving to create improvements that benefit both your own understanding and the welfare of your community. This unique blend of intellectual rigor and loyalty creates a thoughtful, reliable personality with a deep sense of responsibility."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 5w6",
+      "title": "The Problem Solver",
+      "backgroundColor": "rgb(65, 52, 44)",
+      "image": "assets/images/enneagram/keys.webp",
+      "imagePosition": "50% 80%",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Cultivate relationships and social connections alongside intellectual pursuits.",
+            "Challenge yourself to step outside of your comfort zone and confront your fears.",
+            "Recognize the value of emotional intelligence alongside intellectual knowledge.",
+            "Learn to manage stress and anxiety through mindfulness techniques.",
+            "Work on expressing your needs and feelings in relationships."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

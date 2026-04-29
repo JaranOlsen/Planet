@@ -1,0 +1,26 @@
+{
+  "id": "converted-093-spiral-dynamics-stage-red",
+  "title": "Converted: Spiral Dynamics - Stage Red",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured media conversion of legacy contentData[93]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 93,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Spiral Dynamics",
+      "title": "Stage Red (Magic-Mythic)",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/XEHYK3TM2jc",
+        "title": "Spiral Dynamics - Stage Red"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

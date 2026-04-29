@@ -35,6 +35,7 @@ const datasetState = {
   createImages: null,
   createTags: null,
   createConnections: null,
+  clearConnectionEditorObjectsForDestination: null,
   intersectObjectsArray: null,
   developerMode: false,
 };
@@ -175,6 +176,12 @@ export function clearPlanetMindmapVisuals() {
   planetCtx.tags.length = 0;
 
   if (jaraniusConnections) {
+    if (datasetState.clearConnectionEditorObjectsForDestination) {
+      datasetState.clearConnectionEditorObjectsForDestination(jaraniusConnections);
+    }
+    if (typeof window !== 'undefined' && Array.isArray(window.curveMeshes)) {
+      window.curveMeshes = window.curveMeshes.filter((curveData) => curveData.mesh?.parent !== jaraniusConnections);
+    }
     jaraniusConnections.children.slice().forEach((child) => {
       disposeMeshRecursive(child);
       jaraniusConnections.remove(child);
@@ -235,21 +242,26 @@ export function createMindmap() {
   const curveRadiusSegments = 3;
   const curveMaxAltitude = 0.02;
   const curveMinAltitude = contexts[0].radius + 0.02;
+  const editorOptions = (contextIndex, kind) => ({
+    developer: datasetState.developerMode,
+    contextIndex,
+    kind,
+  });
 
   if (!jaraniusConnections.parent) jaranius.add(jaraniusConnections);
   const planetCtx = contexts[0];
-  createConnections(planetCtx.tagData, planetCtx.connectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, false, false);
-  createConnections(planetCtx.tagData, planetCtx.dashedConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, true, false);
-  createConnections(planetCtx.tagData, planetCtx.arrowConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, false, true);
+  createConnections(planetCtx.tagData, planetCtx.connectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, false, false, false, editorOptions(0, 'normal'));
+  createConnections(planetCtx.tagData, planetCtx.dashedConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, true, false, false, editorOptions(0, 'dashed'));
+  createConnections(planetCtx.tagData, planetCtx.arrowConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, false, true, false, editorOptions(0, 'arrow'));
   if (planetCtx.tunnelConnectionData) {
-    createConnections(planetCtx.tagData, planetCtx.tunnelConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, false, false, true);
+    createConnections(planetCtx.tagData, planetCtx.tunnelConnectionData, curveThickness, curveRadiusSegments, curveMaxAltitude, curveMinAltitude, jaraniusConnections, false, false, true, editorOptions(0, 'tunnel'));
   }
 
   if (!spiralDynamicsConnections.parent) spiral.add(spiralDynamicsConnections);
-  createConnections(contexts[1].tagData, contexts[1].connectionData, 0.0002, curveRadiusSegments, 0.1, contexts[1].radius + 0.01, spiralDynamicsConnections, false, false);
+  createConnections(contexts[1].tagData, contexts[1].connectionData, 0.0002, curveRadiusSegments, 0.1, contexts[1].radius + 0.01, spiralDynamicsConnections, false, false, false, editorOptions(1, 'normal'));
 
   if (!enneagramConnectionsObj.parent) enneagram.add(enneagramConnectionsObj);
-  createConnections(contexts[3].tagData, contexts[3].tunnelConnectionData, 0.0002, curveRadiusSegments, 0.1, contexts[3].radius + 0.01, enneagramConnectionsObj, false, false, true);
+  createConnections(contexts[3].tagData, contexts[3].tunnelConnectionData, 0.0002, curveRadiusSegments, 0.1, contexts[3].radius + 0.01, enneagramConnectionsObj, false, false, true, editorOptions(3, 'tunnel'));
 }
 
 const mindmapRegistry = [

@@ -1,0 +1,34 @@
+{
+  "id": "converted-081-36-belonging-to-nature",
+  "title": "Converted: #36 Belonging To Nature",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[81]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 81,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#36 Belonging To Nature",
+      "image": "assets/images/roadToHere/36t.webp",
+      "alt": "#36 Belonging To Nature cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-36-belonging-to-nature",
+        "title": "Insight Timer Embed: Road To Here - #36 Belonging To Nature | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-36-belonging-to-nature"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

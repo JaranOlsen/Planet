@@ -1,0 +1,62 @@
+{
+  "id": "eft-anxiety-split",
+  "title": "EFT: Anxiety Split",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Three practical clinician-facing slides extracted from the EFT interventions practice deck.",
+  "sources": [
+    {
+      "label": "Vrana and Greenberg, Overview of Emotion-Focused Therapy",
+      "url": "https://www.researchgate.net/publication/325379801_Overview_of_emotion-focused_therapy"
+    },
+    {
+      "label": "Markers and tasks summary",
+      "url": "https://www.lotus-on-the-ripple.com/single-post/2019/02/11/integrating-being-and-doing-in-emotion-focused-therapy"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Anxiety Split",
+      "title": "Marker: one part interrupts experience",
+      "image": "assets/images/gut/tom-caillarec--0qyaihQxUU-unsplash.jpg",
+      "body": "Treat anxiety as an active organizer with a feared consequence.",
+      "bullets": [
+        "Name the interrupter's action: tighten, scan, silence, flee, freeze.",
+        "Ask what would happen if the emotion were allowed.",
+        "Look for the protected primary emotion underneath."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Anxiety Split",
+      "title": "Work with the protective logic",
+      "body": "Do not attack the anxiety. Make its protective function explicit, then help it update through contact with the living self.",
+      "steps": [
+        "Invite the anxious interrupter to speak: what are you preventing?",
+        "Heighten its prediction: rejection, collapse, danger, humiliation.",
+        "Move to the interrupted self: what is blocked and what does it cost?",
+        "Facilitate dialogue until fear and need can both be represented.",
+        "Test a small permission: one breath, one sentence, one felt impulse."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "checklist",
+      "overline": "Anxiety Split",
+      "title": "Resolution signals",
+      "body": "The task is resolving when regulation is no longer purchased by self-erasure.",
+      "items": [
+        "The anxious side can say what it fears without escalating.",
+        "The interrupted side can express a need, protest, or grief.",
+        "The client can sense anxiety as protective rather than identical with self.",
+        "A new boundary or permission becomes behaviorally imaginable."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

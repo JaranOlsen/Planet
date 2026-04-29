@@ -1,0 +1,25 @@
+{
+  "id": "converted-114-need-for-postulates-or-axioms",
+  "title": "Converted: Need for postulates or axioms",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[114]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 114,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Limitation",
+      "title": "Need for postulates or axioms",
+      "body": [
+        "Every theory must begin with a set of basic assumptions or postulates that cannot be derived from or proven by the theory itself. These postulates serve as the foundation upon which the theory is built and can sometimes be subject to revision or rejection based on new evidence or insights."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

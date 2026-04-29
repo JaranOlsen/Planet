@@ -1,0 +1,72 @@
+{
+  "id": "converted-145-enneatype-3-achiever",
+  "title": "Converted: Enneatype 3 - The Achiever",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[145], preserving the original D3 mindmap as a legacy-slide.",
+  "legacy": {
+    "contentData": 145,
+    "refs": ["1", "2", "3cj"]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 3",
+      "title": "The Achiever",
+      "backgroundColor": "rgb(137, 110, 36)",
+      "image": "assets/images/enneagram/trophy.webp",
+      "imagePosition": "40%",
+      "body": [
+        {
+          "text": "The Success-Oriented, Pragmatic Type: Adaptive, Excelling, Driven, and Image-Conscious.",
+          "strong": true
+        },
+        "As a Three, you are ambitious, goal-oriented, and driven by a need for personal achievement. You're deeply influenced by the way others perceive you and strive to project an image of success and competence. You tend to be efficient and practical, preferring action over introspection.",
+        "You can be highly adaptable, adjusting your roles and identities to align with your goals or to fit in with your surroundings. However, this might also result in difficulties understanding who you truly are, separate from your achievements and societal expectations."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 3",
+      "title": "The Achiever",
+      "backgroundColor": "rgb(48, 60, 71)",
+      "image": "assets/images/enneagram/ladder.webp",
+      "imagePosition": "bottom",
+      "bullets": [
+        {
+          "text": "Basic fear:",
+          "items": ["Of being worthless"]
+        },
+        {
+          "text": "Basic desire:",
+          "items": ["To feel valuable and worthwhile"]
+        },
+        {
+          "text": "Key motivations",
+          "items": [
+            "Want to be affirmed",
+            "to distinguish themselves from others",
+            "to have attention",
+            "to be admired",
+            "to impress others"
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Type 3 Interactive Mindmap",
+      "theme": "gut",
+      "legacy": {
+        "slideshow": 145,
+        "slide": "3cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

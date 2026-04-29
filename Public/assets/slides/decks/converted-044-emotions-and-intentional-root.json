@@ -1,0 +1,22 @@
+{
+  "id": "converted-044-emotions-and-intentional-root",
+  "title": "Converted: Emotions and intentional root",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[44]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 44,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "full-image",
+      "image": "assets/images/emotion/westeast.webp",
+      "alt": "Emotions and intentional root legacy image 1",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

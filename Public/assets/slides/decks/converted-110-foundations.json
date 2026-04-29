@@ -1,0 +1,157 @@
+{
+  "id": "converted-110-foundations",
+  "title": "Converted: Foundations",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[110]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 110,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17"
+    ]
+  },
+  "slides": [
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide1.webp",
+      "alt": "Foundations legacy image 1",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide3.webp",
+      "alt": "Foundations legacy image 2",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide4.webp",
+      "alt": "Foundations legacy image 3",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Foundations",
+      "title": "01-Carl Rogers on Empathy",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/iMi7uY83z-U",
+        "title": "01-Carl Rogers on Empathy"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide7.webp",
+      "alt": "Foundations legacy image 5",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide8.webp",
+      "alt": "Foundations legacy image 6",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide9.webp",
+      "alt": "Foundations legacy image 7",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide10.webp",
+      "alt": "Foundations legacy image 8",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide11.webp",
+      "alt": "Foundations legacy image 9",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide12.webp",
+      "alt": "Foundations legacy image 10",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide13.webp",
+      "alt": "Foundations legacy image 11",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide14.webp",
+      "alt": "Foundations legacy image 12",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide15.webp",
+      "alt": "Foundations legacy image 13",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide16.webp",
+      "alt": "Foundations legacy image 14",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide18.webp",
+      "alt": "Foundations legacy image 15",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/carlrogers/Slide17.webp",
+      "alt": "Foundations legacy image 16",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Foundations",
+      "title": "02-Carl Rogers on Empathy",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/idgjD5tir_w",
+        "title": "02-Carl Rogers on Empathy"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

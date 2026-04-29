@@ -1,0 +1,132 @@
+{
+  "id": "converted-029-method",
+  "title": "Converted: Method",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[29]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 29,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Method",
+      "title": "Basic Method of EFT",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/ZQht2yOX9Js?si=qo-6eX14rs26WHP1&start=5",
+        "title": "Good Will Hunting | It's Not Your Fault"
+      },
+      "bullets": [
+        {
+          "text": "Context",
+          "children": [
+            "Interaction with a therapist",
+            "Ideally a safe space",
+            "Ideally a loving relation"
+          ]
+        },
+        {
+          "text": "Important issues evoked by",
+          "children": [
+            "Talking about life events and inner experiences",
+            "Important feelings and experiences emerging in a safe space / loving relation",
+            "The guidance of the therapist"
+          ]
+        },
+        {
+          "text": "Method of healing / integration",
+          "children": [
+            "Changing emotion with emotion",
+            "Progressive processing of layers of emotion",
+            "Experience of being seen, heard, and loved"
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Method",
+      "title": "What is Emotion-Focused Therapy (EFT)?",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/XcymHw9AZvg",
+        "title": "What is Emotion-Focused Therapy (EFT)?"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Method",
+      "title": "How did Emotion-Focused Therapy (EFT) come about?",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/4AHJkOF6eR8",
+        "title": "How did Emotion-Focused Therapy (EFT) come about?"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Method",
+      "title": "How does Emotion-Focused Therapy (EFT) relate to mental health problems?",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/wfCRSMr5eUk",
+        "title": "How does Emotion-Focused Therapy (EFT) relate to mental health problems?"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Method",
+      "title": "Depression and relationship difficulties explained by Emotion-Focused Therapy (EFT)",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/-CxfrVifuUA",
+        "title": "Depression and relationship difficulties explained by Emotion-Focused Therapy (EFT)"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Method",
+      "title": "Anxiety (GAD) explained by Emotion-Focused Therapy",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/LRuoHv-ODrI",
+        "title": "Anxiety (GAD) explained by Emotion-Focused Therapy"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Method",
+      "title": "What is chair work in Emotion-Focused Therapy (EFT)? Les Greenberg",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/5OIy0Fdg3Ko",
+        "title": "What is chair work in Emotion-Focused Therapy (EFT)? Les Greenberg"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/mindmaps/treatmentPrinciples.webp",
+      "alt": "Method legacy image 8",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

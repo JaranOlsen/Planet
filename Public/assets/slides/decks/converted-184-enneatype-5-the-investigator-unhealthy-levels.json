@@ -1,0 +1,37 @@
+{
+  "id": "converted-184-enneatype-5-the-investigator-unhealthy-levels",
+  "title": "Converted: Enneatype 5 - The Investigator - Unhealthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[184]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 184,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 5",
+      "title": "The Investigator",
+      "density": "long",
+      "backgroundColor": "rgb(38, 48, 52)",
+      "image": "assets/images/enneagram/book.webp",
+      "bullets": [
+        {
+          "text": "Unhealthy Levels:",
+          "ordered": true,
+          "start": 7,
+          "items": [
+            "They become reclusive and isolated from reality, eccentric and nihilistic. Highly unstable and fearful of aggression, they reject and repel others and all social connections.",
+            "They become obsessed and frightened by their own threatening ideas, leading to horror, delirium, distortions, and phobias.",
+            "In their quest for oblivion, they may commit suicide or suffer a psychotic break with reality. They can become deranged, explosively self-destructive, displaying schizophrenic overtones. This level generally corresponds to the Schizoid, Avoidant, and Schizotypal personality disorders."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

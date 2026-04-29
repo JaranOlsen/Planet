@@ -1,0 +1,45 @@
+{
+  "id": "converted-022-emotions",
+  "title": "Converted: Emotions",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[22]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 22,
+    "refs": [
+      "1",
+      "2",
+      "3"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Emotions",
+      "title": "What is the difference between feelings and emotions?",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/ynHioCxAMEI",
+        "title": "What is the difference between feelings and emotions?"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Emotions",
+      "title": "Why are emotions important?",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/D8lmjmJ0OPg",
+        "title": "Why are emotions important?"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/mindmaps/emotionTheory.webp",
+      "alt": "Emotions legacy image 3",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

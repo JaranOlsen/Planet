@@ -1,0 +1,72 @@
+{
+  "id": "converted-144-enneatype-2-helper",
+  "title": "Converted: Enneatype 2 - The Helper",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[144], preserving the original D3 mindmap as a legacy-slide.",
+  "legacy": {
+    "contentData": 144,
+    "refs": ["1", "2", "3cj"]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 2",
+      "title": "The Helper",
+      "backgroundColor": "rgb(100, 84, 63)",
+      "image": "assets/images/enneagram/hands.webp",
+      "imagePosition": "50% 20%",
+      "body": [
+        {
+          "text": "The Caring, Interpersonal Type: Demonstrative, Generous, People-Pleasing, and Possessive.",
+          "strong": true
+        },
+        "As a Two, your life revolves around relationships and interactions with others. You're driven by a deep-seated desire to feel loved and appreciated, often leading you to be particularly attentive to the needs of others. You tend to place a high value on being helpful and making others feel cared for.",
+        "You can be highly intuitive when it comes to understanding others' feelings and needs, but at times, you might struggle to acknowledge your own needs. You might often find yourself overextending in your eagerness to assist others, sometimes leading to feelings of being underappreciated when your efforts go unnoticed or unreciprocated."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 2",
+      "title": "The Helper",
+      "backgroundColor": "rgb(81, 56, 51)",
+      "image": "assets/images/enneagram/heart.webp",
+      "imagePosition": "56%",
+      "bullets": [
+        {
+          "text": "Basic fear:",
+          "items": ["Of being unwanted, unworthy of being loved"]
+        },
+        {
+          "text": "Basic desire:",
+          "items": ["To feel loved"]
+        },
+        {
+          "text": "Key motivations",
+          "items": [
+            "Want to be loved",
+            "to express their feelings for others",
+            "to be needed and appreciated",
+            "to get others to respond to them",
+            "to vindicate their claims about themselves"
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Type 2 Interactive Mindmap",
+      "theme": "gut",
+      "legacy": {
+        "slideshow": 144,
+        "slide": "3cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

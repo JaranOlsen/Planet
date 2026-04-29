@@ -1,0 +1,56 @@
+{
+  "id": "converted-168-enneatype-8w9-the-bear",
+  "title": "Converted: Enneatype 8w9 - The Bear",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[168]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 168,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 8w9",
+      "title": "The Bear",
+      "backgroundColor": "rgb(44, 41, 36)",
+      "image": "assets/images/enneagram/bear.webp",
+      "imagePosition": "right",
+      "body": [
+        {
+          "text": "The Assertive, Peaceful Type: Protective, Challenging, Dominant, Easygoing, and Accepting.",
+          "strong": true
+        },
+        "As an Eight wing Nine, you combine the assertive, protective, and dominant nature of an Eight with the peace-seeking, accepting, and easygoing qualities of a Nine. This blend results in a strong and steady personality that is both protective and calm. You seek to assert your control over your environment, but you also value peace and harmony.",
+        "Your Nine wing adds a layer of patience and tranquility to your assertive Eight nature, resulting in a more gentle and easygoing leadership style. You strive for control and protection, but also seek peace and acceptance, bringing a unique blend of strength and calm to your endeavors."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 8w9",
+      "title": "The Bear",
+      "backgroundColor": "rgb(44, 41, 36)",
+      "image": "assets/images/enneagram/bear.webp",
+      "imagePosition": "right",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Balance your strength and assertiveness with patience and diplomacy.",
+            "Practice mindfulness to manage impulses and maintain inner peace.",
+            "Cultivate empathy and open-mindedness in your interactions with others.",
+            "Allow yourself to be vulnerable and open in relationships.",
+            "Develop strategies to manage stress and channel your energy in productive ways."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

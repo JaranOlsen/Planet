@@ -1,0 +1,72 @@
+{
+  "id": "converted-150-enneatype-8-challenger",
+  "title": "Converted: Enneatype 8 - The Challenger",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[150], preserving the original D3 mindmap as a legacy-slide.",
+  "legacy": {
+    "contentData": 150,
+    "refs": ["1", "2", "3cj"]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 8",
+      "title": "The Challenger",
+      "backgroundColor": "rgb(6, 19, 72)",
+      "image": "assets/images/enneagram/crown.webp",
+      "imagePosition": "35%",
+      "body": [
+        {
+          "text": "The Powerful, Dominating Type: Self-Confident, Decisive, Willful, and Confrontational.",
+          "strong": true
+        },
+        "As an Eight, you are strong, assertive, and protective, often taking charge of situations. You believe in fairness and justice, and you're not afraid to stand up for what you believe is right. You value directness and honesty and can be quite outspoken.",
+        "You might struggle with vulnerability, viewing it as a sign of weakness, which leads you to maintain strict control over your environment and relationships. Underneath the strong and imposing exterior, there's a desire to protect not only yourself but also those you care about."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 8",
+      "title": "The Challenger",
+      "backgroundColor": "rgb(30, 54, 62)",
+      "image": "assets/images/enneagram/bull.webp",
+      "imagePosition": "40%",
+      "bullets": [
+        {
+          "text": "Basic fear:",
+          "items": ["Of being harmed or controlled by others"]
+        },
+        {
+          "text": "Basic desire:",
+          "items": ["To protect themselves (to be in control of their own life and destiny)"]
+        },
+        {
+          "text": "Key motivations",
+          "items": [
+            "Want to be self-reliant",
+            "to prove their strength and resist weakness",
+            "to be important in their world",
+            "to dominate the environment",
+            "to stay in control of their situation"
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Type 8 Interactive Mindmap",
+      "theme": "gut",
+      "legacy": {
+        "slideshow": 150,
+        "slide": "3cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

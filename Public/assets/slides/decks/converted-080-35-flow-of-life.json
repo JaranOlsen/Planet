@@ -1,0 +1,34 @@
+{
+  "id": "converted-080-35-flow-of-life",
+  "title": "Converted: #35 Flow Of Life",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[80]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 80,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#35 Flow Of Life",
+      "image": "assets/images/roadToHere/35t.webp",
+      "alt": "#35 Flow Of Life cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-35-flow-of-life",
+        "title": "Insight Timer Embed: Road To Here - #35 Flow Of Life | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-35-flow-of-life"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "converted-035-distracting",
+  "title": "Converted: distracting",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[35]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 35,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "distracting",
+      "title": "Working with wandering thought in meditation",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/W-koCNHdiBA",
+        "title": "Working with wandering thought in meditation"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "distracting",
+      "title": "Handling distractions in meditation",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/7H7SGkhdtNQ",
+        "title": "Handling distractions in meditation"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "converted-167-enneatype-7w8-the-realist",
+  "title": "Converted: Enneatype 7w8 - The Realist",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[167]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 167,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 7w8",
+      "title": "The Realist",
+      "backgroundColor": "rgb(58, 38, 29)",
+      "image": "assets/images/enneagram/horse.webp",
+      "imagePosition": "center",
+      "body": [
+        {
+          "text": "The Enthusiastic, Assertive Type: Spontaneous, Versatile, Fun-loving, Independent, and Dominant.",
+          "strong": true
+        },
+        "As a Seven wing Eight, you blend the enthusiastic, spontaneous, and versatile traits of a Seven with the assertive, protective, and dominant qualities of an Eight. This combination results in a personality that is both adventurous and powerful, often willing to take the initiative and make their own path. You seek excitement and new experiences, but also value your personal autonomy and strength.",
+        "Your Eight wing adds an element of assertiveness and self-reliance to your adventurous nature, making you a strong and independent explorer. You strive to live life on your own terms, seeking out new experiences while also asserting your own power and control over your life."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 7w8",
+      "title": "The Realist",
+      "backgroundColor": "rgb(58, 38, 29)",
+      "image": "assets/images/enneagram/horse.webp",
+      "imagePosition": "center",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Learn to tolerate discomfort and negative emotions as a part of life's experiences.",
+            "Focus on one task or project at a time to increase productivity and fulfillment.",
+            "Cultivate empathy and sensitivity to the feelings of others.",
+            "Practice mindfulness to stay grounded and present in the moment.",
+            "Develop resilience to deal with setbacks without escaping into distractions."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

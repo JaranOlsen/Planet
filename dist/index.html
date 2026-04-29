@@ -2,20 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg" href="/Planet/assets/icons/planet.svg" />
+    <link rel="icon" type="image/svg" href="assets/icons/planet.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Planet</title>
+    <title>Planet Slide Lab</title>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script type="module" crossorigin src="/Planet/assets/index-Cy__O50x.js"></script>
-    <link rel="modulepreload" crossorigin href="/Planet/assets/modulepreload-polyfill-B5Qt9EMX.js">
-    <link rel="stylesheet" crossorigin href="/Planet/assets/index-DSxlgRAt.css">
+    <script type="module" crossorigin src="/Planet-slide-lab/assets/index-Cb9FvSq2.js"></script>
+    <link rel="modulepreload" crossorigin href="/Planet-slide-lab/assets/modulepreload-polyfill-B5Qt9EMX.js">
+    <link rel="stylesheet" crossorigin href="/Planet-slide-lab/assets/index-Du5NvWbj.css">
   </head>
   <body>
  
     <div id="container">
+      <div id="labBadge">SLIDE LAB</div>
       <canvas id="canvas"></canvas>
       <div id="credits">
         <label id="intro-label" for="intro-select">Choose an intro:</label>
@@ -57,8 +58,20 @@
       <div id="hotKeys">
         <p class="hotkeyTitle">Interface:</p>
         <div class="hotkey-line">
-            <span class="hotkey">K</span>
+            <span class="hotkey">H</span>
             <span class="description">Show/hide hotkeys</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">S</span>
+            <span class="description">Open/close Silence screen</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">P</span>
+            <span class="description">Show/hide FPS counter</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Esc</span>
+            <span class="description">Close active overlay</span>
         </div>
 
         <p class="hotkeyTitle">Movement control:</p>
@@ -142,10 +155,6 @@
             <span class="hotkey">Shift + &#8593; / &#8595;</span>
             <span class="description">Cycle example Mara</span>
         </div>
-        <div class="hotkey-line">
-            <span class="hotkey">J</span>
-            <span class="description">Toggle FPS counter</span>
-        </div>
 
         <p class="hotkeyTitle">Content display:</p>
         <div class="hotkey-line">
@@ -153,23 +162,35 @@
             <span class="description">Show/hide planet content</span>
         </div>
         <div class="hotkey-line">
+            <span class="hotkey">Shift + C</span>
+            <span class="description">Toggle settlement map mode</span>
+        </div>
+        <div class="hotkey-line">
             <span class="hotkey">I</span>
             <span class="description">Show/hide planet interior</span>
         </div>
         <div class="hotkey-line">
-            <span class="hotkey">S</span>
+            <span class="hotkey">Shift + S</span>
             <span class="description">Show/hide spiral dynamics</span>
         </div>
         <div class="hotkey-line">
-            <span class="hotkey">Y</span>
+            <span class="hotkey">Shift + E</span>
             <span class="description">Show/hide enneagram</span>
         </div>
         <div class="hotkey-line">
-            <span class="hotkey">Shift + 1-9</span>
-            <span class="description">Switch mindmap</span>
+            <span class="hotkey">Shift + 1-4</span>
+            <span class="description">Switch mindmap / language variant</span>
         </div>
 
         <p class="hotkeyTitle">Developer tools:</p>
+        <div class="hotkey-line">
+            <span class="hotkey">Shift + P</span>
+            <span class="description">Show/hide parameter panel</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Shift + L</span>
+            <span class="description">Show/hide Slide Lab</span>
+        </div>
         <div class="hotkey-line">
             <span class="hotkey">Z</span>
             <span class="description">Clear selection of nodes</span>
@@ -241,12 +262,12 @@
         <div id="silence">SILENCE</div>
       </div>
       <audio id="silenceAudio">
-        <source src="/Planet/assets/audio/singingbowl.mp3" type="audio/mpeg">
+        <source src="assets/audio/singingbowl.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
 
       <div id="footer">
-        Click nodes to see content. Wireframe nodes doesn't have content. Press K for hotkeys.
+        Click nodes to see content. Wireframe nodes doesn't have content. Press H for hotkeys.
         <br><br>&#169;2023 Jaran de los Santos Olsen
       </div>
       <!-- SUBTITLES -->
@@ -296,7 +317,7 @@
 
     <audio id="introTune">
         <!-- INTROTUNE -->
-        <source src="/Planet/assets/audio/candle.mp3" type="audio/mpeg">
+        <source src="assets/audio/candle.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio> 
     

@@ -1,0 +1,74 @@
+{
+  "id": "empathy-wisdom",
+  "title": "Empathy: Wisdom",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of the legacy wisdom slides.",
+  "sources": [
+    {
+      "label": "Erik H. Erikson, The Life Cycle Completed",
+      "url": "https://www.worldcat.org/title/7550684"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Empathy",
+      "title": "Wisdom",
+      "image": "assets/images/gut/empathy/wisdom.png",
+      "body": "Clinical judgment about timing, intensity, and direction of response.",
+      "bullets": [
+        "Combines experiential knowledge with humility.",
+        "Lets the client remain expert on their own experience.",
+        "Chooses the next smallest helpful step.",
+        "Prevents insight from replacing felt change."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Wisdom",
+      "title": "Timing and dose",
+      "body": "Wisdom shows up in how much intervention the moment can metabolize.",
+      "steps": [
+        "Check whether the client is resourced enough for depth.",
+        "Name the process before intensifying it.",
+        "Do one intervention, then watch the response.",
+        "Ask consent for depth: stay with this a bit?",
+        "Return to safety when contact narrows or collapses."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Wisdom",
+      "title": "3 quick checks",
+      "headers": [
+        "Check",
+        "Question",
+        "Adjustment"
+      ],
+      "rows": [
+        [
+          "Window",
+          "Is this too much or too little?",
+          "Titrate intensity."
+        ],
+        [
+          "Agenda",
+          "Am I following process or my idea?",
+          "Return to the client."
+        ],
+        [
+          "Next 30 seconds",
+          "What do I expect to happen?",
+          "Choose one clean move."
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

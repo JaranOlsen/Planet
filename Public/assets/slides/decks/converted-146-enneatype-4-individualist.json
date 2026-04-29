@@ -1,0 +1,71 @@
+{
+  "id": "converted-146-enneatype-4-individualist",
+  "title": "Converted: Enneatype 4 - The Individualist",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[146], preserving the original D3 mindmap as a legacy-slide.",
+  "legacy": {
+    "contentData": 146,
+    "refs": ["1", "2", "3cj"]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 4",
+      "title": "The Individualist",
+      "backgroundColor": "rgb(55, 22, 29)",
+      "image": "assets/images/enneagram/snowflake.webp",
+      "body": [
+        {
+          "text": "The Sensitive, Withdrawn Type: Expressive, Dramatic, Self-Absorbed, and Temperamental.",
+          "strong": true
+        },
+        "As a Four, you are deeply in touch with your own emotions and long for understanding and authenticity. You have a rich inner life, often finding solace and self-expression in art, literature, or other forms of creativity. You feel different from others, and there's a persistent sense of longing for something undefined, something that will give meaning to your life or complete your identity.",
+        "At times, you may compare yourself with others, feeling as if they possess qualities that you lack. You value emotional honesty and tend to be more comfortable with melancholy than other types."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 4",
+      "title": "The Individualist",
+      "backgroundColor": "rgb(56, 28, 21)",
+      "image": "assets/images/enneagram/rose.webp",
+      "bullets": [
+        {
+          "text": "Basic fear:",
+          "items": ["That they have no identity or personal significance"]
+        },
+        {
+          "text": "Basic desire:",
+          "items": ["To find themselves and their significance"]
+        },
+        {
+          "text": "Key motivations",
+          "items": [
+            "Want to express themselves and their individuality",
+            "to create and surround themselves with beauty",
+            "to maintain certain moods and feelings",
+            "to withdraw to protect their self-image",
+            "to take care of emotional needs before attending to anything else",
+            "to attract a \"rescuer\""
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Type 4 Interactive Mindmap",
+      "theme": "gut",
+      "legacy": {
+        "slideshow": 146,
+        "slide": "3cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

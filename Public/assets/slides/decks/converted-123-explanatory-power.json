@@ -1,0 +1,25 @@
+{
+  "id": "converted-123-explanatory-power",
+  "title": "Converted: Explanatory power",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[123]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 123,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Quality",
+      "title": "Explanatory power",
+      "body": [
+        "The theory should be able to provide a comprehensive and clear explanation for the phenomenon it addresses, including the underlying mechanisms, causes, or principles."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

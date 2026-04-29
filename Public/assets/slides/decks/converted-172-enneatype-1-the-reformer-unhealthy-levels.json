@@ -1,0 +1,39 @@
+{
+  "id": "converted-172-enneatype-1-the-reformer-unhealthy-levels",
+  "title": "Converted: Enneatype 1 - The Reformer - Unhealthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[172]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 172,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 1",
+      "title": "The Reformer",
+      "density": "long",
+      "backgroundColor": "rgb(96, 81, 59)",
+      "image": "assets/images/enneagram/scale.webp",
+      "imagePosition": "70%",
+      "imageFlip": true,
+      "bullets": [
+        {
+          "text": "Unhealthy Levels:",
+          "ordered": true,
+          "start": 7,
+          "items": [
+            "They can become unyielding, self-righteous, and intolerant, espousing an 'absolute truth' mindset. They may become overly judgmental, while hypocritically justifying their own behaviors.",
+            "An unhealthy One may develop an obsessive focus on the faults of others, and despite preaching about virtues, might engage in behaviors that starkly contrast with their stated ideals.",
+            "At their worst, Ones can become punishing, cruel, and condemnatory. They may suffer from severe depression and anxiety, and in extreme cases, there may be a risk of self-harm or suicide. This stage often aligns with Obsessive-Compulsive and Depressive personality disorders."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "id": "converted-143-enneatype-1-reformer",
+  "title": "Converted: Enneatype 1 - The Reformer",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[143], preserving the original D3 mindmap as a legacy-slide.",
+  "legacy": {
+    "contentData": 143,
+    "refs": ["1", "2", "3cj"]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 1",
+      "title": "The Reformer",
+      "backgroundColor": "rgb(38, 50, 69)",
+      "image": "assets/images/enneagram/swan3.webp",
+      "imagePosition": "70%",
+      "imageFlip": true,
+      "body": [
+        {
+          "text": "The Rational, Idealistic Type: Principled, Purposeful, Self-Controlled, and Perfectionistic.",
+          "strong": true
+        },
+        "As a One, you are defined by your sense of responsibility, integrity, and the commitment to moral and ethical standards. You have an inner critic, a ceaseless voice that strives for perfection and order. This inner critic can be both a source of great discipline and a catalyst for stress, as it drives you to avoid mistakes and faults at all costs.",
+        "You might find yourself frequently irritated by imperfections or inefficiencies, not just in your own actions, but in the world around you. You're a natural teacher, often striving to impart your wisdom and methods to others to improve not just your life but theirs as well."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 1",
+      "title": "The Reformer",
+      "backgroundColor": "rgb(96, 81, 59)",
+      "image": "assets/images/enneagram/scale.webp",
+      "imagePosition": "70%",
+      "imageFlip": true,
+      "bullets": [
+        {
+          "text": "Basic fear:",
+          "items": ["Being corrupt/evil, defective"]
+        },
+        {
+          "text": "Basic desire:",
+          "items": ["To be good, to have integrity, to be balanced"]
+        },
+        {
+          "text": "Key motivations",
+          "items": [
+            "Want to be right",
+            "to strive higher and improve everything",
+            "to be consistent with their ideals",
+            "to justify themselves",
+            "to be beyond criticism so as not to be condemned by anyone"
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Type 1 Interactive Mindmap",
+      "theme": "gut",
+      "legacy": {
+        "slideshow": 143,
+        "slide": "3cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

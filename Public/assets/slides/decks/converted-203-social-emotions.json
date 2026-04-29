@@ -1,0 +1,57 @@
+{
+  "id": "converted-203-social-emotions",
+  "title": "Converted: Social Emotions",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[203]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 203,
+    "refs": [
+      "1j"
+    ]
+  },
+  "slides": [
+    {
+      "template": "word-cloud",
+      "overline": "Mode: Empathy / Intuition / Faith",
+      "title": "Social Emotions",
+      "words": [
+        ["shame", 7],
+        ["guilt", 6],
+        ["pride", 6],
+        ["compassion", 5],
+        ["empathy", 5],
+        ["love", 5],
+        ["grief", 5],
+        ["belonging", 4],
+        ["honor", 4],
+        ["loyalty", 4],
+        ["affection", 3],
+        ["trust", 3],
+        ["friendship", 3],
+        ["humility", 3],
+        ["resentment", 3],
+        ["envy", 2],
+        ["gratitude", 2],
+        ["forgiveness", 2],
+        ["admiration", 2],
+        ["jealousy", 2],
+        ["connection", 2],
+        ["bond", 2]
+      ],
+      "colors": [
+        "#9ad6e8",
+        "#6fb7cf",
+        "#b7dfed",
+        "#e8c0d2",
+        "#f1d8e2"
+      ],
+      "weightFactor": 17,
+      "rotateRatio": 0.1,
+      "minRotation": -0.75,
+      "maxRotation": 0.75,
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

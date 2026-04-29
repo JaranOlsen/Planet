@@ -1,0 +1,25 @@
+{
+  "id": "converted-115-incompleteness",
+  "title": "Converted: Incompleteness",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[115]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 115,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Limitation",
+      "title": "Incompleteness",
+      "body": [
+        "No theory can provide a complete and exhaustive account of every aspect of a phenomenon. There will always be some level of uncertainty or unknowns that a theory cannot fully address or explain."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

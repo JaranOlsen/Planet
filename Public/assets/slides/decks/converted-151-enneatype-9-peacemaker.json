@@ -1,0 +1,71 @@
+{
+  "id": "converted-151-enneatype-9-peacemaker",
+  "title": "Converted: Enneatype 9 - The Peacemaker",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[151], preserving the original D3 mindmap as a legacy-slide.",
+  "legacy": {
+    "contentData": 151,
+    "refs": ["1", "2", "3cj"]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 9",
+      "title": "The Peacemaker",
+      "backgroundColor": "rgb(33, 44, 18)",
+      "image": "assets/images/enneagram/dove.webp",
+      "imagePosition": "50%",
+      "body": [
+        {
+          "text": "The Easygoing, Self-Effacing Type: Receptive, Reassuring, Agreeable, and Complacent.",
+          "strong": true
+        },
+        "As a Nine, you are the embodiment of tranquility, striving for peace and harmony in your life. You tend to avoid conflict, often going along with others' plans and desires to maintain a sense of inner and outer peace. You might struggle with inertia, finding it difficult to confront unpleasant tasks or to assert your needs and wants.",
+        "You're skilled at seeing different perspectives, which can make you an excellent mediator. However, this ability to understand multiple viewpoints can sometimes cause you to lose touch with your own desires and priorities."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 9",
+      "title": "The Peacemaker",
+      "backgroundColor": "rgb(91, 78, 51)",
+      "image": "assets/images/enneagram/yinyang.webp",
+      "imagePosition": "35%",
+      "bullets": [
+        {
+          "text": "Basic fear:",
+          "items": ["Of loss and separation"]
+        },
+        {
+          "text": "Basic desire:",
+          "items": ["To have inner stability, \"peace of mind\""]
+        },
+        {
+          "text": "Key motivations",
+          "items": [
+            "Want to create harmony in their environment",
+            "to avoid conflicts and tension",
+            "to preserve things as they are",
+            "to resist whatever would upset or disturb them"
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Type 9 Interactive Mindmap",
+      "theme": "gut",
+      "legacy": {
+        "slideshow": 151,
+        "slide": "3cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "converted-200-getting-avoiding-manipulating-changing-controlling-collecting",
+  "title": "Converted: getting, avoiding, manipulating, changing, controlling, collecting",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[200]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 200,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "getting, avoiding, manipulating, changing, controlling, collecting",
+      "title": "Life is NOT a Journey - Alan Watts",
+      "media": {
+        "src": "https://www.youtube.com/embed/rBpaUICxEhk?si=gMrm0hSGWSkfa-Km",
+        "title": "Life is NOT a Journey - Alan Watts"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

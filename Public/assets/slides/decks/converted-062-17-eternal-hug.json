@@ -1,0 +1,34 @@
+{
+  "id": "converted-062-17-eternal-hug",
+  "title": "Converted: #17 Eternal Hug",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[62]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 62,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#17 Eternal Hug",
+      "image": "assets/images/roadToHere/17t.webp",
+      "alt": "#17 Eternal Hug cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-17-eternal-hug",
+        "title": "Insight Timer Embed: Road To Here - #17 Eternal Hug | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-17-eternal-hug"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

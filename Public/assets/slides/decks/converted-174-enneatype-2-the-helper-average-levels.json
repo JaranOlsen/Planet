@@ -1,0 +1,38 @@
+{
+  "id": "converted-174-enneatype-2-the-helper-average-levels",
+  "title": "Converted: Enneatype 2 - The Helper - Average Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[174]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 174,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 2",
+      "title": "The Helper",
+      "density": "long",
+      "backgroundColor": "rgb(81, 56, 51)",
+      "image": "assets/images/enneagram/heart.webp",
+      "imagePosition": "56%",
+      "bullets": [
+        {
+          "text": "Average Levels:",
+          "ordered": true,
+          "start": 4,
+          "items": [
+            "To strengthen their connection with others, they may turn to people-pleasing, demonstrating excessive friendliness, emotional expressiveness, and 'good intentions'. They often offer seductive attention, such as compliments and flattery, with love being their highest ideal.",
+            "Their need to be needed intensifies, leading them to become overly intrusive and intimate. They may exhibit codependent behavior, meddling and controlling under the guise of love, and creating needs that they can fulfill.",
+            "They may start overvaluing their contributions, seeing themselves as indispensable, which can lead to patronizing or presumptuous behavior. There may also be a tendency to portray themselves as martyrs, and they might start displaying hypochondriac tendencies."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

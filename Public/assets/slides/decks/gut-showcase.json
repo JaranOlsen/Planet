@@ -1,0 +1,442 @@
+{
+  "id": "gut-showcase",
+  "title": "Gut Path Structured Showcase",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Full structured template library for the gut path.",
+  "slides": [
+    {
+      "template": "opening",
+      "overline": "Gut Path",
+      "title": "The Path Of Befriending",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "subtitle": "Embodied psychotherapy, emotional contact, and grounded repair.",
+      "image": "assets/images/background/therapy.webp",
+      "pills": [
+        "Body",
+        "Emotion",
+        "Need",
+        "Repair"
+      ],
+      "stats": [
+        {
+          "value": "3",
+          "label": "signals"
+        },
+        {
+          "value": "5",
+          "label": "needs"
+        },
+        {
+          "value": "1",
+          "label": "next step"
+        }
+      ]
+    },
+    {
+      "template": "quote",
+      "overline": "Gut Path",
+      "title": "Quote",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "image": "assets/images/background/EFT.webp",
+      "body": [
+        {
+          "text": "Healing begins when the body no longer has to hold the story alone.",
+          "emphasis": true
+        },
+        {
+          "text": "Use this family for emotions, needs, alliance, parts, and repair."
+        }
+      ],
+      "source": "Psychotherapy path"
+    },
+    {
+      "template": "long-text",
+      "overline": "Gut Path",
+      "title": "Long Text",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": [
+        {
+          "text": "Gut slides should feel safe, tactile, and close to lived experience."
+        },
+        {
+          "text": "Prefer concrete language, warm contrast, and enough structure for facilitation.",
+          "emphasis": true
+        }
+      ]
+    },
+    {
+      "template": "full-image",
+      "overline": "Gut Path",
+      "title": "Full Image",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "image": "assets/images/background/therapy.webp",
+      "body": "A full-image slide can make emotional context available before the concept arrives."
+    },
+    {
+      "template": "split-image",
+      "overline": "Gut Path",
+      "title": "Split Image",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "image": "assets/images/emotion/integration.webp",
+      "body": "Use split-image slides when an embodied image needs to carry half the meaning.",
+      "bullets": [
+        "Name the protective move.",
+        "Track the body response.",
+        "Find the unmet need.",
+        "Offer a reparative next step."
+      ]
+    },
+    {
+      "template": "title-bullets",
+      "overline": "Gut Path",
+      "title": "Title Bullets",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "A grounded teaching frame keeps emotional material clear without becoming clinical.",
+      "bullets": [
+        "Name the protective move.",
+        "Track the body response.",
+        "Find the unmet need.",
+        "Offer a reparative next step."
+      ]
+    },
+    {
+      "template": "bullets",
+      "overline": "Gut Path",
+      "title": "Bullets",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "A grounded teaching frame keeps emotional material clear without becoming clinical.",
+      "bullets": [
+        "Name the protective move.",
+        "Track the body response.",
+        "Find the unmet need.",
+        "Offer a reparative next step."
+      ]
+    },
+    {
+      "template": "two-column",
+      "overline": "Gut Path",
+      "title": "Two Column",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "subtitle": "Separate process from content without losing warmth.",
+      "columns": [
+        {
+          "title": "Contact",
+          "body": "What is felt now, in the body and in the relationship?"
+        },
+        {
+          "title": "Meaning",
+          "body": "What need, wound, or protective strategy is organizing the moment?"
+        }
+      ]
+    },
+    {
+      "template": "steps",
+      "overline": "Gut Path",
+      "title": "Steps",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Therapy-oriented slides often need a sequence that can be followed slowly.",
+      "steps": [
+        "Arrive and orient.",
+        "Name what is happening.",
+        "Stay with one emotion.",
+        "Listen for the need.",
+        "Integrate the response."
+      ]
+    },
+    {
+      "template": "checklist",
+      "overline": "Gut Path",
+      "title": "Checklist",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Use this before emotionally focused practice or live facilitation.",
+      "items": [
+        "Consent is explicit.",
+        "Affect is within range.",
+        "Body cues are visible.",
+        "Repair language is ready."
+      ]
+    },
+    {
+      "template": "statistics",
+      "overline": "Gut Path",
+      "title": "Statistics",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "stats": [
+        {
+          "value": "3",
+          "label": "signals"
+        },
+        {
+          "value": "5",
+          "label": "needs"
+        },
+        {
+          "value": "1",
+          "label": "next step"
+        }
+      ]
+    },
+    {
+      "template": "profile",
+      "overline": "Gut Path",
+      "title": "Profile",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "image": "assets/images/emotion/self-compassion.webp",
+      "body": "Profile slides can hold a part, emotion, client pattern, practice, or therapeutic stance.",
+      "bullets": [
+        "Felt sense",
+        "Protective function",
+        "Possible repair"
+      ]
+    },
+    {
+      "template": "gallery",
+      "overline": "Gut Path",
+      "title": "Gallery",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "images": [
+        {
+          "src": "assets/images/emotion/distress.webp",
+          "caption": "Distress"
+        },
+        {
+          "src": "assets/images/emotion/need.webp",
+          "caption": "Need"
+        },
+        {
+          "src": "assets/images/emotion/assertion.webp",
+          "caption": "Assertion"
+        }
+      ]
+    },
+    {
+      "template": "media",
+      "overline": "Gut Path",
+      "title": "Media",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Media slides can hold practice clips, psychoeducation, or guided demonstrations.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/z_Gy3mTztgg",
+        "title": "Therapy sample media"
+      }
+    },
+    {
+      "template": "timeline",
+      "overline": "Gut Path",
+      "title": "Timeline",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Show the movement from protection to integration.",
+      "timeline": [
+        {
+          "title": "Activation",
+          "body": "Something touches the old pattern."
+        },
+        {
+          "title": "Protection",
+          "body": "The system tries to stay safe."
+        },
+        {
+          "title": "Contact",
+          "body": "Emotion and need become available."
+        },
+        {
+          "title": "Repair",
+          "body": "A new response can be practiced."
+        }
+      ]
+    },
+    {
+      "template": "table",
+      "overline": "Gut Path",
+      "title": "Table",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "headers": [
+        "Signal",
+        "Meaning",
+        "Response"
+      ],
+      "rows": [
+        [
+          "Tension",
+          "Threat",
+          "Slow down"
+        ],
+        [
+          "Tears",
+          "Need",
+          "Make room"
+        ],
+        [
+          "Collapse",
+          "Too much",
+          "Resource"
+        ]
+      ]
+    },
+    {
+      "template": "card-grid",
+      "overline": "Gut Path",
+      "title": "Card Grid",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Cards are useful for principles, interventions, parts, or process markers.",
+      "cards": [
+        {
+          "title": "Safety",
+          "body": "The nervous system gets a vote."
+        },
+        {
+          "title": "Contact",
+          "body": "Stay close to what is alive."
+        },
+        {
+          "title": "Repair",
+          "body": "Offer what was missing."
+        }
+      ]
+    },
+    {
+      "template": "call-to-action",
+      "overline": "Gut Path",
+      "title": "Call To Action",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Choose one felt signal and let the slide support a short embodied inquiry.",
+      "action": {
+        "label": "Begin Practice"
+      },
+      "note": "Keep the next step small enough to be felt."
+    },
+    {
+      "template": "word-cloud",
+      "overline": "Gut Path",
+      "title": "Word Cloud",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "words": [
+        [
+          "body",
+          9
+        ],
+        [
+          "need",
+          8
+        ],
+        [
+          "safety",
+          7
+        ],
+        [
+          "contact",
+          6
+        ],
+        [
+          "repair",
+          6
+        ],
+        [
+          "emotion",
+          5
+        ],
+        [
+          "warmth",
+          4
+        ]
+      ]
+    },
+    {
+      "template": "quadrant-chart",
+      "overline": "Gut Path",
+      "title": "Quadrant Chart",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "quadrants": [
+        {
+          "x": 250,
+          "y": 155,
+          "label": "High Arousal"
+        },
+        {
+          "x": 750,
+          "y": 155,
+          "label": "Contact"
+        },
+        {
+          "x": 250,
+          "y": 435,
+          "label": "Protection"
+        },
+        {
+          "x": 750,
+          "y": 435,
+          "label": "Integration"
+        }
+      ]
+    },
+    {
+      "template": "mindmap-slot",
+      "overline": "Gut Path",
+      "title": "Mindmap Slot",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "nodes": [
+        {
+          "id": "root",
+          "label": "Need",
+          "x": 500,
+          "y": 260,
+          "r": 58
+        },
+        {
+          "id": "body",
+          "label": "Body",
+          "x": 270,
+          "y": 160
+        },
+        {
+          "id": "emotion",
+          "label": "Emotion",
+          "x": 730,
+          "y": 160
+        },
+        {
+          "id": "repair",
+          "label": "Repair",
+          "x": 500,
+          "y": 420
+        }
+      ],
+      "links": [
+        {
+          "from": "root",
+          "to": "body"
+        },
+        {
+          "from": "root",
+          "to": "emotion"
+        },
+        {
+          "from": "root",
+          "to": "repair"
+        }
+      ]
+    }
+  ]
+}

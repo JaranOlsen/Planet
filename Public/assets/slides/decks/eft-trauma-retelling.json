@@ -1,0 +1,62 @@
+{
+  "id": "eft-trauma-retelling",
+  "title": "EFT: Trauma Retelling",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Three practical clinician-facing slides extracted from the EFT interventions practice deck.",
+  "sources": [
+    {
+      "label": "Vrana and Greenberg, Overview of Emotion-Focused Therapy",
+      "url": "https://www.researchgate.net/publication/325379801_Overview_of_emotion-focused_therapy"
+    },
+    {
+      "label": "Markers and tasks summary",
+      "url": "https://www.lotus-on-the-ripple.com/single-post/2019/02/11/integrating-being-and-doing-in-emotion-focused-therapy"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Trauma Retelling",
+      "title": "Marker: a broken or avoided story",
+      "image": "assets/images/gut/joshua-rawson-harris-md7cCWYVq9U-unsplash.jpg",
+      "body": "Use when the event is present in fragments and the client can stay dual-aware.",
+      "bullets": [
+        "Confirm consent, pacing, and exit signals before entering.",
+        "Keep one foot in the room and one foot in the memory.",
+        "Stop when new meaning is forming, not when the story is exhausted."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Trauma Retelling",
+      "title": "Titrate the narrative",
+      "body": "Move in and out of the memory with active therapist presence. The client should never be alone inside the event.",
+      "steps": [
+        "Set the frame: what scene, why now, and how to stop.",
+        "Begin before the worst moment; locate body, image, and orientation.",
+        "Retell in short segments; pause for emotion and meaning after each turn.",
+        "Heighten adaptive anger, grief, or protective impulse when it appears.",
+        "Close with what the client knows now, needs now, and can reclaim."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "checklist",
+      "overline": "Trauma Retelling",
+      "title": "Signs the work is productive",
+      "body": "Retelling is on track when the narrative becomes more alive and more owned, not merely more detailed.",
+      "items": [
+        "The client can name what happened and what it meant then.",
+        "The body shows waves of activation and settling.",
+        "Primary emotion replaces numbness, collapse, or global shame.",
+        "A new stance appears: protection, protest, grief, dignity, or self-contact."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

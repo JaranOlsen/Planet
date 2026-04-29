@@ -1,0 +1,56 @@
+{
+  "id": "converted-160-enneatype-9w8-the-comfort-seeker",
+  "title": "Converted: Enneatype 9w8 - The Comfort Seeker",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[160]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 160,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 9w8",
+      "title": "The Comfort Seeker",
+      "backgroundColor": "rgb(30, 49, 16)",
+      "image": "assets/images/enneagram/panda.webp",
+      "imagePosition": "74%",
+      "body": [
+        {
+          "text": "The Peaceful, Assertive Type: Easygoing, Accepting, Comfort-seeking, Protective, and Dominant.",
+          "strong": true
+        },
+        "As a Nine wing Eight, you blend the peace-seeking, accepting, and easygoing nature of a Nine with the assertive, protective, and dominant traits of an Eight. This combination often results in a personality that is both calm and strong, striving for peace and harmony while also capable of taking assertive action when necessary. Your desire for peace and acceptance is balanced by a strong sense of autonomy and control.",
+        "Your Eight wing adds an element of assertiveness to your peaceful demeanor, making you a force to be reckoned with when your peace or the peace of those around you is threatened. You're a protector who values peace and strives to maintain harmony, yet isn't afraid to take a stand when necessary."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 9w8",
+      "title": "The Comfort Seeker",
+      "backgroundColor": "rgb(30, 49, 16)",
+      "image": "assets/images/enneagram/panda.webp",
+      "imagePosition": "74%",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Practice asserting your needs and desires instead of avoiding conflict.",
+            "Cultivate self-awareness to understand your motivations and desires.",
+            "Set personal goals and take active steps to achieve them.",
+            "Develop strategies to manage stress and maintain your inner peace.",
+            "Learn to face and resolve conflicts instead of avoiding them."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

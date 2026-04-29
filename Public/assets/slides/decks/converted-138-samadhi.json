@@ -1,0 +1,89 @@
+{
+  "id": "converted-138-samadhi",
+  "title": "Converted: Samādhi",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[138]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 138,
+    "refs": [
+      "1j",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "word-cloud",
+      "overline": "Samādhi",
+      "title": "A Felt Field of Stillness",
+      "words": [
+        ["Samādhi", 7],
+        ["peace", 6],
+        ["stillness", 6],
+        ["tranquility", 5],
+        ["presence", 5],
+        ["clarity", 5],
+        ["concentration", 4],
+        ["serenity", 4],
+        ["unity", 4],
+        ["focus", 4],
+        ["absorption", 3],
+        ["calm", 3],
+        ["silence", 3],
+        ["harmony", 2],
+        ["flow", 2],
+        ["bliss", 2],
+        ["immersed", 2],
+        ["balance", 2],
+        ["equanimity", 2],
+        ["release", 2],
+        ["comfort", 2],
+        ["solitude", 2],
+        ["centered", 2],
+        ["restful", 2],
+        ["safe", 2],
+        ["unburdened", 2],
+        ["openness", 2],
+        ["attuned", 2],
+        ["soothing", 2],
+        ["unruffled", 2]
+      ],
+      "colors": [
+        "#6f8e6a",
+        "#8fb58a",
+        "#a3b18a",
+        "#c8d8b0",
+        "#8fb3a5"
+      ],
+      "weightFactor": 16,
+      "rotateRatio": 0.1,
+      "minRotation": -0.75,
+      "maxRotation": 0.75,
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "split-image",
+      "overline": "Samādhi",
+      "title": "Scientific Findings",
+      "image": "assets/images/background/temple.webp",
+      "alt": "Temple image used in the legacy Samādhi slide",
+      "bullets": [
+        {
+          "text": "Neuroplasticity: consistent meditation practice leads to measurable changes in brain structure, enhancing self-awareness and attention."
+        },
+        {
+          "text": "Anxiety reduction: meditation can mitigate stress and anxiety by promoting mindfulness and detachment."
+        },
+        {
+          "text": "Telomere length: research suggests meditation may slow cellular aging by influencing protective chromosome structures."
+        },
+        {
+          "text": "Cardiovascular benefits: regular practice can positively affect heart rate, blood pressure, and cholesterol."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "slide-soft"
+    }
+  ]
+}

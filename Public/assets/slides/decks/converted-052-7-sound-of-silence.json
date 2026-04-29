@@ -1,0 +1,34 @@
+{
+  "id": "converted-052-7-sound-of-silence",
+  "title": "Converted: #7 Sound Of Silence",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[52]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 52,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#7 Sound Of Silence",
+      "image": "assets/images/roadToHere/7t.webp",
+      "alt": "#7 Sound Of Silence cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-7-sound-of-silence",
+        "title": "Insight Timer Embed: Road To Here - #7 Sound Of Silence | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-7-sound-of-silence"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

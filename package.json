@@ -1,13 +1,15 @@
 {
-  "name": "planet",
+  "name": "planet-slide-lab",
   "private": true,
   "version": "0.1.0",
-  "homepage": "https://jaranolsen.github.io/Planet/",
+  "homepage": "https://jaranolsen.github.io/Planet-slide-lab/",
   "main": "main.js",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "validate:slides": "node scripts/validate-slides.mjs",
+    "check:slides:fit": "node scripts/check-slide-fit.mjs",
     "test:takadimi": "node --test takadimi/notation.test.mjs",
     "preview": "vite preview",
     "deploy": "vite build && node scripts/prune-pages-dist.mjs && gh-pages -d dist"

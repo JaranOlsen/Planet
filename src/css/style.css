@@ -13,6 +13,26 @@ html, body {
   height: 100%;
   overflow: hidden;
 }
+#labBadge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 20000;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(8, 12, 20, 0.78);
+  color: #f5d36b;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
 #canvas {
   width: 100%;  /* let our container decide our size */
   height: 100%;

@@ -1,0 +1,77 @@
+{
+  "id": "eft-evocative-unfolding",
+  "title": "EFT: Evocative Unfolding",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Three practical clinician-facing slides extracted from the EFT interventions practice deck.",
+  "sources": [
+    {
+      "label": "Vrana and Greenberg, Overview of Emotion-Focused Therapy",
+      "url": "https://www.researchgate.net/publication/325379801_Overview_of_emotion-focused_therapy"
+    },
+    {
+      "label": "Markers and tasks summary",
+      "url": "https://www.lotus-on-the-ripple.com/single-post/2019/02/11/integrating-being-and-doing-in-emotion-focused-therapy"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Evocative Unfolding",
+      "title": "Marker: a puzzling reaction point",
+      "image": "assets/images/gut/tengyart-_VkwiVNCNfo-unsplash.jpg",
+      "body": "Use when the client does not know why they reacted that way.",
+      "bullets": [
+        "Choose one concrete moment, not a general pattern.",
+        "Shift into present tense and sensory detail.",
+        "Let implicit meaning emerge before offering formulation."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Evocative Unfolding",
+      "title": "Micro-sequence",
+      "body": "Experienced clinicians often move too quickly to the scheme. Stay with the client at the frame-by-frame level.",
+      "steps": [
+        "Locate the scene: where, who, distance, light, posture.",
+        "Freeze the first body shift before the named emotion.",
+        "Ask: what did your system see, assume, or expect right there?",
+        "Differentiate primary reaction from secondary management.",
+        "Reflect the discovered meaning and check for bodily recognition."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Evocative Unfolding",
+      "title": "Common errors",
+      "headers": [
+        "Error",
+        "Correction",
+        "Resolution cue"
+      ],
+      "rows": [
+        [
+          "Too broad",
+          "Return to one second in one scene.",
+          "Specific image appears."
+        ],
+        [
+          "Too cognitive",
+          "Ask for body, gaze, impulse, and felt meaning.",
+          "Client says 'that is it.'"
+        ],
+        [
+          "Too interpretive",
+          "Hold formulation lightly and test it experientially.",
+          "Meaning lands in the body."
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "converted-159-enneatype-8w7-the-independent",
+  "title": "Converted: Enneatype 8w7 - The Independent",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[159]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 159,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 8w7",
+      "title": "The Independent",
+      "backgroundColor": "rgb(32, 28, 27)",
+      "image": "assets/images/enneagram/lion.webp",
+      "imagePosition": "45%",
+      "body": [
+        {
+          "text": "The Assertive, Enthusiastic Type: Protective, Challenging, Dominant, Spontaneous, and Fun-loving.",
+          "strong": true
+        },
+        "As an Eight wing Seven, you merge the assertive, protective, and dominant nature of an Eight with the spontaneous, versatile, and fun-loving traits of a Seven. This results in a strong and independent personality that seeks to assert control over their environment while also enjoying life's adventures. You are driven by a desire to protect yourself and those you care about, and you're not afraid to take the initiative to ensure your goals are met.",
+        "Your Seven wing adds a sense of spontaneity and joy to your assertive nature, making you a dynamic and lively leader. You strive for control and independence but also seek to experience life to the fullest, bringing a unique blend of strength and enthusiasm to your pursuits."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 8w7",
+      "title": "The Independent",
+      "backgroundColor": "rgb(32, 28, 27)",
+      "image": "assets/images/enneagram/lion.webp",
+      "imagePosition": "45%",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Practice empathy and kindness along with your natural assertiveness.",
+            "Recognize the importance of vulnerability in forming deep and meaningful relationships.",
+            "Learn to manage your energy and aggression in productive ways.",
+            "Cultivate patience and tolerance towards different perspectives.",
+            "Remember that it's okay to depend on others and ask for help when needed."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "converted-092-spiral-dynamics-stage-purple",
+  "title": "Converted: Spiral Dynamics - Stage Purple",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured media conversion of legacy contentData[92]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 92,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Spiral Dynamics",
+      "title": "Stage Purple (Magic)",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/BZFlE0eKTvw",
+        "title": "Spiral Dynamics - Stage Purple"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

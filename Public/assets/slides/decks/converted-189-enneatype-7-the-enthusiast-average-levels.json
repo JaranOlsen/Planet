@@ -1,0 +1,38 @@
+{
+  "id": "converted-189-enneatype-7-the-enthusiast-average-levels",
+  "title": "Converted: Enneatype 7 - The Enthusiast - Average Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[189]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 189,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 7",
+      "title": "The Enthusiast",
+      "density": "long",
+      "backgroundColor": "rgb(78, 46, 52)",
+      "image": "assets/images/enneagram/suitcases.webp",
+      "imagePosition": "top",
+      "bullets": [
+        {
+          "text": "Average Levels:",
+          "ordered": true,
+          "start": 4,
+          "items": [
+            "As their restlessness increases, they seek more options and choices. They become adventurous and \"worldly wise,\" but less focused, constantly seeking new things and experiences. They value money, variety, and keeping up with the latest trends.",
+            "They struggle to discriminate what they truly need, become hyperactive, and unable to say \"no\" to themselves. They immerse themselves in constant activity. Uninhibited, they do and say whatever comes to mind: storytelling, flamboyant exaggerations, witty wise-cracking, and performing. They fear boredom and are in perpetual motion, but often do too many things—many ideas but little follow through.",
+            "They get into conspicuous consumption and all forms of excess. They become self-centered, materialistic, and greedy, never feeling that they have enough. They are demanding and pushy, yet unsatisfied and jaded. Their behavior can become addictive, hardened, and insensitive."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "eft-motivation-split",
+  "title": "EFT: Motivation Split",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Three practical clinician-facing slides extracted from the EFT interventions practice deck.",
+  "sources": [
+    {
+      "label": "Vrana and Greenberg, Overview of Emotion-Focused Therapy",
+      "url": "https://www.researchgate.net/publication/325379801_Overview_of_emotion-focused_therapy"
+    },
+    {
+      "label": "Markers and tasks summary",
+      "url": "https://www.lotus-on-the-ripple.com/single-post/2019/02/11/integrating-being-and-doing-in-emotion-focused-therapy"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Motivation Split",
+      "title": "Marker: ambivalence with emotional cost",
+      "image": "assets/images/gut/kelly-sikkema-f_aHTIof44U-unsplash-2.jpg",
+      "body": "Use when one part pushes for change and another protects the status quo.",
+      "bullets": [
+        "Name the two positions as active self-organizations.",
+        "Keep both sides emotionally legitimate until their functions are clear.",
+        "Look for an integrated next step small enough to enact."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Motivation Split",
+      "title": "Chair work for ambivalence",
+      "body": "The split softens when each side discovers what the other is protecting.",
+      "steps": [
+        "Give the change side a chair: what do you want and why now?",
+        "Give the no-change side a chair: what danger do you prevent?",
+        "Deepen each side to primary emotion, need, and feared consequence.",
+        "Facilitate direct address until mutual recognition appears.",
+        "Ask the whole client for one testable action that respects both sides."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "checklist",
+      "overline": "Motivation Split",
+      "title": "Resolution is integration, not compliance",
+      "body": "A good ending usually has less pressure and more ownership.",
+      "items": [
+        "The protective side is understood before it is asked to move.",
+        "The change side speaks from need, not contempt for the stuck side.",
+        "The client can name what must be protected during change.",
+        "The next step is concrete, relationally supported, and reversible."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

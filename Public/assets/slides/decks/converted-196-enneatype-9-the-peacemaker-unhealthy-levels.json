@@ -1,0 +1,38 @@
+{
+  "id": "converted-196-enneatype-9-the-peacemaker-unhealthy-levels",
+  "title": "Converted: Enneatype 9 - The Peacemaker - Unhealthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[196]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 196,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 9",
+      "title": "The Peacemaker",
+      "density": "long",
+      "backgroundColor": "rgb(91, 78, 51)",
+      "image": "assets/images/enneagram/yinyang.webp",
+      "imagePosition": "35%",
+      "bullets": [
+        {
+          "text": "Unhealthy Levels:",
+          "ordered": true,
+          "start": 7,
+          "items": [
+            "They can be highly repressed, undeveloped, and ineffectual. They feel incapable of facing problems and become obstinate, dissociating themselves from all conflicts. They can be neglectful and dangerous to others.",
+            "Wanting to block out anything that could affect them, they dissociate so much that they eventually cannot function, becoming numb and depersonalized.",
+            "They finally become severely disoriented and catatonic, abandoning themselves and turning into shattered shells. Multiple personalities are possible at this stage. This level generally corresponds to Schizoid and Dependent personality disorders."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

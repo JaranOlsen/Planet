@@ -1,0 +1,442 @@
+{
+  "id": "heart-showcase",
+  "title": "Heart Path Structured Showcase",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Full structured template library for the heart path.",
+  "slides": [
+    {
+      "template": "opening",
+      "overline": "Heart Path",
+      "title": "The Path Of Training",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "subtitle": "Meditation, compassion, stillness, and freedom from the causes of suffering.",
+      "image": "assets/images/background/rippleLake.webp",
+      "pills": [
+        "Breath",
+        "Stillness",
+        "Kindness",
+        "Release"
+      ],
+      "stats": [
+        {
+          "value": "4",
+          "label": "foundations"
+        },
+        {
+          "value": "7",
+          "label": "factors"
+        },
+        {
+          "value": "1",
+          "label": "breath"
+        }
+      ]
+    },
+    {
+      "template": "quote",
+      "overline": "Heart Path",
+      "title": "Quote",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "image": "assets/images/background/temple.webp",
+      "body": [
+        {
+          "text": "The heart settles when experience is allowed to rise and pass without possession.",
+          "emphasis": true
+        },
+        {
+          "text": "Use this family for breath, virtue, samadhi, compassion, and release."
+        }
+      ],
+      "source": "Meditation path"
+    },
+    {
+      "template": "long-text",
+      "overline": "Heart Path",
+      "title": "Long Text",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": [
+        {
+          "text": "Heart slides should feel spacious, quiet, and invitational."
+        },
+        {
+          "text": "Let fewer words do more work; the layout should leave room for practice.",
+          "emphasis": true
+        }
+      ]
+    },
+    {
+      "template": "full-image",
+      "overline": "Heart Path",
+      "title": "Full Image",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "image": "assets/images/background/rippleLake.webp",
+      "body": "A still image can cue the nervous system before a meditation instruction begins."
+    },
+    {
+      "template": "split-image",
+      "overline": "Heart Path",
+      "title": "Split Image",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "image": "assets/images/anapana/lovethebreath.webp",
+      "body": "Use image and text together when a practice needs both atmosphere and precision.",
+      "bullets": [
+        "Soften the body.",
+        "Gather attention.",
+        "Notice the tone of mind.",
+        "Release what does not need holding."
+      ]
+    },
+    {
+      "template": "title-bullets",
+      "overline": "Heart Path",
+      "title": "Title Bullets",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Meditation teaching benefits from simple steps and plenty of silence around them.",
+      "bullets": [
+        "Soften the body.",
+        "Gather attention.",
+        "Notice the tone of mind.",
+        "Release what does not need holding."
+      ]
+    },
+    {
+      "template": "bullets",
+      "overline": "Heart Path",
+      "title": "Bullets",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Meditation teaching benefits from simple steps and plenty of silence around them.",
+      "bullets": [
+        "Soften the body.",
+        "Gather attention.",
+        "Notice the tone of mind.",
+        "Release what does not need holding."
+      ]
+    },
+    {
+      "template": "two-column",
+      "overline": "Heart Path",
+      "title": "Two Column",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "subtitle": "Hold method and attitude together.",
+      "columns": [
+        {
+          "title": "Training",
+          "body": "Repeated, gentle return to the chosen object."
+        },
+        {
+          "title": "Release",
+          "body": "Letting clinging fade without forcing experience away."
+        }
+      ]
+    },
+    {
+      "template": "steps",
+      "overline": "Heart Path",
+      "title": "Steps",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Use steps for guided practice and meditative progression.",
+      "steps": [
+        "Sit upright.",
+        "Feel the breath.",
+        "Notice wandering.",
+        "Return without blame.",
+        "Rest in awareness."
+      ]
+    },
+    {
+      "template": "checklist",
+      "overline": "Heart Path",
+      "title": "Checklist",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Use this before practice instructions or silent periods.",
+      "items": [
+        "Posture is supported.",
+        "Breath is available.",
+        "Tone is kind.",
+        "Enough silence is left."
+      ]
+    },
+    {
+      "template": "statistics",
+      "overline": "Heart Path",
+      "title": "Statistics",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "stats": [
+        {
+          "value": "4",
+          "label": "foundations"
+        },
+        {
+          "value": "7",
+          "label": "factors"
+        },
+        {
+          "value": "1",
+          "label": "breath"
+        }
+      ]
+    },
+    {
+      "template": "profile",
+      "overline": "Heart Path",
+      "title": "Profile",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "image": "assets/images/restraint/meditation.webp",
+      "body": "Profile slides can hold practices, qualities, teachers, hindrances, or contemplative maps.",
+      "bullets": [
+        "Object",
+        "Attitude",
+        "Release"
+      ]
+    },
+    {
+      "template": "gallery",
+      "overline": "Heart Path",
+      "title": "Gallery",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "images": [
+        {
+          "src": "assets/images/restraint/breath.webp",
+          "caption": "Breath"
+        },
+        {
+          "src": "assets/images/restraint/retreat.webp",
+          "caption": "Retreat"
+        },
+        {
+          "src": "assets/images/background/temple.webp",
+          "caption": "Temple"
+        }
+      ]
+    },
+    {
+      "template": "media",
+      "overline": "Heart Path",
+      "title": "Media",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Media slides can hold guided practices, talks, chants, or silent timers.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/z_Gy3mTztgg",
+        "title": "Meditation sample media"
+      }
+    },
+    {
+      "template": "timeline",
+      "overline": "Heart Path",
+      "title": "Timeline",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Show a contemplative movement without overcrowding it.",
+      "timeline": [
+        {
+          "title": "Virtue",
+          "body": "Life becomes less tangled."
+        },
+        {
+          "title": "Calm",
+          "body": "Attention gathers and steadies."
+        },
+        {
+          "title": "Insight",
+          "body": "Experience is seen more clearly."
+        },
+        {
+          "title": "Release",
+          "body": "Clinging softens."
+        }
+      ]
+    },
+    {
+      "template": "table",
+      "overline": "Heart Path",
+      "title": "Table",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "headers": [
+        "Quality",
+        "Training",
+        "Fruit"
+      ],
+      "rows": [
+        [
+          "Mindfulness",
+          "Remember",
+          "Clarity"
+        ],
+        [
+          "Samadhi",
+          "Gather",
+          "Stability"
+        ],
+        [
+          "Wisdom",
+          "See",
+          "Release"
+        ]
+      ]
+    },
+    {
+      "template": "card-grid",
+      "overline": "Heart Path",
+      "title": "Card Grid",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Cards are useful for practices, qualities, hindrances, or reminders.",
+      "cards": [
+        {
+          "title": "Sila",
+          "body": "A life that supports calm."
+        },
+        {
+          "title": "Samadhi",
+          "body": "Attention resting in one place."
+        },
+        {
+          "title": "Panna",
+          "body": "Seeing without clinging."
+        }
+      ]
+    },
+    {
+      "template": "call-to-action",
+      "overline": "Heart Path",
+      "title": "Call To Action",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Let the slide become a doorway into one minute of practice.",
+      "action": {
+        "label": "Enter Silence"
+      },
+      "note": "No need to improve the moment before noticing it."
+    },
+    {
+      "template": "word-cloud",
+      "overline": "Heart Path",
+      "title": "Word Cloud",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "words": [
+        [
+          "breath",
+          9
+        ],
+        [
+          "stillness",
+          8
+        ],
+        [
+          "kindness",
+          7
+        ],
+        [
+          "release",
+          7
+        ],
+        [
+          "attention",
+          6
+        ],
+        [
+          "presence",
+          5
+        ],
+        [
+          "ease",
+          4
+        ]
+      ]
+    },
+    {
+      "template": "quadrant-chart",
+      "overline": "Heart Path",
+      "title": "Quadrant Chart",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "quadrants": [
+        {
+          "x": 250,
+          "y": 155,
+          "label": "Energy"
+        },
+        {
+          "x": 750,
+          "y": 155,
+          "label": "Joy"
+        },
+        {
+          "x": 250,
+          "y": 435,
+          "label": "Calm"
+        },
+        {
+          "x": 750,
+          "y": 435,
+          "label": "Equanimity"
+        }
+      ]
+    },
+    {
+      "template": "mindmap-slot",
+      "overline": "Heart Path",
+      "title": "Mindmap Slot",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "nodes": [
+        {
+          "id": "root",
+          "label": "Practice",
+          "x": 500,
+          "y": 260,
+          "r": 58
+        },
+        {
+          "id": "breath",
+          "label": "Breath",
+          "x": 270,
+          "y": 160
+        },
+        {
+          "id": "kindness",
+          "label": "Kindness",
+          "x": 730,
+          "y": 160
+        },
+        {
+          "id": "release",
+          "label": "Release",
+          "x": 500,
+          "y": 420
+        }
+      ],
+      "links": [
+        {
+          "from": "root",
+          "to": "breath"
+        },
+        {
+          "from": "root",
+          "to": "kindness"
+        },
+        {
+          "from": "root",
+          "to": "release"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "converted-186-enneatype-6-the-loyalist-average-levels",
+  "title": "Converted: Enneatype 6 - The Loyalist - Average Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[186]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 186,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 6",
+      "title": "The Loyalist",
+      "density": "long",
+      "backgroundColor": "rgb(82, 57, 44)",
+      "image": "assets/images/enneagram/lighthouse.webp",
+      "imagePosition": "50% 60%",
+      "bullets": [
+        {
+          "text": "Average Levels:",
+          "ordered": true,
+          "start": 4,
+          "items": [
+            "They start to invest their time and energy in whatever they perceive as safe and stable. They seek structure and look to alliances and authorities for security and continuity. They remain constantly vigilant, anticipating problems.",
+            "To avoid additional demands, they might react against others in a passive-aggressive manner. They become evasive, indecisive, cautious, procrastinating, and ambivalent. Their high reactivity, anxiety, and negativity lead to contradictory signals and unpredictable reactions due to internal confusion.",
+            "To compensate for insecurities, they may become sarcastic and belligerent, blaming others for their problems. They may adopt a tough stance toward \"outsiders,\" become highly reactive and defensive, dividing people into friends and enemies, while on the lookout for threats to their own security. They may show signs of authoritarian behavior, suspicion, and induce fear in others to silence their own fears."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}
