@@ -1,22 +1,19 @@
-# Planet Slide Lab Workflow
+# Planet Slide Lab Integration Workflow
 
 ## Purpose
-- `Planet` remains the stable production repo.
-- `Planet-slide-lab` is the isolated architecture sandbox for slideshow and slide-authoring work.
-- Promotion is one-way: validate in the lab first, then cherry-pick or manually port narrow changes back into `Planet`.
+- `Planet` is the production repo and now contains the promoted Slide Lab runtime and editor work on `develop`.
+- `Planet-slide-lab` remains useful as a sandbox for risky slide-authoring experiments.
+- Promotion from the lab should be selective: validate there first, then port narrow changes into `Planet`.
 
 ## Remote Policy
-- `origin`: intended lab remote.
-- `upstream`: original `Planet` repo, treated as read-only reference.
-- Do not merge the lab repo back into `Planet`.
+- `origin`: `Planet`.
+- Treat `Planet-slide-lab` as a separate sandbox remote if you add it locally.
+- Do not point this checkout origin at the lab repository.
 
 ## Branching
-- `main`: stable lab baseline.
-- Feature branches:
-  - `slides/runtime`
-  - `slides/templates`
-  - `slides/editor`
-  - `slides/migration`
+- `main`: stable production baseline.
+- `develop`: integration branch for promoted Slide Lab work before release.
+- Keep larger slide changes on focused feature branches before merging into `develop`.
 
 ## Working Rules
 - Keep legacy slide families working while the new system is developed.
@@ -29,6 +26,5 @@
 - Promote back in narrow, production-safe units such as renderer, adapter, controller, or template groups.
 
 ## Manual Follow-up
-- Rotate any GitHub token that was previously embedded in a remote URL.
-- Create the private GitHub repo `Planet-slide-lab`.
-- Push this lab repo to that remote once it exists.
+- Keep GitHub tokens out of remotes and shell history.
+- Re-run `npm run build`, `npm run validate:slides`, and `npm run test:takadimi` before promotion.

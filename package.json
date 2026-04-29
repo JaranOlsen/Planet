@@ -1,8 +1,8 @@
 {
-  "name": "planet-slide-lab",
+  "name": "planet",
   "private": true,
   "version": "0.1.0",
-  "homepage": "https://jaranolsen.github.io/Planet-slide-lab/",
+  "homepage": "https://jaranolsen.github.io/Planet/",
   "main": "main.js",
   "type": "module",
   "scripts": {

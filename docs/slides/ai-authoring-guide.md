@@ -88,7 +88,7 @@ For browser frame checks, start a preview server and run:
 
 ```sh
 npm run preview
-SLIDE_FIT_URL=http://127.0.0.1:4174/Planet-slide-lab/ npm run check:slides:fit
+SLIDE_FIT_URL=http://127.0.0.1:4174/Planet/ npm run check:slides:fit
 ```
 
 Set `CHROME_PATH` if Chrome or Chromium is not in a standard location.

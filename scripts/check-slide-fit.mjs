@@ -8,7 +8,7 @@ import WebSocket from 'ws';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
 const deckRoot = path.join(repoRoot, 'Public/assets/slides/decks');
-const appUrl = process.env.SLIDE_FIT_URL || process.argv[2] || 'http://127.0.0.1:4174/Planet-slide-lab/';
+const appUrl = process.env.SLIDE_FIT_URL || process.argv[2] || 'http://127.0.0.1:4174/Planet/';
 const deckArg = process.env.SLIDE_FIT_DECK || process.argv[3] || '';
 const deckPaths = deckArg
   ? deckArg.split(',').map((entry) => normaliseDeckPath(entry.trim())).filter(Boolean)

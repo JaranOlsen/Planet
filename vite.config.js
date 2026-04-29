@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   assetsInclude: ['src/models/*.glb'],
-  base: '/Planet-slide-lab/',
+  base: '/Planet/',
   root: "./",
   publicDir: 'Public',
   plugins: [
