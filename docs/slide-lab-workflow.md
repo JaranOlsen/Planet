@@ -27,4 +27,4 @@
 
 ## Manual Follow-up
 - Keep GitHub tokens out of remotes and shell history.
-- Re-run `npm run build`, `npm run validate:slides`, and `npm run test:takadimi` before promotion.
+- Re-run `npm run build` and `npm run validate:slides` before promotion.
