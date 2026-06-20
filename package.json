@@ -8,7 +8,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test:takadimi": "node --test takadimi/notation.test.mjs",
     "preview": "vite preview",
     "deploy": "vite build && node scripts/prune-pages-dist.mjs && gh-pages -d dist"
   },
