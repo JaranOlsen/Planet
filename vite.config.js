@@ -23,7 +23,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: resolve(__dirname, 'index.html'),
-        deliberatepractice: resolve(__dirname, 'deliberatepractice/index.html'),
       },
     },
   },
