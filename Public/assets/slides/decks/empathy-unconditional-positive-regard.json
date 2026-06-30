@@ -1,0 +1,80 @@
+{
+  "id": "empathy-unconditional-positive-regard",
+  "title": "Empathy: Unconditional Positive Regard",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of the legacy unconditional positive regard slides.",
+  "sources": [
+    {
+      "label": "Carl Rogers, On Becoming a Person",
+      "url": "https://archive.org/details/onbecomingperson00roge"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Empathy",
+      "title": "Unconditional Positive Regard",
+      "image": "assets/images/gut/empathy/unconditional-positive-regard.png",
+      "body": "Non-contingent respect and warmth toward the client as a person.",
+      "bullets": [
+        "Validates subjective experience without endorsing every action.",
+        "Counters shame and conditions of worth.",
+        "Makes disowned parts safer to contact.",
+        "Supports self-acceptance and experiential change."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "two-column",
+      "overline": "Unconditional Positive Regard",
+      "title": "Hold dignity while staying clear",
+      "columns": [
+        {
+          "title": "What It Is",
+          "body": "Respect for the client's inherent worth, even when the work includes painful impact, limits, or accountability."
+        },
+        {
+          "title": "What It Does",
+          "body": "Reduces defensiveness so shame, fear, need, and longing can become workable experience."
+        },
+        {
+          "title": "Practice Move",
+          "body": "Assume protectiveness first: this makes sense as a way you survived."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Unconditional Positive Regard",
+      "title": "Common drift",
+      "headers": [
+        "Drift",
+        "Risk",
+        "Return"
+      ],
+      "rows": [
+        [
+          "Collusion",
+          "Avoids accountability",
+          "Validate emotion and explore impact."
+        ],
+        [
+          "Cold neutrality",
+          "Withholds warmth",
+          "Name dignity and understandable need."
+        ],
+        [
+          "Reassurance",
+          "Bypasses shame",
+          "Stay with the part that cannot receive acceptance."
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

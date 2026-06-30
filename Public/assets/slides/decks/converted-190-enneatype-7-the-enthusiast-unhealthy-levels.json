@@ -1,0 +1,38 @@
+{
+  "id": "converted-190-enneatype-7-the-enthusiast-unhealthy-levels",
+  "title": "Converted: Enneatype 7 - The Enthusiast - Unhealthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[190]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 190,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 7",
+      "title": "The Enthusiast",
+      "density": "long",
+      "backgroundColor": "rgb(78, 46, 52)",
+      "image": "assets/images/enneagram/suitcases.webp",
+      "imagePosition": "top",
+      "bullets": [
+        {
+          "text": "Unhealthy Levels:",
+          "ordered": true,
+          "start": 7,
+          "items": [
+            "Desperate to quell their anxieties, they can be impulsive and infantile, not knowing when to stop. Addictions and excess take a toll on them: they become debauched, depraved, dissipated escapists, offensive and abusive.",
+            "Trying to flee from themselves, they act out impulses rather than dealing with anxiety or frustrations: they lose control, falling into erratic mood swings, and compulsive actions (manias).",
+            "Finally, their energy and health is completely spent: they become claustrophobic and panic-stricken. Often they give up on themselves and life, falling into deep depression and despair, exhibiting self-destructive behavior including overdoses, and impulsive suicide. This level generally corresponds to Bipolar disorder and Histrionic personality disorder."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

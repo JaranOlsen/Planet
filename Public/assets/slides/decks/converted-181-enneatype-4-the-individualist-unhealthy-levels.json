@@ -1,0 +1,37 @@
+{
+  "id": "converted-181-enneatype-4-the-individualist-unhealthy-levels",
+  "title": "Converted: Enneatype 4 - The Individualist - Unhealthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[181]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 181,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 4",
+      "title": "The Individualist",
+      "density": "long",
+      "backgroundColor": "rgb(56, 28, 21)",
+      "image": "assets/images/enneagram/rose.webp",
+      "bullets": [
+        {
+          "text": "Unhealthy Levels:",
+          "ordered": true,
+          "start": 7,
+          "items": [
+            "Failure of dreams leads to self-inhibition, self-anger, depression, and alienation. They might feel ashamed and fatigued, unable to function effectively.",
+            "They might become tormented by extreme self-contempt, blaming others and pushing away anyone who tries to help. They become a source of their own torment.",
+            "In despair and feeling hopeless, they might resort to self-destructive behaviors such as substance abuse. In extreme cases, they are prone to emotional breakdowns or suicide. This level generally corresponds to severe Avoidant, Depressive, and Narcissistic personality disorders."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -13,6 +13,7 @@ html, body {
   height: 100%;
   overflow: hidden;
 }
+
 #canvas {
   width: 100%;  /* let our container decide our size */
   height: 100%;
@@ -414,30 +415,55 @@ label {
 /*  || HOTKEYS */
 #hotKeys {
   position: absolute;
-  left: 5%;
-  top: 5%;
-  width: max-content;
+  left: clamp(12px, 5vw, 72px);
+  top: clamp(12px, 5vh, 45px);
+  width: min(max-content, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
+  padding: 10px 12px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.62);
+  border-radius: 6px;
   color: white;
   font-size: x-small;
   text-align: left;
-  z-index: 0;
+  z-index: 2;
   display: none;
   user-select: none; 
   cursor: pointer;
 }
 #hotKeys .hotkeyTitle {
   font-size: medium;
-  margin-top:20px;
-  margin-bottom:5px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+#hotKeys .hotkeyTitle:first-child {
+  margin-top: 0;
 }
 #hotKeys .hotkey-line {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(76px, 100px) minmax(0, 1fr);
+  column-gap: 10px;
 }
 #hotKeys .hotkey {
-  width: 100px;
   text-align: right;
 }
 #hotKeys .description {
   text-align: left;
-  margin-left: 10px; /* Space between hotkey and description */
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+  #hotKeys {
+    font-size: 10px;
+  }
+
+  #hotKeys .hotkeyTitle {
+    margin-top: 12px;
+    font-size: 13px;
+  }
+
+  #hotKeys .hotkey-line {
+    grid-template-columns: minmax(64px, 84px) minmax(0, 1fr);
+  }
 }

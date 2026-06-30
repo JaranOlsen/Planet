@@ -1,0 +1,61 @@
+{
+  "id": "empathy-attunement",
+  "title": "Empathy: Attunement",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of the legacy attunement slides.",
+  "sources": [
+    {
+      "label": "Diana Fosha, The Transforming Power of Affect",
+      "url": "https://www.worldcat.org/title/43481668"
+    },
+    {
+      "label": "Legacy video: How do we get to our core pain?",
+      "url": "https://www.youtube-nocookie.com/embed/hEHbrQ6hwFs"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Empathy",
+      "title": "Attunement",
+      "image": "assets/images/gut/empathy/attunement.png",
+      "body": "Moment-to-moment tracking of affect, body, pace, and meaning.",
+      "bullets": [
+        "Match intensity without merging.",
+        "Track voice, breath, gaze, posture, and hesitation.",
+        "Reflect feeling plus meaning, then check fit.",
+        "Use misattunement as a repair opportunity."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "checklist",
+      "overline": "Attunement",
+      "title": "Use your body as an instrument",
+      "body": "Attunement guides the next intervention toward what is alive now.",
+      "items": [
+        "Notice what changes in you as the client speaks.",
+        "Separate resonance from assumption.",
+        "Reflect tentatively: I may be off.",
+        "Watch whether the client softens, corrects, or withdraws.",
+        "Repair early: I think I missed you."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Attunement",
+      "title": "Core pain and empathic tracking",
+      "body": "Legacy media converted into the structured slide system.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/hEHbrQ6hwFs",
+        "title": "How do we get to our core pain?"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

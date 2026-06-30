@@ -1,0 +1,25 @@
+{
+  "id": "converted-112-the-fundamental-nature-of-awareness",
+  "title": "Converted: The fundamental nature of awareness",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[112]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 112,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "The fundamental nature of awareness",
+      "title": "True Detective Rust and Marty talk about the sky: \"The light's winning\"",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/XmdPY-hFSt0",
+        "title": "True Detective Rust and Marty talk about the sky: \"The light's winning\""
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "converted-124-internal-consistency",
+  "title": "Converted: Internal consistency",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[124]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 124,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Quality",
+      "title": "Internal consistency",
+      "body": [
+        "The components and assumptions of the theory should be coherent and logically consistent with one another, avoiding contradictions or discrepancies."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

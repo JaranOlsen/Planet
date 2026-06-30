@@ -1,0 +1,49 @@
+{
+  "id": "converted-004-idealism",
+  "title": "Converted: Idealism",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[4]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 4,
+    "refs": [
+      "1",
+      "2",
+      "3"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "Idealism",
+      "title": "New Science About the Nature of Consciousness",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/Nls4o_mR-sY",
+        "title": "New Science About the Nature of Consciousness"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Idealism",
+      "title": "Why Our Reality Is Not What It Seems...",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/wJG6yL4ncK8",
+        "title": "Why Our Reality Is Not What It Seems..."
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Idealism",
+      "title": "What Does Quantum Entanglement Reveal About Reality?",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/59dWdQuSMnk",
+        "title": "What Does Quantum Entanglement Reveal About Reality?"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

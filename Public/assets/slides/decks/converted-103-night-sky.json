@@ -1,0 +1,26 @@
+{
+  "id": "converted-103-night-sky",
+  "title": "Converted: Night Sky",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured text conversion of legacy contentData[103]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 103,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "fullscreen-text",
+      "title": "Night Sky",
+      "showChrome": false,
+      "density": "long-poem",
+      "image": "assets/images/background/bagan.webp",
+      "textAlign": "center",
+      "body": "Night sky\nHow much\ncan I open up\nbefore you\nstop shining?\nI ask the moon.\n\nHow much of me\ncan I bring forth\nand lay down\nin the moonlight\nbefore my darkness\ndevours your light?\n\nIn a fragile glimpse of trust\nI walk into the night\n\nwith all my old songs\nI don't dare to sing –\n\nAnd the moon is shining.\n\nThe moon is shining.\n\n- Hege Fridtun",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "id": "converted-015-biology",
+  "title": "Converted: Biology",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[15]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 15,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6"
+    ]
+  },
+  "slides": [
+    {
+      "template": "full-image",
+      "image": "assets/images/anomalies/biology/Slide1.webp",
+      "alt": "Biology legacy image 1",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Biology",
+      "title": "Paramecium Characteristic & Structure | Under The Microscope",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/bJ53o73QCRA",
+        "title": "Paramecium Characteristic & Structure | Under The Microscope"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/anomalies/biology/Slide2.webp",
+      "alt": "Biology legacy image 3",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Biology",
+      "title": "This Flatworm Remembers Things After You Cut Off Its Brain",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/CYuDbfFRTsw",
+        "title": "This Flatworm Remembers Things After You Cut Off Its Brain"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/anomalies/biology/Slide3.webp",
+      "alt": "Biology legacy image 5",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Biology",
+      "title": "Eva Jablonka Consciousness as we know it: a view from biology",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/5YrmQvu5Eus",
+        "title": "Eva Jablonka Consciousness as we know it: a view from biology"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

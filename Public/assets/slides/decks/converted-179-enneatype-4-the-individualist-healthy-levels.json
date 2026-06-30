@@ -1,0 +1,37 @@
+{
+  "id": "converted-179-enneatype-4-the-individualist-healthy-levels",
+  "title": "Converted: Enneatype 4 - The Individualist - Healthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[179]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 179,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 4",
+      "title": "The Individualist",
+      "density": "long",
+      "backgroundColor": "rgb(56, 28, 21)",
+      "image": "assets/images/enneagram/rose.webp",
+      "bullets": [
+        {
+          "text": "Healthy Levels:",
+          "ordered": true,
+          "start": 1,
+          "items": [
+            "At their best, Type 4 individuals are deeply creative, capable of transforming personal and universal experiences into valuable creations, possibly even works of art. They are inspired, continuously renewing themselves.",
+            "These individuals are self-aware and introspective, always on a quest for self-discovery. They are attuned to their feelings and impulses and show sensitivity and intuition towards both self and others.",
+            "They embrace their uniqueness and stay true to themselves. They are open about their emotions, humane, and possess a unique mix of vulnerability and emotional strength, often communicated through a blend of seriousness and humor."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "id": "converted-109-existential-exploration-insight-meditation",
+  "title": "Converted: Existential Exploration / Insight Meditation",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[109]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 109,
+    "refs": [
+      "1c",
+      "2c",
+      "3",
+      "4",
+      "5"
+    ]
+  },
+  "slides": [
+    {
+      "template": "fullscreen-text",
+      "title": "Altered traits",
+      "showChrome": true,
+      "image": "assets/images/background/tree1.webp",
+      "textAlign": "center",
+      "body": {
+        "text": "\"Waking up to who you are\nrequires letting go of\nwho you imagine yourself to be.\"",
+        "emphasis": true
+      },
+      "source": "Alan Watts",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "fullscreen-text",
+      "title": "The Transcendental Core",
+      "showChrome": true,
+      "density": "long",
+      "image": "assets/images/background/tree1.webp",
+      "textAlign": "justify",
+      "body": {
+        "segments": [
+          {
+            "text": "I too have experienced this. When I am at my best as a group facilitator, or a therapist, I discover this characteristic. I find that when I am closest to my inner intuitive self, when I am somehow in touch with the unknown in me, when perhaps I am in a slightly altered state of consciousness, then whatever I do seems to be full of healing. Then simply my presence is releasing and helpful.\n\nThere is nothing I can do to force this experience. But when I can relax and be close to ",
+            "muted": true
+          },
+          {
+            "text": "the transcendental core of me",
+            "strong": true
+          },
+          {
+            "text": ", then I may behave in strange and impulsive ways in the relationship, ways which I can't justify rationally which have nothing to do with my thought processes. But these strange behaviors turn out to be right in some odd way. At those moments it seems that my inner spirit has reached out and touched the inner spirit of the other. Our relationship transcends itself and has become part of something larger. Profound growth and healing and energy are present.",
+            "muted": true
+          }
+        ]
+      },
+      "source": "Carl Rogers",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "title": "Altered Traits",
+      "image": "assets/images/books/alteredtraits.webp",
+      "alt": "Cover of Altered Traits by Daniel Goleman and Richard Davidson",
+      "body": "A useful reference point for separating temporary states from durable shifts in trait-level attention, affect, and self-relation.",
+      "reveal": "sequence",
+      "transition": "slide-soft"
+    },
+    {
+      "template": "fullscreen-text",
+      "title": "Exercise: Discovering the Transcendental Core of Me",
+      "image": "assets/images/background/tree1.webp",
+      "textAlign": "center",
+      "body": "Exercise: How to discover the \"Transcendental Core of Me\"?\nWhat am I not?\nWhat am I?\nWhat is real?\nHow can something about me be real in the strong sense?",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "showChrome": true
+    },
+    {
+      "template": "media-only",
+      "title": "Superhumans: The Remarkable Brain Waves of High-Level Meditators",
+      "media": {
+        "type": "video",
+        "src": "https://www.youtube-nocookie.com/embed/10J6crRacZg",
+        "title": "Superhumans: The remarkable brain waves of high-level meditators | Daniel Goleman | Big Think",
+        "aspectRatio": "16 / 9"
+      },
+      "reveal": "none",
+      "transition": "slide-soft"
+    }
+  ]
+}

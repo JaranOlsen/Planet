@@ -1,0 +1,25 @@
+{
+  "id": "converted-110-foundations",
+  "title": "Converted: Foundations",
+  "theme": "aether",
+  "description": "Structured minimal media conversion of legacy contentData[110]. The original legacy slides remain stored for fallback, but only the final media slide is exposed from the node.",
+  "legacy": {
+    "contentData": 110,
+    "refs": [
+      "17"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "Foundations",
+      "title": "02-Carl Rogers on Empathy",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/idgjD5tir_w",
+        "title": "02-Carl Rogers on Empathy"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "converted-130-operational-definitions",
+  "title": "Converted: Operational definitions",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[130]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 130,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Quality",
+      "title": "Operational definitions",
+      "body": [
+        "The key concepts and constructs within the theory should be clearly and unambiguously defined, with measurable or observable indicators."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

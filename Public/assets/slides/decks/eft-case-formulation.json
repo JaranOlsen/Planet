@@ -1,0 +1,83 @@
+{
+  "id": "eft-case-formulation",
+  "title": "EFT: Case Formulation",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Three practical clinician-facing slides for case formulation in EFT.",
+  "sources": [
+    {
+      "label": "Goldman and Goldstein, Case formulation in emotion-focused therapy",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35112340/"
+    },
+    {
+      "label": "Case formulation in Emotion-Focused Therapy",
+      "url": "https://1library.net/document/y8n4622y-case-formulation-in-emotion-focused-therapy.html"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Case Formulation",
+      "title": "Marker: the pattern needs a map",
+      "image": "assets/images/gut/eft-process/case-formulation.png",
+      "body": "Use formulation to orient task choice while preserving discovery.",
+      "bullets": [
+        "Repeated emotional sequences appear across stories.",
+        "Secondary emotion obscures primary pain, need, or action.",
+        "Client and therapist need a shared next-step map."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Case Formulation",
+      "title": "Build the map from live process",
+      "body": "Formulate from what the client does emotionally in session, not only from what they report about life.",
+      "steps": [
+        "Track presenting problem, current triggers, and repeated interpersonal context.",
+        "Identify emotion processing style: access, avoidance, interruption, escalation, collapse.",
+        "Differentiate secondary, primary maladaptive, and primary adaptive emotion.",
+        "Name the core pain, unmet need, and protective strategy in ordinary language.",
+        "Link markers to tasks: focusing, unfolding, chair work, soothing, alliance work.",
+        "Offer the formulation as a testable collaboration: is this close, or not quite?"
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Case Formulation",
+      "title": "Use formulation to choose the next task",
+      "headers": [
+        "Dominant process",
+        "Likely task",
+        "Clinical caution"
+      ],
+      "rows": [
+        [
+          "Vague bodily edge",
+          "Focusing",
+          "Do not force coherence."
+        ],
+        [
+          "Specific puzzling reaction",
+          "Evocative unfolding",
+          "Keep to one episode."
+        ],
+        [
+          "Self-criticism or interruption",
+          "Two-chair work",
+          "Validate protection first."
+        ],
+        [
+          "Attachment injury",
+          "Empty-chair work",
+          "Titrate intensity."
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

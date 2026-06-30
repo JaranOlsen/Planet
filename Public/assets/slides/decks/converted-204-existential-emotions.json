@@ -1,0 +1,56 @@
+{
+  "id": "converted-204-existential-emotions",
+  "title": "Converted: Existential Emotions",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured conversion of legacy contentData[204]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 204,
+    "refs": [
+      "1j"
+    ]
+  },
+  "slides": [
+    {
+      "template": "word-cloud",
+      "overline": "Mode: Thinking / Exploration",
+      "title": "Existential Emotions",
+      "words": [
+        ["awe", 7],
+        ["wonder", 6],
+        ["existential dread", 6],
+        ["curiosity", 5],
+        ["boredom", 5],
+        ["purpose", 4],
+        ["meaning", 4],
+        ["transcendence", 4],
+        ["futility", 4],
+        ["hope", 3],
+        ["despair", 3],
+        ["contemplation", 3],
+        ["absurdity", 3],
+        ["insight", 3],
+        ["mortality", 2],
+        ["emptiness", 2],
+        ["self-awareness", 2],
+        ["freedom", 2],
+        ["insignificance", 2],
+        ["realization", 2],
+        ["fulfillment", 2]
+      ],
+      "colors": [
+        "#edca69",
+        "#fff0ba",
+        "#9dcfc0",
+        "#d6b569",
+        "#f8e5a0"
+      ],
+      "weightFactor": 17,
+      "rotateRatio": 0.1,
+      "minRotation": -0.75,
+      "maxRotation": 0.75,
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

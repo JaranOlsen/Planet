@@ -1,0 +1,26 @@
+{
+  "id": "converted-105-samsara-and-nirvana",
+  "title": "Converted: Samsara and Nirvana",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured text conversion of legacy contentData[105]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 105,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "fullscreen-text",
+      "title": "Samsara and Nirvana",
+      "showChrome": false,
+      "density": "long",
+      "image": "assets/images/background/bagan.webp",
+      "textAlign": "center",
+      "body": "Greed is trying to create what isn't.\nHate is trying to destroy what is.\nThis is samsara.\nDelusion is believing in this.\n\nPeace is allowing what isn't not to be.\nLove is allowing what is to be.\nThis is Nirvana.\nWisdom is knowing this.",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

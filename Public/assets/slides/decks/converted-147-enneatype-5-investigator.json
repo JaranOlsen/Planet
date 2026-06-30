@@ -1,0 +1,68 @@
+{
+  "id": "converted-147-enneatype-5-investigator",
+  "title": "Converted: Enneatype 5 - The Investigator",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[147], preserving the original D3 mindmap as a legacy-slide.",
+  "legacy": {
+    "contentData": 147,
+    "refs": ["1", "2", "3cj"]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 5",
+      "title": "The Investigator",
+      "backgroundColor": "rgb(65, 20, 13)",
+      "image": "assets/images/enneagram/magnify.webp",
+      "body": [
+        {
+          "text": "The Intense, Cerebral Type: Perceptive, Innovative, Secretive, and Isolated.",
+          "strong": true
+        },
+        "As a Five, you approach the world with curiosity and caution, preferring to observe and understand rather than participate. You are the quintessential thinker, driven by a thirst for knowledge and a desire for competence. You might often retreat into your own mind, finding safety in the realm of ideas and concepts.",
+        "The external world can feel overwhelming and intrusive, leading you to minimize your needs and maintain your independence. You're careful about where you direct your energy and attention, often preferring solitude and quiet to social activities."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 5",
+      "title": "The Investigator",
+      "backgroundColor": "rgb(38, 48, 52)",
+      "image": "assets/images/enneagram/book.webp",
+      "bullets": [
+        {
+          "text": "Basic fear:",
+          "items": ["Being useless, helpless, or incapable"]
+        },
+        {
+          "text": "Basic desire:",
+          "items": ["To be capable and competent"]
+        },
+        {
+          "text": "Key motivations",
+          "items": [
+            "Want to possess knowledge",
+            "to understand the environment",
+            "to have everything figured out as a way of defending the self from threats from the environment"
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Type 5 Interactive Mindmap",
+      "theme": "gut",
+      "legacy": {
+        "slideshow": 147,
+        "slide": "3cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

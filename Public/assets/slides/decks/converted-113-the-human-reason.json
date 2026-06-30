@@ -1,0 +1,25 @@
+{
+  "id": "converted-113-the-human-reason",
+  "title": "Converted: The Human - Reason",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[113]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 113,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "The Human - Reason",
+      "title": "Ep. 5 - Awakening from the Meaning Crisis - Plato and the Cave",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/neDutbcedUY",
+        "title": "Ep. 5 - Awakening from the Meaning Crisis - Plato and the Cave"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

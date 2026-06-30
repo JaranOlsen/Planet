@@ -27,6 +27,8 @@ import redmoonTexture from '/assets/textures/moonRed1k.webp';
 import icemoonTexture from '/assets/textures/moonIce1k.webp';
 import dash from '/assets/textures/dash.webp';
 import tier from '/assets/textures/tier.webp';
+import sunflare from '/assets/textures/sunflare.webp';
+import lensflareTexture from '/assets/textures/lensflare.webp';
 
 import signModel from '../../models/sign.glb';
 
@@ -216,8 +218,8 @@ export class PlanetEnvironment {
         sunLight.shadow.radius = 1;
         this.pivot4.add(sunLight);
 
-        const textureFlare0 = this.textureLoader.load('/Planet/assets/textures/sunflare.webp');
-        const textureFlare3 = this.textureLoader.load('/Planet/assets/textures/lensflare.webp');
+        const textureFlare0 = this.textureLoader.load(sunflare);
+        const textureFlare3 = this.textureLoader.load(lensflareTexture);
         const lensflare = new Lensflare();
         lensflare.position.set(0, 0, 0);
         lensflare.addElement(new LensflareElement(textureFlare0, 2560, 0));

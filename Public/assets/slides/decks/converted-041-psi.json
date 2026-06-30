@@ -1,0 +1,49 @@
+{
+  "id": "converted-041-psi",
+  "title": "Converted: Psi",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[41]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 41,
+    "refs": [
+      "1",
+      "2",
+      "3"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "Psi",
+      "title": "Statistics in Parapsychology with Jessica Utts",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/WmYGtKB9EEA?start=1196",
+        "title": "Statistics in Parapsychology with Jessica Utts"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Psi",
+      "title": "New Experiments Show Consciousness Affects Matter ~ Dean Radin, PhD",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/nRSBaq3vAeY",
+        "title": "New Experiments Show Consciousness Affects Matter ~ Dean Radin, PhD"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Psi",
+      "title": "Case Closed: ESP Is Real | Mitch Horowitz speaking at Hereticon, 2022",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/AQDILJb9yK8",
+        "title": "Case Closed: ESP Is Real | Mitch Horowitz speaking at Hereticon, 2022"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

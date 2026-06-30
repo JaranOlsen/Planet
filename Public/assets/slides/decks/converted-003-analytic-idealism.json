@@ -1,0 +1,97 @@
+{
+  "id": "converted-003-analytic-idealism",
+  "title": "Converted: Analytic idealism",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[3]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 3,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "Analytic idealism",
+      "title": "The Hidden Flaws In Our Common Worldview | COURSE (1/7) | Dr. Bernardo Kastrup",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/hDbCTxm6_Ps",
+        "title": "The Hidden Flaws In Our Common Worldview | COURSE (1/7) | Dr. Bernardo Kastrup"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Analytic idealism",
+      "title": "Physicalism: More Broken Than You Think | COURSE (2/7)| Dr. Bernardo Kastrup",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/BbnfnveWUh0",
+        "title": "Physicalism: More Broken Than You Think | COURSE (2/7)| Dr. Bernardo Kastrup"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Analytic idealism",
+      "title": "Constitutive Panpsychism: Hidden Flaws | COURSE (3/7)| Dr. Bernardo Kastrup",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/T7QbZePP_7w",
+        "title": "Constitutive Panpsychism: Hidden Flaws | COURSE (3/7)| Dr. Bernardo Kastrup"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Analytic idealism",
+      "title": "A Revolutionary Theory That's Changing Minds | COURSE (4/7) | Dr. Bernardo Kastrup",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/UPIvI8IsnHc",
+        "title": "A Revolutionary Theory That's Changing Minds | COURSE (4/7) | Dr. Bernardo Kastrup"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Analytic idealism",
+      "title": "Empirical Evidence Against Physicalism | COURSE (5/7) | Dr. Bernardo Kastrup",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/B4RsXr02M0U",
+        "title": "Empirical Evidence Against Physicalism | COURSE (5/7) | Dr. Bernardo Kastrup"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Analytic idealism",
+      "title": "The Biggest Objection: Debunked! | COURSE (6/7) | Dr. Bernardo Kastrup",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/C4sgtZa7LEI",
+        "title": "The Biggest Objection: Debunked! | COURSE (6/7) | Dr. Bernardo Kastrup"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Analytic idealism",
+      "title": "Heres What Critics Get Wrong | COURSE (7/7) | Dr. Bernardo Kastrup",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/mwt7qF40KF0",
+        "title": "Heres What Critics Get Wrong | COURSE (7/7) | Dr. Bernardo Kastrup"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

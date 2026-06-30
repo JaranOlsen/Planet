@@ -1,0 +1,56 @@
+{
+  "id": "converted-164-enneatype-4w5-the-bohemian",
+  "title": "Converted: Enneatype 4w5 - The Bohemian",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[164]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 164,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 4w5",
+      "title": "The Bohemian",
+      "backgroundColor": "rgb(81, 31, 25)",
+      "image": "assets/images/enneagram/leaf.webp",
+      "imagePosition": "55%",
+      "body": [
+        {
+          "text": "The Individualistic, Analytical Type: Introspective, Sensitive, Intellectual, Creative, and Private.",
+          "strong": true
+        },
+        "As a Four wing Five, you blend the introspective, expressive, and sensitive nature of a Four with the intellectual, analytical traits of a Five. This combination results in a complex personality that deeply values emotional expression and intellectual exploration. You're drawn towards understanding and expressing your unique perspectives, often through intellectual or artistic pursuits.",
+        "This desire for self-expression is fueled by the intellectual curiosity of the Five, making you eager to delve into ideas and theories that can enrich your understanding of yourself and the world. As a result, your creative efforts often reflect a unique blend of emotional depth and intellectual insight, and your work often serves as a testament to your unique vision and depth of understanding."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 4w5",
+      "title": "The Bohemian",
+      "backgroundColor": "rgb(81, 31, 25)",
+      "image": "assets/images/enneagram/leaf.webp",
+      "imagePosition": "55%",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Learn to manage feelings of melancholy and over-identification with your emotions.",
+            "Develop strategies to engage more actively with the world around you.",
+            "Value the present moment and the concrete world as much as your inner world.",
+            "Work on understanding and expressing your needs in a constructive way.",
+            "Accept that it's okay to be ordinary and still be valuable and lovable."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

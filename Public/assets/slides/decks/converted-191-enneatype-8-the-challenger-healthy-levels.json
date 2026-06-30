@@ -1,0 +1,38 @@
+{
+  "id": "converted-191-enneatype-8-the-challenger-healthy-levels",
+  "title": "Converted: Enneatype 8 - The Challenger - Healthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[191]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 191,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 8",
+      "title": "The Challenger",
+      "density": "long",
+      "backgroundColor": "rgb(30, 54, 62)",
+      "image": "assets/images/enneagram/bull.webp",
+      "imagePosition": "40%",
+      "bullets": [
+        {
+          "text": "Healthy Levels:",
+          "ordered": true,
+          "start": 1,
+          "items": [
+            "At their best, Type 8 individuals become self-restrained and magnanimous, merciful, and forbearing. They master themselves through their self-surrender to a higher authority. They can be courageous, willing to put themselves in serious jeopardy to achieve their vision and have a lasting influence. They may achieve true heroism and historical greatness.",
+            "They are self-assertive, self-confident, and strong. They have learned to stand up for what they need and want, exhibiting a resourceful, \"can do\" attitude and a passionate inner drive.",
+            "They are decisive, authoritative, and commanding, becoming the natural leaders others look up to. They take initiative and make things happen. They champion, protect, and honor others, carrying them with their strength."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

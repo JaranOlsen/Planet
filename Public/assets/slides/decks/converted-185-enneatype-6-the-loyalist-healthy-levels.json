@@ -1,0 +1,38 @@
+{
+  "id": "converted-185-enneatype-6-the-loyalist-healthy-levels",
+  "title": "Converted: Enneatype 6 - The Loyalist - Healthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[185]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 185,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 6",
+      "title": "The Loyalist",
+      "density": "long",
+      "backgroundColor": "rgb(82, 57, 44)",
+      "image": "assets/images/enneagram/lighthouse.webp",
+      "imagePosition": "50% 60%",
+      "bullets": [
+        {
+          "text": "Healthy Levels:",
+          "ordered": true,
+          "start": 1,
+          "items": [
+            "At their best, Type 6 individuals are self-affirming, trusting in themselves and others. They are independent yet interdependent, cooperating as equals. Their self-belief fosters true courage, positive thinking, leadership, and rich self-expression.",
+            "They can elicit strong emotional responses from others, proving very appealing, endearing, and affectionate. Trust is paramount for them, which leads to bonding with others, forming lasting relationships and alliances.",
+            "They are dedicated to people and causes in which they have deep belief. They build communities, proving responsible, reliable, and trustworthy. Their hard work, perseverance, and sacrifices create stability and security, contributing to a cooperative spirit."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

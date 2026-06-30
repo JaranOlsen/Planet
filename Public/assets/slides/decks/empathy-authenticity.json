@@ -1,0 +1,74 @@
+{
+  "id": "empathy-authenticity",
+  "title": "Empathy: Authenticity",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of the legacy authenticity slides.",
+  "sources": [
+    {
+      "label": "Carl Rogers, On Becoming a Person",
+      "url": "https://archive.org/details/onbecomingperson00roge"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Empathy",
+      "title": "Authenticity",
+      "image": "assets/images/gut/empathy/authenticity.png",
+      "body": "Congruence: your inner response and outward stance are aligned.",
+      "bullets": [
+        "Builds trust by reducing performance.",
+        "Models self-contact in the relationship.",
+        "Makes repair possible when you miss.",
+        "Uses genuineness in service of the client's process."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "checklist",
+      "overline": "Authenticity",
+      "title": "Helpful therapist lines",
+      "body": "Authenticity is most useful when it is brief, clean, and returned to the client.",
+      "items": [
+        "I may be off. What fits better?",
+        "I want to check if I am with you.",
+        "Can we slow down and stay with what is here?",
+        "I think I missed something important.",
+        "I notice uncertainty in me, and I want to check it."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Authenticity",
+      "title": "Keep genuineness clinically clean",
+      "headers": [
+        "Use",
+        "Purpose",
+        "Avoid"
+      ],
+      "rows": [
+        [
+          "Brief self-disclosure",
+          "Support contact",
+          "Oversharing"
+        ],
+        [
+          "Owning a miss",
+          "Repair alliance",
+          "Self-defense"
+        ],
+        [
+          "Naming process",
+          "Clarify the moment",
+          "Hiding behind technique"
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

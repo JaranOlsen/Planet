@@ -1,0 +1,58 @@
+{
+  "id": "converted-207-training-through-practice",
+  "title": "Converted: Training Through Practice",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured media conversion of legacy contentData[207]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 207,
+    "refs": [
+      "1-1",
+      "1-2",
+      "2"
+    ]
+  },
+  "slides": [
+    [
+      {
+        "template": "media",
+        "overline": "Training Through Practice",
+        "title": "Wax On, Wax Off",
+        "showTitle": true,
+        "body": "Skill develops through simple forms repeated before their meaning is fully understood.",
+        "media": {
+          "src": "https://www.youtube-nocookie.com/embed/-P11Bcpyw4g?si=WF3ora2C9BJDrWCQ",
+          "title": "The Karate Kid - Wax On, Wax Off"
+        },
+        "reveal": "sequence",
+        "transition": "crossfade-soft"
+      },
+      {
+        "template": "media",
+        "overline": "Training Through Practice",
+        "title": "Sand The Floor",
+        "showTitle": true,
+        "body": "A second practice scene for showing how embodied repetition becomes available under pressure.",
+        "media": {
+          "src": "https://www.youtube-nocookie.com/embed/LerwIYmNFXY?si=9rb2TZjscx4Jz47o",
+          "title": "The Karate Kid - Sand The Floor"
+        },
+        "reveal": "sequence",
+        "transition": "crossfade-soft"
+      }
+    ],
+    {
+      "template": "media",
+      "overline": "Training Through Practice",
+      "title": "The Samsara Mandala",
+      "showTitle": true,
+      "body": "A visual reminder that training happens inside repeated loops of perception, reaction, and release.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/hL8gEc29KTI?si=KKAplDZPGdqtQgMw",
+        "title": "The Samsara Mandala"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "converted-054-9-roots-of-a-tree",
+  "title": "Converted: #9 Roots Of A Tree",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[54]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 54,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#9 Roots Of A Tree",
+      "image": "assets/images/roadToHere/9t.webp",
+      "alt": "#9 Roots Of A Tree cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-9-roots-of-a-tree",
+        "title": "Insight Timer Embed: Road To Here - #9 Roots Of A Tree | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-9-roots-of-a-tree"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

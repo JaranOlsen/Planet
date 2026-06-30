@@ -1,0 +1,25 @@
+{
+  "id": "converted-039-compassion",
+  "title": "Converted: Compassion",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[39]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 39,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "Compassion",
+      "title": "Developing compassion in meditation",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/i84Pllb3hBE",
+        "title": "Developing compassion in meditation"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

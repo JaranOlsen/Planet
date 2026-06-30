@@ -1,0 +1,26 @@
+{
+  "id": "converted-091-spiral-dynamics-stage-yellow",
+  "title": "Converted: Spiral Dynamics - Stage Yellow",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured media conversion of legacy contentData[91]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 91,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "Spiral Dynamics",
+      "title": "Stage Yellow (Integral)",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/w0d1TsOcbQs",
+        "title": "Spiral Dynamics - Stage Yellow"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

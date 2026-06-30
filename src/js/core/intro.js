@@ -1,3 +1,5 @@
+import { publicAsset } from './assets.js';
+
 const introState = {
   started: false,
   tuneLength: undefined,
@@ -125,73 +127,73 @@ export function setupIntro({ orbitControls, camera, scene }) {
     const selection = introSelect?.value || 'welcome';
 
     let creditText = 'Welcome to my Planet - Jaran de los Santos Olsen';
-    let audioSrc = '/Planet/assets/audio/candle.mp3';
+    let audioFile = 'candle.mp3';
     let subtitleFile = 'null';
 
     switch (selection) {
       case 'desiderata':
         creditText = 'Desiderata - Max Ehrmann. RedFrost Motivation';
-        audioSrc = '/Planet/assets/audio/desiderata.mp3';
+        audioFile = 'desiderata.mp3';
         break;
       case 'astronomer':
         creditText = "When I Heard the Learn'd Astronomer - Walt Whitman. RedFrost Motivation";
-        audioSrc = '/Planet/assets/audio/astronomer.mp3';
+        audioFile = 'astronomer.mp3';
         subtitleFile = 'astronomer';
         break;
       case 'carlrogers':
         creditText = "Carl Rogers speaking about listening and presence. Music: First Step - Hans Zimmer";
-        audioSrc = '/Planet/assets/audio/carlrogers.mp3';
+        audioFile = 'carlrogers.mp3';
         subtitleFile = 'carlrogers';
         break;
       case 'carlrogers2':
         creditText = "Carl Rogers speaking about listening and presence. Music: This Is Me - Jaran de los Santos Olsen";
-        audioSrc = '/Planet/assets/audio/carlrogers2.mp3';
+        audioFile = 'carlrogers2.mp3';
         subtitleFile = 'carlrogers2';
         break;
       case 'alanwatts':
         creditText = "Alan Watts on Swimming With the Stream. Music: Agarb - Bilro & Barbosa and Passion - Sappheiros";
-        audioSrc = '/Planet/assets/audio/alanwatts.mp3';
+        audioFile = 'alanwatts.mp3';
         subtitleFile = 'alanwatts';
         break;
       case 'alanwatts2':
         creditText = "Alan Watts on Letting Go. Music: Kevin MacLeod - Meditation Impromptu 1";
-        audioSrc = '/Planet/assets/audio/alanwatts2.mp3';
+        audioFile = 'alanwatts2.mp3';
         break;
       case 'ajahnchah':
         creditText = "Ajahn Chah from the BBC documentary 'The Mindful Way' & Jack Kornfield speaking about Ajahn Chah and loving awareness. Music: Jaran Olsen - This is me";
-        audioSrc = '/Planet/assets/audio/ajahnchah.mp3';
+        audioFile = 'ajahnchah.mp3';
         break;
       case 'honestIntro':
         creditText = 'An Honest Meditation';
-        audioSrc = '/Planet/assets/audio/honestIntro.mp3';
+        audioFile = 'honestIntro.mp3';
         break;
       case 'guesthouse':
         creditText = "The Guesthouse - Rumi. Read by Helena Bonham Carter";
-        audioSrc = '/Planet/assets/audio/guesthouse.mp3';
+        audioFile = 'guesthouse.mp3';
         break;
       case 'ramanamaharsi':
         creditText = 'Jack Kornfield reads about Ramana Maharsi';
-        audioSrc = '/Planet/assets/audio/ramanamaharsi.mp3';
+        audioFile = 'ramanamaharsi.mp3';
         break;
       case 'krishnamurti':
         creditText = 'Krishnamurti on Meditation and Love';
-        audioSrc = '/Planet/assets/audio/krishnamurti.mp3';
+        audioFile = 'krishnamurti.mp3';
         break;
       case 'rupertspira':
         creditText = 'I am Always I - Rupert Spira';
-        audioSrc = '/Planet/assets/audio/rupertspira.mp3';
+        audioFile = 'rupertspira.mp3';
         break;
       case 'rupertspira2':
         creditText = 'I am That - Rupert Spira';
-        audioSrc = '/Planet/assets/audio/rupertspira2.mp3';
+        audioFile = 'rupertspira2.mp3';
         break;
       case 'portianelson':
         creditText = 'Autobiography in five chapters - Portia Nelson';
-        audioSrc = '/Planet/assets/audio/portianelson.mp3';
+        audioFile = 'portianelson.mp3';
         break;
       case 'welcome':
         creditText = 'Welcome to my Planet - Jaran de los Santos Olsen';
-        audioSrc = '/Planet/assets/audio/candle.mp3';
+        audioFile = 'candle.mp3';
         break;
       default:
         break;
@@ -203,7 +205,7 @@ export function setupIntro({ orbitControls, camera, scene }) {
       subtitleContainer.dataset.subtitleFile = subtitleFile;
     }
 
-    sourceElement.src = audioSrc;
+    sourceElement.src = publicAsset(`assets/audio/${audioFile}`);
     audioElement.load();
     if (audioElement.readyState > 0) {
       introState.tuneLength = audioElement.duration;

@@ -1,0 +1,25 @@
+{
+  "id": "converted-122-parsimony",
+  "title": "Converted: Parsimony",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[122]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 122,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Quality",
+      "title": "Parsimony (Occam's Razor)",
+      "body": [
+        "The theory should be as simple as possible while still effectively explaining the phenomenon. It should avoid unnecessary complexity or assumptions."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

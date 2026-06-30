@@ -1,0 +1,26 @@
+{
+  "id": "converted-088-spiral-dynamics-stage-blue",
+  "title": "Converted: Spiral Dynamics - Stage Blue",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured media conversion of legacy contentData[88]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 88,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "Spiral Dynamics",
+      "title": "Stage Blue (Mythic-Literal)",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/_5iLt1p-W1U",
+        "title": "Spiral Dynamics - Stage Blue"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

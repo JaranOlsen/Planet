@@ -28,6 +28,11 @@
     overflow: hidden;
 }
 
+.eft-slide,
+.eft-slide * {
+    box-sizing: border-box;
+}
+
 .eft-slide::before,
 .eft-slide::after {
     content: "";

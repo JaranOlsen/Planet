@@ -1,0 +1,69 @@
+{
+  "id": "converted-002-transcendent-truth",
+  "title": "Converted: Transcendent Truth",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[2]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 2,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ]
+  },
+  "slides": [
+    {
+      "template": "full-image",
+      "image": "assets/images/truth/Slide1.webp",
+      "alt": "Transcendent Truth legacy image 1",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/truth/Slide2.webp",
+      "alt": "Transcendent Truth legacy image 2",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/truth/Slide3.webp",
+      "alt": "Transcendent Truth legacy image 3",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/truth/Slide4.webp",
+      "alt": "Transcendent Truth legacy image 4",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/truth/Slide5.webp",
+      "alt": "Transcendent Truth legacy image 5",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/truth/Slide6.webp",
+      "alt": "Transcendent Truth legacy image 6",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/truth/Slide7.webp",
+      "alt": "Transcendent Truth legacy image 7",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "converted-156-enneatype-5w4-the-iconoclast",
+  "title": "Converted: Enneatype 5w4 - The Iconoclast",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[156]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 156,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 5w4",
+      "title": "The Iconoclast",
+      "backgroundColor": "rgb(66, 43, 29)",
+      "image": "assets/images/enneagram/owl.webp",
+      "imagePosition": "bottom",
+      "body": [
+        {
+          "text": "The Analytical, Individualistic Type: Intellectual, Introspective, Creative, Sensitive, and Independent.",
+          "strong": true
+        },
+        "As a Five wing Four, you combine the intellectual, analytical nature of a Five with the expressive, introspective traits of a Four. This creates a deep and thoughtful personality, marked by intellectual curiosity and a rich inner world. Your quest for knowledge and understanding is paired with a strong inclination for personal expression and creativity.",
+        "The influence of the Four wing adds a unique, creative spin to your intellectual pursuits, prompting you to explore and express your unique perspectives. This combination can lead to innovative contributions, especially in fields that value intellectual rigor and individualistic expression. You seek not just to understand the world, but also to express your own unique insights and experiences."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 5w4",
+      "title": "The Iconoclast",
+      "backgroundColor": "rgb(66, 43, 29)",
+      "image": "assets/images/enneagram/owl.webp",
+      "imagePosition": "bottom",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Balance introspective tendencies with active engagement in the world.",
+            "Practice expressing your feelings and thoughts openly in relationships.",
+            "Regularly spend time in nature or in soothing environments to ease feelings of anxiety and stress.",
+            "Work on building resilience to deal with uncertainties and emotional situations.",
+            "Learn to recognize and value the practical aspects of life alongside the abstract and theoretical."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

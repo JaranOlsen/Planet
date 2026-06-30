@@ -1,0 +1,74 @@
+{
+  "id": "empathy-presence",
+  "title": "Empathy: Presence",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of the legacy presence slides.",
+  "sources": [
+    {
+      "label": "Ronald D. Siegel, The Mindfulness Solution",
+      "url": "https://www.worldcat.org/title/316835946"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Empathy",
+      "title": "Presence",
+      "image": "assets/images/gut/empathy/presence.png",
+      "body": "Steady, non-hurried attention to the client's unfolding experience.",
+      "bullets": [
+        "Stay with emotion, silence, and uncertainty.",
+        "Let felt sense emerge before meaning-making.",
+        "Clients often borrow the therapist's steadiness.",
+        "Presence makes depth tolerable."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Presence",
+      "title": "Before you intervene",
+      "body": "Presence is an active clinical stance, not passivity.",
+      "steps": [
+        "Ground your own body: feet, breath, pace.",
+        "Track affect and micro-shifts before asking the next question.",
+        "Pause after key moments so meaning can land.",
+        "Invite embodiment: what do you notice inside?",
+        "Let silence work unless the client loses contact."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Presence",
+      "title": "Presence cues",
+      "headers": [
+        "Cue",
+        "Clinical meaning",
+        "Therapist move"
+      ],
+      "rows": [
+        [
+          "Slower pace",
+          "Experience is deepening",
+          "Use fewer words."
+        ],
+        [
+          "Long silence",
+          "Implicit process may be active",
+          "Wait, then check contact."
+        ],
+        [
+          "Flat story",
+          "Affect is not yet contacted",
+          "Reflect body and tone."
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "id": "converted-108-deep-states-of-calm",
+  "title": "Converted: Deep States of Calm",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[108]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 108,
+    "refs": [
+      "1c",
+      "2c",
+      "3cj"
+    ]
+  },
+  "slides": [
+    {
+      "template": "fullscreen-text",
+      "title": "Altered states",
+      "showChrome": true,
+      "image": "assets/images/background/rippleLake.webp",
+      "textAlign": "center",
+      "body": {
+        "text": "\"You can't force your mind to be silent. That would be like trying to smooth ripples in water with a flatiron.\nWater becomes clear and calm only when left alone.\"",
+        "emphasis": true
+      },
+      "source": "Alan Watts",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "fullscreen-text",
+      "title": "Presence as Healing",
+      "showChrome": true,
+      "density": "long",
+      "image": "assets/images/background/rippleLake.webp",
+      "textAlign": "justify",
+      "body": {
+        "segments": [
+          {
+            "text": "I too have experienced this. When I am at my best as a group facilitator, or a therapist, I discover this characteristic. I find that when I am closest to my ",
+            "muted": true
+          },
+          {
+            "text": "inner intuitive self",
+            "strong": true
+          },
+          {
+            "text": ", when I am somehow in touch with ",
+            "muted": true
+          },
+          {
+            "text": "the unknown in me",
+            "strong": true
+          },
+          {
+            "text": ", when perhaps I am in a slightly ",
+            "muted": true
+          },
+          {
+            "text": "altered state of consciousness",
+            "strong": true
+          },
+          {
+            "text": ", then whatever I do seems to be full of healing. Then simply my presence is releasing and helpful.\n\nThere is ",
+            "muted": true
+          },
+          {
+            "text": "nothing I can do to force this experience",
+            "strong": true
+          },
+          {
+            "text": ". But when I can ",
+            "muted": true
+          },
+          {
+            "text": "relax",
+            "strong": true
+          },
+          {
+            "text": " and be close to ",
+            "muted": true
+          },
+          {
+            "text": "the transcendental core of me",
+            "strong": true
+          },
+          {
+            "text": ", then I may behave in strange and impulsive ways in the relationship, ways which I can't justify rationally which ",
+            "muted": true
+          },
+          {
+            "text": "have nothing to do with my thought processes",
+            "strong": true
+          },
+          {
+            "text": ". But these strange behaviors turn out to be right in some odd way. At those moments it seems that my inner spirit has reached out and touched the inner spirit of the other. Our relationship transcends itself and has become part of something larger. Profound growth and healing and energy are present.",
+            "muted": true
+          }
+        ]
+      },
+      "source": "Carl Rogers",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "quadrant-chart",
+      "overline": "Deep States of Calm",
+      "title": "Attention and Concentration",
+      "subtitle": "A practical map for distinguishing stability from scope.",
+      "axisLabels": {
+        "xLeft": "Narrow attention",
+        "xRight": "Wide attention",
+        "yTop": "Deep concentration",
+        "yBottom": "Shallow concentration"
+      },
+      "quadrants": [
+        {
+          "x": 250,
+          "y": 155,
+          "label": "Samādhi\nDeep and narrow"
+        },
+        {
+          "x": 750,
+          "y": 155,
+          "label": "Open awareness\nDeep and wide"
+        },
+        {
+          "x": 250,
+          "y": 435,
+          "label": "Focused distraction\nShallow and narrow"
+        },
+        {
+          "x": 750,
+          "y": 435,
+          "label": "Scattered mind\nShallow and wide"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

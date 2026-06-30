@@ -1,0 +1,34 @@
+{
+  "id": "converted-074-29-a-pearl-in-a-shell",
+  "title": "Converted: #29 A Pearl In A Shell",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[74]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 74,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#29 A Pearl In A Shell",
+      "image": "assets/images/roadToHere/29t.webp",
+      "alt": "#29 A Pearl In A Shell cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-29-a-pearl-in-a-shell",
+        "title": "Insight Timer Embed: Road To Here - #29 A Pearl In A Shell | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-29-a-pearl-in-a-shell"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

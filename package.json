@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "validate:slides": "node scripts/validate-slides.mjs",
+    "check:slides:fit": "node scripts/check-slide-fit.mjs",
     "preview": "vite preview",
     "deploy": "vite build && node scripts/prune-pages-dist.mjs && gh-pages -d dist"
   },

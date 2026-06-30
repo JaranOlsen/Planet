@@ -1,0 +1,339 @@
+{
+  "id": "converted-209-modern-template-playground",
+  "title": "Converted: Modern Template Playground",
+  "theme": "aether",
+  "description": "Structured conversion of the raw modern template playground in legacy slide folder 209.",
+  "legacy": {
+    "contentData": 209,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11j",
+      "12",
+      "13"
+    ]
+  },
+  "slides": [
+    {
+      "template": "opening",
+      "overline": "Launch Sequence",
+      "title": "Designing A Planetary Learning Habitat",
+      "subtitle": "A responsive sanctuary for contemplative inquiry, guided reflections, and live co-creation.",
+      "image": "assets/images/background/solarsystem.webp",
+      "pills": [
+        "Immersion",
+        "Presence",
+        "Adaptive Flow"
+      ],
+      "stats": [
+        {
+          "value": "90",
+          "label": "days"
+        },
+        {
+          "value": "3",
+          "label": "focus areas"
+        },
+        {
+          "value": "1",
+          "label": "learning habitat"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "quote",
+      "overline": "Field Note",
+      "title": "Presence Praxis",
+      "body": [
+        {
+          "text": "The quality of attention we extend to this moment is the architecture of tomorrow's culture.",
+          "emphasis": true
+        },
+        "Slow the orbit, feel the subtle gravity, and let participation be guided by curiosity rather than velocity."
+      ],
+      "source": "Transmission log #042",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "bullets",
+      "overline": "Navigation Protocol",
+      "title": "Experience Playbook",
+      "body": "Orient new explorers with rituals that keep momentum gentle, humane, and curious.",
+      "bullets": [
+        "Begin in orbit mode to survey the landscape and feel its scale.",
+        {
+          "text": "When a node resonates, transition to flight mode and slow your velocity.",
+          "children": [
+            "Hold Shift to modulate vertical drift.",
+            "Use reveal stages to add context in mindful increments."
+          ]
+        },
+        "Pause often to log reflections.",
+        "Invite a collaborator to co-navigate."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "two-column",
+      "overline": "Modes of Engagement",
+      "title": "Orbit vs. Flight",
+      "subtitle": "Two ways of moving through the same field.",
+      "columns": [
+        {
+          "title": "Orbit",
+          "body": "Maintain distance, observe the full constellation, and curate the next waypoint with patience."
+        },
+        {
+          "title": "Flight",
+          "body": "Slip beneath the cloud layer and explore textures, micro-climates, and the voice of each node."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "statistics",
+      "overline": "Signal Dashboard",
+      "title": "Vital Rhythms",
+      "stats": [
+        {
+          "value": "128",
+          "label": "explorers currently orbiting"
+        },
+        {
+          "value": "842",
+          "label": "meditation minutes"
+        },
+        {
+          "value": "37",
+          "label": "live insights"
+        },
+        {
+          "value": "42ms",
+          "label": "interaction latency"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "split-image",
+      "overline": "Atmospheric Update",
+      "title": "Northern Halo Renewal",
+      "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&w=1200&q=80",
+      "body": "The particle shaders were retuned to respond to contemplative pauses.",
+      "bullets": [
+        "Introduced adaptive hue cycling.",
+        "Reduced GPU load through instancing.",
+        "Added developer HUD hooks for live tweaking."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Immersion Clip",
+      "title": "Guided Descent Demo",
+      "showTitle": true,
+      "body": "Verify iframe behavior, scaling, and interaction overlays while moving from orbit to surface.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
+        "title": "Guided descent demo"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "gallery",
+      "overline": "Field Sketches",
+      "title": "Sensory Moodboard",
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1526401485004-46910ecc8e51?auto=format&w=800&q=80",
+          "caption": "Forest"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&w=800&q=80",
+          "caption": "Mountains"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&w=800&q=80",
+          "caption": "Desert"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&w=800&q=80",
+          "caption": "Stars"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Focusing",
+      "title": "The Method",
+      "body": "A six-step sequence for slow, bodily inquiry.",
+      "steps": [
+        {
+          "title": "Clearing a Space",
+          "text": "Sense the main things in your life without going into them."
+        },
+        {
+          "title": "Felt Sense",
+          "text": "Choose one issue and feel its unclear, whole bodily sense."
+        },
+        {
+          "title": "Handle",
+          "text": "Let a word, phrase, or image emerge."
+        },
+        {
+          "title": "Resonating",
+          "text": "Move between the felt sense and the handle until they match."
+        },
+        {
+          "title": "Asking",
+          "text": "Ask what makes the problem have this quality."
+        },
+        {
+          "title": "Receiving",
+          "text": "Welcome whatever comes with release."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "checklist",
+      "overline": "Pre-Orbit Checklist",
+      "title": "Before Opening the Planet",
+      "items": [
+        {
+          "title": "Audio Tuning",
+          "text": "Select intro narration and set comfortable volume defaults."
+        },
+        {
+          "title": "Developer HUD",
+          "text": "Toggle contextual data and ensure metrics are streaming."
+        },
+        {
+          "title": "Mindmap Refresh",
+          "text": "Regenerate pins, clean stale boxes, and confirm dynamic nuggets."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "word-cloud",
+      "overline": "Semantic Field",
+      "title": "Planetary Lexicon",
+      "words": [
+        [
+          "planet",
+          22
+        ],
+        [
+          "presence",
+          20
+        ],
+        [
+          "orbit",
+          18
+        ],
+        [
+          "learning",
+          18
+        ],
+        [
+          "sanctuary",
+          16
+        ],
+        [
+          "enneagram",
+          16
+        ],
+        [
+          "attention",
+          14
+        ],
+        [
+          "practice",
+          14
+        ],
+        [
+          "reflection",
+          12
+        ],
+        [
+          "flow",
+          10
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "statistics",
+      "overline": "Impact Snapshot",
+      "title": "Embodied Metrics",
+      "stats": [
+        {
+          "value": "92%",
+          "label": "reported heightened calm"
+        },
+        {
+          "value": "7.4",
+          "label": "minutes per inquiry"
+        },
+        {
+          "value": "3x",
+          "label": "developer-mode adoption"
+        },
+        {
+          "value": "18",
+          "label": "live collaborations"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "dense-bullets",
+      "overline": "Iteration Radar",
+      "title": "Sprint 27 - Planet Refresh",
+      "body": "Regression coverage for content, controls, and performance.",
+      "groups": [
+        {
+          "title": "Objectives",
+          "items": [
+            "Polish intro transitions.",
+            "Verify HUD toggles.",
+            "Benchmark with 4k assets."
+          ]
+        },
+        {
+          "title": "Progress",
+          "items": [
+            "Scene optimisation: 74%.",
+            "Content refresh: 52%.",
+            "QA automation: 31%."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}
