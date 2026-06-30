@@ -17,7 +17,7 @@
   },
   "slides": [
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Analytic idealism",
       "title": "The Hidden Flaws In Our Common Worldview | COURSE (1/7) | Dr. Bernardo Kastrup",
       "media": {
@@ -28,7 +28,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Analytic idealism",
       "title": "Physicalism: More Broken Than You Think | COURSE (2/7)| Dr. Bernardo Kastrup",
       "media": {
@@ -39,7 +39,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Analytic idealism",
       "title": "Constitutive Panpsychism: Hidden Flaws | COURSE (3/7)| Dr. Bernardo Kastrup",
       "media": {
@@ -50,7 +50,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Analytic idealism",
       "title": "A Revolutionary Theory That's Changing Minds | COURSE (4/7) | Dr. Bernardo Kastrup",
       "media": {
@@ -61,7 +61,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Analytic idealism",
       "title": "Empirical Evidence Against Physicalism | COURSE (5/7) | Dr. Bernardo Kastrup",
       "media": {
@@ -72,7 +72,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Analytic idealism",
       "title": "The Biggest Objection: Debunked! | COURSE (6/7) | Dr. Bernardo Kastrup",
       "media": {
@@ -83,7 +83,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Analytic idealism",
       "title": "Heres What Critics Get Wrong | COURSE (7/7) | Dr. Bernardo Kastrup",
       "media": {

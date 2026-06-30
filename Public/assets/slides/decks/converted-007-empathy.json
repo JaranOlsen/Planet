@@ -26,7 +26,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Empathy",
       "title": "Brene Brown on Empathy",
       "media": {
@@ -37,7 +37,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Empathy",
       "title": "RSA ANIMATE: The Empathic Civilisation",
       "media": {

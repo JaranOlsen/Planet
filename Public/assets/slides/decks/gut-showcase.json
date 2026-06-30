@@ -1,426 +1,593 @@
 {
   "id": "gut-showcase",
-  "title": "Gut Path Structured Showcase",
+  "title": "Gut Path Template Showcase",
   "theme": "gut",
   "path": "gut",
-  "description": "Full structured template library for the gut path.",
+  "description": "Realistic structured-template review set for the gut path: psychotherapy, embodiment, emotional process, and repair.",
   "slides": [
     {
       "template": "opening",
-      "overline": "Gut Path",
-      "title": "The Path Of Befriending",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
-      "subtitle": "Embodied psychotherapy, emotional contact, and grounded repair.",
+      "overline": "Gut Path Template Set",
+      "title": "Repairing the Protective Loop",
+      "subtitle": "A section opener for emotional processing, inner contact, and embodied repair.",
+      "body": "We begin with the whole map: orient the body, track the protective move, make contact with the need, and practice one repair response.",
       "image": "assets/images/background/therapy.webp",
       "pills": [
-        "Body",
-        "Emotion",
-        "Need",
+        "Orient",
+        "Track",
+        "Contact",
         "Repair"
       ],
       "stats": [
         {
-          "value": "3",
-          "label": "signals"
+          "value": "24",
+          "label": "templates"
         },
         {
-          "value": "5",
-          "label": "needs"
+          "value": "4",
+          "label": "process moves"
         },
         {
           "value": "1",
-          "label": "next step"
+          "label": "felt next step"
         }
-      ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "quote",
-      "overline": "Gut Path",
-      "title": "Quote",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
+      "overline": "Emotional Contact",
+      "title": "When Protection Softens",
       "image": "assets/images/background/EFT.webp",
       "body": [
         {
-          "text": "Healing begins when the body no longer has to hold the story alone.",
+          "text": "A symptom is often a loyal protection that has outlived the moment it was built for.",
           "emphasis": true
         },
         {
-          "text": "Use this family for emotions, needs, alliance, parts, and repair."
+          "text": "The task is not to defeat it, but to understand what it has been carrying."
         }
       ],
-      "source": "Psychotherapy path"
+      "source": "Gut path sample content",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "long-text",
-      "overline": "Gut Path",
-      "title": "Long Text",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
+      "overline": "Case Frame",
+      "title": "From Reaction To Need",
       "body": [
         {
-          "text": "Gut slides should feel safe, tactile, and close to lived experience."
+          "text": "A client notices a sharp pull to withdraw whenever feedback arrives. The first layer is anger, but the body tells a more precise story: tight chest, lifted shoulders, and a held breath."
         },
         {
-          "text": "Prefer concrete language, warm contrast, and enough structure for facilitation.",
+          "text": "The slide should support a slow movement from visible reaction to vulnerable need without making the process feel clinical or abstract.",
+          "emphasis": true
+        },
+        {
+          "text": "Good gut slides need warmth, sequence, and concrete language that a facilitator can read while staying relationally present."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "fullscreen-text",
+      "overline": "Somatic Prompt",
+      "title": "Let The Body Vote",
+      "body": [
+        {
+          "text": "Before explaining the pattern, pause and ask where it lives."
+        },
+        {
+          "text": "A sensation is not the whole truth, but it is often the first honest witness.",
           "emphasis": true
         }
-      ]
+      ],
+      "source": "Two-breath check-in",
+      "density": "poem",
+      "textAlign": "center",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "full-image",
-      "overline": "Gut Path",
-      "title": "Full Image",
+      "overline": "Scene Setting",
+      "title": "A Room Safe Enough For Contact",
+      "image": "assets/images/gut/kelly-sikkema-f_aHTIof44U-unsplash-2.jpg",
+      "body": "Use full-image slides when the emotional climate matters before the teaching point arrives.",
       "reveal": "sequence",
-      "transition": "crossfade-soft",
-      "image": "assets/images/background/therapy.webp",
-      "body": "A full-image slide can make emotional context available before the concept arrives."
+      "transition": "crossfade-soft"
     },
     {
       "template": "split-image",
-      "overline": "Gut Path",
-      "title": "Split Image",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
-      "image": "assets/images/emotion/integration.webp",
-      "body": "Use split-image slides when an embodied image needs to carry half the meaning.",
+      "overline": "Process Marker",
+      "title": "Finding The Unmet Need",
+      "image": "assets/images/emotion/need2.webp",
+      "body": "Split-image works well when the visual can carry the vulnerability while the text keeps the method clear.",
       "bullets": [
-        "Name the protective move.",
-        "Track the body response.",
-        "Find the unmet need.",
-        "Offer a reparative next step."
-      ]
+        "Name the surface reaction without arguing with it.",
+        "Track the body signal that stays present.",
+        "Ask what the protected part needed then.",
+        "Offer a response small enough to receive."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Classic Conversion",
+      "title": "The Protective Part",
+      "image": "assets/images/emotion/self-compassion.webp",
+      "backgroundColor": "rgb(82, 57, 55)",
+      "imagePosition": "50% 42%",
+      "body": [
+        {
+          "text": "A protective part is trying to prevent a familiar hurt from happening again.",
+          "strong": true
+        },
+        {
+          "text": "This panel style should compete directly with the legacy slides: strong image, readable copy, and a grounded emotional atmosphere."
+        }
+      ],
+      "bullets": [
+        "Respect the protection before inviting change.",
+        "Locate the body signal.",
+        "Offer contact, not correction."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "title-bullets",
-      "overline": "Gut Path",
-      "title": "Title Bullets",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
-      "body": "A grounded teaching frame keeps emotional material clear without becoming clinical.",
+      "overline": "Teaching Frame",
+      "title": "Four Moves In Chair Work",
+      "body": "Title-bullets should feel like a clean facilitator card: direct, warm, and easy to scan.",
       "bullets": [
-        "Name the protective move.",
-        "Track the body response.",
-        "Find the unmet need.",
-        "Offer a reparative next step."
-      ]
+        "Set two clear positions.",
+        "Let each side speak in first person.",
+        "Reflect the emotion beneath the argument.",
+        "Look for the need both sides protect."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "bullets",
-      "overline": "Gut Path",
-      "title": "Bullets",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
-      "body": "A grounded teaching frame keeps emotional material clear without becoming clinical.",
+      "overline": "Micro-Skills",
+      "title": "Signals Worth Slowing Down For",
+      "body": "Use the basic bullet template for short lists that need emphasis without extra structure.",
       "bullets": [
-        "Name the protective move.",
-        "Track the body response.",
-        "Find the unmet need.",
-        "Offer a reparative next step."
-      ]
+        "Sudden certainty.",
+        "A smile that arrives too early.",
+        "Explaining instead of feeling.",
+        "A phrase repeated with the same rhythm.",
+        "Relief after one accurate reflection."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "dense-bullets",
+      "overline": "Facilitator Map",
+      "title": "Repair Session Cheat Sheet",
+      "body": "Dense-bullets should hold a lot without becoming a wall of text.",
+      "groups": [
+        {
+          "title": "Safety",
+          "items": [
+            "Consent before intensity",
+            "Choice of pace",
+            "Grounding available",
+            "Exit named"
+          ]
+        },
+        {
+          "title": "Contact",
+          "items": [
+            "Track body cues",
+            "Reflect exact words",
+            "Name emotion tentatively",
+            "Stay with one thread"
+          ]
+        },
+        {
+          "title": "Repair",
+          "items": [
+            "Missing response",
+            "Imagined other",
+            "New boundary",
+            "Integration phrase"
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "two-column",
-      "overline": "Gut Path",
-      "title": "Two Column",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
-      "subtitle": "Separate process from content without losing warmth.",
+      "overline": "Differentiation",
+      "title": "Reaction And Need",
+      "subtitle": "Separate what protects from what longs.",
       "columns": [
         {
-          "title": "Contact",
-          "body": "What is felt now, in the body and in the relationship?"
+          "title": "Protective Reaction",
+          "body": "Pushes away, criticises, freezes, performs, or disappears to reduce risk."
         },
         {
-          "title": "Meaning",
-          "body": "What need, wound, or protective strategy is organizing the moment?"
+          "title": "Primary Need",
+          "body": "Asks for safety, recognition, comfort, agency, or permission to exist."
+        },
+        {
+          "title": "Facilitator Stance",
+          "body": "Validate the protection while listening for the need it cannot say directly."
         }
-      ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "steps",
-      "overline": "Gut Path",
-      "title": "Steps",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
-      "body": "Therapy-oriented slides often need a sequence that can be followed slowly.",
+      "overline": "Practice Sequence",
+      "title": "Five Minutes With A Felt Sense",
+      "body": "The steps template should make a live exercise feel followable.",
       "steps": [
-        "Arrive and orient.",
-        "Name what is happening.",
-        "Stay with one emotion.",
-        "Listen for the need.",
-        "Integrate the response."
-      ]
+        {
+          "title": "Orient",
+          "text": "Look around and choose one thing that tells the body this is now."
+        },
+        {
+          "title": "Locate",
+          "text": "Find the strongest sensation connected to the issue."
+        },
+        {
+          "title": "Describe",
+          "text": "Use texture, temperature, movement, or pressure."
+        },
+        {
+          "title": "Ask",
+          "text": "What is this place afraid would happen if it softened?"
+        },
+        {
+          "title": "Receive",
+          "text": "Let one kind response land before moving on."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "checklist",
-      "overline": "Gut Path",
-      "title": "Checklist",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
-      "body": "Use this before emotionally focused practice or live facilitation.",
+      "overline": "Before Deepening",
+      "title": "Safety Check",
+      "body": "Checklist slides should be practical enough to use during facilitation.",
       "items": [
-        "Consent is explicit.",
-        "Affect is within range.",
-        "Body cues are visible.",
-        "Repair language is ready."
-      ]
+        {
+          "title": "Window",
+          "text": "Affect is present but not flooding."
+        },
+        {
+          "title": "Choice",
+          "text": "The client can pause, redirect, or decline."
+        },
+        {
+          "title": "Body",
+          "text": "There is at least one grounding cue available."
+        },
+        {
+          "title": "Alliance",
+          "text": "The facilitator is tracking consent, not just content."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "statistics",
-      "overline": "Gut Path",
-      "title": "Statistics",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
+      "overline": "Session Signals",
+      "title": "Is The Work Still Inside The Window?",
       "stats": [
         {
-          "value": "3",
-          "label": "signals"
-        },
-        {
-          "value": "5",
-          "label": "needs"
+          "value": "2",
+          "label": "protective voices",
+          "note": "enough differentiation to continue"
         },
         {
           "value": "1",
-          "label": "next step"
+          "label": "primary emotion",
+          "note": "contact is present, not flooding"
+        },
+        {
+          "value": "4",
+          "label": "body cues",
+          "note": "breath, hands, chest, gaze"
+        },
+        {
+          "value": "90s",
+          "label": "quiet contact",
+          "note": "long enough for new words"
         }
-      ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "profile",
-      "overline": "Gut Path",
-      "title": "Profile",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
-      "image": "assets/images/emotion/self-compassion.webp",
-      "body": "Profile slides can hold a part, emotion, client pattern, practice, or therapeutic stance.",
+      "overline": "Part Profile",
+      "title": "The Inner Guard",
+      "image": "assets/images/emotion/assertion.webp",
+      "body": "A profile slide can make a pattern feel specific without pathologising it.",
       "bullets": [
-        "Felt sense",
-        "Protective function",
-        "Possible repair"
-      ]
+        "Function: prevents humiliation.",
+        "Signal: heat in face and hands.",
+        "Need: dignity and choice.",
+        "Practice: speak one clean boundary."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "gallery",
-      "overline": "Gut Path",
-      "title": "Gallery",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
+      "overline": "Emotional Arc",
+      "title": "From Distress To Integration",
       "images": [
         {
           "src": "assets/images/emotion/distress.webp",
-          "caption": "Distress"
+          "caption": "Activation"
+        },
+        {
+          "src": "assets/images/emotion/shame.webp",
+          "caption": "Hidden layer"
         },
         {
           "src": "assets/images/emotion/need.webp",
           "caption": "Need"
         },
         {
-          "src": "assets/images/emotion/assertion.webp",
-          "caption": "Assertion"
+          "src": "assets/images/emotion/integration.webp",
+          "caption": "Integration"
         }
-      ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "media",
-      "overline": "Gut Path",
-      "title": "Media",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
-      "body": "Media slides can hold practice clips, psychoeducation, or guided demonstrations.",
+      "overline": "Demonstration Clip",
+      "title": "Repair In The Voice",
+      "showTitle": true,
+      "body": "Media slides should introduce why the clip matters before attention moves to playback.",
       "media": {
         "src": "https://www.youtube-nocookie.com/embed/z_Gy3mTztgg",
-        "title": "Therapy sample media"
-      }
+        "title": "Structured slide sample media"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "timeline",
-      "overline": "Gut Path",
-      "title": "Timeline",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
-      "body": "Show the movement from protection to integration.",
+      "overline": "Process Timeline",
+      "title": "The Protective Loop",
+      "body": "Timeline slides are useful when a pattern has predictable phases.",
       "timeline": [
         {
-          "title": "Activation",
-          "body": "Something touches the old pattern."
+          "title": "Trigger",
+          "body": "Feedback touches an old expectation of rejection."
         },
         {
-          "title": "Protection",
-          "body": "The system tries to stay safe."
+          "title": "Shield",
+          "body": "The system becomes sharp, busy, or unavailable."
         },
         {
           "title": "Contact",
-          "body": "Emotion and need become available."
+          "body": "The softer emotion becomes safe enough to name."
+        },
+        {
+          "title": "Need",
+          "body": "A clear request or boundary emerges."
         },
         {
           "title": "Repair",
-          "body": "A new response can be practiced."
+          "body": "A new response is rehearsed while the body is still online."
         }
-      ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "table",
-      "overline": "Gut Path",
-      "title": "Table",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
+      "overline": "Clinical Discrimination",
+      "title": "Signals And Interventions",
       "headers": [
         "Signal",
-        "Meaning",
-        "Response"
+        "Possible meaning",
+        "Useful response"
       ],
       "rows": [
         [
-          "Tension",
-          "Threat",
-          "Slow down"
+          "Fast talking",
+          "Affect is rising faster than contact",
+          "Slow the pace and reflect one phrase"
         ],
         [
-          "Tears",
-          "Need",
-          "Make room"
+          "Looking away",
+          "Shame or self-protection is active",
+          "Ask what distance is needed"
         ],
         [
-          "Collapse",
-          "Too much",
-          "Resource"
+          "Laughing at pain",
+          "Vulnerability needs cover",
+          "Name the tenderness gently"
+        ],
+        [
+          "Sudden blankness",
+          "System may be overloaded",
+          "Orient to the room"
         ]
-      ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "card-grid",
-      "overline": "Gut Path",
-      "title": "Card Grid",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
-      "body": "Cards are useful for principles, interventions, parts, or process markers.",
+      "overline": "Intervention Palette",
+      "title": "Repair Moves",
+      "body": "Card grids should make a family of interventions feel available at a glance.",
       "cards": [
         {
-          "title": "Safety",
-          "body": "The nervous system gets a vote."
+          "title": "Empathic reflection",
+          "body": "Give the emotion words without taking it over."
         },
         {
-          "title": "Contact",
-          "body": "Stay close to what is alive."
+          "title": "Two-chair dialogue",
+          "body": "Let conflicted parts become visible and differentiated."
         },
         {
-          "title": "Repair",
-          "body": "Offer what was missing."
+          "title": "Imaginal repair",
+          "body": "Bring in the missing response while staying embodied."
+        },
+        {
+          "title": "Boundary rehearsal",
+          "body": "Practice a sentence the nervous system can believe."
         }
-      ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "call-to-action",
-      "overline": "Gut Path",
-      "title": "Call To Action",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
-      "body": "Choose one felt signal and let the slide support a short embodied inquiry.",
+      "overline": "Practice Doorway",
+      "title": "Make The Next Move Small",
+      "body": "Choose one body signal and complete only the next ten seconds of contact: locate it, describe it, and ask what it is protecting.",
       "action": {
-        "label": "Begin Practice"
+        "label": "Track One Signal"
       },
-      "note": "Keep the next step small enough to be felt."
+      "note": "Stop while it still feels workable.",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "word-cloud",
-      "overline": "Gut Path",
-      "title": "Word Cloud",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
+      "overline": "Semantic Field",
+      "title": "Repair Vocabulary",
       "words": [
         [
-          "body",
-          9
+          "protection",
+          24
         ],
         [
           "need",
-          8
+          22
         ],
         [
-          "safety",
-          7
+          "body",
+          20
         ],
         [
           "contact",
-          6
+          19
         ],
         [
-          "repair",
-          6
+          "choice",
+          17
         ],
         [
-          "emotion",
-          5
+          "shame",
+          15
+        ],
+        [
+          "boundary",
+          14
         ],
         [
           "warmth",
-          4
+          13
+        ],
+        [
+          "repair",
+          12
+        ],
+        [
+          "voice",
+          11
+        ],
+        [
+          "safety",
+          10
+        ],
+        [
+          "integration",
+          9
         ]
-      ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "quadrant-chart",
-      "overline": "Gut Path",
-      "title": "Quadrant Chart",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
+      "overline": "Process Map",
+      "title": "Arousal And Contact",
       "quadrants": [
         {
           "x": 250,
           "y": 155,
-          "label": "High Arousal"
+          "label": "High arousal"
         },
         {
           "x": 750,
           "y": 155,
-          "label": "Contact"
+          "label": "Contactful intensity"
         },
         {
           "x": 250,
           "y": 435,
-          "label": "Protection"
+          "label": "Shutdown"
         },
         {
           "x": 750,
           "y": 435,
-          "label": "Integration"
+          "label": "Settled integration"
         }
-      ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     },
     {
       "template": "mindmap-slot",
-      "overline": "Gut Path",
-      "title": "Mindmap Slot",
-      "reveal": "sequence",
-      "transition": "crossfade-soft",
+      "overline": "Case Map",
+      "title": "What The Pattern Protects",
       "nodes": [
         {
           "id": "root",
-          "label": "Need",
+          "label": "Protection",
           "x": 500,
           "y": 260,
           "r": 58
         },
         {
           "id": "body",
-          "label": "Body",
-          "x": 270,
-          "y": 160
+          "label": "Body cue",
+          "x": 260,
+          "y": 150
         },
         {
           "id": "emotion",
-          "label": "Emotion",
-          "x": 730,
-          "y": 160
+          "label": "Primary emotion",
+          "x": 740,
+          "y": 150
+        },
+        {
+          "id": "need",
+          "label": "Unmet need",
+          "x": 280,
+          "y": 430
         },
         {
           "id": "repair",
-          "label": "Repair",
-          "x": 500,
-          "y": 420
+          "label": "Repair move",
+          "x": 720,
+          "y": 430
         }
       ],
       "links": [
@@ -434,9 +601,15 @@
         },
         {
           "from": "root",
+          "to": "need"
+        },
+        {
+          "from": "need",
           "to": "repair"
         }
-      ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
     }
   ]
 }

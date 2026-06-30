@@ -411,6 +411,12 @@ function renderMedia(slide, deck) {
   appendTextBlocks(body, slide.body || slide.text, slide);
   appendBullets(body, slide.bullets || slide.items, slide);
   appendAction(body, slide.action, slide);
+  const frame = createMediaFrame(slide);
+  root.append(body, frame);
+  return { element: root };
+}
+
+function createMediaFrame(slide) {
   const media = slide.media || { src: slide.src || slide.video, title: slide.title };
   const frame = createEl('div', { className: 'slide-v2-media-frame' });
   if (media.aspectRatio) frame.style.aspectRatio = media.aspectRatio;
@@ -432,7 +438,25 @@ function renderMedia(slide, deck) {
       },
     }));
   }
-  root.append(body, frame);
+  return frame;
+}
+
+function renderMediaOnly(slide, deck) {
+  const root = createRoot(slide, deck, 'media-only');
+  const frame = createMediaFrame(slide);
+  root.appendChild(frame);
+
+  if (slide.showTitle === true || slide.showOverline === true || slide.label) {
+    const label = createEl('div', { className: 'slide-v2-media-label' });
+    if (slide.showOverline === true && (slide.overline || slide.kicker)) {
+      label.appendChild(createEl('p', { className: 'slide-v2-overline', text: slide.overline || slide.kicker }));
+    }
+    if (slide.showTitle === true && (slide.title || slide.label)) {
+      label.appendChild(createEl('h1', { className: 'slide-v2-title', text: slide.label || slide.title }));
+    }
+    root.appendChild(label);
+  }
+
   return { element: root };
 }
 
@@ -632,7 +656,7 @@ function renderWordCloud(slide, deck) {
   const header = createEl('header', { className: 'slide-v2-header' });
   addChrome(header, slide);
   root.appendChild(header);
-  const wrapper = markReveal(createEl('div', { className: 'slide-v2-word-cloud' }), slide);
+  const wrapper = createEl('div', { className: 'slide-v2-word-cloud' });
   const canvas = createEl('canvas', {
     attrs: {
       width: slide.width || 1200,
@@ -800,6 +824,7 @@ const renderers = {
   'legacy-panel': renderLegacyPanel,
   'two-column': renderTwoColumn,
   media: renderMedia,
+  'media-only': renderMediaOnly,
   gallery: renderGallery,
   steps: renderSteps,
   checklist: renderChecklist,

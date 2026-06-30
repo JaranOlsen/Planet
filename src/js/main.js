@@ -45,6 +45,7 @@ import { updateGutta, guttCrumbMesh, maraCrumbMesh, cycleStatsChartView, toggleP
 import { setupIntro, introState, fadeOutAudio, animateLetterSpacing } from './core/intro.js'
 import { DeveloperHud } from './core/developerHud.js'
 import { DeveloperSlideLab } from './core/developerSlideLab.js'
+import { hasOpenableSlides } from './core/slideAccess.js'
 import { PlanetEnvironment } from './core/planetEnvironment.js'
 import { SettlementMapLayer } from './settlementMap.js'
 
@@ -1059,7 +1060,8 @@ function onDocumentKeyUp(event) {
             let output = "export const planetTagData = [\n"
             const tagSource = contexts[selectedContext].tagData
             for (let i = 0; i < tagSource.length; i++) {
-                output = output + "    {id: \"" + tagSource[i].id + "\", text: " + JSON.stringify(tagSource[i].text) + ", lat: " + tagSource[i].lat + ", lng: " + tagSource[i].lng + ", color: " + tagSource[i].color + ", size: " + tagSource[i].size + ", slides: " + tagSource[i].slides + "},\n"
+                const developerOnlySlides = tagSource[i].developerOnlySlides ? ", developerOnlySlides: true" : "";
+                output = output + "    {id: \"" + tagSource[i].id + "\", text: " + JSON.stringify(tagSource[i].text) + ", lat: " + tagSource[i].lat + ", lng: " + tagSource[i].lng + ", color: " + tagSource[i].color + ", size: " + tagSource[i].size + ", slides: " + tagSource[i].slides + developerOnlySlides + "},\n"
             }
             output = output + "\n]\n\n// ā ī ū ṅ ñ ṇ ṭ ṭh ḍ ḍh ṇ ḷ ṃ ṁ ŋ \n\n //azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBNéÉàÀèÈùÙëËüÜïÏâêîôûÂÊÎÔÛíÍáÁóÓúÚñÑłŁçÇýÝčČšŠæÆœŒāīūṅṇṭḍḷṃṁ/\*-+7894561230,;:!?¡¿.%$£€={}()[]&~'\`#_°@АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯяüÜöÖäÄñÑςερτυθιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜåÅæÆøØ \n\nexport const planetConnections = [\n"
 
@@ -1222,7 +1224,7 @@ function onDocumentKeyUp(event) {
                     }
                     console.log(color)
 
-                    if (contexts[selectedContext].tagData[node].slides !== undefined) {
+                    if (hasOpenableSlides(contexts[selectedContext].tagData[node], developer)) {
                         contexts[selectedContext].pins[node].material = pinMaterials[color]
                     } else contexts[selectedContext].pins[node].material = pinWireframeMaterials[color]
                     contexts[selectedContext].boxes[node].material = boxMaterials[color]
@@ -1240,7 +1242,7 @@ function onDocumentKeyUp(event) {
                 } 
                 console.log(color)
 
-                if (contexts[selectedContext].tagData[selectedNode].slides !== undefined) {
+                if (hasOpenableSlides(contexts[selectedContext].tagData[selectedNode], developer)) {
                     selectedPin.material = pinMaterials[color]
                 } else selectedPin.material = pinWireframeMaterials[color]
                 selectedBox.material = boxMaterials[color]
@@ -1260,7 +1262,7 @@ function onDocumentKeyUp(event) {
                         contexts[selectedContext].tagData[node].color = color
                     } while (!boxMaterials[color])
 
-                    if (contexts[selectedContext].tagData[node].slides !== undefined) {
+                    if (hasOpenableSlides(contexts[selectedContext].tagData[node], developer)) {
                         contexts[selectedContext].pins[node].material = pinMaterials[color]
                     } else contexts[selectedContext].pins[node].material = pinWireframeMaterials[color]
                     contexts[selectedContext].boxes[node].material = boxMaterials[color]
@@ -1277,7 +1279,7 @@ function onDocumentKeyUp(event) {
                     contexts[selectedContext].tagData[selectedNode].color = color
                 } while (!boxMaterials[color])
 
-                if (contexts[selectedContext].tagData[selectedNode].slides !== undefined) {
+                if (hasOpenableSlides(contexts[selectedContext].tagData[selectedNode], developer)) {
                     selectedPin.material = pinMaterials[color]
                 } else selectedPin.material = pinWireframeMaterials[color]
                 selectedBox.material = boxMaterials[color]
@@ -1596,7 +1598,7 @@ async function onPointerClick(event) {
         selectedTag = contexts[selectedContext]?.tags[selectedNode] || null;
         updateDeveloperHud();
 
-    if (camera.position.distanceTo(selectedPin.position) < 10 && contexts[selectedContext].tagData[selectedNode].slides !== undefined && slideshowStatus.activeSlideshow == undefined) {
+    if (camera.position.distanceTo(selectedPin.position) < 10 && hasOpenableSlides(contexts[selectedContext].tagData[selectedNode], developer) && slideshowStatus.activeSlideshow == undefined) {
             slideshowStatus = await createSlideshowStatus(contexts[selectedContext].tagData[selectedNode].slides);
             await pushContent(slideshowStatus)
             if (window.appStatus == "flight") {

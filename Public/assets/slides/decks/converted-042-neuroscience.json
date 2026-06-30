@@ -19,7 +19,7 @@
   },
   "slides": [
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Neuroscience",
       "title": "Accidental Genius | Darold Treffert | TEDxFondduLac | Darold Treffert | TEDxFondduLac",
       "media": {
@@ -30,7 +30,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Neuroscience",
       "title": "The Curious Case of the People With Split Brains",
       "media": {
@@ -41,7 +41,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Neuroscience",
       "title": "RSA ANIMATE: The Divided Brain",
       "media": {
@@ -52,7 +52,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Neuroscience",
       "title": "The Libet Experiment: Is Free Will Just an Illusion?",
       "media": {
@@ -63,7 +63,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Neuroscience",
       "title": "Experiments in Free Will | Closer To Truth",
       "media": {
@@ -74,7 +74,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Neuroscience",
       "title": "3.1 The Libet experiment",
       "media": {
@@ -85,7 +85,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Neuroscience",
       "title": "3.2 Debunking Libet's Conclusions",
       "media": {
@@ -96,7 +96,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Neuroscience",
       "title": "3.3 Hypnosis vs Libet",
       "media": {
@@ -107,7 +107,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Neuroscience",
       "title": "3.4 Libet's confusion",
       "media": {

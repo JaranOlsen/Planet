@@ -1,0 +1,70 @@
+{
+  "id": "converted-208-present-moment-scenes",
+  "title": "Converted: Present Moment Scenes",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured media conversion of legacy contentData[208]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 208,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Present Moment Scenes",
+      "title": "Epiphany",
+      "showTitle": true,
+      "body": "A musical opening for shifts in perception and the felt sense of insight.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/vbBVrfkFe2I?si=9Z6Ob1NSBz0iiVcZ",
+        "title": "Trent Reznor and Atticus Ross - Epiphany"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Present Moment Scenes",
+      "title": "There Is No Spoon",
+      "showTitle": true,
+      "body": "A concise scene for the difference between changing objects and changing the frame of perception.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/uAXtO5dMqEI?si=IBh7YFVK47hqLSqv",
+        "title": "The Matrix - There Is No Spoon"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Present Moment Scenes",
+      "title": "Here, Now, This Moment",
+      "showTitle": true,
+      "body": "A clip for grounding inquiry in place, time, and immediate experience.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/20Slj87N3Ao?si=Kip4uxEVzPtdWro4",
+        "title": "Peaceful Warrior - Here, Now, This Moment"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Present Moment Scenes",
+      "title": "Seeing The Field",
+      "showTitle": true,
+      "body": "A scene for sensing the wider field before action becomes clear.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/NeMjWb9mwQs?si=0eypoDUy8OczvgDo",
+        "title": "The Legend Of Bagger Vance - Seeing The Field"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

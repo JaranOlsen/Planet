@@ -12,7 +12,7 @@
   },
   "slides": [
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Mathematics",
       "title": "Godel's Incompleteness Theorem - Numberphile",
       "media": {
@@ -23,7 +23,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Mathematics",
       "title": "Godel's Incompleteness (extra footage 1) - Numberphile",
       "media": {

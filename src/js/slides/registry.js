@@ -139,6 +139,12 @@ export const SLIDE_TEMPLATE_REGISTRY = [
     requiredAny: ['media', 'src', 'video'],
   },
   {
+    id: 'media-only',
+    label: 'Media Only',
+    aliases: ['video-only', 'minimal-media'],
+    requiredAny: ['media', 'src', 'video'],
+  },
+  {
     id: 'timeline',
     label: 'Timeline',
     requiredAny: ['timeline', 'items', 'events'],
@@ -401,6 +407,15 @@ export function createSampleSlide(template = 'opening', theme = 'gut') {
       return {
         ...common,
         body: tone.mediaBody,
+        media: {
+          src: tone.mediaSrc,
+          title: tone.mediaTitle,
+        },
+      };
+    case 'media-only':
+      return {
+        ...common,
+        showTitle: false,
         media: {
           src: tone.mediaSrc,
           title: tone.mediaTitle,

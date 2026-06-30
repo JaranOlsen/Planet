@@ -56,7 +56,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Method",
       "title": "What is Emotion-Focused Therapy (EFT)?",
       "media": {
@@ -67,7 +67,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Method",
       "title": "How did Emotion-Focused Therapy (EFT) come about?",
       "media": {
@@ -78,7 +78,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Method",
       "title": "How does Emotion-Focused Therapy (EFT) relate to mental health problems?",
       "media": {
@@ -89,7 +89,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Method",
       "title": "Depression and relationship difficulties explained by Emotion-Focused Therapy (EFT)",
       "media": {
@@ -100,7 +100,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Method",
       "title": "Anxiety (GAD) explained by Emotion-Focused Therapy",
       "media": {
@@ -111,7 +111,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Method",
       "title": "What is chair work in Emotion-Focused Therapy (EFT)? Les Greenberg",
       "media": {

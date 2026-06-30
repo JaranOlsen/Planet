@@ -12,7 +12,7 @@
   },
   "slides": [
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "distracting",
       "title": "Working with wandering thought in meditation",
       "media": {
@@ -23,7 +23,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "distracting",
       "title": "Handling distractions in meditation",
       "media": {

@@ -33,7 +33,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Types of emotion",
       "title": "What is the difference between primary and secondary emotions?",
       "media": {
@@ -44,7 +44,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Types of emotion",
       "title": "What is core pain?",
       "media": {
@@ -55,7 +55,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Types of emotion",
       "title": "Is core pain the same as unmet need?",
       "media": {
@@ -66,7 +66,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Types of emotion",
       "title": "Different kinds of emotional responses in EFT",
       "media": {

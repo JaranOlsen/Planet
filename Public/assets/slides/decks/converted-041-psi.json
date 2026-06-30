@@ -13,7 +13,7 @@
   },
   "slides": [
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Psi",
       "title": "Statistics in Parapsychology with Jessica Utts",
       "media": {
@@ -24,7 +24,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Psi",
       "title": "New Experiments Show Consciousness Affects Matter ~ Dean Radin, PhD",
       "media": {
@@ -35,7 +35,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Psi",
       "title": "Case Closed: ESP Is Real | Mitch Horowitz speaking at Hereticon, 2022",
       "media": {

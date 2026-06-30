@@ -13,7 +13,7 @@
   },
   "slides": [
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Idealism",
       "title": "New Science About the Nature of Consciousness",
       "media": {
@@ -24,7 +24,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Idealism",
       "title": "Why Our Reality Is Not What It Seems...",
       "media": {
@@ -35,7 +35,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Idealism",
       "title": "What Does Quantum Entanglement Reveal About Reality?",
       "media": {

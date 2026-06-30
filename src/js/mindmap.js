@@ -8,7 +8,8 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { convertLatLngtoCartesian } from './mathScripts.js'
 
 //  IMPORT DATA
-import { contexts } from './core/datasets.js'
+import { contexts, isDeveloperMode } from './core/datasets.js'
+import { hasOpenableSlides } from './core/slideAccess.js'
 
 //  IMPORT TEXTURES
 import dash from '/assets/textures/dash.webp'
@@ -408,7 +409,7 @@ function instantiatePin(item, radius, context, globalIndex, destination) {
   const lng = Number(item.lng);
   const color = item.color;
   const size = item.size;
-  const slides = item.slides;
+  const slides = hasOpenableSlides(item, isDeveloperMode());
 
   const segments = slides ? 10 : 6;
   const material = slides ? pinMaterials[color] : pinWireframeMaterials[color];
@@ -1178,7 +1179,7 @@ export function hoverPins(intersects) {
             if (hoveredPin.scale.x === 1) hoveredPin.scale.multiplyScalar(1.2);
 
             const source = contexts[hoveredPin.context].tagData[hoveredPin.index];
-            hoveredPin.material = source.slides ? pinMaterials[source.color] : pinWireframeMaterials[source.color];
+            hoveredPin.material = hasOpenableSlides(source, isDeveloperMode()) ? pinMaterials[source.color] : pinWireframeMaterials[source.color];
 
             const baseScale = hoveredPin.userData.baseScale || 1;
             hoveredPin.scale.set(baseScale, baseScale, baseScale);

@@ -23,7 +23,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Biology",
       "title": "Paramecium Characteristic & Structure | Under The Microscope",
       "media": {
@@ -41,7 +41,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Biology",
       "title": "This Flatworm Remembers Things After You Cut Off Its Brain",
       "media": {
@@ -59,7 +59,7 @@
       "transition": "crossfade-soft"
     },
     {
-      "template": "media",
+      "template": "media-only",
       "overline": "Biology",
       "title": "Eva Jablonka Consciousness as we know it: a view from biology",
       "media": {

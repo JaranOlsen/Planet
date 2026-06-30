@@ -1,0 +1,314 @@
+{
+  "id": "converted-210-aether-template-playground",
+  "title": "Converted: Aether Template Playground",
+  "theme": "aether",
+  "description": "Structured conversion of legacy contentData[210]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 210,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15"
+    ]
+  },
+  "slides": [
+    {
+      "template": "opening",
+      "overline": "Planet Overview",
+      "title": "Welcome to the Sanctuary Orbit",
+      "subtitle": "Settle into a slow arc around Jaranius and let each vista become an invitation to listen.",
+      "image": "assets/images/background/rippleLake.webp",
+      "pills": [
+        "Presence",
+        "Wonder",
+        "Continuity"
+      ],
+      "stats": [
+        {
+          "value": "3",
+          "label": "orbits"
+        },
+        {
+          "value": "1",
+          "label": "sanctuary"
+        },
+        {
+          "value": "15",
+          "label": "template checks"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "overline": "Silent Arrival",
+      "title": "The Breath Beneath the Stars",
+      "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&w=1600&q=80",
+      "body": "Pause by the ridge. Feel the first light fold into the sky, echoing the stillness within.",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "split-image",
+      "overline": "Practice Snapshot",
+      "title": "Falling in Love with the Breath",
+      "image": "https://images.unsplash.com/photo-1526285759904-71a5a394b8b8?auto=format&w=900&q=80",
+      "body": "A compact practice slide for breath attention.",
+      "bullets": [
+        "Settle attention on the cool breath at the nostrils.",
+        "Notice subtle shifts: stillness, vibration, soft expansion.",
+        "When the mind wanders, bow, begin again, and savour the return."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Guided Sequence",
+      "title": "Seven Steps to a Soft Landing",
+      "steps": [
+        "Begin in orbit and sense the planet-wide context.",
+        "Choose one luminous node that stirs genuine interest.",
+        "Glide closer and pause within two breaths of distance.",
+        "Allow attention to settle in the body.",
+        "Invite the node's story to surface.",
+        "Note one phrase, image, or feeling, then expand back to orbit with one resonance."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "quote",
+      "overline": "Verse for the Travellers",
+      "title": "The Guest House of Breath",
+      "body": [
+        {
+          "text": "Each inhale is a doorway, each exhale a tide leaving gifts on the shore.",
+          "emphasis": true
+        },
+        "The planet waits in luminous patience as you remember how to be welcomed by your own belonging."
+      ],
+      "source": "Aether playground",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Guided Meditation",
+      "title": "Vulnerable Strength",
+      "showTitle": true,
+      "body": "Invite participants into an external practice while keeping the launch slide visually consistent.",
+      "action": {
+        "label": "Open Insight Timer Session",
+        "href": "https://insighttimer.com"
+      },
+      "media": {
+        "type": "image",
+        "src": "https://images.unsplash.com/photo-1520975922074-1fa2dd2c6477?auto=format&w=1200&q=80",
+        "title": "Insight Timer cover"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Immersion Clip",
+      "title": "Orbit-to-Surface Transition",
+      "showTitle": true,
+      "body": "Test embedded media playback and iframe scaling with a structured media slide.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/z_Gy3mTztgg",
+        "title": "Orbit-to-surface transition"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "split-image",
+      "overline": "Enneatype Spotlight",
+      "title": "Type 9 - The Peacemaker",
+      "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&w=900&q=80",
+      "body": "Harmonising, spacious, and grounded.",
+      "bullets": [
+        "Healthy: receptive, embodied, and naturally calming.",
+        "Watch: sliding into numb merging or inertia.",
+        "Practice: daily check-ins with desire, voice, and boundaries."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "timeline",
+      "overline": "Programme Journey",
+      "title": "Three Movements of the Retreat",
+      "timeline": [
+        {
+          "title": "Dawn - Orienting",
+          "body": "Orbit overview, intention setting, and sensory calibration."
+        },
+        {
+          "title": "Midday - Deep Dive",
+          "body": "Guided descent into selected mindmap clusters with reflective journalling."
+        },
+        {
+          "title": "Evening - Integration",
+          "body": "Shared storytelling, developer HUD toggles, and closing breath ritual."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "gallery",
+      "overline": "Memory Constellation",
+      "title": "Places That Anchor the Work",
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&w=800&q=80",
+          "caption": "Forest"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&w=800&q=80",
+          "caption": "Night sky"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1451186859696-371d9477be93?auto=format&w=800&q=80",
+          "caption": "Temple"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&w=800&q=80",
+          "caption": "Sea"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "checklist",
+      "overline": "Before We Begin",
+      "title": "Facilitator Checklist",
+      "items": [
+        {
+          "title": "Intro Audio",
+          "text": "Confirm the selected intro track and ensure subtitles are synced."
+        },
+        {
+          "title": "Developer HUD",
+          "text": "Toggle metrics on, clear previous selections, and reset flight speed modifiers."
+        },
+        {
+          "title": "Mindmap Freshness",
+          "text": "Regenerate nuggets and ensure all appear animations reset."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "statistics",
+      "overline": "Live Metrics",
+      "title": "Orbit Snapshot",
+      "stats": [
+        {
+          "value": "128",
+          "label": "explorers currently on the planet"
+        },
+        {
+          "value": "76%",
+          "label": "sessions with spiral layer"
+        },
+        {
+          "value": "42",
+          "label": "average FPS"
+        },
+        {
+          "value": "18",
+          "label": "new nuggets authored"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "call-to-action",
+      "overline": "Invitation",
+      "title": "Join the Orbiting Council",
+      "body": "A small circle for co-designers who want to steward the Planet's next evolution.",
+      "action": {
+        "label": "Email hello@planet",
+        "href": "mailto:hello@planet?subject=Orbiting%20Council"
+      },
+      "note": "Bring curiosity, craft, and a willingness to listen deeply.",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Framework Alignment",
+      "title": "Triad Crosswalk",
+      "headers": [
+        "Center",
+        "Core Need",
+        "Practices"
+      ],
+      "rows": [
+        [
+          "Head",
+          "Clarity and guidance",
+          "Mindmap navigation and inquiry notes"
+        ],
+        [
+          "Heart",
+          "Belonging and resonance",
+          "Story circles, gratitude orbit, shared breath"
+        ],
+        [
+          "Gut",
+          "Grounding and agency",
+          "Flight mode practice and movement rituals"
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "card-grid",
+      "overline": "Guiding Principles",
+      "title": "The Aether Accord",
+      "body": "Principles, values, and commitments for the shared field.",
+      "cards": [
+        {
+          "title": "Softness First",
+          "body": "Lead with warmth, humour, and patience."
+        },
+        {
+          "title": "Sense the Field",
+          "body": "Pause every orbit to attune to breath, energy, and tone."
+        },
+        {
+          "title": "Move Together",
+          "body": "Design for co-presence."
+        },
+        {
+          "title": "Keep Iterating",
+          "body": "Share logs, celebrate experiments, and adjust quickly."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

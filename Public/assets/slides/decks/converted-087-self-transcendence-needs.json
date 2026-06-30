@@ -1,9 +1,9 @@
 {
   "id": "converted-087-self-transcendence-needs",
   "title": "Converted: Self- Transcendence needs",
-  "theme": "head",
-  "path": "head",
-  "description": "Structured conversion of legacy contentData[87]. The original legacy slides remain available for comparison.",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured fullscreen-text conversion of legacy contentData[87], preserving the airy legacy quote/definition style.",
   "legacy": {
     "contentData": 87,
     "refs": [
@@ -14,33 +14,78 @@
   },
   "slides": [
     {
-      "template": "long-text",
-      "overline": "Self- Transcendence needs",
+      "template": "fullscreen-text",
       "title": "Transcend",
+      "showChrome": true,
+      "density": "poem",
+      "image": "assets/images/background/tree1.webp",
+      "textAlign": "center",
       "body": [
-        "Transcend , /trɑːnˈsɛnd/, verb be or go beyond the range or limits of (a field of activity or conceptual sphere). Transcendence , /trɑːnˈsɛnd(ə)ns/, noun existence or experience beyond the normal or physical level. (Oxford English Dictionary)"
+        {
+          "segments": [
+            {
+              "text": "Transcend",
+              "strong": true
+            },
+            {
+              "text": ", /trɑːnˈsɛnd/, "
+            },
+            {
+              "text": "verb",
+              "emphasis": true
+            }
+          ]
+        },
+        "be or go beyond the range or limits of a field of activity or conceptual sphere.",
+        {
+          "segments": [
+            {
+              "text": "Transcendence",
+              "strong": true
+            },
+            {
+              "text": ", /trɑːnˈsɛnd(ə)ns/, "
+            },
+            {
+              "text": "noun",
+              "emphasis": true
+            }
+          ]
+        },
+        "existence or experience beyond the normal or physical level."
       ],
-      "reveal": "sequence",
+      "source": "Oxford English Dictionary",
+      "reveal": "none",
       "transition": "crossfade-soft"
     },
     {
-      "template": "long-text",
-      "overline": "Self- Transcendence needs",
-      "title": "Self- Transcendence needs",
-      "body": [
-        "“Transcendence refers to the very highest and most inclusive or holistic levels of human consciousness, behaving and relating, as ends rather than means, to oneself, to significant others, to human beings in general, to other species, to nature, and to the cosmos.“ (Maslow, 1971, p. 269)."
-      ],
-      "reveal": "sequence",
+      "template": "fullscreen-text",
+      "title": "Self-Transcendence",
+      "showChrome": true,
+      "density": "poem",
+      "image": "assets/images/background/tree1.webp",
+      "textAlign": "center",
+      "body": {
+        "text": "“Transcendence refers to the very highest and most inclusive or holistic levels of human consciousness, behaving and relating, as ends rather than means, to oneself, to significant others, to human beings in general, to other species, to nature, and to the cosmos.”",
+        "emphasis": true
+      },
+      "source": "Maslow, 1971, p. 269",
+      "reveal": "none",
       "transition": "crossfade-soft"
     },
     {
-      "template": "long-text",
-      "overline": "Self- Transcendence needs",
-      "title": "Self- Transcendence needs",
+      "template": "fullscreen-text",
+      "title": "Peak And Plateau Experience",
+      "showChrome": true,
+      "density": "long",
+      "image": "assets/images/background/tree1.webp",
+      "textAlign": "justify",
       "body": [
-        "According to Maslow, self-transcendence brings the individual what he termed “peak experiences” in which they transcend their own personal concerns and see from a higher perspective. These experiences often bring strong positive emotions like joy, peace, and a well-developed sense of awareness (Messerly, 2017). Someone who is highly self-transcendent may also experience “plateau experiences” in which they consistently maintain or enter a state of serenity and higher perspective (Messerly, 2017)."
+        "According to Maslow, self-transcendence brings the individual what he termed “peak experiences” in which they transcend their own personal concerns and see from a higher perspective. These experiences often bring strong positive emotions like joy, peace, and a well-developed sense of awareness.",
+        "Someone who is highly self-transcendent may also experience “plateau experiences” in which they consistently maintain or enter a state of serenity and higher perspective."
       ],
-      "reveal": "sequence",
+      "source": "Messerly, 2017",
+      "reveal": "none",
       "transition": "crossfade-soft"
     }
   ]
