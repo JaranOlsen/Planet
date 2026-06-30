@@ -1,0 +1,53 @@
+{
+  "id": "converted-202-primal-emotions",
+  "title": "Converted: Primal Emotions",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[202]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 202,
+    "refs": [
+      "1j"
+    ]
+  },
+  "slides": [
+    {
+      "template": "word-cloud",
+      "overline": "Mode: Action / Needs",
+      "title": "Primal Emotions",
+      "words": [
+        ["fear", 7],
+        ["rage", 6],
+        ["lust", 6],
+        ["hunger", 5],
+        ["thirst", 5],
+        ["pain", 5],
+        ["pleasure", 5],
+        ["disgust", 4],
+        ["anxiety", 4],
+        ["panic", 3],
+        ["startle", 3],
+        ["aggression", 3],
+        ["desire", 3],
+        ["fight", 2],
+        ["flight", 2],
+        ["survival", 2],
+        ["instinct", 2],
+        ["shock", 2]
+      ],
+      "colors": [
+        "#e1a05f",
+        "#c76b48",
+        "#b94639",
+        "#d7b46d",
+        "#f0d0a2"
+      ],
+      "weightFactor": 18,
+      "rotateRatio": 0.1,
+      "minRotation": -0.75,
+      "maxRotation": 0.75,
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

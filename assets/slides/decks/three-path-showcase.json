@@ -1,0 +1,124 @@
+{
+  "id": "three-path-showcase",
+  "title": "Three Path Template Comparison",
+  "theme": "aether",
+  "description": "Compact comparison of gut, heart, and head visual languages using shared structured templates.",
+  "slides": [
+    {
+      "template": "card-grid",
+      "theme": "aether",
+      "overline": "Three Paths",
+      "title": "One system, three visual languages",
+      "body": "Shared schema and renderer; distinct emotional tone per path.",
+      "cards": [
+        {
+          "title": "Gut / Psychotherapy",
+          "body": "Grounded, tactile, relational, embodied repair."
+        },
+        {
+          "title": "Heart / Meditation",
+          "body": "Still, spacious, luminous, restrained practice."
+        },
+        {
+          "title": "Head / Philosophy",
+          "body": "Clear, analytical, crystalline conceptual hierarchy."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "opening",
+      "overline": "Gut Path",
+      "title": "Gut Template Set",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "subtitle": "Embodied psychotherapy, emotional contact, and grounded repair.",
+      "image": "assets/images/background/therapy.webp",
+      "pills": [
+        "Body",
+        "Emotion",
+        "Need",
+        "Repair"
+      ],
+      "stats": [
+        {
+          "value": "3",
+          "label": "signals"
+        },
+        {
+          "value": "5",
+          "label": "needs"
+        },
+        {
+          "value": "1",
+          "label": "next step"
+        }
+      ],
+      "theme": "gut",
+      "path": "gut"
+    },
+    {
+      "template": "opening",
+      "overline": "Heart Path",
+      "title": "Heart Template Set",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "subtitle": "Meditation, compassion, stillness, and freedom from the causes of suffering.",
+      "image": "assets/images/background/rippleLake.webp",
+      "pills": [
+        "Breath",
+        "Stillness",
+        "Kindness",
+        "Release"
+      ],
+      "stats": [
+        {
+          "value": "4",
+          "label": "foundations"
+        },
+        {
+          "value": "7",
+          "label": "factors"
+        },
+        {
+          "value": "1",
+          "label": "breath"
+        }
+      ],
+      "theme": "heart",
+      "path": "heart"
+    },
+    {
+      "template": "opening",
+      "overline": "Head Path",
+      "title": "Head Template Set",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "subtitle": "Philosophy, ontology, inquiry, and the clear seeing of what is true.",
+      "image": "assets/images/background/solarsystem.webp",
+      "pills": [
+        "Question",
+        "View",
+        "Method",
+        "Truth"
+      ],
+      "stats": [
+        {
+          "value": "2",
+          "label": "views"
+        },
+        {
+          "value": "4",
+          "label": "tests"
+        },
+        {
+          "value": "1",
+          "label": "question"
+        }
+      ],
+      "theme": "head",
+      "path": "head"
+    }
+  ]
+}

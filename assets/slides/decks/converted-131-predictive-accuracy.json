@@ -1,0 +1,25 @@
+{
+  "id": "converted-131-predictive-accuracy",
+  "title": "Converted: Predictive accuracy",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[131]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 131,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Quality",
+      "title": "Predictive accuracy",
+      "body": [
+        "The theory should have a track record of making accurate predictions about future observations or phenomena, thus demonstrating its practical utility and reliability."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

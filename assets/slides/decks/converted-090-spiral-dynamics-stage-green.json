@@ -1,0 +1,26 @@
+{
+  "id": "converted-090-spiral-dynamics-stage-green",
+  "title": "Converted: Spiral Dynamics - Stage Green",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured media conversion of legacy contentData[90]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 90,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "Spiral Dynamics",
+      "title": "Stage Green (Pluralistic)",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/z_Gy3mTztgg",
+        "title": "Spiral Dynamics - Stage Green"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

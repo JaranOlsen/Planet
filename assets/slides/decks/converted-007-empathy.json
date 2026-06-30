@@ -1,0 +1,51 @@
+{
+  "id": "converted-007-empathy",
+  "title": "Converted: Empathy",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[7]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 7,
+    "refs": [
+      "1",
+      "2",
+      "3"
+    ]
+  },
+  "slides": [
+    {
+      "template": "bullets",
+      "overline": "Empathy",
+      "title": "Empathy as the Overarching Quality",
+      "bullets": [
+        "Empathy: A cornerstone of the humanistic, client-centered approach, fostering therapeutic alliance and empowering client's self-healing.",
+        "Facilitates experiential processing of emotions, crucial for therapeutic change.",
+        "Enables the therapist to grasp the client's felt experience, fostering authentic relational depth."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Empathy",
+      "title": "Brene Brown on Empathy",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/1Evwgu369Jw?start=8",
+        "title": "Brene Brown on Empathy"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Empathy",
+      "title": "RSA ANIMATE: The Empathic Civilisation",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/l7AWnfFRc7g",
+        "title": "RSA ANIMATE: The Empathic Civilisation"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

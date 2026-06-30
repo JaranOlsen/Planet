@@ -1,0 +1,619 @@
+{
+  "id": "head-showcase",
+  "title": "Head Path Template Showcase",
+  "theme": "head",
+  "path": "head",
+  "description": "Realistic structured-template review set for the head path: philosophy, models, inquiry, epistemology, and conceptual clarity.",
+  "slides": [
+    {
+      "template": "opening",
+      "overline": "Head Path Template Set",
+      "title": "Testing A View Of Consciousness",
+      "subtitle": "An inquiry opener for models, assumptions, comparisons, and conceptual clarity.",
+      "body": "We begin with the question, name the candidate views, test what each view must explain, and keep the central phenomenon visible while the argument develops.",
+      "image": "assets/images/background/solarsystem.webp",
+      "pills": [
+        "Question",
+        "Model",
+        "Test",
+        "Revise"
+      ],
+      "stats": [
+        {
+          "value": "24",
+          "label": "templates"
+        },
+        {
+          "value": "3",
+          "label": "candidate views"
+        },
+        {
+          "value": "1",
+          "label": "live question"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "quote",
+      "overline": "Inquiry Tone",
+      "title": "Clarity Without Closure",
+      "image": "assets/images/consciousness/venn.webp",
+      "body": [
+        {
+          "text": "A good theory should make experience more intelligible without pretending the mystery has disappeared.",
+          "emphasis": true
+        },
+        {
+          "text": "The head path needs precision, but precision should keep inquiry open rather than brittle."
+        }
+      ],
+      "source": "Head path sample content",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "long-text",
+      "overline": "Problem Statement",
+      "title": "The Explanatory Target",
+      "body": [
+        {
+          "text": "Any adequate view of consciousness has to account for first-person experience, public evidence, causal regularities, and the fact that models are themselves appearances within experience."
+        },
+        {
+          "text": "A strong head slide should make the structure of the question visible before arguing for an answer.",
+          "emphasis": true
+        },
+        {
+          "text": "The goal is not to win a metaphysical debate on one slide, but to clarify what each view must explain."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "fullscreen-text",
+      "overline": "Inquiry Prompt",
+      "title": "What Must Be Explained?",
+      "body": [
+        {
+          "text": "Do not start with the preferred answer."
+        },
+        {
+          "text": "Start with the phenomenon that would remain even if the answer changed.",
+          "emphasis": true
+        }
+      ],
+      "source": "Philosophical hygiene",
+      "density": "poem",
+      "textAlign": "center",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "overline": "Conceptual Horizon",
+      "title": "The World As It Appears",
+      "image": "assets/images/background/solarsystem.webp",
+      "body": "Full-image slides can make a conceptual question feel vast before narrowing into distinctions.",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "split-image",
+      "overline": "Model Contrast",
+      "title": "Experience And Explanation",
+      "image": "assets/images/features/idealism.webp",
+      "body": "Split-image is useful when a model needs both a visual anchor and a concise set of distinctions.",
+      "bullets": [
+        "Define the explanandum.",
+        "Separate ontology from method.",
+        "Ask what the view predicts.",
+        "Name the cost of the explanation."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Classic Conversion",
+      "title": "The Frame Of Knowing",
+      "image": "assets/images/features/headLogo.webp",
+      "backgroundColor": "rgb(72, 63, 40)",
+      "imagePosition": "50% 45%",
+      "body": [
+        {
+          "text": "Every model of the world also implies a model of the knower.",
+          "strong": true
+        },
+        {
+          "text": "This panel should make philosophical content feel as visually strong as the older image-led slides while staying clear and restrained."
+        }
+      ],
+      "bullets": [
+        "What is given?",
+        "What is inferred?",
+        "What would change the view?"
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "title-bullets",
+      "overline": "Argument Frame",
+      "title": "Four Questions For Any View",
+      "body": "Title-bullets should make conceptual evaluation feel orderly and memorable.",
+      "bullets": [
+        "What does the view say exists?",
+        "How does it treat first-person evidence?",
+        "What method checks its claims?",
+        "Which anomaly is hardest for it?"
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "bullets",
+      "overline": "Conceptual Hygiene",
+      "title": "Distinctions To Keep Apart",
+      "body": "Use the basic bullet template when the content is a list of discriminations.",
+      "bullets": [
+        "Experience versus interpretation.",
+        "Correlation versus identity.",
+        "Public method versus metaphysical claim.",
+        "Model usefulness versus literal truth.",
+        "Simplicity versus explanatory loss."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "dense-bullets",
+      "overline": "Seminar Board",
+      "title": "View Comparison Notes",
+      "body": "Dense-bullets should let a complex discussion remain scannable.",
+      "groups": [
+        {
+          "title": "Physicalism",
+          "items": [
+            "Public method",
+            "Causal continuity",
+            "Neural dependence",
+            "Hard problem"
+          ]
+        },
+        {
+          "title": "Idealism",
+          "items": [
+            "Experience first",
+            "Mind as primitive",
+            "World as appearance",
+            "Risk of inflation"
+          ]
+        },
+        {
+          "title": "Panpsychism",
+          "items": [
+            "Continuity of mind",
+            "Avoids emergence gap",
+            "Combination problem",
+            "Broad ontology"
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "two-column",
+      "overline": "Core Tension",
+      "title": "Public Evidence And Private Experience",
+      "subtitle": "The question lives between method and immediacy.",
+      "columns": [
+        {
+          "title": "Public Evidence",
+          "body": "Repeatable, shareable, measurable patterns that make science possible."
+        },
+        {
+          "title": "Private Experience",
+          "body": "The felt presence of seeing, hearing, thinking, pain, meaning, and selfhood."
+        },
+        {
+          "title": "Live Problem",
+          "body": "A theory must respect both without quietly deleting either side."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Inquiry Method",
+      "title": "Testing A Metaphysical Claim",
+      "body": "Steps can turn philosophical analysis into a repeatable practice.",
+      "steps": [
+        {
+          "title": "State",
+          "text": "Put the claim in one sentence."
+        },
+        {
+          "title": "Define",
+          "text": "Clarify the key terms before evaluating it."
+        },
+        {
+          "title": "Derive",
+          "text": "Name what should follow if it is true."
+        },
+        {
+          "title": "Compare",
+          "text": "Set it beside at least one rival view."
+        },
+        {
+          "title": "Check",
+          "text": "Return to experience and evidence."
+        },
+        {
+          "title": "Revise",
+          "text": "Adjust the claim or its scope."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "checklist",
+      "overline": "Before Arguing",
+      "title": "Conceptual Quality Check",
+      "body": "Checklist slides should make standards explicit before the debate begins.",
+      "items": [
+        {
+          "title": "Terms",
+          "text": "Central words are defined consistently."
+        },
+        {
+          "title": "Scope",
+          "text": "The claim says what it does not cover."
+        },
+        {
+          "title": "Rivals",
+          "text": "At least one plausible alternative is named."
+        },
+        {
+          "title": "Evidence",
+          "text": "The argument distinguishes data from interpretation."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "statistics",
+      "overline": "Argument Snapshot",
+      "title": "Is The View Doing Enough Work?",
+      "stats": [
+        {
+          "value": "3",
+          "label": "candidate views",
+          "note": "enough contrast to compare"
+        },
+        {
+          "value": "4",
+          "label": "criteria",
+          "note": "coherence, coverage, parsimony, fruitfulness"
+        },
+        {
+          "value": "2",
+          "label": "hard anomalies",
+          "note": "where the view pays its cost"
+        },
+        {
+          "value": "1",
+          "label": "central question",
+          "note": "what must stay in view"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "profile",
+      "overline": "Concept Profile",
+      "title": "Analytic Idealism",
+      "image": "assets/images/features/idealism.webp",
+      "body": "A profile slide can introduce a view, thinker, or concept without turning it into an essay.",
+      "bullets": [
+        "Primitive: experience or mind.",
+        "Strength: starts from what is given.",
+        "Risk: explaining shared structure.",
+        "Test: predictive and interpretive power."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "gallery",
+      "overline": "Ontology Gallery",
+      "title": "Three Candidate Views",
+      "images": [
+        {
+          "src": "assets/images/features/physicalism.webp",
+          "caption": "Physicalism"
+        },
+        {
+          "src": "assets/images/features/idealism.webp",
+          "caption": "Idealism"
+        },
+        {
+          "src": "assets/images/features/panpsychism.webp",
+          "caption": "Panpsychism"
+        },
+        {
+          "src": "assets/images/features/dualism.webp",
+          "caption": "Dualism"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Lecture Clip",
+      "title": "Argument In Motion",
+      "showTitle": true,
+      "body": "Media slides should give enough conceptual context for the clip to be worth watching.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/z_Gy3mTztgg",
+        "title": "Structured slide sample media"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "timeline",
+      "overline": "Argument Development",
+      "title": "How A View Evolves",
+      "body": "Timeline works well for intellectual history, paradigm shifts, or argument flow.",
+      "timeline": [
+        {
+          "title": "Problem",
+          "body": "A phenomenon resists the current model."
+        },
+        {
+          "title": "Distinction",
+          "body": "A new conceptual separation becomes useful."
+        },
+        {
+          "title": "Model",
+          "body": "The view organizes more of the evidence."
+        },
+        {
+          "title": "Anomaly",
+          "body": "A hard case exposes the cost."
+        },
+        {
+          "title": "Revision",
+          "body": "The view becomes sharper or gives way."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Comparison Surface",
+      "title": "Ontology Cross-Check",
+      "headers": [
+        "View",
+        "What it protects",
+        "Hard question"
+      ],
+      "rows": [
+        [
+          "Physicalism",
+          "Continuity with public science",
+          "Why experience is present at all"
+        ],
+        [
+          "Idealism",
+          "The primacy of experience",
+          "Why the world is stable and shared"
+        ],
+        [
+          "Panpsychism",
+          "Continuity between matter and mind",
+          "How micro-experience combines"
+        ],
+        [
+          "Dualism",
+          "The intuitive subject/object split",
+          "How two substances interact"
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "card-grid",
+      "overline": "Evaluation Criteria",
+      "title": "What Makes A View Better?",
+      "body": "Card grids help abstract criteria become concrete and comparable.",
+      "cards": [
+        {
+          "title": "Coherence",
+          "body": "The view does not contradict its own terms."
+        },
+        {
+          "title": "Coverage",
+          "body": "It accounts for the relevant phenomena."
+        },
+        {
+          "title": "Parsimony",
+          "body": "It adds no more machinery than needed."
+        },
+        {
+          "title": "Fruitfulness",
+          "body": "It opens useful questions, practices, or predictions."
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "call-to-action",
+      "overline": "Inquiry Doorway",
+      "title": "Let The View Risk Something",
+      "body": "Choose the assumption your preferred view relies on most, then ask what you would notice differently if it were false.",
+      "action": {
+        "label": "Test One Assumption"
+      },
+      "note": "Good philosophy changes how the next observation is made.",
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "word-cloud",
+      "overline": "Semantic Field",
+      "title": "Inquiry Vocabulary",
+      "words": [
+        [
+          "consciousness",
+          24
+        ],
+        [
+          "experience",
+          22
+        ],
+        [
+          "ontology",
+          21
+        ],
+        [
+          "evidence",
+          19
+        ],
+        [
+          "model",
+          18
+        ],
+        [
+          "method",
+          16
+        ],
+        [
+          "truth",
+          15
+        ],
+        [
+          "appearance",
+          14
+        ],
+        [
+          "inference",
+          13
+        ],
+        [
+          "anomaly",
+          11
+        ],
+        [
+          "clarity",
+          10
+        ],
+        [
+          "revision",
+          8
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "quadrant-chart",
+      "overline": "Knowledge Map",
+      "title": "Privacy And Method",
+      "quadrants": [
+        {
+          "x": 250,
+          "y": 155,
+          "label": "Private immediacy"
+        },
+        {
+          "x": 750,
+          "y": 155,
+          "label": "Shared concepts"
+        },
+        {
+          "x": 250,
+          "y": 435,
+          "label": "Raw appearance"
+        },
+        {
+          "x": 750,
+          "y": 435,
+          "label": "Public method"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "mindmap-slot",
+      "overline": "Argument Map",
+      "title": "What The Theory Must Hold",
+      "nodes": [
+        {
+          "id": "root",
+          "label": "Consciousness",
+          "x": 500,
+          "y": 260,
+          "r": 58
+        },
+        {
+          "id": "experience",
+          "label": "Experience",
+          "x": 245,
+          "y": 150
+        },
+        {
+          "id": "evidence",
+          "label": "Evidence",
+          "x": 755,
+          "y": 150
+        },
+        {
+          "id": "model",
+          "label": "Model",
+          "x": 280,
+          "y": 430
+        },
+        {
+          "id": "anomaly",
+          "label": "Anomaly",
+          "x": 720,
+          "y": 430
+        }
+      ],
+      "links": [
+        {
+          "from": "root",
+          "to": "experience"
+        },
+        {
+          "from": "root",
+          "to": "evidence"
+        },
+        {
+          "from": "evidence",
+          "to": "model"
+        },
+        {
+          "from": "model",
+          "to": "anomaly"
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

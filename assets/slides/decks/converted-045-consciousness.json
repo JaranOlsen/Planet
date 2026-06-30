@@ -1,0 +1,21 @@
+{
+  "id": "converted-045-consciousness",
+  "title": "Converted: Consciousness?",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[45]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 45,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "full-image",
+      "image": "assets/images/consciousness/venn.webp",
+      "alt": "Consciousness? legacy image 1",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

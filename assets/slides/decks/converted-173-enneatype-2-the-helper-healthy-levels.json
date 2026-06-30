@@ -1,0 +1,38 @@
+{
+  "id": "converted-173-enneatype-2-the-helper-healthy-levels",
+  "title": "Converted: Enneatype 2 - The Helper - Healthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[173]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 173,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 2",
+      "title": "The Helper",
+      "density": "long",
+      "backgroundColor": "rgb(81, 56, 51)",
+      "image": "assets/images/enneagram/heart.webp",
+      "imagePosition": "56%",
+      "bullets": [
+        {
+          "text": "Healthy Levels:",
+          "ordered": true,
+          "start": 1,
+          "items": [
+            "At their best, Type 2 individuals embody selflessness, humility, and genuine altruism. They give love unconditionally and feel privileged to be a part of others' lives.",
+            "They are empathetic and compassionate, often prioritizing the needs of others. Their warmth, sincerity, and capacity for forgiveness make them approachable and dependable.",
+            "They uplift and appreciate those around them, seeing the goodness in people. While they are committed to serving others, they also understand the importance of self-care. They are nurturing, generous, and genuinely loving individuals."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

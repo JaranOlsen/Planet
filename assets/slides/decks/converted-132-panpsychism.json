@@ -1,0 +1,25 @@
+{
+  "id": "converted-132-panpsychism",
+  "title": "Converted: Panpsychism",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[132]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 132,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "Panpsychism",
+      "title": "Philip Goff: Consciousness, Panpsychism, and the Philosophy of Mind | Lex Fridman Podcast #261",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/BCdV6BMMpOo",
+        "title": "Philip Goff: Consciousness, Panpsychism, and the Philosophy of Mind | Lex Fridman Podcast #261"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

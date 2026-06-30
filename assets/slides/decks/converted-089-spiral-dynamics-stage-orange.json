@@ -1,0 +1,26 @@
+{
+  "id": "converted-089-spiral-dynamics-stage-orange",
+  "title": "Converted: Spiral Dynamics - Stage Orange",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured media conversion of legacy contentData[89]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 89,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "Spiral Dynamics",
+      "title": "Stage Orange (Rational)",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/0zfw76P_Cq4",
+        "title": "Spiral Dynamics - Stage Orange"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

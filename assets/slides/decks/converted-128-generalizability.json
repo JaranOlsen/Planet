@@ -1,0 +1,25 @@
+{
+  "id": "converted-128-generalizability",
+  "title": "Converted: Generalizability",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[128]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 128,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Quality",
+      "title": "Generalizability",
+      "body": [
+        "The theory should be able to apply to a wide range of contexts, situations, or cases, rather than being restricted to a specific set of circumstances."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

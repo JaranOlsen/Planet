@@ -1,0 +1,25 @@
+{
+  "id": "converted-034-body-contemplation",
+  "title": "Converted: Body contemplation",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[34]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 34,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "Body contemplation",
+      "title": "Thirty-two parts of the body meditation",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/TKztYwAniaw",
+        "title": "Thirty-two parts of the body meditation"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "id": "eft-conflict-split",
+  "title": "EFT: Conflict Split",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Three practical clinician-facing slides extracted from the EFT interventions practice deck.",
+  "sources": [
+    {
+      "label": "Vrana and Greenberg, Overview of Emotion-Focused Therapy",
+      "url": "https://www.researchgate.net/publication/325379801_Overview_of_emotion-focused_therapy"
+    },
+    {
+      "label": "Markers and tasks summary",
+      "url": "https://www.lotus-on-the-ripple.com/single-post/2019/02/11/integrating-being-and-doing-in-emotion-focused-therapy"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Conflict Split",
+      "title": "Marker: critic versus experiencing self",
+      "image": "assets/images/gut/leuchtturm-entertainment-U2H4Br0_NLs-unsplash.jpg",
+      "body": "Use when one self-position attacks, coerces, or shames another.",
+      "bullets": [
+        "Identify the exact critic message and its emotional tone.",
+        "Put the critic in one chair and the impacted self in the other.",
+        "Aim for softening, protection, and integration, not winning."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Conflict Split",
+      "title": "Two-chair dialogue",
+      "body": "The therapist guides contact between positions while protecting both differentiation and emotional depth.",
+      "steps": [
+        "Have the critic speak directly in second person.",
+        "Move chairs and deepen the receiving impact: shame, hurt, fear, anger.",
+        "Return to critic and ask what it is trying to prevent or secure.",
+        "Heighten the experiencer's need for respect, support, or permission.",
+        "Look for critic softening into care, standards, grief, or fear."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Conflict Split",
+      "title": "When the dialogue stalls",
+      "headers": [
+        "Stall",
+        "Intervention",
+        "Watch for"
+      ],
+      "rows": [
+        [
+          "Critic stays right",
+          "Ask what would happen if it stopped.",
+          "Fear under control."
+        ],
+        [
+          "Experiencer collapses",
+          "Protect and validate impact before response.",
+          "Anger or dignity."
+        ],
+        [
+          "Debate begins",
+          "Return to voice, body, and direct address.",
+          "Affective contact."
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

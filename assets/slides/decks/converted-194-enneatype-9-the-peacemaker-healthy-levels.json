@@ -1,0 +1,38 @@
+{
+  "id": "converted-194-enneatype-9-the-peacemaker-healthy-levels",
+  "title": "Converted: Enneatype 9 - The Peacemaker - Healthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[194]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 194,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 9",
+      "title": "The Peacemaker",
+      "density": "long",
+      "backgroundColor": "rgb(91, 78, 51)",
+      "image": "assets/images/enneagram/yinyang.webp",
+      "imagePosition": "35%",
+      "bullets": [
+        {
+          "text": "Healthy Levels:",
+          "ordered": true,
+          "start": 1,
+          "items": [
+            "At their best, Type 9 individuals become self-possessed, feeling autonomous and fulfilled. They have great equanimity and contentment because they are present to themselves. Paradoxically, being at one with self, they can form more profound relationships. They feel intensely alive and fully connected to self and others.",
+            "They are deeply receptive, accepting, unselfconscious, emotionally stable, and serene. They trust in self and others, are at ease with self and life, and exhibit innocent simplicity. They are patient, unpretentious, good-natured, and genuinely nice people.",
+            "They are optimistic, reassuring, and supportive, with a healing and calming influence. They harmonize groups, bring people together, and serve as good mediators, synthesizers, and communicators."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

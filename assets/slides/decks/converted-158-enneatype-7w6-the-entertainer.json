@@ -1,0 +1,56 @@
+{
+  "id": "converted-158-enneatype-7w6-the-entertainer",
+  "title": "Converted: Enneatype 7w6 - The Entertainer",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[158]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 158,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 7w6",
+      "title": "The Entertainer",
+      "backgroundColor": "rgb(13, 32, 70)",
+      "image": "assets/images/enneagram/hotairballoons.webp",
+      "imagePosition": "37%",
+      "body": [
+        {
+          "text": "The Enthusiastic, Loyal Type: Spontaneous, Versatile, Fun-loving, Responsible, and Engaged.",
+          "strong": true
+        },
+        "As a Seven wing Six, you combine the enthusiastic, spontaneous, and versatile traits of a Seven with the engaged, responsible, and loyal qualities of a Six. This blend results in a personality that is both adventurous and committed, often able to bring a sense of fun and positivity to their responsibilities. You seek excitement and new experiences, but also value stability and community.",
+        "Your Six wing adds a layer of loyalty and engagement to your enthusiastic nature, making you a more grounded and practical adventurer. This balance of excitement and responsibility often allows you to bring a unique blend of joy and dedication to your pursuits, making you a versatile and engaging individual."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 7w6",
+      "title": "The Entertainer",
+      "backgroundColor": "rgb(13, 32, 70)",
+      "image": "assets/images/enneagram/hotairballoons.webp",
+      "imagePosition": "37%",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Practice mindfulness to stay present even when experiencing discomfort or boredom.",
+            "Cultivate deeper relationships instead of jumping from one new experience to another.",
+            "Develop strategies for managing anxiety and stress, such as meditation or physical exercise.",
+            "Learn to appreciate the depth of experiences, not just their novelty.",
+            "Practice delayed gratification to achieve more meaningful goals."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

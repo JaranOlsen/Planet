@@ -1,0 +1,38 @@
+{
+  "id": "converted-195-enneatype-9-the-peacemaker-average-levels",
+  "title": "Converted: Enneatype 9 - The Peacemaker - Average Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[195]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 195,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 9",
+      "title": "The Peacemaker",
+      "density": "long",
+      "backgroundColor": "rgb(91, 78, 51)",
+      "image": "assets/images/enneagram/yinyang.webp",
+      "imagePosition": "35%",
+      "bullets": [
+        {
+          "text": "Average Levels:",
+          "ordered": true,
+          "start": 4,
+          "items": [
+            "They fear conflicts and become self-effacing and accommodating. They idealize others and \"go along\" with their wishes, saying \"yes\" to things they do not really want to do. They fall into conventional roles and expectations, using philosophies and stock sayings to deflect others.",
+            "They are active but disengaged, unreflective, and inattentive. They do not want to be affected, so they become unresponsive and complacent, walking away from problems and \"sweeping them under the rug\". Their thinking becomes hazy and ruminative, filled with comforting fantasies, as they begin to \"tune out\" reality, becoming oblivious. They display emotional indolence, showing an unwillingness to exert themselves or to focus on problems, displaying indifference.",
+            "They begin to minimize problems, to appease others and to maintain \"peace at any price.\" They become stubborn, fatalistic, and resigned, as if nothing could be done to change anything. They fall into wishful thinking and magical solutions, which frustrates and angers others due to their procrastination and unresponsiveness."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

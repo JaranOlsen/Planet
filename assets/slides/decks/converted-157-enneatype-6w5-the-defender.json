@@ -1,0 +1,56 @@
+{
+  "id": "converted-157-enneatype-6w5-the-defender",
+  "title": "Converted: Enneatype 6w5 - The Defender",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[157]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 157,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 6w5",
+      "title": "The Defender",
+      "backgroundColor": "rgb(56, 36, 23)",
+      "image": "assets/images/enneagram/fort.webp",
+      "imagePosition": "50% 60%",
+      "body": [
+        {
+          "text": "The Loyal, Analytical Type: Responsible, Engaged, Alert, Private, and Intellectual.",
+          "strong": true
+        },
+        "As a Six wing Five, you blend the loyal, responsible, and security-oriented nature of a Six with the introspective, intellectual traits of a Five. This combination often results in a deeply committed and thoughtful individual who seeks understanding and stability in their world. Your desire for security and loyalty is balanced by a keen intellectual curiosity and a desire for personal autonomy.",
+        "Your Five wing can make you more introspective and independent than many Sixes, driving you to seek knowledge and understanding as a means of dealing with uncertainty. You're likely to use your intellectual capabilities to dissect problems and ensure safety and stability for yourself and your community."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 6w5",
+      "title": "The Defender",
+      "backgroundColor": "rgb(56, 36, 23)",
+      "image": "assets/images/enneagram/fort.webp",
+      "imagePosition": "50% 60%",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Practice mindfulness techniques to manage anxieties and fears.",
+            "Challenge your assumptions and test your fears instead of letting them limit you.",
+            "Cultivate self-trust and confidence in your decision-making abilities.",
+            "Learn to differentiate between genuine threats and unfounded worries.",
+            "Focus on developing a strong sense of inner stability and security."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "converted-176-enneatype-3-the-achiever-healthy-levels",
+  "title": "Converted: Enneatype 3 - The Achiever - Healthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[176]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 176,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 3",
+      "title": "The Achiever",
+      "density": "long",
+      "backgroundColor": "rgb(48, 60, 71)",
+      "image": "assets/images/enneagram/ladder.webp",
+      "imagePosition": "bottom",
+      "bullets": [
+        {
+          "text": "Healthy Levels:",
+          "ordered": true,
+          "start": 1,
+          "items": [
+            "At their best, Type 3 individuals exemplify authenticity, acceptance, and a generous spirit. Their humility and charitable nature are accompanied by a delightful sense of humor and a warm heart.",
+            "Self-assured and vibrant, they believe in their worth and abilities. They exude a natural charm and grace that make them appealing and likable.",
+            "Their ambition is directed towards self-improvement. They strive to embody the best version of themselves, inspiring others through their remarkable effectiveness and admirable qualities."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

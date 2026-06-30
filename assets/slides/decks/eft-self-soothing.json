@@ -1,0 +1,77 @@
+{
+  "id": "eft-self-soothing",
+  "title": "EFT: Self-Soothing",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Three practical clinician-facing slides extracted from the EFT interventions practice deck.",
+  "sources": [
+    {
+      "label": "Vrana and Greenberg, Overview of Emotion-Focused Therapy",
+      "url": "https://www.researchgate.net/publication/325379801_Overview_of_emotion-focused_therapy"
+    },
+    {
+      "label": "Markers and tasks summary",
+      "url": "https://www.lotus-on-the-ripple.com/single-post/2019/02/11/integrating-being-and-doing-in-emotion-focused-therapy"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Self-Soothing",
+      "title": "Marker: pain without an inner responder",
+      "image": "assets/images/gut/anna-khromova-_8AIdqHVFoc-unsplash.jpg",
+      "body": "Use when vulnerability is present but no caring voice is available.",
+      "bullets": [
+        "Client is in primary vulnerability, not performative collapse.",
+        "Need is specific: comfort, protection, validation, holding, permission.",
+        "Therapist offers the task as an experiment, not reassurance."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Self-Soothing",
+      "title": "Run the task from felt need, not technique",
+      "body": "Experienced clients often know self-compassion language; the intervention works when the need becomes bodily and addressed.",
+      "steps": [
+        "Deepen the vulnerable self: what hurts, where, and what is missing.",
+        "Differentiate the needed response from advice, analysis, or cheerleading.",
+        "Invite a soothing self, caring other, or protective presence into the other chair.",
+        "Have the responder speak directly: slow, concrete, second person.",
+        "Return to the vulnerable side and check whether the body receives it."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "table",
+      "overline": "Self-Soothing",
+      "title": "Clinician tracking",
+      "headers": [
+        "If you see",
+        "Do",
+        "Avoid"
+      ],
+      "rows": [
+        [
+          "Cognitive kindness",
+          "Ask for the words the hurt part can actually take in.",
+          "Polishing the compassionate speech."
+        ],
+        [
+          "Flooding",
+          "Narrow to one need and one sentence.",
+          "Pushing for catharsis."
+        ],
+        [
+          "No responder",
+          "Borrow the therapist voice, then hand it back.",
+          "Calling it resistance too early."
+        ]
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

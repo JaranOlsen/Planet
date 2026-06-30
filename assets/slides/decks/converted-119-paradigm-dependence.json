@@ -1,0 +1,25 @@
+{
+  "id": "converted-119-paradigm-dependence",
+  "title": "Converted: Paradigm-dependence",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[119]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 119,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Limitation",
+      "title": "Paradigm-dependence",
+      "body": [
+        "The development and acceptance of theories are influenced by prevailing scientific paradigms and the broader cultural, social, and historical contexts in which they are formulated. This can sometimes lead to biases or blind spots in the way theories are constructed, evaluated, or interpreted."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

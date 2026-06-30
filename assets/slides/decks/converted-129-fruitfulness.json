@@ -1,0 +1,25 @@
+{
+  "id": "converted-129-fruitfulness",
+  "title": "Converted: Fruitfulness",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[129]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 129,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Quality",
+      "title": "Fruitfulness",
+      "body": [
+        "A good theory should inspire further research, generate new questions, and contribute to the development of new ideas and theories in the field."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

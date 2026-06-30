@@ -1,0 +1,38 @@
+{
+  "id": "converted-193-enneatype-8-the-challenger-unhealthy-levels",
+  "title": "Converted: Enneatype 8 - The Challenger - Unhealthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[193]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 193,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 8",
+      "title": "The Challenger",
+      "density": "long",
+      "backgroundColor": "rgb(30, 54, 62)",
+      "image": "assets/images/enneagram/bull.webp",
+      "imagePosition": "40%",
+      "bullets": [
+        {
+          "text": "Unhealthy Levels:",
+          "ordered": true,
+          "start": 7,
+          "items": [
+            "Defying any attempt to control them, they become completely ruthless, dictatorial, and live by \"might makes right.\" They take on roles like the criminal, outlaw, renegade, and con-artist. They become hard-hearted, immoral, and potentially violent.",
+            "They develop delusional ideas about their power, invincibility, and ability to prevail. This leads to megalomania, feeling omnipotent, invulnerable, and they recklessly overextend themselves.",
+            "If they get in danger, they may brutally destroy everything that has not conformed to their will rather than surrender to anyone else. They become vengeful, barbaric, and murderous, exhibiting sociopathic tendencies. This level generally corresponds to Antisocial Personality Disorder."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

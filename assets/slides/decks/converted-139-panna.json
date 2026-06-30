@@ -1,0 +1,61 @@
+{
+  "id": "converted-139-panna",
+  "title": "Converted: Pañña",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[139]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 139,
+    "refs": [
+      "1j"
+    ]
+  },
+  "slides": [
+    {
+      "template": "word-cloud",
+      "overline": "Pañña",
+      "title": "A Field of Insight",
+      "words": [
+        ["Pañña", 10],
+        ["wisdom", 6],
+        ["insight", 6],
+        ["understanding", 6],
+        ["discernment", 5],
+        ["awareness", 5],
+        ["intuition", 4],
+        ["comprehension", 4],
+        ["clarity", 4],
+        ["knowledge", 3],
+        ["intelligence", 3],
+        ["realization", 2],
+        ["perceptiveness", 2],
+        ["mindfulness", 2],
+        ["illumination", 2],
+        ["recognition", 2],
+        ["learning", 2],
+        ["intelligibility", 2],
+        ["sagacity", 2],
+        ["acuity", 2],
+        ["prudence", 2],
+        ["foresight", 2],
+        ["penetration", 2],
+        ["perspicacity", 2],
+        ["acumen", 2]
+      ],
+      "colors": [
+        "#ccd5ae",
+        "#a3b18a",
+        "#708d81",
+        "#a68a64",
+        "#b08968",
+        "#8f7a66"
+      ],
+      "weightFactor": 16,
+      "rotateRatio": 0.1,
+      "minRotation": -0.75,
+      "maxRotation": 0.75,
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

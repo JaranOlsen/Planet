@@ -1,0 +1,38 @@
+{
+  "id": "converted-178-enneatype-3-the-achiever-unhealthy-levels",
+  "title": "Converted: Enneatype 3 - The Achiever - Unhealthy Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[178]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 178,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 3",
+      "title": "The Achiever",
+      "density": "long",
+      "backgroundColor": "rgb(48, 60, 71)",
+      "image": "assets/images/enneagram/ladder.webp",
+      "imagePosition": "bottom",
+      "bullets": [
+        {
+          "text": "Unhealthy Levels:",
+          "ordered": true,
+          "start": 7,
+          "items": [
+            "Driven by fear of failure and humiliation, they may resort to exploitation and opportunism. They covet others' success and will do whatever it takes to maintain their image of superiority.",
+            "Deceptive behaviors increase, driven by a need to hide mistakes and wrongdoings. They become untrustworthy, often betraying or sabotaging others for their own benefit. Delusional jealousy of others can arise.",
+            "At their worst, they become vindictive, seeking to destroy anything that reflects their own shortcomings. Obsessed with their failures, they may resort to psychopathic behaviors. This level generally corresponds to severe Narcissistic Personality Disorder."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "converted-161-enneatype-1w2-the-advocate",
+  "title": "Converted: Enneatype 1w2 - The Advocate",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[161]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 161,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 1w2",
+      "title": "The Advocate",
+      "backgroundColor": "rgb(81, 118, 148)",
+      "image": "assets/images/enneagram/compass.webp",
+      "imagePosition": "70%",
+      "body": [
+        {
+          "text": "The Rational, Idealistic, Generous Type: Principled, Purposeful, Self-Controlled, Perfectionistic, Caring, and Altruistic.",
+          "strong": true
+        },
+        "As a One wing Two, you carry the core traits of the Enneatype 1, such as an unwavering sense of responsibility, integrity, and devotion to ethical standards. Your inner critic remains a driving force towards perfection and orderliness. However, the Two wing adds a layer of empathy, care, and a desire to help others.",
+        "You may still find yourself frustrated by imperfections and inefficiencies, but this frustration often extends towards injustices or unfairness faced by others. This mix of dedication to high standards and caring for others often leads you to take action, not just for your own improvement, but for the betterment of your community as well. Your natural teaching instincts may manifest in active mentorship, offering guidance to others not just for practical improvements, but for emotional growth as well."
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 1w2",
+      "title": "The Advocate",
+      "backgroundColor": "rgb(149, 112, 82)",
+      "image": "assets/images/enneagram/compass.webp",
+      "imagePosition": "70%",
+      "bullets": [
+        {
+          "text": "Growth recommendations:",
+          "items": [
+            "Establish boundaries to avoid overcommitting yourself or meddling in others' affairs.",
+            "Practice self-care and allocate time for your personal needs and relaxation.",
+            "Regularly reflect on your motivations to ensure they are guided by genuine concern rather than a need to be needed.",
+            "Appreciate that perfection is an ideal, not a practical expectation.",
+            "Understand that you can't fix everything and everyone, and that's okay."
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "id": "converted-133-template-playground",
+  "title": "Converted: Template Playground",
+  "theme": "aether",
+  "description": "Legacy-slide wrapper for contentData[133], preserving the custom, D3, quiz, word-cloud, and animation experiments while keeping them addressable from the structured deck system.",
+  "legacy": {
+    "contentData": 133,
+    "refs": [
+      "1cj",
+      "2-1",
+      "2-2",
+      "2-3",
+      "3",
+      "4",
+      "5cj",
+      "6j",
+      "7",
+      "8-1c",
+      "8-2",
+      "9cj",
+      "10cj",
+      "11c",
+      "12cj",
+      "13cj"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 1: 1cj",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "1cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 2: 2-1",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "2-1"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 3: 2-2",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "2-2"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 4: 2-3",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "2-3"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 5: 3",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "3"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 6: 4",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "4"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 7: 5cj",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "5cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 8: 6j",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "6j"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 9: 7",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "7"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 10: 8-1c",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "8-1c"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 11: 8-2",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "8-2"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 12: 9cj",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "9cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 13: 10cj",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "10cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 14: 11c",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "11c"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 15: 12cj",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "12cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "legacy-slide",
+      "title": "Template Playground 16: 13cj",
+      "legacy": {
+        "slideshow": 133,
+        "slide": "13cj"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

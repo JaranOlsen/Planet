@@ -1,0 +1,34 @@
+{
+  "id": "converted-060-15-at-peace-with-pain",
+  "title": "Converted: #15 At Peace With Pain",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[60]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 60,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#15 At Peace With Pain",
+      "image": "assets/images/roadToHere/15t.webp",
+      "alt": "#15 At Peace With Pain cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-15-at-peace-with-pain",
+        "title": "Insight Timer Embed: Road To Here - #15 At Peace With Pain | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-15-at-peace-with-pain"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

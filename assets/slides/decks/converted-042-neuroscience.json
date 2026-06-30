@@ -1,0 +1,121 @@
+{
+  "id": "converted-042-neuroscience",
+  "title": "Converted: Neuroscience",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[42]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 42,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "overline": "Neuroscience",
+      "title": "Accidental Genius | Darold Treffert | TEDxFondduLac | Darold Treffert | TEDxFondduLac",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/Wxe1PkyJev8",
+        "title": "Accidental Genius | Darold Treffert | TEDxFondduLac | Darold Treffert | TEDxFondduLac"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Neuroscience",
+      "title": "The Curious Case of the People With Split Brains",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/hvf4seEFtnY",
+        "title": "The Curious Case of the People With Split Brains"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Neuroscience",
+      "title": "RSA ANIMATE: The Divided Brain",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/dFs9WO2B8uI",
+        "title": "RSA ANIMATE: The Divided Brain"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Neuroscience",
+      "title": "The Libet Experiment: Is Free Will Just an Illusion?",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/OjCt-L0Ph5o",
+        "title": "The Libet Experiment: Is Free Will Just an Illusion?"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Neuroscience",
+      "title": "Experiments in Free Will | Closer To Truth",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/TTSYzWkK5Qo",
+        "title": "Experiments in Free Will | Closer To Truth"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Neuroscience",
+      "title": "3.1 The Libet experiment",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/Ko2SPWgDH6o",
+        "title": "3.1 The Libet experiment"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Neuroscience",
+      "title": "3.2 Debunking Libet's Conclusions",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/TluNbkNrRKU",
+        "title": "3.2 Debunking Libet's Conclusions"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Neuroscience",
+      "title": "3.3 Hypnosis vs Libet",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/6g0_c-je7ag",
+        "title": "3.3 Hypnosis vs Libet"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media-only",
+      "overline": "Neuroscience",
+      "title": "3.4 Libet's confusion",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/_ee7MAtfhkM",
+        "title": "3.4 Libet's confusion"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

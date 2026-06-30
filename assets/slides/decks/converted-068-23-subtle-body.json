@@ -1,0 +1,34 @@
+{
+  "id": "converted-068-23-subtle-body",
+  "title": "Converted: #23 Subtle Body",
+  "theme": "heart",
+  "path": "heart",
+  "description": "Structured conversion of legacy contentData[68]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 68,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Road To Here",
+      "title": "#23 Subtle Body",
+      "image": "assets/images/roadToHere/23t.webp",
+      "alt": "#23 Subtle Body cover art",
+      "media": {
+        "src": "https://widgets.insighttimer.com/track/road-to-here-number-23-subtle-body",
+        "title": "Insight Timer Embed: Road To Here - #23 Subtle Body | Jaran de los Santos Olsen",
+        "height": "250px",
+        "allow": "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      },
+      "action": {
+        "label": "Open in Insight Timer",
+        "href": "https://insighttimer.com/jarandelossantosolsen/guided-meditations/road-to-here-number-23-subtle-body"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

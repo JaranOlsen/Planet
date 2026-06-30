@@ -1,0 +1,26 @@
+{
+  "id": "converted-197-god-is-no-thing",
+  "title": "Converted: God Is No-Thing",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured media conversion of legacy contentData[197]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 197,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media-only",
+      "title": "GOD IS NO-THING | Pete Holmes #shorts",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/qJguU6sLR-8",
+        "title": "GOD IS NO-THING | Pete Holmes #shorts",
+        "aspectRatio": "9 / 16"
+      },
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

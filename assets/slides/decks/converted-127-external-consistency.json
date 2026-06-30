@@ -1,0 +1,25 @@
+{
+  "id": "converted-127-external-consistency",
+  "title": "Converted: External consistency",
+  "theme": "head",
+  "path": "head",
+  "description": "Structured text conversion of legacy contentData[127]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 127,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "long-text",
+      "overline": "Theory Quality",
+      "title": "External consistency",
+      "body": [
+        "The theory should be consistent with other well-established theories, principles, and empirical findings in the relevant domain or field."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

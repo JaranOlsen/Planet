@@ -1,0 +1,65 @@
+{
+  "id": "eft-focusing",
+  "title": "EFT: Focusing",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Three practical clinician-facing slides for focusing in EFT.",
+  "sources": [
+    {
+      "label": "Watson and Sharbanee, Emotion Focused Therapy: Case Conceptualization and Treatment",
+      "url": "https://www.researchgate.net/publication/356370129_Emotion_Focused_Therapy_-_Case_Conceptualization_and_Treatment_Adults"
+    },
+    {
+      "label": "Gendlin, Focusing",
+      "url": "https://focusing.org/sixsteps"
+    }
+  ],
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Focusing",
+      "title": "Marker: felt, not yet symbolized",
+      "image": "assets/images/gut/eft-process/focusing.png",
+      "body": "Use focusing when a vague bodily sense needs attention before action.",
+      "bullets": [
+        "The client says: I do not know; it is hard to name.",
+        "There is a bodily referent: throat, chest, stomach, breath.",
+        "The issue is too global for chair work, too alive for advice."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "steps",
+      "overline": "Focusing",
+      "title": "Focusing micro-sequence",
+      "body": "Keep the pace below the client's thinking speed. Focusing works when the body has time to answer.",
+      "steps": [
+        "Clear enough space: set aside the story, not the client.",
+        "Invite attention into the bodily middle and wait for the whole feel.",
+        "Ask for a handle: word, image, gesture, texture, temperature, movement.",
+        "Check resonance: does that word fit it, or is something off?",
+        "Ask from contact: what is the worst of this, or what does it need?",
+        "Receive the shift and let the new meaning settle before moving on."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "checklist",
+      "overline": "Focusing",
+      "title": "Protect the felt sense",
+      "body": "The therapist's discipline is to keep attention with the implicit edge without turning it into analysis.",
+      "items": [
+        "Use fewer words than usual.",
+        "Reflect images exactly; do not improve them.",
+        "Treat silence as active processing.",
+        "Check whether the body receives each phrase.",
+        "If dissociation appears, orient outward.",
+        "If analysis takes over, return to body."
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

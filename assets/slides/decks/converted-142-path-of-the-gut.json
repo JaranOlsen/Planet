@@ -1,0 +1,54 @@
+{
+  "id": "converted-142-path-of-the-gut",
+  "title": "Converted: Path of the Gut",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[142]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 142,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "split-image",
+      "overline": "Path of the Gut",
+      "title": "Path of the Gut",
+      "image": "assets/images/features/maslow.webp",
+      "alt": "Path of the Gut",
+      "reveal": "sequence",
+      "transition": "crossfade-soft",
+      "body": "Unconditional embracing / integration\n↑\nPrimary adaptive emotions\n↑\nPrimary maladaptive emotions\n↑\nSecondary emotions\n↑\nInstrumental emotions",
+      "textAlign": "center"
+    },
+    {
+      "template": "split-image",
+      "overline": "Path of the Gut",
+      "title": "What is Missing in Psychotherapy?",
+      "image": "assets/images/background/therapy.webp",
+      "alt": "Therapy background",
+      "bullets": [
+        {
+          "text": "From the wisdom traditions",
+          "children": [
+            "Deep states of sustained calm and presence",
+            "Awakening perspectives; possibility of accessing deeper truths about self, nature, life, and death",
+            "Source of existential meaning"
+          ]
+        },
+        {
+          "text": "From metaphysics and direct-path approaches",
+          "children": [
+            "Philosophical and empirical justification for taking experiencing really seriously",
+            "Philosophical and empirical justification for mature spirituality",
+            "Methods for facilitating awakening and existential insight"
+          ]
+        }
+      ],
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

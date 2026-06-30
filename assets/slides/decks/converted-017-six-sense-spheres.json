@@ -1,0 +1,125 @@
+{
+  "id": "converted-017-six-sense-spheres",
+  "title": "Converted: Six sense-spheres",
+  "theme": "aether",
+  "description": "Structured media/image conversion of legacy contentData[17]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 17,
+    "refs": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14"
+    ]
+  },
+  "slides": [
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide1.webp",
+      "alt": "Six sense-spheres legacy image 1",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide2.webp",
+      "alt": "Six sense-spheres legacy image 2",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide3.webp",
+      "alt": "Six sense-spheres legacy image 3",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide4.webp",
+      "alt": "Six sense-spheres legacy image 4",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide5.webp",
+      "alt": "Six sense-spheres legacy image 5",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide6.webp",
+      "alt": "Six sense-spheres legacy image 6",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide7.webp",
+      "alt": "Six sense-spheres legacy image 7",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide8.webp",
+      "alt": "Six sense-spheres legacy image 8",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide9.webp",
+      "alt": "Six sense-spheres legacy image 9",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide10.webp",
+      "alt": "Six sense-spheres legacy image 10",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide11.webp",
+      "alt": "Six sense-spheres legacy image 11",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide12.webp",
+      "alt": "Six sense-spheres legacy image 12",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide13.webp",
+      "alt": "Six sense-spheres legacy image 13",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "full-image",
+      "image": "assets/images/exercises/sixsenses/Slide14.webp",
+      "alt": "Six sense-spheres legacy image 14",
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

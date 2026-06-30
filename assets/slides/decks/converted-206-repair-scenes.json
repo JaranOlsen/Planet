@@ -1,0 +1,42 @@
+{
+  "id": "converted-206-repair-scenes",
+  "title": "Converted: Repair Scenes",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured media conversion of legacy contentData[206]. The original legacy slides remain available for comparison.",
+  "legacy": {
+    "contentData": 206,
+    "refs": [
+      "1",
+      "2"
+    ]
+  },
+  "slides": [
+    {
+      "template": "media",
+      "overline": "Repair Scenes",
+      "title": "It's Not Your Fault",
+      "showTitle": true,
+      "body": "A film scene for demonstrating emotional repair, repetition, and receiving care.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/6tqPK8nJL2U?si=xMj8gY5U4m9yKXt5",
+        "title": "Good Will Hunting: It's Not Your Fault"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    },
+    {
+      "template": "media",
+      "overline": "Repair Scenes",
+      "title": "Staying With The Work",
+      "showTitle": true,
+      "body": "A second scene for comparing rupture, contact, and the gradual softening of protection.",
+      "media": {
+        "src": "https://www.youtube-nocookie.com/embed/JyC3RE6wzkY?si=gOBEGSJz5ZWeu2XO",
+        "title": "Kiki Scene - The Work"
+      },
+      "reveal": "sequence",
+      "transition": "crossfade-soft"
+    }
+  ]
+}

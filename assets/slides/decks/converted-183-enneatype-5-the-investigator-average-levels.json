@@ -1,0 +1,37 @@
+{
+  "id": "converted-183-enneatype-5-the-investigator-average-levels",
+  "title": "Converted: Enneatype 5 - The Investigator - Average Levels",
+  "theme": "gut",
+  "path": "gut",
+  "description": "Structured conversion of legacy contentData[183]. The original legacy slide remains available for comparison.",
+  "legacy": {
+    "contentData": 183,
+    "refs": [
+      "1"
+    ]
+  },
+  "slides": [
+    {
+      "template": "legacy-panel",
+      "overline": "Enneatype 5",
+      "title": "The Investigator",
+      "density": "long",
+      "backgroundColor": "rgb(38, 48, 52)",
+      "image": "assets/images/enneagram/book.webp",
+      "bullets": [
+        {
+          "text": "Average Levels:",
+          "ordered": true,
+          "start": 4,
+          "items": [
+            "They start to conceptualize and fine-tune everything before acting, working things out in their minds through model building, preparation, and practice. They become specialized, often challenging established ways of doing things.",
+            "As they get involved with complex ideas or imaginary worlds, they become increasingly detached. Preoccupied with their visions and interpretations, they may lose touch with reality. They show interest in off-beat, esoteric subjects, even those with dark and disturbing elements.",
+            "They begin to oppose anything that interferes with their inner world and personal vision, becoming provocative, abrasive, cynical, and argumentative."
+          ]
+        }
+      ],
+      "reveal": "none",
+      "transition": "crossfade-soft"
+    }
+  ]
+}
