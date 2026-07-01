@@ -6,7 +6,21 @@ window.WordCloud = WordCloud;
 
 
 //  IMPORT SCRIPTS
-import { renderer, camera, clock, orbitControls, flyControls, resizeRendererToDisplaySize, updateFlightSpeedByDistance, getFollowMode, setFollowMode } from './core/camera.js'
+import {
+    renderer,
+    camera,
+    clock,
+    orbitControls,
+    flyControls,
+    resizeRendererToDisplaySize,
+    updateFlightSpeedByDistance,
+    beginSmoothOrbitTransition,
+    cancelSmoothOrbitTransition,
+    getFollowMode,
+    setFollowMode,
+    updateFlightStabilizer,
+    updateSmoothOrbitTransition,
+} from './core/camera.js'
 import { setupLighting } from './core/lighting.js'
 import {
     createImages,
@@ -45,6 +59,7 @@ import { updateGutta, guttCrumbMesh, maraCrumbMesh, cycleStatsChartView, toggleP
 import { setupIntro, introState, fadeOutAudio, animateLetterSpacing } from './core/intro.js'
 import { DeveloperHud } from './core/developerHud.js'
 import { DeveloperSlideLab } from './core/developerSlideLab.js'
+import { saveMindmapDataFile, serializeMindmapDataFile } from './core/mindmapDataFile.js'
 import { hasOpenableSlides } from './core/slideAccess.js'
 import { PlanetEnvironment } from './core/planetEnvironment.js'
 import { SettlementMapLayer } from './settlementMap.js'
@@ -112,6 +127,11 @@ function updateConnectionHandleVisibility() {
 function updateDeveloperHud() {
     developerHud.update({ developer, contexts, selectedContext });
     updateConnectionHandleVisibility();
+}
+
+function setDeveloperStatus(status) {
+    developerHud.setStatus(status);
+    updateDeveloperHud();
 }
 
 function createContexts(version) {
@@ -759,16 +779,33 @@ function redrawDeveloperConnections(contextIndex) {
     updateDeveloperHud();
 }
 
-function serializeConnectionEntry(entry) {
-    if (typeof entry === 'string') return JSON.stringify(entry);
-    return JSON.stringify(entry);
+function printSelectedMindmapDataFile() {
+    console.log(serializeMindmapDataFile(contexts[selectedContext]));
 }
 
-function serializeConnectionRows(rows) {
-    if (!Array.isArray(rows)) return '';
-    return rows
-        .map((row) => `[${row.map(serializeConnectionEntry).join(', ')}],`)
-        .join('\n');
+async function saveActiveMindmapDataFile() {
+    if (!developer) return;
+
+    if (selectedContext !== 0) {
+        const message = 'Save works for the planet context only.';
+        setDeveloperStatus(message);
+        console.warn(message);
+        return;
+    }
+
+    const context = contexts[0];
+    setDeveloperStatus(`Saving ${context?.name || 'mindmap'} data...`);
+
+    try {
+        const result = await saveMindmapDataFile(context);
+        const message = `Saved ${result.file}`;
+        setDeveloperStatus(message);
+        console.log(`Mindmap data saved to ${result.file}`);
+    } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        setDeveloperStatus(`Save failed: ${message}`);
+        console.error('Mindmap data save failed:', error);
+    }
 }
 
 
@@ -840,20 +877,16 @@ function onDocumentKeyUp(event) {
     if (focusElement !== "tagInput") {
         if (!hasModifier && keyCode == 79) { //O
             if (window.appStatus === "orbit") {
+                cancelSmoothOrbitTransition();
                 window.appStatus = "flight";
                 orbitControls.enabled = false;
                 flyControls.enabled = true;
                 document.body.style.cursor = 'crosshair';
             } else {
                 window.appStatus = "orbit";
-                orbitControls.enabled = true;
                 flyControls.enabled = false;
                 document.body.style.cursor = 'default';
-                // **Reset the camera's up vector to default**
-                camera.up.set(0, 1, 0);
-
-                // **Ensure OrbitControls are updated with the new up vector**
-                orbitControls.update();
+                beginSmoothOrbitTransition(middleOfPlanet, { targetRadius: contexts[0]?.radius });
             }
         }
         if (event.shiftKey) {
@@ -887,6 +920,10 @@ function onDocumentKeyUp(event) {
             }
             if (developer && code === "KeyL") { // Shift+L
                 developerSlideLab.toggle();
+                return;
+            }
+            if (developer && code === "KeyQ") { // Shift+Q
+                saveActiveMindmapDataFile();
                 return;
             }
             if (window.appStatus === "orbit") {
@@ -1057,30 +1094,7 @@ function onDocumentKeyUp(event) {
             }
         }
         if (keyCode == 81 && developer == true) { //Q - print tagdata and connectiondata
-            let output = "export const planetTagData = [\n"
-            const tagSource = contexts[selectedContext].tagData
-            for (let i = 0; i < tagSource.length; i++) {
-                const developerOnlySlides = tagSource[i].developerOnlySlides ? ", developerOnlySlides: true" : "";
-                output = output + "    {id: \"" + tagSource[i].id + "\", text: " + JSON.stringify(tagSource[i].text) + ", lat: " + tagSource[i].lat + ", lng: " + tagSource[i].lng + ", color: " + tagSource[i].color + ", size: " + tagSource[i].size + ", slides: " + tagSource[i].slides + developerOnlySlides + "},\n"
-            }
-            output = output + "\n]\n\n// ā ī ū ṅ ñ ṇ ṭ ṭh ḍ ḍh ṇ ḷ ṃ ṁ ŋ \n\n //azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBNéÉàÀèÈùÙëËüÜïÏâêîôûÂÊÎÔÛíÍáÁóÓúÚñÑłŁçÇýÝčČšŠæÆœŒāīūṅṇṭḍḷṃṁ/\*-+7894561230,;:!?¡¿.%$£€={}()[]&~'\`#_°@АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯяüÜöÖäÄñÑςερτυθιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜåÅæÆøØ \n\nexport const planetConnections = [\n"
-
-            const connectionSource = contexts[selectedContext].connectionData
-            output = output + serializeConnectionRows(connectionSource)
-            output = output + "\n]\n\nexport const planetArrowedConnections = [\n"
-
-            const arrowConnectionSource = contexts[selectedContext].arrowConnectionData
-            output = output + serializeConnectionRows(arrowConnectionSource)
-            output = output + "\n]\n\nexport const planetDashedConnections = [\n"
-
-            const dashedConnectionSource = contexts[selectedContext].dashedConnectionData
-            output = output + serializeConnectionRows(dashedConnectionSource)
-            output = output + "\n]\n\nexport const planetTunnelConnections = [\n"
-
-            const tunnelConnectionSource = contexts[selectedContext].tunnelConnectionData
-            output = output + serializeConnectionRows(tunnelConnectionSource)
-            output = output + "\n]"
-            console.log(output)
+            printSelectedMindmapDataFile()
         }
         if (keyCode == 84 && developer == true) { //T - create new node
             const tagInput = document.getElementById("tagInput");
@@ -1866,8 +1880,9 @@ function render() {
     }
 
     const delta = clock.getDelta();
+    const cameraTransitionActive = updateSmoothOrbitTransition(delta);
 
-    if (flyControls.enabled) {  
+    if (!cameraTransitionActive && flyControls.enabled) {
         flyControls.update(delta);
 
         const distance = camera.position.distanceTo(middleOfPlanet);
@@ -1877,9 +1892,10 @@ function render() {
         }
 
         updateFlightSpeedByDistance(distance);
+        updateFlightStabilizer(delta);
     }
 
-    if (window.appStatus === "flight") {
+    if (!cameraTransitionActive && window.appStatus === "flight") {
         const currentFollowMode = getFollowMode();
         if (currentFollowMode === "gutt") {
           const exampleGutt = getExampleAgent(guttaState.gutta, 'exampleGuttId', 'exampleGuttIndex');
@@ -1899,7 +1915,7 @@ function render() {
         }
       }
 
-    if (window.appStatus === "orbit") {
+    if (!cameraTransitionActive && window.appStatus === "orbit") {
         const currentFollowMode = getFollowMode();
         if (currentFollowMode === "gutt") {
             followOrbitAgent(getExampleAgent(guttaState.gutta, 'exampleGuttId', 'exampleGuttIndex'));
@@ -1908,7 +1924,7 @@ function render() {
         }
     }
 
-    if (orbitControls.enabled) {
+    if (!cameraTransitionActive && orbitControls.enabled) {
         orbitControls.update();
     }
 

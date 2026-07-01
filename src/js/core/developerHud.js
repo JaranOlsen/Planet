@@ -1,6 +1,7 @@
 export class DeveloperHud {
   constructor() {
     this.element = null;
+    this.status = '';
   }
 
   ensureElement() {
@@ -41,8 +42,13 @@ export class DeveloperHud {
     const total = Array.isArray(contexts) ? contexts.length : 0;
     const count = Array.isArray(ctx?.tagData) ? ctx.tagData.length : 0;
 
-    this.element.textContent = `Developer Mode · ${name} (Context ${Number(selectedContext) + 1}/${total}) · Nodes: ${count}`;
+    const status = this.status ? ` · ${this.status}` : '';
+    this.element.textContent = `Developer Mode · ${name} (Context ${Number(selectedContext) + 1}/${total}) · Nodes: ${count}${status}`;
     this.element.style.display = 'block';
+  }
+
+  setStatus(status) {
+    this.status = status || '';
   }
 
   hide() {
