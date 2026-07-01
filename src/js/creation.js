@@ -12,21 +12,26 @@ import tagFontUrl from '/assets/fonts/SourceSans3_Regular.json?url';
 
 //  IMPORT TEXTURES
     // ||Diffuse
+import diffuseTexture16k from "/assets/textures/diffuse16k.jpg"
 import diffuseTexture4k from "/assets/textures/diffuse4k.webp"
 import diffuseTexture2k from "/assets/textures/diffuse2k.webp"
 import diffuseTexture1k from "/assets/textures/diffuse1k.webp"
 
     // ||Normals - White = high altitude - see https://youtu.be/YJqWHsllczY?t=43 on how to best generate
+import normalTexture16k from "/assets/textures/normal16k.jpg"
 import normalTexture4k from "/assets/textures/normal4k.webp"
 import normalTexture2k from "/assets/textures/normal2k.webp"
 import normalTexture1k from "/assets/textures/normal1k.webp"
 
     // ||Roughness - Green (white) = high roughness (green channel - see documentation). 
+import roughnessTexture16k from "/assets/textures/roughness16k.jpg"
 import roughnessTexture4k from "/assets/textures/roughness4k.webp"
 import roughnessTexture2k from "/assets/textures/roughness2k.webp"
 import roughnessTexture1k from "/assets/textures/roughness1k.webp"
 
     // ||Clouds
+import cloudsTexture8k from "/assets/textures/clouds8k.webp"
+import cloudsNormal8k from "/assets/textures/clouds8kNormal.webp"
 import cloudsTexture4k from "/assets/textures/clouds4k.webp"
 import cloudsNormal4k from "/assets/textures/clouds4kNormal.webp"
 import cloudsTexture1k from "/assets/textures/clouds1k.webp"
@@ -38,7 +43,7 @@ export function creation(version, postLoadingManager, guttaState, scene) {
     createTitle(scene)
     if (version == 1){ //FULL VERSION
         initialiseLoadingManager(postLoadingManager)
-        const jaranius = createJaranius(diffuseTexture4k, normalTexture4k, roughnessTexture4k, cloudsTexture4k, cloudsNormal4k, version)
+        const jaranius = createJaranius(diffuseTexture16k, normalTexture16k, roughnessTexture16k, cloudsTexture8k, cloudsNormal8k, version)
         createContexts(version)
         createMindmap()
         createGutta(4000, 200, version, guttaState, jaranius)

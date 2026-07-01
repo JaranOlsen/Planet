@@ -7,11 +7,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/validate-critical-assets.mjs && vite build",
+    "validate": "npm run validate:assets && npm run validate:slides",
+    "validate:assets": "node scripts/validate-critical-assets.mjs",
     "validate:slides": "node scripts/validate-slides.mjs",
     "check:slides:fit": "node scripts/check-slide-fit.mjs",
     "preview": "vite preview",
-    "deploy": "vite build && node scripts/prune-pages-dist.mjs && gh-pages -d dist"
+    "deploy": "npm run build && node scripts/prune-pages-dist.mjs && gh-pages -d dist"
   },
   "devDependencies": {
     "@types/dat.gui": "^0.7.13",
