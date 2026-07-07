@@ -1,6 +1,11 @@
 import * as THREE from 'three';
 import { DoubleSide } from 'three';
 import { palette } from './palette.js';
+import {
+    getPlanetGraphicsProfileSettings,
+    onGraphicsProfileChange,
+    planetGraphicsSettings,
+} from '../core/planetGraphicsSettings.js';
 
 // Import textures
 import nugget_diffuse from "/assets/textures/nugget_diffuse.jpg";
@@ -28,6 +33,7 @@ export const connectionMaterial = new THREE.MeshStandardMaterial({
     emissive: 0xffffff,
     emissiveIntensity: 0.1,
 });
+connectionMaterial.userData.contentEmissiveRole = 'connection';
 
 // Prepare the materials for the boxes and pins
 export const boxMaterials = [];
@@ -89,3 +95,80 @@ boxMaterials[5].opacity = 0.7;
 boxMaterials[6].opacity = 0.5;
 boxMaterials[7].opacity = 0.5;
 boxMaterials[8].opacity = 0.5;
+
+export function applyContentMaterialProfile() {
+    const { emissive } = getPlanetGraphicsProfileSettings().content;
+
+    connectionMaterial.emissiveIntensity = emissive.connection;
+
+    boxMaterials.forEach((material) => {
+        material.emissiveIntensity = emissive.box;
+    });
+    pinMaterials.forEach((material) => {
+        material.emissiveIntensity = emissive.pin;
+    });
+    pinWireframeMaterials.forEach((material) => {
+        material.emissiveIntensity = emissive.pin;
+    });
+
+    boxMaterials[0].emissiveIntensity = emissive.boxPrimary;
+    boxMaterials[1].emissiveIntensity = emissive.boxSecondary;
+    pinMaterials[0].emissiveIntensity = emissive.pinPrimary;
+    pinWireframeMaterials[0].emissiveIntensity = emissive.pinPrimary;
+}
+
+function getContentFadeDistances(visibilitySize = planetGraphicsSettings.content.defaultVisibilitySize) {
+    const {
+        defaultVisibilitySize,
+        fadeTransitionDistance,
+        largestOuterFadeDistance,
+        smallestInnerFadeDistance,
+    } = planetGraphicsSettings.content;
+    const sizeFactor = THREE.MathUtils.clamp(
+        Number.isFinite(visibilitySize) ? visibilitySize : defaultVisibilitySize,
+        0,
+        1,
+    );
+    const transitionDistance = Math.max(fadeTransitionDistance, 0.1);
+    const smallestOuterFadeDistance = smallestInnerFadeDistance + transitionDistance;
+    const outerFadeDistance = THREE.MathUtils.lerp(
+        smallestOuterFadeDistance,
+        largestOuterFadeDistance,
+        sizeFactor,
+    );
+    return {
+        innerFadeDistance: outerFadeDistance - transitionDistance,
+        outerFadeDistance,
+    };
+}
+
+export function getContentOpacityFactor(distanceToPlanetCenter, visibilitySize) {
+    if (!getPlanetGraphicsProfileSettings().content.presenceEnabled) return 1;
+
+    const { minOpacity } = planetGraphicsSettings.content;
+    const { innerFadeDistance, outerFadeDistance } = getContentFadeDistances(visibilitySize);
+    const t = THREE.MathUtils.clamp(
+        (outerFadeDistance - distanceToPlanetCenter) / (outerFadeDistance - innerFadeDistance),
+        0,
+        1,
+    );
+    const fade = t * t * (3 - 2 * t);
+    return THREE.MathUtils.lerp(minOpacity, 1, fade);
+}
+
+export function getContentScaleFactor(distanceToPlanetCenter, visibilitySize) {
+    if (!getPlanetGraphicsProfileSettings().content.presenceEnabled) return 1;
+
+    const { minScale } = planetGraphicsSettings.content;
+    const { innerFadeDistance, outerFadeDistance } = getContentFadeDistances(visibilitySize);
+    const t = THREE.MathUtils.clamp(
+        (outerFadeDistance - distanceToPlanetCenter) / (outerFadeDistance - innerFadeDistance),
+        0,
+        1,
+    );
+    const fade = t * t * (3 - 2 * t);
+    return THREE.MathUtils.lerp(minScale, 1, fade);
+}
+
+applyContentMaterialProfile();
+onGraphicsProfileChange(applyContentMaterialProfile);

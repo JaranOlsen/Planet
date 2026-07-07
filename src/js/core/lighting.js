@@ -1,4 +1,9 @@
 import * as THREE from 'three';
+import {
+  CONTENT_LIGHT_LAYER,
+  getPlanetGraphicsProfileSettings,
+  onGraphicsProfileChange,
+} from './planetGraphicsSettings.js';
 
 export function setupLighting(scene) {
   const ambient = new THREE.AmbientLight(0xffffff, 0.01);
@@ -9,6 +14,17 @@ export function setupLighting(scene) {
   spotlight.angle = Math.PI / 4;
   spotlight.decay = 0.5;
   scene.add(spotlight);
+
+  function applyLightingProfile() {
+    if (getPlanetGraphicsProfileSettings().content.lightLayerOnly) {
+      spotlight.layers.set(CONTENT_LIGHT_LAYER);
+    } else {
+      spotlight.layers.set(0);
+    }
+  }
+
+  applyLightingProfile();
+  onGraphicsProfileChange(applyLightingProfile);
 
   const targetIntensities = {
     spotlight: spotlight.intensity,

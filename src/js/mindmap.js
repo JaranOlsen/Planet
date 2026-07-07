@@ -10,6 +10,7 @@ import { convertLatLngtoCartesian } from './mathScripts.js'
 //  IMPORT DATA
 import { contexts, isDeveloperMode } from './core/datasets.js'
 import { hasOpenableSlides } from './core/slideAccess.js'
+import { enableContentLightLayer, getPlanetGraphicsProfileSettings } from './core/planetGraphicsSettings.js';
 
 //  IMPORT TEXTURES
 import dash from '/assets/textures/dash.webp'
@@ -78,6 +79,21 @@ const connectionHandleGuideMaterials = [
     depthTest: false,
   }),
 ];
+
+function getConnectionEmissiveIntensity() {
+  return getPlanetGraphicsProfileSettings().content.emissive.connection;
+}
+
+function markConnectionMaterial(material) {
+  material.userData.contentEmissiveRole = 'connection';
+  return material;
+}
+
+function normalizeContentVisibilitySize(value, min, max) {
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return undefined;
+  return THREE.MathUtils.clamp((numericValue - min) / (max - min), 0, 1);
+}
 
 let cachedTagFont = null;
 let tagFontPromise = null;
@@ -167,6 +183,7 @@ function spawnNuggetRock({ lat, lng, nuggetRadius, destination }) {
   rockGroup.position.set(pos.x, pos.y, pos.z);
   const normal = new THREE.Vector3(pos.x, pos.y, pos.z).normalize();
   rockGroup.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), normal);
+  enableContentLightLayer(rockGroup);
 
   destination.add(rockGroup);
 }
@@ -392,6 +409,14 @@ function instantiateTag(font, item, radius, context, globalIndex, destination) {
 
   tagGroup.add(tag);
   boxGroup.add(box);
+  const tagVisibilitySize = normalizeContentVisibilitySize(item.size, 10, 110);
+  tagGroup.userData.contentDistanceScale = true;
+  tagGroup.userData.contentVisibilitySize = tagVisibilitySize;
+  boxGroup.userData.contentDistanceScale = true;
+  boxGroup.userData.contentVisibilitySize = tagVisibilitySize;
+
+  enableContentLightLayer(tagGroup);
+  enableContentLightLayer(boxGroup);
 
   tag.userData.group = tagGroup;
   box.userData.group = boxGroup;
@@ -417,6 +442,8 @@ function instantiatePin(item, radius, context, globalIndex, destination) {
   const pin = new THREE.Mesh(new THREE.SphereGeometry(size / 1333, segments, segments), material);
   pin.userData = pin.userData || {};
   pin.userData.baseScale = pin.scale.x;
+  pin.userData.contentDistanceScale = true;
+  pin.userData.contentVisibilitySize = normalizeContentVisibilitySize(size, 10, 110);
   pin.source = dataSourceRef;
   pin.context = context;
   pin.index = globalIndex;
@@ -433,6 +460,7 @@ function instantiatePin(item, radius, context, globalIndex, destination) {
 
   pin.position.set(pos.x, pos.y, pos.z);
   pin.castShadow = true;
+  enableContentLightLayer(pin);
 
   destination.add(pin);
   intersectObjectsArray.push(pin);
@@ -959,9 +987,10 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
                 transparent: true,
                 opacity: 0.6,
                 emissive: 0xffffff,
-                emissiveIntensity: 0.1,
+                emissiveIntensity: getConnectionEmissiveIntensity(),
                 alphaMap: dashTexture
             });
+            markConnectionMaterial(material);
         }
 
         if (arrowed) {
@@ -983,9 +1012,10 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
                 transparent: true,
                 opacity: 0.8,
                 emissive: 0xffffff,
-                emissiveIntensity: 0.1,
+                emissiveIntensity: getConnectionEmissiveIntensity(),
                 alphaMap: curveTexture,
             });
+            markConnectionMaterial(material);
             
             segmentModifier = 5
         }
@@ -1006,6 +1036,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         const geometry = createConnectionTubeGeometry(edgeRef);
         const curve = new THREE.Mesh(geometry, material);
         edgeRef.mesh = curve;
+        enableContentLightLayer(curve);
         if (arrowed) {
             // Save the mesh and its texture in the global curveMeshes array
             window.curveMeshes.push({
@@ -1044,6 +1075,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
 
         const curve = new THREE.Mesh(geometry, material);
         curve.renderOrder = 9;
+        enableContentLightLayer(curve);
         destination.add(curve);
     }
 }
@@ -1070,6 +1102,9 @@ export function instantiateNugget(index, lat, lng, color, size, slides, destinat
     nugget.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), normal);
     nugget.castShadow = true;
     nugget.receiveShadow = false;
+    nugget.userData.contentDistanceScale = true;
+    nugget.userData.contentVisibilitySize = normalizeContentVisibilitySize(size * 100000, 100, 300);
+    enableContentLightLayer(nugget);
 
     destination.add(nugget);
     intersectObjectsArray.push(nugget);
@@ -1077,7 +1112,7 @@ export function instantiateNugget(index, lat, lng, color, size, slides, destinat
     return {nugget, slides};
 }
 
-export function createImages(textureSrc, lat, lng, size, radius, destination) {
+export function createImages(textureSrc, lat, lng, size, radius, destination, authoredSize = size * 500) {
   const roundingFactor = 0.01;
 
   // 1) Make the square base shape
@@ -1130,6 +1165,9 @@ export function createImages(textureSrc, lat, lng, size, radius, destination) {
 
   const mesh = new THREE.Mesh(geo, mat);
   mesh.castShadow = true;
+  mesh.userData.contentDistanceScale = true;
+  mesh.userData.contentVisibilitySize = normalizeContentVisibilitySize(authoredSize, 35, 600);
+  enableContentLightLayer(mesh);
 
   // 4) Place on globe facing outward, and nudge off the surface slightly
   const p = convertLatLngtoCartesian(lat, lng, radius);
@@ -1149,8 +1187,11 @@ export function createImages(textureSrc, lat, lng, size, radius, destination) {
     // tex.generateMipmaps = false;
     // tex.minFilter = THREE.LinearFilter;
 
-    mat.map = tex;
-    mat.needsUpdate = true;
+    const activeMaterials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+    activeMaterials.forEach((activeMaterial) => {
+      activeMaterial.map = tex;
+      activeMaterial.needsUpdate = true;
+    });
 
     const img = tex.image;
     if (img && img.width && img.height) {

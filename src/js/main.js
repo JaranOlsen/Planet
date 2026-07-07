@@ -22,6 +22,7 @@ import {
     updateSmoothOrbitTransition,
 } from './core/camera.js'
 import { setupLighting } from './core/lighting.js'
+import { createPostProcessingPipeline } from './core/postProcessing.js'
 import {
     createImages,
     createTags,
@@ -63,6 +64,7 @@ import { saveMindmapDataFile, serializeMindmapDataFile } from './core/mindmapDat
 import { hasOpenableSlides } from './core/slideAccess.js'
 import { PlanetEnvironment } from './core/planetEnvironment.js'
 import { SettlementMapLayer } from './settlementMap.js'
+import { getPlanetGraphicsProfileSettings, planetGraphicsSettings } from './core/planetGraphicsSettings.js'
 
 if (import.meta.hot) {
     import.meta.hot.on('vite:beforeUpdate', () => {
@@ -73,7 +75,13 @@ if (import.meta.hot) {
 //IMPORT DATA
 // Default / initial mindmap dataset (index 0). Additional datasets loaded dynamically.
 import { palette } from './data/palette.js'
-import { pinMaterials, pinWireframeMaterials, boxMaterials } from './data/materials.js'
+import {
+    pinMaterials,
+    pinWireframeMaterials,
+    boxMaterials,
+    getContentOpacityFactor,
+    getContentScaleFactor,
+} from './data/materials.js'
 
 window.appStatus = "initialising";
 
@@ -493,6 +501,7 @@ buttons.forEach(button => {
   
 //CREATE LIGHTS
 const { ambient, spotlight, updateLightIntensity, queueSpotlightIntensity, queueAmbientIntensity } = setupLighting(scene);
+const postProcessing = createPostProcessingPipeline({ renderer, scene, camera });
 
 //CREATE CONTEXTS
 //CREATE GUTTA STATS
@@ -598,6 +607,204 @@ function setClassicMindmapVisualsVisible(visible) {
         });
         updateConnectionHandleVisibility();
     }
+}
+
+function forEachRenderableMaterial(material, callback) {
+    if (Array.isArray(material)) {
+        material.forEach((entry) => forEachRenderableMaterial(entry, callback));
+        return;
+    }
+
+    if (material) callback(material);
+}
+
+function scopeContentMaterialToObject(object) {
+    if (!object?.material) return;
+
+    const scopeMaterial = (material) => {
+        if (!material || material.userData.graphicsObjectScoped) return material;
+        const scoped = material.clone();
+        scoped.userData.graphicsObjectScoped = true;
+        return scoped;
+    };
+
+    object.material = Array.isArray(object.material)
+        ? object.material.map(scopeMaterial)
+        : scopeMaterial(object.material);
+}
+
+function getObjectContentVisibilitySize(object) {
+    let cursor = object;
+    while (cursor) {
+        const visibilitySize = cursor.userData?.contentVisibilitySize;
+        if (Number.isFinite(visibilitySize)) return visibilitySize;
+        cursor = cursor.parent;
+    }
+    return planetGraphicsSettings.content.defaultVisibilitySize;
+}
+
+function getPrimaryMaterial(object) {
+    if (!object?.material) return null;
+    if (Array.isArray(object.material)) {
+        return object.material.find(Boolean) || null;
+    }
+    return object.material;
+}
+
+function ensureShadowOpacityMaterial(object) {
+    if (!object?.isMesh || !object.userData.graphicsBaseCastShadow) return null;
+
+    if (!object.customDepthMaterial?.userData?.contentShadowOpacityMaterial) {
+        const shadowMaterial = new THREE.MeshDepthMaterial({
+            depthPacking: THREE.RGBADepthPacking,
+        });
+        shadowMaterial.alphaHash = true;
+        shadowMaterial.userData.contentShadowOpacityMaterial = true;
+        shadowMaterial.onBeforeCompile = (shader) => {
+            shader.uniforms.uContentShadowOpacity = {
+                value: shadowMaterial.userData.pendingShadowOpacity ?? 1,
+            };
+            shader.fragmentShader = shader.fragmentShader
+                .replace(
+                    '#include <common>',
+                    `#include <common>
+uniform float uContentShadowOpacity;`,
+                )
+                .replace(
+                '#include <alphahash_fragment>',
+                `diffuseColor.a *= uContentShadowOpacity;
+#include <alphahash_fragment>`,
+                );
+            shadowMaterial.userData.shadowOpacityUniform = shader.uniforms.uContentShadowOpacity;
+        };
+        object.customDepthMaterial = shadowMaterial;
+    }
+
+    return object.customDepthMaterial;
+}
+
+function syncShadowOpacityMaterial(object, shadowMaterial) {
+    const sourceMaterial = getPrimaryMaterial(object);
+    if (!sourceMaterial || !shadowMaterial) return;
+
+    let needsUpdate = false;
+    if (shadowMaterial.map !== sourceMaterial.map) {
+        shadowMaterial.map = sourceMaterial.map || null;
+        needsUpdate = true;
+    }
+    if (shadowMaterial.alphaMap !== sourceMaterial.alphaMap) {
+        shadowMaterial.alphaMap = sourceMaterial.alphaMap || null;
+        needsUpdate = true;
+    }
+    if (shadowMaterial.alphaTest !== sourceMaterial.alphaTest) {
+        shadowMaterial.alphaTest = sourceMaterial.alphaTest || 0;
+        needsUpdate = true;
+    }
+    if (needsUpdate) {
+        shadowMaterial.needsUpdate = true;
+    }
+}
+
+function applyContentShadowOpacity(object, opacityFactor) {
+    if (!object || object.castShadow === undefined) return;
+
+    if (object.userData.graphicsBaseCastShadow === undefined) {
+        object.userData.graphicsBaseCastShadow = object.castShadow;
+    }
+
+    if (!object.userData.graphicsBaseCastShadow) return;
+
+    const shadowMaterial = ensureShadowOpacityMaterial(object);
+    syncShadowOpacityMaterial(object, shadowMaterial);
+    const shadowOpacity = THREE.MathUtils.clamp(opacityFactor, 0, 1);
+    const cutoff = planetGraphicsSettings.content.shadowOpacityCutoff;
+
+    object.castShadow = shadowOpacity > cutoff;
+
+    const opacityUniform = shadowMaterial?.userData?.shadowOpacityUniform;
+    if (opacityUniform) {
+        opacityUniform.value = shadowOpacity;
+    } else if (shadowMaterial) {
+        shadowMaterial.userData.pendingShadowOpacity = shadowOpacity;
+    }
+}
+
+function applyContentPresenceToMaterial(material, opacityFactor) {
+    const emissiveRole = material.userData?.contentEmissiveRole;
+    if (emissiveRole && material.emissiveIntensity !== undefined) {
+        const profileValue = getPlanetGraphicsProfileSettings().content.emissive[emissiveRole];
+        if (profileValue !== undefined && Math.abs(material.emissiveIntensity - profileValue) > 0.001) {
+            material.emissiveIntensity = profileValue;
+        }
+    }
+
+    if (material.opacity === undefined) return;
+
+    if (material.userData.graphicsBaseOpacity === undefined) {
+        material.userData.graphicsBaseOpacity = material.opacity;
+        material.userData.graphicsBaseTransparent = material.transparent;
+        material.userData.graphicsBaseDepthWrite = material.depthWrite;
+    }
+
+    const baseOpacity = material.userData.graphicsBaseOpacity;
+    const nextOpacity = baseOpacity * opacityFactor;
+    const nextTransparent = material.userData.graphicsBaseTransparent || nextOpacity < 0.995;
+    const nextDepthWrite = Boolean(material.userData.graphicsBaseDepthWrite) && nextOpacity >= 0.995;
+
+    if (Math.abs(material.opacity - nextOpacity) > 0.001) {
+        material.opacity = nextOpacity;
+    }
+
+    if (material.transparent !== nextTransparent) {
+        material.transparent = nextTransparent;
+        material.needsUpdate = true;
+    }
+
+    if (material.depthWrite !== nextDepthWrite) {
+        material.depthWrite = nextDepthWrite;
+    }
+}
+
+function applyContentPresenceToObject(object, contentPresenceContext) {
+    if (!object) return;
+
+    object.traverse((child) => {
+        const visibilitySize = getObjectContentVisibilitySize(child);
+        const childOpacityFactor = getContentOpacityFactor(contentPresenceContext.distanceToPlanetCenter, visibilitySize);
+        const childScaleFactor = getContentScaleFactor(contentPresenceContext.distanceToPlanetCenter, visibilitySize);
+
+        if (child.userData?.contentDistanceScale) {
+            if (!child.userData.graphicsBaseScale) {
+                child.userData.graphicsBaseScale = child.scale.clone();
+            }
+            child.scale.copy(child.userData.graphicsBaseScale).multiplyScalar(childScaleFactor);
+        }
+
+        if (child.material) {
+            scopeContentMaterialToObject(child);
+            forEachRenderableMaterial(child.material, (material) => {
+                applyContentPresenceToMaterial(material, childOpacityFactor);
+            });
+        }
+
+        applyContentShadowOpacity(child, childOpacityFactor);
+    });
+}
+
+function updatePlanetContentPresence() {
+    if (!planetEnvironment.isJaraniusInitialized()) return;
+
+    const distanceToPlanetCenter = camera.position.distanceTo(middleOfPlanet);
+    const contentPresenceContext = { distanceToPlanetCenter };
+
+    [
+        planetContent,
+        jaraniusConnections,
+        spiral,
+        spiralDynamicsConnections,
+        enneagram,
+        enneagramConnectionsObj,
+    ].forEach((root) => applyContentPresenceToObject(root, contentPresenceContext));
 }
 
 function applySettlementLabelStyle(active) {
@@ -1859,6 +2066,7 @@ function render() {
         scanPins();
         settlementMapLayer?.update();
         updateLightIntensity(clock);
+        updatePlanetContentPresence();
     }
 
     if (introState.tuneLength) {
@@ -1932,9 +2140,10 @@ function render() {
         const canvas = renderer.domElement;
         camera.aspect = canvas.clientWidth / canvas.clientHeight;
         camera.updateProjectionMatrix();
+        postProcessing.resize(canvas.clientWidth, canvas.clientHeight);
     }
 
-    renderer.render(scene, camera);
+    postProcessing.render();
 }
 
 animate()

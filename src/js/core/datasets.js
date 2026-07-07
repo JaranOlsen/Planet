@@ -212,11 +212,11 @@ export function createMindmap() {
 
   for (let i = 0; i < activePlanetImages.length; i++) {
     const img = activePlanetImages[i];
-    createImages(img.src, img.lat, img.lng, img.size / 500, img.radius, planetContent);
+    createImages(img.src, img.lat, img.lng, img.size / 500, img.radius, planetContent, img.size);
   }
 
   for (let i = 0; i < spiralImageData.length; i++) {
-    createImages(spiralImageData[i].src, spiralImageData[i].lat, spiralImageData[i].lng, spiralImageData[i].size / 500, spiralImageData[i].radius, spiral);
+    createImages(spiralImageData[i].src, spiralImageData[i].lat, spiralImageData[i].lng, spiralImageData[i].size / 500, spiralImageData[i].radius, spiral, spiralImageData[i].size);
   }
 
   const indexMod = 0;

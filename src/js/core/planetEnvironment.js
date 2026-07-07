@@ -29,12 +29,36 @@ import dash from '/assets/textures/dash.webp';
 import tier from '/assets/textures/tier.webp';
 import sunflare from '/assets/textures/sunflare.webp';
 import lensflareTexture from '/assets/textures/lensflare.webp';
+import cloudsWispy8kTexture from '/assets/textures/cloudsWispy8k.webp';
+import cloudsWispy4kTexture from '/assets/textures/cloudsWispy4k.webp';
+import cloudsWispy1kTexture from '/assets/textures/cloudsWispy1k.webp';
 
 import signModel from '../../models/sign.glb';
 
 import { palette } from '../data/palette.js';
 import { createRoute } from '../mindmap.js';
 import { createFieldLines } from '../flux.js';
+import {
+    enableContentLightLayer,
+    getPlanetGraphicsProfileSettings,
+    onGraphicsProfileChange,
+    planetGraphicsSettings,
+} from './planetGraphicsSettings.js';
+import {
+    configureTextureQuality,
+    createCloudMaterial,
+    createPlanetSurfaceMaterial,
+    selectSupportedTexture,
+    updateCloudMaterial,
+    updatePlanetSurfaceMaterial,
+} from './planetMaterials.js';
+
+function selectWispyCloudTexture(cloudsTexture) {
+    const raw = String(cloudsTexture);
+    if (raw.includes('clouds1k')) return cloudsWispy1kTexture;
+    if (raw.includes('clouds4k')) return cloudsWispy4kTexture;
+    return cloudsWispy8kTexture;
+}
 
 class Moon {
     constructor(radius, texture, z, pivot, intensity) {
@@ -104,6 +128,7 @@ export class PlanetEnvironment {
 
         this.jaranius = null;
         this.clouds = null;
+        this.cloudsWispy = null;
         this.atmosphere = null;
         this.atmosphericLight = null;
         this.sign = null;
@@ -116,14 +141,17 @@ export class PlanetEnvironment {
         this.setupGalaxy();
         this.setupStars();
         this.setupSunAndMoons();
+        onGraphicsProfileChange(() => this.applyGraphicsProfile());
     }
 
     setupGalaxy() {
         const radius = 1000;
         const segments = 50;
         const geometry = new THREE.SphereGeometry(radius, segments, segments);
-        const galaxyDiffuseTexture = this.textureLoader.load(milkyway);
-        galaxyDiffuseTexture.colorSpace = THREE.SRGBColorSpace;
+        const galaxyDiffuseTexture = configureTextureQuality(this.renderer, this.textureLoader.load(milkyway), {
+            colorSpace: THREE.SRGBColorSpace,
+            anisotropy: 4,
+        });
         const material = new THREE.MeshBasicMaterial({
             map: galaxyDiffuseTexture,
             transparent: false,
@@ -168,12 +196,14 @@ export class PlanetEnvironment {
     createStarMaterial(texturePath) {
         const material = new THREE.PointsMaterial({
             size: 5,
-            map: this.textureLoader.load(texturePath),
+            map: configureTextureQuality(this.renderer, this.textureLoader.load(texturePath), {
+                colorSpace: THREE.SRGBColorSpace,
+                anisotropy: 2,
+            }),
             transparent: true,
             fog: false,
             depthWrite: false,
         });
-        material.colorSpace = THREE.SRGBColorSpace;
         return material;
     }
 
@@ -193,8 +223,10 @@ export class PlanetEnvironment {
         const sunRadius = 5;
         const sunRadianceGeo = new THREE.SphereGeometry(sunRadius, 25, 25);
 
-        const sunDiffuseTexture = this.textureLoader.load(sunTexture);
-        sunDiffuseTexture.colorSpace = THREE.SRGBColorSpace;
+        const sunDiffuseTexture = configureTextureQuality(this.renderer, this.textureLoader.load(sunTexture), {
+            colorSpace: THREE.SRGBColorSpace,
+            anisotropy: 4,
+        });
         const sunMat = new THREE.MeshBasicMaterial({ map: sunDiffuseTexture });
 
         this.sunRadiance = new THREE.Mesh(sunRadianceGeo, sunMat);
@@ -239,8 +271,10 @@ export class PlanetEnvironment {
         ];
 
         moons.forEach((moon) => {
-            const moonDiffuseTexture = this.textureLoader.load(moon.texture);
-            moonDiffuseTexture.colorSpace = THREE.SRGBColorSpace;
+            const moonDiffuseTexture = configureTextureQuality(this.renderer, this.textureLoader.load(moon.texture), {
+                colorSpace: THREE.SRGBColorSpace,
+                anisotropy: 4,
+            });
             const mesh = new THREE.Mesh(
                 new THREE.SphereGeometry(moon.radius, 25, 25),
                 new THREE.MeshStandardMaterial({
@@ -307,17 +341,26 @@ export class PlanetEnvironment {
         const jaraniusGeometry = new THREE.SphereGeometry(5, jaraniusSegments, jaraniusSegments);
         jaraniusGeometry.computeBoundingSphere();
 
-        const diffuse = this.textureLoader2.load(diffuseTexture);
-        diffuse.colorSpace = THREE.SRGBColorSpace;
+        const diffuse = configureTextureQuality(
+            this.renderer,
+            this.textureLoader2.load(selectSupportedTexture(this.renderer, diffuseTexture)),
+            { colorSpace: THREE.SRGBColorSpace },
+        );
+        const normal = configureTextureQuality(
+            this.renderer,
+            this.textureLoader2.load(selectSupportedTexture(this.renderer, normalTexture)),
+            { colorSpace: THREE.NoColorSpace },
+        );
+        const roughness = configureTextureQuality(
+            this.renderer,
+            this.textureLoader2.load(selectSupportedTexture(this.renderer, roughnessTexture)),
+            { colorSpace: THREE.NoColorSpace },
+        );
 
-        const jaraniusMaterial = new THREE.MeshStandardMaterial({
-            map: diffuse,
-            normalMap: this.textureLoader2.load(normalTexture),
-            roughnessMap: this.textureLoader2.load(roughnessTexture),
-            normalScale: new Vector2(5, 5),
-            metalness: 0,
-            flatShading: false,
-            side: FrontSide,
+        const jaraniusMaterial = createPlanetSurfaceMaterial({
+            diffuseMap: diffuse,
+            normalMap: normal,
+            roughnessMap: roughness,
         });
 
         this.jaranius = new THREE.Mesh(jaraniusGeometry, jaraniusMaterial);
@@ -326,25 +369,54 @@ export class PlanetEnvironment {
         this.jaranius.receiveShadow = true;
         this.jaranius.castShadow = true;
 
-        const cloudsDiffuseTexture = this.textureLoader2.load(cloudsTexture);
-        cloudsDiffuseTexture.colorSpace = THREE.SRGBColorSpace;
+        const cloudsDiffuseTexture = configureTextureQuality(
+            this.renderer,
+            this.textureLoader2.load(selectSupportedTexture(this.renderer, cloudsTexture)),
+            { colorSpace: THREE.SRGBColorSpace },
+        );
+        const cloudsNormalTexture = configureTextureQuality(
+            this.renderer,
+            this.textureLoader2.load(selectSupportedTexture(this.renderer, cloudsNormal)),
+            { colorSpace: THREE.NoColorSpace },
+        );
         const cloudsMaterial = new THREE.MeshLambertMaterial({
             map: cloudsDiffuseTexture,
-            normalMap: this.textureLoader2.load(cloudsNormal),
-            normalScale: new Vector2(0.5, 0.5),
+            normalMap: cloudsNormalTexture,
+            normalScale: new Vector2(planetGraphicsSettings.clouds.normalScale, planetGraphicsSettings.clouds.normalScale),
             transparent: true,
             side: DoubleSide,
-            opacity: 0.8,
+            opacity: planetGraphicsSettings.clouds.opacity,
             depthWrite: false,
         });
 
         this.clouds = new THREE.Mesh(
-            new THREE.SphereGeometry(5.04, jaraniusSegments, jaraniusSegments),
+            new THREE.SphereGeometry(planetGraphicsSettings.clouds.radius, jaraniusSegments, jaraniusSegments),
             cloudsMaterial,
         );
         this.clouds.receiveShadow = true;
         this.clouds.castShadow = false;
         this.jaranius.add(this.clouds);
+
+        const wispyCloudsDiffuseTexture = configureTextureQuality(
+            this.renderer,
+            this.textureLoader2.load(selectSupportedTexture(this.renderer, selectWispyCloudTexture(cloudsTexture))),
+            { colorSpace: THREE.SRGBColorSpace },
+        );
+        const activeProfileSettings = getPlanetGraphicsProfileSettings();
+        const wispyCloudsMaterial = createCloudMaterial({
+            map: wispyCloudsDiffuseTexture,
+            normalMap: cloudsNormalTexture,
+            opacity: activeProfileSettings.clouds.wispyOpacity,
+            wispy: true,
+        });
+        this.cloudsWispy = new THREE.Mesh(
+            new THREE.SphereGeometry(planetGraphicsSettings.clouds.wispyRadius, 100, 100),
+            wispyCloudsMaterial,
+        );
+        this.cloudsWispy.rotation.set(...planetGraphicsSettings.clouds.wispyInitialRotation);
+        this.cloudsWispy.receiveShadow = false;
+        this.cloudsWispy.castShadow = false;
+        this.jaranius.add(this.cloudsWispy);
 
         this.atmosphericLight = new THREE.Mesh(
             new THREE.SphereGeometry(5.01, jaraniusSegments, jaraniusSegments),
@@ -358,13 +430,14 @@ export class PlanetEnvironment {
                     uniformCameraPosition: { value: this.camera.position },
                     planetPosition: { value: new THREE.Vector3(0, 0, 0) },
                     lightPosition: { value: this.sunObjectWorldPosition },
-                    closeDistanceThreshold: { value: 7 },
-                    standardColor: { value: new THREE.Vector3(0.3, 0.6, 1.0) },
-                    sunsetColor: { value: new THREE.Vector3(1.0, 0.4, 0.1) },
-                    nightColor: { value: new THREE.Vector3(0.0, 0.0, 0.0) },
+                    closeDistanceThreshold: { value: planetGraphicsSettings.atmosphere.closeDistanceThreshold },
+                    standardColor: { value: new THREE.Vector3(...planetGraphicsSettings.atmosphere.standardColor) },
+                    sunsetColor: { value: new THREE.Vector3(...planetGraphicsSettings.atmosphere.sunsetColor) },
+                    nightColor: { value: new THREE.Vector3(...planetGraphicsSettings.atmosphere.nightColor) },
                     sunsetMinAngleThreshold: { value: 75 },
                     sunsetMaxAngleThreshold: { value: 102 },
                     nightMaxAngleThreshold: { value: 130 },
+                    sunsetStrength: { value: activeProfileSettings.atmosphere.sunsetStrength },
                 },
             }),
         );
@@ -372,7 +445,7 @@ export class PlanetEnvironment {
         this.jaranius.add(this.atmosphericLight);
 
         this.atmosphere = new THREE.Mesh(
-            new THREE.SphereGeometry(5.3, 100, 100),
+            new THREE.SphereGeometry(planetGraphicsSettings.atmosphere.radius, 100, 100),
             new THREE.ShaderMaterial({
                 vertexShader: atmosphereVertexShader,
                 fragmentShader: atmosphereFragmentShader,
@@ -384,13 +457,18 @@ export class PlanetEnvironment {
                     planetPosition: { value: new THREE.Vector3(0, 0, 0) },
                     minDistance: { value: 5.0 },
                     maxDistance: { value: 5000.0 },
-                    closeDistanceThreshold: { value: 7 },
-                    standardColor: { value: new THREE.Vector3(0.3, 0.6, 1.0) },
-                    sunsetColor: { value: new THREE.Vector3(1.0, 0.4, 0.1) },
-                    nightColor: { value: new THREE.Vector3(0.0, 0.0, 0.0) },
+                    closeDistanceThreshold: { value: planetGraphicsSettings.atmosphere.closeDistanceThreshold },
+                    standardColor: { value: new THREE.Vector3(...planetGraphicsSettings.atmosphere.standardColor) },
+                    sunsetColor: { value: new THREE.Vector3(...planetGraphicsSettings.atmosphere.sunsetColor) },
+                    nightColor: { value: new THREE.Vector3(...planetGraphicsSettings.atmosphere.nightColor) },
                     sunsetMinAngleThreshold: { value: 75 },
                     sunsetMaxAngleThreshold: { value: 102 },
                     nightMaxAngleThreshold: { value: 130 },
+                    sunsetStrength: { value: activeProfileSettings.atmosphere.sunsetStrength },
+                    envelopeStrength: { value: activeProfileSettings.atmosphere.envelopeStrength },
+                    envelopeDayStrength: { value: activeProfileSettings.atmosphere.envelopeDayStrength },
+                    envelopeNightStrength: { value: activeProfileSettings.atmosphere.envelopeNightStrength },
+                    outerAlphaPower: { value: activeProfileSettings.atmosphere.outerAlphaPower },
                 },
                 blending: THREE.AdditiveBlending,
                 side: THREE.BackSide,
@@ -399,7 +477,7 @@ export class PlanetEnvironment {
             }),
         );
         this.atmosphere.position.set(0, 0, 0);
-        this.atmosphere.scale.set(1.2, 1.2, 1.2);
+        this.atmosphere.scale.setScalar(activeProfileSettings.atmosphere.scale);
         this.jaranius.add(this.atmosphere);
 
         const jaraniusLight = new THREE.PointLight(0xffffff, 0);
@@ -409,6 +487,7 @@ export class PlanetEnvironment {
         this.sign = new THREE.Object3D();
         this.planetContent.add(this.sign);
         this.sign.position.set(0, -5.05, 0);
+        enableContentLightLayer(this.sign);
 
         const loader = new GLTFLoader(this.postLoadingManager);
         loader.load(
@@ -419,6 +498,7 @@ export class PlanetEnvironment {
                 model.scale.set(5, 5, 5);
                 model.rotation.y += Math.PI / 2;
                 model.rotation.x += Math.PI / 3;
+                enableContentLightLayer(model);
                 model.traverse((object) => {
                     if (object.isMesh) {
                         object.castShadow = true;
@@ -433,6 +513,7 @@ export class PlanetEnvironment {
 
         const route = new THREE.Object3D();
         this.planetContent.add(route);
+        enableContentLightLayer(route);
         const myRoute = [
             { lat: -90, lng: 0 },
             { lat: -64, lng: 120 },
@@ -450,8 +531,38 @@ export class PlanetEnvironment {
             { lat: 40, lng: 130 },
         ];
         createRoute(myRoute, 5.01, 0.3, route);
+        enableContentLightLayer(route);
+
+        this.applyGraphicsProfile();
 
         return this.jaranius;
+    }
+
+    applyGraphicsProfile() {
+        const profileSettings = getPlanetGraphicsProfileSettings();
+
+        if (this.cloudsWispy) {
+            this.cloudsWispy.visible = profileSettings.clouds.wispyEnabled;
+            this.cloudsWispy.material.opacity = profileSettings.clouds.wispyOpacity;
+        }
+
+        if (this.atmosphere) {
+            this.atmosphere.scale.setScalar(profileSettings.atmosphere.scale);
+        }
+
+        const atmosphereUniforms = this.atmosphere?.material?.uniforms;
+        if (atmosphereUniforms) {
+            atmosphereUniforms.sunsetStrength.value = profileSettings.atmosphere.sunsetStrength;
+            atmosphereUniforms.envelopeStrength.value = profileSettings.atmosphere.envelopeStrength;
+            atmosphereUniforms.envelopeDayStrength.value = profileSettings.atmosphere.envelopeDayStrength;
+            atmosphereUniforms.envelopeNightStrength.value = profileSettings.atmosphere.envelopeNightStrength;
+            atmosphereUniforms.outerAlphaPower.value = profileSettings.atmosphere.outerAlphaPower;
+        }
+
+        const atmosphericLightUniforms = this.atmosphericLight?.material?.uniforms;
+        if (atmosphericLightUniforms) {
+            atmosphericLightUniforms.sunsetStrength.value = profileSettings.atmosphere.sunsetStrength;
+        }
     }
 
     createSpiral() {
@@ -599,14 +710,32 @@ export class PlanetEnvironment {
             this.pivot2.rotation.y += -0.00003;
             this.pivot3.rotation.y += -0.000009;
             this.pivot4.rotation.y += -0.0001;
-            if (this.clouds) this.clouds.rotation.y += 0.00001;
+            if (this.clouds) this.clouds.rotation.y += planetGraphicsSettings.clouds.rotationSpeed;
+            if (this.cloudsWispy) this.cloudsWispy.rotation.y += planetGraphicsSettings.clouds.wispyRotationSpeed;
         }
 
         this.sunObjectWorldPosition = this.sunRadiance?.getWorldPosition(this.sunObjectWorldPosition) || this.sunObjectWorldPosition;
+        const distanceToCenter = this.camera.position.distanceTo(this.middleOfPlanet);
+
+        if (this.jaranius?.material) {
+            updatePlanetSurfaceMaterial(this.jaranius.material, distanceToCenter);
+        }
+
+        if (this.clouds?.material) {
+            updateCloudMaterial(this.clouds.material, this.sunObjectWorldPosition, this.middleOfPlanet);
+        }
+
+        if (this.cloudsWispy?.material) {
+            updateCloudMaterial(this.cloudsWispy.material, this.sunObjectWorldPosition, this.middleOfPlanet);
+        }
 
         if (this.atmosphere) {
             const distance = this.camera.position.distanceTo(this.middleOfPlanet) - 8;
-            const scaleFactor = Math.max(1.2, 1 + 0.75 * Math.exp(-0.1 * distance));
+            const activeAtmosphereSettings = getPlanetGraphicsProfileSettings().atmosphere;
+            const scaleFactor = Math.max(
+                activeAtmosphereSettings.scale,
+                1 + activeAtmosphereSettings.closeScaleBoost * Math.exp(-0.1 * distance),
+            );
             this.atmosphere.scale.set(scaleFactor, scaleFactor, scaleFactor);
             this.atmosphere.material.uniforms.lightPosition.value.copy(this.sunObjectWorldPosition);
         }
@@ -616,7 +745,6 @@ export class PlanetEnvironment {
         }
 
         if (orbitControls) {
-            const distanceToCenter = this.camera.position.distanceTo(this.middleOfPlanet);
             orbitControls.rotateSpeed = (distanceToCenter - 5) / distanceToCenter;
             orbitControls.zoomSpeed = (distanceToCenter - 5) / distanceToCenter / 3;
         }

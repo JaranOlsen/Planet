@@ -21,6 +21,11 @@ uniform float sunsetMinAngleThreshold;
 uniform float sunsetMaxAngleThreshold;
 uniform float nightMaxAngleThreshold;
 
+uniform float sunsetStrength;
+uniform float envelopeStrength;
+uniform float envelopeDayStrength;
+uniform float envelopeNightStrength;
+uniform float outerAlphaPower;
 
 void main() {
     float intensity = pow(baseIntensity - dot(vertexNormal, vec3(0.0, 0.0, 1.0)), intensityPower);
@@ -37,6 +42,7 @@ void main() {
     vec3 toCamera = normalize(uniformCameraPosition - planetPosition);
 
     float angle = degrees(acos(dot(toSun, toCamera)));
+    vec3 adjustedSunsetColor = mix(standardColor, sunsetColor, sunsetStrength);
 
     // standardColor from 0 - 90 degrees
     if (angle <= sunsetMinAngleThreshold) {
@@ -45,12 +51,12 @@ void main() {
     // sunsetColor fading in from 90 degrees, reaching its maximum at 130
     else if (angle > sunsetMinAngleThreshold && angle <= sunsetMaxAngleThreshold) {
         float sunsetFadeIn = smoothstep(sunsetMinAngleThreshold, sunsetMaxAngleThreshold, angle);
-        atmosphereColor = mix(standardColor, sunsetColor, sunsetFadeIn);
+        atmosphereColor = mix(standardColor, adjustedSunsetColor, sunsetFadeIn);
     }
     // sunsetColor fading out and nightColor fading in between 130 to 150 degrees
     else if (angle > sunsetMaxAngleThreshold && angle <= nightMaxAngleThreshold) {
         float nightFadeIn = smoothstep(sunsetMaxAngleThreshold, nightMaxAngleThreshold, angle);
-        atmosphereColor = mix(sunsetColor, nightColor, nightFadeIn);
+        atmosphereColor = mix(adjustedSunsetColor, nightColor, nightFadeIn);
     }
     // nightColor staying at its maximum all until 180 degrees
     else if (angle > nightMaxAngleThreshold) {
@@ -67,6 +73,15 @@ void main() {
         atmosphereColor = standardColor;
     }
 
+    vec3 planetNormal = normalize(vWorldPosition - planetPosition);
+    vec3 viewDirection = normalize(uniformCameraPosition - vWorldPosition);
+    float viewRim = pow(1.0 - clamp(dot(planetNormal, viewDirection), 0.0, 1.0), 2.0);
+    float daySide = smoothstep(-0.18, 0.42, dot(planetNormal, toSun));
+    float envelope = viewRim * mix(envelopeNightStrength, envelopeDayStrength, daySide);
+    float candidateAlpha = alpha * pow(clamp(viewRim, 0.0, 1.0), outerAlphaPower);
+    float finalAlpha = mix(alpha, candidateAlpha, envelopeStrength);
+    vec3 finalColor = atmosphereColor + standardColor * envelope * envelopeStrength;
+    float finalIntensity = mix(intensity, intensity * (0.72 + viewRim * 0.28) + envelope, envelopeStrength);
 
-    gl_FragColor = vec4(atmosphereColor, alpha) * intensity;
+    gl_FragColor = vec4(finalColor, finalAlpha) * finalIntensity;
 }

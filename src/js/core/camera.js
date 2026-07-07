@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { FlyControls } from 'three/addons/controls/FlyControls.js';
+import { CONTENT_LIGHT_LAYER, planetGraphicsSettings } from './planetGraphicsSettings.js';
 
 const canvas = document.querySelector('#canvas');
 
@@ -8,11 +9,16 @@ const renderer = new THREE.WebGLRenderer({
   canvas,
   antialias: true,
 });
-renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, planetGraphicsSettings.renderer.maxPixelRatio));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.logarithmicDepthBuffer = false; // turn on if z-fighting
 renderer.frustumCulled = true;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = planetGraphicsSettings.renderer.useAcesToneMapping
+  ? THREE.ACESFilmicToneMapping
+  : THREE.NoToneMapping;
+renderer.toneMappingExposure = planetGraphicsSettings.renderer.toneMappingExposure;
 
 const fov = 50;
 const aspect = 2; // the canvas default
@@ -20,6 +26,7 @@ const near = 0.1; // raise near plane for better depth precision and fewer dista
 const far = 2000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 camera.position.z = 500;
+camera.layers.enable(CONTENT_LIGHT_LAYER);
 
 const clock = new THREE.Clock();
 
@@ -338,12 +345,13 @@ document.addEventListener('keyup', (event) => {
 
 function resizeRendererToDisplaySize() {
   const { domElement } = renderer;
-  const width = domElement.clientWidth;
-  const height = domElement.clientHeight;
+  const pixelRatio = renderer.getPixelRatio();
+  const width = Math.floor(domElement.clientWidth * pixelRatio);
+  const height = Math.floor(domElement.clientHeight * pixelRatio);
   const needResize = domElement.width !== width || domElement.height !== height;
 
   if (needResize) {
-    renderer.setSize(width, height, false);
+    renderer.setSize(domElement.clientWidth, domElement.clientHeight, false);
   }
 
   return needResize;

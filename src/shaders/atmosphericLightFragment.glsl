@@ -18,6 +18,8 @@ uniform float sunsetMinAngleThreshold;
 uniform float sunsetMaxAngleThreshold;
 uniform float nightMaxAngleThreshold;
 
+uniform float sunsetStrength;
+
 void main() {
     float intensity = baseIntensity - dot(vertexNormal, vec3(0.0, 0.0, 1.0));
     vec3 atmosphereColor;
@@ -27,6 +29,7 @@ void main() {
     vec3 toCamera = normalize(uniformCameraPosition - planetPosition);
 
     float angle = degrees(acos(dot(toSun, toCamera)));
+    vec3 adjustedSunsetColor = mix(standardColor, sunsetColor, sunsetStrength);
 
     // standardColor from 0 - 90 degrees
     if (angle <= sunsetMinAngleThreshold) {
@@ -35,12 +38,12 @@ void main() {
     // sunsetColor fading in from 90 degrees, reaching its maximum at 130
     else if (angle > sunsetMinAngleThreshold && angle <= sunsetMaxAngleThreshold) {
         float sunsetFadeIn = smoothstep(sunsetMinAngleThreshold, sunsetMaxAngleThreshold, angle);
-        atmosphereColor = mix(standardColor, sunsetColor, sunsetFadeIn);
+        atmosphereColor = mix(standardColor, adjustedSunsetColor, sunsetFadeIn);
     }
     // sunsetColor fading out and nightColor fading in between 130 to 150 degrees
     else if (angle > sunsetMaxAngleThreshold && angle <= nightMaxAngleThreshold) {
         float nightFadeIn = smoothstep(sunsetMaxAngleThreshold, nightMaxAngleThreshold, angle);
-        atmosphereColor = mix(sunsetColor, nightColor, nightFadeIn);
+        atmosphereColor = mix(adjustedSunsetColor, nightColor, nightFadeIn);
     }
     // nightColor staying at its maximum all until 180 degrees
     else if (angle > nightMaxAngleThreshold) {
