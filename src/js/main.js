@@ -50,7 +50,7 @@ import {
     switchMindmap as datasetsSwitchMindmap,
     isDeveloperMode,
 } from './core/datasets.js'
-import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng, easeInOutQuad } from './mathScripts.js'
+import { getRandomNum, convertCartesiantoLatLng, constrainLatLng, easeInOutQuad } from './mathScripts.js'
 import { pushContent, handleCarouselButton, createSlideshowStatus, createPreviewSlideshowStatus } from './content.js'
 import { revealNextSlideStep } from './slides.js'
 import { initialiseVersion } from './versions.js'
@@ -62,6 +62,8 @@ import { DeveloperSlideLab } from './core/developerSlideLab.js'
 import { saveMindmapDataFile, serializeMindmapDataFile } from './core/mindmapDataFile.js'
 import { hasOpenableSlides } from './core/slideAccess.js'
 import { PlanetEnvironment } from './core/planetEnvironment.js'
+import { createProceduralPlanet } from './core/proceduralPlanet.js'
+import { createProceduralPlanetRuntime } from './core/proceduralPlanetRuntime.js'
 import { SettlementMapLayer } from './settlementMap.js'
 
 if (import.meta.hot) {
@@ -74,6 +76,13 @@ if (import.meta.hot) {
 // Default / initial mindmap dataset (index 0). Additional datasets loaded dynamically.
 import { palette } from './data/palette.js'
 import { pinMaterials, pinWireframeMaterials, boxMaterials } from './data/materials.js'
+import {
+    planetTagData,
+    planetConnections,
+    planetArrowedConnections,
+    planetDashedConnections,
+    planetTunnelConnections,
+} from './data/planetData.js'
 
 window.appStatus = "initialising";
 
@@ -97,6 +106,37 @@ let settlementMode = false;
 let settlementMapLayer = null;
 let settlementLabelRefreshTimer = null;
 const developerHud = new DeveloperHud();
+const urlParams = new URLSearchParams(window.location.search);
+const planetRenderMode = urlParams.get('planet') === 'procedural' ? 'procedural' : 'legacy';
+
+function readProceduralPlanetConfig(params) {
+    const config = {};
+    const seed = params.get('planetSeed');
+    const weatherSeed = params.get('weatherSeed');
+    if (seed) config.seed = seed;
+    if (weatherSeed) config.weatherSeed = weatherSeed;
+    if (params.has('seaLevel')) {
+        const seaLevel = Number(params.get('seaLevel'));
+        if (Number.isFinite(seaLevel)) config.seaLevel = seaLevel;
+    }
+    if (params.has('terrainScale')) {
+        const terrainScale = Number(params.get('terrainScale'));
+        if (Number.isFinite(terrainScale)) config.terrainScale = terrainScale;
+    }
+    return config;
+}
+
+const proceduralPlanet = planetRenderMode === 'procedural'
+    ? createProceduralPlanet({
+        tagData: planetTagData,
+        connectionData: planetConnections,
+        arrowConnectionData: planetArrowedConnections,
+        dashedConnectionData: planetDashedConnections,
+        tunnelConnectionData: planetTunnelConnections,
+    }, readProceduralPlanetConfig(urlParams))
+    : null;
+
+window.planetRenderMode = planetRenderMode;
 
 function getSelectedConnectionNodeIds() {
     const ctx = contexts[selectedContext];
@@ -412,6 +452,7 @@ const planetEnvironment = new PlanetEnvironment({
     postLoadingManager,
     textureLoader,
     textureLoader2,
+    proceduralPlanet,
 });
 
 const {
@@ -426,6 +467,99 @@ const {
 const jaraniusCenter = planetEnvironment.getJaraniusCenter();
 const middleOfPlanet = planetEnvironment.getMiddleOfPlanet();
 let jaranius = planetEnvironment.getJaranius();
+
+const proceduralPlanetRuntime = createProceduralPlanetRuntime({
+    proceduralPlanet,
+    planetEnvironment,
+    scene,
+    camera,
+    orbitControls,
+    flyControls,
+    middleOfPlanet,
+    cancelSmoothOrbitTransition,
+    getJaranius: () => jaranius,
+    getPlanetContext: () => contexts[0],
+    getCurveMeshes: () => window.curveMeshes || [],
+    getOctreeHelperRoot: () => (typeof octreeHelperRoot !== 'undefined' ? octreeHelperRoot : null),
+    datasetObjects: [
+        planetContent,
+        jaraniusConnections,
+        spiral,
+        spiralDynamicsConnections,
+        enneagram,
+        enneagramConnectionsObj,
+    ],
+});
+
+window.planetDebug = {
+    mode: planetRenderMode,
+    proceduralPlanet,
+    bookmarks: proceduralPlanetRuntime.getBookmarkNames(),
+    bookmark: proceduralPlanetRuntime.applyBookmark,
+    bookmarkAt: ({
+        mode = 'surface',
+        lat = 20,
+        lng = 20,
+        radius = mode === 'orbit' ? 11 : 5.34,
+        clearance = 0.28,
+        heading = 'north',
+        lookAhead = 1.02,
+        lookDown = 0.48,
+    } = {}) => proceduralPlanetRuntime.applyBookmarkConfig({
+        mode,
+        lat,
+        lng,
+        radius,
+        clearance,
+        heading,
+        lookAhead,
+        lookDown,
+    }),
+    sampleLatLng: (lat, lng) => proceduralPlanet?.sampleLatLng(lat, lng),
+    sampleSurfaceLatLng: (lat, lng) => proceduralPlanet?.sampleSurfaceLatLng(lat, lng),
+    getNodeMetrics: (nodeId) => proceduralPlanet?.getNodeMetrics(nodeId),
+    getTextureStats: () => proceduralPlanet?.getTextureStats?.() || null,
+    getProceduralLayerStats: () => planetEnvironment.getProceduralLayerStats?.() || null,
+    getSurfaceDetailStats: () => planetEnvironment.getSurfaceDetailStats(),
+    getSurfacePropSnapshot: (precision = 4) => planetEnvironment.getSurfacePropSnapshot(precision),
+    getSemanticOverlayStats: () => planetEnvironment.getSemanticOverlayStats(),
+    getSemanticLandmarkStats: () => planetEnvironment.getSemanticLandmarkStats(),
+    setSemanticOverlayVisible: (active) => {
+        if (!planetEnvironment.semanticOverlay) return false;
+        planetEnvironment.semanticOverlay.visible = Boolean(active);
+        return planetEnvironment.semanticOverlay.visible;
+    },
+    getSurfacePresentationState: proceduralPlanetRuntime.getSurfacePresentationState,
+    getSurfacePresentationDiagnostics: proceduralPlanetRuntime.getSurfacePresentationDiagnostics,
+    setSurfacePresentation: proceduralPlanetRuntime.setSurfacePresentation,
+    getSurfaceFlightState: proceduralPlanetRuntime.getSurfaceFlightState,
+    setSurfaceFlightAltitude: proceduralPlanetRuntime.setSurfaceFlightAltitude,
+    getCameraPose: () => {
+        const direction = new THREE.Vector3();
+        camera.getWorldDirection(direction);
+        return {
+            status: window.appStatus,
+            position: camera.position.toArray(),
+            direction: direction.toArray(),
+            up: camera.up.toArray(),
+            distance: camera.position.distanceTo(middleOfPlanet),
+        };
+    },
+    createDebugCanvas: () => proceduralPlanet?.createDebugCanvas() || null,
+    openDebugMap: () => {
+        const canvas = proceduralPlanet?.createDebugCanvas();
+        if (!canvas) return null;
+        const win = window.open('', 'procedural-planet-debug');
+        if (!win) return canvas;
+        win.document.body.style.margin = '0';
+        win.document.body.style.background = '#0b1014';
+        win.document.body.appendChild(canvas);
+        canvas.style.width = '100vw';
+        canvas.style.height = '100vh';
+        canvas.style.imageRendering = 'pixelated';
+        return canvas;
+    },
+};
 
 configureDatasets({
     planetContent,
@@ -446,6 +580,19 @@ initialiseLoadingManager(initialLoadingManager);
 
 initialiseVersion(creation, postLoadingManager, guttaState, scene);
 window.appStatus = "version-menu";
+
+const initialPlanetBookmark = urlParams.get('planetView');
+let pendingInitialPlanetBookmark = proceduralPlanet && initialPlanetBookmark
+    ? initialPlanetBookmark
+    : null;
+
+function applyPendingInitialPlanetBookmark() {
+    if (!pendingInitialPlanetBookmark) return;
+    if (window.appStatus !== 'orbit' && window.appStatus !== 'flight') return;
+    const bookmark = pendingInitialPlanetBookmark;
+    pendingInitialPlanetBookmark = null;
+    proceduralPlanetRuntime.applyBookmark(bookmark);
+}
 
 export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture, cloudsNormal, version) {
     const jaraniusMesh = planetEnvironment.createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture, cloudsNormal, version);
@@ -492,7 +639,27 @@ buttons.forEach(button => {
 });
   
 //CREATE LIGHTS
-const { ambient, spotlight, updateLightIntensity, queueSpotlightIntensity, queueAmbientIntensity } = setupLighting(scene);
+const {
+    ambient,
+    spotlight,
+    updateLightIntensity,
+    queueSpotlightIntensity,
+    queueAmbientIntensity,
+    setLightIntensities,
+    getLightIntensities,
+} = setupLighting(scene);
+window.planetDebug.getPresentationLighting = getLightIntensities;
+window.planetDebug.setPresentationLighting = ({
+    spotlightIntensity = 1.15,
+    ambientIntensity = 0.25,
+} = {}) => {
+    setLightIntensities({ spotlightIntensity, ambientIntensity });
+    return getLightIntensities();
+};
+window.planetDebug.setNaturalLighting = () => {
+    setLightIntensities({ spotlightIntensity: 0, ambientIntensity: 0.01 });
+    return getLightIntensities();
+};
 
 //CREATE CONTEXTS
 //CREATE GUTTA STATS
@@ -578,6 +745,7 @@ function ensureSettlementMapLayer() {
             contexts,
             getSunWorldPosition: () => planetEnvironment.getSunWorldPosition(),
             getCameraWorldPosition: (target) => camera.getWorldPosition(target),
+            terrainSampler: proceduralPlanet || undefined,
         });
     }
     return settlementMapLayer;
@@ -1835,9 +2003,19 @@ function render() {
         lastFrameTimeMs = now - ((now - lastFrameTimeMs) % FRAME_INTERVAL_MS);
     }
 
+    const delta = clock.getDelta();
     updateFpsCounter(now);
 
-    updateGutta(guttaState, guttaStats, jaranius, nuggets, developer && !settlementMode, octreeHelperRoot)
+    const showGuttaOctreeDebug = proceduralPlanetRuntime.shouldShowGuttaOctreeDebug({ developer, settlementMode });
+    octreeHelperRoot.visible = showGuttaOctreeDebug;
+    updateGutta(
+        guttaState,
+        guttaStats,
+        jaranius,
+        nuggets,
+        showGuttaOctreeDebug,
+        octreeHelperRoot,
+    )
     
     const camPos = camera.position
     const camRot = camera.rotation
@@ -1845,11 +2023,14 @@ function render() {
     spotlight.rotation.set(camRot.x, camRot.y, camRot.z);
     
     if (planetEnvironment.isJaraniusInitialized()) {
+        applyPendingInitialPlanetBookmark();
         planetEnvironment.update({
             appStatus: window.appStatus,
             orbitControls,
             introState,
+            delta,
         });
+        proceduralPlanetRuntime.applySurfacePresentation();
 
         window.curveMeshes.forEach(curveData => {
             curveData.texture.offset.y += 0.004;
@@ -1879,16 +2060,17 @@ function render() {
         }
     }
 
-    const delta = clock.getDelta();
     const cameraTransitionActive = updateSmoothOrbitTransition(delta);
 
     if (!cameraTransitionActive && flyControls.enabled) {
         flyControls.update(delta);
 
-        const distance = camera.position.distanceTo(middleOfPlanet);
-        if (distance < flyControls.minDistance) {
+        const proceduralSurfaceState = proceduralPlanetRuntime.clampCameraToSurface();
+        let distance = camera.position.distanceTo(middleOfPlanet);
+        if (!proceduralSurfaceState && distance < flyControls.minDistance) {
             const direction = camera.position.clone().sub(middleOfPlanet).normalize();
             camera.position.copy(direction.multiplyScalar(flyControls.minDistance));
+            distance = camera.position.distanceTo(middleOfPlanet);
         }
 
         updateFlightSpeedByDistance(distance);
