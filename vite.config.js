@@ -1,22 +1,27 @@
 import { defineConfig } from 'vite'
 import vitePluginString from 'vite-plugin-string'
 import { parse } from '@babel/parser'
-import { writeFile } from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'path'
 
 const mindmapSaveTargets = {
-  planet: 'src/js/data/planetData.js',
-  full: 'src/js/data/planetData.js',
-  simple: 'src/js/data/planetSimpleData.js',
+  planet: { file: 'src/js/data/planetData.js', prefix: 'planet', imageFile: 'src/js/data/planetImageData.js', imageExport: 'planetImageData' },
+  full: { file: 'src/js/data/planetData.js', prefix: 'planet', imageFile: 'src/js/data/planetImageData.js', imageExport: 'planetImageData' },
+  simple: { file: 'src/js/data/planetSimpleData.js', prefix: 'planet', imageFile: 'src/js/data/planetSimpleImageData.js', imageExport: 'planetImageData' },
+  compass: { file: 'src/js/data/planetCompassData.js', prefix: 'planet', imageFile: 'src/js/data/planetCompassImageData.js', imageExport: 'planetImageData' },
+  spiral: { file: 'src/js/data/spiralData.js', prefix: 'spiral', imageFile: 'src/js/data/spiralImageData.js', imageExport: 'spiralImageData' },
+  enneagram: { file: 'src/js/data/enneagramData.js', prefix: 'enneagram' },
 }
 
-const requiredMindmapExports = [
-  'planetTagData',
-  'planetConnections',
-  'planetArrowedConnections',
-  'planetDashedConnections',
-  'planetTunnelConnections',
-]
+function requiredMindmapExports(prefix) {
+  return [
+    `${prefix}TagData`,
+    `${prefix}Connections`,
+    `${prefix}ArrowedConnections`,
+    `${prefix}DashedConnections`,
+    `${prefix}TunnelConnections`,
+  ]
+}
 
 function sendJson(res, status, payload) {
   res.statusCode = status
@@ -48,7 +53,7 @@ function readJsonBody(req, maxBytes = 5 * 1024 * 1024) {
   })
 }
 
-function validateMindmapDataSource(source) {
+function validateMindmapDataSource(source, prefix) {
   const ast = parse(source, { sourceType: 'module' })
   const exportedNames = new Set()
 
@@ -63,10 +68,51 @@ function validateMindmapDataSource(source) {
     })
   })
 
-  const missing = requiredMindmapExports.filter((name) => !exportedNames.has(name))
+  const missing = requiredMindmapExports(prefix).filter((name) => !exportedNames.has(name))
   if (missing.length > 0) {
     throw new Error(`Generated data is missing exports: ${missing.join(', ')}`)
   }
+}
+
+function updateMindmapImageSource(source, exportName, images) {
+  if (!Array.isArray(images) || images.length === 0) return source
+  const ast = parse(source, { sourceType: 'module' })
+  let imageArray = null
+
+  ast.program.body.forEach((node) => {
+    if (node.type !== 'ExportNamedDeclaration' || node.declaration?.type !== 'VariableDeclaration') return
+    node.declaration.declarations.forEach((declaration) => {
+      if (declaration.id?.name === exportName && declaration.init?.type === 'ArrayExpression') imageArray = declaration.init
+    })
+  })
+  if (!imageArray) throw new Error(`Generated image data is missing export: ${exportName}`)
+
+  const updatesById = new Map(images.filter((image) => image?.id).map((image) => [String(image.id), image]))
+  const replacements = []
+  const updatedIds = new Set()
+  const propertyName = (property) => property?.key?.name || property?.key?.value
+
+  imageArray.elements.forEach((element) => {
+    if (element?.type !== 'ObjectExpression') return
+    const idProperty = element.properties.find((property) => propertyName(property) === 'id')
+    const id = idProperty?.value?.value
+    const update = updatesById.get(String(id))
+    if (!update) return
+    updatedIds.add(String(id))
+    element.properties.forEach((property) => {
+      const key = propertyName(property)
+      if (!['lat', 'lng', 'size', 'radius'].includes(key) || update[key] === undefined) return
+      replacements.push({ start: property.value.start, end: property.value.end, value: JSON.stringify(update[key]) })
+    })
+  })
+
+  const missing = [...updatesById.keys()].filter((id) => !updatedIds.has(id))
+  if (missing.length) throw new Error(`Image data contains unknown ids: ${missing.join(', ')}`)
+  replacements.sort((left, right) => right.start - left.start)
+  return replacements.reduce(
+    (result, replacement) => `${result.slice(0, replacement.start)}${replacement.value}${result.slice(replacement.end)}`,
+    source,
+  )
 }
 
 function mindmapSavePlugin() {
@@ -82,9 +128,9 @@ function mindmapSavePlugin() {
         try {
           const body = await readJsonBody(req)
           const datasetKey = String(body.dataset || '').trim().toLowerCase()
-          const targetFile = mindmapSaveTargets[datasetKey]
+          const target = mindmapSaveTargets[datasetKey]
 
-          if (!targetFile) {
+          if (!target) {
             sendJson(res, 400, { error: `No save target is configured for dataset "${body.dataset || 'unknown'}".` })
             return
           }
@@ -94,16 +140,30 @@ function mindmapSavePlugin() {
             return
           }
 
-          validateMindmapDataSource(body.source)
+          validateMindmapDataSource(body.source, target.prefix)
+
+          let imageSource = null
+          if (target.imageFile && Array.isArray(body.images) && body.images.length > 0) {
+            imageSource = updateMindmapImageSource(
+              await readFile(resolve(__dirname, target.imageFile), 'utf8'),
+              target.imageExport,
+              body.images,
+            )
+            parse(imageSource, { sourceType: 'module' })
+          }
 
           if (!body.dryRun) {
-            await writeFile(resolve(__dirname, targetFile), body.source.endsWith('\n') ? body.source : `${body.source}\n`, 'utf8')
+            await writeFile(resolve(__dirname, target.file), body.source.endsWith('\n') ? body.source : `${body.source}\n`, 'utf8')
+            if (imageSource !== null) {
+              await writeFile(resolve(__dirname, target.imageFile), imageSource.endsWith('\n') ? imageSource : `${imageSource}\n`, 'utf8')
+            }
           }
 
           sendJson(res, 200, {
             ok: true,
             dryRun: Boolean(body.dryRun),
-            file: targetFile,
+            file: target.file,
+            imageFile: imageSource !== null ? target.imageFile : null,
           })
         } catch (error) {
           sendJson(res, 400, { error: error instanceof Error ? error.message : String(error) })

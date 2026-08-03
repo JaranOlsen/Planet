@@ -2,11 +2,6 @@ const specialCharacterReference = `// ā ī ū ṅ ñ ṇ ṭ ṭh ḍ ḍh ṇ 
 
  //azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBNéÉàÀèÈùÙëËüÜïÏâêîôûÂÊÎÔÛíÍáÁóÓúÚñÑłŁçÇýÝčČšŠæÆœŒāīūṅṇṭḍḷṃṁ/*-+7894561230,;:!?¡¿.%$£€={}()[]&~'\`#_°@АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯяüÜöÖäÄñÑςερτυθιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜåÅæÆøØ `;
 
-function formatNumberish(value) {
-  if (value === undefined) return 'undefined';
-  return String(value);
-}
-
 function formatSlides(value) {
   if (value === undefined) return 'undefined';
   if (typeof value === 'number' || typeof value === 'boolean') return String(value);
@@ -14,8 +9,21 @@ function formatSlides(value) {
 }
 
 function serializeTag(tag) {
-  const developerOnlySlides = tag.developerOnlySlides ? ', developerOnlySlides: true' : '';
-  return `    {id: ${JSON.stringify(tag.id)}, text: ${JSON.stringify(tag.text)}, lat: ${formatNumberish(tag.lat)}, lng: ${formatNumberish(tag.lng)}, color: ${formatNumberish(tag.color)}, size: ${formatNumberish(tag.size)}, slides: ${formatSlides(tag.slides)}${developerOnlySlides}},`;
+  const preferredOrder = ['id', 'text', 'lat', 'lng', 'color', 'size', 'slides'];
+  const keys = [
+    ...preferredOrder.filter((key) => key in tag || key === 'slides'),
+    ...Object.keys(tag).filter((key) => !preferredOrder.includes(key)),
+  ];
+  const entries = keys.map((key) => {
+    const value = tag[key];
+    const serialized = key === 'slides'
+      ? formatSlides(value)
+      : value === undefined
+        ? 'undefined'
+        : JSON.stringify(value);
+    return `${JSON.stringify(key)}: ${serialized}`;
+  });
+  return `    {${entries.join(', ')}},`;
 }
 
 function serializeConnectionEntry(entry) {
@@ -32,30 +40,32 @@ export function serializeConnectionRows(rows) {
 
 export function serializeMindmapDataFile(context) {
   const tagSource = Array.isArray(context?.tagData) ? context.tagData : [];
+  const name = String(context?.name || 'planet').toLowerCase();
+  const prefix = name === 'spiral' ? 'spiral' : name === 'enneagram' ? 'enneagram' : 'planet';
   const output = [
-    'export const planetTagData = [',
+    `export const ${prefix}TagData = [`,
     tagSource.map(serializeTag).join('\n'),
     '',
     ']',
     '',
     specialCharacterReference,
     '',
-    'export const planetConnections = [',
+    `export const ${prefix}Connections = [`,
     serializeConnectionRows(context?.connectionData),
     '',
     ']',
     '',
-    'export const planetArrowedConnections = [',
+    `export const ${prefix}ArrowedConnections = [`,
     serializeConnectionRows(context?.arrowConnectionData),
     '',
     ']',
     '',
-    'export const planetDashedConnections = [',
+    `export const ${prefix}DashedConnections = [`,
     serializeConnectionRows(context?.dashedConnectionData),
     '',
     ']',
     '',
-    'export const planetTunnelConnections = [',
+    `export const ${prefix}TunnelConnections = [`,
     serializeConnectionRows(context?.tunnelConnectionData),
     '',
     ']',
@@ -67,6 +77,9 @@ export function serializeMindmapDataFile(context) {
 
 export async function saveMindmapDataFile(context) {
   const source = serializeMindmapDataFile(context);
+  const images = Array.isArray(context?.imageData)
+    ? context.imageData.map(({ id, lat, lng, size, radius }) => ({ id, lat, lng, size, radius }))
+    : [];
   const response = await fetch('/__planet-dev/save-mindmap', {
     method: 'POST',
     headers: {
@@ -75,6 +88,7 @@ export async function saveMindmapDataFile(context) {
     body: JSON.stringify({
       dataset: context?.name,
       source,
+      images,
     }),
   });
 

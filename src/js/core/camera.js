@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { FlyControls } from 'three/addons/controls/FlyControls.js';
+import { convertLatLngtoCartesian } from '../mathScripts.js';
 
 const canvas = document.querySelector('#canvas');
 
@@ -379,6 +380,27 @@ function setFollowMode(mode) {
   followMode = mode;
 }
 
+function setOrbitReviewView(lat, lng, target = new THREE.Vector3(), requestedDistance) {
+  const currentDistance = camera.position.distanceTo(target);
+  const distance = Math.max(
+    Number.isFinite(requestedDistance) ? requestedDistance : currentDistance,
+    orbitControls.minDistance || 0,
+  );
+  const point = convertLatLngtoCartesian(lat, lng, 1);
+  const direction = new THREE.Vector3(point.x, point.y, point.z).normalize();
+
+  orbitTransition.active = false;
+  followMode = 'manual';
+  clearFlightMomentum();
+  flyControls.enabled = false;
+  orbitControls.enabled = true;
+  orbitControls.target.copy(target);
+  camera.position.copy(target).add(direction.multiplyScalar(distance));
+  camera.up.copy(defaultCameraUp);
+  camera.lookAt(target);
+  orbitControls.update();
+}
+
 export {
   canvas,
   renderer,
@@ -394,6 +416,7 @@ export {
   getFollowMode,
   isSmoothOrbitTransitionActive,
   setFollowMode,
+  setOrbitReviewView,
   updateFlightStabilizer,
   updateSmoothOrbitTransition,
 };

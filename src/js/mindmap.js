@@ -17,7 +17,18 @@ import arrow from '/assets/textures/arrow6.webp'
 import tagFontUrl from '/assets/fonts/SourceSans3_Regular.json?url';
 
 //  IMPORT MATERIALS
-import { textMaterial, connectionMaterial, boxMaterials, pinMaterials, pinWireframeMaterials } from './data/materials.js';
+import {
+  textMaterial,
+  axisTextMaterial,
+  connectionMaterial,
+  boxMaterials,
+  pinMaterials,
+  pinWireframeMaterials,
+  compassBoxMaterials,
+  compassPinMaterials,
+  compassPinWireframeMaterials,
+  compassConnectionMaterials,
+} from './data/materials.js';
 import { planetNuggetData } from './data/planetNuggetData.js';
 import { enneagramTagData } from './data/enneagramData.js';
 import rocksModel from '../models/rocks.glb';
@@ -33,6 +44,10 @@ const textureLoader = new THREE.TextureLoader()
 export const intersectObjectsArray = []
 
 export const hoveredPins = []
+
+export function clearHoveredPins() {
+  hoveredPins.length = 0;
+}
 
 export const connectionHandleObjects = []
 
@@ -291,7 +306,7 @@ function instantiateTag(font, item, radius, context, globalIndex, destination) {
     (txtGeo.boundingBox.max.y - txtGeo.boundingBox.min.y),
     0
   );
-  const tag = new THREE.Mesh(txtGeo, textMaterial);
+  const tag = new THREE.Mesh(txtGeo, item.labelOnly ? axisTextMaterial : textMaterial);
   tag.scale.set(sizeScalar, sizeScalar, sizeScalar);
   tag.userData = tag.userData || {};
   tag.userData.baseScale = sizeScalar;
@@ -356,8 +371,10 @@ function instantiateTag(font, item, radius, context, globalIndex, destination) {
     0
   );
 
-  const box = new THREE.Mesh(boxGeo, boxMaterials[color]);
-  box.castShadow = true;
+  const boxMaterial = item.compassStyle ? compassBoxMaterials[color] : boxMaterials[color];
+  const box = new THREE.Mesh(boxGeo, boxMaterial);
+  box.visible = !item.labelOnly;
+  box.castShadow = item.castShadow !== false;
   box.userData = box.userData || {};
   box.userData.baseScale = 1;
   box.userData.heightFactor = height;
@@ -399,8 +416,8 @@ function instantiateTag(font, item, radius, context, globalIndex, destination) {
   destination.add(boxGroup);
   destination.add(tagGroup);
 
-  contexts[context].boxes.push(box);
-  contexts[context].tags.push(tag);
+  contexts[context].boxes[globalIndex] = box;
+  contexts[context].tags[globalIndex] = tag;
 }
 
 function instantiatePin(item, radius, context, globalIndex, destination) {
@@ -412,9 +429,12 @@ function instantiatePin(item, radius, context, globalIndex, destination) {
   const slides = hasOpenableSlides(item, isDeveloperMode());
 
   const segments = slides ? 10 : 6;
-  const material = slides ? pinMaterials[color] : pinWireframeMaterials[color];
+  const solidMaterials = item.compassStyle ? compassPinMaterials : pinMaterials;
+  const wireframeMaterials = item.compassStyle ? compassPinWireframeMaterials : pinWireframeMaterials;
+  const material = slides ? solidMaterials[color] : wireframeMaterials[color];
 
   const pin = new THREE.Mesh(new THREE.SphereGeometry(size / 1333, segments, segments), material);
+  pin.visible = !item.labelOnly;
   pin.userData = pin.userData || {};
   pin.userData.baseScale = pin.scale.x;
   pin.source = dataSourceRef;
@@ -432,11 +452,13 @@ function instantiatePin(item, radius, context, globalIndex, destination) {
   }
 
   pin.position.set(pos.x, pos.y, pos.z);
-  pin.castShadow = true;
+  pin.castShadow = item.castShadow !== false;
 
   destination.add(pin);
-  intersectObjectsArray.push(pin);
-  contexts[context].pins.push(pin);
+  if (!item.labelOnly) {
+    intersectObjectsArray.push(pin);
+  }
+  contexts[context].pins[globalIndex] = pin;
 }
 
 export function createTags(dataSource, destination, radius, context, indexMod) {
@@ -453,6 +475,43 @@ export function createTags(dataSource, destination, radius, context, indexMod) {
   });
 
   return fontPromise;
+}
+
+function removeLabelMesh(mesh) {
+  if (!mesh) return;
+  const group = mesh.userData?.group;
+  if (group?.parent) group.parent.remove(group);
+  if (mesh.geometry) mesh.geometry.dispose();
+}
+
+export async function rebuildNodeLabel(contextIndex, nodeIndex) {
+  const context = contexts[contextIndex];
+  const item = context?.tagData?.[nodeIndex];
+  if (!context || !item) return false;
+
+  removeLabelMesh(context.boxes[nodeIndex]);
+  removeLabelMesh(context.tags[nodeIndex]);
+  context.boxes[nodeIndex] = undefined;
+  context.tags[nodeIndex] = undefined;
+
+  const font = await loadTagFont();
+  instantiateTag(font, item, context.radius, contextIndex, nodeIndex, context.tagDestination);
+  return true;
+}
+
+export function refreshNodeMaterial(contextIndex, nodeIndex) {
+  const context = contexts[contextIndex];
+  const item = context?.tagData?.[nodeIndex];
+  if (!context || !item) return;
+  const color = item.color;
+  const solidMaterials = item.compassStyle ? compassPinMaterials : pinMaterials;
+  const wireframeMaterials = item.compassStyle ? compassPinWireframeMaterials : pinWireframeMaterials;
+  const pin = context.pins[nodeIndex];
+  const box = context.boxes[nodeIndex];
+  if (pin) {
+    pin.material = hasOpenableSlides(item, isDeveloperMode()) ? solidMaterials[color] : wireframeMaterials[color];
+  }
+  if (box) box.material = item.compassStyle ? compassBoxMaterials[color] : boxMaterials[color];
 }
 
 function updatePinTransform(pin) {
@@ -921,6 +980,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
                             if (arrowed == true) weight *= 4
                             if (tunnel !== true) {
                                 getCurve(p1, p2, weight, {
+                                  sourceItem,
                                   sourceId: sourceItem.id,
                                   targetId,
                                   connectionSource,
@@ -943,6 +1003,10 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         const v2 = new THREE.Vector3(p2.x, p2.y, p2.z);
 
         let material = connectionMaterial;
+        const sourceItem = metadata.sourceItem;
+        if (sourceItem?.connectionStyle === 'path') {
+            material = compassConnectionMaterials[sourceItem.color] || connectionMaterial;
+        }
         let segmentModifier = 1
         let curveTexture
 
@@ -1015,7 +1079,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         }
         curve.renderOrder = 9;
 
-        curve.castShadow = true;
+        curve.castShadow = !sourceItem?.connectionStyle;
 
         destination.add(curve);
 
@@ -1077,7 +1141,7 @@ export function instantiateNugget(index, lat, lng, color, size, slides, destinat
     return {nugget, slides};
 }
 
-export function createImages(textureSrc, lat, lng, size, radius, destination) {
+export function createImages(textureSrc, lat, lng, size, radius, destination, editorMetadata = {}) {
   const roundingFactor = 0.01;
 
   // 1) Make the square base shape
@@ -1130,6 +1194,12 @@ export function createImages(textureSrc, lat, lng, size, radius, destination) {
 
   const mesh = new THREE.Mesh(geo, mat);
   mesh.castShadow = true;
+  mesh.context = editorMetadata.contextIndex;
+  mesh.index = editorMetadata.imageIndex;
+  mesh.source = editorMetadata.source;
+  mesh.userData.isMindmapImage = true;
+  mesh.userData.baseImageSize = Number(editorMetadata.dataSize) || size * 500;
+  mesh.userData.imageAspect = 1;
 
   // 4) Place on globe facing outward, and nudge off the surface slightly
   const p = convertLatLngtoCartesian(lat, lng, radius);
@@ -1156,7 +1226,10 @@ export function createImages(textureSrc, lat, lng, size, radius, destination) {
     if (img && img.width && img.height) {
       const aspect = img.width / img.height; // e.g., 1620 / 900 = 1.8
       // keep height = `size`, widen X by aspect:
-      mesh.scale.set(aspect, 1, 1);
+      mesh.userData.imageAspect = aspect;
+      const currentSize = Number(mesh.source?.[mesh.index]?.size) || mesh.userData.baseImageSize;
+      const ratio = currentSize / mesh.userData.baseImageSize;
+      mesh.scale.set(aspect * ratio, ratio, 1);
     }
   });
 
@@ -1178,8 +1251,11 @@ export function hoverPins(intersects) {
             hoveredPin.material = hoveredPin.material.wireframe ? pinWireframeMaterials[1] : pinMaterials[1];
             if (hoveredPin.scale.x === 1) hoveredPin.scale.multiplyScalar(1.2);
 
-            const source = contexts[hoveredPin.context].tagData[hoveredPin.index];
-            hoveredPin.material = hasOpenableSlides(source, isDeveloperMode()) ? pinMaterials[source.color] : pinWireframeMaterials[source.color];
+            const source = contexts[hoveredPin.context]?.tagData?.[hoveredPin.index];
+            if (!source) continue;
+            const solidMaterials = source?.compassStyle ? compassPinMaterials : pinMaterials;
+            const wireframeMaterials = source?.compassStyle ? compassPinWireframeMaterials : pinWireframeMaterials;
+            hoveredPin.material = hasOpenableSlides(source, isDeveloperMode()) ? solidMaterials[source.color] : wireframeMaterials[source.color];
 
             const baseScale = hoveredPin.userData.baseScale || 1;
             hoveredPin.scale.set(baseScale, baseScale, baseScale);
@@ -1287,6 +1363,14 @@ function slerpVectors(start, end, alpha) {
     const omega = Math.acos(dot);
     const sinOmega = Math.sin(omega);
   
+    // Antipodal points need an explicit great-circle axis; linear interpolation
+    // collapses to the zero vector at the midpoint.
+    if (dot < -0.999999) {
+      const reference = Math.abs(start.y) < 0.9 ? new THREE.Vector3(0, 1, 0) : new THREE.Vector3(1, 0, 0);
+      const axis = new THREE.Vector3().crossVectors(start, reference).normalize();
+      return start.clone().applyAxisAngle(axis, Math.PI * alpha).normalize();
+    }
+
     // If angle too small, fallback to simple linear interpolation
     if (sinOmega < 1e-6) {
       // basically the same direction
