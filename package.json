@@ -8,9 +8,10 @@
   "scripts": {
     "dev": "vite",
     "build": "node scripts/validate-critical-assets.mjs && vite build",
-    "validate": "npm run validate:assets && npm run validate:slides",
+    "validate": "npm run validate:assets && npm run validate:slides && npm run validate:procedural",
     "validate:assets": "node scripts/validate-critical-assets.mjs",
     "validate:slides": "node scripts/validate-slides.mjs",
+    "validate:procedural": "node scripts/check-procedural-planet.mjs",
     "check:slides:fit": "node scripts/check-slide-fit.mjs",
     "preview": "vite preview",
     "deploy": "npm run build && node scripts/prune-pages-dist.mjs && gh-pages -d dist"

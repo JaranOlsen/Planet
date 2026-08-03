@@ -47,13 +47,14 @@ class Moon {
 }
 
 export class PlanetEnvironment {
-    constructor({ scene, camera, renderer, postLoadingManager, textureLoader, textureLoader2 }) {
+    constructor({ scene, camera, renderer, postLoadingManager, textureLoader, textureLoader2, proceduralPlanet = null }) {
         this.scene = scene;
         this.camera = camera;
         this.renderer = renderer;
         this.postLoadingManager = postLoadingManager;
         this.textureLoader = textureLoader;
         this.textureLoader2 = textureLoader2;
+        this.proceduralPlanet = proceduralPlanet;
 
         this.middleOfPlanet = new THREE.Vector3(0, 0, 0);
 
@@ -104,6 +105,10 @@ export class PlanetEnvironment {
 
         this.jaranius = null;
         this.clouds = null;
+        this.water = null;
+        this.semanticOverlay = null;
+        this.semanticLandmarks = null;
+        this.surfaceDetail = null;
         this.atmosphere = null;
         this.atmosphericLight = null;
         this.sign = null;
@@ -307,18 +312,23 @@ export class PlanetEnvironment {
         const jaraniusGeometry = new THREE.SphereGeometry(5, jaraniusSegments, jaraniusSegments);
         jaraniusGeometry.computeBoundingSphere();
 
-        const diffuse = this.textureLoader2.load(diffuseTexture);
-        diffuse.colorSpace = THREE.SRGBColorSpace;
+        let jaraniusMaterial;
+        if (this.proceduralPlanet) {
+            jaraniusMaterial = this.proceduralPlanet.createTerrainMaterial();
+        } else {
+            const diffuse = this.textureLoader2.load(diffuseTexture);
+            diffuse.colorSpace = THREE.SRGBColorSpace;
 
-        const jaraniusMaterial = new THREE.MeshStandardMaterial({
-            map: diffuse,
-            normalMap: this.textureLoader2.load(normalTexture),
-            roughnessMap: this.textureLoader2.load(roughnessTexture),
-            normalScale: new Vector2(5, 5),
-            metalness: 0,
-            flatShading: false,
-            side: FrontSide,
-        });
+            jaraniusMaterial = new THREE.MeshStandardMaterial({
+                map: diffuse,
+                normalMap: this.textureLoader2.load(normalTexture),
+                roughnessMap: this.textureLoader2.load(roughnessTexture),
+                normalScale: new Vector2(5, 5),
+                metalness: 0,
+                flatShading: false,
+                side: FrontSide,
+            });
+        }
 
         this.jaranius = new THREE.Mesh(jaraniusGeometry, jaraniusMaterial);
         this.jaranius.name = 'jaranius';
@@ -326,25 +336,42 @@ export class PlanetEnvironment {
         this.jaranius.receiveShadow = true;
         this.jaranius.castShadow = true;
 
-        const cloudsDiffuseTexture = this.textureLoader2.load(cloudsTexture);
-        cloudsDiffuseTexture.colorSpace = THREE.SRGBColorSpace;
-        const cloudsMaterial = new THREE.MeshLambertMaterial({
-            map: cloudsDiffuseTexture,
-            normalMap: this.textureLoader2.load(cloudsNormal),
-            normalScale: new Vector2(0.5, 0.5),
-            transparent: true,
-            side: DoubleSide,
-            opacity: 0.8,
-            depthWrite: false,
-        });
+        if (this.proceduralPlanet) {
+            this.water = this.proceduralPlanet.createWaterMesh(5.018, jaraniusSegments);
+            this.jaranius.add(this.water);
 
-        this.clouds = new THREE.Mesh(
-            new THREE.SphereGeometry(5.04, jaraniusSegments, jaraniusSegments),
-            cloudsMaterial,
-        );
-        this.clouds.receiveShadow = true;
-        this.clouds.castShadow = false;
-        this.jaranius.add(this.clouds);
+            this.clouds = this.proceduralPlanet.createCloudGroup(5.055, jaraniusSegments);
+            this.jaranius.add(this.clouds);
+
+            this.semanticLandmarks = this.proceduralPlanet.createSemanticLandmarkGroup(5.072);
+            this.jaranius.add(this.semanticLandmarks);
+
+            this.semanticOverlay = this.proceduralPlanet.createSemanticOverlayGroup(5.032);
+            this.jaranius.add(this.semanticOverlay);
+
+            this.surfaceDetail = this.proceduralPlanet.createSurfaceDetailLayer();
+            this.jaranius.add(this.surfaceDetail.root);
+        } else {
+            const cloudsDiffuseTexture = this.textureLoader2.load(cloudsTexture);
+            cloudsDiffuseTexture.colorSpace = THREE.SRGBColorSpace;
+            const cloudsMaterial = new THREE.MeshLambertMaterial({
+                map: cloudsDiffuseTexture,
+                normalMap: this.textureLoader2.load(cloudsNormal),
+                normalScale: new Vector2(0.5, 0.5),
+                transparent: true,
+                side: DoubleSide,
+                opacity: 0.8,
+                depthWrite: false,
+            });
+
+            this.clouds = new THREE.Mesh(
+                new THREE.SphereGeometry(5.04, jaraniusSegments, jaraniusSegments),
+                cloudsMaterial,
+            );
+            this.clouds.receiveShadow = true;
+            this.clouds.castShadow = false;
+            this.jaranius.add(this.clouds);
+        }
 
         this.atmosphericLight = new THREE.Mesh(
             new THREE.SphereGeometry(5.01, jaraniusSegments, jaraniusSegments),
@@ -353,14 +380,14 @@ export class PlanetEnvironment {
                 fragmentShader: atmosphericLightFragmentShader,
                 blending: THREE.AdditiveBlending,
                 uniforms: {
-                    baseIntensity: { value: 0.9 },
-                    atmosphereStrength: { value: 2.5 },
+                    baseIntensity: { value: this.proceduralPlanet ? 0.82 : 0.9 },
+                    atmosphereStrength: { value: this.proceduralPlanet ? 2.9 : 2.5 },
                     uniformCameraPosition: { value: this.camera.position },
                     planetPosition: { value: new THREE.Vector3(0, 0, 0) },
                     lightPosition: { value: this.sunObjectWorldPosition },
                     closeDistanceThreshold: { value: 7 },
-                    standardColor: { value: new THREE.Vector3(0.3, 0.6, 1.0) },
-                    sunsetColor: { value: new THREE.Vector3(1.0, 0.4, 0.1) },
+                    standardColor: { value: this.proceduralPlanet ? new THREE.Vector3(0.2, 0.54, 1.05) : new THREE.Vector3(0.3, 0.6, 1.0) },
+                    sunsetColor: { value: this.proceduralPlanet ? new THREE.Vector3(1.0, 0.5, 0.18) : new THREE.Vector3(1.0, 0.4, 0.1) },
                     nightColor: { value: new THREE.Vector3(0.0, 0.0, 0.0) },
                     sunsetMinAngleThreshold: { value: 75 },
                     sunsetMaxAngleThreshold: { value: 102 },
@@ -377,16 +404,16 @@ export class PlanetEnvironment {
                 vertexShader: atmosphereVertexShader,
                 fragmentShader: atmosphereFragmentShader,
                 uniforms: {
-                    baseIntensity: { value: 0.1 },
-                    intensityPower: { value: 1.1 },
+                    baseIntensity: { value: this.proceduralPlanet ? 0.13 : 0.1 },
+                    intensityPower: { value: this.proceduralPlanet ? 1.25 : 1.1 },
                     lightPosition: { value: this.sunObjectWorldPosition },
                     uniformCameraPosition: { value: this.camera.position },
                     planetPosition: { value: new THREE.Vector3(0, 0, 0) },
                     minDistance: { value: 5.0 },
                     maxDistance: { value: 5000.0 },
                     closeDistanceThreshold: { value: 7 },
-                    standardColor: { value: new THREE.Vector3(0.3, 0.6, 1.0) },
-                    sunsetColor: { value: new THREE.Vector3(1.0, 0.4, 0.1) },
+                    standardColor: { value: this.proceduralPlanet ? new THREE.Vector3(0.2, 0.54, 1.05) : new THREE.Vector3(0.3, 0.6, 1.0) },
+                    sunsetColor: { value: this.proceduralPlanet ? new THREE.Vector3(1.0, 0.5, 0.18) : new THREE.Vector3(1.0, 0.4, 0.1) },
                     nightColor: { value: new THREE.Vector3(0.0, 0.0, 0.0) },
                     sunsetMinAngleThreshold: { value: 75 },
                     sunsetMaxAngleThreshold: { value: 102 },
@@ -590,7 +617,7 @@ export class PlanetEnvironment {
         }
     }
 
-    update({ appStatus, orbitControls, introState }) {
+    update({ appStatus, orbitControls, introState, delta = 0 }) {
         if (!this.jaraniusInitialized) return;
 
         if (appStatus !== 'initialising' && appStatus !== 'version-menu' && appStatus !== 'intro-menu' && appStatus !== 'silence') {
@@ -600,6 +627,18 @@ export class PlanetEnvironment {
             this.pivot3.rotation.y += -0.000009;
             this.pivot4.rotation.y += -0.0001;
             if (this.clouds) this.clouds.rotation.y += 0.00001;
+        }
+
+        if (this.proceduralPlanet) {
+            this.proceduralPlanet.update(delta);
+        }
+
+        if (this.surfaceDetail) {
+            this.surfaceDetail.update({
+                camera: this.camera,
+                jaranius: this.jaranius,
+                appStatus,
+            });
         }
 
         this.sunObjectWorldPosition = this.sunRadiance?.getWorldPosition(this.sunObjectWorldPosition) || this.sunObjectWorldPosition;
@@ -672,5 +711,35 @@ export class PlanetEnvironment {
 
     getSunWorldPosition() {
         return this.sunObjectWorldPosition;
+    }
+
+    getSurfaceDetailStats() {
+        return this.surfaceDetail?.getStats?.() || null;
+    }
+
+    getSurfacePropSnapshot(precision = 4) {
+        return this.surfaceDetail?.getPropSnapshot?.(precision) || null;
+    }
+
+    getSemanticOverlayStats() {
+        return this.proceduralPlanet?.getSemanticOverlayStats?.() || null;
+    }
+
+    getSemanticLandmarkStats() {
+        return this.proceduralPlanet?.getSemanticLandmarkStats?.() || null;
+    }
+
+    getProceduralLayerStats() {
+        if (!this.proceduralPlanet) return null;
+        return {
+            waterChildren: this.water?.children?.length || 0,
+            hasFoamShell: Boolean(this.water?.children?.some?.((child) => child.name === 'procedural-coast-foam-shell')),
+            cloudChildren: this.clouds?.children?.length || 0,
+            hasSemanticOverlay: Boolean(this.semanticOverlay),
+            hasSemanticLandmarks: Boolean(this.semanticLandmarks),
+            hasSurfaceDetail: Boolean(this.surfaceDetail),
+            hasDynamicWeatherShadow: Boolean(this.jaranius?.material?.userData?.proceduralWeatherShadow),
+            textureStats: this.proceduralPlanet.getTextureStats?.() || null,
+        };
     }
 }

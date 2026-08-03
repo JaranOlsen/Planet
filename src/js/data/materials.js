@@ -20,6 +20,16 @@ export const textMaterial = new THREE.MeshBasicMaterial( {
     side: DoubleSide
 } );
 
+// Used for cartographic labels that belong to the globe's reading grammar but
+// are not interactive mindmap nodes.
+export const axisTextMaterial = new THREE.MeshBasicMaterial({
+    color: 0xE9DFC2,
+    transparent: true,
+    opacity: 0.92,
+    depthWrite: false,
+    side: DoubleSide
+});
+
 //Connection Material
 export const connectionMaterial = new THREE.MeshStandardMaterial({
     color: 0xffffaa,
@@ -33,6 +43,10 @@ export const connectionMaterial = new THREE.MeshStandardMaterial({
 export const boxMaterials = [];
 export const pinMaterials = [];
 export const pinWireframeMaterials = [];
+export const compassBoxMaterials = [];
+export const compassPinMaterials = [];
+export const compassPinWireframeMaterials = [];
+export const compassConnectionMaterials = [];
 
 for (const color of palette) {
     // For boxes
@@ -62,6 +76,32 @@ for (const color of palette) {
         wireframe: true,
     });
     pinWireframeMaterials.push(pinWireframeMaterial);
+
+    // Compass labels are cartographic overlays. They should remain equally
+    // readable on the day and night sides and should not cast terrain shadows.
+    compassBoxMaterials.push(new THREE.MeshBasicMaterial({
+        color,
+        transparent: true,
+        opacity: 0.86,
+        depthWrite: false,
+        side: DoubleSide
+    }));
+    compassPinMaterials.push(new THREE.MeshBasicMaterial({ color }));
+    compassPinWireframeMaterials.push(new THREE.MeshBasicMaterial({
+        color,
+        wireframe: true
+    }));
+
+    // The Compass paths read as three quiet threads laid over the terrain.
+    const pathThreadColor = new THREE.Color(color).lerp(new THREE.Color(0xFFF8EA), 0.72);
+    compassConnectionMaterials.push(new THREE.MeshBasicMaterial({
+        color: pathThreadColor,
+        transparent: true,
+        opacity: 0.82,
+        depthTest: false,
+        depthWrite: false,
+        side: DoubleSide
+    }));
 }
 
 // Set unique materials

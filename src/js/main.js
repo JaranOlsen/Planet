@@ -18,6 +18,7 @@ import {
     cancelSmoothOrbitTransition,
     getFollowMode,
     setFollowMode,
+    setOrbitReviewView,
     updateFlightStabilizer,
     updateSmoothOrbitTransition,
 } from './core/camera.js'
@@ -38,6 +39,9 @@ import {
     refreshConnectionHandleVisibility,
     clearConnectionEditorObjectsForDestination,
     findConnectionTargetIndex,
+    rebuildNodeLabel,
+    refreshNodeMaterial,
+    clearHoveredPins,
 } from './mindmap.js'
 import {
     configureDatasets,
@@ -50,7 +54,7 @@ import {
     switchMindmap as datasetsSwitchMindmap,
     isDeveloperMode,
 } from './core/datasets.js'
-import { getRandomNum, convertLatLngtoCartesian, convertCartesiantoLatLng, constrainLatLng, easeInOutQuad } from './mathScripts.js'
+import { getRandomNum, convertCartesiantoLatLng, convertLatLngtoCartesian, constrainLatLng, easeInOutQuad } from './mathScripts.js'
 import { pushContent, handleCarouselButton, createSlideshowStatus, createPreviewSlideshowStatus } from './content.js'
 import { revealNextSlideStep } from './slides.js'
 import { initialiseVersion } from './versions.js'
@@ -58,10 +62,13 @@ import { creation } from './creation.js'
 import { updateGutta, guttCrumbMesh, maraCrumbMesh, cycleStatsChartView, toggleParametersPanel } from './gutta.js'
 import { setupIntro, introState, fadeOutAudio, animateLetterSpacing } from './core/intro.js'
 import { DeveloperHud } from './core/developerHud.js'
+import { DeveloperContextMenu } from './core/developerContextMenu.js'
 import { DeveloperSlideLab } from './core/developerSlideLab.js'
 import { saveMindmapDataFile, serializeMindmapDataFile } from './core/mindmapDataFile.js'
 import { hasOpenableSlides } from './core/slideAccess.js'
 import { PlanetEnvironment } from './core/planetEnvironment.js'
+import { createProceduralPlanet } from './core/proceduralPlanet.js'
+import { createProceduralPlanetRuntime } from './core/proceduralPlanetRuntime.js'
 import { SettlementMapLayer } from './settlementMap.js'
 
 if (import.meta.hot) {
@@ -73,7 +80,14 @@ if (import.meta.hot) {
 //IMPORT DATA
 // Default / initial mindmap dataset (index 0). Additional datasets loaded dynamically.
 import { palette } from './data/palette.js'
-import { pinMaterials, pinWireframeMaterials, boxMaterials } from './data/materials.js'
+import { boxMaterials } from './data/materials.js'
+import {
+    planetTagData,
+    planetConnections,
+    planetArrowedConnections,
+    planetDashedConnections,
+    planetTunnelConnections,
+} from './data/planetData.js'
 
 window.appStatus = "initialising";
 
@@ -91,12 +105,75 @@ let selectedBox = null;
 let selectedTag = null;
 let selectedNode = null;
 let selectedNodes = []
+let selectedImage = null;
+let selectedImageMesh = null;
 let showContent = true;
 let fastMove = false;
+let openSlidesOnNodeClick = true;
+let cursorConnectionMode = 'off';
+let cursorConnectionSource = null;
+let editorDirtyContexts = new Set();
+let editorBaselines = new Map();
+let editorUndoStack = [];
+let editorRedoStack = [];
+let tagInputMode = null;
+let suppressTagInputEnterKeyUp = false;
+let pointerClient = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+let nodeDragState = null;
+let imageDragState = null;
+let connectionHandleHistoryBefore = null;
 let settlementMode = false;
 let settlementMapLayer = null;
 let settlementLabelRefreshTimer = null;
-const developerHud = new DeveloperHud();
+const developerContextMenu = new DeveloperContextMenu({
+    onCreate: (state) => openTagInput('create', state.contextIndex, null, state),
+    onEdit: (state) => openTagInput('edit', state.contextIndex, state.nodeIndex, state),
+    onDelete: (state) => deleteEditorNodes(state.contextIndex, state.targetIndices),
+    onSetSize: (size, state) => setEditorNodesSize(state.contextIndex, state.targetIndices, size),
+    onSetColor: (colorIndex, state) => setEditorNodesColor(state.contextIndex, state.targetIndices, colorIndex),
+    onStartConnection: (kind, state) => startCursorConnectionFromNodes(kind, state.contextIndex, state.targetIndices),
+    onToggleSelection: (state) => toggleEditorMultiSelection(state.contextIndex, state.nodeIndex),
+    onClearSelection: () => clearEditorSelection(),
+});
+const developerHud = new DeveloperHud({
+    onUndo: () => undoEditorChange(),
+    onRedo: () => redoEditorChange(),
+    onEditText: () => openSelectedNodeTextEditor(),
+    onToggleSlides: () => toggleNodeSlideOpening(),
+    onConnectionModeChange: (mode) => setCursorConnectionMode(mode),
+});
+const urlParams = new URLSearchParams(window.location.search);
+const showDeveloperOctree = urlParams.get('debugOctree') === '1';
+const planetRenderMode = urlParams.get('planet') === 'procedural' ? 'procedural' : 'legacy';
+
+function readProceduralPlanetConfig(params) {
+    const config = {};
+    const seed = params.get('planetSeed');
+    const weatherSeed = params.get('weatherSeed');
+    if (seed) config.seed = seed;
+    if (weatherSeed) config.weatherSeed = weatherSeed;
+    if (params.has('seaLevel')) {
+        const seaLevel = Number(params.get('seaLevel'));
+        if (Number.isFinite(seaLevel)) config.seaLevel = seaLevel;
+    }
+    if (params.has('terrainScale')) {
+        const terrainScale = Number(params.get('terrainScale'));
+        if (Number.isFinite(terrainScale)) config.terrainScale = terrainScale;
+    }
+    return config;
+}
+
+const proceduralPlanet = planetRenderMode === 'procedural'
+    ? createProceduralPlanet({
+        tagData: planetTagData,
+        connectionData: planetConnections,
+        arrowConnectionData: planetArrowedConnections,
+        dashedConnectionData: planetDashedConnections,
+        tunnelConnectionData: planetTunnelConnections,
+    }, readProceduralPlanetConfig(urlParams))
+    : null;
+
+window.planetRenderMode = planetRenderMode;
 
 function getSelectedConnectionNodeIds() {
     const ctx = contexts[selectedContext];
@@ -125,7 +202,22 @@ function updateConnectionHandleVisibility() {
 }
 
 function updateDeveloperHud() {
-    developerHud.update({ developer, contexts, selectedContext });
+    const dirtyKey = getEditorDirtyKey(selectedContext);
+    developerHud.update({
+        developer,
+        contexts,
+        selectedContext,
+        selectedNode,
+        selectedNodes,
+        selectedImage,
+        fastMove,
+        slidesOpen: openSlidesOnNodeClick,
+        connectionMode: cursorConnectionMode,
+        connectionSource: cursorConnectionSource?.label,
+        dirty: editorDirtyContexts.has(dirtyKey),
+        canUndo: editorUndoStack.length > 0,
+        canRedo: editorRedoStack.length > 0,
+    });
     updateConnectionHandleVisibility();
 }
 
@@ -134,9 +226,150 @@ function setDeveloperStatus(status) {
     updateDeveloperHud();
 }
 
+function getEditorDirtyKey(contextIndex) {
+    const context = contexts[contextIndex];
+    return `${contextIndex}:${context?.name || 'unknown'}`;
+}
+
+function isEditableContext(contextIndex = selectedContext) {
+    return contextIndex === 0 || contextIndex === 1 || contextIndex === 3;
+}
+
+function cloneEditorData(value) {
+    if (value === undefined) return undefined;
+    return typeof structuredClone === 'function'
+        ? structuredClone(value)
+        : JSON.parse(JSON.stringify(value));
+}
+
+function snapshotEditorContext(contextIndex = selectedContext) {
+    const context = contexts[contextIndex];
+    if (!context || !isEditableContext(contextIndex)) return null;
+    return {
+        tagData: cloneEditorData(context.tagData),
+        connectionData: cloneEditorData(context.connectionData),
+        arrowConnectionData: cloneEditorData(context.arrowConnectionData),
+        dashedConnectionData: cloneEditorData(context.dashedConnectionData),
+        tunnelConnectionData: cloneEditorData(context.tunnelConnectionData),
+        imageData: cloneEditorData(context.imageData),
+    };
+}
+
+function editorSnapshotsEqual(left, right) {
+    return JSON.stringify(left) === JSON.stringify(right);
+}
+
+function markEditorDirty(contextIndex = selectedContext) {
+    editorDirtyContexts.add(getEditorDirtyKey(contextIndex));
+    if (contextIndex === 0) markSettlementMapDirty();
+}
+
+function refreshEditorDirtyState(contextIndex = selectedContext) {
+    const key = getEditorDirtyKey(contextIndex);
+    const baseline = editorBaselines.get(key);
+    const current = snapshotEditorContext(contextIndex);
+    if (baseline && current && editorSnapshotsEqual(baseline, current)) editorDirtyContexts.delete(key);
+    else editorDirtyContexts.add(key);
+    if (contextIndex === 0) markSettlementMapDirty();
+}
+
+function commitEditorMutation(label, contextIndex, before) {
+    const after = snapshotEditorContext(contextIndex);
+    if (!before || !after || editorSnapshotsEqual(before, after)) return false;
+    const dirtyKey = getEditorDirtyKey(contextIndex);
+    if (!editorBaselines.has(dirtyKey)) editorBaselines.set(dirtyKey, cloneEditorData(before));
+    editorUndoStack.push({ label, contextIndex, contextName: contexts[contextIndex]?.name, before, after });
+    if (editorUndoStack.length > 40) editorUndoStack.shift();
+    editorRedoStack.length = 0;
+    refreshEditorDirtyState(contextIndex);
+    setDeveloperStatus(label);
+    return true;
+}
+
+function replaceArrayContents(destination, source) {
+    if (!Array.isArray(destination) || !Array.isArray(source)) return;
+    destination.splice(0, destination.length, ...cloneEditorData(source));
+}
+
+async function restoreEditorSnapshot(entry, snapshot) {
+    const context = contexts[entry.contextIndex];
+    if (!context || context.name !== entry.contextName) {
+        setDeveloperStatus(`Cannot restore ${entry.label}: the active dataset changed.`);
+        return false;
+    }
+
+    clearContextVisuals(entry.contextIndex);
+    replaceArrayContents(context.tagData, snapshot.tagData);
+    replaceArrayContents(context.connectionData, snapshot.connectionData);
+    replaceArrayContents(context.arrowConnectionData, snapshot.arrowConnectionData);
+    replaceArrayContents(context.dashedConnectionData, snapshot.dashedConnectionData);
+    replaceArrayContents(context.tunnelConnectionData, snapshot.tunnelConnectionData);
+    replaceArrayContents(context.imageData, snapshot.imageData);
+    await rebuildContextVisuals(entry.contextIndex);
+    clearEditorSelection();
+    refreshEditorDirtyState(entry.contextIndex);
+    return true;
+}
+
+async function undoEditorChange() {
+    const entry = editorUndoStack.pop();
+    if (!entry) return;
+    if (await restoreEditorSnapshot(entry, entry.before)) {
+        editorRedoStack.push(entry);
+        setDeveloperStatus(`Undid: ${entry.label}`);
+    } else {
+        editorUndoStack.push(entry);
+    }
+}
+
+async function redoEditorChange() {
+    const entry = editorRedoStack.pop();
+    if (!entry) return;
+    if (await restoreEditorSnapshot(entry, entry.after)) {
+        editorUndoStack.push(entry);
+        setDeveloperStatus(`Redid: ${entry.label}`);
+    } else {
+        editorRedoStack.push(entry);
+    }
+}
+
+function toggleNodeSlideOpening() {
+    openSlidesOnNodeClick = !openSlidesOnNodeClick;
+    setDeveloperStatus(`Slides on node click: ${openSlidesOnNodeClick ? 'on' : 'off'}`);
+}
+
+function setCursorConnectionMode(mode) {
+    const allowed = new Set(['off', 'normal', 'arrow', 'dashed', 'tunnel']);
+    cursorConnectionMode = allowed.has(mode) ? mode : 'off';
+    cursorConnectionSource = null;
+    setDeveloperStatus(cursorConnectionMode === 'off'
+        ? 'Cursor connection tool off.'
+        : `Cursor connection: ${cursorConnectionMode}. Click a source node, then a target node.`);
+}
+
+function cycleCursorConnectionMode() {
+    const modes = ['off', 'normal', 'arrow', 'dashed', 'tunnel'];
+    const next = modes[(modes.indexOf(cursorConnectionMode) + 1) % modes.length];
+    setCursorConnectionMode(next);
+}
+
+function clearEditorSelection() {
+    selectedNodes.length = 0;
+    selectedNode = null;
+    selectedPin = null;
+    selectedBox = null;
+    selectedTag = null;
+    selectedImage = null;
+    selectedImageMesh = null;
+    cursorConnectionSource = null;
+    clearHoveredPins();
+    updateDeveloperHud();
+}
+
 function createContexts(version) {
     const devMode = datasetsCreateContexts(version);
     developer = devMode;
+    openSlidesOnNodeClick = !developer;
     developerSlideLab.setDeveloperMode(developer);
     if (!developer) {
         developerHud.hide();
@@ -168,6 +401,14 @@ function switchMindmap(index) {
     const result = datasetsSwitchMindmap(index);
     if (result && typeof result.then === 'function') {
         return result.then((value) => {
+            if (value?.ok) {
+                clearEditorSelection();
+                editorUndoStack.length = 0;
+                editorRedoStack.length = 0;
+                setDeveloperStatus(value.unchanged ? `${value.name} is already active.` : `Switched to ${value.name}.`);
+            } else if (value?.error) {
+                setDeveloperStatus(`Switch failed: ${value.error}`);
+            }
             markSettlementMapDirty();
             if (settlementMode) {
                 setClassicMindmapVisualsVisible(false);
@@ -412,6 +653,7 @@ const planetEnvironment = new PlanetEnvironment({
     postLoadingManager,
     textureLoader,
     textureLoader2,
+    proceduralPlanet,
 });
 
 const {
@@ -426,6 +668,121 @@ const {
 const jaraniusCenter = planetEnvironment.getJaraniusCenter();
 const middleOfPlanet = planetEnvironment.getMiddleOfPlanet();
 let jaranius = planetEnvironment.getJaranius();
+
+const compassReviewViews = [
+    { name: 'Befriending meridian', lat: 0, lng: 120 },
+    { name: 'Training meridian', lat: 0, lng: 0 },
+    { name: 'Discovering meridian', lat: 0, lng: -120 },
+    { name: 'Centre axis', lat: 0, lng: 180 },
+    { name: 'Shared horizon', lat: 58, lng: 180 },
+    { name: 'Southern origins', lat: -58, lng: 0 },
+];
+let compassReviewIndex = -1;
+
+function showCompassReviewView(index) {
+    const normalized = ((index % compassReviewViews.length) + compassReviewViews.length) % compassReviewViews.length;
+    const view = compassReviewViews[normalized];
+    compassReviewIndex = normalized;
+    window.appStatus = 'orbit';
+    document.body.style.cursor = 'default';
+    setOrbitReviewView(view.lat, view.lng, middleOfPlanet, 13.5);
+    console.log(`Compass review view: ${view.name}`);
+    return view;
+}
+
+const proceduralPlanetRuntime = createProceduralPlanetRuntime({
+    proceduralPlanet,
+    planetEnvironment,
+    scene,
+    camera,
+    orbitControls,
+    flyControls,
+    middleOfPlanet,
+    cancelSmoothOrbitTransition,
+    getJaranius: () => jaranius,
+    getPlanetContext: () => contexts[0],
+    getCurveMeshes: () => window.curveMeshes || [],
+    getOctreeHelperRoot: () => (typeof octreeHelperRoot !== 'undefined' ? octreeHelperRoot : null),
+    datasetObjects: [
+        planetContent,
+        jaraniusConnections,
+        spiral,
+        spiralDynamicsConnections,
+        enneagram,
+        enneagramConnectionsObj,
+    ],
+});
+
+window.planetDebug = {
+    mode: planetRenderMode,
+    proceduralPlanet,
+    bookmarks: proceduralPlanetRuntime.getBookmarkNames(),
+    bookmark: proceduralPlanetRuntime.applyBookmark,
+    bookmarkAt: ({
+        mode = 'surface',
+        lat = 20,
+        lng = 20,
+        radius = mode === 'orbit' ? 11 : 5.34,
+        clearance = 0.28,
+        heading = 'north',
+        lookAhead = 1.02,
+        lookDown = 0.48,
+    } = {}) => proceduralPlanetRuntime.applyBookmarkConfig({
+        mode,
+        lat,
+        lng,
+        radius,
+        clearance,
+        heading,
+        lookAhead,
+        lookDown,
+    }),
+    sampleLatLng: (lat, lng) => proceduralPlanet?.sampleLatLng(lat, lng),
+    sampleSurfaceLatLng: (lat, lng) => proceduralPlanet?.sampleSurfaceLatLng(lat, lng),
+    getNodeMetrics: (nodeId) => proceduralPlanet?.getNodeMetrics(nodeId),
+    getTextureStats: () => proceduralPlanet?.getTextureStats?.() || null,
+    getProceduralLayerStats: () => planetEnvironment.getProceduralLayerStats?.() || null,
+    getSurfaceDetailStats: () => planetEnvironment.getSurfaceDetailStats(),
+    getSurfacePropSnapshot: (precision = 4) => planetEnvironment.getSurfacePropSnapshot(precision),
+    getSemanticOverlayStats: () => planetEnvironment.getSemanticOverlayStats(),
+    getSemanticLandmarkStats: () => planetEnvironment.getSemanticLandmarkStats(),
+    setSemanticOverlayVisible: (active) => {
+        if (!planetEnvironment.semanticOverlay) return false;
+        planetEnvironment.semanticOverlay.visible = Boolean(active);
+        return planetEnvironment.semanticOverlay.visible;
+    },
+    getSurfacePresentationState: proceduralPlanetRuntime.getSurfacePresentationState,
+    getSurfacePresentationDiagnostics: proceduralPlanetRuntime.getSurfacePresentationDiagnostics,
+    setSurfacePresentation: proceduralPlanetRuntime.setSurfacePresentation,
+    getSurfaceFlightState: proceduralPlanetRuntime.getSurfaceFlightState,
+    setSurfaceFlightAltitude: proceduralPlanetRuntime.setSurfaceFlightAltitude,
+    getCameraPose: () => {
+        const direction = new THREE.Vector3();
+        camera.getWorldDirection(direction);
+        return {
+            status: window.appStatus,
+            position: camera.position.toArray(),
+            direction: direction.toArray(),
+            up: camera.up.toArray(),
+            distance: camera.position.distanceTo(middleOfPlanet),
+        };
+    },
+    showCompassReviewView,
+    createDebugCanvas: () => proceduralPlanet?.createDebugCanvas() || null,
+    openDebugMap: () => {
+        const canvas = proceduralPlanet?.createDebugCanvas();
+        if (!canvas) return null;
+        const win = window.open('', 'procedural-planet-debug');
+        if (!win) return canvas;
+        win.document.body.style.margin = '0';
+        win.document.body.style.background = '#0b1014';
+        win.document.body.appendChild(canvas);
+        canvas.style.width = '100vw';
+        canvas.style.height = '100vh';
+        canvas.style.imageRendering = 'pixelated';
+        return canvas;
+    },
+};
 
 configureDatasets({
     planetContent,
@@ -446,6 +803,19 @@ initialiseLoadingManager(initialLoadingManager);
 
 initialiseVersion(creation, postLoadingManager, guttaState, scene);
 window.appStatus = "version-menu";
+
+const initialPlanetBookmark = urlParams.get('planetView');
+let pendingInitialPlanetBookmark = proceduralPlanet && initialPlanetBookmark
+    ? initialPlanetBookmark
+    : null;
+
+function applyPendingInitialPlanetBookmark() {
+    if (!pendingInitialPlanetBookmark) return;
+    if (window.appStatus !== 'orbit' && window.appStatus !== 'flight') return;
+    const bookmark = pendingInitialPlanetBookmark;
+    pendingInitialPlanetBookmark = null;
+    proceduralPlanetRuntime.applyBookmark(bookmark);
+}
 
 export function createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture, cloudsNormal, version) {
     const jaraniusMesh = planetEnvironment.createJaranius(diffuseTexture, normalTexture, roughnessTexture, cloudsTexture, cloudsNormal, version);
@@ -492,7 +862,27 @@ buttons.forEach(button => {
 });
   
 //CREATE LIGHTS
-const { ambient, spotlight, updateLightIntensity, queueSpotlightIntensity, queueAmbientIntensity } = setupLighting(scene);
+const {
+    ambient,
+    spotlight,
+    updateLightIntensity,
+    queueSpotlightIntensity,
+    queueAmbientIntensity,
+    setLightIntensities,
+    getLightIntensities,
+} = setupLighting(scene);
+window.planetDebug.getPresentationLighting = getLightIntensities;
+window.planetDebug.setPresentationLighting = ({
+    spotlightIntensity = 1.15,
+    ambientIntensity = 0.25,
+} = {}) => {
+    setLightIntensities({ spotlightIntensity, ambientIntensity });
+    return getLightIntensities();
+};
+window.planetDebug.setNaturalLighting = () => {
+    setLightIntensities({ spotlightIntensity: 0, ambientIntensity: 0.01 });
+    return getLightIntensities();
+};
 
 //CREATE CONTEXTS
 //CREATE GUTTA STATS
@@ -530,13 +920,13 @@ function toggleFpsOverlay() {
 }
 
 function closeActiveOverlay() {
+    if (developerContextMenu.isOpen()) {
+        developerContextMenu.close();
+        return true;
+    }
+
     if (focusElement === "tagInput") {
-        const tagInput = document.getElementById("tagInput");
-        if (tagInput) {
-            tagInput.style.display = "none";
-            tagInput.blur();
-        }
-        focusElement = undefined;
+        closeTagInput();
         return true;
     }
 
@@ -571,6 +961,392 @@ function clearConnectionDestination(destination) {
     destination.clear();
 }
 
+function removeNodeMesh(mesh) {
+    if (!mesh) return;
+    const group = mesh.userData?.group;
+    if (group?.parent) group.parent.remove(group);
+    else if (mesh.parent) mesh.parent.remove(mesh);
+    if (mesh.geometry) mesh.geometry.dispose();
+}
+
+function clearContextVisuals(contextIndex) {
+    const context = contexts[contextIndex];
+    if (!context) return;
+    context.pins.forEach((pin) => {
+        const intersectIndex = intersectObjectsArray.indexOf(pin);
+        if (intersectIndex >= 0) intersectObjectsArray.splice(intersectIndex, 1);
+        if (pin?.parent) pin.parent.remove(pin);
+        if (pin?.geometry) pin.geometry.dispose();
+    });
+    context.boxes.forEach(removeNodeMesh);
+    context.tags.forEach(removeNodeMesh);
+    context.pins.length = 0;
+    context.boxes.length = 0;
+    context.tags.length = 0;
+    clearConnectionDestination(context.connectionDestination);
+    clearHoveredPins();
+}
+
+function removeEditorImage(mesh) {
+    if (!mesh) return;
+    const intersectIndex = intersectObjectsArray.indexOf(mesh);
+    if (intersectIndex >= 0) intersectObjectsArray.splice(intersectIndex, 1);
+    if (mesh.parent) mesh.parent.remove(mesh);
+    if (mesh.geometry) mesh.geometry.dispose();
+    const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+    materials.forEach((material) => {
+        material?.map?.dispose?.();
+        material?.dispose?.();
+    });
+}
+
+function clearContextImages(contextIndex) {
+    const context = contexts[contextIndex];
+    context?.images?.forEach(removeEditorImage);
+    if (context?.images) context.images.length = 0;
+}
+
+function rebuildContextImages(contextIndex) {
+    const context = contexts[contextIndex];
+    if (!context?.imageDestination || !Array.isArray(context.imageData)) return;
+    clearContextImages(contextIndex);
+    context.imageData.forEach((item, imageIndex) => {
+        const created = createImages(
+            item.src,
+            Number(item.lat),
+            Number(item.lng),
+            Number(item.size) / 500,
+            Number(item.radius) || context.radius,
+            context.imageDestination,
+            { contextIndex, imageIndex, source: context.imageData, dataSize: item.size },
+        );
+        context.images[imageIndex] = created.box;
+    });
+}
+
+async function rebuildContextVisuals(contextIndex) {
+    const context = contexts[contextIndex];
+    if (!context || !isEditableContext(contextIndex)) return;
+    const labelsPromise = createTags(context.tagData, context.tagDestination, context.radius, contextIndex, 0);
+    redrawDeveloperConnections(contextIndex);
+    rebuildContextImages(contextIndex);
+    await labelsPromise;
+    updateDeveloperHud();
+}
+
+function getConnectionDataForKind(context, kind) {
+    if (kind === 'arrow') return context.arrowConnectionData;
+    if (kind === 'dashed') return context.dashedConnectionData;
+    if (kind === 'tunnel') return context.tunnelConnectionData;
+    return context.connectionData;
+}
+
+function ensureConnectionRows(context, kind) {
+    let rows = getConnectionDataForKind(context, kind);
+    if (!Array.isArray(rows)) {
+        rows = context.tagData.map((tag) => [tag.id]);
+        if (kind === 'arrow') context.arrowConnectionData = rows;
+        else if (kind === 'dashed') context.dashedConnectionData = rows;
+        else if (kind === 'tunnel') context.tunnelConnectionData = rows;
+        else context.connectionData = rows;
+    }
+    const rowsById = new Map(rows.filter(Array.isArray).map((row) => [row[0], row]));
+    const normalized = context.tagData.map((tag) => rowsById.get(tag.id) || [tag.id]);
+    rows.splice(0, rows.length, ...normalized);
+    return rows;
+}
+
+function toggleConnectionBetween(contextIndex, sourceIndex, targetIndex, kind) {
+    const context = contexts[contextIndex];
+    if (!context || sourceIndex === targetIndex || !context.tagData[sourceIndex] || !context.tagData[targetIndex]) return false;
+    const rows = ensureConnectionRows(context, kind);
+    const row = rows[sourceIndex];
+    const targetId = context.tagData[targetIndex].id;
+    const connectionIndex = findConnectionTargetIndex(row, targetId);
+    if (connectionIndex >= 0) row.splice(connectionIndex, 1);
+    else row.push(targetId);
+    redrawDeveloperConnections(contextIndex);
+    return connectionIndex < 0;
+}
+
+function getSelectedEditorNodeIndices() {
+    const context = contexts[selectedContext];
+    if (!context || !isEditableContext(selectedContext)) return [];
+    const candidates = selectedNodes.length > 0 ? selectedNodes : [selectedNode];
+    return [...new Set(candidates)].filter((index) => Number.isInteger(index) && context.tagData[index]);
+}
+
+function changeSelectedNodeColors(direction) {
+    const targets = getSelectedEditorNodeIndices();
+    if (!targets.length) return;
+    const before = snapshotEditorContext(selectedContext);
+    const step = fastMove ? 10 : 1;
+    targets.forEach((nodeIndex) => {
+        let color = Number(contexts[selectedContext].tagData[nodeIndex].color) || 0;
+        do {
+            color = (color + direction * step + palette.length) % palette.length;
+        } while (!boxMaterials[color]);
+        contexts[selectedContext].tagData[nodeIndex].color = color;
+        refreshNodeMaterial(selectedContext, nodeIndex);
+    });
+    commitEditorMutation(`Changed color of ${targets.length} node${targets.length === 1 ? '' : 's'}`, selectedContext, before);
+}
+
+function refreshMindmapImage(contextIndex, imageIndex) {
+    const context = contexts[contextIndex];
+    const item = context?.imageData?.[imageIndex];
+    const mesh = context?.images?.[imageIndex];
+    if (!item || !mesh) return false;
+    const size = Number(item.size) || mesh.userData.baseImageSize || 5;
+    const baseSize = Number(mesh.userData.baseImageSize) || size;
+    const ratio = size / baseSize;
+    const aspect = Number(mesh.userData.imageAspect) || 1;
+    mesh.scale.set(aspect * ratio, ratio, 1);
+    const radius = Number(item.radius) || context.radius;
+    const position = convertLatLngtoCartesian(Number(item.lat), Number(item.lng), radius);
+    const normal = new THREE.Vector3(position.x, position.y, position.z).normalize();
+    mesh.position.copy(normal).multiplyScalar(radius + 0.001 * (size / 500));
+    mesh.lookAt(normal.clone().multiplyScalar(radius + 10 * (size / 500)));
+    return true;
+}
+
+function resizeSelectedItems(direction) {
+    if (Number.isInteger(selectedImage)) {
+        const context = contexts[selectedContext];
+        const item = context?.imageData?.[selectedImage];
+        if (!item) return;
+        const before = snapshotEditorContext(selectedContext);
+        const delta = direction * (fastMove ? 25 : 5);
+        item.size = THREE.MathUtils.clamp(Number(item.size) + delta, 5, 2000);
+        refreshMindmapImage(selectedContext, selectedImage);
+        commitEditorMutation(`${direction > 0 ? 'Increased' : 'Decreased'} image size to ${item.size}`, selectedContext, before);
+        return;
+    }
+
+    const targets = getSelectedEditorNodeIndices();
+    if (!targets.length) return;
+    const before = snapshotEditorContext(selectedContext);
+    const delta = direction * (fastMove ? 25 : 5);
+    targets.forEach((nodeIndex) => {
+        const context = contexts[selectedContext];
+        const pin = context.pins[nodeIndex];
+        const box = context.boxes[nodeIndex];
+        const tag = context.tags[nodeIndex];
+        const size = THREE.MathUtils.clamp(Number(context.tagData[nodeIndex].size) + delta, 5, 500);
+        context.tagData[nodeIndex].size = size;
+        const originalSize = pin?.originalSize || size;
+        const ratio = size / originalSize;
+        const tagScale = size / 100000;
+        if (pin) {
+            pin.scale.setScalar(ratio);
+            pin.userData.baseScale = ratio;
+        }
+        if (box) {
+            box.scale.setScalar(ratio);
+            box.userData.baseScale = ratio;
+        }
+        if (tag) {
+            tag.scale.setScalar(tagScale);
+            tag.userData.baseScale = tagScale;
+        }
+        refreshNode(selectedContext, nodeIndex);
+    });
+    commitEditorMutation(`${direction > 0 ? 'Increased' : 'Decreased'} size of ${targets.length} node${targets.length === 1 ? '' : 's'}`, selectedContext, before);
+}
+
+function selectEditorNode(contextIndex, nodeIndex) {
+    const context = contexts[contextIndex];
+    if (!context?.tagData?.[nodeIndex]) return false;
+    selectedContext = contextIndex;
+    selectedNode = nodeIndex;
+    selectedPin = context.pins[nodeIndex] || null;
+    selectedBox = context.boxes[nodeIndex] || null;
+    selectedTag = context.tags[nodeIndex] || null;
+    selectedImage = null;
+    selectedImageMesh = null;
+    updateDeveloperHud();
+    return true;
+}
+
+function selectEditorImage(contextIndex, imageIndex) {
+    const context = contexts[contextIndex];
+    if (!context?.imageData?.[imageIndex] || !context?.images?.[imageIndex]) return false;
+    selectedContext = contextIndex;
+    selectedNodes.length = 0;
+    selectedNode = null;
+    selectedPin = null;
+    selectedBox = null;
+    selectedTag = null;
+    selectedImage = imageIndex;
+    selectedImageMesh = context.images[imageIndex];
+    cursorConnectionSource = null;
+    updateDeveloperHud();
+    return true;
+}
+
+function applyEditorNodeSize(contextIndex, nodeIndex, size) {
+    const context = contexts[contextIndex];
+    if (!context?.tagData?.[nodeIndex]) return false;
+    if (Number(context.tagData[nodeIndex].size) === size) return false;
+    context.tagData[nodeIndex].size = size;
+    const pin = context.pins[nodeIndex];
+    const box = context.boxes[nodeIndex];
+    const tag = context.tags[nodeIndex];
+    const originalSize = pin?.originalSize || size;
+    const ratio = size / originalSize;
+    if (pin) {
+        pin.scale.setScalar(ratio);
+        pin.userData.baseScale = ratio;
+    }
+    if (box) {
+        box.scale.setScalar(ratio);
+        box.userData.baseScale = ratio;
+    }
+    if (tag) {
+        const tagScale = size / 100000;
+        tag.scale.setScalar(tagScale);
+        tag.userData.baseScale = tagScale;
+    }
+    refreshNode(contextIndex, nodeIndex);
+    return true;
+}
+
+function setEditorNodesSize(contextIndex, requestedIndices, requestedSize) {
+    const context = contexts[contextIndex];
+    const targets = [...new Set(requestedIndices || [])].filter((index) => Number.isInteger(index) && context?.tagData?.[index]);
+    if (!targets.length) return;
+    const size = THREE.MathUtils.clamp(Number(requestedSize) || 5, 5, 500);
+    const before = snapshotEditorContext(contextIndex);
+    const changed = targets.reduce((count, nodeIndex) => count + Number(applyEditorNodeSize(contextIndex, nodeIndex, size)), 0);
+    if (changed) commitEditorMutation(`Set ${changed} node${changed === 1 ? '' : 's'} to size ${size}`, contextIndex, before);
+}
+
+function setEditorNodesColor(contextIndex, requestedIndices, requestedColor) {
+    const context = contexts[contextIndex];
+    const color = Number(requestedColor);
+    const targets = [...new Set(requestedIndices || [])].filter((index) => Number.isInteger(index) && context?.tagData?.[index]);
+    if (!targets.length || !boxMaterials[color]) return;
+    const before = snapshotEditorContext(contextIndex);
+    let changed = 0;
+    targets.forEach((nodeIndex) => {
+        if (Number(context.tagData[nodeIndex].color) === color) return;
+        context.tagData[nodeIndex].color = color;
+        refreshNodeMaterial(contextIndex, nodeIndex);
+        changed++;
+    });
+    if (changed) commitEditorMutation(`Changed color of ${changed} node${changed === 1 ? '' : 's'}`, contextIndex, before);
+}
+
+function deleteEditorNodes(contextIndex, requestedIndices) {
+    const context = contexts[contextIndex];
+    if (!context || !isEditableContext(contextIndex)) return;
+    const targets = [...new Set(requestedIndices)]
+        .filter((index) => Number.isInteger(index) && context.tagData[index])
+        .sort((a, b) => b - a);
+    if (!targets.length) return;
+    const before = snapshotEditorContext(contextIndex);
+    const removedIds = new Set(targets.map((index) => context.tagData[index]?.id).filter(Boolean));
+    clearContextVisuals(contextIndex);
+    targets.forEach((index) => context.tagData.splice(index, 1));
+    ['normal', 'arrow', 'dashed', 'tunnel'].forEach((kind) => {
+        const rows = ensureConnectionRows(context, kind);
+        for (let i = rows.length - 1; i >= 0; i--) {
+            if (removedIds.has(rows[i]?.[0])) rows.splice(i, 1);
+            else if (Array.isArray(rows[i])) {
+                rows[i] = rows[i].filter((entry, entryIndex) => entryIndex === 0 || !removedIds.has(typeof entry === 'string' ? entry : entry?.id || entry?.target || entry?.to));
+            }
+        }
+    });
+    rebuildContextVisuals(contextIndex).catch((error) => {
+        console.error('Mindmap rebuild after deletion failed:', error);
+        setDeveloperStatus('Node deleted, but the map could not be fully redrawn.');
+    });
+    clearEditorSelection();
+    commitEditorMutation(`Deleted ${targets.length} node${targets.length === 1 ? '' : 's'}`, contextIndex, before);
+}
+
+function toggleEditorMultiSelection(contextIndex, nodeIndex) {
+    const context = contexts[contextIndex];
+    if (!context?.tagData?.[nodeIndex]) return;
+    const previousPrimary = selectedContext === contextIndex ? selectedNode : null;
+    if (selectedContext !== contextIndex) selectedNodes.length = 0;
+    if (selectedNodes.length === 0 && Number.isInteger(previousPrimary) && previousPrimary !== nodeIndex && context.tagData[previousPrimary]) {
+        selectedNodes.push(previousPrimary);
+    }
+    const existing = selectedNodes.indexOf(nodeIndex);
+    if (existing >= 0) selectedNodes.splice(existing, 1);
+    else selectedNodes.push(nodeIndex);
+
+    if (selectedNodes.length === 0) {
+        clearEditorSelection();
+        setDeveloperStatus('Selection cleared.');
+        return;
+    }
+    const primaryIndex = selectedNodes.includes(nodeIndex) ? nodeIndex : selectedNodes[selectedNodes.length - 1];
+    selectEditorNode(contextIndex, primaryIndex);
+    setDeveloperStatus(`${selectedNodes.length} node${selectedNodes.length === 1 ? '' : 's'} selected.`);
+}
+
+function startCursorConnectionFromNodes(kind, contextIndex, requestedIndices) {
+    const context = contexts[contextIndex];
+    const nodeIndices = [...new Set(requestedIndices || [])].filter((index) => Number.isInteger(index) && context?.tagData?.[index]);
+    if (!nodeIndices.length) return;
+    selectEditorNode(contextIndex, nodeIndices[nodeIndices.length - 1]);
+    selectedNodes.splice(0, selectedNodes.length, ...nodeIndices);
+    cursorConnectionMode = kind;
+    cursorConnectionSource = {
+        contextIndex,
+        nodeIndices,
+        label: nodeIndices.length === 1
+            ? context.tagData[nodeIndices[0]]?.text || context.tagData[nodeIndices[0]]?.id
+            : `${nodeIndices.length} selected nodes`,
+    };
+    setDeveloperStatus(`${nodeIndices.length} connection source${nodeIndices.length === 1 ? '' : 's'} selected. Click a target for ${kind} connection${nodeIndices.length === 1 ? '' : 's'}.`);
+}
+
+function toggleSelectedConnections(kind) {
+    const targets = getSelectedEditorNodeIndices();
+    if (targets.length < 2) {
+        setDeveloperStatus('Select at least two nodes (A) to edit connections.');
+        return;
+    }
+    const before = snapshotEditorContext(selectedContext);
+    let added = 0;
+    for (let i = 1; i < targets.length; i++) {
+        if (toggleConnectionBetween(selectedContext, targets[0], targets[i], kind)) added++;
+    }
+    commitEditorMutation(`${kind} connections updated (${added} added)`, selectedContext, before);
+}
+
+function openTagInput(mode, contextIndex, nodeIndex = null, placement = {}) {
+    const tagInput = document.getElementById('tagInput');
+    const tagInputPanel = document.getElementById('tagInputPanel');
+    if (!tagInput || !tagInputPanel || !isEditableContext(contextIndex)) return;
+    developerContextMenu.close();
+    const latLng = placement.latLng || (mode === 'create' ? getPointerLatLngForContext(contextIndex) : null);
+    const clientX = Number.isFinite(placement.x) ? placement.x : pointerClient.x;
+    const clientY = Number.isFinite(placement.y) ? placement.y : pointerClient.y;
+    tagInputMode = { mode, contextIndex, nodeIndex, latLng };
+    focusElement = 'tagInput';
+    tagInputPanel.hidden = false;
+    tagInputPanel.style.display = 'block';
+    tagInputPanel.style.left = `${Math.max(8, Math.min(clientX + 12, window.innerWidth - 352))}px`;
+    tagInputPanel.style.top = `${Math.max(8, Math.min(clientY + 12, window.innerHeight - 190))}px`;
+    tagInput.value = mode === 'edit' ? contexts[contextIndex]?.tagData?.[nodeIndex]?.text || '' : '';
+    tagInput.placeholder = mode === 'edit' ? 'Edit node text' : 'New node text';
+    tagInput.focus();
+    tagInput.select();
+    setDeveloperStatus(mode === 'edit' ? 'Editing node text. Enter saves; Shift+Enter adds a line.' : 'Creating node. Enter saves; Escape cancels.');
+}
+
+function openSelectedNodeTextEditor() {
+    if (!Number.isInteger(selectedNode) || !contexts[selectedContext]?.tagData?.[selectedNode]) {
+        setDeveloperStatus('Select a node before editing its text.');
+        return;
+    }
+    openTagInput('edit', selectedContext, selectedNode);
+}
+
 function ensureSettlementMapLayer() {
     if (!settlementMapLayer && jaranius) {
         settlementMapLayer = new SettlementMapLayer({
@@ -578,6 +1354,7 @@ function ensureSettlementMapLayer() {
             contexts,
             getSunWorldPosition: () => planetEnvironment.getSunWorldPosition(),
             getCameraWorldPosition: (target) => camera.getWorldPosition(target),
+            terrainSampler: proceduralPlanet || undefined,
         });
     }
     return settlementMapLayer;
@@ -780,31 +1557,52 @@ function redrawDeveloperConnections(contextIndex) {
 }
 
 function printSelectedMindmapDataFile() {
-    console.log(serializeMindmapDataFile(contexts[selectedContext]));
+    if (!developer || !isEditableContext(selectedContext)) {
+        setDeveloperStatus('This context cannot be printed.');
+        return null;
+    }
+    const context = contexts[selectedContext];
+    const source = serializeMindmapDataFile(context);
+    console.groupCollapsed(`Mindmap data · ${context.name} · ${context.tagData.length} nodes`);
+    console.log(source);
+    if (context.imageData?.length) console.log('Image data:', cloneEditorData(context.imageData));
+    console.groupEnd();
+    const imageSummary = context.imageData?.length ? `, ${context.imageData.length} images` : '';
+    setDeveloperStatus(`Printed ${context.name} data (${context.tagData.length} nodes${imageSummary}) to the console.`);
+    return source;
 }
 
 async function saveActiveMindmapDataFile() {
     if (!developer) return;
-
-    if (selectedContext !== 0) {
-        const message = 'Save works for the planet context only.';
-        setDeveloperStatus(message);
-        console.warn(message);
+    if (!isEditableContext(selectedContext)) {
+        setDeveloperStatus('This context is not editable.');
         return;
     }
 
-    const context = contexts[0];
+    const contextIndex = selectedContext;
+    const context = contexts[contextIndex];
+    const contextName = context?.name || 'mindmap';
+    const savedSnapshot = snapshotEditorContext(contextIndex);
     setDeveloperStatus(`Saving ${context?.name || 'mindmap'} data...`);
 
     try {
         const result = await saveMindmapDataFile(context);
-        const message = `Saved ${result.file}`;
+        const message = result.imageFile
+            ? `Saved ${result.file} and ${result.imageFile}`
+            : `Saved ${result.file}`;
+        const dirtyKey = `${contextIndex}:${contextName}`;
+        editorBaselines.set(dirtyKey, savedSnapshot);
+        if (contexts[contextIndex]?.name === contextName) refreshEditorDirtyState(contextIndex);
+        else editorDirtyContexts.delete(dirtyKey);
         setDeveloperStatus(message);
         console.log(`Mindmap data saved to ${result.file}`);
+        if (result.imageFile) console.log(`Mindmap image data saved to ${result.imageFile}`);
+        return result;
     } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         setDeveloperStatus(`Save failed: ${message}`);
         console.error('Mindmap data save failed:', error);
+        return null;
     }
 }
 
@@ -814,12 +1612,78 @@ function getActiveIntersectObjects() {
     if (settlementMode && settlementMapLayer?.isVisible()) {
         return settlementMapLayer.intersectObjects;
     }
-    return intersectObjectsArray;
+    return intersectObjectsArray.filter((object) => {
+        let current = object;
+        while (current) {
+            if (current.visible === false) return false;
+            if (current === scene) return true;
+            current = current.parent;
+        }
+        return false;
+    });
+}
+
+function getActiveEditorNodeObjects() {
+    const objects = new Set(getActiveIntersectObjects());
+    contexts.forEach((context, contextIndex) => {
+        if (!isEditableContext(contextIndex)) return;
+        context.boxes?.forEach((box) => objects.add(box));
+        context.tags?.forEach((tag) => objects.add(tag));
+        context.images?.forEach((image) => objects.add(image));
+    });
+    return [...objects].filter((object) => {
+        if (!object || object.visible === false || !Number.isInteger(object.index)) return false;
+        let current = object;
+        while (current) {
+            if (current.visible === false) return false;
+            if (current === scene) return true;
+            current = current.parent;
+        }
+        return false;
+    });
+}
+
+function isMindmapImageObject(object) {
+    return Boolean(object?.userData?.isMindmapImage);
+}
+
+function isEditorIntersectionVisible(intersection) {
+    const contextIndex = intersection?.object?.context;
+    const context = contexts[contextIndex];
+    const destination = context?.tagDestination || context?.imageDestination;
+    if (!context || !destination || !Number.isFinite(Number(context.radius))) return true;
+
+    const center = destination.getWorldPosition(new THREE.Vector3());
+    const worldScale = destination.getWorldScale(new THREE.Vector3());
+    const radius = Number(context.radius) * Math.max(Math.abs(worldScale.x), Math.abs(worldScale.y), Math.abs(worldScale.z));
+    if (!Number.isFinite(radius) || radius <= 0) return true;
+    const cameraPosition = camera.getWorldPosition(new THREE.Vector3());
+    if (cameraPosition.distanceTo(center) <= radius + 0.01) return true;
+
+    const item = isMindmapImageObject(intersection.object)
+        ? context.imageData?.[intersection.object.index]
+        : context.tagData?.[intersection.object.index];
+    if (item && Number.isFinite(Number(item.lat)) && Number.isFinite(Number(item.lng))) {
+        const localAnchor = convertLatLngtoCartesian(Number(item.lat), Number(item.lng), Number(context.radius));
+        const worldAnchor = new THREE.Vector3(localAnchor.x, localAnchor.y, localAnchor.z).applyMatrix4(destination.matrixWorld);
+        const outward = worldAnchor.clone().sub(center).normalize();
+        const towardCamera = cameraPosition.clone().sub(worldAnchor).normalize();
+        if (outward.dot(towardCamera) <= 0) return false;
+    }
+
+    const surfaceHit = raycaster.ray.intersectSphere(new THREE.Sphere(center, radius), new THREE.Vector3());
+    if (!surfaceHit) return true;
+    const surfaceDistance = raycaster.ray.origin.distanceTo(surfaceHit);
+    return surfaceDistance + Math.max(0.015, radius * 0.003) >= intersection.distance;
+}
+
+function getVisibleIntersections(objects, recursive = false) {
+    return raycaster.intersectObjects(objects, recursive).filter(isEditorIntersectionVisible);
 }
 
 function scanPins() {
     raycaster.setFromCamera(pointer, camera);
-    const intersects = raycaster.intersectObjects(getActiveIntersectObjects());
+    const intersects = getVisibleIntersections(getActiveIntersectObjects());
 
     if (settlementMode && settlementMapLayer?.isVisible()) {
         settlementMapLayer.hover(intersects);
@@ -829,6 +1693,12 @@ function scanPins() {
 }
 
 //EVENTS KEYBOARD
+function getResizeDirectionForKey(event) {
+    if (event.code === 'NumpadAdd' || event.key === '+' || event.key === '=') return 1;
+    if (event.code === 'NumpadSubtract' || event.key === '-') return -1;
+    return 0;
+}
+
 document.addEventListener("keyup", onDocumentKeyUp, false);
 function onDocumentKeyUp(event) {
     const keyCode = event.which;
@@ -837,11 +1707,39 @@ function onDocumentKeyUp(event) {
     const digitMatch = /^Digit([1-9])$/.exec(code);
     const textEntryActive = isTextEntryTarget(event.target);
 
+    if (code === 'Enter' && suppressTagInputEnterKeyUp) {
+        suppressTagInputEnterKeyUp = false;
+        return;
+    }
+
     if (code === "Escape" && closeActiveOverlay()) {
         return;
     }
 
     if (textEntryActive) {
+        return;
+    }
+
+    const resizeDirection = getResizeDirectionForKey(event);
+    if (developer && resizeDirection && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        event.preventDefault();
+        resizeSelectedItems(resizeDirection);
+        return;
+    }
+
+    if (developer && (event.ctrlKey || event.metaKey) && code === 'KeyZ') {
+        if (event.shiftKey) redoEditorChange();
+        else undoEditorChange();
+        return;
+    }
+
+    if (developer && (event.ctrlKey || event.metaKey) && code === 'KeyY') {
+        redoEditorChange();
+        return;
+    }
+
+    if (code === 'Escape' && cursorConnectionMode !== 'off') {
+        setCursorConnectionMode('off');
         return;
     }
 
@@ -924,6 +1822,14 @@ function onDocumentKeyUp(event) {
             }
             if (developer && code === "KeyQ") { // Shift+Q
                 saveActiveMindmapDataFile();
+                return;
+            }
+            if (developer && code === "KeyO") { // Shift+O
+                toggleNodeSlideOpening();
+                return;
+            }
+            if (import.meta.env.DEV && code === "KeyJ") { // Shift+J
+                showCompassReviewView(compassReviewIndex + 1);
                 return;
             }
             if (window.appStatus === "orbit") {
@@ -1074,8 +1980,7 @@ function onDocumentKeyUp(event) {
 
         //Node management
         if (keyCode == 90 && developer == true) { //Z - clear selection
-            selectedNodes.length = 0
-            updateDeveloperHud()
+            clearEditorSelection()
         }
         if (keyCode == 65 && developer == true) { //A - add to selection
             if (selectedNode !== null) {
@@ -1083,7 +1988,7 @@ function onDocumentKeyUp(event) {
                     selectedNodes.push(selectedNode)
                 }
                 console.log(selectedNodes)
-                updateDeveloperHud()
+                setDeveloperStatus(`${selectedNodes.length} node${selectedNodes.length === 1 ? '' : 's'} selected.`)
             }
         }
         if (keyCode == 70 && developer == true) { //F - toggle fast move
@@ -1092,326 +1997,65 @@ function onDocumentKeyUp(event) {
             } else {
                 fastMove = true
             }
+            setDeveloperStatus(`Move mode: ${fastMove ? 'fast' : 'fine'}`)
         }
         if (keyCode == 81 && developer == true) { //Q - print tagdata and connectiondata
             printSelectedMindmapDataFile()
         }
         if (keyCode == 84 && developer == true) { //T - create new node
-            const tagInput = document.getElementById("tagInput");
             const activeElement = document.activeElement;
-            focusElement = "tagInput"
-
             if (event.key === 't' && pointer !== null && !(activeElement instanceof HTMLInputElement)) {
-                tagInput.style.display = "block";
-                tagInput.style.left = event.clientX + "px";
-                tagInput.style.top = event.clientY + "px";
-                tagInput.value = "";
-                tagInput.focus();
-
+                openTagInput('create', selectedContext);
                 event.preventDefault();
             }
         }
+        if (code === 'Enter' && developer == true && slideshowStatus.activeSlideshow === undefined) {
+            openSelectedNodeTextEditor();
+            return;
+        }
+        if (code === 'KeyK' && developer == true) {
+            cycleCursorConnectionMode();
+            return;
+        }
         if (keyCode == 88 && developer == true) { //X - remove node
-            if (selectedNode !== null) {
-                const index = intersectObjectsArray.indexOf(contexts[selectedContext].pins[selectedNode])
-                intersectObjectsArray.splice(index, 1)
-
-                const id = contexts[selectedContext].tagData[selectedNode].id
-
-                contexts[selectedContext].tagData.splice(selectedNode, 1)
-                contexts[selectedContext].connectionData.splice(selectedNode, 1)
-                if (contexts[selectedContext].arrowConnectionData !== undefined) contexts[selectedContext].arrowConnectionData.splice(selectedNode, 1)
-                if (contexts[selectedContext].dashedConnectionData !== undefined) contexts[selectedContext].dashedConnectionData.splice(selectedNode, 1)
-                if (contexts[selectedContext].tunnelConnectionData !== undefined) contexts[selectedContext].tunnelConnectionData.splice(selectedNode, 1)
-                contexts[selectedContext].pins.splice(selectedNode, 1)
-                contexts[selectedContext].boxes.splice(selectedNode, 1)
-                contexts[selectedContext].tags.splice(selectedNode, 1)
-                contexts[selectedContext].tagDestination.remove(selectedPin)
-                contexts[selectedContext].tagDestination.remove(selectedBox)
-                contexts[selectedContext].tagDestination.remove(selectedTag)
-
-                for (let i = 0; i < contexts[selectedContext].tagData.length; i++) {
-                    const index1 = findConnectionTargetIndex(contexts[selectedContext].connectionData[i], id)
-                    if (index1 !== -1) contexts[selectedContext].connectionData[i].splice(index1, 1)
-                    
-                    if (contexts[selectedContext].arrowConnectionData !== undefined) {
-                        const index2 = findConnectionTargetIndex(contexts[selectedContext].arrowConnectionData[i], id)
-                        if (index2 !== -1) contexts[selectedContext].arrowConnectionData[i].splice(index2, 1)
-                    }
-
-                    if (contexts[selectedContext].dashedConnectionData !== undefined) {
-                        const index3 = findConnectionTargetIndex(contexts[selectedContext].dashedConnectionData[i], id)
-                        if (index3 !== -1) contexts[selectedContext].dashedConnectionData[i].splice(index3, 1)
-                    }
-                    if (contexts[selectedContext].tunnelConnectionData !== undefined) {
-                        const index4 = findConnectionTargetIndex(contexts[selectedContext].tunnelConnectionData[i], id)
-                        if (index4 !== -1) contexts[selectedContext].tunnelConnectionData[i].splice(index4, 1)
-                    }
-                }
-
-                for (let i = selectedNode; i < contexts[selectedContext].tagData.length; i++) {
-                    contexts[selectedContext].pins[i].index -= 1
-                    contexts[selectedContext].boxes[i].index -= 1
-                    contexts[selectedContext].tags[i].index -= 1
-                }
-
-                hoveredPins.length = 0
-                selectedNode = null
-                selectedPin = null
-                selectedBox = null
-                selectedTag = null
-                redrawDeveloperConnections(selectedContext)
-            }           
+            deleteEditorNodes(selectedContext, getSelectedEditorNodeIndices())
         }
         if (keyCode == 82 && developer == true) { //R - create new connections
-            if (selectedNodes.length > 1) {
-                for (let i = 1; i < selectedNodes.length; i++){
-                    const targetId = contexts[selectedContext].tagData[selectedNodes[i]].id
-                    const row = contexts[selectedContext].connectionData[selectedNodes[0]]
-                    const index = findConnectionTargetIndex(row, targetId)
-                    if (index > -1) {
-                        row.splice(index, 1)
-                    } else row.push(targetId)
-                }
-
-                redrawDeveloperConnections(selectedContext)
-            
-            } 
+            toggleSelectedConnections('normal')
         }
         if (keyCode == 86 && developer == true) { //V - create new arrow connections
-            if (selectedNodes.length > 1) {
-                for (let i = 1; i < selectedNodes.length; i++){
-                    const targetId = contexts[selectedContext].tagData[selectedNodes[i]].id
-                    const row = contexts[selectedContext].arrowConnectionData[selectedNodes[0]]
-                    const index = findConnectionTargetIndex(row, targetId)
-                    if (index > -1) {
-                        row.splice(index, 1)
-                    } else row.push(targetId)
-                }
-
-                redrawDeveloperConnections(selectedContext)
-            } 
+            toggleSelectedConnections('arrow')
         }
         if (keyCode == 66 && developer == true) { //B - create new dashed connections
-            if (selectedNodes.length > 1) {
-                for (let i = 1; i < selectedNodes.length; i++){
-                    const targetId = contexts[selectedContext].tagData[selectedNodes[i]].id
-                    const row = contexts[selectedContext].dashedConnectionData[selectedNodes[0]]
-                    const index = findConnectionTargetIndex(row, targetId)
-                    if (index > -1) {
-                        row.splice(index, 1)
-                    } else row.push(targetId)
-                }
-
-                redrawDeveloperConnections(selectedContext)
-            } 
+            toggleSelectedConnections('dashed')
         }
         if (keyCode == 78 && developer == true) { //N - create new tunnel connections
-            if (selectedNodes.length > 1) {
-                for (let i = 1; i < selectedNodes.length; i++){
-                    const targetId = contexts[selectedContext].tagData[selectedNodes[i]].id
-                    const row = contexts[selectedContext].tunnelConnectionData[selectedNodes[0]]
-                    const index = findConnectionTargetIndex(row, targetId)
-                    if (index > -1) {
-                        row.splice(index, 1)
-                    } else row.push(targetId)
-                }
-
-                redrawDeveloperConnections(selectedContext)
-            } 
+            toggleSelectedConnections('tunnel')
         }
         
         if (keyCode == 87 && developer == true) { //W - redraw connections
             redrawDeveloperConnections(selectedContext)
         } 
         if (keyCode == 69 && developer == true) { //E - change color
-            if (selectedNodes.length > 1) {
-                selectedNodes.forEach((node) => {
-                    if (fastMove == true) contexts[selectedContext].tagData[node].color += 9
-                    contexts[selectedContext].tagData[node].color += 1
-                    if (contexts[selectedContext].tagData[node].color >= palette.length) contexts[selectedContext].tagData[node].color -= palette.length
-
-                    let color = contexts[selectedContext].tagData[node].color
-                    if (!boxMaterials[color]) {
-                        color = (Math.floor(color / 10) + 1) * 10
-                        contexts[selectedContext].tagData[node].color = color
-                    }
-                    console.log(color)
-
-                    if (hasOpenableSlides(contexts[selectedContext].tagData[node], developer)) {
-                        contexts[selectedContext].pins[node].material = pinMaterials[color]
-                    } else contexts[selectedContext].pins[node].material = pinWireframeMaterials[color]
-                    contexts[selectedContext].boxes[node].material = boxMaterials[color]
-            })
-
-            } else if (selectedNode) {
-                if (fastMove == true) contexts[selectedContext].tagData[selectedNode].color += 9
-                contexts[selectedContext].tagData[selectedNode].color += 1
-                if (contexts[selectedContext].tagData[selectedNode].color >= palette.length) contexts[selectedContext].tagData[selectedNode].color -= palette.length
-                
-                let color = contexts[selectedContext].tagData[selectedNode].color
-                if (!boxMaterials[color]) {
-                    color = (Math.floor(color / 10) + 1) * 10
-                    contexts[selectedContext].tagData[selectedNode].color = color
-                } 
-                console.log(color)
-
-                if (hasOpenableSlides(contexts[selectedContext].tagData[selectedNode], developer)) {
-                    selectedPin.material = pinMaterials[color]
-                } else selectedPin.material = pinWireframeMaterials[color]
-                selectedBox.material = boxMaterials[color]
-                
-            }
+            changeSelectedNodeColors(1)
         }
         if (keyCode == 68 && developer == true) { //D - change color
-            if (selectedNodes.length > 1) {
-                selectedNodes.forEach((node) => {
-                    if (fastMove == true) contexts[selectedContext].tagData[node].color -= 9
-
-                    let color = contexts[selectedContext].tagData[node].color
-                    do {
-                        color -= 1
-                        if (color < 0) color += palette.length
-                        console.log(color)
-                        contexts[selectedContext].tagData[node].color = color
-                    } while (!boxMaterials[color])
-
-                    if (hasOpenableSlides(contexts[selectedContext].tagData[node], developer)) {
-                        contexts[selectedContext].pins[node].material = pinMaterials[color]
-                    } else contexts[selectedContext].pins[node].material = pinWireframeMaterials[color]
-                    contexts[selectedContext].boxes[node].material = boxMaterials[color]
-            })
-
-            } else if (selectedNode) {
-                if (fastMove == true) contexts[selectedContext].tagData[selectedNode].color -= 9
-                
-                let color = contexts[selectedContext].tagData[selectedNode].color
-                do {
-                    color -= 1
-                    if (color < 0) color += palette.length
-                    console.log(color)
-                    contexts[selectedContext].tagData[selectedNode].color = color
-                } while (!boxMaterials[color])
-
-                if (hasOpenableSlides(contexts[selectedContext].tagData[selectedNode], developer)) {
-                    selectedPin.material = pinMaterials[color]
-                } else selectedPin.material = pinWireframeMaterials[color]
-                selectedBox.material = boxMaterials[color]
-                
-            }
+            changeSelectedNodeColors(-1)
         }
 
-        if (keyCode == 187 && developer == true) { //+
-            let originalSize = 0
-            let size = 0
-
-            if (selectedNodes.length > 1) {
-                selectedNodes.forEach((node) => {
-                    originalSize = contexts[selectedContext].pins[node].originalSize
-                    contexts[selectedContext].tagData[node].size += 5
-
-                    size = contexts[selectedContext].tagData[node].size
-                    const ratio = size / originalSize
-                    const tagScale = size / 100000
-                    const pin = contexts[selectedContext].pins[node]
-                    const box = contexts[selectedContext].boxes[node]
-                    const tag = contexts[selectedContext].tags[node]
-                    if (pin) {
-                        pin.scale.set(ratio, ratio, ratio)
-                        pin.userData.baseScale = pin.scale.x
-                    }
-                    if (box) {
-                        box.scale.set(ratio, ratio, ratio)
-                        box.userData.baseScale = box.scale.x
-                    }
-                    if (tag) {
-                        tag.scale.set(tagScale, tagScale, tagScale)
-                        tag.userData.baseScale = tag.scale.x
-                    }
-                    refreshNode(selectedContext, node)
-                })
-
-            }else if (selectedNode) {
-                originalSize = contexts[selectedContext].pins[selectedNode].originalSize
-                contexts[selectedContext].tagData[selectedNode].size += 5
-
-                size = contexts[selectedContext].tagData[selectedNode].size
-                const ratio = size / originalSize
-                const tagScale = size / 100000
-                selectedPin.scale.set(ratio, ratio, ratio)
-                selectedPin.userData.baseScale = selectedPin.scale.x
-                if (selectedBox) {
-                    selectedBox.scale.set(ratio, ratio, ratio)
-                    selectedBox.userData.baseScale = selectedBox.scale.x
-                }
-                if (selectedTag) {
-                    selectedTag.scale.set(tagScale, tagScale, tagScale)
-                    selectedTag.userData.baseScale = selectedTag.scale.x
-                }
-                refreshNode(selectedContext, selectedNode)
-            }
-        }
-        if (keyCode == 189 && developer == true) { //-
-            let originalSize = 0
-            let size = 0
-
-            if (selectedNodes.length > 1) {
-                selectedNodes.forEach((node) => {
-                    originalSize = contexts[selectedContext].pins[node].originalSize
-                    contexts[selectedContext].tagData[node].size -= 5
-
-                    size = contexts[selectedContext].tagData[node].size
-                    const ratio = size / originalSize
-                    const tagScale = size / 100000
-                    const pin = contexts[selectedContext].pins[node]
-                    const box = contexts[selectedContext].boxes[node]
-                    const tag = contexts[selectedContext].tags[node]
-                    if (pin) {
-                        pin.scale.set(ratio, ratio, ratio)
-                        pin.userData.baseScale = pin.scale.x
-                    }
-                    if (box) {
-                        box.scale.set(ratio, ratio, ratio)
-                        box.userData.baseScale = box.scale.x
-                    }
-                    if (tag) {
-                        tag.scale.set(tagScale, tagScale, tagScale)
-                        tag.userData.baseScale = tag.scale.x
-                    }
-                    refreshNode(selectedContext, node)
-                })
-
-            }else if (selectedNode) {
-                originalSize = contexts[selectedContext].pins[selectedNode].originalSize
-                contexts[selectedContext].tagData[selectedNode].size -= 5
-
-                size = contexts[selectedContext].tagData[selectedNode].size
-                const ratio = size / originalSize
-                const tagScale = size / 100000
-                selectedPin.scale.set(ratio, ratio, ratio)
-                selectedPin.userData.baseScale = selectedPin.scale.x
-                if (selectedBox) {
-                    selectedBox.scale.set(ratio, ratio, ratio)
-                    selectedBox.userData.baseScale = selectedBox.scale.x
-                }
-                if (selectedTag) {
-                    selectedTag.scale.set(tagScale, tagScale, tagScale)
-                    selectedTag.userData.baseScale = selectedTag.scale.x
-                }
-                refreshNode(selectedContext, selectedNode)
-            }
-        }
     }
 }
 
 function isTextEntryTarget(target) {
     if (!(target instanceof Element)) return false;
-    return Boolean(target.closest('input, textarea, select, [contenteditable="true"], #developer-slide-lab'));
+    return Boolean(target.closest('input, textarea, select, button, [contenteditable="true"], #developer-slide-lab, #developer-hud, #developer-context-menu, #tagInputPanel'));
 }
 
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     const keyCode = event.which;
+    const isMoveKey = keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39;
+    const movementBefore = developer && isMoveKey ? snapshotEditorContext(selectedContext) : null;
 
     if (window.appStatus === "silence") {
         return;
@@ -1443,7 +2087,7 @@ function onDocumentKeyDown(event) {
                 contexts[selectedContext].tagData[selectedNodes[node]].lat = posLatLng.lat.toFixed(1)
                 contexts[selectedContext].tagData[selectedNodes[node]].lng = posLatLng.lng.toFixed(1)
                 refreshNode(selectedContext, selectedNodes[node])
-                if (selectedContext === 0) markSettlementMapDirty()
+                markEditorDirty(selectedContext)
             }
         }
     } else if (selectedPin != null && developer == true  && slideshowStatus.activeSlideshow == undefined && focusElement !== "tagInput" && !flyControls.enabled) {
@@ -1475,69 +2119,190 @@ function onDocumentKeyDown(event) {
             contexts[selectedContext].tagData[selectedNode].lat = posLatLng.lat.toFixed(1)
             contexts[selectedContext].tagData[selectedNode].lng = posLatLng.lng.toFixed(1)
             refreshNode(selectedContext, selectedNode)
-            if (selectedContext === 0) markSettlementMapDirty()
+            markEditorDirty(selectedContext)
         }
-    }     
+    }
+    if (movementBefore && isMoveKey) {
+        commitEditorMutation('Moved node', selectedContext, movementBefore)
+    }
 };
 
 let focusElement //create new Node
-document.getElementById("tagInput").addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        raycaster.setFromCamera(pointer, camera);
-        const intersects = raycaster.intersectObjects(jaraniusCenter.children, false); //add support for spiralCenter?
+function getPointerLatLngForContext(contextIndex) {
+    const context = contexts[contextIndex];
+    if (!context?.tagDestination) return null;
+    raycaster.setFromCamera(pointer, camera);
+    context.tagDestination.updateMatrixWorld(true);
+    const inverseMatrix = new THREE.Matrix4().copy(context.tagDestination.matrixWorld).invert();
+    const localRay = raycaster.ray.clone().applyMatrix4(inverseMatrix);
+    const localPoint = new THREE.Vector3();
+    if (!localRay.intersectSphere(new THREE.Sphere(new THREE.Vector3(), context.radius), localPoint)) return null;
+    return convertCartesiantoLatLng(localPoint.x, localPoint.y, localPoint.z);
+}
 
-        if (intersects.length > 0) {
-            const point = intersects[0].point;
-            const latLng = convertCartesiantoLatLng(point.x, point.y, point.z);
-
-            console.log(latLng)
-
-            const id = generateUUID()
-
-            const newItem = {
-                id: id,
-                text: this.value,
-                lat: latLng.lat.toFixed(1),
-                lng: latLng.lng.toFixed(1),
-                color: 22,
-                size: 40,
-                slides: undefined
-            };
-            const newTagDestination = contexts[selectedContext].tagData
-            const newConnectionsDestination = contexts[selectedContext].connectionData
-            const newArrowConnectionsDestination = contexts[selectedContext].arrowConnectionData
-            const newDashedConnectionsDestination = contexts[selectedContext].dashedConnectionData
-            const newTunnelConnectionsDestination = contexts[selectedContext].tunnelConnectionData
-
-            newTagDestination.push(newItem)
-            newConnectionsDestination.push([id])
-            if (newArrowConnectionsDestination !== undefined) newArrowConnectionsDestination.push([id])
-            if (newDashedConnectionsDestination !== undefined) newDashedConnectionsDestination.push([id])
-            if (newTunnelConnectionsDestination !== undefined) newTunnelConnectionsDestination.push([id])
-            if (selectedContext === 0) markSettlementMapDirty()
-
-            const globalIndex = newTagDestination.length - 1
-            updateDeveloperHud();
-            const creationPromise = createTags([newItem], contexts[selectedContext].tagDestination, contexts[selectedContext].radius, selectedContext, globalIndex)
-            selectedNode = globalIndex
-            selectedPin = contexts[selectedContext].pins[globalIndex]
-            if (selectedPin) selectedPin.userData.baseScale = selectedPin.scale.x
-            creationPromise.then(() => {
-                selectedBox = contexts[selectedContext].boxes[globalIndex]
-                if (selectedBox) selectedBox.userData.baseScale = selectedBox.scale.x
-                selectedTag = contexts[selectedContext].tags[globalIndex]
-                if (selectedTag) selectedTag.userData.baseScale = selectedTag.scale.x
-                refreshNode(selectedContext, globalIndex)
-                updateDeveloperHud();
-            })
-
-            this.style.display = "none";
-            focusElement = undefined
-        }
+function closeTagInput() {
+    const input = document.getElementById('tagInput');
+    const panel = document.getElementById('tagInputPanel');
+    if (panel) {
+        panel.hidden = true;
+        panel.style.display = 'none';
     }
-})
+    if (input) {
+        input.blur();
+        input.value = '';
+    }
+    focusElement = undefined;
+    tagInputMode = null;
+}
+
+function commitTagInput() {
+    const input = document.getElementById('tagInput');
+    const mode = tagInputMode ? { ...tagInputMode } : null;
+    const text = input?.value.trim() || '';
+    if (!mode || !text) {
+        setDeveloperStatus('Node text cannot be empty.');
+        return;
+    }
+
+    const context = contexts[mode.contextIndex];
+    if (!context || !isEditableContext(mode.contextIndex)) {
+        closeTagInput();
+        return;
+    }
+    const before = snapshotEditorContext(mode.contextIndex);
+
+    if (mode.mode === 'edit') {
+        const item = context.tagData[mode.nodeIndex];
+        if (!item) {
+            closeTagInput();
+            return;
+        }
+        item.text = text;
+        closeTagInput();
+        commitEditorMutation('Edited node text', mode.contextIndex, before);
+        rebuildNodeLabel(mode.contextIndex, mode.nodeIndex).then(() => {
+            selectedBox = context.boxes[mode.nodeIndex] || null;
+            selectedTag = context.tags[mode.nodeIndex] || null;
+            refreshNode(mode.contextIndex, mode.nodeIndex);
+            updateDeveloperHud();
+        }).catch((error) => {
+            console.error('Node label rebuild failed:', error);
+            setDeveloperStatus('Text saved, but the label could not be redrawn.');
+        });
+        return;
+    }
+
+    const latLng = mode.latLng;
+    if (!latLng) {
+        setDeveloperStatus('Point at the active map surface before creating a node.');
+        return;
+    }
+
+    const id = generateUUID();
+    const newItem = {
+        id,
+        text,
+        lat: Number(latLng.lat.toFixed(1)),
+        lng: Number(latLng.lng.toFixed(1)),
+        color: 22,
+        size: 40,
+        slides: undefined,
+    };
+    context.tagData.push(newItem);
+    ['normal', 'arrow', 'dashed', 'tunnel'].forEach((kind) => ensureConnectionRows(context, kind));
+    const globalIndex = context.tagData.length - 1;
+    const creationPromise = createTags([newItem], context.tagDestination, context.radius, mode.contextIndex, globalIndex);
+    selectedContext = mode.contextIndex;
+    selectedNode = globalIndex;
+    selectedPin = context.pins[globalIndex] || null;
+    closeTagInput();
+    commitEditorMutation('Created node', mode.contextIndex, before);
+    creationPromise.then(() => {
+        selectedBox = context.boxes[globalIndex] || null;
+        selectedTag = context.tags[globalIndex] || null;
+        refreshNode(mode.contextIndex, globalIndex);
+        updateDeveloperHud();
+    }).catch((error) => {
+        console.error('New node label creation failed:', error);
+        setDeveloperStatus('Node created, but its label could not be drawn.');
+    });
+}
+
+document.getElementById('tagInput').addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+        closeTagInput();
+        setDeveloperStatus('Node edit cancelled.');
+        return;
+    }
+    if (event.key !== 'Enter' || event.shiftKey || event.isComposing) return;
+    event.preventDefault();
+    event.stopPropagation();
+    suppressTagInputEnterKeyUp = true;
+    commitTagInput();
+});
+document.getElementById('tagInputSave').addEventListener('click', commitTagInput);
+document.getElementById('tagInputCancel').addEventListener('click', () => {
+    closeTagInput();
+    setDeveloperStatus('Node edit cancelled.');
+});
 
 //EVENTS MOUSE
+function openDeveloperMindmapContextMenu(event) {
+    if (!developer || openSlidesOnNodeClick || settlementMode || isTextEntryTarget(event.target)) return;
+    event.preventDefault();
+    event.stopPropagation();
+
+    const x = event.clientX;
+    const y = event.clientY;
+    pointer.x = (x / window.innerWidth) * 2 - 1;
+    pointer.y = -(y / window.innerHeight) * 2 + 1;
+    pointerClient = { x, y };
+    raycaster.setFromCamera(pointer, camera);
+
+    const pin = getVisibleIntersections(getActiveEditorNodeObjects(), false)[0]?.object || null;
+    if (isMindmapImageObject(pin)) {
+        selectEditorImage(pin.context, pin.index);
+        setDeveloperStatus('Image selected. Drag to move it or use +/- to resize it.');
+        return;
+    }
+    const contextIndex = pin?.context ?? selectedContext;
+    if (!isEditableContext(contextIndex)) return;
+    const preserveGroup = Boolean(
+        pin
+        && selectedContext === contextIndex
+        && selectedNodes.length > 1
+        && selectedNodes.includes(pin.index)
+    );
+    if (pin) {
+        if (!preserveGroup) selectedNodes.length = 0;
+        selectEditorNode(contextIndex, pin.index);
+    }
+
+    const nodeIndex = pin?.index ?? null;
+    const node = Number.isInteger(nodeIndex) ? contexts[contextIndex]?.tagData?.[nodeIndex] : null;
+    const targetIndices = node
+        ? preserveGroup ? [...selectedNodes] : [nodeIndex]
+        : [];
+    developerContextMenu.open({
+        x,
+        y,
+        latLng: getPointerLatLngForContext(contextIndex),
+        contextIndex,
+        nodeIndex,
+        node,
+        targetIndices,
+        selectionCount: targetIndices.length,
+        size: Number(node?.size) || 40,
+        colorIndex: Number(node?.color) || 0,
+        palette,
+        inMultiSelection: Number.isInteger(nodeIndex) && selectedNodes.includes(nodeIndex),
+    });
+}
+
+window.addEventListener('contextmenu', openDeveloperMindmapContextMenu);
+
 let initialTouchPosition = { x: null, y: null };
 const tapMoveThreshold = 30; // px movement allowed to still count as a tap/click
 let orbitDragging = false; // suppress slide clicks while orbiting
@@ -1556,6 +2321,60 @@ function onPointerMove(event) {
 
     pointer.x = (cx / window.innerWidth) * 2 - 1;
     pointer.y = -(cy / window.innerHeight) * 2 + 1;
+    pointerClient = { x: cx, y: cy };
+
+    if (developer && imageDragState) {
+        const dx = cx - imageDragState.startX;
+        const dy = cy - imageDragState.startY;
+        if (!imageDragState.active && (dx * dx + dy * dy) > 25) imageDragState.active = true;
+        if (imageDragState.active) {
+            const latLng = getPointerLatLngForContext(imageDragState.contextIndex);
+            if (latLng) {
+                const targetPosition = convertLatLngtoCartesian(latLng.lat, latLng.lng, 1);
+                const targetVector = new THREE.Vector3(targetPosition.x, targetPosition.y, targetPosition.z).normalize();
+                const rotation = new THREE.Quaternion().setFromUnitVectors(imageDragState.anchorVector, targetVector);
+                const rotated = imageDragState.startVector.clone().applyQuaternion(rotation).normalize();
+                const nextLatLng = convertCartesiantoLatLng(rotated.x, rotated.y, rotated.z);
+                const item = contexts[imageDragState.contextIndex]?.imageData?.[imageDragState.imageIndex];
+                if (item) {
+                    item.lat = Number(nextLatLng.lat.toFixed(1));
+                    item.lng = Number(nextLatLng.lng.toFixed(1));
+                    refreshMindmapImage(imageDragState.contextIndex, imageDragState.imageIndex);
+                }
+            }
+            document.body.style.cursor = 'grabbing';
+            selectState = false;
+            event.preventDefault();
+        }
+        return;
+    }
+
+    if (developer && nodeDragState) {
+        const dx = cx - nodeDragState.startX;
+        const dy = cy - nodeDragState.startY;
+        if (!nodeDragState.active && (dx * dx + dy * dy) > 25) nodeDragState.active = true;
+        if (nodeDragState.active) {
+            const latLng = getPointerLatLngForContext(nodeDragState.contextIndex);
+            if (latLng) {
+                const targetPosition = convertLatLngtoCartesian(latLng.lat, latLng.lng, 1);
+                const targetVector = new THREE.Vector3(targetPosition.x, targetPosition.y, targetPosition.z).normalize();
+                const rotation = new THREE.Quaternion().setFromUnitVectors(nodeDragState.anchorVector, targetVector);
+                nodeDragState.startVectors.forEach(({ nodeIndex, vector }) => {
+                    const rotated = vector.clone().applyQuaternion(rotation).normalize();
+                    const nextLatLng = convertCartesiantoLatLng(rotated.x, rotated.y, rotated.z);
+                    const item = contexts[nodeDragState.contextIndex]?.tagData?.[nodeIndex];
+                    if (!item) return;
+                    item.lat = Number(nextLatLng.lat.toFixed(1));
+                    item.lng = Number(nextLatLng.lng.toFixed(1));
+                    refreshNode(nodeDragState.contextIndex, nodeIndex);
+                });
+            }
+            document.body.style.cursor = 'grabbing';
+            selectState = false;
+            event.preventDefault();
+        }
+        return;
+    }
 
     // If we've moved too far since pointerdown, cancel click intent
     if (initialTouchPosition.x !== null && initialTouchPosition.y !== null) {
@@ -1599,20 +2418,81 @@ async function onPointerClick(event) {
     pointer.y = -(y / window.innerHeight) * 2 + 1;
   
     raycaster.setFromCamera(pointer, camera);
-    const intersects = raycaster.intersectObjects(getActiveIntersectObjects());
+    const visibleIntersections = getVisibleIntersections(developer ? getActiveEditorNodeObjects() : getActiveIntersectObjects());
+    const intersects = developer && cursorConnectionMode !== 'off'
+        ? visibleIntersections.filter(({ object }) => !isMindmapImageObject(object))
+        : visibleIntersections;
   
     if (intersects.length > 0) {
-        selectedPin = intersects[0].object;
-
+        const clickedObject = intersects[0].object;
+        if (developer && isMindmapImageObject(clickedObject)) {
+            selectEditorImage(clickedObject.context, clickedObject.index);
+            setDeveloperStatus('Image selected. Drag to move it or use +/- to resize it.');
+            return;
+        }
+        const clickedContext = clickedObject.context;
+        const clickedNode = clickedObject.index;
+        const clickedPin = contexts[clickedContext]?.pins?.[clickedNode] || clickedObject;
         const previousContext = selectedContext;
-        selectedContext = intersects[0].object.context;
-        if (previousContext !== selectedContext) selectedNodes.length = 0;
-        selectedNode = intersects[0].object.index;
+        if (developer && cursorConnectionMode === 'off' && event.shiftKey) {
+            toggleEditorMultiSelection(clickedContext, clickedNode);
+            return;
+        }
+
+        selectedContext = clickedContext;
+        if (previousContext !== clickedContext) {
+            selectedNodes.length = 0;
+            cursorConnectionSource = null;
+            developerHud.setStatus('');
+        }
+        if (developer && cursorConnectionMode === 'off') selectedNodes.length = 0;
+        selectedPin = clickedPin;
+        selectedNode = clickedNode;
         selectedBox = contexts[selectedContext]?.boxes[selectedNode] || null;
         selectedTag = contexts[selectedContext]?.tags[selectedNode] || null;
+        selectedImage = null;
+        selectedImageMesh = null;
         updateDeveloperHud();
 
-    if (camera.position.distanceTo(selectedPin.position) < 10 && hasOpenableSlides(contexts[selectedContext].tagData[selectedNode], developer) && slideshowStatus.activeSlideshow == undefined) {
+        if (developer && cursorConnectionMode !== 'off') {
+            if (!isEditableContext(selectedContext)) {
+                setDeveloperStatus('This context does not support connections.');
+                return;
+            }
+            if (!cursorConnectionSource || cursorConnectionSource.contextIndex !== selectedContext) {
+                const sourceIndices = selectedNodes.length > 1 && selectedNodes.includes(selectedNode)
+                    ? [...selectedNodes]
+                    : [selectedNode];
+                startCursorConnectionFromNodes(cursorConnectionMode, selectedContext, sourceIndices);
+                return;
+            }
+            const sourceIndices = cursorConnectionSource.nodeIndices
+                || (Number.isInteger(cursorConnectionSource.nodeIndex) ? [cursorConnectionSource.nodeIndex] : []);
+            const actionableSources = sourceIndices.filter((nodeIndex) => nodeIndex !== selectedNode);
+            if (!actionableSources.length) {
+                cursorConnectionSource = null;
+                setDeveloperStatus('Connection source cleared.');
+                return;
+            }
+            const before = snapshotEditorContext(selectedContext);
+            let added = 0;
+            let removed = 0;
+            actionableSources.forEach((sourceIndex) => {
+                if (toggleConnectionBetween(selectedContext, sourceIndex, selectedNode, cursorConnectionMode)) added++;
+                else removed++;
+            });
+            const sourceLabel = cursorConnectionSource.label;
+            cursorConnectionSource = null;
+            commitEditorMutation(
+                `${cursorConnectionMode} connections from ${sourceLabel}: ${added} added${removed ? `, ${removed} removed` : ''}`,
+                selectedContext,
+                before,
+            );
+            return;
+        }
+
+    const selectedPinWorldPosition = selectedPin.getWorldPosition(new THREE.Vector3());
+    if (openSlidesOnNodeClick && camera.position.distanceTo(selectedPinWorldPosition) < 10 && hasOpenableSlides(contexts[selectedContext].tagData[selectedNode], developer) && slideshowStatus.activeSlideshow == undefined) {
             slideshowStatus = await createSlideshowStatus(contexts[selectedContext].tagData[selectedNode].slides);
             await pushContent(slideshowStatus)
             if (window.appStatus == "flight") {
@@ -1631,7 +2511,8 @@ let connectionHandleDragOrbitWasEnabled = false;
 function processPointerUpEvent(event) {
     if (developer && isConnectionHandleDragActive()) {
         endConnectionHandleDrag();
-        markSettlementMapDirty();
+        commitEditorMutation('Adjusted connection curve', selectedContext, connectionHandleHistoryBefore);
+        connectionHandleHistoryBefore = null;
         orbitControls.enabled = connectionHandleDragOrbitWasEnabled;
         connectionHandleDragOrbitWasEnabled = false;
         selectState = false;
@@ -1639,6 +2520,43 @@ function processPointerUpEvent(event) {
         initialTouchPosition.y = null;
         event.preventDefault();
         return;
+    }
+
+    if (developer && imageDragState) {
+        const drag = imageDragState;
+        imageDragState = null;
+        orbitControls.enabled = drag.orbitWasEnabled;
+        document.body.style.cursor = 'default';
+        if (drag.active) {
+            selectEditorImage(drag.contextIndex, drag.imageIndex);
+            commitEditorMutation('Dragged image', drag.contextIndex, drag.before);
+            selectState = false;
+            initialTouchPosition.x = null;
+            initialTouchPosition.y = null;
+            event.preventDefault();
+            return;
+        }
+    }
+
+    if (developer && nodeDragState) {
+        const drag = nodeDragState;
+        nodeDragState = null;
+        orbitControls.enabled = drag.orbitWasEnabled;
+        document.body.style.cursor = 'default';
+        if (drag.active) {
+            selectedContext = drag.contextIndex;
+            selectedNode = drag.nodeIndex;
+            selectedPin = contexts[selectedContext]?.pins[selectedNode] || null;
+            selectedBox = contexts[selectedContext]?.boxes[selectedNode] || null;
+            selectedTag = contexts[selectedContext]?.tags[selectedNode] || null;
+            redrawDeveloperConnections(drag.contextIndex);
+            commitEditorMutation(`Dragged ${drag.nodeIndices.length} node${drag.nodeIndices.length === 1 ? '' : 's'}`, drag.contextIndex, drag.before);
+            selectState = false;
+            initialTouchPosition.x = null;
+            initialTouchPosition.y = null;
+            event.preventDefault();
+            return;
+        }
     }
 
     // Suppress click if we were orbit-dragging (OrbitControls active)
@@ -1653,20 +2571,100 @@ function processPointerUpEvent(event) {
   
   window.addEventListener('pointermove', onPointerMove);
     window.addEventListener('pointerdown', (event) => {
+        if (isTextEntryTarget(event.target)) {
+            selectState = false;
+            return;
+        }
+        if (event.button === 0) developerContextMenu.close();
         const isTouch = !!event.changedTouches;
         const cx = isTouch ? event.changedTouches[0].clientX : event.clientX;
         const cy = isTouch ? event.changedTouches[0].clientY : event.clientY;
         pointer.x = (cx / window.innerWidth) * 2 - 1;
         pointer.y = -(cy / window.innerHeight) * 2 + 1;
+        pointerClient = { x: cx, y: cy };
 
-        if (developer && !isTextEntryTarget(event.target)) {
+        if (developer && (event.button === undefined || event.button === 0)) {
             raycaster.setFromCamera(pointer, camera);
             if (beginConnectionHandleDrag(raycaster)) {
+                connectionHandleHistoryBefore = snapshotEditorContext(selectedContext);
                 connectionHandleDragOrbitWasEnabled = orbitControls.enabled;
                 orbitControls.enabled = false;
                 selectState = false;
                 event.preventDefault();
                 return;
+            }
+            if (!settlementMode && cursorConnectionMode === 'off' && !event.shiftKey) {
+                const editorIntersects = getVisibleIntersections(getActiveEditorNodeObjects(), false);
+                const imageHit = editorIntersects.find(({ object }) => isMindmapImageObject(object));
+                if (imageHit && imageHit === editorIntersects[0]) {
+                    const imageObject = imageHit.object;
+                    if (selectEditorImage(imageObject.context, imageObject.index)) {
+                        const context = contexts[imageObject.context];
+                        const item = context.imageData[imageObject.index];
+                        const pointerLatLng = getPointerLatLngForContext(imageObject.context);
+                        const anchorPosition = pointerLatLng
+                            ? convertLatLngtoCartesian(pointerLatLng.lat, pointerLatLng.lng, 1)
+                            : convertLatLngtoCartesian(Number(item.lat), Number(item.lng), 1);
+                        const startPosition = convertLatLngtoCartesian(Number(item.lat), Number(item.lng), 1);
+                        imageDragState = {
+                            contextIndex: imageObject.context,
+                            imageIndex: imageObject.index,
+                            anchorVector: new THREE.Vector3(anchorPosition.x, anchorPosition.y, anchorPosition.z).normalize(),
+                            startVector: new THREE.Vector3(startPosition.x, startPosition.y, startPosition.z).normalize(),
+                            startX: cx,
+                            startY: cy,
+                            active: false,
+                            orbitWasEnabled: orbitControls.enabled,
+                            before: snapshotEditorContext(imageObject.context),
+                        };
+                        orbitControls.enabled = false;
+                    }
+                }
+                const nodeIntersects = imageDragState
+                    ? []
+                    : editorIntersects.filter(({ object }) => !isMindmapImageObject(object));
+                const hasSelectedGroup = selectedNodes.length > 1 && isEditableContext(selectedContext);
+                const selectedHit = hasSelectedGroup
+                    ? nodeIntersects.find(({ object }) => object.context === selectedContext && selectedNodes.includes(object.index))
+                    : null;
+                const hitObject = (selectedHit || nodeIntersects[0])?.object;
+                if (hitObject && (hasSelectedGroup || isEditableContext(hitObject.context))) {
+                    const dragContextIndex = hasSelectedGroup ? selectedContext : hitObject.context;
+                    const primaryNodeIndex = hasSelectedGroup && selectedNodes.includes(selectedNode)
+                        ? selectedNode
+                        : hasSelectedGroup ? selectedNodes[0] : hitObject.index;
+                    const nodeIndices = hasSelectedGroup ? [...selectedNodes] : [hitObject.index];
+                    if (nodeIndices.length === 1) {
+                        selectedNodes.length = 0;
+                        selectEditorNode(hitObject.context, hitObject.index);
+                    }
+                    const context = contexts[dragContextIndex];
+                    const anchorItem = context.tagData[primaryNodeIndex];
+                    const pointerLatLng = getPointerLatLngForContext(dragContextIndex);
+                    const anchorPosition = pointerLatLng
+                        ? convertLatLngtoCartesian(pointerLatLng.lat, pointerLatLng.lng, 1)
+                        : convertLatLngtoCartesian(Number(anchorItem.lat), Number(anchorItem.lng), 1);
+                    nodeDragState = {
+                        contextIndex: dragContextIndex,
+                        nodeIndex: primaryNodeIndex,
+                        nodeIndices,
+                        anchorVector: new THREE.Vector3(anchorPosition.x, anchorPosition.y, anchorPosition.z).normalize(),
+                        startVectors: nodeIndices.map((nodeIndex) => {
+                            const item = context.tagData[nodeIndex];
+                            const position = convertLatLngtoCartesian(Number(item.lat), Number(item.lng), 1);
+                            return {
+                                nodeIndex,
+                                vector: new THREE.Vector3(position.x, position.y, position.z).normalize(),
+                            };
+                        }),
+                        startX: cx,
+                        startY: cy,
+                        active: false,
+                        orbitWasEnabled: orbitControls.enabled,
+                        before: snapshotEditorContext(dragContextIndex),
+                    };
+                    orbitControls.enabled = false;
+                }
             }
         }
 
@@ -1681,6 +2679,21 @@ function processPointerUpEvent(event) {
         }
     });
   window.addEventListener('pointerup', processPointerUpEvent);
+  window.addEventListener('dblclick', (event) => {
+      if (!developer || openSlidesOnNodeClick || isTextEntryTarget(event.target)) return;
+      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      pointerClient = { x: event.clientX, y: event.clientY };
+      raycaster.setFromCamera(pointer, camera);
+      const pin = getVisibleIntersections(getActiveIntersectObjects(), false)[0]?.object;
+      if (!pin || !isEditableContext(pin.context)) return;
+      selectedContext = pin.context;
+      selectedNode = pin.index;
+      selectedPin = pin;
+      selectedBox = contexts[selectedContext]?.boxes[selectedNode] || null;
+      selectedTag = contexts[selectedContext]?.tags[selectedNode] || null;
+      openSelectedNodeTextEditor();
+  });
 
 // DATA CONSISTENCY CHECK (updated for dynamic switching)
 (() => {
@@ -1835,9 +2848,19 @@ function render() {
         lastFrameTimeMs = now - ((now - lastFrameTimeMs) % FRAME_INTERVAL_MS);
     }
 
+    const delta = clock.getDelta();
     updateFpsCounter(now);
 
-    updateGutta(guttaState, guttaStats, jaranius, nuggets, developer && !settlementMode, octreeHelperRoot)
+    const showGuttaOctreeDebug = proceduralPlanetRuntime.shouldShowGuttaOctreeDebug({ developer: developer && showDeveloperOctree, settlementMode });
+    octreeHelperRoot.visible = showGuttaOctreeDebug;
+    updateGutta(
+        guttaState,
+        guttaStats,
+        jaranius,
+        nuggets,
+        showGuttaOctreeDebug,
+        octreeHelperRoot,
+    )
     
     const camPos = camera.position
     const camRot = camera.rotation
@@ -1845,11 +2868,14 @@ function render() {
     spotlight.rotation.set(camRot.x, camRot.y, camRot.z);
     
     if (planetEnvironment.isJaraniusInitialized()) {
+        applyPendingInitialPlanetBookmark();
         planetEnvironment.update({
             appStatus: window.appStatus,
             orbitControls,
             introState,
+            delta,
         });
+        proceduralPlanetRuntime.applySurfacePresentation();
 
         window.curveMeshes.forEach(curveData => {
             curveData.texture.offset.y += 0.004;
@@ -1879,16 +2905,17 @@ function render() {
         }
     }
 
-    const delta = clock.getDelta();
     const cameraTransitionActive = updateSmoothOrbitTransition(delta);
 
     if (!cameraTransitionActive && flyControls.enabled) {
         flyControls.update(delta);
 
-        const distance = camera.position.distanceTo(middleOfPlanet);
-        if (distance < flyControls.minDistance) {
+        const proceduralSurfaceState = proceduralPlanetRuntime.clampCameraToSurface();
+        let distance = camera.position.distanceTo(middleOfPlanet);
+        if (!proceduralSurfaceState && distance < flyControls.minDistance) {
             const direction = camera.position.clone().sub(middleOfPlanet).normalize();
             camera.position.copy(direction.multiplyScalar(flyControls.minDistance));
+            distance = camera.position.distanceTo(middleOfPlanet);
         }
 
         updateFlightSpeedByDistance(distance);

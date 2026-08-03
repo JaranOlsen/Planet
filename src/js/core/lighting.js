@@ -54,6 +54,23 @@ export function setupLighting(scene) {
     lightTransitionDuration = seconds;
   }
 
+  function setLightIntensities({ spotlightIntensity = spotlight.intensity, ambientIntensity = ambient.intensity } = {}) {
+    targetIntensities.spotlight = spotlightIntensity;
+    targetIntensities.ambient = ambientIntensity;
+    spotlight.intensity = spotlightIntensity;
+    ambient.intensity = ambientIntensity;
+    lightTransitionStart = null;
+  }
+
+  function getLightIntensities() {
+    return {
+      spotlight: spotlight.intensity,
+      ambient: ambient.intensity,
+      targetSpotlight: targetIntensities.spotlight,
+      targetAmbient: targetIntensities.ambient,
+    };
+  }
+
   return {
     ambient,
     spotlight,
@@ -61,5 +78,7 @@ export function setupLighting(scene) {
     queueSpotlightIntensity,
     queueAmbientIntensity,
     setLightTransitionDuration,
+    setLightIntensities,
+    getLightIntensities,
   };
 }

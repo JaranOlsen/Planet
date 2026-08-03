@@ -632,6 +632,32 @@ export class SettlementMapLayer {
     };
   }
 
+  getSurfaceTerrain(unit) {
+    const surfaceTerrain = this.terrainSampler.sampleSurfaceUnit?.(unit);
+    if (surfaceTerrain) return surfaceTerrain;
+
+    const unitTerrain = this.terrainSampler.sampleUnit?.(unit);
+    if (unitTerrain) return unitTerrain;
+
+    const latLng = unitToLatLng(unit);
+    return this.terrainSampler.sample?.(latLng.lat, latLng.lng) || {
+      color: DEFAULT_TERRAIN_COLOR.clone(),
+      waterScore: 0,
+      roughness: 0.55,
+      slopeScore: 0,
+    };
+  }
+
+  getSurfacePoint(unit, offset = 0, terrain = null) {
+    const surfaceTerrain = terrain || this.getSurfaceTerrain(unit);
+    const radius = Number.isFinite(surfaceTerrain?.radius) ? surfaceTerrain.radius : PLANET_RADIUS;
+    return {
+      terrain: surfaceTerrain,
+      radius,
+      position: unit.clone().multiplyScalar(radius + offset),
+    };
+  }
+
   buildSettlements() {
     const ctx = this.contexts[0];
     if (!ctx?.tagData) return;
@@ -649,9 +675,10 @@ export class SettlementMapLayer {
 
     ctx.tagData.forEach((node, index) => {
       const unit = latLngToUnit(node.lat, node.lng);
-      const sample = this.terrainSampler.sample(node.lat, node.lng);
+      const surface = this.getSurfacePoint(unit, SETTLEMENT_SURFACE_OFFSET);
+      const sample = surface.terrain;
       const settlementBase = this.getSettlementSpec(node);
-      const center = unit.clone().multiplyScalar(PLANET_RADIUS + SETTLEMENT_SURFACE_OFFSET);
+      const center = surface.position;
       const { east, north } = getTangentBasis(unit);
       const seed = seededRandom(node.id);
       const routeShape = routeShapes.get(node.id);
@@ -687,7 +714,8 @@ export class SettlementMapLayer {
       for (let i = 0; i < settlement.buildingCount; i++) {
         const placement = this.getBuildingPlacement(i, settlement, seed, mainAxis, crossAxis);
         const buildingUnit = unit.clone().multiplyScalar(PLANET_RADIUS).add(placement.local).normalize();
-        const surfacePosition = buildingUnit.clone().multiplyScalar(PLANET_RADIUS + SETTLEMENT_SURFACE_OFFSET);
+        const buildingSurface = this.getSurfacePoint(buildingUnit, SETTLEMENT_SURFACE_OFFSET);
+        const surfacePosition = buildingSurface.position;
         const landmarkBoost = settlement.type === 'city' && i === 0 ? 1.18 : settlement.type === 'town' && i === 0 ? 1.1 : 1;
         const along = placement.local.dot(mainAxis) / Math.max(settlement.alongRadius, 0.001);
         const across = placement.local.dot(crossAxis) / Math.max(settlement.crossRadius, 0.001);
@@ -717,7 +745,7 @@ export class SettlementMapLayer {
           buildingUnit,
         ));
         const shadowMatrix = new THREE.Matrix4().compose(
-          buildingUnit.clone().multiplyScalar(PLANET_RADIUS + 0.0025),
+          this.getSurfacePoint(buildingUnit, 0.0025, buildingSurface.terrain).position,
           shadowQuaternion,
           new THREE.Vector3(footprint * 1.65, depth * 1.45, 1),
         );
@@ -830,10 +858,11 @@ export class SettlementMapLayer {
   createLocalRibbonGeometry(originUnit, localPoints, width, color) {
     const samples = localPoints.map((local) => {
       const unit = originUnit.clone().multiplyScalar(PLANET_RADIUS).add(local).normalize();
+      const surface = this.getSurfacePoint(unit, ROAD_SURFACE_OFFSET + 0.002);
       return {
         unit,
-        position: unit.clone().multiplyScalar(PLANET_RADIUS + ROAD_SURFACE_OFFSET + 0.002),
-        terrain: { color },
+        position: surface.position,
+        terrain: { ...surface.terrain, color },
       };
     });
     return this.createRibbonGeometry(samples, width, () => true, () => color.clone());
@@ -850,7 +879,7 @@ export class SettlementMapLayer {
         local.multiplyScalar(lerp(0.45, 0.68, seed()));
       }
       const treeUnit = unit.clone().multiplyScalar(PLANET_RADIUS).add(local).normalize();
-      const surface = treeUnit.clone().multiplyScalar(PLANET_RADIUS + SETTLEMENT_SURFACE_OFFSET + 0.002);
+      const surface = this.getSurfacePoint(treeUnit, SETTLEMENT_SURFACE_OFFSET + 0.002).position;
       const { east } = getTangentBasis(treeUnit);
       const quaternion = new THREE.Quaternion().setFromRotationMatrix(getSurfaceFrame(treeUnit, east));
       const trunkHeight = settlement.type === 'city' ? 0.0028 : 0.0024;
@@ -932,13 +961,44 @@ export class SettlementMapLayer {
 
   getSettlementSpec(node) {
     const size = Number(node.size) || 20;
-    if (size >= 55) {
-      return { type: 'city', buildingCount: 240, radius: 0.12, footprint: 0.0039, height: 0.0115 };
+    const metrics = this.terrainSampler.getNodeMetrics?.(node.id);
+    const terrain = this.terrainSampler.sample?.(node.lat, node.lng);
+    const terrainSuitability = Number.isFinite(terrain?.settlementSuitability)
+      ? terrain.settlementSuitability
+      : 0.5;
+    const centrality = Number.isFinite(metrics?.centrality) ? metrics.centrality : 0;
+    const semanticScore = Number.isFinite(metrics?.semanticScore) ? metrics.semanticScore : 0;
+    const slideBoost = node.slides ? 8 : 0;
+    const rank = size + centrality * 28 + semanticScore * 18 + terrainSuitability * 10 + slideBoost;
+
+    if (rank >= 70 || size >= 72) {
+      const density = clamp01((rank - 70) / 45);
+      return {
+        type: 'city',
+        buildingCount: Math.round(210 + density * 84),
+        radius: 0.112 + density * 0.026,
+        footprint: 0.0039,
+        height: 0.0115 + density * 0.0022,
+      };
     }
-    if (size >= 28) {
-      return { type: 'town', buildingCount: 108, radius: 0.084, footprint: 0.0036, height: 0.0088 };
+    if (rank >= 36 || size >= 28) {
+      const density = clamp01((rank - 36) / 34);
+      return {
+        type: 'town',
+        buildingCount: Math.round(88 + density * 62),
+        radius: 0.076 + density * 0.022,
+        footprint: 0.0036,
+        height: 0.0088 + density * 0.0012,
+      };
     }
-    return { type: 'village', buildingCount: 34, radius: 0.052, footprint: 0.0033, height: 0.0072 };
+    const density = clamp01(rank / 36);
+    return {
+      type: 'village',
+      buildingCount: Math.round(24 + density * 22),
+      radius: 0.044 + density * 0.018,
+      footprint: 0.0033,
+      height: 0.0072,
+    };
   }
 
   addInstancedMesh(geometry, material, items, name, {
@@ -1051,13 +1111,13 @@ export class SettlementMapLayer {
       const t = i / ROAD_SAMPLE_COUNT;
       const unit = routeDirection(startUnit, endUnit, sideUnit, offsets[i], t);
       const latLng = unitToLatLng(unit);
-      const terrain = this.terrainSampler.sample(latLng.lat, latLng.lng);
+      const surface = this.getSurfacePoint(unit, ROAD_SURFACE_OFFSET);
       samples.push({
         unit,
-        position: unit.clone().multiplyScalar(PLANET_RADIUS + ROAD_SURFACE_OFFSET),
+        position: surface.position,
         lat: latLng.lat,
         lng: latLng.lng,
-        terrain,
+        terrain: surface.terrain,
       });
     }
 
@@ -1244,8 +1304,7 @@ export class SettlementMapLayer {
         if (side.lengthSq() < 1e-8) side.copy(getTangentBasis(unit).east);
         side.normalize();
         const sideSign = isFerry || kind === 'path' ? 0 : lightIndex % 2 === 0 ? -1 : 1;
-        const position = unit.clone()
-          .multiplyScalar(PLANET_RADIUS + ROAD_SURFACE_OFFSET + (water ? 0.012 : 0.004))
+        const position = this.getSurfacePoint(unit, ROAD_SURFACE_OFFSET + (water ? 0.012 : 0.004)).position
           .add(side.multiplyScalar(lateralOffset * sideSign));
         const targetPositions = isFerry ? ferryPositions : lightPositions;
         const targetNormals = isFerry ? ferryNormals : lightNormals;
