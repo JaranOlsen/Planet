@@ -1,0 +1,1 @@
+{"version":3,"file":"planetCompassImageData-BBVPmAw7.js","sources":["../../src/js/data/planetCompassImageData.js"],"sourcesContent":["// The Compass relies on the shared planet terrain; modality-specific imagery\n// would make one path appear to define the universal map.\nexport const planetImageData = [];\n"],"names":["planetImageData"],"mappings":"AAEY,MAACA,EAAkB,CAAA"}

@@ -9,7 +9,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script type="module" crossorigin src="/Planet/assets/index-1jGHSUHP.js"></script>
+    <script type="module" crossorigin src="/Planet/assets/index-B3hSbHYl.js"></script>
     <link rel="stylesheet" crossorigin href="/Planet/assets/index-D7CqIBLJ.css">
   </head>
   <body>
@@ -93,11 +93,19 @@
         </div>
         <div class="hotkey-line">
             <span class="hotkey">Space / Shift</span>
-            <span class="description">Fly up/down</span>
+            <span class="description">Vertical burn up/down</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">B</span>
+            <span class="description">Hold stabilizing burn</span>
         </div>
         <div class="hotkey-line">
             <span class="hotkey">Q / E</span>
             <span class="description">Roll left/right</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Arrows</span>
+            <span class="description">Pitch/yaw</span>
         </div>
         <div class="hotkey-line">
             <span class="hotkey">,</span>
@@ -176,8 +184,8 @@
             <span class="description">Show/hide enneagram</span>
         </div>
         <div class="hotkey-line">
-            <span class="hotkey">Shift + 1-4</span>
-            <span class="description">Switch mindmap / language variant</span>
+            <span class="hotkey">Shift + 1 / 2 / 3</span>
+            <span class="description">Full / Simple / Compass mindmap</span>
         </div>
 
         <p class="hotkeyTitle">Developer tools:</p>
@@ -204,6 +212,34 @@
         <div class="hotkey-line">
             <span class="hotkey">Q</span>
             <span class="description">Print nodedata</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Shift + Q</span>
+            <span class="description">Save active map/layer data</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Shift + O</span>
+            <span class="description">Toggle opening slides when nodes are clicked</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Right-click</span>
+            <span class="description">Open node and map editing menu</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Shift + click</span>
+            <span class="description">Add or remove a node from the selection</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">K</span>
+            <span class="description">Cycle cursor connection tool</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Enter</span>
+            <span class="description">Edit selected node text</span>
+        </div>
+        <div class="hotkey-line">
+            <span class="hotkey">Ctrl/Cmd + Z</span>
+            <span class="description">Undo (add Shift to redo)</span>
         </div>
         <div class="hotkey-line">
             <span class="hotkey">T</span>
@@ -242,7 +278,7 @@
             <span class="description">Change color (previous) of selected node(s)</span>
         </div>
         <div class="hotkey-line">
-            <span class="hotkey">+</span>
+            <span class="hotkey">+ / =</span>
             <span class="description">Increase size of selected node(s)</span>
         </div>
         <div class="hotkey-line">
@@ -270,7 +306,14 @@
       </div>
       <!-- SUBTITLES -->
       <div id="subtitle-container" data-subtitle-file="null"></div> 
-      <input id="tagInput" type="text" style="display: none; position: absolute;" />
+      <section id="tagInputPanel" role="dialog" aria-label="Mindmap node text editor" hidden style="display: none; position: fixed; z-index: 10021; width: min(340px, calc(100vw - 24px)); box-sizing: border-box; padding: 10px; border: 1px solid rgba(255,255,255,0.28); border-radius: 8px; background: rgba(16,18,23,0.97); color: white; box-shadow: 0 12px 36px rgba(0,0,0,0.5); font: 12px/1.35 sans-serif;">
+        <textarea id="tagInput" rows="4" style="display: block; width: 100%; box-sizing: border-box; resize: vertical; padding: 8px; border-radius: 5px;"></textarea>
+        <div style="margin-top: 5px; opacity: 0.72;">Enter saves · Shift+Enter adds a line · Escape cancels</div>
+        <div style="display: flex; justify-content: flex-end; gap: 6px; margin-top: 8px;">
+          <button id="tagInputCancel" type="button">Cancel</button>
+          <button id="tagInputSave" type="button">Save</button>
+        </div>
+      </section>
 
       <!-- SLIDES -->
       <section aria-label="Slides">
