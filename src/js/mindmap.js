@@ -778,6 +778,7 @@ function createConnectionTubeGeometry(edgeRef) {
   });
 
   const path = new THREE.CatmullRomCurve3(points);
+  edgeRef.reflectionPath = path;
   return new THREE.TubeGeometry(
     path,
     CONNECTION_CURVE_SAMPLE_COUNT,
@@ -990,7 +991,11 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
                                   contextIndex: editorOptions.contextIndex,
                                   kind: editorOptions.kind || (arrowed ? 'arrow' : dashed ? 'dashed' : 'normal'),
                                 });
-                            } else digTunnel(p1, p2, weight)
+                            } else digTunnel(p1, p2, weight, {
+                                sourceId: sourceItem.id,
+                                targetId,
+                                kind: 'tunnel',
+                            })
                         }
                     });
                 });
@@ -1069,6 +1074,12 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         };
         const geometry = createConnectionTubeGeometry(edgeRef);
         const curve = new THREE.Mesh(geometry, material);
+        curve.userData.reflectionConnection = {
+            sourceId: metadata.sourceId,
+            targetId: metadata.targetId,
+            kind: metadata.kind,
+            path: edgeRef.reflectionPath,
+        };
         edgeRef.mesh = curve;
         if (arrowed) {
             // Save the mesh and its texture in the global curveMeshes array
@@ -1088,7 +1099,7 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         }
     }
 
-    function digTunnel(p1, p2, weight){
+    function digTunnel(p1, p2, weight, metadata){
         const v1 = new THREE.Vector3(p1.x, p1.y, p1.z);
         const v2 = new THREE.Vector3(p2.x, p2.y, p2.z);
         const points = []
@@ -1107,6 +1118,12 @@ export function createConnections(tagSource, connectionSource, curveThickness, c
         const geometry = new THREE.TubeGeometry(path, 2, curveThickness * weight, curveRadiusSegments * segmentModifier, false);
 
         const curve = new THREE.Mesh(geometry, material);
+        curve.userData.reflectionConnection = {
+            sourceId: metadata.sourceId,
+            targetId: metadata.targetId,
+            kind: metadata.kind,
+            path,
+        };
         curve.renderOrder = 9;
         destination.add(curve);
     }

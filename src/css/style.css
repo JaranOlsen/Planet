@@ -467,3 +467,390 @@ label {
     grid-template-columns: minmax(64px, 84px) minmax(0, 1fr);
   }
 }
+
+/*  || TRANSFORMATION FIELDS */
+.transformation-ledger {
+  position: fixed;
+  right: clamp(14px, 3vw, 42px);
+  top: clamp(74px, 12vh, 132px);
+  width: min(320px, calc(100vw - 28px));
+  box-sizing: border-box;
+  padding: 15px 17px 16px;
+  border: 1px solid rgba(229, 238, 255, 0.18);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(9, 13, 20, 0.78), rgba(17, 23, 31, 0.48));
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(9px);
+  color: rgba(246, 249, 255, 0.92);
+  font-family: Georgia, 'Times New Roman', serif;
+  opacity: 0;
+  transform: translate3d(12px, 0, 0);
+  transition: opacity 650ms ease, transform 650ms ease, border-color 500ms ease;
+  pointer-events: none;
+  user-select: none;
+  z-index: 4;
+}
+
+.transformation-ledger.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.transformation-ledger.is-visible.is-wormhole-active {
+  opacity: 0;
+  transform: translate3d(0, -8px, 0) scale(0.985);
+  transition-duration: 480ms;
+}
+
+.transformation-ledger.is-pulling {
+  border-color: rgba(236, 246, 255, 0.48);
+  box-shadow: 0 0 38px rgba(194, 221, 255, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.transformation-ledger.is-awakened {
+  background: linear-gradient(145deg, rgba(12, 20, 24, 0.72), rgba(27, 24, 38, 0.42));
+}
+
+.transformation-ledger__eyebrow {
+  margin-bottom: 10px;
+  color: rgba(225, 234, 246, 0.58);
+  font: 600 9px/1.2 Arial, sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.transformation-ledger__items {
+  display: grid;
+  gap: 12px;
+}
+
+.transformation-ledger__item {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  align-items: start;
+  gap: 10px;
+}
+
+.transformation-ledger__swatch {
+  width: 19px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--field-color);
+  box-shadow: 0 0 9px color-mix(in srgb, var(--field-color) 72%, transparent);
+  opacity: 0.82;
+  margin-top: 5px;
+}
+
+.transformation-ledger__copy,
+.transformation-ledger__label,
+.transformation-ledger__description {
+  display: block;
+}
+
+.transformation-ledger__label {
+  color: rgba(250, 252, 255, 0.94);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.transformation-ledger__description {
+  margin-top: 3px;
+  color: rgba(224, 232, 242, 0.56);
+  font: italic 10.5px/1.35 Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.012em;
+}
+
+body.awakening-cursor-hidden,
+body.awakening-cursor-hidden * {
+  cursor: none !important;
+}
+
+.awakening-warp {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms linear;
+  z-index: 5;
+}
+
+.awakening-warp.is-visible {
+  opacity: 1;
+}
+
+.awakening-warp__aperture,
+.awakening-warp__flow,
+.awakening-warp__core,
+.awakening-warp__whiteout {
+  position: absolute;
+  pointer-events: none;
+}
+
+.awakening-warp__aperture {
+  inset: -2px;
+  background:
+    radial-gradient(
+      circle farthest-side at var(--awakening-x, 50vw) var(--awakening-y, 50vh),
+      transparent 0 7%,
+      rgba(8, 13, 24, 0.08) 18%,
+      rgba(3, 6, 13, 0.48) 55%,
+      rgba(0, 1, 4, 0.91) 100%
+    ),
+    radial-gradient(
+      circle farthest-side at var(--awakening-x, 50vw) var(--awakening-y, 50vh),
+      transparent 0 10%,
+      rgba(111, 151, 193, 0.14) 20%,
+      transparent 38%
+    );
+  opacity: var(--awakening-aperture, 0);
+  z-index: 0;
+}
+
+.awakening-warp__flow {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
+  z-index: 1;
+}
+
+.awakening-warp__core {
+  left: var(--awakening-x, 50vw);
+  top: var(--awakening-y, 50vh);
+  width: 100vmin;
+  height: 100vmin;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #fff 0 3.5%, #fffef8 5.5%, rgba(255, 244, 214, 0.96) 10%, rgba(255, 244, 214, 0.42) 22%, transparent 49%),
+    radial-gradient(circle, rgba(220, 236, 255, 0.72) 0 11%, rgba(220, 236, 255, 0.16) 31%, transparent 63%);
+  filter: blur(calc(0.45px + var(--awakening-strength, 0) * 1.3px)) brightness(1.08);
+  opacity: var(--awakening-strength, 0);
+  transform: translate(-50%, -50%) scale(var(--awakening-light-scale, 0.025));
+  transform-origin: center;
+  will-change: transform, opacity;
+  z-index: 2;
+}
+
+.awakening-warp__whiteout {
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 48%, #fff 0 18%, #fffef8 46%, #fff7df 76%, #e9f4ff 118%);
+  opacity: var(--awakening-whiteout, 0);
+  filter: brightness(calc(1 + var(--awakening-whiteout, 0) * 0.18));
+  z-index: 4;
+}
+
+.awakening-warp[data-passage="reflection"] .awakening-warp__whiteout {
+  inset: auto;
+  left: var(--awakening-x, 50vw);
+  top: var(--awakening-y, 50vh);
+  width: 200vmax;
+  height: 200vmax;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      #fff 0 28%,
+      rgba(255, 255, 252, 0.995) 43%,
+      rgba(255, 251, 238, 0.93) 58%,
+      rgba(246, 249, 255, 0.72) 73%,
+      rgba(235, 245, 255, 0.38) 86%,
+      rgba(235, 245, 255, 0.12) 95%,
+      rgba(235, 245, 255, 0) 100%
+    );
+  opacity: var(--awakening-whiteout, 0);
+  filter: blur(2px) brightness(calc(1 + var(--awakening-whiteout, 0) * 0.1));
+  transform: translate(-50%, -50%) scale(var(--reflection-white-scale, 0.01));
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.awakening-warp[data-passage="reflection"][data-phase="reflectionApproach"] .awakening-warp__whiteout {
+  inset: 0;
+  left: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background:
+    radial-gradient(
+      ellipse at var(--awakening-x, 50vw) var(--awakening-y, 50vh),
+      #fff 0 13%,
+      #fffef8 36%,
+      rgba(255, 252, 241, 0.985) 61%,
+      rgba(244, 249, 255, 0.96) 100%
+    );
+  filter: blur(3.2px) brightness(calc(1 + var(--awakening-whiteout, 0) * 0.08));
+  transform: none;
+  -webkit-mask-image:
+    radial-gradient(
+      circle var(--reflection-absorb-radius, 0vmax) at var(--awakening-x, 50vw) var(--awakening-y, 50vh),
+      #000 0 24%,
+      rgba(0, 0, 0, 0.82) 43%,
+      rgba(0, 0, 0, 0.43) 68%,
+      rgba(0, 0, 0, 0.16) 86%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle var(--reflection-absorb-lobe-a, 0vmax) at
+        calc(var(--awakening-x, 50vw) + var(--reflection-absorb-offset-a-x, 0vmax))
+        calc(var(--awakening-y, 50vh) - var(--reflection-absorb-offset-a-y, 0vmax)),
+      rgba(0, 0, 0, 0.7) 0 42%,
+      rgba(0, 0, 0, 0.28) 72%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle var(--reflection-absorb-lobe-b, 0vmax) at
+        calc(var(--awakening-x, 50vw) - var(--reflection-absorb-offset-b-x, 0vmax))
+        calc(var(--awakening-y, 50vh) + var(--reflection-absorb-offset-b-y, 0vmax)),
+      rgba(0, 0, 0, 0.68) 0 39%,
+      rgba(0, 0, 0, 0.25) 73%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle var(--reflection-absorb-lobe-c, 0vmax) at
+        calc(var(--awakening-x, 50vw) + var(--reflection-absorb-offset-c-x, 0vmax))
+        calc(var(--awakening-y, 50vh) + var(--reflection-absorb-offset-c-y, 0vmax)),
+      rgba(0, 0, 0, 0.64) 0 38%,
+      rgba(0, 0, 0, 0.22) 72%,
+      transparent 100%
+    );
+  mask-image:
+    radial-gradient(
+      circle var(--reflection-absorb-radius, 0vmax) at var(--awakening-x, 50vw) var(--awakening-y, 50vh),
+      #000 0 24%,
+      rgba(0, 0, 0, 0.82) 43%,
+      rgba(0, 0, 0, 0.43) 68%,
+      rgba(0, 0, 0, 0.16) 86%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle var(--reflection-absorb-lobe-a, 0vmax) at
+        calc(var(--awakening-x, 50vw) + var(--reflection-absorb-offset-a-x, 0vmax))
+        calc(var(--awakening-y, 50vh) - var(--reflection-absorb-offset-a-y, 0vmax)),
+      rgba(0, 0, 0, 0.7) 0 42%,
+      rgba(0, 0, 0, 0.28) 72%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle var(--reflection-absorb-lobe-b, 0vmax) at
+        calc(var(--awakening-x, 50vw) - var(--reflection-absorb-offset-b-x, 0vmax))
+        calc(var(--awakening-y, 50vh) + var(--reflection-absorb-offset-b-y, 0vmax)),
+      rgba(0, 0, 0, 0.68) 0 39%,
+      rgba(0, 0, 0, 0.25) 73%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle var(--reflection-absorb-lobe-c, 0vmax) at
+        calc(var(--awakening-x, 50vw) + var(--reflection-absorb-offset-c-x, 0vmax))
+        calc(var(--awakening-y, 50vh) + var(--reflection-absorb-offset-c-y, 0vmax)),
+      rgba(0, 0, 0, 0.64) 0 38%,
+      rgba(0, 0, 0, 0.22) 72%,
+      transparent 100%
+    );
+  will-change: mask-image, -webkit-mask-image, opacity;
+}
+
+.awakening-warp[data-passage="reflection"][data-phase="reflectionWhiteHold"] .awakening-warp__whiteout {
+  inset: 0;
+  left: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: radial-gradient(circle at 50% 48%, #fff 0 22%, #fffef8 56%, #f4f9ff 100%);
+  filter: brightness(1.08);
+  transform: none;
+}
+
+.awakening-warp[data-passage="reflection"][data-phase="reflectionReveal"] .awakening-warp__whiteout {
+  inset: 0;
+  left: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background:
+    radial-gradient(circle at 50% 48%, #fff 0 20%, #fffef8 52%, #f4f9ff 100%);
+  filter: blur(3px) brightness(1.08);
+  transform: none;
+  -webkit-mask-image:
+    radial-gradient(
+      circle at var(--awakening-x, 50vw) var(--awakening-y, 50vh),
+      transparent 0 var(--reflection-reveal-inner, 0vmax),
+      rgba(0, 0, 0, 0.055) var(--reflection-reveal-soft-one, 0vmax),
+      rgba(0, 0, 0, 0.24) var(--reflection-reveal-soft-two, 0vmax),
+      rgba(0, 0, 0, 0.62) var(--reflection-reveal-soft-three, 0vmax),
+      #000 var(--reflection-reveal-radius, 0vmax)
+    ),
+    radial-gradient(
+      circle var(--reflection-reveal-lobe-a, 0vmax) at
+        calc(var(--awakening-x, 50vw) + var(--reflection-reveal-offset-a-x, 0vmax))
+        calc(var(--awakening-y, 50vh) + var(--reflection-reveal-offset-a-y, 0vmax)),
+      transparent 0 18%, rgba(0, 0, 0, 0.08) 38%, rgba(0, 0, 0, 0.36) 68%, #000 100%
+    ),
+    radial-gradient(
+      circle var(--reflection-reveal-lobe-b, 0vmax) at
+        calc(var(--awakening-x, 50vw) + var(--reflection-reveal-offset-b-x, 0vmax))
+        calc(var(--awakening-y, 50vh) + var(--reflection-reveal-offset-b-y, 0vmax)),
+      transparent 0 16%, rgba(0, 0, 0, 0.07) 36%, rgba(0, 0, 0, 0.34) 67%, #000 100%
+    ),
+    radial-gradient(
+      circle var(--reflection-reveal-lobe-c, 0vmax) at
+        calc(var(--awakening-x, 50vw) + var(--reflection-reveal-offset-c-x, 0vmax))
+        calc(var(--awakening-y, 50vh) + var(--reflection-reveal-offset-c-y, 0vmax)),
+      transparent 0 14%, rgba(0, 0, 0, 0.06) 34%, rgba(0, 0, 0, 0.32) 66%, #000 100%
+    );
+  -webkit-mask-composite: source-in, source-in, source-in;
+  mask-image:
+    radial-gradient(
+      circle at var(--awakening-x, 50vw) var(--awakening-y, 50vh),
+      transparent 0 var(--reflection-reveal-inner, 0vmax),
+      rgba(0, 0, 0, 0.055) var(--reflection-reveal-soft-one, 0vmax),
+      rgba(0, 0, 0, 0.24) var(--reflection-reveal-soft-two, 0vmax),
+      rgba(0, 0, 0, 0.62) var(--reflection-reveal-soft-three, 0vmax),
+      #000 var(--reflection-reveal-radius, 0vmax)
+    ),
+    radial-gradient(
+      circle var(--reflection-reveal-lobe-a, 0vmax) at
+        calc(var(--awakening-x, 50vw) + var(--reflection-reveal-offset-a-x, 0vmax))
+        calc(var(--awakening-y, 50vh) + var(--reflection-reveal-offset-a-y, 0vmax)),
+      transparent 0 18%, rgba(0, 0, 0, 0.08) 38%, rgba(0, 0, 0, 0.36) 68%, #000 100%
+    ),
+    radial-gradient(
+      circle var(--reflection-reveal-lobe-b, 0vmax) at
+        calc(var(--awakening-x, 50vw) + var(--reflection-reveal-offset-b-x, 0vmax))
+        calc(var(--awakening-y, 50vh) + var(--reflection-reveal-offset-b-y, 0vmax)),
+      transparent 0 16%, rgba(0, 0, 0, 0.07) 36%, rgba(0, 0, 0, 0.34) 67%, #000 100%
+    ),
+    radial-gradient(
+      circle var(--reflection-reveal-lobe-c, 0vmax) at
+        calc(var(--awakening-x, 50vw) + var(--reflection-reveal-offset-c-x, 0vmax))
+        calc(var(--awakening-y, 50vh) + var(--reflection-reveal-offset-c-y, 0vmax)),
+      transparent 0 14%, rgba(0, 0, 0, 0.06) 34%, rgba(0, 0, 0, 0.32) 66%, #000 100%
+    );
+  mask-composite: intersect, intersect, intersect;
+  will-change: mask-image, -webkit-mask-image;
+}
+
+body.awakening-warp-active #canvas {
+  transform-origin: var(--awakening-x, 50vw) var(--awakening-y, 50vh);
+  transform: scale(var(--awakening-canvas-scale, 1));
+  filter: brightness(var(--awakening-canvas-brightness, 1))
+          saturate(var(--awakening-canvas-saturation, 1))
+          blur(var(--awakening-canvas-blur, 0));
+}
+
+@media (max-width: 640px) {
+  .transformation-ledger {
+    top: auto;
+    right: 12px;
+    bottom: 14px;
+    width: min(290px, calc(100vw - 24px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transformation-ledger { transition-duration: 0ms; }
+}
