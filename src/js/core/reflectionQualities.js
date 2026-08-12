@@ -5,17 +5,17 @@ const FULL_DEFINITIONS = Object.freeze([
   {
     key: 'essence-love',
     id: '8BD3708E-8E3D-44B8-9E92-1050FA7987E5',
-    color: '#3072BC',
+    color: '#F6A0CB',
   },
   {
     key: 'essence-wisdom',
     id: 'D4724AD1-EECD-4975-920C-CDAD71AA53C3',
-    color: '#F6F055',
+    color: '#3072BC',
   },
   {
     key: 'essence-salvation',
     id: '0027E01B-C40A-49F0-9833-30244700C39E',
-    color: '#F6A0CB',
+    color: '#F6F055',
   },
 ]);
 
@@ -23,17 +23,17 @@ const SIMPLE_DEFINITIONS = Object.freeze([
   {
     key: 'peace',
     id: '4A481D1E-5DB6-4ABB-B9D0-8164F41393F9',
-    color: '#F6A0CB',
+    color: '#ED9C00',
   },
   {
     key: 'love',
     id: 'F47603CA-44A7-4009-B07B-29DFA540729D',
-    color: '#3072BC',
+    color: '#F6A0CB',
   },
   {
     key: 'truth',
     id: '982A6AFF-D536-4504-B63A-EC42A2712432',
-    color: '#ED9C00',
+    color: '#3072BC',
   },
 ]);
 
