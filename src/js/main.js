@@ -16,6 +16,7 @@ import {
     updateFlightSpeedByDistance,
     beginSmoothOrbitTransition,
     cancelSmoothOrbitTransition,
+    clearFlightMomentum,
     getFollowMode,
     setFollowMode,
     setOrbitReviewView,
@@ -70,6 +71,7 @@ import { PlanetEnvironment } from './core/planetEnvironment.js'
 import { createProceduralPlanet } from './core/proceduralPlanet.js'
 import { createProceduralPlanetRuntime } from './core/proceduralPlanetRuntime.js'
 import { SettlementMapLayer } from './settlementMap.js'
+import { createTransformationOverlay } from './core/transformationOverlay.js'
 
 if (import.meta.hot) {
     import.meta.hot.on('vite:beforeUpdate', () => {
@@ -713,6 +715,25 @@ const proceduralPlanetRuntime = createProceduralPlanetRuntime({
     ],
 });
 
+const transformationOverlay = createTransformationOverlay({
+    scene,
+    camera,
+    orbitControls,
+    flyControls,
+    middleOfPlanet,
+    setFollowMode,
+    cancelSmoothOrbitTransition,
+    clearFlightMomentum,
+    getPlanetContext: () => contexts[0],
+    getJaranius: () => jaranius,
+    getPlanetLayers: () => ({
+        terrain: jaranius,
+        clouds: planetEnvironment.clouds,
+        water: planetEnvironment.water,
+        sign: planetEnvironment.sign,
+    }),
+});
+
 window.planetDebug = {
     mode: planetRenderMode,
     proceduralPlanet,
@@ -768,6 +789,15 @@ window.planetDebug = {
         };
     },
     showCompassReviewView,
+    transformationOverlay: {
+        getState: transformationOverlay.getState,
+        setVisible: transformationOverlay.setVisible,
+        hasCameraControl: transformationOverlay.hasCameraControl,
+        resetAwakening: transformationOverlay.resetAwakening,
+        getPassageStyle: transformationOverlay.getPassageStyle,
+        setPassageStyle: transformationOverlay.setPassageStyle,
+        cyclePassageStyle: transformationOverlay.cyclePassageStyle,
+    },
     createDebugCanvas: () => proceduralPlanet?.createDebugCanvas() || null,
     openDebugMap: () => {
         const canvas = proceduralPlanet?.createDebugCanvas();
@@ -946,6 +976,12 @@ function closeActiveOverlay() {
     const hotKeys = document.querySelector('#hotKeys');
     if (hotKeys && hotKeys.style.display == "block") {
         hotKeys.style.display = "none";
+        return true;
+    }
+
+    const transformationState = transformationOverlay.getState();
+    if (transformationState.visible && (transformationState.stage === 'idle' || transformationState.stage === 'complete')) {
+        transformationOverlay.setVisible(false);
         return true;
     }
 
@@ -1720,6 +1756,14 @@ function onDocumentKeyUp(event) {
         return;
     }
 
+    // The northern passage owns the camera and application mode until its
+    // south-pole settle is complete. Ignore all other hotkeys during that
+    // interval so silence, developer views, or mode switches cannot strand it.
+    if (transformationOverlay.hasCameraControl()) {
+        event.preventDefault();
+        return;
+    }
+
     const resizeDirection = getResizeDirectionForKey(event);
     if (developer && resizeDirection && !event.ctrlKey && !event.metaKey && !event.altKey) {
         event.preventDefault();
@@ -1774,6 +1818,7 @@ function onDocumentKeyUp(event) {
     //Controls
     if (focusElement !== "tagInput") {
         if (!hasModifier && keyCode == 79) { //O
+            if (transformationOverlay.hasCameraControl()) return;
             if (window.appStatus === "orbit") {
                 cancelSmoothOrbitTransition();
                 window.appStatus = "flight";
@@ -1810,6 +1855,14 @@ function onDocumentKeyUp(event) {
             }
             if (window.appStatus !== "flight" && code === "KeyC") { // Shift+C
                 toggleSettlementMode().catch(handleSettlementMapError);
+                return;
+            }
+            if (code === "KeyT") { // Shift+T / Shift+Alt+T
+                if (event.altKey) {
+                    transformationOverlay.cyclePassageStyle();
+                } else {
+                    transformationOverlay.toggle();
+                }
                 return;
             }
             if (developer && code === "KeyP") { // Shift+P
@@ -2887,14 +2940,16 @@ function render() {
         updateLightIntensity(clock);
     }
 
+    const awakeningOwnsCamera = transformationOverlay.hasCameraControl();
+
     if (introState.tuneLength) {
-        if (camera.position.z > 15 && introState.started === true) {
+        if (!awakeningOwnsCamera && camera.position.z > 15 && introState.started === true) {
             camera.position.z -= 0.0213 * Math.pow(camera.position.z - 10, 1.35) / introState.tuneLength
         }
-        if (camera.position.z < -15 && introState.started === true) {
+        if (!awakeningOwnsCamera && camera.position.z < -15 && introState.started === true) {
             camera.position.z += 0.213 * Math.pow(Math.abs(camera.position.z) - 10, 1.35) / introState.tuneLength
         }
-        if (introState.started === true) {
+        if (!awakeningOwnsCamera && introState.started === true) {
             camera.position.x += 0.4 / introState.tuneLength
             camera.position.y += 0.2 / introState.tuneLength
         }
@@ -2905,9 +2960,9 @@ function render() {
         }
     }
 
-    const cameraTransitionActive = updateSmoothOrbitTransition(delta);
+    const cameraTransitionActive = awakeningOwnsCamera ? false : updateSmoothOrbitTransition(delta);
 
-    if (!cameraTransitionActive && flyControls.enabled) {
+    if (!awakeningOwnsCamera && !cameraTransitionActive && flyControls.enabled) {
         flyControls.update(delta);
 
         const proceduralSurfaceState = proceduralPlanetRuntime.clampCameraToSurface();
@@ -2922,7 +2977,7 @@ function render() {
         updateFlightStabilizer(delta);
     }
 
-    if (!cameraTransitionActive && window.appStatus === "flight") {
+    if (!awakeningOwnsCamera && !cameraTransitionActive && window.appStatus === "flight") {
         const currentFollowMode = getFollowMode();
         if (currentFollowMode === "gutt") {
           const exampleGutt = getExampleAgent(guttaState.gutta, 'exampleGuttId', 'exampleGuttIndex');
@@ -2942,7 +2997,7 @@ function render() {
         }
       }
 
-    if (!cameraTransitionActive && window.appStatus === "orbit") {
+    if (!awakeningOwnsCamera && !cameraTransitionActive && window.appStatus === "orbit") {
         const currentFollowMode = getFollowMode();
         if (currentFollowMode === "gutt") {
             followOrbitAgent(getExampleAgent(guttaState.gutta, 'exampleGuttId', 'exampleGuttIndex'));
@@ -2951,9 +3006,11 @@ function render() {
         }
     }
 
-    if (!cameraTransitionActive && orbitControls.enabled) {
+    if (!awakeningOwnsCamera && !cameraTransitionActive && orbitControls.enabled) {
         orbitControls.update();
     }
+
+    transformationOverlay.update(delta, clock.elapsedTime);
 
     if (resizeRendererToDisplaySize()) {
         const canvas = renderer.domElement;
